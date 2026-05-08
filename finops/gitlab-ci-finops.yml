@@ -1,11 +1,11 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/
-provider: GitLab CI/CD
+provider: GitLab
 providerId: gitlab-ci
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - DevOps
 - CI/CD
@@ -15,10 +15,18 @@ tags:
 - FinOps
 - Cost Management
 - FOCUS
-description: FOCUS-aligned FinOps placeholder for GitLab CI/CD. Pipeline will replace with real billing details.
-notes: Initial scaffold — billing model has not yet been reconciled.
+description: >-
+  FOCUS-aligned FinOps profile for GitLab CI/CD. Costs come from per-seat
+  subscription (Free/Premium/Ultimate), CI compute minute consumption (with
+  per-tier free allotment and $10/1,000-minute top-ups), storage, transfer,
+  GitLab Credits for Duo Agent Platform, and self-managed runner infra costs.
+notes: >-
+  GitLab dashboards expose CI minute usage per project/group; storage and
+  transfer are visible at namespace level. Self-managed runners typically
+  carry the bulk of compute spend on cloud-billed underlying VMs.
 sources:
-- https://docs.gitlab.com/ee/ci/
+- https://about.gitlab.com/pricing/
+- https://docs.gitlab.com/ci/pipelines/cicd_minutes/
 - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
@@ -26,11 +34,11 @@ alignedWith:
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-publisherName: GitLab CI/CD
-serviceCategory: DevOps
+publisherName: GitLab
+serviceCategory: DevOps / CI/CD
 billingModel:
-  pricingCategory: To Be Reconciled
-  billingFrequency: Monthly
+  pricingCategory: Subscription + Usage
+  billingFrequency: Monthly / Annual
   billingCurrency: USD
   chargeCategories:
   - Usage
@@ -39,28 +47,67 @@ billingModel:
 focusColumns:
   ServiceName: GitLab CI/CD
   ServiceCategory: DevOps
-  ProviderName: GitLab CI/CD
-  PublisherName: GitLab CI/CD
-  InvoiceIssuerName: GitLab CI/CD
+  ProviderName: GitLab
+  PublisherName: GitLab
+  InvoiceIssuerName: GitLab
   BillingCurrency: USD
   ChargeCategory: Usage
+  PricingUnit: seat / minute / GiB
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation.
-  unit: varies
+- name: seats
+  description: Active billable users per tier.
+  unit: user-month
+  aggregation: max
+  dimensions:
+  - tier
+  - namespace
+- name: ci_compute_minutes
+  description: CI compute minutes consumed against the included monthly allotment.
+  unit: minute
   aggregation: sum
   dimensions:
-  - account
-  - resource
+  - project
+  - runner_type
+- name: ci_compute_topup
+  description: One-time top-up of additional compute minutes (consumable balance).
+  unit: minute
+  aggregation: sum
+  dimensions:
+  - namespace
+- name: storage_gib
+  description: Repository, registry, package and artifact storage in GiB.
+  unit: GiB-month
+  aggregation: avg
+  dimensions:
+  - namespace
+- name: transfer
+  description: Egress transfer for Pages, registry, etc.
+  unit: GiB
+  aggregation: sum
+  dimensions:
+  - namespace
+- name: gitlab_credits
+  description: Bundled credits for Duo Agent Platform usage.
+  unit: USD
+  aggregation: sum
+  dimensions:
+  - namespace
+- name: self_managed_runner_vm_hours
+  description: Underlying cloud VM hours for self-hosted runners (cloud-billed, not GitLab-billed).
+  unit: vm-hour
+  aggregation: sum
+  dimensions:
+  - cloud_account
+  - runner_label
 principles:
 - name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+  description: Use the GitLab Usage Quotas page (CI minutes, storage) and namespace-level usage exports.
 - name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
+  description: Allocate by namespace/group/project; map to FOCUS BillingAccountId / ResourceTag.
 - name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+  description: Use cache, parent-child pipelines, fail-fast, larger runners on critical paths; switch high-volume jobs to self-hosted runners; right-size CI minute purchases.
 - name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  description: Assign group owners; alert when CI minutes consumption exceeds plan threshold.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -3,7 +3,11 @@ url: https://raw.githubusercontent.com/api-evangelist/gitlab-ci/refs/heads/main/
 name: GitLab CI/CD
 x-type: company
 description: >-
-  GitLab CI/CD is the built-in continuous integration, delivery, and deployment platform for GitLab. APIs expose pipelines, jobs, runners, schedules, and security scanners.
+  GitLab CI/CD is the built-in continuous integration, delivery and deployment
+  platform for GitLab. The CI/CD surface area within GitLab's REST API v4 covers
+  pipelines, jobs, pipeline schedules, pipeline triggers, runners, agents,
+  releases, environments, deployments, package and container registries, and
+  the security/dependency scanners. GitLab also exposes a GraphQL API.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - DevOps
@@ -11,13 +15,76 @@ tags:
   - Pipelines
   - GitLab
   - DevSecOps
+  - Runners
+  - Container Registry
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: gitlab-ci:rest-v4
+    name: GitLab REST API v4 (CI/CD endpoints)
+    description: >-
+      GitLab REST API v4. CI/CD-related endpoint families include /projects/:id/
+      pipelines, /projects/:id/jobs, /projects/:id/pipeline_schedules,
+      /projects/:id/triggers, /runners, /projects/:id/runners,
+      /projects/:id/environments, /projects/:id/deployments and the
+      /projects/:id/releases family. Authenticated with personal access tokens,
+      OAuth tokens, project access tokens, group access tokens, CI job tokens
+      or trigger tokens.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.gitlab.com/api/
+    baseURL: https://gitlab.com/api/v4
+    tags:
+      - REST
+      - Pipelines
+      - Jobs
+      - Runners
+      - Schedules
+      - Releases
+    properties:
+      - type: Documentation
+        url: https://docs.gitlab.com/api/
+      - type: APIReference
+        url: https://docs.gitlab.com/api/api_resources/
+      - type: OpenAPI
+        url: openapi/gitlab-ci-openapi.yml
+      - type: OpenAPISource
+        url: https://docs.gitlab.com/api/openapi/openapi_v2.yaml
+      - type: InteractiveDocs
+        url: https://docs.gitlab.com/api/openapi/openapi_interactive/
+      - type: Authentication
+        url: https://docs.gitlab.com/api/rest/authentication/
+  - aid: gitlab-ci:graphql
+    name: GitLab GraphQL API
+    description: >-
+      GitLab's GraphQL API at /api/graphql. Many CI/CD entities (Pipeline,
+      CiJob, CiRunner, MergeRequest pipelines) are exposed via GraphQL queries
+      and mutations.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.gitlab.com/api/graphql/
+    baseURL: https://gitlab.com/api/graphql
+    tags:
+      - GraphQL
+      - Pipelines
+      - Jobs
+    properties:
+      - type: Documentation
+        url: https://docs.gitlab.com/api/graphql/
+      - type: GraphQLExplorer
+        url: https://gitlab.com/-/graphql-explorer
+      - type: Reference
+        url: https://docs.gitlab.com/api/graphql/reference/
 common:
   - type: Website
-    url: https://docs.gitlab.com/ee/ci/
+    url: https://about.gitlab.com/
+  - type: Documentation
+    url: https://docs.gitlab.com/api/
+  - type: Pricing
+    url: https://about.gitlab.com/pricing/
+  - type: GitHub
+    url: https://gitlab.com/gitlab-org/gitlab
+  - type: StatusPage
+    url: https://status.gitlab.com/
   - type: Plans
     url: plans/gitlab-ci-plans-pricing.yml
   - type: RateLimits

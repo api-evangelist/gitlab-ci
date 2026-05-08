@@ -1,11 +1,11 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: GitLab CI/CD
+provider: GitLab
 providerId: gitlab-ci
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - DevOps
 - CI/CD
@@ -15,21 +15,88 @@ tags:
 - Rate Limiting
 - Quotas
 - Throttling
-description: Placeholder rate-limit artifact for GitLab CI/CD. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: >-
+  GitLab.com SaaS enforces general request, search, autocomplete and raw-file
+  rate limits per IP / user / project, plus per-project pipeline and CI
+  resource limits. Self-managed instances expose the same configuration via
+  Application Settings.
+notes: >-
+  Numbers below reflect public GitLab.com defaults from docs.gitlab.com. Tier
+  unauthenticated 500/min and authenticated 2,000/min global API rate limits
+  are in addition to per-endpoint limits like search.
 sources:
-- https://docs.gitlab.com/ee/ci/
+- https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits
+- https://docs.gitlab.com/administration/instance_limits/
+- https://docs.gitlab.com/api/rest/troubleshooting/#status-code-429
 responseCodes:
   throttled: 429
+headers:
+- name: RateLimit-Limit
+  description: Per-window quota.
+- name: RateLimit-Remaining
+  description: Calls remaining in window.
+- name: RateLimit-Reset
+  description: Epoch seconds when the window resets.
+- name: Retry-After
+  description: Seconds to wait before retrying after a 429.
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+- name: Search API (authenticated)
+  scope: user
+  metric: requests
+  limit: 30
+  timeFrame: 1m
+- name: Search API (unauthenticated)
+  scope: ip
+  metric: requests
+  limit: 10
+  timeFrame: 1m
+- name: Autocomplete users (authenticated)
+  scope: user
+  metric: requests
+  limit: 300
+  timeFrame: 1m
+- name: Autocomplete users (unauthenticated)
+  scope: ip
+  metric: requests
+  limit: 100
+  timeFrame: 1m
+- name: Raw blob endpoint (per project & path)
+  scope: project+path
+  metric: requests
+  limit: 300
+  timeFrame: 1m
+- name: Raw blob endpoint (unauthenticated, per project)
+  scope: project
+  metric: requests
+  limit: 800
+  timeFrame: 1m
+- name: Default API (unauthenticated)
+  scope: ip
+  metric: requests
+  limit: 500
+  timeFrame: 1m
+  notes: Default global API throttle on GitLab.com.
+- name: Default API (authenticated)
+  scope: user
+  metric: requests
+  limit: 2000
+  timeFrame: 1m
+  notes: Default global API throttle on GitLab.com.
+- name: Pipeline jobs in active pipelines
+  scope: project
+  metric: jobs
+  limit: tier-dependent
+  notes: Tier-dependent ceiling on jobs across active pipelines.
+- name: Maximum deployment jobs
+  scope: pipeline
+  metric: jobs
+  limit: 500
+  notes: Default maximum deployment jobs per pipeline.
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: Honor Retry-After on 429; use exponential backoff with jitter.
+- name: Tokens
+  description: Use personal/project/group access tokens or CI job tokens; OAuth supported.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

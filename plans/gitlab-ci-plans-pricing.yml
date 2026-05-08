@@ -1,11 +1,11 @@
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: GitLab CI/CD
+provider: GitLab
 providerId: gitlab-ci
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - DevOps
 - CI/CD
@@ -13,29 +13,128 @@ tags:
 - GitLab
 - DevSecOps
 - Plans
-description: Placeholder plans/pricing artifact for GitLab CI/CD. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled.
+- Pricing
+description: >-
+  GitLab.com SaaS subscription tiers (Free, Premium, Ultimate) bundle the REST
+  and GraphQL APIs with included CI compute minutes per user. Self-managed and
+  Dedicated options are sold via sales. Additional compute is sold as
+  one-time-purchase top-ups.
+notes: >-
+  Tier prices, included compute minutes and overage prices reflected here are
+  the public list values from about.gitlab.com/pricing as of 2026-05-08.
 sources:
-- https://docs.gitlab.com/ee/ci/
+- https://about.gitlab.com/pricing/
+- https://docs.gitlab.com/ci/pipelines/cicd_minutes/
 plans:
-- id: gitlab-ci-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: gitlab-free
+  name: GitLab Free
+  type: free
+  description: Free SaaS tier — 400 CI compute minutes/user/month and 10 GiB storage.
   entries:
-  - label: API Access
-    name: api_access
+  - label: Per-user
+    name: per_user
     type: flat
-    metric: varies
+    metric: user-month
     limit: -1
-    timeFrame: usage
+    timeFrame: month
     geo: global
     unit: 1
-    price: see https://docs.gitlab.com/ee/ci/
+    price: 0
+    currency: USD
+    userMultiplied: true
+  - label: Included CI compute minutes
+    name: ci_minutes
+    type: tier
+    metric: minutes/user/month
+    limit: 400
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: true
+- id: gitlab-premium
+  name: GitLab Premium
+  type: subscription
+  description: Premium SaaS — $29/user/month annual; 10,000 CI compute minutes/user/month, 500 GiB storage, $12 GitLab Credits/user/month for Duo Agent Platform.
+  entries:
+  - label: Per-user
+    name: per_user
+    type: flat
+    metric: user-month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 29
+    currency: USD
+    userMultiplied: true
+  - label: Included CI compute minutes
+    name: ci_minutes
+    type: tier
+    metric: minutes/user/month
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: true
+- id: gitlab-ultimate
+  name: GitLab Ultimate
+  type: enterprise
+  description: Ultimate SaaS — custom pricing; 50,000 CI compute minutes/user/month, 500 GiB storage, $24 GitLab Credits/user/month for Duo Agent Platform.
+  entries:
+  - label: Per-user
+    name: per_user
+    type: flat
+    metric: user-month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    currency: USD
+    userMultiplied: true
+  - label: Included CI compute minutes
+    name: ci_minutes
+    type: tier
+    metric: minutes/user/month
+    limit: 50000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: true
+- id: gitlab-compute-topup
+  name: Additional CI Compute Minutes
+  type: addOn
+  description: One-time purchase top-up of CI compute minutes when monthly allotment is exhausted.
+  entries:
+  - label: Compute pack
+    name: compute_pack
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: one-time
+    geo: global
+    unit: 1000
+    price: 10
+    currency: USD
     userMultiplied: false
-  elements:
-  - name: Pending Reconciliation
+- id: gitlab-self-managed
+  name: GitLab Self-Managed / Dedicated
+  type: enterprise
+  description: Self-managed installations on customer infrastructure or single-tenant Dedicated SaaS on AWS. Pricing via sales.
+  entries:
+  - label: Custom contract
+    name: enterprise_contract
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: annual
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
