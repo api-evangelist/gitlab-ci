@@ -1,0 +1,211 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — offline_transfers
+  description: 'GitLab API — offline_transfers. 4 operations. Lead operation: Start a new offline transfer export. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - offline_transfers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-offline-transfers
+    baseUri: https://gitlab.com
+    description: GitLab API — offline_transfers business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-offline_exports
+      path: /api/v4/offline_exports
+      operations:
+      - name: postapiv4offlineexports
+        method: POST
+        description: Start a new offline transfer export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4OfflineExports
+          in: body
+          type: string
+          required: true
+      - name: getapiv4offlineexports
+        method: GET
+        description: List all offline transfer exports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: sort
+          in: query
+          type: string
+          description: Return offline transfer exports sorted in created by `asc` or `desc` order.
+        - name: status
+          in: query
+          type: string
+          description: Return offline transfer exports with specified status
+    - name: api-v4-offline_exports-id
+      path: /api/v4/offline_exports/{id}
+      operations:
+      - name: getapiv4offlineexportsid
+        method: GET
+        description: Get offline transfer export details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of user's offline transfer export
+          required: true
+    - name: api-v4-offline_imports
+      path: /api/v4/offline_imports
+      operations:
+      - name: postapiv4offlineimports
+        method: POST
+        description: Start a new offline transfer import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4OfflineImports
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-offline-transfers-rest
+    port: 8080
+    description: REST adapter for GitLab API — offline_transfers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v4/offline-exports
+      name: api-v4-offline-exports
+      description: REST surface for api-v4-offline_exports.
+      operations:
+      - method: POST
+        name: postapiv4offlineexports
+        description: Start a new offline transfer export
+        call: gitlab-ci-offline-transfers.postapiv4offlineexports
+        with:
+          postApiV4OfflineExports: rest.postApiV4OfflineExports
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getapiv4offlineexports
+        description: List all offline transfer exports
+        call: gitlab-ci-offline-transfers.getapiv4offlineexports
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          sort: rest.sort
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/offline-exports/{id}
+      name: api-v4-offline-exports-id
+      description: REST surface for api-v4-offline_exports-id.
+      operations:
+      - method: GET
+        name: getapiv4offlineexportsid
+        description: Get offline transfer export details
+        call: gitlab-ci-offline-transfers.getapiv4offlineexportsid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/offline-imports
+      name: api-v4-offline-imports
+      description: REST surface for api-v4-offline_imports.
+      operations:
+      - method: POST
+        name: postapiv4offlineimports
+        description: Start a new offline transfer import
+        call: gitlab-ci-offline-transfers.postapiv4offlineimports
+        with:
+          postApiV4OfflineImports: rest.postApiV4OfflineImports
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-offline-transfers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — offline_transfers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: start-new-offline-transfer-export
+      description: Start a new offline transfer export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-offline-transfers.postapiv4offlineexports
+      with:
+        postApiV4OfflineExports: tools.postApiV4OfflineExports
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-offline-transfer-exports
+      description: List all offline transfer exports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-offline-transfers.getapiv4offlineexports
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        sort: tools.sort
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-offline-transfer-export-details
+      description: Get offline transfer export details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-offline-transfers.getapiv4offlineexportsid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-new-offline-transfer-import
+      description: Start a new offline transfer import
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-offline-transfers.postapiv4offlineimports
+      with:
+        postApiV4OfflineImports: tools.postApiV4OfflineImports
+      outputParameters:
+      - type: object
+        mapping: $.

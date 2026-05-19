@@ -1,0 +1,1787 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — award_emoji
+  description: 'GitLab API — award_emoji. 32 operations. Lead operation: List an awardable''s emoji reactions for groups.
+    Self-contained Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - award_emoji
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-award-emoji
+    baseUri: https://gitlab.com
+    description: GitLab API — award_emoji business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-groups-id-epics-epic_iid-award_emoji
+      path: /api/v4/groups/{id}/epics/{epic_iid}/award_emoji
+      operations:
+      - name: getapiv4groupsidepicsepiciidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the group
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4groupsidepicsepiciidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4GroupsIdEpicsEpicIidAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-epics-epic_iid-award_emoji-award_id
+      path: /api/v4/groups/{id}/epics/{epic_iid}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4groupsidepicsepiciidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4groupsidepicsepiciidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-groups-id-epics-epic_iid-notes-note_id-award_emoji
+      path: /api/v4/groups/{id}/epics/{epic_iid}/notes/{note_id}/award_emoji
+      operations:
+      - name: getapiv4groupsidepicsepiciidnotesnoteidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4groupsidepicsepiciidnotesnoteidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-epics-epic_iid-notes-note_id-award_emoji-award_id
+      path: /api/v4/groups/{id}/epics/{epic_iid}/notes/{note_id}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: epic_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-award_emoji
+      path: /api/v4/projects/{id}/issues/{issue_iid}/award_emoji
+      operations:
+      - name: getapiv4projectsidissuesissueiidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidissuesissueiidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdIssuesIssueIidAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-award_emoji-award_id
+      path: /api/v4/projects/{id}/issues/{issue_iid}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4projectsidissuesissueiidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsidissuesissueiidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-notes-note_id-award_emoji
+      path: /api/v4/projects/{id}/issues/{issue_iid}/notes/{note_id}/award_emoji
+      operations:
+      - name: getapiv4projectsidissuesissueiidnotesnoteidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4projectsidissuesissueiidnotesnoteidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-notes-note_id-award_emoji-award_id
+      path: /api/v4/projects/{id}/issues/{issue_iid}/notes/{note_id}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-award_emoji
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/award_emoji
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidmergerequestsmergerequestiidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-award_emoji-award_id
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-notes-note_id-award_emoji
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/notes/{note_id}/award_emoji
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-notes-note_id-award_emoji-aw
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/notes/{note_id}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-award_emoji
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/award_emoji
+      operations:
+      - name: getapiv4projectsidsnippetssnippetidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidsnippetssnippetidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-award_emoji-award_id
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4projectsidsnippetssnippetidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsidsnippetssnippetidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-notes-note_id-award_emoji
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/notes/{note_id}/award_emoji
+      operations:
+      - name: getapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+        method: GET
+        description: List an awardable's emoji reactions for projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+        method: POST
+        description: Add a new emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-notes-note_id-award_emoji-award_id
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/notes/{note_id}/award_emoji/{award_id}
+      operations:
+      - name: getapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+        method: GET
+        description: Get a single emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of the emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+        method: DELETE
+        description: Delete an emoji reaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: award_id
+          in: path
+          type: integer
+          description: ID of an emoji reaction.
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+        - name: note_id
+          in: path
+          type: integer
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-award-emoji-rest
+    port: 8080
+    description: REST adapter for GitLab API — award_emoji. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/groups/{id}/epics/{epic-iid}/award-emoji
+      name: api-v4-groups-id-epics-epic-iid-award-emoji
+      description: REST surface for api-v4-groups-id-epics-epic_iid-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4groupsidepicsepiciidawardemoji
+        description: List an awardable's emoji reactions for groups
+        call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidawardemoji
+        with:
+          id: rest.id
+          epic_iid: rest.epic_iid
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4groupsidepicsepiciidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4groupsidepicsepiciidawardemoji
+        with:
+          id: rest.id
+          epic_iid: rest.epic_iid
+          postApiV4GroupsIdEpicsEpicIidAwardEmoji: rest.postApiV4GroupsIdEpicsEpicIidAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/epics/{epic-iid}/award-emoji/{award-id}
+      name: api-v4-groups-id-epics-epic-iid-award-emoji-award-id
+      description: REST surface for api-v4-groups-id-epics-epic_iid-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4groupsidepicsepiciidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          epic_iid: rest.epic_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4groupsidepicsepiciidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4groupsidepicsepiciidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          epic_iid: rest.epic_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/epics/{epic-iid}/notes/{note-id}/award-emoji
+      name: api-v4-groups-id-epics-epic-iid-notes-note-id-award-emoji
+      description: REST surface for api-v4-groups-id-epics-epic_iid-notes-note_id-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4groupsidepicsepiciidnotesnoteidawardemoji
+        description: List an awardable's emoji reactions for groups
+        call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidnotesnoteidawardemoji
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+          epic_iid: rest.epic_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4groupsidepicsepiciidnotesnoteidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4groupsidepicsepiciidnotesnoteidawardemoji
+        with:
+          id: rest.id
+          epic_iid: rest.epic_iid
+          note_id: rest.note_id
+          postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji: rest.postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/epics/{epic-iid}/notes/{note-id}/award-emoji/{award-id}
+      name: api-v4-groups-id-epics-epic-iid-notes-note-id-award-emoji-award-id
+      description: REST surface for api-v4-groups-id-epics-epic_iid-notes-note_id-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          epic_iid: rest.epic_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          epic_iid: rest.epic_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/award-emoji
+      name: api-v4-projects-id-issues-issue-iid-award-emoji
+      description: REST surface for api-v4-projects-id-issues-issue_iid-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesissueiidawardemoji
+        description: List an awardable's emoji reactions for projects
+        call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidawardemoji
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidissuesissueiidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4projectsidissuesissueiidawardemoji
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          postApiV4ProjectsIdIssuesIssueIidAwardEmoji: rest.postApiV4ProjectsIdIssuesIssueIidAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/award-emoji/{award-id}
+      name: api-v4-projects-id-issues-issue-iid-award-emoji-award-id
+      description: REST surface for api-v4-projects-id-issues-issue_iid-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesissueiidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          issue_iid: rest.issue_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidissuesissueiidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4projectsidissuesissueiidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          issue_iid: rest.issue_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/notes/{note-id}/award-emoji
+      name: api-v4-projects-id-issues-issue-iid-notes-note-id-award-emoji
+      description: REST surface for api-v4-projects-id-issues-issue_iid-notes-note_id-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesissueiidnotesnoteidawardemoji
+        description: List an awardable's emoji reactions for projects
+        call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidnotesnoteidawardemoji
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+          issue_iid: rest.issue_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidissuesissueiidnotesnoteidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4projectsidissuesissueiidnotesnoteidawardemoji
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          note_id: rest.note_id
+          postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji: rest.postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/notes/{note-id}/award-emoji/{award-id}
+      name: api-v4-projects-id-issues-issue-iid-notes-note-id-award-emoji-award-id
+      description: REST surface for api-v4-projects-id-issues-issue_iid-notes-note_id-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          issue_iid: rest.issue_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          issue_iid: rest.issue_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/award-emoji
+      name: api-v4-projects-id-merge-requests-merge-request-iid-award-emoji
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidawardemoji
+        description: List an awardable's emoji reactions for projects
+        call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidawardemoji
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4projectsidmergerequestsmergerequestiidawardemoji
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji: rest.postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/award-emoji/{award-id}
+      name: api-v4-projects-id-merge-requests-merge-request-iid-award-emoji-award-id
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/notes/{note-id}/award-emoji
+      name: api-v4-projects-id-merge-requests-merge-request-iid-notes-note-id-award-emoji
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-notes-note_id-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+        description: List an awardable's emoji reactions for projects
+        call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          note_id: rest.note_id
+          postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji: rest.postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/notes/{note-id}/award-emoji/{award-id}
+      name: api-v4-projects-id-merge-requests-merge-request-iid-notes-note-id-award-emoji-aw
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-notes-note_id-award_emoji-aw.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/award-emoji
+      name: api-v4-projects-id-snippets-snippet-id-award-emoji
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetidawardemoji
+        description: List an awardable's emoji reactions for projects
+        call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidawardemoji
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidsnippetssnippetidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4projectsidsnippetssnippetidawardemoji
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+          postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji: rest.postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/award-emoji/{award-id}
+      name: api-v4-projects-id-snippets-snippet-id-award-emoji-award-id
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidsnippetssnippetidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4projectsidsnippetssnippetidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/notes/{note-id}/award-emoji
+      name: api-v4-projects-id-snippets-snippet-id-notes-note-id-award-emoji
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-notes-note_id-award_emoji.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+        description: List an awardable's emoji reactions for projects
+        call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+          snippet_id: rest.snippet_id
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+        description: Add a new emoji reaction
+        call: gitlab-ci-award-emoji.postapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+          note_id: rest.note_id
+          postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji: rest.postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/notes/{note-id}/award-emoji/{award-id}
+      name: api-v4-projects-id-snippets-snippet-id-notes-note-id-award-emoji-award-id
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-notes-note_id-award_emoji-award_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+        description: Get a single emoji reaction
+        call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          snippet_id: rest.snippet_id
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+        description: Delete an emoji reaction
+        call: gitlab-ci-award-emoji.deleteapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+        with:
+          award_id: rest.award_id
+          id: rest.id
+          snippet_id: rest.snippet_id
+          note_id: rest.note_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-award-emoji-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — award_emoji. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-awardable-s-emoji-reactions-groups
+      description: List an awardable's emoji reactions for groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidawardemoji
+      with:
+        id: tools.id
+        epic_iid: tools.epic_iid
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4groupsidepicsepiciidawardemoji
+      with:
+        id: tools.id
+        epic_iid: tools.epic_iid
+        postApiV4GroupsIdEpicsEpicIidAwardEmoji: tools.postApiV4GroupsIdEpicsEpicIidAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        epic_iid: tools.epic_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4groupsidepicsepiciidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        epic_iid: tools.epic_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-groups-2
+      description: List an awardable's emoji reactions for groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidnotesnoteidawardemoji
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+        epic_iid: tools.epic_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-2
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4groupsidepicsepiciidnotesnoteidawardemoji
+      with:
+        id: tools.id
+        epic_iid: tools.epic_iid
+        note_id: tools.note_id
+        postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji: tools.postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-2
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        epic_iid: tools.epic_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-2
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4groupsidepicsepiciidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        epic_iid: tools.epic_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-projects
+      description: List an awardable's emoji reactions for projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidawardemoji
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-3
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4projectsidissuesissueiidawardemoji
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        postApiV4ProjectsIdIssuesIssueIidAwardEmoji: tools.postApiV4ProjectsIdIssuesIssueIidAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-3
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        issue_iid: tools.issue_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-3
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4projectsidissuesissueiidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        issue_iid: tools.issue_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-projects-2
+      description: List an awardable's emoji reactions for projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidnotesnoteidawardemoji
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+        issue_iid: tools.issue_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-4
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4projectsidissuesissueiidnotesnoteidawardemoji
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        note_id: tools.note_id
+        postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji: tools.postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-4
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        issue_iid: tools.issue_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-4
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4projectsidissuesissueiidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        issue_iid: tools.issue_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-projects-3
+      description: List an awardable's emoji reactions for projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidawardemoji
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-5
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4projectsidmergerequestsmergerequestiidawardemoji
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji: tools.postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-5
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-5
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4projectsidmergerequestsmergerequestiidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-projects-4
+      description: List an awardable's emoji reactions for projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-6
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemoji
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        note_id: tools.note_id
+        postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji: tools.postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-6
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-6
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4projectsidmergerequestsmergerequestiidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-projects-5
+      description: List an awardable's emoji reactions for projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidawardemoji
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-7
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4projectsidsnippetssnippetidawardemoji
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+        postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji: tools.postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-7
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-7
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4projectsidsnippetssnippetidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-awardable-s-emoji-reactions-projects-6
+      description: List an awardable's emoji reactions for projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+        snippet_id: tools.snippet_id
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-emoji-reaction-8
+      description: Add a new emoji reaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-award-emoji.postapiv4projectsidsnippetssnippetidnotesnoteidawardemoji
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+        note_id: tools.note_id
+        postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji: tools.postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-emoji-reaction-8
+      description: Get a single emoji reaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-award-emoji.getapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        snippet_id: tools.snippet_id
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-emoji-reaction-8
+      description: Delete an emoji reaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-award-emoji.deleteapiv4projectsidsnippetssnippetidnotesnoteidawardemojiawardid
+      with:
+        award_id: tools.award_id
+        id: tools.id
+        snippet_id: tools.snippet_id
+        note_id: tools.note_id
+      outputParameters:
+      - type: object
+        mapping: $.

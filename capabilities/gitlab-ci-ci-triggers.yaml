@@ -1,0 +1,324 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — ci_triggers
+  description: 'GitLab API — ci_triggers. 6 operations. Lead operation: ci_triggers. Self-contained Naftiko capability covering
+    one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - ci_triggers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-ci-triggers
+    baseUri: https://gitlab.com
+    description: GitLab API — ci_triggers business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-(ref-ref-)trigger-pipeline
+      path: /api/v4/projects/{id}/(ref/{ref}/)trigger/pipeline
+      operations:
+      - name: postapiv4projectsidrefreftriggerpipeline
+        method: POST
+        description: Trigger a GitLab project pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: ref
+          in: path
+          type: string
+          description: The commit sha or name of a branch or tag
+          required: true
+        - name: postApiV4ProjectsId(refRef)triggerPipeline
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-triggers
+      path: /api/v4/projects/{id}/triggers
+      operations:
+      - name: getapiv4projectsidtriggers
+        method: GET
+        description: Get trigger tokens list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidtriggers
+        method: POST
+        description: Create a trigger token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdTriggers
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-triggers-trigger_id
+      path: /api/v4/projects/{id}/triggers/{trigger_id}
+      operations:
+      - name: getapiv4projectsidtriggerstriggerid
+        method: GET
+        description: Get specific trigger token of a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: trigger_id
+          in: path
+          type: integer
+          description: The trigger token ID
+          required: true
+      - name: putapiv4projectsidtriggerstriggerid
+        method: PUT
+        description: Update a trigger token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: trigger_id
+          in: path
+          type: integer
+          description: The trigger token ID
+          required: true
+        - name: putApiV4ProjectsIdTriggersTriggerId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidtriggerstriggerid
+        method: DELETE
+        description: Delete a trigger token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: trigger_id
+          in: path
+          type: integer
+          description: The trigger token ID
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-ci-triggers-rest
+    port: 8080
+    description: REST adapter for GitLab API — ci_triggers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/ref/{ref}/trigger/pipeline
+      name: api-v4-projects-id-ref-ref-trigger-pipeline
+      description: REST surface for api-v4-projects-id-(ref-ref-)trigger-pipeline.
+      operations:
+      - method: POST
+        name: postapiv4projectsidrefreftriggerpipeline
+        description: Trigger a GitLab project pipeline
+        call: gitlab-ci-ci-triggers.postapiv4projectsidrefreftriggerpipeline
+        with:
+          id: rest.id
+          ref: rest.ref
+          postApiV4ProjectsId(refRef)triggerPipeline: rest.postApiV4ProjectsId(refRef)triggerPipeline
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/triggers
+      name: api-v4-projects-id-triggers
+      description: REST surface for api-v4-projects-id-triggers.
+      operations:
+      - method: GET
+        name: getapiv4projectsidtriggers
+        description: Get trigger tokens list
+        call: gitlab-ci-ci-triggers.getapiv4projectsidtriggers
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidtriggers
+        description: Create a trigger token
+        call: gitlab-ci-ci-triggers.postapiv4projectsidtriggers
+        with:
+          id: rest.id
+          postApiV4ProjectsIdTriggers: rest.postApiV4ProjectsIdTriggers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/triggers/{trigger-id}
+      name: api-v4-projects-id-triggers-trigger-id
+      description: REST surface for api-v4-projects-id-triggers-trigger_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidtriggerstriggerid
+        description: Get specific trigger token of a project
+        call: gitlab-ci-ci-triggers.getapiv4projectsidtriggerstriggerid
+        with:
+          id: rest.id
+          trigger_id: rest.trigger_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidtriggerstriggerid
+        description: Update a trigger token
+        call: gitlab-ci-ci-triggers.putapiv4projectsidtriggerstriggerid
+        with:
+          id: rest.id
+          trigger_id: rest.trigger_id
+          putApiV4ProjectsIdTriggersTriggerId: rest.putApiV4ProjectsIdTriggersTriggerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidtriggerstriggerid
+        description: Delete a trigger token
+        call: gitlab-ci-ci-triggers.deleteapiv4projectsidtriggerstriggerid
+        with:
+          id: rest.id
+          trigger_id: rest.trigger_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-ci-triggers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — ci_triggers. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: trigger-gitlab-project-pipeline
+      description: Trigger a GitLab project pipeline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-ci-triggers.postapiv4projectsidrefreftriggerpipeline
+      with:
+        id: tools.id
+        ref: tools.ref
+        postApiV4ProjectsId(refRef)triggerPipeline: tools.postApiV4ProjectsId(refRef)triggerPipeline
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-trigger-tokens-list
+      description: Get trigger tokens list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-triggers.getapiv4projectsidtriggers
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-trigger-token
+      description: Create a trigger token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-ci-triggers.postapiv4projectsidtriggers
+      with:
+        id: tools.id
+        postApiV4ProjectsIdTriggers: tools.postApiV4ProjectsIdTriggers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-trigger-token-project
+      description: Get specific trigger token of a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-triggers.getapiv4projectsidtriggerstriggerid
+      with:
+        id: tools.id
+        trigger_id: tools.trigger_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-trigger-token
+      description: Update a trigger token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-triggers.putapiv4projectsidtriggerstriggerid
+      with:
+        id: tools.id
+        trigger_id: tools.trigger_id
+        putApiV4ProjectsIdTriggersTriggerId: tools.putApiV4ProjectsIdTriggersTriggerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-trigger-token
+      description: Delete a trigger token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-ci-triggers.deleteapiv4projectsidtriggerstriggerid
+      with:
+        id: tools.id
+        trigger_id: tools.trigger_id
+      outputParameters:
+      - type: object
+        mapping: $.

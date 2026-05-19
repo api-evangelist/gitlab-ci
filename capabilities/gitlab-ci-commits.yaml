@@ -1,0 +1,775 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — commits
+  description: 'GitLab API — commits. 12 operations. Lead operation: Create a new commit. Self-contained Naftiko capability
+    covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - commits
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-commits
+    baseUri: https://gitlab.com
+    description: GitLab API — commits business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-repository-commits
+      path: /api/v4/projects/{id}/repository/commits
+      operations:
+      - name: getapiv4projectsidrepositorycommits
+        method: GET
+        description: Get a project repository commits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: ref_name
+          in: query
+          type: string
+          description: The name of a repository branch or tag, if not given the default branch is used
+        - name: since
+          in: query
+          type: string
+          description: Only commits after or on this date will be returned
+        - name: until
+          in: query
+          type: string
+          description: Only commits before or on this date will be returned
+        - name: path
+          in: query
+          type: string
+          description: The file path
+        - name: follow
+          in: query
+          type: boolean
+          description: Follow file renames when filtering by path
+        - name: author
+          in: query
+          type: string
+          description: Search commits by commit author
+        - name: all
+          in: query
+          type: boolean
+          description: Every commit will be returned
+        - name: with_stats
+          in: query
+          type: boolean
+          description: Stats about each commit will be added to the response
+        - name: first_parent
+          in: query
+          type: boolean
+          description: Only include the first parent of merges
+        - name: order
+          in: query
+          type: string
+          description: List commits in order
+        - name: trailers
+          in: query
+          type: boolean
+          description: Parse and include Git trailers for every commit
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidrepositorycommits
+        method: POST
+        description: Create a new commit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdRepositoryCommits
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-repository-commits-sha
+      path: /api/v4/projects/{id}/repository/commits/{sha}
+      operations:
+      - name: getapiv4projectsidrepositorycommitssha
+        method: GET
+        description: Get a specific commit of a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag
+          required: true
+        - name: stats
+          in: query
+          type: boolean
+          description: Include commit stats
+    - name: api-v4-projects-id-repository-commits-sha-cherry_pick
+      path: /api/v4/projects/{id}/repository/commits/{sha}/cherry_pick
+      operations:
+      - name: postapiv4projectsidrepositorycommitsshacherrypick
+        method: POST
+        description: Cherry pick commit into a branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag to be cherry-picked
+          required: true
+        - name: postApiV4ProjectsIdRepositoryCommitsShaCherryPick
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-repository-commits-sha-comments
+      path: /api/v4/projects/{id}/repository/commits/{sha}/comments
+      operations:
+      - name: getapiv4projectsidrepositorycommitsshacomments
+        method: GET
+        description: Get a commit's comments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag
+          required: true
+      - name: postapiv4projectsidrepositorycommitsshacomments
+        method: POST
+        description: Post comment to commit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag on which to post a comment
+          required: true
+        - name: postApiV4ProjectsIdRepositoryCommitsShaComments
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-repository-commits-sha-diff
+      path: /api/v4/projects/{id}/repository/commits/{sha}/diff
+      operations:
+      - name: getapiv4projectsidrepositorycommitsshadiff
+        method: GET
+        description: Get the diff for a specific commit of a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: unidiff
+          in: query
+          type: boolean
+          description: A diff in a Unified diff format
+    - name: api-v4-projects-id-repository-commits-sha-merge_requests
+      path: /api/v4/projects/{id}/repository/commits/{sha}/merge_requests
+      operations:
+      - name: getapiv4projectsidrepositorycommitsshamergerequests
+        method: GET
+        description: Get Merge Requests associated with a commit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag on which to find Merge Requests
+          required: true
+        - name: state
+          in: query
+          type: string
+          description: Filter merge-requests by state
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-repository-commits-sha-refs
+      path: /api/v4/projects/{id}/repository/commits/{sha}/refs
+      operations:
+      - name: getapiv4projectsidrepositorycommitssharefs
+        method: GET
+        description: Get all references a commit is pushed to
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: Scope
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-repository-commits-sha-revert
+      path: /api/v4/projects/{id}/repository/commits/{sha}/revert
+      operations:
+      - name: postapiv4projectsidrepositorycommitssharevert
+        method: POST
+        description: Revert a commit in a branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: Commit SHA to revert
+          required: true
+        - name: postApiV4ProjectsIdRepositoryCommitsShaRevert
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-repository-commits-sha-sequence
+      path: /api/v4/projects/{id}/repository/commits/{sha}/sequence
+      operations:
+      - name: getapiv4projectsidrepositorycommitsshasequence
+        method: GET
+        description: Get the sequence count of a commit SHA
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit SHA
+          required: true
+        - name: first_parent
+          in: query
+          type: boolean
+          description: Only include the first parent of merges
+    - name: api-v4-projects-id-repository-commits-sha-signature
+      path: /api/v4/projects/{id}/repository/commits/{sha}/signature
+      operations:
+      - name: getapiv4projectsidrepositorycommitsshasignature
+        method: GET
+        description: Get a commit's signature
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: A commit sha, or the name of a branch or tag
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-commits-rest
+    port: 8080
+    description: REST adapter for GitLab API — commits. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/repository/commits
+      name: api-v4-projects-id-repository-commits
+      description: REST surface for api-v4-projects-id-repository-commits.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommits
+        description: Get a project repository commits
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommits
+        with:
+          id: rest.id
+          ref_name: rest.ref_name
+          since: rest.since
+          until: rest.until
+          path: rest.path
+          follow: rest.follow
+          author: rest.author
+          all: rest.all
+          with_stats: rest.with_stats
+          first_parent: rest.first_parent
+          order: rest.order
+          trailers: rest.trailers
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidrepositorycommits
+        description: Create a new commit
+        call: gitlab-ci-commits.postapiv4projectsidrepositorycommits
+        with:
+          id: rest.id
+          postApiV4ProjectsIdRepositoryCommits: rest.postApiV4ProjectsIdRepositoryCommits
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}
+      name: api-v4-projects-id-repository-commits-sha
+      description: REST surface for api-v4-projects-id-repository-commits-sha.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitssha
+        description: Get a specific commit of a project
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitssha
+        with:
+          id: rest.id
+          sha: rest.sha
+          stats: rest.stats
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/cherry-pick
+      name: api-v4-projects-id-repository-commits-sha-cherry-pick
+      description: REST surface for api-v4-projects-id-repository-commits-sha-cherry_pick.
+      operations:
+      - method: POST
+        name: postapiv4projectsidrepositorycommitsshacherrypick
+        description: Cherry pick commit into a branch
+        call: gitlab-ci-commits.postapiv4projectsidrepositorycommitsshacherrypick
+        with:
+          id: rest.id
+          sha: rest.sha
+          postApiV4ProjectsIdRepositoryCommitsShaCherryPick: rest.postApiV4ProjectsIdRepositoryCommitsShaCherryPick
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/comments
+      name: api-v4-projects-id-repository-commits-sha-comments
+      description: REST surface for api-v4-projects-id-repository-commits-sha-comments.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitsshacomments
+        description: Get a commit's comments
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshacomments
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          sha: rest.sha
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidrepositorycommitsshacomments
+        description: Post comment to commit
+        call: gitlab-ci-commits.postapiv4projectsidrepositorycommitsshacomments
+        with:
+          id: rest.id
+          sha: rest.sha
+          postApiV4ProjectsIdRepositoryCommitsShaComments: rest.postApiV4ProjectsIdRepositoryCommitsShaComments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/diff
+      name: api-v4-projects-id-repository-commits-sha-diff
+      description: REST surface for api-v4-projects-id-repository-commits-sha-diff.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitsshadiff
+        description: Get the diff for a specific commit of a project
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshadiff
+        with:
+          id: rest.id
+          sha: rest.sha
+          page: rest.page
+          per_page: rest.per_page
+          unidiff: rest.unidiff
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/merge-requests
+      name: api-v4-projects-id-repository-commits-sha-merge-requests
+      description: REST surface for api-v4-projects-id-repository-commits-sha-merge_requests.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitsshamergerequests
+        description: Get Merge Requests associated with a commit
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshamergerequests
+        with:
+          id: rest.id
+          sha: rest.sha
+          state: rest.state
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/refs
+      name: api-v4-projects-id-repository-commits-sha-refs
+      description: REST surface for api-v4-projects-id-repository-commits-sha-refs.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitssharefs
+        description: Get all references a commit is pushed to
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitssharefs
+        with:
+          id: rest.id
+          sha: rest.sha
+          type: rest.type
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/revert
+      name: api-v4-projects-id-repository-commits-sha-revert
+      description: REST surface for api-v4-projects-id-repository-commits-sha-revert.
+      operations:
+      - method: POST
+        name: postapiv4projectsidrepositorycommitssharevert
+        description: Revert a commit in a branch
+        call: gitlab-ci-commits.postapiv4projectsidrepositorycommitssharevert
+        with:
+          id: rest.id
+          sha: rest.sha
+          postApiV4ProjectsIdRepositoryCommitsShaRevert: rest.postApiV4ProjectsIdRepositoryCommitsShaRevert
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/sequence
+      name: api-v4-projects-id-repository-commits-sha-sequence
+      description: REST surface for api-v4-projects-id-repository-commits-sha-sequence.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitsshasequence
+        description: Get the sequence count of a commit SHA
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshasequence
+        with:
+          id: rest.id
+          sha: rest.sha
+          first_parent: rest.first_parent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/signature
+      name: api-v4-projects-id-repository-commits-sha-signature
+      description: REST surface for api-v4-projects-id-repository-commits-sha-signature.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitsshasignature
+        description: Get a commit's signature
+        call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshasignature
+        with:
+          id: rest.id
+          sha: rest.sha
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-commits-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — commits. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-project-repository-commits
+      description: Get a project repository commits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommits
+      with:
+        id: tools.id
+        ref_name: tools.ref_name
+        since: tools.since
+        until: tools.until
+        path: tools.path
+        follow: tools.follow
+        author: tools.author
+        all: tools.all
+        with_stats: tools.with_stats
+        first_parent: tools.first_parent
+        order: tools.order
+        trailers: tools.trailers
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-commit
+      description: Create a new commit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-commits.postapiv4projectsidrepositorycommits
+      with:
+        id: tools.id
+        postApiV4ProjectsIdRepositoryCommits: tools.postApiV4ProjectsIdRepositoryCommits
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-commit-project
+      description: Get a specific commit of a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitssha
+      with:
+        id: tools.id
+        sha: tools.sha
+        stats: tools.stats
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cherry-pick-commit-branch
+      description: Cherry pick commit into a branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-commits.postapiv4projectsidrepositorycommitsshacherrypick
+      with:
+        id: tools.id
+        sha: tools.sha
+        postApiV4ProjectsIdRepositoryCommitsShaCherryPick: tools.postApiV4ProjectsIdRepositoryCommitsShaCherryPick
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-commit-s-comments
+      description: Get a commit's comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshacomments
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        sha: tools.sha
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-comment-commit
+      description: Post comment to commit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-commits.postapiv4projectsidrepositorycommitsshacomments
+      with:
+        id: tools.id
+        sha: tools.sha
+        postApiV4ProjectsIdRepositoryCommitsShaComments: tools.postApiV4ProjectsIdRepositoryCommitsShaComments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-diff-specific-commit-project
+      description: Get the diff for a specific commit of a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshadiff
+      with:
+        id: tools.id
+        sha: tools.sha
+        page: tools.page
+        per_page: tools.per_page
+        unidiff: tools.unidiff
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-merge-requests-associated-commit
+      description: Get Merge Requests associated with a commit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshamergerequests
+      with:
+        id: tools.id
+        sha: tools.sha
+        state: tools.state
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-references-commit-is
+      description: Get all references a commit is pushed to
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitssharefs
+      with:
+        id: tools.id
+        sha: tools.sha
+        type: tools.type
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revert-commit-branch
+      description: Revert a commit in a branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-commits.postapiv4projectsidrepositorycommitssharevert
+      with:
+        id: tools.id
+        sha: tools.sha
+        postApiV4ProjectsIdRepositoryCommitsShaRevert: tools.postApiV4ProjectsIdRepositoryCommitsShaRevert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sequence-count-commit-sha
+      description: Get the sequence count of a commit SHA
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshasequence
+      with:
+        id: tools.id
+        sha: tools.sha
+        first_parent: tools.first_parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-commit-s-signature
+      description: Get a commit's signature
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commits.getapiv4projectsidrepositorycommitsshasignature
+      with:
+        id: tools.id
+        sha: tools.sha
+      outputParameters:
+      - type: object
+        mapping: $.

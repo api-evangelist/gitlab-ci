@@ -1,0 +1,405 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — geo
+  description: 'GitLab API — geo. 9 operations. Lead operation: Query the GraphQL endpoint of an existing Geo node. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - geo
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-geo
+    baseUri: https://gitlab.com
+    description: GitLab API — geo business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-geo-node_proxy-id-graphql
+      path: /api/v4/geo/node_proxy/{id}/graphql
+      operations:
+      - name: postapiv4geonodeproxyidgraphql
+        method: POST
+        description: Query the GraphQL endpoint of an existing Geo node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of the Geo node
+          required: true
+    - name: api-v4-geo-proxy
+      path: /api/v4/geo/proxy
+      operations:
+      - name: getapiv4geoproxy
+        method: GET
+        description: Determine if a Geo site should proxy requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v4-geo-proxy_git_ssh-info_refs_receive_pack
+      path: /api/v4/geo/proxy_git_ssh/info_refs_receive_pack
+      operations:
+      - name: postapiv4geoproxygitsshinforefsreceivepack
+        method: POST
+        description: Internal endpoint that returns git-received-pack output for git push
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4GeoProxyGitSshInfoRefsReceivePack
+          in: body
+          type: string
+          required: true
+    - name: api-v4-geo-proxy_git_ssh-info_refs_upload_pack
+      path: /api/v4/geo/proxy_git_ssh/info_refs_upload_pack
+      operations:
+      - name: postapiv4geoproxygitsshinforefsuploadpack
+        method: POST
+        description: Internal endpoint that returns info refs upload pack for clone or pull operations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4GeoProxyGitSshInfoRefsUploadPack
+          in: body
+          type: string
+          required: true
+    - name: api-v4-geo-proxy_git_ssh-receive_pack
+      path: /api/v4/geo/proxy_git_ssh/receive_pack
+      operations:
+      - name: postapiv4geoproxygitsshreceivepack
+        method: POST
+        description: Internal endpoint that posts git-receive-pack for git push
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4GeoProxyGitSshReceivePack
+          in: body
+          type: string
+          required: true
+    - name: api-v4-geo-proxy_git_ssh-upload_pack
+      path: /api/v4/geo/proxy_git_ssh/upload_pack
+      operations:
+      - name: postapiv4geoproxygitsshuploadpack
+        method: POST
+        description: Internal endpoint that posts git-upload-pack for clone or pull operations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4GeoProxyGitSshUploadPack
+          in: body
+          type: string
+          required: true
+    - name: api-v4-geo-repositories-gl_repository-pipeline_refs
+      path: /api/v4/geo/repositories/{gl_repository}/pipeline_refs
+      operations:
+      - name: getapiv4georepositoriesglrepositorypipelinerefs
+        method: GET
+        description: Used by secondary runners to verify the secondary instance has the very latest version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: gl_repository
+          in: path
+          type: string
+          description: The repository to check
+          required: true
+    - name: api-v4-geo-retrieve-replicable_name-replicable_id
+      path: /api/v4/geo/retrieve/{replicable_name}/{replicable_id}
+      operations:
+      - name: getapiv4georetrievereplicablenamereplicableid
+        method: GET
+        description: Internal endpoint that returns a replicable file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: replicable_name
+          in: path
+          type: string
+          description: The replicable name of a replicator instance
+          required: true
+        - name: replicable_id
+          in: path
+          type: integer
+          description: The replicable ID of a replicable instance
+          required: true
+    - name: api-v4-geo-status
+      path: /api/v4/geo/status
+      operations:
+      - name: postapiv4geostatus
+        method: POST
+        description: Internal endpoint that posts the current node status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4GeoStatus
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-geo-rest
+    port: 8080
+    description: REST adapter for GitLab API — geo. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/geo/node-proxy/{id}/graphql
+      name: api-v4-geo-node-proxy-id-graphql
+      description: REST surface for api-v4-geo-node_proxy-id-graphql.
+      operations:
+      - method: POST
+        name: postapiv4geonodeproxyidgraphql
+        description: Query the GraphQL endpoint of an existing Geo node
+        call: gitlab-ci-geo.postapiv4geonodeproxyidgraphql
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/proxy
+      name: api-v4-geo-proxy
+      description: REST surface for api-v4-geo-proxy.
+      operations:
+      - method: GET
+        name: getapiv4geoproxy
+        description: Determine if a Geo site should proxy requests
+        call: gitlab-ci-geo.getapiv4geoproxy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/proxy-git-ssh/info-refs-receive-pack
+      name: api-v4-geo-proxy-git-ssh-info-refs-receive-pack
+      description: REST surface for api-v4-geo-proxy_git_ssh-info_refs_receive_pack.
+      operations:
+      - method: POST
+        name: postapiv4geoproxygitsshinforefsreceivepack
+        description: Internal endpoint that returns git-received-pack output for git push
+        call: gitlab-ci-geo.postapiv4geoproxygitsshinforefsreceivepack
+        with:
+          postApiV4GeoProxyGitSshInfoRefsReceivePack: rest.postApiV4GeoProxyGitSshInfoRefsReceivePack
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/proxy-git-ssh/info-refs-upload-pack
+      name: api-v4-geo-proxy-git-ssh-info-refs-upload-pack
+      description: REST surface for api-v4-geo-proxy_git_ssh-info_refs_upload_pack.
+      operations:
+      - method: POST
+        name: postapiv4geoproxygitsshinforefsuploadpack
+        description: Internal endpoint that returns info refs upload pack for clone or pull operations
+        call: gitlab-ci-geo.postapiv4geoproxygitsshinforefsuploadpack
+        with:
+          postApiV4GeoProxyGitSshInfoRefsUploadPack: rest.postApiV4GeoProxyGitSshInfoRefsUploadPack
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/proxy-git-ssh/receive-pack
+      name: api-v4-geo-proxy-git-ssh-receive-pack
+      description: REST surface for api-v4-geo-proxy_git_ssh-receive_pack.
+      operations:
+      - method: POST
+        name: postapiv4geoproxygitsshreceivepack
+        description: Internal endpoint that posts git-receive-pack for git push
+        call: gitlab-ci-geo.postapiv4geoproxygitsshreceivepack
+        with:
+          postApiV4GeoProxyGitSshReceivePack: rest.postApiV4GeoProxyGitSshReceivePack
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/proxy-git-ssh/upload-pack
+      name: api-v4-geo-proxy-git-ssh-upload-pack
+      description: REST surface for api-v4-geo-proxy_git_ssh-upload_pack.
+      operations:
+      - method: POST
+        name: postapiv4geoproxygitsshuploadpack
+        description: Internal endpoint that posts git-upload-pack for clone or pull operations
+        call: gitlab-ci-geo.postapiv4geoproxygitsshuploadpack
+        with:
+          postApiV4GeoProxyGitSshUploadPack: rest.postApiV4GeoProxyGitSshUploadPack
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/repositories/{gl-repository}/pipeline-refs
+      name: api-v4-geo-repositories-gl-repository-pipeline-refs
+      description: REST surface for api-v4-geo-repositories-gl_repository-pipeline_refs.
+      operations:
+      - method: GET
+        name: getapiv4georepositoriesglrepositorypipelinerefs
+        description: Used by secondary runners to verify the secondary instance has the very latest version
+        call: gitlab-ci-geo.getapiv4georepositoriesglrepositorypipelinerefs
+        with:
+          gl_repository: rest.gl_repository
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/retrieve/{replicable-name}/{replicable-id}
+      name: api-v4-geo-retrieve-replicable-name-replicable-id
+      description: REST surface for api-v4-geo-retrieve-replicable_name-replicable_id.
+      operations:
+      - method: GET
+        name: getapiv4georetrievereplicablenamereplicableid
+        description: Internal endpoint that returns a replicable file
+        call: gitlab-ci-geo.getapiv4georetrievereplicablenamereplicableid
+        with:
+          replicable_name: rest.replicable_name
+          replicable_id: rest.replicable_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/geo/status
+      name: api-v4-geo-status
+      description: REST surface for api-v4-geo-status.
+      operations:
+      - method: POST
+        name: postapiv4geostatus
+        description: Internal endpoint that posts the current node status
+        call: gitlab-ci-geo.postapiv4geostatus
+        with:
+          postApiV4GeoStatus: rest.postApiV4GeoStatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-geo-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — geo. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: query-graphql-endpoint-existing-geo
+      description: Query the GraphQL endpoint of an existing Geo node
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-geo.postapiv4geonodeproxyidgraphql
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: determine-if-geo-site-should
+      description: Determine if a Geo site should proxy requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-geo.getapiv4geoproxy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: internal-endpoint-that-returns-git
+      description: Internal endpoint that returns git-received-pack output for git push
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-geo.postapiv4geoproxygitsshinforefsreceivepack
+      with:
+        postApiV4GeoProxyGitSshInfoRefsReceivePack: tools.postApiV4GeoProxyGitSshInfoRefsReceivePack
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: internal-endpoint-that-returns-info
+      description: Internal endpoint that returns info refs upload pack for clone or pull operations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-geo.postapiv4geoproxygitsshinforefsuploadpack
+      with:
+        postApiV4GeoProxyGitSshInfoRefsUploadPack: tools.postApiV4GeoProxyGitSshInfoRefsUploadPack
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: internal-endpoint-that-posts-git
+      description: Internal endpoint that posts git-receive-pack for git push
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-geo.postapiv4geoproxygitsshreceivepack
+      with:
+        postApiV4GeoProxyGitSshReceivePack: tools.postApiV4GeoProxyGitSshReceivePack
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: internal-endpoint-that-posts-git-2
+      description: Internal endpoint that posts git-upload-pack for clone or pull operations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-geo.postapiv4geoproxygitsshuploadpack
+      with:
+        postApiV4GeoProxyGitSshUploadPack: tools.postApiV4GeoProxyGitSshUploadPack
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: used-secondary-runners-verify-secondary
+      description: Used by secondary runners to verify the secondary instance has the very latest version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-geo.getapiv4georepositoriesglrepositorypipelinerefs
+      with:
+        gl_repository: tools.gl_repository
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: internal-endpoint-that-returns-replicable
+      description: Internal endpoint that returns a replicable file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-geo.getapiv4georetrievereplicablenamereplicableid
+      with:
+        replicable_name: tools.replicable_name
+        replicable_id: tools.replicable_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: internal-endpoint-that-posts-current
+      description: Internal endpoint that posts the current node status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-geo.postapiv4geostatus
+      with:
+        postApiV4GeoStatus: tools.postApiV4GeoStatus
+      outputParameters:
+      - type: object
+        mapping: $.

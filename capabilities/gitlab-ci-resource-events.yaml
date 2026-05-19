@@ -1,0 +1,269 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — resource_events
+  description: 'GitLab API — resource_events. 4 operations. Lead operation: List project Issue milestone events. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - resource_events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-resource-events
+    baseUri: https://gitlab.com
+    description: GitLab API — resource_events business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-issues-eventable_id-resource_milestone_events
+      path: /api/v4/projects/{id}/issues/{eventable_id}/resource_milestone_events
+      operations:
+      - name: getapiv4projectsidissueseventableidresourcemilestoneevents
+        method: GET
+        description: List project Issue milestone events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: eventable_id
+          in: path
+          type: integer
+          description: The ID of the eventable
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-issues-eventable_id-resource_milestone_events-event_id
+      path: /api/v4/projects/{id}/issues/{eventable_id}/resource_milestone_events/{event_id}
+      operations:
+      - name: getapiv4projectsidissueseventableidresourcemilestoneeventseventid
+        method: GET
+        description: Get single Issue milestone event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: event_id
+          in: path
+          type: string
+          description: The ID of a resource milestone event
+          required: true
+        - name: eventable_id
+          in: path
+          type: integer
+          description: The ID of the eventable
+          required: true
+    - name: api-v4-projects-id-merge_requests-eventable_id-resource_milestone_events
+      path: /api/v4/projects/{id}/merge_requests/{eventable_id}/resource_milestone_events
+      operations:
+      - name: getapiv4projectsidmergerequestseventableidresourcemilestoneevents
+        method: GET
+        description: List project Merge request milestone events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: eventable_id
+          in: path
+          type: integer
+          description: The ID of the eventable
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-merge_requests-eventable_id-resource_milestone_events-event_i
+      path: /api/v4/projects/{id}/merge_requests/{eventable_id}/resource_milestone_events/{event_id}
+      operations:
+      - name: getapiv4projectsidmergerequestseventableidresourcemilestoneeventseventid
+        method: GET
+        description: Get single Merge request milestone event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: event_id
+          in: path
+          type: string
+          description: The ID of a resource milestone event
+          required: true
+        - name: eventable_id
+          in: path
+          type: integer
+          description: The ID of the eventable
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-resource-events-rest
+    port: 8080
+    description: REST adapter for GitLab API — resource_events. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/issues/{eventable-id}/resource-milestone-events
+      name: api-v4-projects-id-issues-eventable-id-resource-milestone-events
+      description: REST surface for api-v4-projects-id-issues-eventable_id-resource_milestone_events.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissueseventableidresourcemilestoneevents
+        description: List project Issue milestone events
+        call: gitlab-ci-resource-events.getapiv4projectsidissueseventableidresourcemilestoneevents
+        with:
+          id: rest.id
+          eventable_id: rest.eventable_id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{eventable-id}/resource-milestone-events/{event-id}
+      name: api-v4-projects-id-issues-eventable-id-resource-milestone-events-event-id
+      description: REST surface for api-v4-projects-id-issues-eventable_id-resource_milestone_events-event_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissueseventableidresourcemilestoneeventseventid
+        description: Get single Issue milestone event
+        call: gitlab-ci-resource-events.getapiv4projectsidissueseventableidresourcemilestoneeventseventid
+        with:
+          id: rest.id
+          event_id: rest.event_id
+          eventable_id: rest.eventable_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{eventable-id}/resource-milestone-events
+      name: api-v4-projects-id-merge-requests-eventable-id-resource-milestone-events
+      description: REST surface for api-v4-projects-id-merge_requests-eventable_id-resource_milestone_events.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestseventableidresourcemilestoneevents
+        description: List project Merge request milestone events
+        call: gitlab-ci-resource-events.getapiv4projectsidmergerequestseventableidresourcemilestoneevents
+        with:
+          id: rest.id
+          eventable_id: rest.eventable_id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{eventable-id}/resource-milestone-events/{event-id}
+      name: api-v4-projects-id-merge-requests-eventable-id-resource-milestone-events-event-i
+      description: REST surface for api-v4-projects-id-merge_requests-eventable_id-resource_milestone_events-event_i.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestseventableidresourcemilestoneeventseventid
+        description: Get single Merge request milestone event
+        call: gitlab-ci-resource-events.getapiv4projectsidmergerequestseventableidresourcemilestoneeventseventid
+        with:
+          id: rest.id
+          event_id: rest.event_id
+          eventable_id: rest.eventable_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-resource-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — resource_events. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-project-issue-milestone-events
+      description: List project Issue milestone events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-resource-events.getapiv4projectsidissueseventableidresourcemilestoneevents
+      with:
+        id: tools.id
+        eventable_id: tools.eventable_id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-issue-milestone-event
+      description: Get single Issue milestone event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-resource-events.getapiv4projectsidissueseventableidresourcemilestoneeventseventid
+      with:
+        id: tools.id
+        event_id: tools.event_id
+        eventable_id: tools.eventable_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-project-merge-request-milestone
+      description: List project Merge request milestone events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-resource-events.getapiv4projectsidmergerequestseventableidresourcemilestoneevents
+      with:
+        id: tools.id
+        eventable_id: tools.eventable_id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-milestone
+      description: Get single Merge request milestone event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-resource-events.getapiv4projectsidmergerequestseventableidresourcemilestoneeventseventid
+      with:
+        id: tools.id
+        event_id: tools.event_id
+        eventable_id: tools.eventable_id
+      outputParameters:
+      - type: object
+        mapping: $.

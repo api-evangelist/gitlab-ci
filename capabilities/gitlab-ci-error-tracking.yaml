@@ -1,0 +1,284 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — error_tracking
+  description: 'GitLab API — error_tracking. 6 operations. Lead operation: List project client keys. Self-contained Naftiko
+    capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - error_tracking
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-error-tracking
+    baseUri: https://gitlab.com
+    description: GitLab API — error_tracking business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-error_tracking-client_keys
+      path: /api/v4/projects/{id}/error_tracking/client_keys
+      operations:
+      - name: getapiv4projectsiderrortrackingclientkeys
+        method: GET
+        description: List project client keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+      - name: postapiv4projectsiderrortrackingclientkeys
+        method: POST
+        description: Create a client key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+    - name: api-v4-projects-id-error_tracking-client_keys-key_id
+      path: /api/v4/projects/{id}/error_tracking/client_keys/{key_id}
+      operations:
+      - name: deleteapiv4projectsiderrortrackingclientkeyskeyid
+        method: DELETE
+        description: Delete a client key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: key_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-error_tracking-settings
+      path: /api/v4/projects/{id}/error_tracking/settings
+      operations:
+      - name: getapiv4projectsiderrortrackingsettings
+        method: GET
+        description: Get Error Tracking settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+      - name: patchapiv4projectsiderrortrackingsettings
+        method: PATCH
+        description: Enable or disable the Error Tracking project settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: patchApiV4ProjectsIdErrorTrackingSettings
+          in: body
+          type: string
+          required: true
+      - name: putapiv4projectsiderrortrackingsettings
+        method: PUT
+        description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: putApiV4ProjectsIdErrorTrackingSettings
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-error-tracking-rest
+    port: 8080
+    description: REST adapter for GitLab API — error_tracking. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/error-tracking/client-keys
+      name: api-v4-projects-id-error-tracking-client-keys
+      description: REST surface for api-v4-projects-id-error_tracking-client_keys.
+      operations:
+      - method: GET
+        name: getapiv4projectsiderrortrackingclientkeys
+        description: List project client keys
+        call: gitlab-ci-error-tracking.getapiv4projectsiderrortrackingclientkeys
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsiderrortrackingclientkeys
+        description: Create a client key
+        call: gitlab-ci-error-tracking.postapiv4projectsiderrortrackingclientkeys
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/error-tracking/client-keys/{key-id}
+      name: api-v4-projects-id-error-tracking-client-keys-key-id
+      description: REST surface for api-v4-projects-id-error_tracking-client_keys-key_id.
+      operations:
+      - method: DELETE
+        name: deleteapiv4projectsiderrortrackingclientkeyskeyid
+        description: Delete a client key
+        call: gitlab-ci-error-tracking.deleteapiv4projectsiderrortrackingclientkeyskeyid
+        with:
+          id: rest.id
+          key_id: rest.key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/error-tracking/settings
+      name: api-v4-projects-id-error-tracking-settings
+      description: REST surface for api-v4-projects-id-error_tracking-settings.
+      operations:
+      - method: GET
+        name: getapiv4projectsiderrortrackingsettings
+        description: Get Error Tracking settings
+        call: gitlab-ci-error-tracking.getapiv4projectsiderrortrackingsettings
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchapiv4projectsiderrortrackingsettings
+        description: Enable or disable the Error Tracking project settings
+        call: gitlab-ci-error-tracking.patchapiv4projectsiderrortrackingsettings
+        with:
+          id: rest.id
+          patchApiV4ProjectsIdErrorTrackingSettings: rest.patchApiV4ProjectsIdErrorTrackingSettings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsiderrortrackingsettings
+        description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+        call: gitlab-ci-error-tracking.putapiv4projectsiderrortrackingsettings
+        with:
+          id: rest.id
+          putApiV4ProjectsIdErrorTrackingSettings: rest.putApiV4ProjectsIdErrorTrackingSettings
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-error-tracking-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — error_tracking. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-project-client-keys
+      description: List project client keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-error-tracking.getapiv4projectsiderrortrackingclientkeys
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-client-key
+      description: Create a client key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-error-tracking.postapiv4projectsiderrortrackingclientkeys
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-client-key
+      description: Delete a client key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-error-tracking.deleteapiv4projectsiderrortrackingclientkeyskeyid
+      with:
+        id: tools.id
+        key_id: tools.key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-error-tracking-settings
+      description: Get Error Tracking settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-error-tracking.getapiv4projectsiderrortrackingsettings
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-disable-error-tracking-project
+      description: Enable or disable the Error Tracking project settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-error-tracking.patchapiv4projectsiderrortrackingsettings
+      with:
+        id: tools.id
+        patchApiV4ProjectsIdErrorTrackingSettings: tools.patchApiV4ProjectsIdErrorTrackingSettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-error-tracking-project-settings
+      description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-error-tracking.putapiv4projectsiderrortrackingsettings
+      with:
+        id: tools.id
+        putApiV4ProjectsIdErrorTrackingSettings: tools.putApiV4ProjectsIdErrorTrackingSettings
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,235 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — instance
+  description: 'GitLab API — instance. 3 operations. Lead operation: instance. Self-contained Naftiko capability covering
+    one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - instance
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-instance
+    baseUri: https://gitlab.com
+    description: GitLab API — instance business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-application-appearance
+      path: /api/v4/application/appearance
+      operations:
+      - name: getapiv4applicationappearance
+        method: GET
+        description: Get the current appearance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: putapiv4applicationappearance
+        method: PUT
+        description: Modify appearance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: title
+          in: formData
+          type: string
+          description: Instance title on the sign in / sign up page
+        - name: description
+          in: formData
+          type: string
+          description: Markdown text shown on the sign in / sign up page
+        - name: pwa_name
+          in: formData
+          type: string
+          description: Name of the Progressive Web App
+        - name: pwa_short_name
+          in: formData
+          type: string
+          description: Optional, short name for Progressive Web App
+        - name: pwa_description
+          in: formData
+          type: string
+          description: An explanation of what the Progressive Web App does
+        - name: logo
+          in: formData
+          type: file
+          description: Instance image used on the sign in / sign up page
+        - name: pwa_icon
+          in: formData
+          type: file
+          description: Icon used for Progressive Web App
+        - name: header_logo
+          in: formData
+          type: file
+          description: Instance image used for the main navigation bar
+        - name: favicon
+          in: formData
+          type: file
+          description: Instance favicon in .ico/.png format
+        - name: member_guidelines
+          in: formData
+          type: string
+          description: Markdown text shown on the members page of a group or project
+        - name: new_project_guidelines
+          in: formData
+          type: string
+          description: Markdown text shown on the new project page
+        - name: profile_image_guidelines
+          in: formData
+          type: string
+          description: Markdown text shown on the profile page below Public Avatar
+        - name: header_message
+          in: formData
+          type: string
+          description: Message within the system header bar
+        - name: footer_message
+          in: formData
+          type: string
+          description: Message within the system footer bar
+        - name: message_background_color
+          in: formData
+          type: string
+          description: Background color for the system header / footer bar
+        - name: message_font_color
+          in: formData
+          type: string
+          description: Font color for the system header / footer bar
+        - name: email_header_and_footer_enabled
+          in: formData
+          type: boolean
+          description: Add header and footer to all outgoing emails if enabled
+        - name: site_name
+          in: formData
+          type: string
+          description: Last part of the webpage title. Defaults to empty.
+    - name: api-v4-application-statistics
+      path: /api/v4/application/statistics
+      operations:
+      - name: getapiv4applicationstatistics
+        method: GET
+        description: Get the current application statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-instance-rest
+    port: 8080
+    description: REST adapter for GitLab API — instance. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/application/appearance
+      name: api-v4-application-appearance
+      description: REST surface for api-v4-application-appearance.
+      operations:
+      - method: GET
+        name: getapiv4applicationappearance
+        description: Get the current appearance
+        call: gitlab-ci-instance.getapiv4applicationappearance
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4applicationappearance
+        description: Modify appearance
+        call: gitlab-ci-instance.putapiv4applicationappearance
+        with:
+          title: rest.title
+          description: rest.description
+          pwa_name: rest.pwa_name
+          pwa_short_name: rest.pwa_short_name
+          pwa_description: rest.pwa_description
+          logo: rest.logo
+          pwa_icon: rest.pwa_icon
+          header_logo: rest.header_logo
+          favicon: rest.favicon
+          member_guidelines: rest.member_guidelines
+          new_project_guidelines: rest.new_project_guidelines
+          profile_image_guidelines: rest.profile_image_guidelines
+          header_message: rest.header_message
+          footer_message: rest.footer_message
+          message_background_color: rest.message_background_color
+          message_font_color: rest.message_font_color
+          email_header_and_footer_enabled: rest.email_header_and_footer_enabled
+          site_name: rest.site_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/application/statistics
+      name: api-v4-application-statistics
+      description: REST surface for api-v4-application-statistics.
+      operations:
+      - method: GET
+        name: getapiv4applicationstatistics
+        description: Get the current application statistics
+        call: gitlab-ci-instance.getapiv4applicationstatistics
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-instance-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — instance. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-current-appearance
+      description: Get the current appearance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-instance.getapiv4applicationappearance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: modify-appearance
+      description: Modify appearance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-instance.putapiv4applicationappearance
+      with:
+        title: tools.title
+        description: tools.description
+        pwa_name: tools.pwa_name
+        pwa_short_name: tools.pwa_short_name
+        pwa_description: tools.pwa_description
+        logo: tools.logo
+        pwa_icon: tools.pwa_icon
+        header_logo: tools.header_logo
+        favicon: tools.favicon
+        member_guidelines: tools.member_guidelines
+        new_project_guidelines: tools.new_project_guidelines
+        profile_image_guidelines: tools.profile_image_guidelines
+        header_message: tools.header_message
+        footer_message: tools.footer_message
+        message_background_color: tools.message_background_color
+        message_font_color: tools.message_font_color
+        email_header_and_footer_enabled: tools.email_header_and_footer_enabled
+        site_name: tools.site_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-application-statistics
+      description: Get the current application statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-instance.getapiv4applicationstatistics
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,523 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — imports
+  description: 'GitLab API — imports. 9 operations. Lead operation: Start a new GitLab Migration. Self-contained Naftiko capability
+    covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - imports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-imports
+    baseUri: https://gitlab.com
+    description: GitLab API — imports business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-bulk_imports
+      path: /api/v4/bulk_imports
+      operations:
+      - name: postapiv4bulkimports
+        method: POST
+        description: Start a new GitLab Migration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: configuration[url]
+          in: formData
+          type: string
+          description: Source GitLab instance URL
+          required: true
+        - name: configuration[access_token]
+          in: formData
+          type: string
+          description: Access token to the source GitLab instance
+          required: true
+        - name: entities[source_type]
+          in: formData
+          type: array
+          description: Source entity type
+          required: true
+        - name: entities[source_full_path]
+          in: formData
+          type: array
+          description: Relative path of the source entity to import
+          required: true
+        - name: entities[destination_namespace]
+          in: formData
+          type: array
+          description: Destination namespace for the entity
+          required: true
+        - name: entities[destination_slug]
+          in: formData
+          type: array
+          description: Destination slug for the entity
+        - name: entities[destination_name]
+          in: formData
+          type: array
+          description: 'Deprecated: Use :destination_slug instead. Destination slug for the entity'
+        - name: entities[migrate_projects]
+          in: formData
+          type: array
+          description: Indicates group migration should include nested projects
+        - name: entities[migrate_memberships]
+          in: formData
+          type: array
+          description: The option to migrate memberships or not
+      - name: getapiv4bulkimports
+        method: GET
+        description: List all GitLab Migrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: sort
+          in: query
+          type: string
+          description: Return GitLab Migrations sorted in created by `asc` or `desc` order.
+        - name: status
+          in: query
+          type: string
+          description: Return GitLab Migrations with specified status
+    - name: api-v4-bulk_imports-entities
+      path: /api/v4/bulk_imports/entities
+      operations:
+      - name: getapiv4bulkimportsentities
+        method: GET
+        description: List all GitLab Migrations' entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: sort
+          in: query
+          type: string
+          description: Return GitLab Migrations sorted in created by `asc` or `desc` order.
+        - name: status
+          in: query
+          type: string
+          description: Return all GitLab Migrations' entities with specified status
+    - name: api-v4-bulk_imports-import_id
+      path: /api/v4/bulk_imports/{import_id}
+      operations:
+      - name: getapiv4bulkimportsimportid
+        method: GET
+        description: Get GitLab Migration details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: import_id
+          in: path
+          type: integer
+          description: The ID of user's GitLab Migration
+          required: true
+    - name: api-v4-bulk_imports-import_id-cancel
+      path: /api/v4/bulk_imports/{import_id}/cancel
+      operations:
+      - name: postapiv4bulkimportsimportidcancel
+        method: POST
+        description: Cancel GitLab Migration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: import_id
+          in: path
+          type: integer
+          description: The ID of user's GitLab Migration
+          required: true
+    - name: api-v4-bulk_imports-import_id-entities
+      path: /api/v4/bulk_imports/{import_id}/entities
+      operations:
+      - name: getapiv4bulkimportsimportidentities
+        method: GET
+        description: List GitLab Migration entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: import_id
+          in: path
+          type: integer
+          description: The ID of user's GitLab Migration
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Return import entities with specified status
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-bulk_imports-import_id-entities-entity_id
+      path: /api/v4/bulk_imports/{import_id}/entities/{entity_id}
+      operations:
+      - name: getapiv4bulkimportsimportidentitiesentityid
+        method: GET
+        description: Get GitLab Migration entity details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: import_id
+          in: path
+          type: integer
+          description: The ID of user's GitLab Migration
+          required: true
+        - name: entity_id
+          in: path
+          type: integer
+          description: The ID of GitLab Migration entity
+          required: true
+    - name: api-v4-bulk_imports-import_id-entities-entity_id-failures
+      path: /api/v4/bulk_imports/{import_id}/entities/{entity_id}/failures
+      operations:
+      - name: getapiv4bulkimportsimportidentitiesentityidfailures
+        method: GET
+        description: Get GitLab Migration entity failures
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: import_id
+          in: path
+          type: integer
+          description: The ID of user's GitLab Migration
+          required: true
+        - name: entity_id
+          in: path
+          type: integer
+          description: The ID of GitLab Migration entity
+          required: true
+    - name: api-v4-import-github-gists
+      path: /api/v4/import/github/gists
+      operations:
+      - name: postapiv4importgithubgists
+        method: POST
+        description: Import User Gists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4ImportGithubGists
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-imports-rest
+    port: 8080
+    description: REST adapter for GitLab API — imports. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/bulk-imports
+      name: api-v4-bulk-imports
+      description: REST surface for api-v4-bulk_imports.
+      operations:
+      - method: POST
+        name: postapiv4bulkimports
+        description: Start a new GitLab Migration
+        call: gitlab-ci-imports.postapiv4bulkimports
+        with:
+          configuration[url]: rest.configuration[url]
+          configuration[access_token]: rest.configuration[access_token]
+          entities[source_type]: rest.entities[source_type]
+          entities[source_full_path]: rest.entities[source_full_path]
+          entities[destination_namespace]: rest.entities[destination_namespace]
+          entities[destination_slug]: rest.entities[destination_slug]
+          entities[destination_name]: rest.entities[destination_name]
+          entities[migrate_projects]: rest.entities[migrate_projects]
+          entities[migrate_memberships]: rest.entities[migrate_memberships]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getapiv4bulkimports
+        description: List all GitLab Migrations
+        call: gitlab-ci-imports.getapiv4bulkimports
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          sort: rest.sort
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/bulk-imports/entities
+      name: api-v4-bulk-imports-entities
+      description: REST surface for api-v4-bulk_imports-entities.
+      operations:
+      - method: GET
+        name: getapiv4bulkimportsentities
+        description: List all GitLab Migrations' entities
+        call: gitlab-ci-imports.getapiv4bulkimportsentities
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          sort: rest.sort
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/bulk-imports/{import-id}
+      name: api-v4-bulk-imports-import-id
+      description: REST surface for api-v4-bulk_imports-import_id.
+      operations:
+      - method: GET
+        name: getapiv4bulkimportsimportid
+        description: Get GitLab Migration details
+        call: gitlab-ci-imports.getapiv4bulkimportsimportid
+        with:
+          import_id: rest.import_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/bulk-imports/{import-id}/cancel
+      name: api-v4-bulk-imports-import-id-cancel
+      description: REST surface for api-v4-bulk_imports-import_id-cancel.
+      operations:
+      - method: POST
+        name: postapiv4bulkimportsimportidcancel
+        description: Cancel GitLab Migration
+        call: gitlab-ci-imports.postapiv4bulkimportsimportidcancel
+        with:
+          import_id: rest.import_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/bulk-imports/{import-id}/entities
+      name: api-v4-bulk-imports-import-id-entities
+      description: REST surface for api-v4-bulk_imports-import_id-entities.
+      operations:
+      - method: GET
+        name: getapiv4bulkimportsimportidentities
+        description: List GitLab Migration entities
+        call: gitlab-ci-imports.getapiv4bulkimportsimportidentities
+        with:
+          import_id: rest.import_id
+          status: rest.status
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/bulk-imports/{import-id}/entities/{entity-id}
+      name: api-v4-bulk-imports-import-id-entities-entity-id
+      description: REST surface for api-v4-bulk_imports-import_id-entities-entity_id.
+      operations:
+      - method: GET
+        name: getapiv4bulkimportsimportidentitiesentityid
+        description: Get GitLab Migration entity details
+        call: gitlab-ci-imports.getapiv4bulkimportsimportidentitiesentityid
+        with:
+          import_id: rest.import_id
+          entity_id: rest.entity_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/bulk-imports/{import-id}/entities/{entity-id}/failures
+      name: api-v4-bulk-imports-import-id-entities-entity-id-failures
+      description: REST surface for api-v4-bulk_imports-import_id-entities-entity_id-failures.
+      operations:
+      - method: GET
+        name: getapiv4bulkimportsimportidentitiesentityidfailures
+        description: Get GitLab Migration entity failures
+        call: gitlab-ci-imports.getapiv4bulkimportsimportidentitiesentityidfailures
+        with:
+          import_id: rest.import_id
+          entity_id: rest.entity_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/import/github/gists
+      name: api-v4-import-github-gists
+      description: REST surface for api-v4-import-github-gists.
+      operations:
+      - method: POST
+        name: postapiv4importgithubgists
+        description: Import User Gists
+        call: gitlab-ci-imports.postapiv4importgithubgists
+        with:
+          postApiV4ImportGithubGists: rest.postApiV4ImportGithubGists
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-imports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — imports. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: start-new-gitlab-migration
+      description: Start a new GitLab Migration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-imports.postapiv4bulkimports
+      with:
+        configuration[url]: tools.configuration[url]
+        configuration[access_token]: tools.configuration[access_token]
+        entities[source_type]: tools.entities[source_type]
+        entities[source_full_path]: tools.entities[source_full_path]
+        entities[destination_namespace]: tools.entities[destination_namespace]
+        entities[destination_slug]: tools.entities[destination_slug]
+        entities[destination_name]: tools.entities[destination_name]
+        entities[migrate_projects]: tools.entities[migrate_projects]
+        entities[migrate_memberships]: tools.entities[migrate_memberships]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-gitlab-migrations
+      description: List all GitLab Migrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-imports.getapiv4bulkimports
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        sort: tools.sort
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-gitlab-migrations-entities
+      description: List all GitLab Migrations' entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-imports.getapiv4bulkimportsentities
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        sort: tools.sort
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-gitlab-migration-details
+      description: Get GitLab Migration details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-imports.getapiv4bulkimportsimportid
+      with:
+        import_id: tools.import_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-gitlab-migration
+      description: Cancel GitLab Migration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-imports.postapiv4bulkimportsimportidcancel
+      with:
+        import_id: tools.import_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-gitlab-migration-entities
+      description: List GitLab Migration entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-imports.getapiv4bulkimportsimportidentities
+      with:
+        import_id: tools.import_id
+        status: tools.status
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-gitlab-migration-entity-details
+      description: Get GitLab Migration entity details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-imports.getapiv4bulkimportsimportidentitiesentityid
+      with:
+        import_id: tools.import_id
+        entity_id: tools.entity_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-gitlab-migration-entity-failures
+      description: Get GitLab Migration entity failures
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-imports.getapiv4bulkimportsimportidentitiesentityidfailures
+      with:
+        import_id: tools.import_id
+        entity_id: tools.entity_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-user-gists
+      description: Import User Gists
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-imports.postapiv4importgithubgists
+      with:
+        postApiV4ImportGithubGists: tools.postApiV4ImportGithubGists
+      outputParameters:
+      - type: object
+        mapping: $.

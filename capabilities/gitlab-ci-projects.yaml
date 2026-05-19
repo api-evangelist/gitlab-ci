@@ -1,0 +1,4874 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — projects
+  description: 'GitLab API — projects. 73 operations. Lead operation: Search on GitLab within a project. Self-contained Naftiko
+    capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - projects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-projects
+    baseUri: https://gitlab.com
+    description: GitLab API — projects business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects
+      path: /api/v4/projects
+      operations:
+      - name: getapiv4projects
+        method: GET
+        description: Get a list of visible projects for authenticated user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_by
+          in: query
+          type: string
+          description: Return projects ordered by field. storage_size, repository_size, wiki_size, packages_size are only
+            available to admins. Similarity is available when searching a
+        - name: sort
+          in: query
+          type: string
+          description: Return projects sorted in ascending and descending order
+        - name: archived
+          in: query
+          type: boolean
+          description: Limit by archived status
+        - name: visibility
+          in: query
+          type: string
+          description: Limit by visibility
+        - name: search
+          in: query
+          type: string
+          description: Return list of projects matching the search criteria
+        - name: search_namespaces
+          in: query
+          type: boolean
+          description: Include ancestor namespaces when matching search criteria
+        - name: owned
+          in: query
+          type: boolean
+          description: Limit by owned by authenticated user
+        - name: starred
+          in: query
+          type: boolean
+          description: Limit by starred status
+        - name: imported
+          in: query
+          type: boolean
+          description: Limit by imported by authenticated user
+        - name: membership
+          in: query
+          type: boolean
+          description: Limit by projects that the current user is a member of
+        - name: with_issues_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled issues feature
+        - name: with_merge_requests_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled merge requests feature
+        - name: with_programming_language
+          in: query
+          type: string
+          description: Limit to repositories which use the given programming language
+        - name: min_access_level
+          in: query
+          type: integer
+          description: Limit by minimum access level of authenticated user
+        - name: id_after
+          in: query
+          type: integer
+          description: Limit results to projects with IDs greater than the specified ID
+        - name: id_before
+          in: query
+          type: integer
+          description: Limit results to projects with IDs less than the specified ID
+        - name: last_activity_after
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity after specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: last_activity_before
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity before specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: repository_storage
+          in: query
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: topic
+          in: query
+          type: array
+          description: Comma-separated list of topics. Limit results to projects having all topics
+        - name: topic_id
+          in: query
+          type: integer
+          description: Limit results to projects with the assigned topic given by the topic ID
+        - name: updated_before
+          in: query
+          type: string
+          description: 'Return projects updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: updated_after
+          in: query
+          type: string
+          description: 'Return projects updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: include_pending_delete
+          in: query
+          type: boolean
+          description: Include projects in pending delete state. Can only be set by admins
+        - name: marked_for_deletion_on
+          in: query
+          type: string
+          description: Date when the project was marked for deletion
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by projects that are not archived and not marked for deletion
+        - name: wiki_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where wiki checksum is failed
+        - name: repository_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where repository checksum is failed
+        - name: include_hidden
+          in: query
+          type: boolean
+          description: Include hidden projects. Can only be set by admins
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: simple
+          in: query
+          type: boolean
+          description: Return only the ID, URL, name, and path of each project
+        - name: statistics
+          in: query
+          type: boolean
+          description: Include project statistics
+        - name: with_custom_attributes
+          in: query
+          type: boolean
+          description: Include custom attributes in the response
+      - name: postapiv4projects
+        method: POST
+        description: Create new project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4Projects
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-user-user_id
+      path: /api/v4/projects/user/{user_id}
+      operations:
+      - name: postapiv4projectsuseruserid
+        method: POST
+        description: Create new project for a specified user. Only available to admin users.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: integer
+          description: The ID of a user
+          required: true
+        - name: postApiV4ProjectsUserUserId
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id
+      path: /api/v4/projects/{id}
+      operations:
+      - name: getapiv4projectsid
+        method: GET
+        description: Get a single project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: statistics
+          in: query
+          type: boolean
+          description: Include project statistics
+        - name: with_custom_attributes
+          in: query
+          type: boolean
+          description: Include custom attributes in the response
+        - name: license
+          in: query
+          type: boolean
+          description: Include project license data
+      - name: putapiv4projectsid
+        method: PUT
+        description: Update an existing project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: putApiV4ProjectsId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsid
+        method: DELETE
+        description: Delete a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-(--)search
+      path: /api/v4/projects/{id}/(-/)search
+      operations:
+      - name: getapiv4projectsidsearch
+        method: GET
+        description: Search on GitLab within a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: The expression it should be searched for
+          required: true
+        - name: scope
+          in: query
+          type: string
+          description: The scope of the search
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: The name of a repository branch or tag. If not given, the default branch is used
+        - name: state
+          in: query
+          type: string
+          description: Filter results by state
+        - name: confidential
+          in: query
+          type: boolean
+          description: Filter results by confidentiality
+        - name: type
+          in: query
+          type: array
+          description: 'Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident,
+            test_case, requirement, objective, key_result, ticket'
+        - name: fields
+          in: query
+          type: array
+          description: Array of fields you wish to search. Available with advanced search.
+        - name: num_context_lines
+          in: query
+          type: integer
+          description: Number of context lines around each match. Available with advanced and exact code search. Introduced
+            in GitLab 18.11.
+        - name: regex
+          in: query
+          type: boolean
+          description: Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-archive
+      path: /api/v4/projects/{id}/archive
+      operations:
+      - name: postapiv4projectsidarchive
+        method: POST
+        description: Archive a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-audit_events
+      path: /api/v4/projects/{id}/audit_events
+      operations:
+      - name: getapiv4projectsidauditevents
+        method: GET
+        description: Get a list of audit events in this project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: created_after
+          in: query
+          type: string
+          description: Return audit events created after the specified time
+        - name: created_before
+          in: query
+          type: string
+          description: Return audit events created before the specified time
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-audit_events-audit_event_id
+      path: /api/v4/projects/{id}/audit_events/{audit_event_id}
+      operations:
+      - name: getapiv4projectsidauditeventsauditeventid
+        method: GET
+        description: Get a specific audit event in this project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: audit_event_id
+          in: path
+          type: integer
+          description: The ID of the audit event
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-create_ci_config
+      path: /api/v4/projects/{id}/create_ci_config
+      operations:
+      - name: postapiv4projectsidcreateciconfig
+        method: POST
+        description: Create merge request for missing ci config in project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-fork
+      path: /api/v4/projects/{id}/fork
+      operations:
+      - name: postapiv4projectsidfork
+        method: POST
+        description: Fork new project for the current user or provided namespace.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdFork
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidfork
+        method: DELETE
+        description: Remove a forked_from relationship
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-fork-forked_from_id
+      path: /api/v4/projects/{id}/fork/{forked_from_id}
+      operations:
+      - name: postapiv4projectsidforkforkedfromid
+        method: POST
+        description: Mark this project as forked from another
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: forked_from_id
+          in: path
+          type: string
+          description: The ID of the project it was forked from
+          required: true
+    - name: api-v4-projects-id-forks
+      path: /api/v4/projects/{id}/forks
+      operations:
+      - name: getapiv4projectsidforks
+        method: GET
+        description: List forks of this project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: order_by
+          in: query
+          type: string
+          description: Return projects ordered by field. storage_size, repository_size, wiki_size, packages_size are only
+            available to admins. Similarity is available when searching a
+        - name: sort
+          in: query
+          type: string
+          description: Return projects sorted in ascending and descending order
+        - name: archived
+          in: query
+          type: boolean
+          description: Limit by archived status
+        - name: visibility
+          in: query
+          type: string
+          description: Limit by visibility
+        - name: search
+          in: query
+          type: string
+          description: Return list of projects matching the search criteria
+        - name: search_namespaces
+          in: query
+          type: boolean
+          description: Include ancestor namespaces when matching search criteria
+        - name: owned
+          in: query
+          type: boolean
+          description: Limit by owned by authenticated user
+        - name: starred
+          in: query
+          type: boolean
+          description: Limit by starred status
+        - name: imported
+          in: query
+          type: boolean
+          description: Limit by imported by authenticated user
+        - name: membership
+          in: query
+          type: boolean
+          description: Limit by projects that the current user is a member of
+        - name: with_issues_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled issues feature
+        - name: with_merge_requests_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled merge requests feature
+        - name: with_programming_language
+          in: query
+          type: string
+          description: Limit to repositories which use the given programming language
+        - name: min_access_level
+          in: query
+          type: integer
+          description: Limit by minimum access level of authenticated user
+        - name: id_after
+          in: query
+          type: integer
+          description: Limit results to projects with IDs greater than the specified ID
+        - name: id_before
+          in: query
+          type: integer
+          description: Limit results to projects with IDs less than the specified ID
+        - name: last_activity_after
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity after specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: last_activity_before
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity before specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: repository_storage
+          in: query
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: topic
+          in: query
+          type: array
+          description: Comma-separated list of topics. Limit results to projects having all topics
+        - name: topic_id
+          in: query
+          type: integer
+          description: Limit results to projects with the assigned topic given by the topic ID
+        - name: updated_before
+          in: query
+          type: string
+          description: 'Return projects updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: updated_after
+          in: query
+          type: string
+          description: 'Return projects updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: include_pending_delete
+          in: query
+          type: boolean
+          description: Include projects in pending delete state. Can only be set by admins
+        - name: marked_for_deletion_on
+          in: query
+          type: string
+          description: Date when the project was marked for deletion
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by projects that are not archived and not marked for deletion
+        - name: wiki_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where wiki checksum is failed
+        - name: repository_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where repository checksum is failed
+        - name: include_hidden
+          in: query
+          type: boolean
+          description: Include hidden projects. Can only be set by admins
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: simple
+          in: query
+          type: boolean
+          description: Return only the ID, URL, name, and path of each project
+        - name: with_custom_attributes
+          in: query
+          type: boolean
+          description: Include custom attributes in the response
+    - name: api-v4-projects-id-groups
+      path: /api/v4/projects/{id}/groups
+      operations:
+      - name: getapiv4projectsidgroups
+        method: GET
+        description: Get ancestor and shared groups for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Return list of groups matching the search criteria
+        - name: skip_groups
+          in: query
+          type: array
+          description: Array of group ids to exclude from list
+        - name: with_shared
+          in: query
+          type: boolean
+          description: Include shared groups
+        - name: shared_visible_only
+          in: query
+          type: boolean
+          description: Limit to shared groups user has access to
+        - name: shared_min_access_level
+          in: query
+          type: integer
+          description: Limit returned shared groups by minimum access level to the project
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-housekeeping
+      path: /api/v4/projects/{id}/housekeeping
+      operations:
+      - name: postapiv4projectsidhousekeeping
+        method: POST
+        description: Start the housekeeping task for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdHousekeeping
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-import_project_members-project_id
+      path: /api/v4/projects/{id}/import_project_members/{project_id}
+      operations:
+      - name: postapiv4projectsidimportprojectmembersprojectid
+        method: POST
+        description: Import members from another project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: project_id
+          in: path
+          type: integer
+          description: The ID of the source project to import the members from.
+          required: true
+    - name: api-v4-projects-id-invited_groups
+      path: /api/v4/projects/{id}/invited_groups
+      operations:
+      - name: getapiv4projectsidinvitedgroups
+        method: GET
+        description: Get a list of invited groups in this project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: relation
+          in: query
+          type: array
+          description: Filter by group relation
+        - name: search
+          in: query
+          type: string
+          description: Search for a specific group
+        - name: min_access_level
+          in: query
+          type: integer
+          description: Limit by minimum access level of authenticated user
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: with_custom_attributes
+          in: query
+          type: boolean
+          description: Include custom attributes in the response
+    - name: api-v4-projects-id-issues
+      path: /api/v4/projects/{id}/issues
+      operations:
+      - name: getapiv4projectsidissues
+        method: GET
+        description: Get a list of project issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: with_labels_details
+          in: query
+          type: boolean
+          description: Return titles of labels and other details
+        - name: state
+          in: query
+          type: string
+          description: Return opened, closed, or all issues
+        - name: closed_by_id
+          in: query
+          type: integer
+          description: Return issues which were closed by the user with the given ID.
+        - name: order_by
+          in: query
+          type: string
+          description: Return issues ordered by `created_at`, `due_date`, `label_priority`, `milestone_due`, `popularity`,
+            `priority`, `relative_position`, `title`, or `updated_at` fi
+        - name: sort
+          in: query
+          type: string
+          description: Return issues sorted in `asc` or `desc` order.
+        - name: due_date
+          in: query
+          type: string
+          description: 'Return issues that have no due date (`0`), or whose due date is this week, this month, between two
+            weeks ago and next month, or which are overdue. Accepts: `ove'
+        - name: issue_type
+          in: query
+          type: string
+          description: 'The type of the issue. Accepts: issue, incident, test_case, requirement, task, ticket'
+        - name: labels
+          in: query
+          type: array
+          description: Comma-separated list of label names
+        - name: milestone
+          in: query
+          type: string
+          description: Milestone title
+        - name: milestone_id
+          in: query
+          type: string
+          description: Return issues assigned to milestones with the specified timebox value ("Any", "None", "Upcoming" or
+            "Started")
+        - name: iids
+          in: query
+          type: array
+          description: The IID array of issues
+        - name: search
+          in: query
+          type: string
+          description: Search issues for text present in the title, description, or any combination of these
+        - name: in
+          in: query
+          type: string
+          description: '`title`, `description`, or a string joining them with comma'
+        - name: author_id
+          in: query
+          type: integer
+          description: Return issues which are authored by the user with the given ID
+        - name: author_username
+          in: query
+          type: string
+          description: Return issues which are authored by the user with the given username
+        - name: assignee_id
+          in: query
+          type: integer
+          description: Return issues which are assigned to the user with the given ID
+        - name: assignee_username
+          in: query
+          type: array
+          description: Return issues which are assigned to the user with the given username
+        - name: created_after
+          in: query
+          type: string
+          description: Return issues created after the specified time
+        - name: created_before
+          in: query
+          type: string
+          description: Return issues created before the specified time
+        - name: updated_after
+          in: query
+          type: string
+          description: Return issues updated after the specified time
+        - name: updated_before
+          in: query
+          type: string
+          description: Return issues updated before the specified time
+        - name: not[labels]
+          in: query
+          type: array
+          description: Comma-separated list of label names
+        - name: not[milestone]
+          in: query
+          type: string
+          description: Milestone title
+        - name: not[milestone_id]
+          in: query
+          type: string
+          description: Return issues assigned to milestones without the specified timebox value ("Any", "None", "Upcoming"
+            or "Started")
+        - name: not[iids]
+          in: query
+          type: array
+          description: The IID array of issues
+        - name: not[author_id]
+          in: query
+          type: integer
+          description: Return issues which are not authored by the user with the given ID
+        - name: not[author_username]
+          in: query
+          type: string
+          description: Return issues which are not authored by the user with the given username
+        - name: not[assignee_id]
+          in: query
+          type: integer
+          description: Return issues which are not assigned to the user with the given ID
+        - name: not[assignee_username]
+          in: query
+          type: array
+          description: Return issues which are not assigned to the user with the given username
+        - name: not[weight]
+          in: query
+          type: integer
+          description: Return issues without the specified weight
+        - name: not[iteration_id]
+          in: query
+          type: integer
+          description: Return issues which are not assigned to the iteration with the given ID
+        - name: not[iteration_title]
+          in: query
+          type: string
+          description: Return issues which are not assigned to the iteration with the given title
+        - name: scope
+          in: query
+          type: string
+          description: 'Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`'
+        - name: my_reaction_emoji
+          in: query
+          type: string
+          description: Return issues reacted by the authenticated user by the given emoji
+        - name: confidential
+          in: query
+          type: boolean
+          description: Filter confidential or public issues
+        - name: weight
+          in: query
+          type: integer
+          description: The weight of the issue
+        - name: epic_id
+          in: query
+          type: integer
+          description: The ID of an epic associated with the issues
+        - name: health_status
+          in: query
+          type: string
+          description: 'The health status of the issue. Must be one of: on_track, needs_attention, at_risk, none, any'
+        - name: iteration_id
+          in: query
+          type: integer
+          description: Return issues which are assigned to the iteration with the given ID
+        - name: iteration_title
+          in: query
+          type: string
+          description: Return issues which are assigned to the iteration with the given title
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: cursor
+          in: query
+          type: string
+          description: Cursor for obtaining the next set of records
+      - name: postapiv4projectsidissues
+        method: POST
+        description: Create a new project issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdIssues
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid
+      path: /api/v4/projects/{id}/issues/{issue_iid}
+      operations:
+      - name: getapiv4projectsidissuesissueiid
+        method: GET
+        description: Get a single project issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+      - name: putapiv4projectsidissuesissueiid
+        method: PUT
+        description: Update an existing issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+        - name: putApiV4ProjectsIdIssuesIssueIid
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidissuesissueiid
+        method: DELETE
+        description: Delete a project issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-clone
+      path: /api/v4/projects/{id}/issues/{issue_iid}/clone
+      operations:
+      - name: postapiv4projectsidissuesissueiidclone
+        method: POST
+        description: Clone an existing issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+        - name: postApiV4ProjectsIdIssuesIssueIidClone
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-closed_by
+      path: /api/v4/projects/{id}/issues/{issue_iid}/closed_by
+      operations:
+      - name: getapiv4projectsidissuesissueiidclosedby
+        method: GET
+        description: List merge requests closing issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-move
+      path: /api/v4/projects/{id}/issues/{issue_iid}/move
+      operations:
+      - name: postapiv4projectsidissuesissueiidmove
+        method: POST
+        description: Move an existing issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+        - name: postApiV4ProjectsIdIssuesIssueIidMove
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-issues-issue_iid-reorder
+      path: /api/v4/projects/{id}/issues/{issue_iid}/reorder
+      operations:
+      - name: putapiv4projectsidissuesissueiidreorder
+        method: PUT
+        description: Reorder an existing issue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: issue_iid
+          in: path
+          type: integer
+          description: The internal ID of a project issue
+          required: true
+        - name: putApiV4ProjectsIdIssuesIssueIidReorder
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-issues_statistics
+      path: /api/v4/projects/{id}/issues_statistics
+      operations:
+      - name: getapiv4projectsidissuesstatistics
+        method: GET
+        description: Get statistics for the list of project issues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: labels
+          in: query
+          type: array
+          description: Comma-separated list of label names
+        - name: milestone
+          in: query
+          type: string
+          description: Milestone title
+        - name: milestone_id
+          in: query
+          type: string
+          description: Return issues assigned to milestones with the specified timebox value ("Any", "None", "Upcoming" or
+            "Started")
+        - name: iids
+          in: query
+          type: array
+          description: The IID array of issues
+        - name: search
+          in: query
+          type: string
+          description: Search issues for text present in the title, description, or any combination of these
+        - name: in
+          in: query
+          type: string
+          description: '`title`, `description`, or a string joining them with comma'
+        - name: author_id
+          in: query
+          type: integer
+          description: Return issues which are authored by the user with the given ID
+        - name: author_username
+          in: query
+          type: string
+          description: Return issues which are authored by the user with the given username
+        - name: assignee_id
+          in: query
+          type: integer
+          description: Return issues which are assigned to the user with the given ID
+        - name: assignee_username
+          in: query
+          type: array
+          description: Return issues which are assigned to the user with the given username
+        - name: created_after
+          in: query
+          type: string
+          description: Return issues created after the specified time
+        - name: created_before
+          in: query
+          type: string
+          description: Return issues created before the specified time
+        - name: updated_after
+          in: query
+          type: string
+          description: Return issues updated after the specified time
+        - name: updated_before
+          in: query
+          type: string
+          description: Return issues updated before the specified time
+        - name: not[labels]
+          in: query
+          type: array
+          description: Comma-separated list of label names
+        - name: not[milestone]
+          in: query
+          type: string
+          description: Milestone title
+        - name: not[milestone_id]
+          in: query
+          type: string
+          description: Return issues assigned to milestones without the specified timebox value ("Any", "None", "Upcoming"
+            or "Started")
+        - name: not[iids]
+          in: query
+          type: array
+          description: The IID array of issues
+        - name: not[author_id]
+          in: query
+          type: integer
+          description: Return issues which are not authored by the user with the given ID
+        - name: not[author_username]
+          in: query
+          type: string
+          description: Return issues which are not authored by the user with the given username
+        - name: not[assignee_id]
+          in: query
+          type: integer
+          description: Return issues which are not assigned to the user with the given ID
+        - name: not[assignee_username]
+          in: query
+          type: array
+          description: Return issues which are not assigned to the user with the given username
+        - name: not[weight]
+          in: query
+          type: integer
+          description: Return issues without the specified weight
+        - name: not[iteration_id]
+          in: query
+          type: integer
+          description: Return issues which are not assigned to the iteration with the given ID
+        - name: not[iteration_title]
+          in: query
+          type: string
+          description: Return issues which are not assigned to the iteration with the given title
+        - name: scope
+          in: query
+          type: string
+          description: 'Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`'
+        - name: my_reaction_emoji
+          in: query
+          type: string
+          description: Return issues reacted by the authenticated user by the given emoji
+        - name: confidential
+          in: query
+          type: boolean
+          description: Filter confidential or public issues
+        - name: weight
+          in: query
+          type: integer
+          description: The weight of the issue
+        - name: epic_id
+          in: query
+          type: integer
+          description: The ID of an epic associated with the issues
+        - name: health_status
+          in: query
+          type: string
+          description: 'The health status of the issue. Must be one of: on_track, needs_attention, at_risk, none, any'
+        - name: iteration_id
+          in: query
+          type: integer
+          description: Return issues which are assigned to the iteration with the given ID
+        - name: iteration_title
+          in: query
+          type: string
+          description: Return issues which are assigned to the iteration with the given title
+    - name: api-v4-projects-id-languages
+      path: /api/v4/projects/{id}/languages
+      operations:
+      - name: getapiv4projectsidlanguages
+        method: GET
+        description: Get languages in project repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-packages-protection-rules
+      path: /api/v4/projects/{id}/packages/protection/rules
+      operations:
+      - name: getapiv4projectsidpackagesprotectionrules
+        method: GET
+        description: Get list of package protection rules for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+      - name: postapiv4projectsidpackagesprotectionrules
+        method: POST
+        description: Create a package protection rule for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdPackagesProtectionRules
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-packages-protection-rules-package_protection_rule_id
+      path: /api/v4/projects/{id}/packages/protection/rules/{package_protection_rule_id}
+      operations:
+      - name: patchapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+        method: PATCH
+        description: Update a package protection rule for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: package_protection_rule_id
+          in: path
+          type: integer
+          description: The ID of the package protection rule
+          required: true
+        - name: patchApiV4ProjectsIdPackagesProtectionRulesPackageProtectionRuleId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+        method: DELETE
+        description: Delete package protection rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: package_protection_rule_id
+          in: path
+          type: integer
+          description: The ID of the package protection rule
+          required: true
+    - name: api-v4-projects-id-pages_access
+      path: /api/v4/projects/{id}/pages_access
+      operations:
+      - name: getapiv4projectsidpagesaccess
+        method: GET
+        description: Check pages access of this project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-registry-protection-repository-rules
+      path: /api/v4/projects/{id}/registry/protection/repository/rules
+      operations:
+      - name: getapiv4projectsidregistryprotectionrepositoryrules
+        method: GET
+        description: Get list of container registry protection rules for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+      - name: postapiv4projectsidregistryprotectionrepositoryrules
+        method: POST
+        description: Create a container protection rule for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdRegistryProtectionRepositoryRules
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-registry-protection-repository-rules-protection_rule_id
+      path: /api/v4/projects/{id}/registry/protection/repository/rules/{protection_rule_id}
+      operations:
+      - name: patchapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+        method: PATCH
+        description: Update a container protection rule for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: protection_rule_id
+          in: path
+          type: integer
+          description: The ID of the container protection rule
+          required: true
+        - name: patchApiV4ProjectsIdRegistryProtectionRepositoryRulesProtectionRuleId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+        method: DELETE
+        description: Delete container protection rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: protection_rule_id
+          in: path
+          type: integer
+          description: The ID of the container protection rule
+          required: true
+    - name: api-v4-projects-id-registry-protection-tag-rules
+      path: /api/v4/projects/{id}/registry/protection/tag/rules
+      operations:
+      - name: getapiv4projectsidregistryprotectiontagrules
+        method: GET
+        description: Gets a list of container protection tag rules for a project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+      - name: postapiv4projectsidregistryprotectiontagrules
+        method: POST
+        description: Create a container protection tag rule for a project. 5 rule limit per project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: postApiV4ProjectsIdRegistryProtectionTagRules
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-registry-protection-tag-rules-protection_rule_id
+      path: /api/v4/projects/{id}/registry/protection/tag/rules/{protection_rule_id}
+      operations:
+      - name: patchapiv4projectsidregistryprotectiontagrulesprotectionruleid
+        method: PATCH
+        description: Update a container protection tag rule for a project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: protection_rule_id
+          in: path
+          type: integer
+          description: The ID of the container protection tag rule.
+          required: true
+        - name: patchApiV4ProjectsIdRegistryProtectionTagRulesProtectionRuleId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidregistryprotectiontagrulesprotectionruleid
+        method: DELETE
+        description: Delete container protection tag rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: protection_rule_id
+          in: path
+          type: integer
+          description: The ID of the container protection tag rule.
+          required: true
+    - name: api-v4-projects-id-repository_size
+      path: /api/v4/projects/{id}/repository_size
+      operations:
+      - name: postapiv4projectsidrepositorysize
+        method: POST
+        description: Start a task to recalculate repository size for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-restore
+      path: /api/v4/projects/{id}/restore
+      operations:
+      - name: postapiv4projectsidrestore
+        method: POST
+        description: Restore a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-runners
+      path: /api/v4/projects/{id}/runners
+      operations:
+      - name: getapiv4projectsidrunners
+        method: GET
+        description: List project's runners
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: scope
+          in: query
+          type: string
+          description: 'Deprecated: Use `type` or `status` instead. The scope of runners to return'
+        - name: type
+          in: query
+          type: string
+          description: The type of runners to return
+        - name: paused
+          in: query
+          type: boolean
+          description: Whether to include only runners that are accepting or ignoring new jobs
+        - name: status
+          in: query
+          type: string
+          description: The status of runners to return
+        - name: tag_list
+          in: query
+          type: array
+          description: A list of runner tags
+        - name: version_prefix
+          in: query
+          type: string
+          description: The version prefix of runners to return
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidrunners
+        method: POST
+        description: Assign a runner to project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: postApiV4ProjectsIdRunners
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-runners-reset_registration_token
+      path: /api/v4/projects/{id}/runners/reset_registration_token
+      operations:
+      - name: postapiv4projectsidrunnersresetregistrationtoken
+        method: POST
+        description: Reset the runner registration token for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a project
+          required: true
+    - name: api-v4-projects-id-runners-runner_id
+      path: /api/v4/projects/{id}/runners/{runner_id}
+      operations:
+      - name: deleteapiv4projectsidrunnersrunnerid
+        method: DELETE
+        description: Unassign a project runner from the project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: runner_id
+          in: path
+          type: integer
+          description: The ID of a runner
+          required: true
+    - name: api-v4-projects-id-share
+      path: /api/v4/projects/{id}/share
+      operations:
+      - name: postapiv4projectsidshare
+        method: POST
+        description: Share the project with a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdShare
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-share-group_id
+      path: /api/v4/projects/{id}/share/{group_id}
+      operations:
+      - name: deleteapiv4projectsidsharegroupid
+        method: DELETE
+        description: Remove a group share
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: group_id
+          in: path
+          type: integer
+          description: The ID of the group
+          required: true
+    - name: api-v4-projects-id-share_locations
+      path: /api/v4/projects/{id}/share_locations
+      operations:
+      - name: getapiv4projectsidsharelocations
+        method: GET
+        description: Returns group that can be shared with the given project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The id of the project
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Return list of groups matching the search criteria
+    - name: api-v4-projects-id-star
+      path: /api/v4/projects/{id}/star
+      operations:
+      - name: postapiv4projectsidstar
+        method: POST
+        description: Star a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-starrers
+      path: /api/v4/projects/{id}/starrers
+      operations:
+      - name: getapiv4projectsidstarrers
+        method: GET
+        description: Get the users who starred a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Return list of users matching the search criteria
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-statistics
+      path: /api/v4/projects/{id}/statistics
+      operations:
+      - name: getapiv4projectsidstatistics
+        method: GET
+        description: Get the list of project fetch statistics for the last 30 days
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-storage
+      path: /api/v4/projects/{id}/storage
+      operations:
+      - name: getapiv4projectsidstorage
+        method: GET
+        description: Show the storage information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: ID of a project
+          required: true
+    - name: api-v4-projects-id-terraform-state_protection_rules
+      path: /api/v4/projects/{id}/terraform/state_protection_rules
+      operations:
+      - name: getapiv4projectsidterraformstateprotectionrules
+        method: GET
+        description: List all Terraform state protection rules for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-transfer
+      path: /api/v4/projects/{id}/transfer
+      operations:
+      - name: putapiv4projectsidtransfer
+        method: PUT
+        description: Transfer a project to a new namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: putApiV4ProjectsIdTransfer
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-transfer_locations
+      path: /api/v4/projects/{id}/transfer_locations
+      operations:
+      - name: getapiv4projectsidtransferlocations
+        method: GET
+        description: Get the namespaces to where the project can be transferred
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Return list of namespaces matching the search criteria
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-unarchive
+      path: /api/v4/projects/{id}/unarchive
+      operations:
+      - name: postapiv4projectsidunarchive
+        method: POST
+        description: Unarchive a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-unstar
+      path: /api/v4/projects/{id}/unstar
+      operations:
+      - name: postapiv4projectsidunstar
+        method: POST
+        description: Unstar a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-uploads
+      path: /api/v4/projects/{id}/uploads
+      operations:
+      - name: postapiv4projectsiduploads
+        method: POST
+        description: Upload a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdUploads
+          in: body
+          type: string
+          required: true
+      - name: getapiv4projectsiduploads
+        method: GET
+        description: Get the list of uploads of a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-uploads-authorize
+      path: /api/v4/projects/{id}/uploads/authorize
+      operations:
+      - name: postapiv4projectsiduploadsauthorize
+        method: POST
+        description: Workhorse authorize the file upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-uploads-secret-filename
+      path: /api/v4/projects/{id}/uploads/{secret}/{filename}
+      operations:
+      - name: getapiv4projectsiduploadssecretfilename
+        method: GET
+        description: Download a single project upload by secret and filename
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: secret
+          in: path
+          type: string
+          description: The 32-character secret of a project upload
+          required: true
+        - name: filename
+          in: path
+          type: string
+          description: The filename of a project upload
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsiduploadssecretfilename
+        method: DELETE
+        description: Delete a single project upload by secret and filename
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: secret
+          in: path
+          type: string
+          description: The 32-character secret of a project upload
+          required: true
+        - name: filename
+          in: path
+          type: string
+          description: The filename of a project upload
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-uploads-upload_id
+      path: /api/v4/projects/{id}/uploads/{upload_id}
+      operations:
+      - name: getapiv4projectsiduploadsuploadid
+        method: GET
+        description: Download a single project upload by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upload_id
+          in: path
+          type: integer
+          description: The ID of a project upload
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapiv4projectsiduploadsuploadid
+        method: DELETE
+        description: Delete a single project upload by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upload_id
+          in: path
+          type: integer
+          description: The ID of a project upload
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-users
+      path: /api/v4/projects/{id}/users
+      operations:
+      - name: getapiv4projectsidusers
+        method: GET
+        description: Get the users list of a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Return list of users matching the search criteria
+        - name: skip_users
+          in: query
+          type: array
+          description: Filter out users with the specified IDs
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-runners-id-projects
+      path: /api/v4/runners/{id}/projects
+      operations:
+      - name: getapiv4runnersidprojects
+        method: GET
+        description: List runner's projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of a runner
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-users-user_id-contributed_projects
+      path: /api/v4/users/{user_id}/contributed_projects
+      operations:
+      - name: getapiv4usersuseridcontributedprojects
+        method: GET
+        description: Get projects that a user has contributed to
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The ID or username of the user
+          required: true
+        - name: order_by
+          in: query
+          type: string
+          description: Return projects ordered by field. storage_size, repository_size, wiki_size, packages_size are only
+            available to admins. Similarity is available when searching a
+        - name: sort
+          in: query
+          type: string
+          description: Return projects sorted in ascending and descending order
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: simple
+          in: query
+          type: boolean
+          description: Return only the ID, URL, name, and path of each project
+    - name: api-v4-users-user_id-projects
+      path: /api/v4/users/{user_id}/projects
+      operations:
+      - name: getapiv4usersuseridprojects
+        method: GET
+        description: Get a user projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The ID or username of the user
+          required: true
+        - name: order_by
+          in: query
+          type: string
+          description: Return projects ordered by field. storage_size, repository_size, wiki_size, packages_size are only
+            available to admins. Similarity is available when searching a
+        - name: sort
+          in: query
+          type: string
+          description: Return projects sorted in ascending and descending order
+        - name: archived
+          in: query
+          type: boolean
+          description: Limit by archived status
+        - name: visibility
+          in: query
+          type: string
+          description: Limit by visibility
+        - name: search
+          in: query
+          type: string
+          description: Return list of projects matching the search criteria
+        - name: search_namespaces
+          in: query
+          type: boolean
+          description: Include ancestor namespaces when matching search criteria
+        - name: owned
+          in: query
+          type: boolean
+          description: Limit by owned by authenticated user
+        - name: starred
+          in: query
+          type: boolean
+          description: Limit by starred status
+        - name: imported
+          in: query
+          type: boolean
+          description: Limit by imported by authenticated user
+        - name: membership
+          in: query
+          type: boolean
+          description: Limit by projects that the current user is a member of
+        - name: with_issues_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled issues feature
+        - name: with_merge_requests_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled merge requests feature
+        - name: with_programming_language
+          in: query
+          type: string
+          description: Limit to repositories which use the given programming language
+        - name: min_access_level
+          in: query
+          type: integer
+          description: Limit by minimum access level of authenticated user
+        - name: id_after
+          in: query
+          type: integer
+          description: Limit results to projects with IDs greater than the specified ID
+        - name: id_before
+          in: query
+          type: integer
+          description: Limit results to projects with IDs less than the specified ID
+        - name: last_activity_after
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity after specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: last_activity_before
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity before specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: repository_storage
+          in: query
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: topic
+          in: query
+          type: array
+          description: Comma-separated list of topics. Limit results to projects having all topics
+        - name: topic_id
+          in: query
+          type: integer
+          description: Limit results to projects with the assigned topic given by the topic ID
+        - name: updated_before
+          in: query
+          type: string
+          description: 'Return projects updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: updated_after
+          in: query
+          type: string
+          description: 'Return projects updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: include_pending_delete
+          in: query
+          type: boolean
+          description: Include projects in pending delete state. Can only be set by admins
+        - name: marked_for_deletion_on
+          in: query
+          type: string
+          description: Date when the project was marked for deletion
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by projects that are not archived and not marked for deletion
+        - name: wiki_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where wiki checksum is failed
+        - name: repository_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where repository checksum is failed
+        - name: include_hidden
+          in: query
+          type: boolean
+          description: Include hidden projects. Can only be set by admins
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: simple
+          in: query
+          type: boolean
+          description: Return only the ID, URL, name, and path of each project
+        - name: statistics
+          in: query
+          type: boolean
+          description: Include project statistics
+        - name: with_custom_attributes
+          in: query
+          type: boolean
+          description: Include custom attributes in the response
+    - name: api-v4-users-user_id-starred_projects
+      path: /api/v4/users/{user_id}/starred_projects
+      operations:
+      - name: getapiv4usersuseridstarredprojects
+        method: GET
+        description: Get projects starred by a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: The ID or username of the user
+          required: true
+        - name: order_by
+          in: query
+          type: string
+          description: Return projects ordered by field. storage_size, repository_size, wiki_size, packages_size are only
+            available to admins. Similarity is available when searching a
+        - name: sort
+          in: query
+          type: string
+          description: Return projects sorted in ascending and descending order
+        - name: archived
+          in: query
+          type: boolean
+          description: Limit by archived status
+        - name: visibility
+          in: query
+          type: string
+          description: Limit by visibility
+        - name: search
+          in: query
+          type: string
+          description: Return list of projects matching the search criteria
+        - name: search_namespaces
+          in: query
+          type: boolean
+          description: Include ancestor namespaces when matching search criteria
+        - name: owned
+          in: query
+          type: boolean
+          description: Limit by owned by authenticated user
+        - name: starred
+          in: query
+          type: boolean
+          description: Limit by starred status
+        - name: imported
+          in: query
+          type: boolean
+          description: Limit by imported by authenticated user
+        - name: membership
+          in: query
+          type: boolean
+          description: Limit by projects that the current user is a member of
+        - name: with_issues_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled issues feature
+        - name: with_merge_requests_enabled
+          in: query
+          type: boolean
+          description: Limit by enabled merge requests feature
+        - name: with_programming_language
+          in: query
+          type: string
+          description: Limit to repositories which use the given programming language
+        - name: min_access_level
+          in: query
+          type: integer
+          description: Limit by minimum access level of authenticated user
+        - name: id_after
+          in: query
+          type: integer
+          description: Limit results to projects with IDs greater than the specified ID
+        - name: id_before
+          in: query
+          type: integer
+          description: Limit results to projects with IDs less than the specified ID
+        - name: last_activity_after
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity after specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: last_activity_before
+          in: query
+          type: string
+          description: 'Limit results to projects with last_activity before specified time. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: repository_storage
+          in: query
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: topic
+          in: query
+          type: array
+          description: Comma-separated list of topics. Limit results to projects having all topics
+        - name: topic_id
+          in: query
+          type: integer
+          description: Limit results to projects with the assigned topic given by the topic ID
+        - name: updated_before
+          in: query
+          type: string
+          description: 'Return projects updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: updated_after
+          in: query
+          type: string
+          description: 'Return projects updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: include_pending_delete
+          in: query
+          type: boolean
+          description: Include projects in pending delete state. Can only be set by admins
+        - name: marked_for_deletion_on
+          in: query
+          type: string
+          description: Date when the project was marked for deletion
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by projects that are not archived and not marked for deletion
+        - name: wiki_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where wiki checksum is failed
+        - name: repository_checksum_failed
+          in: query
+          type: boolean
+          description: Limit by projects where repository checksum is failed
+        - name: include_hidden
+          in: query
+          type: boolean
+          description: Include hidden projects. Can only be set by admins
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: simple
+          in: query
+          type: boolean
+          description: Return only the ID, URL, name, and path of each project
+        - name: statistics
+          in: query
+          type: boolean
+          description: Include project statistics
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-projects-rest
+    port: 8080
+    description: REST adapter for GitLab API — projects. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects
+      name: api-v4-projects
+      description: REST surface for api-v4-projects.
+      operations:
+      - method: GET
+        name: getapiv4projects
+        description: Get a list of visible projects for authenticated user
+        call: gitlab-ci-projects.getapiv4projects
+        with:
+          order_by: rest.order_by
+          sort: rest.sort
+          archived: rest.archived
+          visibility: rest.visibility
+          search: rest.search
+          search_namespaces: rest.search_namespaces
+          owned: rest.owned
+          starred: rest.starred
+          imported: rest.imported
+          membership: rest.membership
+          with_issues_enabled: rest.with_issues_enabled
+          with_merge_requests_enabled: rest.with_merge_requests_enabled
+          with_programming_language: rest.with_programming_language
+          min_access_level: rest.min_access_level
+          id_after: rest.id_after
+          id_before: rest.id_before
+          last_activity_after: rest.last_activity_after
+          last_activity_before: rest.last_activity_before
+          repository_storage: rest.repository_storage
+          topic: rest.topic
+          topic_id: rest.topic_id
+          updated_before: rest.updated_before
+          updated_after: rest.updated_after
+          include_pending_delete: rest.include_pending_delete
+          marked_for_deletion_on: rest.marked_for_deletion_on
+          active: rest.active
+          wiki_checksum_failed: rest.wiki_checksum_failed
+          repository_checksum_failed: rest.repository_checksum_failed
+          include_hidden: rest.include_hidden
+          page: rest.page
+          per_page: rest.per_page
+          simple: rest.simple
+          statistics: rest.statistics
+          with_custom_attributes: rest.with_custom_attributes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projects
+        description: Create new project
+        call: gitlab-ci-projects.postapiv4projects
+        with:
+          postApiV4Projects: rest.postApiV4Projects
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/user/{user-id}
+      name: api-v4-projects-user-user-id
+      description: REST surface for api-v4-projects-user-user_id.
+      operations:
+      - method: POST
+        name: postapiv4projectsuseruserid
+        description: Create new project for a specified user. Only available to admin users.
+        call: gitlab-ci-projects.postapiv4projectsuseruserid
+        with:
+          user_id: rest.user_id
+          postApiV4ProjectsUserUserId: rest.postApiV4ProjectsUserUserId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}
+      name: api-v4-projects-id
+      description: REST surface for api-v4-projects-id.
+      operations:
+      - method: GET
+        name: getapiv4projectsid
+        description: Get a single project
+        call: gitlab-ci-projects.getapiv4projectsid
+        with:
+          id: rest.id
+          statistics: rest.statistics
+          with_custom_attributes: rest.with_custom_attributes
+          license: rest.license
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsid
+        description: Update an existing project
+        call: gitlab-ci-projects.putapiv4projectsid
+        with:
+          id: rest.id
+          putApiV4ProjectsId: rest.putApiV4ProjectsId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsid
+        description: Delete a project
+        call: gitlab-ci-projects.deleteapiv4projectsid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}//search
+      name: api-v4-projects-id-search
+      description: REST surface for api-v4-projects-id-(--)search.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsearch
+        description: Search on GitLab within a project
+        call: gitlab-ci-projects.getapiv4projectsidsearch
+        with:
+          id: rest.id
+          search: rest.search
+          scope: rest.scope
+          ref: rest.ref
+          state: rest.state
+          confidential: rest.confidential
+          type: rest.type
+          fields: rest.fields
+          num_context_lines: rest.num_context_lines
+          regex: rest.regex
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/archive
+      name: api-v4-projects-id-archive
+      description: REST surface for api-v4-projects-id-archive.
+      operations:
+      - method: POST
+        name: postapiv4projectsidarchive
+        description: Archive a project
+        call: gitlab-ci-projects.postapiv4projectsidarchive
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/audit-events
+      name: api-v4-projects-id-audit-events
+      description: REST surface for api-v4-projects-id-audit_events.
+      operations:
+      - method: GET
+        name: getapiv4projectsidauditevents
+        description: Get a list of audit events in this project.
+        call: gitlab-ci-projects.getapiv4projectsidauditevents
+        with:
+          created_after: rest.created_after
+          created_before: rest.created_before
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/audit-events/{audit-event-id}
+      name: api-v4-projects-id-audit-events-audit-event-id
+      description: REST surface for api-v4-projects-id-audit_events-audit_event_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidauditeventsauditeventid
+        description: Get a specific audit event in this project.
+        call: gitlab-ci-projects.getapiv4projectsidauditeventsauditeventid
+        with:
+          audit_event_id: rest.audit_event_id
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/create-ci-config
+      name: api-v4-projects-id-create-ci-config
+      description: REST surface for api-v4-projects-id-create_ci_config.
+      operations:
+      - method: POST
+        name: postapiv4projectsidcreateciconfig
+        description: Create merge request for missing ci config in project
+        call: gitlab-ci-projects.postapiv4projectsidcreateciconfig
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/fork
+      name: api-v4-projects-id-fork
+      description: REST surface for api-v4-projects-id-fork.
+      operations:
+      - method: POST
+        name: postapiv4projectsidfork
+        description: Fork new project for the current user or provided namespace.
+        call: gitlab-ci-projects.postapiv4projectsidfork
+        with:
+          id: rest.id
+          postApiV4ProjectsIdFork: rest.postApiV4ProjectsIdFork
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidfork
+        description: Remove a forked_from relationship
+        call: gitlab-ci-projects.deleteapiv4projectsidfork
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/fork/{forked-from-id}
+      name: api-v4-projects-id-fork-forked-from-id
+      description: REST surface for api-v4-projects-id-fork-forked_from_id.
+      operations:
+      - method: POST
+        name: postapiv4projectsidforkforkedfromid
+        description: Mark this project as forked from another
+        call: gitlab-ci-projects.postapiv4projectsidforkforkedfromid
+        with:
+          id: rest.id
+          forked_from_id: rest.forked_from_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/forks
+      name: api-v4-projects-id-forks
+      description: REST surface for api-v4-projects-id-forks.
+      operations:
+      - method: GET
+        name: getapiv4projectsidforks
+        description: List forks of this project
+        call: gitlab-ci-projects.getapiv4projectsidforks
+        with:
+          id: rest.id
+          order_by: rest.order_by
+          sort: rest.sort
+          archived: rest.archived
+          visibility: rest.visibility
+          search: rest.search
+          search_namespaces: rest.search_namespaces
+          owned: rest.owned
+          starred: rest.starred
+          imported: rest.imported
+          membership: rest.membership
+          with_issues_enabled: rest.with_issues_enabled
+          with_merge_requests_enabled: rest.with_merge_requests_enabled
+          with_programming_language: rest.with_programming_language
+          min_access_level: rest.min_access_level
+          id_after: rest.id_after
+          id_before: rest.id_before
+          last_activity_after: rest.last_activity_after
+          last_activity_before: rest.last_activity_before
+          repository_storage: rest.repository_storage
+          topic: rest.topic
+          topic_id: rest.topic_id
+          updated_before: rest.updated_before
+          updated_after: rest.updated_after
+          include_pending_delete: rest.include_pending_delete
+          marked_for_deletion_on: rest.marked_for_deletion_on
+          active: rest.active
+          wiki_checksum_failed: rest.wiki_checksum_failed
+          repository_checksum_failed: rest.repository_checksum_failed
+          include_hidden: rest.include_hidden
+          page: rest.page
+          per_page: rest.per_page
+          simple: rest.simple
+          with_custom_attributes: rest.with_custom_attributes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/groups
+      name: api-v4-projects-id-groups
+      description: REST surface for api-v4-projects-id-groups.
+      operations:
+      - method: GET
+        name: getapiv4projectsidgroups
+        description: Get ancestor and shared groups for a project
+        call: gitlab-ci-projects.getapiv4projectsidgroups
+        with:
+          id: rest.id
+          search: rest.search
+          skip_groups: rest.skip_groups
+          with_shared: rest.with_shared
+          shared_visible_only: rest.shared_visible_only
+          shared_min_access_level: rest.shared_min_access_level
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/housekeeping
+      name: api-v4-projects-id-housekeeping
+      description: REST surface for api-v4-projects-id-housekeeping.
+      operations:
+      - method: POST
+        name: postapiv4projectsidhousekeeping
+        description: Start the housekeeping task for a project
+        call: gitlab-ci-projects.postapiv4projectsidhousekeeping
+        with:
+          id: rest.id
+          postApiV4ProjectsIdHousekeeping: rest.postApiV4ProjectsIdHousekeeping
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/import-project-members/{project-id}
+      name: api-v4-projects-id-import-project-members-project-id
+      description: REST surface for api-v4-projects-id-import_project_members-project_id.
+      operations:
+      - method: POST
+        name: postapiv4projectsidimportprojectmembersprojectid
+        description: Import members from another project
+        call: gitlab-ci-projects.postapiv4projectsidimportprojectmembersprojectid
+        with:
+          id: rest.id
+          project_id: rest.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/invited-groups
+      name: api-v4-projects-id-invited-groups
+      description: REST surface for api-v4-projects-id-invited_groups.
+      operations:
+      - method: GET
+        name: getapiv4projectsidinvitedgroups
+        description: Get a list of invited groups in this project
+        call: gitlab-ci-projects.getapiv4projectsidinvitedgroups
+        with:
+          id: rest.id
+          relation: rest.relation
+          search: rest.search
+          min_access_level: rest.min_access_level
+          page: rest.page
+          per_page: rest.per_page
+          with_custom_attributes: rest.with_custom_attributes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues
+      name: api-v4-projects-id-issues
+      description: REST surface for api-v4-projects-id-issues.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissues
+        description: Get a list of project issues
+        call: gitlab-ci-projects.getapiv4projectsidissues
+        with:
+          id: rest.id
+          with_labels_details: rest.with_labels_details
+          state: rest.state
+          closed_by_id: rest.closed_by_id
+          order_by: rest.order_by
+          sort: rest.sort
+          due_date: rest.due_date
+          issue_type: rest.issue_type
+          labels: rest.labels
+          milestone: rest.milestone
+          milestone_id: rest.milestone_id
+          iids: rest.iids
+          search: rest.search
+          in: rest.in
+          author_id: rest.author_id
+          author_username: rest.author_username
+          assignee_id: rest.assignee_id
+          assignee_username: rest.assignee_username
+          created_after: rest.created_after
+          created_before: rest.created_before
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          not[labels]: rest.not[labels]
+          not[milestone]: rest.not[milestone]
+          not[milestone_id]: rest.not[milestone_id]
+          not[iids]: rest.not[iids]
+          not[author_id]: rest.not[author_id]
+          not[author_username]: rest.not[author_username]
+          not[assignee_id]: rest.not[assignee_id]
+          not[assignee_username]: rest.not[assignee_username]
+          not[weight]: rest.not[weight]
+          not[iteration_id]: rest.not[iteration_id]
+          not[iteration_title]: rest.not[iteration_title]
+          scope: rest.scope
+          my_reaction_emoji: rest.my_reaction_emoji
+          confidential: rest.confidential
+          weight: rest.weight
+          epic_id: rest.epic_id
+          health_status: rest.health_status
+          iteration_id: rest.iteration_id
+          iteration_title: rest.iteration_title
+          page: rest.page
+          per_page: rest.per_page
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidissues
+        description: Create a new project issue
+        call: gitlab-ci-projects.postapiv4projectsidissues
+        with:
+          id: rest.id
+          postApiV4ProjectsIdIssues: rest.postApiV4ProjectsIdIssues
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}
+      name: api-v4-projects-id-issues-issue-iid
+      description: REST surface for api-v4-projects-id-issues-issue_iid.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesissueiid
+        description: Get a single project issue
+        call: gitlab-ci-projects.getapiv4projectsidissuesissueiid
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidissuesissueiid
+        description: Update an existing issue
+        call: gitlab-ci-projects.putapiv4projectsidissuesissueiid
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          putApiV4ProjectsIdIssuesIssueIid: rest.putApiV4ProjectsIdIssuesIssueIid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidissuesissueiid
+        description: Delete a project issue
+        call: gitlab-ci-projects.deleteapiv4projectsidissuesissueiid
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/clone
+      name: api-v4-projects-id-issues-issue-iid-clone
+      description: REST surface for api-v4-projects-id-issues-issue_iid-clone.
+      operations:
+      - method: POST
+        name: postapiv4projectsidissuesissueiidclone
+        description: Clone an existing issue
+        call: gitlab-ci-projects.postapiv4projectsidissuesissueiidclone
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          postApiV4ProjectsIdIssuesIssueIidClone: rest.postApiV4ProjectsIdIssuesIssueIidClone
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/closed-by
+      name: api-v4-projects-id-issues-issue-iid-closed-by
+      description: REST surface for api-v4-projects-id-issues-issue_iid-closed_by.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesissueiidclosedby
+        description: List merge requests closing issue
+        call: gitlab-ci-projects.getapiv4projectsidissuesissueiidclosedby
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/move
+      name: api-v4-projects-id-issues-issue-iid-move
+      description: REST surface for api-v4-projects-id-issues-issue_iid-move.
+      operations:
+      - method: POST
+        name: postapiv4projectsidissuesissueiidmove
+        description: Move an existing issue
+        call: gitlab-ci-projects.postapiv4projectsidissuesissueiidmove
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          postApiV4ProjectsIdIssuesIssueIidMove: rest.postApiV4ProjectsIdIssuesIssueIidMove
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues/{issue-iid}/reorder
+      name: api-v4-projects-id-issues-issue-iid-reorder
+      description: REST surface for api-v4-projects-id-issues-issue_iid-reorder.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidissuesissueiidreorder
+        description: Reorder an existing issue
+        call: gitlab-ci-projects.putapiv4projectsidissuesissueiidreorder
+        with:
+          id: rest.id
+          issue_iid: rest.issue_iid
+          putApiV4ProjectsIdIssuesIssueIidReorder: rest.putApiV4ProjectsIdIssuesIssueIidReorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/issues-statistics
+      name: api-v4-projects-id-issues-statistics
+      description: REST surface for api-v4-projects-id-issues_statistics.
+      operations:
+      - method: GET
+        name: getapiv4projectsidissuesstatistics
+        description: Get statistics for the list of project issues
+        call: gitlab-ci-projects.getapiv4projectsidissuesstatistics
+        with:
+          id: rest.id
+          labels: rest.labels
+          milestone: rest.milestone
+          milestone_id: rest.milestone_id
+          iids: rest.iids
+          search: rest.search
+          in: rest.in
+          author_id: rest.author_id
+          author_username: rest.author_username
+          assignee_id: rest.assignee_id
+          assignee_username: rest.assignee_username
+          created_after: rest.created_after
+          created_before: rest.created_before
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          not[labels]: rest.not[labels]
+          not[milestone]: rest.not[milestone]
+          not[milestone_id]: rest.not[milestone_id]
+          not[iids]: rest.not[iids]
+          not[author_id]: rest.not[author_id]
+          not[author_username]: rest.not[author_username]
+          not[assignee_id]: rest.not[assignee_id]
+          not[assignee_username]: rest.not[assignee_username]
+          not[weight]: rest.not[weight]
+          not[iteration_id]: rest.not[iteration_id]
+          not[iteration_title]: rest.not[iteration_title]
+          scope: rest.scope
+          my_reaction_emoji: rest.my_reaction_emoji
+          confidential: rest.confidential
+          weight: rest.weight
+          epic_id: rest.epic_id
+          health_status: rest.health_status
+          iteration_id: rest.iteration_id
+          iteration_title: rest.iteration_title
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/languages
+      name: api-v4-projects-id-languages
+      description: REST surface for api-v4-projects-id-languages.
+      operations:
+      - method: GET
+        name: getapiv4projectsidlanguages
+        description: Get languages in project repository
+        call: gitlab-ci-projects.getapiv4projectsidlanguages
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/packages/protection/rules
+      name: api-v4-projects-id-packages-protection-rules
+      description: REST surface for api-v4-projects-id-packages-protection-rules.
+      operations:
+      - method: GET
+        name: getapiv4projectsidpackagesprotectionrules
+        description: Get list of package protection rules for a project
+        call: gitlab-ci-projects.getapiv4projectsidpackagesprotectionrules
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidpackagesprotectionrules
+        description: Create a package protection rule for a project
+        call: gitlab-ci-projects.postapiv4projectsidpackagesprotectionrules
+        with:
+          id: rest.id
+          postApiV4ProjectsIdPackagesProtectionRules: rest.postApiV4ProjectsIdPackagesProtectionRules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/packages/protection/rules/{package-protection-rule-id}
+      name: api-v4-projects-id-packages-protection-rules-package-protection-rule-id
+      description: REST surface for api-v4-projects-id-packages-protection-rules-package_protection_rule_id.
+      operations:
+      - method: PATCH
+        name: patchapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+        description: Update a package protection rule for a project
+        call: gitlab-ci-projects.patchapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+        with:
+          id: rest.id
+          package_protection_rule_id: rest.package_protection_rule_id
+          patchApiV4ProjectsIdPackagesProtectionRulesPackageProtectionRuleId: rest.patchApiV4ProjectsIdPackagesProtectionRulesPackageProtectionRuleId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+        description: Delete package protection rule
+        call: gitlab-ci-projects.deleteapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+        with:
+          id: rest.id
+          package_protection_rule_id: rest.package_protection_rule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/pages-access
+      name: api-v4-projects-id-pages-access
+      description: REST surface for api-v4-projects-id-pages_access.
+      operations:
+      - method: GET
+        name: getapiv4projectsidpagesaccess
+        description: Check pages access of this project
+        call: gitlab-ci-projects.getapiv4projectsidpagesaccess
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/registry/protection/repository/rules
+      name: api-v4-projects-id-registry-protection-repository-rules
+      description: REST surface for api-v4-projects-id-registry-protection-repository-rules.
+      operations:
+      - method: GET
+        name: getapiv4projectsidregistryprotectionrepositoryrules
+        description: Get list of container registry protection rules for a project
+        call: gitlab-ci-projects.getapiv4projectsidregistryprotectionrepositoryrules
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidregistryprotectionrepositoryrules
+        description: Create a container protection rule for a project
+        call: gitlab-ci-projects.postapiv4projectsidregistryprotectionrepositoryrules
+        with:
+          id: rest.id
+          postApiV4ProjectsIdRegistryProtectionRepositoryRules: rest.postApiV4ProjectsIdRegistryProtectionRepositoryRules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/registry/protection/repository/rules/{protection-rule-id}
+      name: api-v4-projects-id-registry-protection-repository-rules-protection-rule-id
+      description: REST surface for api-v4-projects-id-registry-protection-repository-rules-protection_rule_id.
+      operations:
+      - method: PATCH
+        name: patchapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+        description: Update a container protection rule for a project
+        call: gitlab-ci-projects.patchapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+        with:
+          id: rest.id
+          protection_rule_id: rest.protection_rule_id
+          patchApiV4ProjectsIdRegistryProtectionRepositoryRulesProtectionRuleId: rest.patchApiV4ProjectsIdRegistryProtectionRepositoryRulesProtectionRuleId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+        description: Delete container protection rule
+        call: gitlab-ci-projects.deleteapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+        with:
+          id: rest.id
+          protection_rule_id: rest.protection_rule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/registry/protection/tag/rules
+      name: api-v4-projects-id-registry-protection-tag-rules
+      description: REST surface for api-v4-projects-id-registry-protection-tag-rules.
+      operations:
+      - method: GET
+        name: getapiv4projectsidregistryprotectiontagrules
+        description: Gets a list of container protection tag rules for a project.
+        call: gitlab-ci-projects.getapiv4projectsidregistryprotectiontagrules
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidregistryprotectiontagrules
+        description: Create a container protection tag rule for a project. 5 rule limit per project.
+        call: gitlab-ci-projects.postapiv4projectsidregistryprotectiontagrules
+        with:
+          id: rest.id
+          postApiV4ProjectsIdRegistryProtectionTagRules: rest.postApiV4ProjectsIdRegistryProtectionTagRules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/registry/protection/tag/rules/{protection-rule-id}
+      name: api-v4-projects-id-registry-protection-tag-rules-protection-rule-id
+      description: REST surface for api-v4-projects-id-registry-protection-tag-rules-protection_rule_id.
+      operations:
+      - method: PATCH
+        name: patchapiv4projectsidregistryprotectiontagrulesprotectionruleid
+        description: Update a container protection tag rule for a project.
+        call: gitlab-ci-projects.patchapiv4projectsidregistryprotectiontagrulesprotectionruleid
+        with:
+          id: rest.id
+          protection_rule_id: rest.protection_rule_id
+          patchApiV4ProjectsIdRegistryProtectionTagRulesProtectionRuleId: rest.patchApiV4ProjectsIdRegistryProtectionTagRulesProtectionRuleId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidregistryprotectiontagrulesprotectionruleid
+        description: Delete container protection tag rule
+        call: gitlab-ci-projects.deleteapiv4projectsidregistryprotectiontagrulesprotectionruleid
+        with:
+          id: rest.id
+          protection_rule_id: rest.protection_rule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository-size
+      name: api-v4-projects-id-repository-size
+      description: REST surface for api-v4-projects-id-repository_size.
+      operations:
+      - method: POST
+        name: postapiv4projectsidrepositorysize
+        description: Start a task to recalculate repository size for a project
+        call: gitlab-ci-projects.postapiv4projectsidrepositorysize
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/restore
+      name: api-v4-projects-id-restore
+      description: REST surface for api-v4-projects-id-restore.
+      operations:
+      - method: POST
+        name: postapiv4projectsidrestore
+        description: Restore a project
+        call: gitlab-ci-projects.postapiv4projectsidrestore
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/runners
+      name: api-v4-projects-id-runners
+      description: REST surface for api-v4-projects-id-runners.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrunners
+        description: List project's runners
+        call: gitlab-ci-projects.getapiv4projectsidrunners
+        with:
+          id: rest.id
+          scope: rest.scope
+          type: rest.type
+          paused: rest.paused
+          status: rest.status
+          tag_list: rest.tag_list
+          version_prefix: rest.version_prefix
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidrunners
+        description: Assign a runner to project
+        call: gitlab-ci-projects.postapiv4projectsidrunners
+        with:
+          id: rest.id
+          postApiV4ProjectsIdRunners: rest.postApiV4ProjectsIdRunners
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/runners/reset-registration-token
+      name: api-v4-projects-id-runners-reset-registration-token
+      description: REST surface for api-v4-projects-id-runners-reset_registration_token.
+      operations:
+      - method: POST
+        name: postapiv4projectsidrunnersresetregistrationtoken
+        description: Reset the runner registration token for a project
+        call: gitlab-ci-projects.postapiv4projectsidrunnersresetregistrationtoken
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/runners/{runner-id}
+      name: api-v4-projects-id-runners-runner-id
+      description: REST surface for api-v4-projects-id-runners-runner_id.
+      operations:
+      - method: DELETE
+        name: deleteapiv4projectsidrunnersrunnerid
+        description: Unassign a project runner from the project
+        call: gitlab-ci-projects.deleteapiv4projectsidrunnersrunnerid
+        with:
+          id: rest.id
+          runner_id: rest.runner_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/share
+      name: api-v4-projects-id-share
+      description: REST surface for api-v4-projects-id-share.
+      operations:
+      - method: POST
+        name: postapiv4projectsidshare
+        description: Share the project with a group
+        call: gitlab-ci-projects.postapiv4projectsidshare
+        with:
+          id: rest.id
+          postApiV4ProjectsIdShare: rest.postApiV4ProjectsIdShare
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/share/{group-id}
+      name: api-v4-projects-id-share-group-id
+      description: REST surface for api-v4-projects-id-share-group_id.
+      operations:
+      - method: DELETE
+        name: deleteapiv4projectsidsharegroupid
+        description: Remove a group share
+        call: gitlab-ci-projects.deleteapiv4projectsidsharegroupid
+        with:
+          id: rest.id
+          group_id: rest.group_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/share-locations
+      name: api-v4-projects-id-share-locations
+      description: REST surface for api-v4-projects-id-share_locations.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsharelocations
+        description: Returns group that can be shared with the given project
+        call: gitlab-ci-projects.getapiv4projectsidsharelocations
+        with:
+          id: rest.id
+          search: rest.search
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/star
+      name: api-v4-projects-id-star
+      description: REST surface for api-v4-projects-id-star.
+      operations:
+      - method: POST
+        name: postapiv4projectsidstar
+        description: Star a project
+        call: gitlab-ci-projects.postapiv4projectsidstar
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/starrers
+      name: api-v4-projects-id-starrers
+      description: REST surface for api-v4-projects-id-starrers.
+      operations:
+      - method: GET
+        name: getapiv4projectsidstarrers
+        description: Get the users who starred a project
+        call: gitlab-ci-projects.getapiv4projectsidstarrers
+        with:
+          id: rest.id
+          search: rest.search
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/statistics
+      name: api-v4-projects-id-statistics
+      description: REST surface for api-v4-projects-id-statistics.
+      operations:
+      - method: GET
+        name: getapiv4projectsidstatistics
+        description: Get the list of project fetch statistics for the last 30 days
+        call: gitlab-ci-projects.getapiv4projectsidstatistics
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/storage
+      name: api-v4-projects-id-storage
+      description: REST surface for api-v4-projects-id-storage.
+      operations:
+      - method: GET
+        name: getapiv4projectsidstorage
+        description: Show the storage information
+        call: gitlab-ci-projects.getapiv4projectsidstorage
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/terraform/state-protection-rules
+      name: api-v4-projects-id-terraform-state-protection-rules
+      description: REST surface for api-v4-projects-id-terraform-state_protection_rules.
+      operations:
+      - method: GET
+        name: getapiv4projectsidterraformstateprotectionrules
+        description: List all Terraform state protection rules for a project
+        call: gitlab-ci-projects.getapiv4projectsidterraformstateprotectionrules
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/transfer
+      name: api-v4-projects-id-transfer
+      description: REST surface for api-v4-projects-id-transfer.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidtransfer
+        description: Transfer a project to a new namespace
+        call: gitlab-ci-projects.putapiv4projectsidtransfer
+        with:
+          id: rest.id
+          putApiV4ProjectsIdTransfer: rest.putApiV4ProjectsIdTransfer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/transfer-locations
+      name: api-v4-projects-id-transfer-locations
+      description: REST surface for api-v4-projects-id-transfer_locations.
+      operations:
+      - method: GET
+        name: getapiv4projectsidtransferlocations
+        description: Get the namespaces to where the project can be transferred
+        call: gitlab-ci-projects.getapiv4projectsidtransferlocations
+        with:
+          id: rest.id
+          search: rest.search
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/unarchive
+      name: api-v4-projects-id-unarchive
+      description: REST surface for api-v4-projects-id-unarchive.
+      operations:
+      - method: POST
+        name: postapiv4projectsidunarchive
+        description: Unarchive a project
+        call: gitlab-ci-projects.postapiv4projectsidunarchive
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/unstar
+      name: api-v4-projects-id-unstar
+      description: REST surface for api-v4-projects-id-unstar.
+      operations:
+      - method: POST
+        name: postapiv4projectsidunstar
+        description: Unstar a project
+        call: gitlab-ci-projects.postapiv4projectsidunstar
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/uploads
+      name: api-v4-projects-id-uploads
+      description: REST surface for api-v4-projects-id-uploads.
+      operations:
+      - method: POST
+        name: postapiv4projectsiduploads
+        description: Upload a file
+        call: gitlab-ci-projects.postapiv4projectsiduploads
+        with:
+          id: rest.id
+          postApiV4ProjectsIdUploads: rest.postApiV4ProjectsIdUploads
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getapiv4projectsiduploads
+        description: Get the list of uploads of a project
+        call: gitlab-ci-projects.getapiv4projectsiduploads
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/uploads/authorize
+      name: api-v4-projects-id-uploads-authorize
+      description: REST surface for api-v4-projects-id-uploads-authorize.
+      operations:
+      - method: POST
+        name: postapiv4projectsiduploadsauthorize
+        description: Workhorse authorize the file upload
+        call: gitlab-ci-projects.postapiv4projectsiduploadsauthorize
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/uploads/{secret}/{filename}
+      name: api-v4-projects-id-uploads-secret-filename
+      description: REST surface for api-v4-projects-id-uploads-secret-filename.
+      operations:
+      - method: GET
+        name: getapiv4projectsiduploadssecretfilename
+        description: Download a single project upload by secret and filename
+        call: gitlab-ci-projects.getapiv4projectsiduploadssecretfilename
+        with:
+          secret: rest.secret
+          filename: rest.filename
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsiduploadssecretfilename
+        description: Delete a single project upload by secret and filename
+        call: gitlab-ci-projects.deleteapiv4projectsiduploadssecretfilename
+        with:
+          secret: rest.secret
+          filename: rest.filename
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/uploads/{upload-id}
+      name: api-v4-projects-id-uploads-upload-id
+      description: REST surface for api-v4-projects-id-uploads-upload_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsiduploadsuploadid
+        description: Download a single project upload by ID
+        call: gitlab-ci-projects.getapiv4projectsiduploadsuploadid
+        with:
+          upload_id: rest.upload_id
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsiduploadsuploadid
+        description: Delete a single project upload by ID
+        call: gitlab-ci-projects.deleteapiv4projectsiduploadsuploadid
+        with:
+          upload_id: rest.upload_id
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/users
+      name: api-v4-projects-id-users
+      description: REST surface for api-v4-projects-id-users.
+      operations:
+      - method: GET
+        name: getapiv4projectsidusers
+        description: Get the users list of a project
+        call: gitlab-ci-projects.getapiv4projectsidusers
+        with:
+          id: rest.id
+          search: rest.search
+          skip_users: rest.skip_users
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/runners/{id}/projects
+      name: api-v4-runners-id-projects
+      description: REST surface for api-v4-runners-id-projects.
+      operations:
+      - method: GET
+        name: getapiv4runnersidprojects
+        description: List runner's projects
+        call: gitlab-ci-projects.getapiv4runnersidprojects
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/users/{user-id}/contributed-projects
+      name: api-v4-users-user-id-contributed-projects
+      description: REST surface for api-v4-users-user_id-contributed_projects.
+      operations:
+      - method: GET
+        name: getapiv4usersuseridcontributedprojects
+        description: Get projects that a user has contributed to
+        call: gitlab-ci-projects.getapiv4usersuseridcontributedprojects
+        with:
+          user_id: rest.user_id
+          order_by: rest.order_by
+          sort: rest.sort
+          page: rest.page
+          per_page: rest.per_page
+          simple: rest.simple
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/users/{user-id}/projects
+      name: api-v4-users-user-id-projects
+      description: REST surface for api-v4-users-user_id-projects.
+      operations:
+      - method: GET
+        name: getapiv4usersuseridprojects
+        description: Get a user projects
+        call: gitlab-ci-projects.getapiv4usersuseridprojects
+        with:
+          user_id: rest.user_id
+          order_by: rest.order_by
+          sort: rest.sort
+          archived: rest.archived
+          visibility: rest.visibility
+          search: rest.search
+          search_namespaces: rest.search_namespaces
+          owned: rest.owned
+          starred: rest.starred
+          imported: rest.imported
+          membership: rest.membership
+          with_issues_enabled: rest.with_issues_enabled
+          with_merge_requests_enabled: rest.with_merge_requests_enabled
+          with_programming_language: rest.with_programming_language
+          min_access_level: rest.min_access_level
+          id_after: rest.id_after
+          id_before: rest.id_before
+          last_activity_after: rest.last_activity_after
+          last_activity_before: rest.last_activity_before
+          repository_storage: rest.repository_storage
+          topic: rest.topic
+          topic_id: rest.topic_id
+          updated_before: rest.updated_before
+          updated_after: rest.updated_after
+          include_pending_delete: rest.include_pending_delete
+          marked_for_deletion_on: rest.marked_for_deletion_on
+          active: rest.active
+          wiki_checksum_failed: rest.wiki_checksum_failed
+          repository_checksum_failed: rest.repository_checksum_failed
+          include_hidden: rest.include_hidden
+          page: rest.page
+          per_page: rest.per_page
+          simple: rest.simple
+          statistics: rest.statistics
+          with_custom_attributes: rest.with_custom_attributes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/users/{user-id}/starred-projects
+      name: api-v4-users-user-id-starred-projects
+      description: REST surface for api-v4-users-user_id-starred_projects.
+      operations:
+      - method: GET
+        name: getapiv4usersuseridstarredprojects
+        description: Get projects starred by a user
+        call: gitlab-ci-projects.getapiv4usersuseridstarredprojects
+        with:
+          user_id: rest.user_id
+          order_by: rest.order_by
+          sort: rest.sort
+          archived: rest.archived
+          visibility: rest.visibility
+          search: rest.search
+          search_namespaces: rest.search_namespaces
+          owned: rest.owned
+          starred: rest.starred
+          imported: rest.imported
+          membership: rest.membership
+          with_issues_enabled: rest.with_issues_enabled
+          with_merge_requests_enabled: rest.with_merge_requests_enabled
+          with_programming_language: rest.with_programming_language
+          min_access_level: rest.min_access_level
+          id_after: rest.id_after
+          id_before: rest.id_before
+          last_activity_after: rest.last_activity_after
+          last_activity_before: rest.last_activity_before
+          repository_storage: rest.repository_storage
+          topic: rest.topic
+          topic_id: rest.topic_id
+          updated_before: rest.updated_before
+          updated_after: rest.updated_after
+          include_pending_delete: rest.include_pending_delete
+          marked_for_deletion_on: rest.marked_for_deletion_on
+          active: rest.active
+          wiki_checksum_failed: rest.wiki_checksum_failed
+          repository_checksum_failed: rest.repository_checksum_failed
+          include_hidden: rest.include_hidden
+          page: rest.page
+          per_page: rest.per_page
+          simple: rest.simple
+          statistics: rest.statistics
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-projects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — projects. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-list-visible-projects-authenticated
+      description: Get a list of visible projects for authenticated user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projects
+      with:
+        order_by: tools.order_by
+        sort: tools.sort
+        archived: tools.archived
+        visibility: tools.visibility
+        search: tools.search
+        search_namespaces: tools.search_namespaces
+        owned: tools.owned
+        starred: tools.starred
+        imported: tools.imported
+        membership: tools.membership
+        with_issues_enabled: tools.with_issues_enabled
+        with_merge_requests_enabled: tools.with_merge_requests_enabled
+        with_programming_language: tools.with_programming_language
+        min_access_level: tools.min_access_level
+        id_after: tools.id_after
+        id_before: tools.id_before
+        last_activity_after: tools.last_activity_after
+        last_activity_before: tools.last_activity_before
+        repository_storage: tools.repository_storage
+        topic: tools.topic
+        topic_id: tools.topic_id
+        updated_before: tools.updated_before
+        updated_after: tools.updated_after
+        include_pending_delete: tools.include_pending_delete
+        marked_for_deletion_on: tools.marked_for_deletion_on
+        active: tools.active
+        wiki_checksum_failed: tools.wiki_checksum_failed
+        repository_checksum_failed: tools.repository_checksum_failed
+        include_hidden: tools.include_hidden
+        page: tools.page
+        per_page: tools.per_page
+        simple: tools.simple
+        statistics: tools.statistics
+        with_custom_attributes: tools.with_custom_attributes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project
+      description: Create new project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projects
+      with:
+        postApiV4Projects: tools.postApiV4Projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-specified-user
+      description: Create new project for a specified user. Only available to admin users.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsuseruserid
+      with:
+        user_id: tools.user_id
+        postApiV4ProjectsUserUserId: tools.postApiV4ProjectsUserUserId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-project
+      description: Get a single project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsid
+      with:
+        id: tools.id
+        statistics: tools.statistics
+        with_custom_attributes: tools.with_custom_attributes
+        license: tools.license
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-project
+      description: Update an existing project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.putapiv4projectsid
+      with:
+        id: tools.id
+        putApiV4ProjectsId: tools.putApiV4ProjectsId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-project
+      description: Delete a project
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-gitlab-within-project
+      description: Search on GitLab within a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidsearch
+      with:
+        id: tools.id
+        search: tools.search
+        scope: tools.scope
+        ref: tools.ref
+        state: tools.state
+        confidential: tools.confidential
+        type: tools.type
+        fields: tools.fields
+        num_context_lines: tools.num_context_lines
+        regex: tools.regex
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: archive-project
+      description: Archive a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidarchive
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-audit-events-this
+      description: Get a list of audit events in this project.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidauditevents
+      with:
+        created_after: tools.created_after
+        created_before: tools.created_before
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-audit-event-this
+      description: Get a specific audit event in this project.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidauditeventsauditeventid
+      with:
+        audit_event_id: tools.audit_event_id
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-merge-request-missing-ci
+      description: Create merge request for missing ci config in project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidcreateciconfig
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fork-new-project-current-user
+      description: Fork new project for the current user or provided namespace.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidfork
+      with:
+        id: tools.id
+        postApiV4ProjectsIdFork: tools.postApiV4ProjectsIdFork
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-forked-relationship
+      description: Remove a forked_from relationship
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidfork
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mark-this-project-forked-another
+      description: Mark this project as forked from another
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidforkforkedfromid
+      with:
+        id: tools.id
+        forked_from_id: tools.forked_from_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-forks-this-project
+      description: List forks of this project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidforks
+      with:
+        id: tools.id
+        order_by: tools.order_by
+        sort: tools.sort
+        archived: tools.archived
+        visibility: tools.visibility
+        search: tools.search
+        search_namespaces: tools.search_namespaces
+        owned: tools.owned
+        starred: tools.starred
+        imported: tools.imported
+        membership: tools.membership
+        with_issues_enabled: tools.with_issues_enabled
+        with_merge_requests_enabled: tools.with_merge_requests_enabled
+        with_programming_language: tools.with_programming_language
+        min_access_level: tools.min_access_level
+        id_after: tools.id_after
+        id_before: tools.id_before
+        last_activity_after: tools.last_activity_after
+        last_activity_before: tools.last_activity_before
+        repository_storage: tools.repository_storage
+        topic: tools.topic
+        topic_id: tools.topic_id
+        updated_before: tools.updated_before
+        updated_after: tools.updated_after
+        include_pending_delete: tools.include_pending_delete
+        marked_for_deletion_on: tools.marked_for_deletion_on
+        active: tools.active
+        wiki_checksum_failed: tools.wiki_checksum_failed
+        repository_checksum_failed: tools.repository_checksum_failed
+        include_hidden: tools.include_hidden
+        page: tools.page
+        per_page: tools.per_page
+        simple: tools.simple
+        with_custom_attributes: tools.with_custom_attributes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ancestor-and-shared-groups
+      description: Get ancestor and shared groups for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidgroups
+      with:
+        id: tools.id
+        search: tools.search
+        skip_groups: tools.skip_groups
+        with_shared: tools.with_shared
+        shared_visible_only: tools.shared_visible_only
+        shared_min_access_level: tools.shared_min_access_level
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-housekeeping-task-project
+      description: Start the housekeeping task for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidhousekeeping
+      with:
+        id: tools.id
+        postApiV4ProjectsIdHousekeeping: tools.postApiV4ProjectsIdHousekeeping
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-members-another-project
+      description: Import members from another project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidimportprojectmembersprojectid
+      with:
+        id: tools.id
+        project_id: tools.project_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-invited-groups-this
+      description: Get a list of invited groups in this project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidinvitedgroups
+      with:
+        id: tools.id
+        relation: tools.relation
+        search: tools.search
+        min_access_level: tools.min_access_level
+        page: tools.page
+        per_page: tools.per_page
+        with_custom_attributes: tools.with_custom_attributes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-project-issues
+      description: Get a list of project issues
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidissues
+      with:
+        id: tools.id
+        with_labels_details: tools.with_labels_details
+        state: tools.state
+        closed_by_id: tools.closed_by_id
+        order_by: tools.order_by
+        sort: tools.sort
+        due_date: tools.due_date
+        issue_type: tools.issue_type
+        labels: tools.labels
+        milestone: tools.milestone
+        milestone_id: tools.milestone_id
+        iids: tools.iids
+        search: tools.search
+        in: tools.in
+        author_id: tools.author_id
+        author_username: tools.author_username
+        assignee_id: tools.assignee_id
+        assignee_username: tools.assignee_username
+        created_after: tools.created_after
+        created_before: tools.created_before
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        not[labels]: tools.not[labels]
+        not[milestone]: tools.not[milestone]
+        not[milestone_id]: tools.not[milestone_id]
+        not[iids]: tools.not[iids]
+        not[author_id]: tools.not[author_id]
+        not[author_username]: tools.not[author_username]
+        not[assignee_id]: tools.not[assignee_id]
+        not[assignee_username]: tools.not[assignee_username]
+        not[weight]: tools.not[weight]
+        not[iteration_id]: tools.not[iteration_id]
+        not[iteration_title]: tools.not[iteration_title]
+        scope: tools.scope
+        my_reaction_emoji: tools.my_reaction_emoji
+        confidential: tools.confidential
+        weight: tools.weight
+        epic_id: tools.epic_id
+        health_status: tools.health_status
+        iteration_id: tools.iteration_id
+        iteration_title: tools.iteration_title
+        page: tools.page
+        per_page: tools.per_page
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-issue
+      description: Create a new project issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidissues
+      with:
+        id: tools.id
+        postApiV4ProjectsIdIssues: tools.postApiV4ProjectsIdIssues
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-project-issue
+      description: Get a single project issue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidissuesissueiid
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-issue
+      description: Update an existing issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.putapiv4projectsidissuesissueiid
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        putApiV4ProjectsIdIssuesIssueIid: tools.putApiV4ProjectsIdIssuesIssueIid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-project-issue
+      description: Delete a project issue
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidissuesissueiid
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clone-existing-issue
+      description: Clone an existing issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidissuesissueiidclone
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        postApiV4ProjectsIdIssuesIssueIidClone: tools.postApiV4ProjectsIdIssuesIssueIidClone
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-merge-requests-closing-issue
+      description: List merge requests closing issue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidissuesissueiidclosedby
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: move-existing-issue
+      description: Move an existing issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidissuesissueiidmove
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        postApiV4ProjectsIdIssuesIssueIidMove: tools.postApiV4ProjectsIdIssuesIssueIidMove
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reorder-existing-issue
+      description: Reorder an existing issue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.putapiv4projectsidissuesissueiidreorder
+      with:
+        id: tools.id
+        issue_iid: tools.issue_iid
+        putApiV4ProjectsIdIssuesIssueIidReorder: tools.putApiV4ProjectsIdIssuesIssueIidReorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-statistics-list-project-issues
+      description: Get statistics for the list of project issues
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidissuesstatistics
+      with:
+        id: tools.id
+        labels: tools.labels
+        milestone: tools.milestone
+        milestone_id: tools.milestone_id
+        iids: tools.iids
+        search: tools.search
+        in: tools.in
+        author_id: tools.author_id
+        author_username: tools.author_username
+        assignee_id: tools.assignee_id
+        assignee_username: tools.assignee_username
+        created_after: tools.created_after
+        created_before: tools.created_before
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        not[labels]: tools.not[labels]
+        not[milestone]: tools.not[milestone]
+        not[milestone_id]: tools.not[milestone_id]
+        not[iids]: tools.not[iids]
+        not[author_id]: tools.not[author_id]
+        not[author_username]: tools.not[author_username]
+        not[assignee_id]: tools.not[assignee_id]
+        not[assignee_username]: tools.not[assignee_username]
+        not[weight]: tools.not[weight]
+        not[iteration_id]: tools.not[iteration_id]
+        not[iteration_title]: tools.not[iteration_title]
+        scope: tools.scope
+        my_reaction_emoji: tools.my_reaction_emoji
+        confidential: tools.confidential
+        weight: tools.weight
+        epic_id: tools.epic_id
+        health_status: tools.health_status
+        iteration_id: tools.iteration_id
+        iteration_title: tools.iteration_title
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-languages-project-repository
+      description: Get languages in project repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidlanguages
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-package-protection-rules
+      description: Get list of package protection rules for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidpackagesprotectionrules
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-package-protection-rule-project
+      description: Create a package protection rule for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidpackagesprotectionrules
+      with:
+        id: tools.id
+        postApiV4ProjectsIdPackagesProtectionRules: tools.postApiV4ProjectsIdPackagesProtectionRules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-package-protection-rule-project
+      description: Update a package protection rule for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.patchapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+      with:
+        id: tools.id
+        package_protection_rule_id: tools.package_protection_rule_id
+        patchApiV4ProjectsIdPackagesProtectionRulesPackageProtectionRuleId: tools.patchApiV4ProjectsIdPackagesProtectionRulesPackageProtectionRuleId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-package-protection-rule
+      description: Delete package protection rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidpackagesprotectionrulespackageprotectionruleid
+      with:
+        id: tools.id
+        package_protection_rule_id: tools.package_protection_rule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-pages-access-this-project
+      description: Check pages access of this project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidpagesaccess
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-container-registry-protection
+      description: Get list of container registry protection rules for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidregistryprotectionrepositoryrules
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-container-protection-rule-project
+      description: Create a container protection rule for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidregistryprotectionrepositoryrules
+      with:
+        id: tools.id
+        postApiV4ProjectsIdRegistryProtectionRepositoryRules: tools.postApiV4ProjectsIdRegistryProtectionRepositoryRules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-container-protection-rule-project
+      description: Update a container protection rule for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.patchapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+      with:
+        id: tools.id
+        protection_rule_id: tools.protection_rule_id
+        patchApiV4ProjectsIdRegistryProtectionRepositoryRulesProtectionRuleId: tools.patchApiV4ProjectsIdRegistryProtectionRepositoryRulesProtectionRuleId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-container-protection-rule
+      description: Delete container protection rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidregistryprotectionrepositoryrulesprotectionruleid
+      with:
+        id: tools.id
+        protection_rule_id: tools.protection_rule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-list-container-protection-tag
+      description: Gets a list of container protection tag rules for a project.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidregistryprotectiontagrules
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-container-protection-tag-rule
+      description: Create a container protection tag rule for a project. 5 rule limit per project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidregistryprotectiontagrules
+      with:
+        id: tools.id
+        postApiV4ProjectsIdRegistryProtectionTagRules: tools.postApiV4ProjectsIdRegistryProtectionTagRules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-container-protection-tag-rule
+      description: Update a container protection tag rule for a project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.patchapiv4projectsidregistryprotectiontagrulesprotectionruleid
+      with:
+        id: tools.id
+        protection_rule_id: tools.protection_rule_id
+        patchApiV4ProjectsIdRegistryProtectionTagRulesProtectionRuleId: tools.patchApiV4ProjectsIdRegistryProtectionTagRulesProtectionRuleId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-container-protection-tag-rule
+      description: Delete container protection tag rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidregistryprotectiontagrulesprotectionruleid
+      with:
+        id: tools.id
+        protection_rule_id: tools.protection_rule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-task-recalculate-repository-size
+      description: Start a task to recalculate repository size for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidrepositorysize
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restore-project
+      description: Restore a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidrestore
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-project-s-runners
+      description: List project's runners
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidrunners
+      with:
+        id: tools.id
+        scope: tools.scope
+        type: tools.type
+        paused: tools.paused
+        status: tools.status
+        tag_list: tools.tag_list
+        version_prefix: tools.version_prefix
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-runner-project
+      description: Assign a runner to project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidrunners
+      with:
+        id: tools.id
+        postApiV4ProjectsIdRunners: tools.postApiV4ProjectsIdRunners
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-runner-registration-token-project
+      description: Reset the runner registration token for a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidrunnersresetregistrationtoken
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unassign-project-runner-project
+      description: Unassign a project runner from the project
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidrunnersrunnerid
+      with:
+        id: tools.id
+        runner_id: tools.runner_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: share-project-group
+      description: Share the project with a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidshare
+      with:
+        id: tools.id
+        postApiV4ProjectsIdShare: tools.postApiV4ProjectsIdShare
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-group-share
+      description: Remove a group share
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsidsharegroupid
+      with:
+        id: tools.id
+        group_id: tools.group_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: returns-group-that-can-be
+      description: Returns group that can be shared with the given project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidsharelocations
+      with:
+        id: tools.id
+        search: tools.search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: star-project
+      description: Star a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidstar
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-users-who-starred-project
+      description: Get the users who starred a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidstarrers
+      with:
+        id: tools.id
+        search: tools.search
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-project-fetch-statistics
+      description: Get the list of project fetch statistics for the last 30 days
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidstatistics
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: show-storage-information
+      description: Show the storage information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidstorage
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-terraform-state-protection
+      description: List all Terraform state protection rules for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidterraformstateprotectionrules
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: transfer-project-new-namespace
+      description: Transfer a project to a new namespace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.putapiv4projectsidtransfer
+      with:
+        id: tools.id
+        putApiV4ProjectsIdTransfer: tools.putApiV4ProjectsIdTransfer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-namespaces-where-project-can
+      description: Get the namespaces to where the project can be transferred
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidtransferlocations
+      with:
+        id: tools.id
+        search: tools.search
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unarchive-project
+      description: Unarchive a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidunarchive
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unstar-project
+      description: Unstar a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsidunstar
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-file
+      description: Upload a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsiduploads
+      with:
+        id: tools.id
+        postApiV4ProjectsIdUploads: tools.postApiV4ProjectsIdUploads
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-uploads-project
+      description: Get the list of uploads of a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsiduploads
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workhorse-authorize-file-upload
+      description: Workhorse authorize the file upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects.postapiv4projectsiduploadsauthorize
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-single-project-upload-secret
+      description: Download a single project upload by secret and filename
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsiduploadssecretfilename
+      with:
+        secret: tools.secret
+        filename: tools.filename
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-single-project-upload-secret
+      description: Delete a single project upload by secret and filename
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsiduploadssecretfilename
+      with:
+        secret: tools.secret
+        filename: tools.filename
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-single-project-upload-id
+      description: Download a single project upload by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsiduploadsuploadid
+      with:
+        upload_id: tools.upload_id
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-single-project-upload-id
+      description: Delete a single project upload by ID
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects.deleteapiv4projectsiduploadsuploadid
+      with:
+        upload_id: tools.upload_id
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-users-list-project
+      description: Get the users list of a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4projectsidusers
+      with:
+        id: tools.id
+        search: tools.search
+        skip_users: tools.skip_users
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-runner-s-projects
+      description: List runner's projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4runnersidprojects
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-projects-that-user-has
+      description: Get projects that a user has contributed to
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4usersuseridcontributedprojects
+      with:
+        user_id: tools.user_id
+        order_by: tools.order_by
+        sort: tools.sort
+        page: tools.page
+        per_page: tools.per_page
+        simple: tools.simple
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-projects
+      description: Get a user projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4usersuseridprojects
+      with:
+        user_id: tools.user_id
+        order_by: tools.order_by
+        sort: tools.sort
+        archived: tools.archived
+        visibility: tools.visibility
+        search: tools.search
+        search_namespaces: tools.search_namespaces
+        owned: tools.owned
+        starred: tools.starred
+        imported: tools.imported
+        membership: tools.membership
+        with_issues_enabled: tools.with_issues_enabled
+        with_merge_requests_enabled: tools.with_merge_requests_enabled
+        with_programming_language: tools.with_programming_language
+        min_access_level: tools.min_access_level
+        id_after: tools.id_after
+        id_before: tools.id_before
+        last_activity_after: tools.last_activity_after
+        last_activity_before: tools.last_activity_before
+        repository_storage: tools.repository_storage
+        topic: tools.topic
+        topic_id: tools.topic_id
+        updated_before: tools.updated_before
+        updated_after: tools.updated_after
+        include_pending_delete: tools.include_pending_delete
+        marked_for_deletion_on: tools.marked_for_deletion_on
+        active: tools.active
+        wiki_checksum_failed: tools.wiki_checksum_failed
+        repository_checksum_failed: tools.repository_checksum_failed
+        include_hidden: tools.include_hidden
+        page: tools.page
+        per_page: tools.per_page
+        simple: tools.simple
+        statistics: tools.statistics
+        with_custom_attributes: tools.with_custom_attributes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-projects-starred-user
+      description: Get projects starred by a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects.getapiv4usersuseridstarredprojects
+      with:
+        user_id: tools.user_id
+        order_by: tools.order_by
+        sort: tools.sort
+        archived: tools.archived
+        visibility: tools.visibility
+        search: tools.search
+        search_namespaces: tools.search_namespaces
+        owned: tools.owned
+        starred: tools.starred
+        imported: tools.imported
+        membership: tools.membership
+        with_issues_enabled: tools.with_issues_enabled
+        with_merge_requests_enabled: tools.with_merge_requests_enabled
+        with_programming_language: tools.with_programming_language
+        min_access_level: tools.min_access_level
+        id_after: tools.id_after
+        id_before: tools.id_before
+        last_activity_after: tools.last_activity_after
+        last_activity_before: tools.last_activity_before
+        repository_storage: tools.repository_storage
+        topic: tools.topic
+        topic_id: tools.topic_id
+        updated_before: tools.updated_before
+        updated_after: tools.updated_after
+        include_pending_delete: tools.include_pending_delete
+        marked_for_deletion_on: tools.marked_for_deletion_on
+        active: tools.active
+        wiki_checksum_failed: tools.wiki_checksum_failed
+        repository_checksum_failed: tools.repository_checksum_failed
+        include_hidden: tools.include_hidden
+        page: tools.page
+        per_page: tools.per_page
+        simple: tools.simple
+        statistics: tools.statistics
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -2,95 +2,281 @@ aid: gitlab-ci
 url: https://raw.githubusercontent.com/api-evangelist/gitlab-ci/refs/heads/main/apis.yml
 name: GitLab CI/CD
 kind: company
-description: >-
-  GitLab CI/CD is the built-in continuous integration, delivery and deployment
-  platform for GitLab. The CI/CD surface area within GitLab's REST API v4 covers
-  pipelines, jobs, pipeline schedules, pipeline triggers, runners, agents,
-  releases, environments, deployments, package and container registries, and
-  the security/dependency scanners. GitLab also exposes a GraphQL API.
+description: GitLab CI/CD is the built-in continuous integration, delivery and deployment platform for GitLab. The CI/CD surface
+  area within GitLab's REST API v4 covers pipelines, jobs, pipeline schedules, pipeline triggers, runners, agents, releases,
+  environments, deployments, package and container registries, and the security/dependency scanners. GitLab also exposes a
+  GraphQL API.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - DevOps
-  - CI/CD
-  - Pipelines
-  - GitLab
-  - DevSecOps
-  - Runners
-  - Container Registry
+- DevOps
+- CI/CD
+- Pipelines
+- GitLab
+- DevSecOps
+- Runners
+- Container Registry
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: gitlab-ci:rest-v4
-    name: GitLab REST API v4 (CI/CD endpoints)
-    description: >-
-      GitLab REST API v4. CI/CD-related endpoint families include /projects/:id/
-      pipelines, /projects/:id/jobs, /projects/:id/pipeline_schedules,
-      /projects/:id/triggers, /runners, /projects/:id/runners,
-      /projects/:id/environments, /projects/:id/deployments and the
-      /projects/:id/releases family. Authenticated with personal access tokens,
-      OAuth tokens, project access tokens, group access tokens, CI job tokens
-      or trigger tokens.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.gitlab.com/api/
-    baseURL: https://gitlab.com/api/v4
-    tags:
-      - REST
-      - Pipelines
-      - Jobs
-      - Runners
-      - Schedules
-      - Releases
-    properties:
-      - type: Documentation
-        url: https://docs.gitlab.com/api/
-      - type: APIReference
-        url: https://docs.gitlab.com/api/api_resources/
-      - type: OpenAPI
-        url: openapi/gitlab-ci-openapi.yml
-      - type: OpenAPISource
-        url: https://docs.gitlab.com/api/openapi/openapi_v2.yaml
-      - type: InteractiveDocs
-        url: https://docs.gitlab.com/api/openapi/openapi_interactive/
-      - type: Authentication
-        url: https://docs.gitlab.com/api/rest/authentication/
-  - aid: gitlab-ci:graphql
-    name: GitLab GraphQL API
-    description: >-
-      GitLab's GraphQL API at /api/graphql. Many CI/CD entities (Pipeline,
-      CiJob, CiRunner, MergeRequest pipelines) are exposed via GraphQL queries
-      and mutations.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.gitlab.com/api/graphql/
-    baseURL: https://gitlab.com/api/graphql
-    tags:
-      - GraphQL
-      - Pipelines
-      - Jobs
-    properties:
-      - type: Documentation
-        url: https://docs.gitlab.com/api/graphql/
-      - type: GraphQLExplorer
-        url: https://gitlab.com/-/graphql-explorer
-      - type: Reference
-        url: https://docs.gitlab.com/api/graphql/reference/
-common:
-  - type: Website
-    url: https://about.gitlab.com/
+- aid: gitlab-ci:rest-v4
+  name: GitLab REST API v4 (CI/CD endpoints)
+  description: GitLab REST API v4. CI/CD-related endpoint families include /projects/:id/ pipelines, /projects/:id/jobs, /projects/:id/pipeline_schedules,
+    /projects/:id/triggers, /runners, /projects/:id/runners, /projects/:id/environments, /projects/:id/deployments and the
+    /projects/:id/releases family. Authenticated with personal access tokens, OAuth tokens, project access tokens, group access
+    tokens, CI job tokens or trigger tokens.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.gitlab.com/api/
+  baseURL: https://gitlab.com/api/v4
+  tags:
+  - REST
+  - Pipelines
+  - Jobs
+  - Runners
+  - Schedules
+  - Releases
+  properties:
   - type: Documentation
     url: https://docs.gitlab.com/api/
-  - type: Pricing
-    url: https://about.gitlab.com/pricing/
-  - type: GitHub
-    url: https://gitlab.com/gitlab-org/gitlab
-  - type: StatusPage
-    url: https://status.gitlab.com/
-  - type: Plans
-    url: plans/gitlab-ci-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/gitlab-ci-rate-limits.yml
-  - type: FinOps
-    url: finops/gitlab-ci-finops.yml
+  - type: APIReference
+    url: https://docs.gitlab.com/api/api_resources/
+  - type: OpenAPI
+    url: openapi/gitlab-ci-openapi.yml
+  - type: OpenAPISource
+    url: https://docs.gitlab.com/api/openapi/openapi_v2.yaml
+  - type: InteractiveDocs
+    url: https://docs.gitlab.com/api/openapi/openapi_interactive/
+  - type: Authentication
+    url: https://docs.gitlab.com/api/rest/authentication/
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-access-requests.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-access-tokens.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-agents.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-alert-management.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-applications.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-attestations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-audit-events.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-avatars.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-award-emoji.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-badges.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-batched-background-migrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-branches.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-broadcast-messages.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-chaos.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-catalog.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-lint.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-resource-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-runners.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-triggers.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ci-variables.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-cluster-agents.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-clusters.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-commit-statuses.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-commits.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-container-registry.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-custom-attributes.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-database-dictionary.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-dependency-proxy.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-deploy-resources.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-draft-notes.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-environments.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-error-tracking.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-events.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-feature-flags.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-features.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-files.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-freeze-periods.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-geo.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-gitlab-pages.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-glql.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-group-import-and-export.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-hooks.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-imports.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-instance.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-internal-operations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-invitations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-issues.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-jira-connect-subscriptions.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-job-artifacts.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-keys.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ldap.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-markdown.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-members.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-merge-request-approvals.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-merge-requests.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-metadata.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-metric-images.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-metrics.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-migrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-ml-model-registry.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-namespaces.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-offline-transfers.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-organizations.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-packages.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-pipeline-schedules.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-pipelines.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-plan-limits.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-project-import.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-project-snapshots.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-project-templates.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-project-topics.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-projects.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-projects-job-token-scope.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-protected-branches.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-protected-tags.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-pypi-packages.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-releases.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-remote-mirrors.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-repositories.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-resource-events.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-runners.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-search.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-secure-files.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-snippets.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-submodules.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-suggestions.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-tags.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-terraform.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-unleash.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-usage-data.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-users.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-web-commits.yaml
+  - type: NaftikoCapability
+    url: capabilities/gitlab-ci-wikis.yaml
+- aid: gitlab-ci:graphql
+  name: GitLab GraphQL API
+  description: GitLab's GraphQL API at /api/graphql. Many CI/CD entities (Pipeline, CiJob, CiRunner, MergeRequest pipelines)
+    are exposed via GraphQL queries and mutations.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.gitlab.com/api/graphql/
+  baseURL: https://gitlab.com/api/graphql
+  tags:
+  - GraphQL
+  - Pipelines
+  - Jobs
+  properties:
+  - type: Documentation
+    url: https://docs.gitlab.com/api/graphql/
+  - type: GraphQLExplorer
+    url: https://gitlab.com/-/graphql-explorer
+  - type: Reference
+    url: https://docs.gitlab.com/api/graphql/reference/
+common:
+- type: Website
+  url: https://about.gitlab.com/
+- type: Documentation
+  url: https://docs.gitlab.com/api/
+- type: Pricing
+  url: https://about.gitlab.com/pricing/
+- type: GitHub
+  url: https://gitlab.com/gitlab-org/gitlab
+- type: StatusPage
+  url: https://status.gitlab.com/
+- type: Plans
+  url: plans/gitlab-ci-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/gitlab-ci-rate-limits.yml
+- type: FinOps
+  url: finops/gitlab-ci-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,402 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — projects_job_token_scope
+  description: 'GitLab API — projects_job_token_scope. 8 operations. Lead operation: projects_job_token_scope. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - projects_job_token_scope
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-projects-job-token-scope
+    baseUri: https://gitlab.com
+    description: GitLab API — projects_job_token_scope business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-job_token_scope
+      path: /api/v4/projects/{id}/job_token_scope
+      operations:
+      - name: getapiv4projectsidjobtokenscope
+        method: GET
+        description: Fetch CI_JOB_TOKEN access settings.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+      - name: patchapiv4projectsidjobtokenscope
+        method: PATCH
+        description: Patch CI_JOB_TOKEN access settings.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: patchApiV4ProjectsIdJobTokenScope
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-job_token_scope-allowlist
+      path: /api/v4/projects/{id}/job_token_scope/allowlist
+      operations:
+      - name: getapiv4projectsidjobtokenscopeallowlist
+        method: GET
+        description: Fetch project inbound allowlist for CI_JOB_TOKEN access settings.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4projectsidjobtokenscopeallowlist
+        method: POST
+        description: Add target project to allowlist.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: ID of user project
+          required: true
+        - name: postApiV4ProjectsIdJobTokenScopeAllowlist
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-job_token_scope-allowlist-target_project_id
+      path: /api/v4/projects/{id}/job_token_scope/allowlist/{target_project_id}
+      operations:
+      - name: deleteapiv4projectsidjobtokenscopeallowlisttargetprojectid
+        method: DELETE
+        description: Delete project from allowlist.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: ID of user project
+          required: true
+        - name: target_project_id
+          in: path
+          type: integer
+          description: ID of the project to be removed from the allowlist
+          required: true
+    - name: api-v4-projects-id-job_token_scope-groups_allowlist
+      path: /api/v4/projects/{id}/job_token_scope/groups_allowlist
+      operations:
+      - name: getapiv4projectsidjobtokenscopegroupsallowlist
+        method: GET
+        description: Fetch project groups allowlist for CI_JOB_TOKEN access settings.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: id
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4projectsidjobtokenscopegroupsallowlist
+        method: POST
+        description: Add target group to allowlist.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: ID of user project
+          required: true
+        - name: postApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-job_token_scope-groups_allowlist-target_group_id
+      path: /api/v4/projects/{id}/job_token_scope/groups_allowlist/{target_group_id}
+      operations:
+      - name: deleteapiv4projectsidjobtokenscopegroupsallowlisttargetgroupid
+        method: DELETE
+        description: Delete target group from allowlist.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: ID of user project
+          required: true
+        - name: target_group_id
+          in: path
+          type: integer
+          description: ID of the group to be removed from the allowlist
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-projects-job-token-scope-rest
+    port: 8080
+    description: REST adapter for GitLab API — projects_job_token_scope. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/job-token-scope
+      name: api-v4-projects-id-job-token-scope
+      description: REST surface for api-v4-projects-id-job_token_scope.
+      operations:
+      - method: GET
+        name: getapiv4projectsidjobtokenscope
+        description: Fetch CI_JOB_TOKEN access settings.
+        call: gitlab-ci-projects-job-token-scope.getapiv4projectsidjobtokenscope
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchapiv4projectsidjobtokenscope
+        description: Patch CI_JOB_TOKEN access settings.
+        call: gitlab-ci-projects-job-token-scope.patchapiv4projectsidjobtokenscope
+        with:
+          id: rest.id
+          patchApiV4ProjectsIdJobTokenScope: rest.patchApiV4ProjectsIdJobTokenScope
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/job-token-scope/allowlist
+      name: api-v4-projects-id-job-token-scope-allowlist
+      description: REST surface for api-v4-projects-id-job_token_scope-allowlist.
+      operations:
+      - method: GET
+        name: getapiv4projectsidjobtokenscopeallowlist
+        description: Fetch project inbound allowlist for CI_JOB_TOKEN access settings.
+        call: gitlab-ci-projects-job-token-scope.getapiv4projectsidjobtokenscopeallowlist
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidjobtokenscopeallowlist
+        description: Add target project to allowlist.
+        call: gitlab-ci-projects-job-token-scope.postapiv4projectsidjobtokenscopeallowlist
+        with:
+          id: rest.id
+          postApiV4ProjectsIdJobTokenScopeAllowlist: rest.postApiV4ProjectsIdJobTokenScopeAllowlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/job-token-scope/allowlist/{target-project-id}
+      name: api-v4-projects-id-job-token-scope-allowlist-target-project-id
+      description: REST surface for api-v4-projects-id-job_token_scope-allowlist-target_project_id.
+      operations:
+      - method: DELETE
+        name: deleteapiv4projectsidjobtokenscopeallowlisttargetprojectid
+        description: Delete project from allowlist.
+        call: gitlab-ci-projects-job-token-scope.deleteapiv4projectsidjobtokenscopeallowlisttargetprojectid
+        with:
+          id: rest.id
+          target_project_id: rest.target_project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/job-token-scope/groups-allowlist
+      name: api-v4-projects-id-job-token-scope-groups-allowlist
+      description: REST surface for api-v4-projects-id-job_token_scope-groups_allowlist.
+      operations:
+      - method: GET
+        name: getapiv4projectsidjobtokenscopegroupsallowlist
+        description: Fetch project groups allowlist for CI_JOB_TOKEN access settings.
+        call: gitlab-ci-projects-job-token-scope.getapiv4projectsidjobtokenscopegroupsallowlist
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidjobtokenscopegroupsallowlist
+        description: Add target group to allowlist.
+        call: gitlab-ci-projects-job-token-scope.postapiv4projectsidjobtokenscopegroupsallowlist
+        with:
+          id: rest.id
+          postApiV4ProjectsIdJobTokenScopeGroupsAllowlist: rest.postApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/job-token-scope/groups-allowlist/{target-group-id}
+      name: api-v4-projects-id-job-token-scope-groups-allowlist-target-group-id
+      description: REST surface for api-v4-projects-id-job_token_scope-groups_allowlist-target_group_id.
+      operations:
+      - method: DELETE
+        name: deleteapiv4projectsidjobtokenscopegroupsallowlisttargetgroupid
+        description: Delete target group from allowlist.
+        call: gitlab-ci-projects-job-token-scope.deleteapiv4projectsidjobtokenscopegroupsallowlisttargetgroupid
+        with:
+          id: rest.id
+          target_group_id: rest.target_group_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-projects-job-token-scope-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — projects_job_token_scope. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: fetch-ci-job-token-access
+      description: Fetch CI_JOB_TOKEN access settings.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects-job-token-scope.getapiv4projectsidjobtokenscope
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-ci-job-token-access
+      description: Patch CI_JOB_TOKEN access settings.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects-job-token-scope.patchapiv4projectsidjobtokenscope
+      with:
+        id: tools.id
+        patchApiV4ProjectsIdJobTokenScope: tools.patchApiV4ProjectsIdJobTokenScope
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-project-inbound-allowlist-ci
+      description: Fetch project inbound allowlist for CI_JOB_TOKEN access settings.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects-job-token-scope.getapiv4projectsidjobtokenscopeallowlist
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-target-project-allowlist
+      description: Add target project to allowlist.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects-job-token-scope.postapiv4projectsidjobtokenscopeallowlist
+      with:
+        id: tools.id
+        postApiV4ProjectsIdJobTokenScopeAllowlist: tools.postApiV4ProjectsIdJobTokenScopeAllowlist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-project-allowlist
+      description: Delete project from allowlist.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects-job-token-scope.deleteapiv4projectsidjobtokenscopeallowlisttargetprojectid
+      with:
+        id: tools.id
+        target_project_id: tools.target_project_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-project-groups-allowlist-ci
+      description: Fetch project groups allowlist for CI_JOB_TOKEN access settings.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-projects-job-token-scope.getapiv4projectsidjobtokenscopegroupsallowlist
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-target-group-allowlist
+      description: Add target group to allowlist.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-projects-job-token-scope.postapiv4projectsidjobtokenscopegroupsallowlist
+      with:
+        id: tools.id
+        postApiV4ProjectsIdJobTokenScopeGroupsAllowlist: tools.postApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-target-group-allowlist
+      description: Delete target group from allowlist.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-projects-job-token-scope.deleteapiv4projectsidjobtokenscopegroupsallowlisttargetgroupid
+      with:
+        id: tools.id
+        target_group_id: tools.target_group_id
+      outputParameters:
+      - type: object
+        mapping: $.

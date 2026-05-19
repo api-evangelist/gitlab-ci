@@ -1,0 +1,294 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — tags
+  description: 'GitLab API — tags. 5 operations. Lead operation: tags. Self-contained Naftiko capability covering one Gitlab
+    Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - tags
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-tags
+    baseUri: https://gitlab.com
+    description: GitLab API — tags business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-repository-tags
+      path: /api/v4/projects/{id}/repository/tags
+      operations:
+      - name: getapiv4projectsidrepositorytags
+        method: GET
+        description: Get a project repository tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: sort
+          in: query
+          type: string
+          description: Return tags sorted in updated by `asc` or `desc` order.
+        - name: order_by
+          in: query
+          type: string
+          description: Return tags ordered by `name`, `updated`, `version` fields.
+        - name: search
+          in: query
+          type: string
+          description: Return list of tags matching the search criteria
+        - name: page_token
+          in: query
+          type: string
+          description: Name of tag to start the pagination from
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidrepositorytags
+        method: POST
+        description: Create a new repository tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdRepositoryTags
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-repository-tags-tag_name
+      path: /api/v4/projects/{id}/repository/tags/{tag_name}
+      operations:
+      - name: getapiv4projectsidrepositorytagstagname
+        method: GET
+        description: Get a single repository tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The name of the tag
+          required: true
+      - name: deleteapiv4projectsidrepositorytagstagname
+        method: DELETE
+        description: Delete a repository tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The name of the tag
+          required: true
+    - name: api-v4-projects-id-repository-tags-tag_name-signature
+      path: /api/v4/projects/{id}/repository/tags/{tag_name}/signature
+      operations:
+      - name: getapiv4projectsidrepositorytagstagnamesignature
+        method: GET
+        description: Get a tag's signature
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The name of the tag
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-tags-rest
+    port: 8080
+    description: REST adapter for GitLab API — tags. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/repository/tags
+      name: api-v4-projects-id-repository-tags
+      description: REST surface for api-v4-projects-id-repository-tags.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorytags
+        description: Get a project repository tags
+        call: gitlab-ci-tags.getapiv4projectsidrepositorytags
+        with:
+          id: rest.id
+          sort: rest.sort
+          order_by: rest.order_by
+          search: rest.search
+          page_token: rest.page_token
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidrepositorytags
+        description: Create a new repository tag
+        call: gitlab-ci-tags.postapiv4projectsidrepositorytags
+        with:
+          id: rest.id
+          postApiV4ProjectsIdRepositoryTags: rest.postApiV4ProjectsIdRepositoryTags
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/tags/{tag-name}
+      name: api-v4-projects-id-repository-tags-tag-name
+      description: REST surface for api-v4-projects-id-repository-tags-tag_name.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorytagstagname
+        description: Get a single repository tag
+        call: gitlab-ci-tags.getapiv4projectsidrepositorytagstagname
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidrepositorytagstagname
+        description: Delete a repository tag
+        call: gitlab-ci-tags.deleteapiv4projectsidrepositorytagstagname
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/tags/{tag-name}/signature
+      name: api-v4-projects-id-repository-tags-tag-name-signature
+      description: REST surface for api-v4-projects-id-repository-tags-tag_name-signature.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorytagstagnamesignature
+        description: Get a tag's signature
+        call: gitlab-ci-tags.getapiv4projectsidrepositorytagstagnamesignature
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-tags-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — tags. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-project-repository-tags
+      description: Get a project repository tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-tags.getapiv4projectsidrepositorytags
+      with:
+        id: tools.id
+        sort: tools.sort
+        order_by: tools.order_by
+        search: tools.search
+        page_token: tools.page_token
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-repository-tag
+      description: Create a new repository tag
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-tags.postapiv4projectsidrepositorytags
+      with:
+        id: tools.id
+        postApiV4ProjectsIdRepositoryTags: tools.postApiV4ProjectsIdRepositoryTags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-repository-tag
+      description: Get a single repository tag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-tags.getapiv4projectsidrepositorytagstagname
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-repository-tag
+      description: Delete a repository tag
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-tags.deleteapiv4projectsidrepositorytagstagname
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tag-s-signature
+      description: Get a tag's signature
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-tags.getapiv4projectsidrepositorytagstagnamesignature
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+      outputParameters:
+      - type: object
+        mapping: $.

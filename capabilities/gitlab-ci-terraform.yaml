@@ -1,0 +1,1055 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — terraform
+  description: 'GitLab API — terraform. 18 operations. Lead operation: Get details about the latest version of a module. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - terraform
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-terraform
+    baseUri: https://gitlab.com
+    description: GitLab API — terraform business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system
+      path: /api/v4/packages/terraform/modules/v1/{module_namespace}/{module_name}/{module_system}
+      operations:
+      - name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystem
+        method: GET
+        description: Get details about the latest version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: module_namespace
+          in: path
+          type: string
+          description: Group's ID or slug
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Name of the module
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: System of the module
+          required: true
+    - name: api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-
+      path: /api/v4/packages/terraform/modules/v1/{module_namespace}/{module_name}/{module_system}/*module_version
+      operations:
+      - name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversion
+        method: GET
+        description: Get details about specific version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: module_namespace
+          in: path
+          type: string
+          description: Group's ID or slug
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Name of the module
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: System of the module
+          required: true
+        - name: module_version
+          in: query
+          type: string
+          description: Version of the module
+          required: true
+    - name: api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-
+      path: /api/v4/packages/terraform/modules/v1/{module_namespace}/{module_name}/{module_system}/*module_version/download
+      operations:
+      - name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversiondownload
+        method: GET
+        description: Get download location for specific version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: module_namespace
+          in: path
+          type: string
+          description: Group's ID or slug
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Name of the module
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: System of the module
+          required: true
+        - name: module_version
+          in: query
+          type: string
+          description: Version of the module
+          required: true
+    - name: api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-
+      path: /api/v4/packages/terraform/modules/v1/{module_namespace}/{module_name}/{module_system}/*module_version/file
+      operations:
+      - name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversionfile
+        method: GET
+        description: Download specific version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: module_namespace
+          in: path
+          type: string
+          description: Group's ID or slug
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Name of the module
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: System of the module
+          required: true
+        - name: module_version
+          in: query
+          type: string
+          description: Version of the module
+          required: true
+    - name: api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-
+      path: /api/v4/packages/terraform/modules/v1/{module_namespace}/{module_name}/{module_system}/download
+      operations:
+      - name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemdownload
+        method: GET
+        description: Get download location for the latest version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: module_namespace
+          in: path
+          type: string
+          description: Group's ID or slug
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Name of the module
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: System of the module
+          required: true
+    - name: api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-
+      path: /api/v4/packages/terraform/modules/v1/{module_namespace}/{module_name}/{module_system}/versions
+      operations:
+      - name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemversions
+        method: GET
+        description: List versions for a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: module_namespace
+          in: path
+          type: string
+          description: Group's ID or slug
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Name of the module
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: System of the module
+          required: true
+    - name: api-v4-projects-id-packages-terraform-modules-module_name-module_system
+      path: /api/v4/projects/{id}/packages/terraform/modules/{module_name}/{module_system}
+      operations:
+      - name: getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystem
+        method: GET
+        description: Download the latest version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or full path of a project
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Module name
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: Module system
+          required: true
+        - name: terraform-get
+          in: query
+          type: string
+          description: Terraform get redirection flag
+    - name: api-v4-projects-id-packages-terraform-modules-module_name-module_system-*module_
+      path: /api/v4/projects/{id}/packages/terraform/modules/{module_name}/{module_system}/*module_version
+      operations:
+      - name: getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversion
+        method: GET
+        description: Download a specific version of a module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or full path of a project
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Module name
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: Module system
+          required: true
+        - name: module_version
+          in: query
+          type: string
+          description: Module version
+          required: true
+        - name: terraform-get
+          in: query
+          type: string
+          description: Terraform get redirection flag
+    - name: api-v4-projects-id-packages-terraform-modules-module_name-module_system-*module_
+      path: /api/v4/projects/{id}/packages/terraform/modules/{module_name}/{module_system}/*module_version/file
+      operations:
+      - name: putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfile
+        method: PUT
+        description: Upload Terraform Module package file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or full path of a project
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Module name
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: Module system
+          required: true
+        - name: module_version
+          in: formData
+          type: string
+          description: Module version
+          required: true
+        - name: file
+          in: formData
+          type: file
+          description: The package file to be published (generated by Multipart middleware)
+          required: true
+    - name: api-v4-projects-id-packages-terraform-modules-module_name-module_system-*module_
+      path: /api/v4/projects/{id}/packages/terraform/modules/{module_name}/{module_system}/*module_version/file/authorize
+      operations:
+      - name: putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfileauthorize
+        method: PUT
+        description: Workhorse authorize Terraform Module package file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or full path of a project
+          required: true
+        - name: module_name
+          in: path
+          type: string
+          description: Module name
+          required: true
+        - name: module_system
+          in: path
+          type: string
+          description: Module system
+          required: true
+        - name: putApiV4ProjectsIdPackagesTerraformModulesModuleNameModuleSystem*moduleVersionFileAuthorize
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-terraform-state-name
+      path: /api/v4/projects/{id}/terraform/state/{name}
+      operations:
+      - name: getapiv4projectsidterraformstatename
+        method: GET
+        description: Get a Terraform state by its name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+        - name: ID
+          in: query
+          type: string
+          description: Terraform state lock ID
+      - name: postapiv4projectsidterraformstatename
+        method: POST
+        description: Add a new Terraform state or update an existing one
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+        - name: postApiV4ProjectsIdTerraformStateName
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidterraformstatename
+        method: DELETE
+        description: Delete a Terraform state of a certain name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+    - name: api-v4-projects-id-terraform-state-name-authorize
+      path: /api/v4/projects/{id}/terraform/state/{name}/authorize
+      operations:
+      - name: postapiv4projectsidterraformstatenameauthorize
+        method: POST
+        description: Authorize Terraform state upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+    - name: api-v4-projects-id-terraform-state-name-lock
+      path: /api/v4/projects/{id}/terraform/state/{name}/lock
+      operations:
+      - name: postapiv4projectsidterraformstatenamelock
+        method: POST
+        description: Lock a Terraform state of a certain name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+        - name: postApiV4ProjectsIdTerraformStateNameLock
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidterraformstatenamelock
+        method: DELETE
+        description: Unlock a Terraform state of a certain name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+        - name: ID
+          in: query
+          type: string
+          description: Terraform state lock ID
+    - name: api-v4-projects-id-terraform-state-name-versions-serial
+      path: /api/v4/projects/{id}/terraform/state/{name}/versions/{serial}
+      operations:
+      - name: getapiv4projectsidterraformstatenameversionsserial
+        method: GET
+        description: Get a Terraform state version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of a Terraform state
+          required: true
+        - name: serial
+          in: path
+          type: integer
+          description: The version number of the state
+          required: true
+      - name: deleteapiv4projectsidterraformstatenameversionsserial
+        method: DELETE
+        description: Delete a Terraform state version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: integer
+          required: true
+        - name: serial
+          in: path
+          type: integer
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-terraform-rest
+    port: 8080
+    description: REST adapter for GitLab API — terraform. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/packages/terraform/modules/v1/{module-namespace}/{module-name}/{module-system}
+      name: api-v4-packages-terraform-modules-v1-module-namespace-module-name-module-system
+      description: REST surface for api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system.
+      operations:
+      - method: GET
+        name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystem
+        description: Get details about the latest version of a module
+        call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystem
+        with:
+          module_namespace: rest.module_namespace
+          module_name: rest.module_name
+          module_system: rest.module_system
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/packages/terraform/modules/v1/{module-namespace}/{module-name}/{module-system}/module-version
+      name: api-v4-packages-terraform-modules-v1-module-namespace-module-name-module-system
+      description: REST surface for api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-.
+      operations:
+      - method: GET
+        name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversion
+        description: Get details about specific version of a module
+        call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversion
+        with:
+          module_namespace: rest.module_namespace
+          module_name: rest.module_name
+          module_system: rest.module_system
+          module_version: rest.module_version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/packages/terraform/modules/v1/{module-namespace}/{module-name}/{module-system}/module-version/download
+      name: api-v4-packages-terraform-modules-v1-module-namespace-module-name-module-system
+      description: REST surface for api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-.
+      operations:
+      - method: GET
+        name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversiondownload
+        description: Get download location for specific version of a module
+        call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversiondownload
+        with:
+          module_namespace: rest.module_namespace
+          module_name: rest.module_name
+          module_system: rest.module_system
+          module_version: rest.module_version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/packages/terraform/modules/v1/{module-namespace}/{module-name}/{module-system}/module-version/file
+      name: api-v4-packages-terraform-modules-v1-module-namespace-module-name-module-system
+      description: REST surface for api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-.
+      operations:
+      - method: GET
+        name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversionfile
+        description: Download specific version of a module
+        call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversionfile
+        with:
+          module_namespace: rest.module_namespace
+          module_name: rest.module_name
+          module_system: rest.module_system
+          module_version: rest.module_version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/packages/terraform/modules/v1/{module-namespace}/{module-name}/{module-system}/download
+      name: api-v4-packages-terraform-modules-v1-module-namespace-module-name-module-system
+      description: REST surface for api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-.
+      operations:
+      - method: GET
+        name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemdownload
+        description: Get download location for the latest version of a module
+        call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemdownload
+        with:
+          module_namespace: rest.module_namespace
+          module_name: rest.module_name
+          module_system: rest.module_system
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/packages/terraform/modules/v1/{module-namespace}/{module-name}/{module-system}/versions
+      name: api-v4-packages-terraform-modules-v1-module-namespace-module-name-module-system
+      description: REST surface for api-v4-packages-terraform-modules-v1-module_namespace-module_name-module_system-.
+      operations:
+      - method: GET
+        name: getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemversions
+        description: List versions for a module
+        call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemversions
+        with:
+          module_namespace: rest.module_namespace
+          module_name: rest.module_name
+          module_system: rest.module_system
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/packages/terraform/modules/{module-name}/{module-system}
+      name: api-v4-projects-id-packages-terraform-modules-module-name-module-system
+      description: REST surface for api-v4-projects-id-packages-terraform-modules-module_name-module_system.
+      operations:
+      - method: GET
+        name: getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystem
+        description: Download the latest version of a module
+        call: gitlab-ci-terraform.getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystem
+        with:
+          id: rest.id
+          module_name: rest.module_name
+          module_system: rest.module_system
+          terraform-get: rest.terraform-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/packages/terraform/modules/{module-name}/{module-system}/module-version
+      name: api-v4-projects-id-packages-terraform-modules-module-name-module-system-module
+      description: REST surface for api-v4-projects-id-packages-terraform-modules-module_name-module_system-*module_.
+      operations:
+      - method: GET
+        name: getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversion
+        description: Download a specific version of a module
+        call: gitlab-ci-terraform.getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversion
+        with:
+          id: rest.id
+          module_name: rest.module_name
+          module_system: rest.module_system
+          module_version: rest.module_version
+          terraform-get: rest.terraform-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/packages/terraform/modules/{module-name}/{module-system}/module-version/file
+      name: api-v4-projects-id-packages-terraform-modules-module-name-module-system-module
+      description: REST surface for api-v4-projects-id-packages-terraform-modules-module_name-module_system-*module_.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfile
+        description: Upload Terraform Module package file
+        call: gitlab-ci-terraform.putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfile
+        with:
+          id: rest.id
+          module_name: rest.module_name
+          module_system: rest.module_system
+          module_version: rest.module_version
+          file: rest.file
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/packages/terraform/modules/{module-name}/{module-system}/module-version/file/authorize
+      name: api-v4-projects-id-packages-terraform-modules-module-name-module-system-module
+      description: REST surface for api-v4-projects-id-packages-terraform-modules-module_name-module_system-*module_.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfileauthorize
+        description: Workhorse authorize Terraform Module package file
+        call: gitlab-ci-terraform.putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfileauthorize
+        with:
+          id: rest.id
+          module_name: rest.module_name
+          module_system: rest.module_system
+          putApiV4ProjectsIdPackagesTerraformModulesModuleNameModuleSystem*moduleVersionFileAuthorize: rest.putApiV4ProjectsIdPackagesTerraformModulesModuleNameModuleSystem*moduleVersionFileAuthorize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/terraform/state/{name}
+      name: api-v4-projects-id-terraform-state-name
+      description: REST surface for api-v4-projects-id-terraform-state-name.
+      operations:
+      - method: GET
+        name: getapiv4projectsidterraformstatename
+        description: Get a Terraform state by its name
+        call: gitlab-ci-terraform.getapiv4projectsidterraformstatename
+        with:
+          id: rest.id
+          name: rest.name
+          ID: rest.ID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidterraformstatename
+        description: Add a new Terraform state or update an existing one
+        call: gitlab-ci-terraform.postapiv4projectsidterraformstatename
+        with:
+          id: rest.id
+          name: rest.name
+          postApiV4ProjectsIdTerraformStateName: rest.postApiV4ProjectsIdTerraformStateName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidterraformstatename
+        description: Delete a Terraform state of a certain name
+        call: gitlab-ci-terraform.deleteapiv4projectsidterraformstatename
+        with:
+          id: rest.id
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/terraform/state/{name}/authorize
+      name: api-v4-projects-id-terraform-state-name-authorize
+      description: REST surface for api-v4-projects-id-terraform-state-name-authorize.
+      operations:
+      - method: POST
+        name: postapiv4projectsidterraformstatenameauthorize
+        description: Authorize Terraform state upload
+        call: gitlab-ci-terraform.postapiv4projectsidterraformstatenameauthorize
+        with:
+          id: rest.id
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/terraform/state/{name}/lock
+      name: api-v4-projects-id-terraform-state-name-lock
+      description: REST surface for api-v4-projects-id-terraform-state-name-lock.
+      operations:
+      - method: POST
+        name: postapiv4projectsidterraformstatenamelock
+        description: Lock a Terraform state of a certain name
+        call: gitlab-ci-terraform.postapiv4projectsidterraformstatenamelock
+        with:
+          id: rest.id
+          name: rest.name
+          postApiV4ProjectsIdTerraformStateNameLock: rest.postApiV4ProjectsIdTerraformStateNameLock
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidterraformstatenamelock
+        description: Unlock a Terraform state of a certain name
+        call: gitlab-ci-terraform.deleteapiv4projectsidterraformstatenamelock
+        with:
+          id: rest.id
+          name: rest.name
+          ID: rest.ID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/terraform/state/{name}/versions/{serial}
+      name: api-v4-projects-id-terraform-state-name-versions-serial
+      description: REST surface for api-v4-projects-id-terraform-state-name-versions-serial.
+      operations:
+      - method: GET
+        name: getapiv4projectsidterraformstatenameversionsserial
+        description: Get a Terraform state version
+        call: gitlab-ci-terraform.getapiv4projectsidterraformstatenameversionsserial
+        with:
+          id: rest.id
+          name: rest.name
+          serial: rest.serial
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidterraformstatenameversionsserial
+        description: Delete a Terraform state version
+        call: gitlab-ci-terraform.deleteapiv4projectsidterraformstatenameversionsserial
+        with:
+          id: rest.id
+          name: rest.name
+          serial: rest.serial
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-terraform-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — terraform. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-details-about-latest-version
+      description: Get details about the latest version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystem
+      with:
+        module_namespace: tools.module_namespace
+        module_name: tools.module_name
+        module_system: tools.module_system
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-details-about-specific-version
+      description: Get details about specific version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversion
+      with:
+        module_namespace: tools.module_namespace
+        module_name: tools.module_name
+        module_system: tools.module_system
+        module_version: tools.module_version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-download-location-specific-version
+      description: Get download location for specific version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversiondownload
+      with:
+        module_namespace: tools.module_namespace
+        module_name: tools.module_name
+        module_system: tools.module_system
+        module_version: tools.module_version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-specific-version-module
+      description: Download specific version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemmoduleversionfile
+      with:
+        module_namespace: tools.module_namespace
+        module_name: tools.module_name
+        module_system: tools.module_system
+        module_version: tools.module_version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-download-location-latest-version
+      description: Get download location for the latest version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemdownload
+      with:
+        module_namespace: tools.module_namespace
+        module_name: tools.module_name
+        module_system: tools.module_system
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-versions-module
+      description: List versions for a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4packagesterraformmodulesv1modulenamespacemodulenamemodulesystemversions
+      with:
+        module_namespace: tools.module_namespace
+        module_name: tools.module_name
+        module_system: tools.module_system
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-latest-version-module
+      description: Download the latest version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystem
+      with:
+        id: tools.id
+        module_name: tools.module_name
+        module_system: tools.module_system
+        terraform-get: tools.terraform-get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-specific-version-module-2
+      description: Download a specific version of a module
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversion
+      with:
+        id: tools.id
+        module_name: tools.module_name
+        module_system: tools.module_system
+        module_version: tools.module_version
+        terraform-get: tools.terraform-get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-terraform-module-package-file
+      description: Upload Terraform Module package file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfile
+      with:
+        id: tools.id
+        module_name: tools.module_name
+        module_system: tools.module_system
+        module_version: tools.module_version
+        file: tools.file
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workhorse-authorize-terraform-module-package
+      description: Workhorse authorize Terraform Module package file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.putapiv4projectsidpackagesterraformmodulesmodulenamemodulesystemmoduleversionfileauthorize
+      with:
+        id: tools.id
+        module_name: tools.module_name
+        module_system: tools.module_system
+        putApiV4ProjectsIdPackagesTerraformModulesModuleNameModuleSystem*moduleVersionFileAuthorize: tools.putApiV4ProjectsIdPackagesTerraformModulesModuleNameModuleSystem*moduleVersionFileAuthorize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-terraform-state-its-name
+      description: Get a Terraform state by its name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4projectsidterraformstatename
+      with:
+        id: tools.id
+        name: tools.name
+        ID: tools.ID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-new-terraform-state-update
+      description: Add a new Terraform state or update an existing one
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-terraform.postapiv4projectsidterraformstatename
+      with:
+        id: tools.id
+        name: tools.name
+        postApiV4ProjectsIdTerraformStateName: tools.postApiV4ProjectsIdTerraformStateName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-terraform-state-certain-name
+      description: Delete a Terraform state of a certain name
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-terraform.deleteapiv4projectsidterraformstatename
+      with:
+        id: tools.id
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: authorize-terraform-state-upload
+      description: Authorize Terraform state upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-terraform.postapiv4projectsidterraformstatenameauthorize
+      with:
+        id: tools.id
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lock-terraform-state-certain-name
+      description: Lock a Terraform state of a certain name
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-terraform.postapiv4projectsidterraformstatenamelock
+      with:
+        id: tools.id
+        name: tools.name
+        postApiV4ProjectsIdTerraformStateNameLock: tools.postApiV4ProjectsIdTerraformStateNameLock
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unlock-terraform-state-certain-name
+      description: Unlock a Terraform state of a certain name
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-terraform.deleteapiv4projectsidterraformstatenamelock
+      with:
+        id: tools.id
+        name: tools.name
+        ID: tools.ID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-terraform-state-version
+      description: Get a Terraform state version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-terraform.getapiv4projectsidterraformstatenameversionsserial
+      with:
+        id: tools.id
+        name: tools.name
+        serial: tools.serial
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-terraform-state-version
+      description: Delete a Terraform state version
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-terraform.deleteapiv4projectsidterraformstatenameversionsserial
+      with:
+        id: tools.id
+        name: tools.name
+        serial: tools.serial
+      outputParameters:
+      - type: object
+        mapping: $.

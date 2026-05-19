@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — broadcast_messages
+  description: 'GitLab API — broadcast_messages. 5 operations. Lead operation: Get all broadcast messages. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - broadcast_messages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-broadcast-messages
+    baseUri: https://gitlab.com
+    description: GitLab API — broadcast_messages business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-broadcast_messages
+      path: /api/v4/broadcast_messages
+      operations:
+      - name: getapiv4broadcastmessages
+        method: GET
+        description: Get all broadcast messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4broadcastmessages
+        method: POST
+        description: Create a broadcast message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4BroadcastMessages
+          in: body
+          type: string
+          required: true
+    - name: api-v4-broadcast_messages-id
+      path: /api/v4/broadcast_messages/{id}
+      operations:
+      - name: getapiv4broadcastmessagesid
+        method: GET
+        description: Get a specific broadcast message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Broadcast message ID
+          required: true
+      - name: putapiv4broadcastmessagesid
+        method: PUT
+        description: Update a broadcast message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Broadcast message ID
+          required: true
+        - name: putApiV4BroadcastMessagesId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4broadcastmessagesid
+        method: DELETE
+        description: Delete a broadcast message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Broadcast message ID
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-broadcast-messages-rest
+    port: 8080
+    description: REST adapter for GitLab API — broadcast_messages. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v4/broadcast-messages
+      name: api-v4-broadcast-messages
+      description: REST surface for api-v4-broadcast_messages.
+      operations:
+      - method: GET
+        name: getapiv4broadcastmessages
+        description: Get all broadcast messages
+        call: gitlab-ci-broadcast-messages.getapiv4broadcastmessages
+        with:
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4broadcastmessages
+        description: Create a broadcast message
+        call: gitlab-ci-broadcast-messages.postapiv4broadcastmessages
+        with:
+          postApiV4BroadcastMessages: rest.postApiV4BroadcastMessages
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/broadcast-messages/{id}
+      name: api-v4-broadcast-messages-id
+      description: REST surface for api-v4-broadcast_messages-id.
+      operations:
+      - method: GET
+        name: getapiv4broadcastmessagesid
+        description: Get a specific broadcast message
+        call: gitlab-ci-broadcast-messages.getapiv4broadcastmessagesid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4broadcastmessagesid
+        description: Update a broadcast message
+        call: gitlab-ci-broadcast-messages.putapiv4broadcastmessagesid
+        with:
+          id: rest.id
+          putApiV4BroadcastMessagesId: rest.putApiV4BroadcastMessagesId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4broadcastmessagesid
+        description: Delete a broadcast message
+        call: gitlab-ci-broadcast-messages.deleteapiv4broadcastmessagesid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-broadcast-messages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — broadcast_messages. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-all-broadcast-messages
+      description: Get all broadcast messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-broadcast-messages.getapiv4broadcastmessages
+      with:
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-broadcast-message
+      description: Create a broadcast message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-broadcast-messages.postapiv4broadcastmessages
+      with:
+        postApiV4BroadcastMessages: tools.postApiV4BroadcastMessages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-broadcast-message
+      description: Get a specific broadcast message
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-broadcast-messages.getapiv4broadcastmessagesid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-broadcast-message
+      description: Update a broadcast message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-broadcast-messages.putapiv4broadcastmessagesid
+      with:
+        id: tools.id
+        putApiV4BroadcastMessagesId: tools.putApiV4BroadcastMessagesId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-broadcast-message
+      description: Delete a broadcast message
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-broadcast-messages.deleteapiv4broadcastmessagesid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

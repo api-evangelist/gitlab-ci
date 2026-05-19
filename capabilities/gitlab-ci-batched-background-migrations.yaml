@@ -1,0 +1,226 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — batched_background_migrations
+  description: 'GitLab API — batched_background_migrations. 4 operations. Lead operation: batched_background_migrations. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - batched_background_migrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-batched-background-migrations
+    baseUri: https://gitlab.com
+    description: GitLab API — batched_background_migrations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-admin-batched_background_migrations
+      path: /api/v4/admin/batched_background_migrations
+      operations:
+      - name: getapiv4adminbatchedbackgroundmigrations
+        method: GET
+        description: Get the list of batched background migrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: database
+          in: query
+          type: string
+          description: The name of the database, the default `main`
+        - name: job_class_name
+          in: query
+          type: string
+          description: Filter migrations by job class name.
+    - name: api-v4-admin-batched_background_migrations-id
+      path: /api/v4/admin/batched_background_migrations/{id}
+      operations:
+      - name: getapiv4adminbatchedbackgroundmigrationsid
+        method: GET
+        description: Retrieve a batched background migration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: database
+          in: query
+          type: string
+          description: The name of the database
+        - name: id
+          in: path
+          type: integer
+          description: The batched background migration id
+          required: true
+    - name: api-v4-admin-batched_background_migrations-id-pause
+      path: /api/v4/admin/batched_background_migrations/{id}/pause
+      operations:
+      - name: putapiv4adminbatchedbackgroundmigrationsidpause
+        method: PUT
+        description: Pause a batched background migration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The batched background migration id
+          required: true
+        - name: putApiV4AdminBatchedBackgroundMigrationsIdPause
+          in: body
+          type: string
+          required: true
+    - name: api-v4-admin-batched_background_migrations-id-resume
+      path: /api/v4/admin/batched_background_migrations/{id}/resume
+      operations:
+      - name: putapiv4adminbatchedbackgroundmigrationsidresume
+        method: PUT
+        description: Resume a batched background migration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The batched background migration id
+          required: true
+        - name: putApiV4AdminBatchedBackgroundMigrationsIdResume
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-batched-background-migrations-rest
+    port: 8080
+    description: REST adapter for GitLab API — batched_background_migrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v4/admin/batched-background-migrations
+      name: api-v4-admin-batched-background-migrations
+      description: REST surface for api-v4-admin-batched_background_migrations.
+      operations:
+      - method: GET
+        name: getapiv4adminbatchedbackgroundmigrations
+        description: Get the list of batched background migrations
+        call: gitlab-ci-batched-background-migrations.getapiv4adminbatchedbackgroundmigrations
+        with:
+          database: rest.database
+          job_class_name: rest.job_class_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/admin/batched-background-migrations/{id}
+      name: api-v4-admin-batched-background-migrations-id
+      description: REST surface for api-v4-admin-batched_background_migrations-id.
+      operations:
+      - method: GET
+        name: getapiv4adminbatchedbackgroundmigrationsid
+        description: Retrieve a batched background migration
+        call: gitlab-ci-batched-background-migrations.getapiv4adminbatchedbackgroundmigrationsid
+        with:
+          database: rest.database
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/admin/batched-background-migrations/{id}/pause
+      name: api-v4-admin-batched-background-migrations-id-pause
+      description: REST surface for api-v4-admin-batched_background_migrations-id-pause.
+      operations:
+      - method: PUT
+        name: putapiv4adminbatchedbackgroundmigrationsidpause
+        description: Pause a batched background migration
+        call: gitlab-ci-batched-background-migrations.putapiv4adminbatchedbackgroundmigrationsidpause
+        with:
+          id: rest.id
+          putApiV4AdminBatchedBackgroundMigrationsIdPause: rest.putApiV4AdminBatchedBackgroundMigrationsIdPause
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/admin/batched-background-migrations/{id}/resume
+      name: api-v4-admin-batched-background-migrations-id-resume
+      description: REST surface for api-v4-admin-batched_background_migrations-id-resume.
+      operations:
+      - method: PUT
+        name: putapiv4adminbatchedbackgroundmigrationsidresume
+        description: Resume a batched background migration
+        call: gitlab-ci-batched-background-migrations.putapiv4adminbatchedbackgroundmigrationsidresume
+        with:
+          id: rest.id
+          putApiV4AdminBatchedBackgroundMigrationsIdResume: rest.putApiV4AdminBatchedBackgroundMigrationsIdResume
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-batched-background-migrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — batched_background_migrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-list-batched-background-migrations
+      description: Get the list of batched background migrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-batched-background-migrations.getapiv4adminbatchedbackgroundmigrations
+      with:
+        database: tools.database
+        job_class_name: tools.job_class_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-batched-background-migration
+      description: Retrieve a batched background migration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-batched-background-migrations.getapiv4adminbatchedbackgroundmigrationsid
+      with:
+        database: tools.database
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pause-batched-background-migration
+      description: Pause a batched background migration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-batched-background-migrations.putapiv4adminbatchedbackgroundmigrationsidpause
+      with:
+        id: tools.id
+        putApiV4AdminBatchedBackgroundMigrationsIdPause: tools.putApiV4AdminBatchedBackgroundMigrationsIdPause
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resume-batched-background-migration
+      description: Resume a batched background migration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-batched-background-migrations.putapiv4adminbatchedbackgroundmigrationsidresume
+      with:
+        id: tools.id
+        putApiV4AdminBatchedBackgroundMigrationsIdResume: tools.putApiV4AdminBatchedBackgroundMigrationsIdResume
+      outputParameters:
+      - type: object
+        mapping: $.

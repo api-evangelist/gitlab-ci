@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — pypi_packages
+  description: 'GitLab API — pypi_packages. 1 operations. Lead operation: Download a package file from a group. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - pypi_packages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-pypi-packages
+    baseUri: https://gitlab.com
+    description: GitLab API — pypi_packages business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-groups-id---packages-pypi-files-sha256-*file_identifier
+      path: /api/v4/groups/{id}/-/packages/pypi/files/{sha256}/*file_identifier
+      operations:
+      - name: getapiv4groupsidpackagespypifilessha256fileidentifier
+        method: GET
+        description: Download a package file from a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID or full path of the group.
+          required: true
+        - name: file_identifier
+          in: query
+          type: string
+          description: The PyPi package file identifier
+          required: true
+        - name: sha256
+          in: path
+          type: string
+          description: The PyPi package sha256 check sum
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-pypi-packages-rest
+    port: 8080
+    description: REST adapter for GitLab API — pypi_packages. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/groups/{id}//packages/pypi/files/{sha256}/file-identifier
+      name: api-v4-groups-id-packages-pypi-files-sha256-file-identifier
+      description: REST surface for api-v4-groups-id---packages-pypi-files-sha256-*file_identifier.
+      operations:
+      - method: GET
+        name: getapiv4groupsidpackagespypifilessha256fileidentifier
+        description: Download a package file from a group
+        call: gitlab-ci-pypi-packages.getapiv4groupsidpackagespypifilessha256fileidentifier
+        with:
+          id: rest.id
+          file_identifier: rest.file_identifier
+          sha256: rest.sha256
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-pypi-packages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — pypi_packages. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: download-package-file-group
+      description: Download a package file from a group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-pypi-packages.getapiv4groupsidpackagespypifilessha256fileidentifier
+      with:
+        id: tools.id
+        file_identifier: tools.file_identifier
+        sha256: tools.sha256
+      outputParameters:
+      - type: object
+        mapping: $.

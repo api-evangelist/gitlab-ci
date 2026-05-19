@@ -1,0 +1,793 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — releases
+  description: 'GitLab API — releases. 14 operations. Lead operation: List group releases. Self-contained Naftiko capability
+    covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - releases
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-releases
+    baseUri: https://gitlab.com
+    description: GitLab API — releases business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-groups-id-releases
+      path: /api/v4/groups/{id}/releases
+      operations:
+      - name: getapiv4groupsidreleases
+        method: GET
+        description: List group releases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the group owned by the authenticated user
+          required: true
+        - name: sort
+          in: query
+          type: string
+          description: The direction of the order. Either `desc` (default) for descending order or `asc` for ascending order
+        - name: simple
+          in: query
+          type: boolean
+          description: Return only limited fields for each release
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-releases
+      path: /api/v4/projects/{id}/releases
+      operations:
+      - name: getapiv4projectsidreleases
+        method: GET
+        description: List Releases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: order_by
+          in: query
+          type: string
+          description: The field to use as order. Either `released_at` (default) or `created_at`
+        - name: sort
+          in: query
+          type: string
+          description: The direction of the order. Either `desc` (default) for descending order or `asc` for ascending order
+        - name: include_html_description
+          in: query
+          type: boolean
+          description: If `true`, a response includes HTML rendered markdown of the release description
+        - name: updated_before
+          in: query
+          type: string
+          description: 'Return releases updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        - name: updated_after
+          in: query
+          type: string
+          description: 'Return releases updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+      - name: postapiv4projectsidreleases
+        method: POST
+        description: Create a release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdReleases
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-releases-permalink-latest(-)(*suffix_path)
+      path: /api/v4/projects/{id}/releases/permalink/latest(/)(*suffix_path)
+      operations:
+      - name: getapiv4projectsidreleasespermalinklatestsuffixpath
+        method: GET
+        description: Get the latest project release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: suffix_path
+          in: query
+          type: string
+          description: The path to be suffixed to the latest release
+          required: true
+    - name: api-v4-projects-id-releases-tag_name
+      path: /api/v4/projects/{id}/releases/{tag_name}
+      operations:
+      - name: getapiv4projectsidreleasestagname
+        method: GET
+        description: Get a release by a tag name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The Git tag the release is associated with
+          required: true
+        - name: include_html_description
+          in: query
+          type: boolean
+          description: If `true`, a response includes HTML rendered markdown of the release description
+      - name: putapiv4projectsidreleasestagname
+        method: PUT
+        description: Update a release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The Git tag the release is associated with
+          required: true
+        - name: putApiV4ProjectsIdReleasesTagName
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidreleasestagname
+        method: DELETE
+        description: Delete a release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The Git tag the release is associated with
+          required: true
+    - name: api-v4-projects-id-releases-tag_name-assets-links
+      path: /api/v4/projects/{id}/releases/{tag_name}/assets/links
+      operations:
+      - name: getapiv4projectsidreleasestagnameassetslinks
+        method: GET
+        description: List links of a release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The tag associated with the release
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidreleasestagnameassetslinks
+        method: POST
+        description: Create a release link
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The tag associated with the release
+          required: true
+        - name: postApiV4ProjectsIdReleasesTagNameAssetsLinks
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-releases-tag_name-assets-links-link_id
+      path: /api/v4/projects/{id}/releases/{tag_name}/assets/links/{link_id}
+      operations:
+      - name: getapiv4projectsidreleasestagnameassetslinkslinkid
+        method: GET
+        description: Get a release link
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The tag associated with the release
+          required: true
+        - name: link_id
+          in: path
+          type: integer
+          description: The ID of the link
+          required: true
+      - name: putapiv4projectsidreleasestagnameassetslinkslinkid
+        method: PUT
+        description: Update a release link
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The tag associated with the release
+          required: true
+        - name: link_id
+          in: path
+          type: integer
+          description: The ID of the link
+          required: true
+        - name: putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidreleasestagnameassetslinkslinkid
+        method: DELETE
+        description: Delete a release link
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The tag associated with the release
+          required: true
+        - name: link_id
+          in: path
+          type: integer
+          description: The ID of the link
+          required: true
+    - name: api-v4-projects-id-releases-tag_name-downloads-*direct_asset_path
+      path: /api/v4/projects/{id}/releases/{tag_name}/downloads/*direct_asset_path
+      operations:
+      - name: getapiv4projectsidreleasestagnamedownloadsdirectassetpath
+        method: GET
+        description: Download a project release asset file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: tag_name
+          in: path
+          type: string
+          description: The Git tag the release is associated with
+          required: true
+        - name: direct_asset_path
+          in: query
+          type: string
+          description: The path to the file to download, as specified when creating the release asset
+          required: true
+    - name: api-v4-projects-id-releases-tag_name-evidence
+      path: /api/v4/projects/{id}/releases/{tag_name}/evidence
+      operations:
+      - name: postapiv4projectsidreleasestagnameevidence
+        method: POST
+        description: Collect release evidence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tag_name
+          in: path
+          type: string
+          description: The Git tag the release is associated with
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-releases-rest
+    port: 8080
+    description: REST adapter for GitLab API — releases. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/groups/{id}/releases
+      name: api-v4-groups-id-releases
+      description: REST surface for api-v4-groups-id-releases.
+      operations:
+      - method: GET
+        name: getapiv4groupsidreleases
+        description: List group releases
+        call: gitlab-ci-releases.getapiv4groupsidreleases
+        with:
+          id: rest.id
+          sort: rest.sort
+          simple: rest.simple
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases
+      name: api-v4-projects-id-releases
+      description: REST surface for api-v4-projects-id-releases.
+      operations:
+      - method: GET
+        name: getapiv4projectsidreleases
+        description: List Releases
+        call: gitlab-ci-releases.getapiv4projectsidreleases
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          order_by: rest.order_by
+          sort: rest.sort
+          include_html_description: rest.include_html_description
+          updated_before: rest.updated_before
+          updated_after: rest.updated_after
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidreleases
+        description: Create a release
+        call: gitlab-ci-releases.postapiv4projectsidreleases
+        with:
+          id: rest.id
+          postApiV4ProjectsIdReleases: rest.postApiV4ProjectsIdReleases
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases/permalink/latest/suffix-path
+      name: api-v4-projects-id-releases-permalink-latest-suffix-path
+      description: REST surface for api-v4-projects-id-releases-permalink-latest(-)(*suffix_path).
+      operations:
+      - method: GET
+        name: getapiv4projectsidreleasespermalinklatestsuffixpath
+        description: Get the latest project release
+        call: gitlab-ci-releases.getapiv4projectsidreleasespermalinklatestsuffixpath
+        with:
+          id: rest.id
+          suffix_path: rest.suffix_path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases/{tag-name}
+      name: api-v4-projects-id-releases-tag-name
+      description: REST surface for api-v4-projects-id-releases-tag_name.
+      operations:
+      - method: GET
+        name: getapiv4projectsidreleasestagname
+        description: Get a release by a tag name
+        call: gitlab-ci-releases.getapiv4projectsidreleasestagname
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          include_html_description: rest.include_html_description
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidreleasestagname
+        description: Update a release
+        call: gitlab-ci-releases.putapiv4projectsidreleasestagname
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          putApiV4ProjectsIdReleasesTagName: rest.putApiV4ProjectsIdReleasesTagName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidreleasestagname
+        description: Delete a release
+        call: gitlab-ci-releases.deleteapiv4projectsidreleasestagname
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases/{tag-name}/assets/links
+      name: api-v4-projects-id-releases-tag-name-assets-links
+      description: REST surface for api-v4-projects-id-releases-tag_name-assets-links.
+      operations:
+      - method: GET
+        name: getapiv4projectsidreleasestagnameassetslinks
+        description: List links of a release
+        call: gitlab-ci-releases.getapiv4projectsidreleasestagnameassetslinks
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidreleasestagnameassetslinks
+        description: Create a release link
+        call: gitlab-ci-releases.postapiv4projectsidreleasestagnameassetslinks
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          postApiV4ProjectsIdReleasesTagNameAssetsLinks: rest.postApiV4ProjectsIdReleasesTagNameAssetsLinks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases/{tag-name}/assets/links/{link-id}
+      name: api-v4-projects-id-releases-tag-name-assets-links-link-id
+      description: REST surface for api-v4-projects-id-releases-tag_name-assets-links-link_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidreleasestagnameassetslinkslinkid
+        description: Get a release link
+        call: gitlab-ci-releases.getapiv4projectsidreleasestagnameassetslinkslinkid
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          link_id: rest.link_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidreleasestagnameassetslinkslinkid
+        description: Update a release link
+        call: gitlab-ci-releases.putapiv4projectsidreleasestagnameassetslinkslinkid
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          link_id: rest.link_id
+          putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId: rest.putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidreleasestagnameassetslinkslinkid
+        description: Delete a release link
+        call: gitlab-ci-releases.deleteapiv4projectsidreleasestagnameassetslinkslinkid
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          link_id: rest.link_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases/{tag-name}/downloads/direct-asset-path
+      name: api-v4-projects-id-releases-tag-name-downloads-direct-asset-path
+      description: REST surface for api-v4-projects-id-releases-tag_name-downloads-*direct_asset_path.
+      operations:
+      - method: GET
+        name: getapiv4projectsidreleasestagnamedownloadsdirectassetpath
+        description: Download a project release asset file
+        call: gitlab-ci-releases.getapiv4projectsidreleasestagnamedownloadsdirectassetpath
+        with:
+          id: rest.id
+          tag_name: rest.tag_name
+          direct_asset_path: rest.direct_asset_path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/releases/{tag-name}/evidence
+      name: api-v4-projects-id-releases-tag-name-evidence
+      description: REST surface for api-v4-projects-id-releases-tag_name-evidence.
+      operations:
+      - method: POST
+        name: postapiv4projectsidreleasestagnameevidence
+        description: Collect release evidence
+        call: gitlab-ci-releases.postapiv4projectsidreleasestagnameevidence
+        with:
+          tag_name: rest.tag_name
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-releases-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — releases. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-group-releases
+      description: List group releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4groupsidreleases
+      with:
+        id: tools.id
+        sort: tools.sort
+        simple: tools.simple
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-releases
+      description: List Releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4projectsidreleases
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        order_by: tools.order_by
+        sort: tools.sort
+        include_html_description: tools.include_html_description
+        updated_before: tools.updated_before
+        updated_after: tools.updated_after
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-release
+      description: Create a release
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-releases.postapiv4projectsidreleases
+      with:
+        id: tools.id
+        postApiV4ProjectsIdReleases: tools.postApiV4ProjectsIdReleases
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-latest-project-release
+      description: Get the latest project release
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4projectsidreleasespermalinklatestsuffixpath
+      with:
+        id: tools.id
+        suffix_path: tools.suffix_path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-release-tag-name
+      description: Get a release by a tag name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4projectsidreleasestagname
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        include_html_description: tools.include_html_description
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-release
+      description: Update a release
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.putapiv4projectsidreleasestagname
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        putApiV4ProjectsIdReleasesTagName: tools.putApiV4ProjectsIdReleasesTagName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-release
+      description: Delete a release
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-releases.deleteapiv4projectsidreleasestagname
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-links-release
+      description: List links of a release
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4projectsidreleasestagnameassetslinks
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-release-link
+      description: Create a release link
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-releases.postapiv4projectsidreleasestagnameassetslinks
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        postApiV4ProjectsIdReleasesTagNameAssetsLinks: tools.postApiV4ProjectsIdReleasesTagNameAssetsLinks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-release-link
+      description: Get a release link
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4projectsidreleasestagnameassetslinkslinkid
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        link_id: tools.link_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-release-link
+      description: Update a release link
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.putapiv4projectsidreleasestagnameassetslinkslinkid
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        link_id: tools.link_id
+        putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId: tools.putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-release-link
+      description: Delete a release link
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-releases.deleteapiv4projectsidreleasestagnameassetslinkslinkid
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        link_id: tools.link_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-project-release-asset-file
+      description: Download a project release asset file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-releases.getapiv4projectsidreleasestagnamedownloadsdirectassetpath
+      with:
+        id: tools.id
+        tag_name: tools.tag_name
+        direct_asset_path: tools.direct_asset_path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: collect-release-evidence
+      description: Collect release evidence
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-releases.postapiv4projectsidreleasestagnameevidence
+      with:
+        tag_name: tools.tag_name
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

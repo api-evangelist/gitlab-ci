@@ -1,0 +1,1516 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — deploy_resources
+  description: 'GitLab API — deploy_resources. 24 operations. Lead operation: List all deploy keys. Self-contained Naftiko
+    capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - deploy_resources
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-deploy-resources
+    baseUri: https://gitlab.com
+    description: GitLab API — deploy_resources business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-deploy_keys
+      path: /api/v4/deploy_keys
+      operations:
+      - name: getapiv4deploykeys
+        method: GET
+        description: List all deploy keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: public
+          in: query
+          type: boolean
+          description: Only return deploy keys that are public
+      - name: postapiv4deploykeys
+        method: POST
+        description: Create a deploy key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4DeployKeys
+          in: body
+          type: string
+          required: true
+    - name: api-v4-deploy_tokens
+      path: /api/v4/deploy_tokens
+      operations:
+      - name: getapiv4deploytokens
+        method: GET
+        description: List all deploy tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by active status
+    - name: api-v4-groups-id-deploy_tokens
+      path: /api/v4/groups/{id}/deploy_tokens
+      operations:
+      - name: getapiv4groupsiddeploytokens
+        method: GET
+        description: List group deploy tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID or URL-encoded path of the group owned by the authenticated user
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by active status
+      - name: postapiv4groupsiddeploytokens
+        method: POST
+        description: Create a group deploy token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID or URL-encoded path of the group owned by the authenticated user
+          required: true
+        - name: postApiV4GroupsIdDeployTokens
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-deploy_tokens-token_id
+      path: /api/v4/groups/{id}/deploy_tokens/{token_id}
+      operations:
+      - name: getapiv4groupsiddeploytokenstokenid
+        method: GET
+        description: Get a group deploy token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID or URL-encoded path of the group owned by the authenticated user
+          required: true
+        - name: token_id
+          in: path
+          type: integer
+          description: The ID of the deploy token
+          required: true
+      - name: deleteapiv4groupsiddeploytokenstokenid
+        method: DELETE
+        description: Delete a group deploy token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID or URL-encoded path of the group owned by the authenticated user
+          required: true
+        - name: token_id
+          in: path
+          type: integer
+          description: The ID of the deploy token
+          required: true
+    - name: api-v4-projects-id-deploy_keys
+      path: /api/v4/projects/{id}/deploy_keys
+      operations:
+      - name: getapiv4projectsiddeploykeys
+        method: GET
+        description: List deploy keys for project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsiddeploykeys
+        method: POST
+        description: Add deploy key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: postApiV4ProjectsIdDeployKeys
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-deploy_keys-key_id
+      path: /api/v4/projects/{id}/deploy_keys/{key_id}
+      operations:
+      - name: getapiv4projectsiddeploykeyskeyid
+        method: GET
+        description: Get a single deploy key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: key_id
+          in: path
+          type: integer
+          description: The ID of the deploy key
+          required: true
+      - name: putapiv4projectsiddeploykeyskeyid
+        method: PUT
+        description: Update deploy key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: key_id
+          in: path
+          type: integer
+          description: The ID of the deploy key
+          required: true
+        - name: putApiV4ProjectsIdDeployKeysKeyId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsiddeploykeyskeyid
+        method: DELETE
+        description: Delete deploy key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: key_id
+          in: path
+          type: integer
+          description: The ID of the deploy key
+          required: true
+    - name: api-v4-projects-id-deploy_keys-key_id-enable
+      path: /api/v4/projects/{id}/deploy_keys/{key_id}/enable
+      operations:
+      - name: postapiv4projectsiddeploykeyskeyidenable
+        method: POST
+        description: Enable a deploy key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: key_id
+          in: path
+          type: integer
+          description: The ID of the deploy key
+          required: true
+    - name: api-v4-projects-id-deploy_tokens
+      path: /api/v4/projects/{id}/deploy_tokens
+      operations:
+      - name: getapiv4projectsiddeploytokens
+        method: GET
+        description: List project deploy tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: active
+          in: query
+          type: boolean
+          description: Limit by active status
+      - name: postapiv4projectsiddeploytokens
+        method: POST
+        description: Create a project deploy token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: postApiV4ProjectsIdDeployTokens
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-deploy_tokens-token_id
+      path: /api/v4/projects/{id}/deploy_tokens/{token_id}
+      operations:
+      - name: getapiv4projectsiddeploytokenstokenid
+        method: GET
+        description: Get a project deploy token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: token_id
+          in: path
+          type: integer
+          description: The ID of the deploy token
+          required: true
+      - name: deleteapiv4projectsiddeploytokenstokenid
+        method: DELETE
+        description: Delete a project deploy token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: token_id
+          in: path
+          type: integer
+          description: The ID of the deploy token
+          required: true
+    - name: api-v4-projects-id-deployments
+      path: /api/v4/projects/{id}/deployments
+      operations:
+      - name: getapiv4projectsiddeployments
+        method: GET
+        description: List project deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: order_by
+          in: query
+          type: string
+          description: Return deployments ordered by either one of `id`, `iid`, `created_at`, `updated_at` or `ref` fields.
+            Default is `id`
+        - name: sort
+          in: query
+          type: string
+          description: Return deployments sorted in `asc` or `desc` order. Default is `asc`
+        - name: updated_after
+          in: query
+          type: string
+          description: Return deployments updated after the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
+        - name: updated_before
+          in: query
+          type: string
+          description: Return deployments updated before the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
+        - name: finished_after
+          in: query
+          type: string
+          description: Return deployments finished after the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
+        - name: finished_before
+          in: query
+          type: string
+          description: Return deployments finished before the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
+        - name: environment
+          in: query
+          type: string
+          description: The name of the environment to filter deployments by
+        - name: status
+          in: query
+          type: string
+          description: The status to filter deployments by. One of `created`, `running`, `success`, `failed`, `canceled`,
+            or `blocked`
+      - name: postapiv4projectsiddeployments
+        method: POST
+        description: Create a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: postApiV4ProjectsIdDeployments
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-deployments-deployment_id
+      path: /api/v4/projects/{id}/deployments/{deployment_id}
+      operations:
+      - name: getapiv4projectsiddeploymentsdeploymentid
+        method: GET
+        description: Get a specific deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: deployment_id
+          in: path
+          type: integer
+          description: The ID of the deployment
+          required: true
+      - name: putapiv4projectsiddeploymentsdeploymentid
+        method: PUT
+        description: Update a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: deployment_id
+          in: path
+          type: integer
+          required: true
+        - name: putApiV4ProjectsIdDeploymentsDeploymentId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsiddeploymentsdeploymentid
+        method: DELETE
+        description: Delete a specific deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: deployment_id
+          in: path
+          type: integer
+          description: The ID of the deployment
+          required: true
+    - name: api-v4-projects-id-deployments-deployment_id-approval
+      path: /api/v4/projects/{id}/deployments/{deployment_id}/approval
+      operations:
+      - name: postapiv4projectsiddeploymentsdeploymentidapproval
+        method: POST
+        description: Approve or reject a blocked deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: deployment_id
+          in: path
+          type: integer
+          description: The ID of the deployment
+          required: true
+        - name: postApiV4ProjectsIdDeploymentsDeploymentIdApproval
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-deployments-deployment_id-merge_requests
+      path: /api/v4/projects/{id}/deployments/{deployment_id}/merge_requests
+      operations:
+      - name: getapiv4projectsiddeploymentsdeploymentidmergerequests
+        method: GET
+        description: List of merge requests associated with a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the authenticated user
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: deployment_id
+          in: path
+          type: integer
+          description: The ID of the deployment
+          required: true
+        - name: author_id
+          in: query
+          type: integer
+          description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine
+            with `scope=all` or `scope=assigned_to_me`.
+        - name: author_username
+          in: query
+          type: string
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: assignee_id
+          in: query
+          type: integer
+          description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any`
+            returns merge requests with an assignee.
+        - name: assignee_username
+          in: query
+          type: array
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: reviewer_username
+          in: query
+          type: string
+          description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns
+            merge requests with no reviewers. `Any` returns merge request
+        - name: labels
+          in: query
+          type: array
+          description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with
+            no labels. `Any` lists all merge requests with at least o
+        - name: milestone
+          in: query
+          type: string
+          description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any`
+            returns merge requests that have an assigned milestone.
+        - name: my_reaction_emoji
+          in: query
+          type: string
+          description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues
+            not given a reaction. `Any` returns issues given at least o
+        - name: reviewer_id
+          in: query
+          type: integer
+          description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge
+            requests with no reviewers. `Any` returns merge requests
+        - name: state
+          in: query
+          type: string
+          description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
+        - name: order_by
+          in: query
+          type: string
+          description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`,
+            `title`, `updated_at` or `merged_at` fields. Introd
+        - name: sort
+          in: query
+          type: string
+          description: Returns merge requests sorted in `asc` or `desc` order.
+        - name: with_labels_details
+          in: query
+          type: boolean
+          description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`,
+            `:description_html`, `:text_color`'
+        - name: with_merge_status_recheck
+          in: query
+          type: boolean
+          description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated
+            asynchronously. Introduced in GitLab 13.0.
+        - name: created_after
+          in: query
+          type: string
+          description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
+        - name: created_before
+          in: query
+          type: string
+          description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
+        - name: updated_after
+          in: query
+          type: string
+          description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
+        - name: updated_before
+          in: query
+          type: string
+          description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
+        - name: view
+          in: query
+          type: string
+          description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
+        - name: scope
+          in: query
+          type: string
+          description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or
+            `all`'
+        - name: source_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given source branch
+        - name: source_project_id
+          in: query
+          type: integer
+          description: Returns merge requests with the given source project id
+        - name: target_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given target branch
+        - name: search
+          in: query
+          type: string
+          description: Search merge requests against their `title` and `description`.
+        - name: in
+          in: query
+          type: string
+          description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
+        - name: wip
+          in: query
+          type: string
+          description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return
+            only draft merge requests, `no` to return non-draft merge req
+        - name: draft
+          in: query
+          type: boolean
+          description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false`
+            to return non-draft merge requests.
+        - name: not[author_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`.
+            Combine with `scope=all` or `scope=assigned_to_me`'
+        - name: not[author_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[assignee_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge
+            requests. `Any` returns merge requests with an assignee.'
+        - name: not[assignee_username]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[reviewer_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None`
+            returns merge requests with no reviewers. `Any` returns m'
+        - name: not[labels]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge
+            requests with no labels. `Any` lists all merge requests wit'
+        - name: not[milestone]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no
+            milestone. `Any` returns merge requests that have an assigned'
+        - name: not[my_reaction_emoji]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None`
+            returns issues not given a reaction. `Any` returns issues give'
+        - name: not[reviewer_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None`
+            returns merge requests with no reviewers. `Any` returns me'
+        - name: deployed_before
+          in: query
+          type: string
+          description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
+        - name: deployed_after
+          in: query
+          type: string
+          description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
+        - name: environment
+          in: query
+          type: string
+          description: Returns merge requests deployed to the given environment
+        - name: approved
+          in: query
+          type: string
+          description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no`
+            returns only non-approved merge requests.
+        - name: merge_user_id
+          in: query
+          type: integer
+          description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive
+            with `merge_user_username`.
+        - name: merge_user_username
+          in: query
+          type: string
+          description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive
+            with `merge_user_id`.
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-deploy-resources-rest
+    port: 8080
+    description: REST adapter for GitLab API — deploy_resources. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/deploy-keys
+      name: api-v4-deploy-keys
+      description: REST surface for api-v4-deploy_keys.
+      operations:
+      - method: GET
+        name: getapiv4deploykeys
+        description: List all deploy keys
+        call: gitlab-ci-deploy-resources.getapiv4deploykeys
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          public: rest.public
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4deploykeys
+        description: Create a deploy key
+        call: gitlab-ci-deploy-resources.postapiv4deploykeys
+        with:
+          postApiV4DeployKeys: rest.postApiV4DeployKeys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/deploy-tokens
+      name: api-v4-deploy-tokens
+      description: REST surface for api-v4-deploy_tokens.
+      operations:
+      - method: GET
+        name: getapiv4deploytokens
+        description: List all deploy tokens
+        call: gitlab-ci-deploy-resources.getapiv4deploytokens
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          active: rest.active
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/deploy-tokens
+      name: api-v4-groups-id-deploy-tokens
+      description: REST surface for api-v4-groups-id-deploy_tokens.
+      operations:
+      - method: GET
+        name: getapiv4groupsiddeploytokens
+        description: List group deploy tokens
+        call: gitlab-ci-deploy-resources.getapiv4groupsiddeploytokens
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          active: rest.active
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4groupsiddeploytokens
+        description: Create a group deploy token
+        call: gitlab-ci-deploy-resources.postapiv4groupsiddeploytokens
+        with:
+          id: rest.id
+          postApiV4GroupsIdDeployTokens: rest.postApiV4GroupsIdDeployTokens
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/deploy-tokens/{token-id}
+      name: api-v4-groups-id-deploy-tokens-token-id
+      description: REST surface for api-v4-groups-id-deploy_tokens-token_id.
+      operations:
+      - method: GET
+        name: getapiv4groupsiddeploytokenstokenid
+        description: Get a group deploy token
+        call: gitlab-ci-deploy-resources.getapiv4groupsiddeploytokenstokenid
+        with:
+          id: rest.id
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4groupsiddeploytokenstokenid
+        description: Delete a group deploy token
+        call: gitlab-ci-deploy-resources.deleteapiv4groupsiddeploytokenstokenid
+        with:
+          id: rest.id
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deploy-keys
+      name: api-v4-projects-id-deploy-keys
+      description: REST surface for api-v4-projects-id-deploy_keys.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeploykeys
+        description: List deploy keys for project
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeploykeys
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsiddeploykeys
+        description: Add deploy key
+        call: gitlab-ci-deploy-resources.postapiv4projectsiddeploykeys
+        with:
+          id: rest.id
+          postApiV4ProjectsIdDeployKeys: rest.postApiV4ProjectsIdDeployKeys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deploy-keys/{key-id}
+      name: api-v4-projects-id-deploy-keys-key-id
+      description: REST surface for api-v4-projects-id-deploy_keys-key_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeploykeyskeyid
+        description: Get a single deploy key
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeploykeyskeyid
+        with:
+          id: rest.id
+          key_id: rest.key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsiddeploykeyskeyid
+        description: Update deploy key
+        call: gitlab-ci-deploy-resources.putapiv4projectsiddeploykeyskeyid
+        with:
+          id: rest.id
+          key_id: rest.key_id
+          putApiV4ProjectsIdDeployKeysKeyId: rest.putApiV4ProjectsIdDeployKeysKeyId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsiddeploykeyskeyid
+        description: Delete deploy key
+        call: gitlab-ci-deploy-resources.deleteapiv4projectsiddeploykeyskeyid
+        with:
+          id: rest.id
+          key_id: rest.key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deploy-keys/{key-id}/enable
+      name: api-v4-projects-id-deploy-keys-key-id-enable
+      description: REST surface for api-v4-projects-id-deploy_keys-key_id-enable.
+      operations:
+      - method: POST
+        name: postapiv4projectsiddeploykeyskeyidenable
+        description: Enable a deploy key
+        call: gitlab-ci-deploy-resources.postapiv4projectsiddeploykeyskeyidenable
+        with:
+          id: rest.id
+          key_id: rest.key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deploy-tokens
+      name: api-v4-projects-id-deploy-tokens
+      description: REST surface for api-v4-projects-id-deploy_tokens.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeploytokens
+        description: List project deploy tokens
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeploytokens
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          active: rest.active
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsiddeploytokens
+        description: Create a project deploy token
+        call: gitlab-ci-deploy-resources.postapiv4projectsiddeploytokens
+        with:
+          id: rest.id
+          postApiV4ProjectsIdDeployTokens: rest.postApiV4ProjectsIdDeployTokens
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deploy-tokens/{token-id}
+      name: api-v4-projects-id-deploy-tokens-token-id
+      description: REST surface for api-v4-projects-id-deploy_tokens-token_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeploytokenstokenid
+        description: Get a project deploy token
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeploytokenstokenid
+        with:
+          id: rest.id
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsiddeploytokenstokenid
+        description: Delete a project deploy token
+        call: gitlab-ci-deploy-resources.deleteapiv4projectsiddeploytokenstokenid
+        with:
+          id: rest.id
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deployments
+      name: api-v4-projects-id-deployments
+      description: REST surface for api-v4-projects-id-deployments.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeployments
+        description: List project deployments
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeployments
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          order_by: rest.order_by
+          sort: rest.sort
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          finished_after: rest.finished_after
+          finished_before: rest.finished_before
+          environment: rest.environment
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsiddeployments
+        description: Create a deployment
+        call: gitlab-ci-deploy-resources.postapiv4projectsiddeployments
+        with:
+          id: rest.id
+          postApiV4ProjectsIdDeployments: rest.postApiV4ProjectsIdDeployments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deployments/{deployment-id}
+      name: api-v4-projects-id-deployments-deployment-id
+      description: REST surface for api-v4-projects-id-deployments-deployment_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeploymentsdeploymentid
+        description: Get a specific deployment
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeploymentsdeploymentid
+        with:
+          id: rest.id
+          deployment_id: rest.deployment_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsiddeploymentsdeploymentid
+        description: Update a deployment
+        call: gitlab-ci-deploy-resources.putapiv4projectsiddeploymentsdeploymentid
+        with:
+          id: rest.id
+          deployment_id: rest.deployment_id
+          putApiV4ProjectsIdDeploymentsDeploymentId: rest.putApiV4ProjectsIdDeploymentsDeploymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsiddeploymentsdeploymentid
+        description: Delete a specific deployment
+        call: gitlab-ci-deploy-resources.deleteapiv4projectsiddeploymentsdeploymentid
+        with:
+          id: rest.id
+          deployment_id: rest.deployment_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deployments/{deployment-id}/approval
+      name: api-v4-projects-id-deployments-deployment-id-approval
+      description: REST surface for api-v4-projects-id-deployments-deployment_id-approval.
+      operations:
+      - method: POST
+        name: postapiv4projectsiddeploymentsdeploymentidapproval
+        description: Approve or reject a blocked deployment
+        call: gitlab-ci-deploy-resources.postapiv4projectsiddeploymentsdeploymentidapproval
+        with:
+          id: rest.id
+          deployment_id: rest.deployment_id
+          postApiV4ProjectsIdDeploymentsDeploymentIdApproval: rest.postApiV4ProjectsIdDeploymentsDeploymentIdApproval
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/deployments/{deployment-id}/merge-requests
+      name: api-v4-projects-id-deployments-deployment-id-merge-requests
+      description: REST surface for api-v4-projects-id-deployments-deployment_id-merge_requests.
+      operations:
+      - method: GET
+        name: getapiv4projectsiddeploymentsdeploymentidmergerequests
+        description: List of merge requests associated with a deployment
+        call: gitlab-ci-deploy-resources.getapiv4projectsiddeploymentsdeploymentidmergerequests
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          deployment_id: rest.deployment_id
+          author_id: rest.author_id
+          author_username: rest.author_username
+          assignee_id: rest.assignee_id
+          assignee_username: rest.assignee_username
+          reviewer_username: rest.reviewer_username
+          labels: rest.labels
+          milestone: rest.milestone
+          my_reaction_emoji: rest.my_reaction_emoji
+          reviewer_id: rest.reviewer_id
+          state: rest.state
+          order_by: rest.order_by
+          sort: rest.sort
+          with_labels_details: rest.with_labels_details
+          with_merge_status_recheck: rest.with_merge_status_recheck
+          created_after: rest.created_after
+          created_before: rest.created_before
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          view: rest.view
+          scope: rest.scope
+          source_branch: rest.source_branch
+          source_project_id: rest.source_project_id
+          target_branch: rest.target_branch
+          search: rest.search
+          in: rest.in
+          wip: rest.wip
+          draft: rest.draft
+          not[author_id]: rest.not[author_id]
+          not[author_username]: rest.not[author_username]
+          not[assignee_id]: rest.not[assignee_id]
+          not[assignee_username]: rest.not[assignee_username]
+          not[reviewer_username]: rest.not[reviewer_username]
+          not[labels]: rest.not[labels]
+          not[milestone]: rest.not[milestone]
+          not[my_reaction_emoji]: rest.not[my_reaction_emoji]
+          not[reviewer_id]: rest.not[reviewer_id]
+          deployed_before: rest.deployed_before
+          deployed_after: rest.deployed_after
+          environment: rest.environment
+          approved: rest.approved
+          merge_user_id: rest.merge_user_id
+          merge_user_username: rest.merge_user_username
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-deploy-resources-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — deploy_resources. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-deploy-keys
+      description: List all deploy keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4deploykeys
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        public: tools.public
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-deploy-key
+      description: Create a deploy key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4deploykeys
+      with:
+        postApiV4DeployKeys: tools.postApiV4DeployKeys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-deploy-tokens
+      description: List all deploy tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4deploytokens
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        active: tools.active
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-group-deploy-tokens
+      description: List group deploy tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4groupsiddeploytokens
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        active: tools.active
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-group-deploy-token
+      description: Create a group deploy token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4groupsiddeploytokens
+      with:
+        id: tools.id
+        postApiV4GroupsIdDeployTokens: tools.postApiV4GroupsIdDeployTokens
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group-deploy-token
+      description: Get a group deploy token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4groupsiddeploytokenstokenid
+      with:
+        id: tools.id
+        token_id: tools.token_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group-deploy-token
+      description: Delete a group deploy token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-deploy-resources.deleteapiv4groupsiddeploytokenstokenid
+      with:
+        id: tools.id
+        token_id: tools.token_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-deploy-keys-project
+      description: List deploy keys for project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeploykeys
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-deploy-key
+      description: Add deploy key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4projectsiddeploykeys
+      with:
+        id: tools.id
+        postApiV4ProjectsIdDeployKeys: tools.postApiV4ProjectsIdDeployKeys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-deploy-key
+      description: Get a single deploy key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeploykeyskeyid
+      with:
+        id: tools.id
+        key_id: tools.key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-deploy-key
+      description: Update deploy key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.putapiv4projectsiddeploykeyskeyid
+      with:
+        id: tools.id
+        key_id: tools.key_id
+        putApiV4ProjectsIdDeployKeysKeyId: tools.putApiV4ProjectsIdDeployKeysKeyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-deploy-key
+      description: Delete deploy key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-deploy-resources.deleteapiv4projectsiddeploykeyskeyid
+      with:
+        id: tools.id
+        key_id: tools.key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-deploy-key
+      description: Enable a deploy key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4projectsiddeploykeyskeyidenable
+      with:
+        id: tools.id
+        key_id: tools.key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-project-deploy-tokens
+      description: List project deploy tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeploytokens
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        active: tools.active
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-project-deploy-token
+      description: Create a project deploy token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4projectsiddeploytokens
+      with:
+        id: tools.id
+        postApiV4ProjectsIdDeployTokens: tools.postApiV4ProjectsIdDeployTokens
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-project-deploy-token
+      description: Get a project deploy token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeploytokenstokenid
+      with:
+        id: tools.id
+        token_id: tools.token_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-project-deploy-token
+      description: Delete a project deploy token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-deploy-resources.deleteapiv4projectsiddeploytokenstokenid
+      with:
+        id: tools.id
+        token_id: tools.token_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-project-deployments
+      description: List project deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeployments
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        order_by: tools.order_by
+        sort: tools.sort
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        finished_after: tools.finished_after
+        finished_before: tools.finished_before
+        environment: tools.environment
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-deployment
+      description: Create a deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4projectsiddeployments
+      with:
+        id: tools.id
+        postApiV4ProjectsIdDeployments: tools.postApiV4ProjectsIdDeployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-deployment
+      description: Get a specific deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeploymentsdeploymentid
+      with:
+        id: tools.id
+        deployment_id: tools.deployment_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-deployment
+      description: Update a deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.putapiv4projectsiddeploymentsdeploymentid
+      with:
+        id: tools.id
+        deployment_id: tools.deployment_id
+        putApiV4ProjectsIdDeploymentsDeploymentId: tools.putApiV4ProjectsIdDeploymentsDeploymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-specific-deployment
+      description: Delete a specific deployment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-deploy-resources.deleteapiv4projectsiddeploymentsdeploymentid
+      with:
+        id: tools.id
+        deployment_id: tools.deployment_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: approve-reject-blocked-deployment
+      description: Approve or reject a blocked deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-deploy-resources.postapiv4projectsiddeploymentsdeploymentidapproval
+      with:
+        id: tools.id
+        deployment_id: tools.deployment_id
+        postApiV4ProjectsIdDeploymentsDeploymentIdApproval: tools.postApiV4ProjectsIdDeploymentsDeploymentIdApproval
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-merge-requests-associated-deployment
+      description: List of merge requests associated with a deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-deploy-resources.getapiv4projectsiddeploymentsdeploymentidmergerequests
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        deployment_id: tools.deployment_id
+        author_id: tools.author_id
+        author_username: tools.author_username
+        assignee_id: tools.assignee_id
+        assignee_username: tools.assignee_username
+        reviewer_username: tools.reviewer_username
+        labels: tools.labels
+        milestone: tools.milestone
+        my_reaction_emoji: tools.my_reaction_emoji
+        reviewer_id: tools.reviewer_id
+        state: tools.state
+        order_by: tools.order_by
+        sort: tools.sort
+        with_labels_details: tools.with_labels_details
+        with_merge_status_recheck: tools.with_merge_status_recheck
+        created_after: tools.created_after
+        created_before: tools.created_before
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        view: tools.view
+        scope: tools.scope
+        source_branch: tools.source_branch
+        source_project_id: tools.source_project_id
+        target_branch: tools.target_branch
+        search: tools.search
+        in: tools.in
+        wip: tools.wip
+        draft: tools.draft
+        not[author_id]: tools.not[author_id]
+        not[author_username]: tools.not[author_username]
+        not[assignee_id]: tools.not[assignee_id]
+        not[assignee_username]: tools.not[assignee_username]
+        not[reviewer_username]: tools.not[reviewer_username]
+        not[labels]: tools.not[labels]
+        not[milestone]: tools.not[milestone]
+        not[my_reaction_emoji]: tools.not[my_reaction_emoji]
+        not[reviewer_id]: tools.not[reviewer_id]
+        deployed_before: tools.deployed_before
+        deployed_after: tools.deployed_after
+        environment: tools.environment
+        approved: tools.approved
+        merge_user_id: tools.merge_user_id
+        merge_user_username: tools.merge_user_username
+      outputParameters:
+      - type: object
+        mapping: $.

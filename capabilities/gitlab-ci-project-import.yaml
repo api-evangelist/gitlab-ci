@@ -1,0 +1,2714 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — project_import
+  description: 'GitLab API — project_import. 19 operations. Lead operation: Import a BitBucket Cloud repository. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - project_import
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-project-import
+    baseUri: https://gitlab.com
+    description: GitLab API — project_import business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-import-bitbucket
+      path: /api/v4/import/bitbucket
+      operations:
+      - name: postapiv4importbitbucket
+        method: POST
+        description: Import a BitBucket Cloud repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4ImportBitbucket
+          in: body
+          type: string
+          required: true
+    - name: api-v4-import-bitbucket_server
+      path: /api/v4/import/bitbucket_server
+      operations:
+      - name: postapiv4importbitbucketserver
+        method: POST
+        description: Import a BitBucket Server repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4ImportBitbucketServer
+          in: body
+          type: string
+          required: true
+    - name: api-v4-import-github
+      path: /api/v4/import/github
+      operations:
+      - name: postapiv4importgithub
+        method: POST
+        description: Import a GitHub project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4ImportGithub
+          in: body
+          type: string
+          required: true
+    - name: api-v4-import-github-cancel
+      path: /api/v4/import/github/cancel
+      operations:
+      - name: postapiv4importgithubcancel
+        method: POST
+        description: Cancel GitHub project import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4ImportGithubCancel
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-import
+      path: /api/v4/projects/import
+      operations:
+      - name: postapiv4projectsimport
+        method: POST
+        description: Create a new project import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: formData
+          type: string
+          description: The new project path and name
+          required: true
+        - name: file
+          in: formData
+          type: file
+          description: The project export file to be imported
+          required: true
+        - name: name
+          in: formData
+          type: string
+          description: The name of the project to be imported. Defaults to the path of the project if not provided.
+        - name: namespace
+          in: formData
+          type: string
+          description: (deprecated) The ID or path of the namespace to import the project to. Defaults to the current user's
+            namespace.
+        - name: namespace_id
+          in: formData
+          type: integer
+          description: The ID of the namespace that the project will be imported into. Defaults to the current user's namespace.
+        - name: namespace_path
+          in: formData
+          type: string
+          description: The path of the namespace that the project will be imported into. Defaults to the current user's namespace.
+        - name: overwrite
+          in: formData
+          type: boolean
+          description: If there is a project in the same namespace and with the same name overwrite it
+        - name: override_params[description]
+          in: formData
+          type: string
+          description: The description of the project
+        - name: override_params[build_git_strategy]
+          in: formData
+          type: string
+          description: The Git strategy. Defaults to `fetch`
+        - name: override_params[build_timeout]
+          in: formData
+          type: integer
+          description: Build timeout
+        - name: override_params[auto_cancel_pending_pipelines]
+          in: formData
+          type: string
+          description: Auto-cancel pending pipelines
+        - name: override_params[ci_config_path]
+          in: formData
+          type: string
+          description: The path to CI config file. Defaults to `.gitlab-ci.yml`
+        - name: override_params[service_desk_enabled]
+          in: formData
+          type: boolean
+          description: Disable or enable the service desk
+        - name: override_params[issues_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if the issue tracker is enabled
+        - name: override_params[merge_requests_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if merge requests are enabled
+        - name: override_params[wiki_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if the wiki is enabled
+        - name: override_params[jobs_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if jobs are enabled
+        - name: override_params[snippets_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if snippets are enabled
+        - name: override_params[issues_access_level]
+          in: formData
+          type: string
+          description: Issues access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[repository_access_level]
+          in: formData
+          type: string
+          description: Repository access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[merge_requests_access_level]
+          in: formData
+          type: string
+          description: Merge requests access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[forking_access_level]
+          in: formData
+          type: string
+          description: Forks access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[wiki_access_level]
+          in: formData
+          type: string
+          description: Wiki access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[builds_access_level]
+          in: formData
+          type: string
+          description: Builds access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[snippets_access_level]
+          in: formData
+          type: string
+          description: Snippets access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[package_registry_access_level]
+          in: formData
+          type: string
+          description: Controls visibility of the package registry. One of `disabled`, `private`, `enabled` or `public`. `private`
+            will make the package registry accessible only to pr
+        - name: override_params[pages_access_level]
+          in: formData
+          type: string
+          description: Pages access level. One of `disabled`, `private`, `enabled` or `public`
+        - name: override_params[analytics_access_level]
+          in: formData
+          type: string
+          description: Analytics access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[container_registry_access_level]
+          in: formData
+          type: string
+          description: 'Controls visibility of the container registry. One of `disabled`, `private` or `enabled`. `private`
+            will make the container registry accessible only to project '
+        - name: override_params[security_and_compliance_access_level]
+          in: formData
+          type: string
+          description: Security and compliance access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[releases_access_level]
+          in: formData
+          type: string
+          description: Releases access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[environments_access_level]
+          in: formData
+          type: string
+          description: Environments access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[feature_flags_access_level]
+          in: formData
+          type: string
+          description: Feature flags access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[infrastructure_access_level]
+          in: formData
+          type: string
+          description: Infrastructure access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[monitor_access_level]
+          in: formData
+          type: string
+          description: Monitor access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[model_experiments_access_level]
+          in: formData
+          type: string
+          description: Model experiments access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[model_registry_access_level]
+          in: formData
+          type: string
+          description: Model registry access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[emails_disabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use emails_enabled instead.'
+        - name: override_params[emails_enabled]
+          in: formData
+          type: boolean
+          description: Enable email notifications
+        - name: override_params[show_default_award_emojis]
+          in: formData
+          type: boolean
+          description: Show default award emojis
+        - name: override_params[show_diff_preview_in_email]
+          in: formData
+          type: boolean
+          description: Include the code diff preview in merge request notification emails
+        - name: override_params[warn_about_potentially_unwanted_characters]
+          in: formData
+          type: boolean
+          description: Warn about potentially unwanted characters
+        - name: override_params[enforce_auth_checks_on_uploads]
+          in: formData
+          type: boolean
+          description: Enforce auth check on uploads
+        - name: override_params[shared_runners_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if shared runners are enabled for that project
+        - name: override_params[group_runners_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if group runners are enabled for that project
+        - name: override_params[resource_group_default_process_mode]
+          in: formData
+          type: string
+          description: The process mode of the resource group
+        - name: override_params[resolve_outdated_diff_discussions]
+          in: formData
+          type: boolean
+          description: Automatically resolve merge request diff threads on lines changed with a push
+        - name: override_params[remove_source_branch_after_merge]
+          in: formData
+          type: boolean
+          description: Remove the source branch by default after merge
+        - name: override_params[packages_enabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use :package_registry_access_level instead. Enable project packages feature'
+        - name: override_params[container_registry_enabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use :container_registry_access_level instead. Flag indication if the container registry
+            is enabled for that project'
+        - name: override_params[container_expiration_policy_attributes][cadence]
+          in: formData
+          type: string
+          description: Container expiration policy cadence for recurring job
+        - name: override_params[container_expiration_policy_attributes][keep_n]
+          in: formData
+          type: integer
+          description: Container expiration policy number of images to keep
+        - name: override_params[container_expiration_policy_attributes][older_than]
+          in: formData
+          type: string
+          description: Container expiration policy remove images older than value
+        - name: override_params[container_expiration_policy_attributes][name_regex]
+          in: formData
+          type: string
+          description: Container expiration policy regex for image removal
+        - name: override_params[container_expiration_policy_attributes][name_regex_keep]
+          in: formData
+          type: string
+          description: Container expiration policy regex for image retention
+        - name: override_params[container_expiration_policy_attributes][enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if container expiration policy is enabled
+        - name: override_params[lfs_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if Git LFS is enabled for that project
+        - name: override_params[visibility]
+          in: formData
+          type: string
+          description: The visibility of the project.
+        - name: override_params[public_builds]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use public_jobs instead.'
+        - name: override_params[public_jobs]
+          in: formData
+          type: boolean
+          description: Perform public builds
+        - name: override_params[request_access_enabled]
+          in: formData
+          type: boolean
+          description: Allow users to request member access
+        - name: override_params[only_allow_merge_if_pipeline_succeeds]
+          in: formData
+          type: boolean
+          description: Only allow to merge if builds succeed
+        - name: override_params[allow_merge_on_skipped_pipeline]
+          in: formData
+          type: boolean
+          description: Allow to merge if pipeline is skipped
+        - name: override_params[only_allow_merge_if_all_discussions_are_resolved]
+          in: formData
+          type: boolean
+          description: Only allow to merge if all threads are resolved
+        - name: override_params[tag_list]
+          in: formData
+          type: array
+          description: 'Deprecated: Use :topics instead'
+        - name: override_params[topics]
+          in: formData
+          type: array
+          description: The list of topics for a project
+        - name: override_params[avatar]
+          in: formData
+          type: file
+          description: Avatar image for project
+        - name: override_params[printing_merge_request_link_enabled]
+          in: formData
+          type: boolean
+          description: Show link to create/view merge request when pushing from the command line
+        - name: override_params[merge_method]
+          in: formData
+          type: string
+          description: The merge method used when merging merge requests
+        - name: override_params[suggestion_commit_message]
+          in: formData
+          type: string
+          description: The commit message used to apply merge request suggestions
+        - name: override_params[merge_commit_template]
+          in: formData
+          type: string
+          description: Template used to create merge commit message
+        - name: override_params[squash_commit_template]
+          in: formData
+          type: string
+          description: Template used to create squash commit message
+        - name: override_params[issue_branch_template]
+          in: formData
+          type: string
+          description: Template used to create a branch from an issue
+        - name: override_params[auto_devops_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if Auto DevOps is enabled
+        - name: override_params[auto_devops_deploy_strategy]
+          in: formData
+          type: string
+          description: Auto Deploy strategy
+        - name: override_params[autoclose_referenced_issues]
+          in: formData
+          type: boolean
+          description: Flag indication if referenced issues auto-closing is enabled
+        - name: override_params[repository_storage]
+          in: formData
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: override_params[squash_option]
+          in: formData
+          type: string
+          description: Squash default for project. One of `never`, `always`, `default_on`, or `default_off`.
+        - name: override_params[mr_default_target_self]
+          in: formData
+          type: boolean
+          description: Merge requests of this forked project targets itself by default
+        - name: override_params[mr_default_title_template]
+          in: formData
+          type: string
+          description: Template used to generate the default merge request title. Maximum 100 characters.
+        - name: override_params[only_allow_merge_if_all_status_checks_passed]
+          in: formData
+          type: boolean
+          description: Blocks merge requests from merging unless all status checks have passed
+        - name: override_params[approvals_before_merge]
+          in: formData
+          type: integer
+          description: How many approvers should approve merge request by default
+        - name: override_params[mirror]
+          in: formData
+          type: boolean
+          description: '[Deprecated] Enables pull mirroring in a project'
+        - name: override_params[mirror_trigger_builds]
+          in: formData
+          type: boolean
+          description: '[Deprecated] Pull mirroring triggers builds'
+        - name: override_params[external_authorization_classification_label]
+          in: formData
+          type: string
+          description: The classification label for the project
+        - name: override_params[requirements_access_level]
+          in: formData
+          type: string
+          description: Requirements feature access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[prevent_merge_without_jira_issue]
+          in: formData
+          type: boolean
+          description: Require an associated issue from Jira
+        - name: override_params[auto_duo_code_review_enabled]
+          in: formData
+          type: boolean
+          description: Enable automatic reviews by GitLab Duo on merge requests
+        - name: override_params[duo_remote_flows_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo remote flows for this project
+        - name: override_params[duo_sast_fp_detection_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo SAST false positive detection for this project
+        - name: override_params[duo_secret_detection_fp_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo Secret Detection false positive detection for this project
+        - name: override_params[duo_sast_vr_workflow_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo SAST vulnerability resolution workflow for this project
+        - name: override_params[spp_repository_pipeline_access]
+          in: formData
+          type: boolean
+          description: Grant read-only access to security policy configurations for enforcement in linked CI/CD projects
+        - name: override_params[merge_request_title_regex]
+          in: formData
+          type: string
+          description: The regex the Merge Request must adhere to
+        - name: override_params[merge_request_title_regex_description]
+          in: formData
+          type: string
+          description: The description for the regex the Merge Request must adhere to
+        - name: file.path
+          in: formData
+          type: string
+          description: Path to locally stored body (generated by Workhorse)
+        - name: file.name
+          in: formData
+          type: string
+          description: Real filename as send in Content-Disposition (generated by Workhorse)
+        - name: file.type
+          in: formData
+          type: string
+          description: Real content type as send in Content-Type (generated by Workhorse)
+        - name: file.size
+          in: formData
+          type: integer
+          description: Real size of file (generated by Workhorse)
+        - name: file.md5
+          in: formData
+          type: string
+          description: MD5 checksum of the file (generated by Workhorse)
+        - name: file.sha1
+          in: formData
+          type: string
+          description: SHA1 checksum of the file (generated by Workhorse)
+        - name: file.sha256
+          in: formData
+          type: string
+          description: SHA256 checksum of the file (generated by Workhorse)
+        - name: file.etag
+          in: formData
+          type: string
+          description: Etag of the file (generated by Workhorse)
+        - name: file.remote_id
+          in: formData
+          type: string
+          description: Remote_id of the file (generated by Workhorse)
+        - name: file.remote_url
+          in: formData
+          type: string
+          description: Remote_url of the file (generated by Workhorse)
+    - name: api-v4-projects-import-relation
+      path: /api/v4/projects/import-relation
+      operations:
+      - name: postapiv4projectsimportrelation
+        method: POST
+        description: Re-import a relation into a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: formData
+          type: string
+          description: The project path and name
+          required: true
+        - name: file
+          in: formData
+          type: file
+          description: The project export file from which to extract the relation.
+          required: true
+        - name: relation
+          in: formData
+          type: string
+          description: The relation to import. Must be one of issues, merge_requests, ci_pipelines, or milestones.
+          required: true
+        - name: file.path
+          in: formData
+          type: string
+          description: Path to locally stored body (generated by Workhorse)
+        - name: file.name
+          in: formData
+          type: string
+          description: Real filename as sent in Content-Disposition (generated by Workhorse)
+        - name: file.type
+          in: formData
+          type: string
+          description: Real content type as send in Content-Type (generated by Workhorse)
+        - name: file.size
+          in: formData
+          type: integer
+          description: Real size of file (generated by Workhorse)
+        - name: file.md5
+          in: formData
+          type: string
+          description: MD5 checksum of the file (generated by Workhorse)
+        - name: file.sha1
+          in: formData
+          type: string
+          description: SHA1 checksum of the file (generated by Workhorse)
+        - name: file.sha256
+          in: formData
+          type: string
+          description: SHA256 checksum of the file (generated by Workhorse)
+        - name: file.etag
+          in: formData
+          type: string
+          description: Etag of the file (generated by Workhorse)
+        - name: file.remote_id
+          in: formData
+          type: string
+          description: Remote_id of the file (generated by Workhorse)
+        - name: file.remote_url
+          in: formData
+          type: string
+          description: Remote_url of the file (generated by Workhorse)
+    - name: api-v4-projects-import-relation-authorize
+      path: /api/v4/projects/import-relation/authorize
+      operations:
+      - name: postapiv4projectsimportrelationauthorize
+        method: POST
+        description: Workhorse authorize the project relation import upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v4-projects-import-authorize
+      path: /api/v4/projects/import/authorize
+      operations:
+      - name: postapiv4projectsimportauthorize
+        method: POST
+        description: Workhorse authorize the project import upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v4-projects-remote-import
+      path: /api/v4/projects/remote-import
+      operations:
+      - name: postapiv4projectsremoteimport
+        method: POST
+        description: Create a new project import using a remote object storage path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: url
+          in: formData
+          type: string
+          description: The URL for the file.
+          required: true
+        - name: path
+          in: formData
+          type: string
+          description: The new project path and name
+          required: true
+        - name: name
+          in: formData
+          type: string
+          description: The name of the project to be imported. Defaults to the path of the project if not provided.
+        - name: namespace
+          in: formData
+          type: string
+          description: (deprecated) The ID or path of the namespace to import the project to. Defaults to the current user's
+            namespace.
+        - name: namespace_id
+          in: formData
+          type: integer
+          description: The ID of the namespace that the project will be imported into. Defaults to the current user's namespace.
+        - name: namespace_path
+          in: formData
+          type: string
+          description: The path of the namespace that the project will be imported into. Defaults to the current user's namespace.
+        - name: overwrite
+          in: formData
+          type: boolean
+          description: If there is a project in the same namespace and with the same name overwrite it
+        - name: override_params[description]
+          in: formData
+          type: string
+          description: The description of the project
+        - name: override_params[build_git_strategy]
+          in: formData
+          type: string
+          description: The Git strategy. Defaults to `fetch`
+        - name: override_params[build_timeout]
+          in: formData
+          type: integer
+          description: Build timeout
+        - name: override_params[auto_cancel_pending_pipelines]
+          in: formData
+          type: string
+          description: Auto-cancel pending pipelines
+        - name: override_params[ci_config_path]
+          in: formData
+          type: string
+          description: The path to CI config file. Defaults to `.gitlab-ci.yml`
+        - name: override_params[service_desk_enabled]
+          in: formData
+          type: boolean
+          description: Disable or enable the service desk
+        - name: override_params[issues_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if the issue tracker is enabled
+        - name: override_params[merge_requests_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if merge requests are enabled
+        - name: override_params[wiki_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if the wiki is enabled
+        - name: override_params[jobs_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if jobs are enabled
+        - name: override_params[snippets_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if snippets are enabled
+        - name: override_params[issues_access_level]
+          in: formData
+          type: string
+          description: Issues access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[repository_access_level]
+          in: formData
+          type: string
+          description: Repository access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[merge_requests_access_level]
+          in: formData
+          type: string
+          description: Merge requests access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[forking_access_level]
+          in: formData
+          type: string
+          description: Forks access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[wiki_access_level]
+          in: formData
+          type: string
+          description: Wiki access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[builds_access_level]
+          in: formData
+          type: string
+          description: Builds access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[snippets_access_level]
+          in: formData
+          type: string
+          description: Snippets access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[package_registry_access_level]
+          in: formData
+          type: string
+          description: Controls visibility of the package registry. One of `disabled`, `private`, `enabled` or `public`. `private`
+            will make the package registry accessible only to pr
+        - name: override_params[pages_access_level]
+          in: formData
+          type: string
+          description: Pages access level. One of `disabled`, `private`, `enabled` or `public`
+        - name: override_params[analytics_access_level]
+          in: formData
+          type: string
+          description: Analytics access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[container_registry_access_level]
+          in: formData
+          type: string
+          description: 'Controls visibility of the container registry. One of `disabled`, `private` or `enabled`. `private`
+            will make the container registry accessible only to project '
+        - name: override_params[security_and_compliance_access_level]
+          in: formData
+          type: string
+          description: Security and compliance access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[releases_access_level]
+          in: formData
+          type: string
+          description: Releases access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[environments_access_level]
+          in: formData
+          type: string
+          description: Environments access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[feature_flags_access_level]
+          in: formData
+          type: string
+          description: Feature flags access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[infrastructure_access_level]
+          in: formData
+          type: string
+          description: Infrastructure access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[monitor_access_level]
+          in: formData
+          type: string
+          description: Monitor access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[model_experiments_access_level]
+          in: formData
+          type: string
+          description: Model experiments access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[model_registry_access_level]
+          in: formData
+          type: string
+          description: Model registry access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[emails_disabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use emails_enabled instead.'
+        - name: override_params[emails_enabled]
+          in: formData
+          type: boolean
+          description: Enable email notifications
+        - name: override_params[show_default_award_emojis]
+          in: formData
+          type: boolean
+          description: Show default award emojis
+        - name: override_params[show_diff_preview_in_email]
+          in: formData
+          type: boolean
+          description: Include the code diff preview in merge request notification emails
+        - name: override_params[warn_about_potentially_unwanted_characters]
+          in: formData
+          type: boolean
+          description: Warn about potentially unwanted characters
+        - name: override_params[enforce_auth_checks_on_uploads]
+          in: formData
+          type: boolean
+          description: Enforce auth check on uploads
+        - name: override_params[shared_runners_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if shared runners are enabled for that project
+        - name: override_params[group_runners_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if group runners are enabled for that project
+        - name: override_params[resource_group_default_process_mode]
+          in: formData
+          type: string
+          description: The process mode of the resource group
+        - name: override_params[resolve_outdated_diff_discussions]
+          in: formData
+          type: boolean
+          description: Automatically resolve merge request diff threads on lines changed with a push
+        - name: override_params[remove_source_branch_after_merge]
+          in: formData
+          type: boolean
+          description: Remove the source branch by default after merge
+        - name: override_params[packages_enabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use :package_registry_access_level instead. Enable project packages feature'
+        - name: override_params[container_registry_enabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use :container_registry_access_level instead. Flag indication if the container registry
+            is enabled for that project'
+        - name: override_params[container_expiration_policy_attributes][cadence]
+          in: formData
+          type: string
+          description: Container expiration policy cadence for recurring job
+        - name: override_params[container_expiration_policy_attributes][keep_n]
+          in: formData
+          type: integer
+          description: Container expiration policy number of images to keep
+        - name: override_params[container_expiration_policy_attributes][older_than]
+          in: formData
+          type: string
+          description: Container expiration policy remove images older than value
+        - name: override_params[container_expiration_policy_attributes][name_regex]
+          in: formData
+          type: string
+          description: Container expiration policy regex for image removal
+        - name: override_params[container_expiration_policy_attributes][name_regex_keep]
+          in: formData
+          type: string
+          description: Container expiration policy regex for image retention
+        - name: override_params[container_expiration_policy_attributes][enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if container expiration policy is enabled
+        - name: override_params[lfs_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if Git LFS is enabled for that project
+        - name: override_params[visibility]
+          in: formData
+          type: string
+          description: The visibility of the project.
+        - name: override_params[public_builds]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use public_jobs instead.'
+        - name: override_params[public_jobs]
+          in: formData
+          type: boolean
+          description: Perform public builds
+        - name: override_params[request_access_enabled]
+          in: formData
+          type: boolean
+          description: Allow users to request member access
+        - name: override_params[only_allow_merge_if_pipeline_succeeds]
+          in: formData
+          type: boolean
+          description: Only allow to merge if builds succeed
+        - name: override_params[allow_merge_on_skipped_pipeline]
+          in: formData
+          type: boolean
+          description: Allow to merge if pipeline is skipped
+        - name: override_params[only_allow_merge_if_all_discussions_are_resolved]
+          in: formData
+          type: boolean
+          description: Only allow to merge if all threads are resolved
+        - name: override_params[tag_list]
+          in: formData
+          type: array
+          description: 'Deprecated: Use :topics instead'
+        - name: override_params[topics]
+          in: formData
+          type: array
+          description: The list of topics for a project
+        - name: override_params[avatar]
+          in: formData
+          type: file
+          description: Avatar image for project
+        - name: override_params[printing_merge_request_link_enabled]
+          in: formData
+          type: boolean
+          description: Show link to create/view merge request when pushing from the command line
+        - name: override_params[merge_method]
+          in: formData
+          type: string
+          description: The merge method used when merging merge requests
+        - name: override_params[suggestion_commit_message]
+          in: formData
+          type: string
+          description: The commit message used to apply merge request suggestions
+        - name: override_params[merge_commit_template]
+          in: formData
+          type: string
+          description: Template used to create merge commit message
+        - name: override_params[squash_commit_template]
+          in: formData
+          type: string
+          description: Template used to create squash commit message
+        - name: override_params[issue_branch_template]
+          in: formData
+          type: string
+          description: Template used to create a branch from an issue
+        - name: override_params[auto_devops_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if Auto DevOps is enabled
+        - name: override_params[auto_devops_deploy_strategy]
+          in: formData
+          type: string
+          description: Auto Deploy strategy
+        - name: override_params[autoclose_referenced_issues]
+          in: formData
+          type: boolean
+          description: Flag indication if referenced issues auto-closing is enabled
+        - name: override_params[repository_storage]
+          in: formData
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: override_params[squash_option]
+          in: formData
+          type: string
+          description: Squash default for project. One of `never`, `always`, `default_on`, or `default_off`.
+        - name: override_params[mr_default_target_self]
+          in: formData
+          type: boolean
+          description: Merge requests of this forked project targets itself by default
+        - name: override_params[mr_default_title_template]
+          in: formData
+          type: string
+          description: Template used to generate the default merge request title. Maximum 100 characters.
+        - name: override_params[only_allow_merge_if_all_status_checks_passed]
+          in: formData
+          type: boolean
+          description: Blocks merge requests from merging unless all status checks have passed
+        - name: override_params[approvals_before_merge]
+          in: formData
+          type: integer
+          description: How many approvers should approve merge request by default
+        - name: override_params[mirror]
+          in: formData
+          type: boolean
+          description: '[Deprecated] Enables pull mirroring in a project'
+        - name: override_params[mirror_trigger_builds]
+          in: formData
+          type: boolean
+          description: '[Deprecated] Pull mirroring triggers builds'
+        - name: override_params[external_authorization_classification_label]
+          in: formData
+          type: string
+          description: The classification label for the project
+        - name: override_params[requirements_access_level]
+          in: formData
+          type: string
+          description: Requirements feature access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[prevent_merge_without_jira_issue]
+          in: formData
+          type: boolean
+          description: Require an associated issue from Jira
+        - name: override_params[auto_duo_code_review_enabled]
+          in: formData
+          type: boolean
+          description: Enable automatic reviews by GitLab Duo on merge requests
+        - name: override_params[duo_remote_flows_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo remote flows for this project
+        - name: override_params[duo_sast_fp_detection_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo SAST false positive detection for this project
+        - name: override_params[duo_secret_detection_fp_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo Secret Detection false positive detection for this project
+        - name: override_params[duo_sast_vr_workflow_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo SAST vulnerability resolution workflow for this project
+        - name: override_params[spp_repository_pipeline_access]
+          in: formData
+          type: boolean
+          description: Grant read-only access to security policy configurations for enforcement in linked CI/CD projects
+        - name: override_params[merge_request_title_regex]
+          in: formData
+          type: string
+          description: The regex the Merge Request must adhere to
+        - name: override_params[merge_request_title_regex_description]
+          in: formData
+          type: string
+          description: The description for the regex the Merge Request must adhere to
+    - name: api-v4-projects-remote-import-s3
+      path: /api/v4/projects/remote-import-s3
+      operations:
+      - name: postapiv4projectsremoteimports3
+        method: POST
+        description: Create a new project import using a file from AWS S3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: region
+          in: formData
+          type: string
+          description: AWS region
+          required: true
+        - name: bucket_name
+          in: formData
+          type: string
+          description: Bucket name
+          required: true
+        - name: file_key
+          in: formData
+          type: string
+          description: File key
+          required: true
+        - name: access_key_id
+          in: formData
+          type: string
+          description: Access key id
+          required: true
+        - name: secret_access_key
+          in: formData
+          type: string
+          description: Secret access key
+          required: true
+        - name: path
+          in: formData
+          type: string
+          description: The new project path and name
+          required: true
+        - name: name
+          in: formData
+          type: string
+          description: The name of the project to be imported. Defaults to the path of the project if not provided.
+        - name: namespace
+          in: formData
+          type: string
+          description: (deprecated) The ID or path of the namespace to import the project to. Defaults to the current user's
+            namespace.
+        - name: namespace_id
+          in: formData
+          type: integer
+          description: The ID of the namespace that the project will be imported into. Defaults to the current user's namespace.
+        - name: namespace_path
+          in: formData
+          type: string
+          description: The path of the namespace that the project will be imported into. Defaults to the current user's namespace.
+        - name: overwrite
+          in: formData
+          type: boolean
+          description: If there is a project in the same namespace and with the same name overwrite it
+        - name: override_params[description]
+          in: formData
+          type: string
+          description: The description of the project
+        - name: override_params[build_git_strategy]
+          in: formData
+          type: string
+          description: The Git strategy. Defaults to `fetch`
+        - name: override_params[build_timeout]
+          in: formData
+          type: integer
+          description: Build timeout
+        - name: override_params[auto_cancel_pending_pipelines]
+          in: formData
+          type: string
+          description: Auto-cancel pending pipelines
+        - name: override_params[ci_config_path]
+          in: formData
+          type: string
+          description: The path to CI config file. Defaults to `.gitlab-ci.yml`
+        - name: override_params[service_desk_enabled]
+          in: formData
+          type: boolean
+          description: Disable or enable the service desk
+        - name: override_params[issues_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if the issue tracker is enabled
+        - name: override_params[merge_requests_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if merge requests are enabled
+        - name: override_params[wiki_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if the wiki is enabled
+        - name: override_params[jobs_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if jobs are enabled
+        - name: override_params[snippets_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if snippets are enabled
+        - name: override_params[issues_access_level]
+          in: formData
+          type: string
+          description: Issues access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[repository_access_level]
+          in: formData
+          type: string
+          description: Repository access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[merge_requests_access_level]
+          in: formData
+          type: string
+          description: Merge requests access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[forking_access_level]
+          in: formData
+          type: string
+          description: Forks access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[wiki_access_level]
+          in: formData
+          type: string
+          description: Wiki access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[builds_access_level]
+          in: formData
+          type: string
+          description: Builds access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[snippets_access_level]
+          in: formData
+          type: string
+          description: Snippets access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[package_registry_access_level]
+          in: formData
+          type: string
+          description: Controls visibility of the package registry. One of `disabled`, `private`, `enabled` or `public`. `private`
+            will make the package registry accessible only to pr
+        - name: override_params[pages_access_level]
+          in: formData
+          type: string
+          description: Pages access level. One of `disabled`, `private`, `enabled` or `public`
+        - name: override_params[analytics_access_level]
+          in: formData
+          type: string
+          description: Analytics access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[container_registry_access_level]
+          in: formData
+          type: string
+          description: 'Controls visibility of the container registry. One of `disabled`, `private` or `enabled`. `private`
+            will make the container registry accessible only to project '
+        - name: override_params[security_and_compliance_access_level]
+          in: formData
+          type: string
+          description: Security and compliance access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[releases_access_level]
+          in: formData
+          type: string
+          description: Releases access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[environments_access_level]
+          in: formData
+          type: string
+          description: Environments access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[feature_flags_access_level]
+          in: formData
+          type: string
+          description: Feature flags access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[infrastructure_access_level]
+          in: formData
+          type: string
+          description: Infrastructure access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[monitor_access_level]
+          in: formData
+          type: string
+          description: Monitor access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[model_experiments_access_level]
+          in: formData
+          type: string
+          description: Model experiments access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[model_registry_access_level]
+          in: formData
+          type: string
+          description: Model registry access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[emails_disabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use emails_enabled instead.'
+        - name: override_params[emails_enabled]
+          in: formData
+          type: boolean
+          description: Enable email notifications
+        - name: override_params[show_default_award_emojis]
+          in: formData
+          type: boolean
+          description: Show default award emojis
+        - name: override_params[show_diff_preview_in_email]
+          in: formData
+          type: boolean
+          description: Include the code diff preview in merge request notification emails
+        - name: override_params[warn_about_potentially_unwanted_characters]
+          in: formData
+          type: boolean
+          description: Warn about potentially unwanted characters
+        - name: override_params[enforce_auth_checks_on_uploads]
+          in: formData
+          type: boolean
+          description: Enforce auth check on uploads
+        - name: override_params[shared_runners_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if shared runners are enabled for that project
+        - name: override_params[group_runners_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if group runners are enabled for that project
+        - name: override_params[resource_group_default_process_mode]
+          in: formData
+          type: string
+          description: The process mode of the resource group
+        - name: override_params[resolve_outdated_diff_discussions]
+          in: formData
+          type: boolean
+          description: Automatically resolve merge request diff threads on lines changed with a push
+        - name: override_params[remove_source_branch_after_merge]
+          in: formData
+          type: boolean
+          description: Remove the source branch by default after merge
+        - name: override_params[packages_enabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use :package_registry_access_level instead. Enable project packages feature'
+        - name: override_params[container_registry_enabled]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use :container_registry_access_level instead. Flag indication if the container registry
+            is enabled for that project'
+        - name: override_params[container_expiration_policy_attributes][cadence]
+          in: formData
+          type: string
+          description: Container expiration policy cadence for recurring job
+        - name: override_params[container_expiration_policy_attributes][keep_n]
+          in: formData
+          type: integer
+          description: Container expiration policy number of images to keep
+        - name: override_params[container_expiration_policy_attributes][older_than]
+          in: formData
+          type: string
+          description: Container expiration policy remove images older than value
+        - name: override_params[container_expiration_policy_attributes][name_regex]
+          in: formData
+          type: string
+          description: Container expiration policy regex for image removal
+        - name: override_params[container_expiration_policy_attributes][name_regex_keep]
+          in: formData
+          type: string
+          description: Container expiration policy regex for image retention
+        - name: override_params[container_expiration_policy_attributes][enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if container expiration policy is enabled
+        - name: override_params[lfs_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if Git LFS is enabled for that project
+        - name: override_params[visibility]
+          in: formData
+          type: string
+          description: The visibility of the project.
+        - name: override_params[public_builds]
+          in: formData
+          type: boolean
+          description: 'Deprecated: Use public_jobs instead.'
+        - name: override_params[public_jobs]
+          in: formData
+          type: boolean
+          description: Perform public builds
+        - name: override_params[request_access_enabled]
+          in: formData
+          type: boolean
+          description: Allow users to request member access
+        - name: override_params[only_allow_merge_if_pipeline_succeeds]
+          in: formData
+          type: boolean
+          description: Only allow to merge if builds succeed
+        - name: override_params[allow_merge_on_skipped_pipeline]
+          in: formData
+          type: boolean
+          description: Allow to merge if pipeline is skipped
+        - name: override_params[only_allow_merge_if_all_discussions_are_resolved]
+          in: formData
+          type: boolean
+          description: Only allow to merge if all threads are resolved
+        - name: override_params[tag_list]
+          in: formData
+          type: array
+          description: 'Deprecated: Use :topics instead'
+        - name: override_params[topics]
+          in: formData
+          type: array
+          description: The list of topics for a project
+        - name: override_params[avatar]
+          in: formData
+          type: file
+          description: Avatar image for project
+        - name: override_params[printing_merge_request_link_enabled]
+          in: formData
+          type: boolean
+          description: Show link to create/view merge request when pushing from the command line
+        - name: override_params[merge_method]
+          in: formData
+          type: string
+          description: The merge method used when merging merge requests
+        - name: override_params[suggestion_commit_message]
+          in: formData
+          type: string
+          description: The commit message used to apply merge request suggestions
+        - name: override_params[merge_commit_template]
+          in: formData
+          type: string
+          description: Template used to create merge commit message
+        - name: override_params[squash_commit_template]
+          in: formData
+          type: string
+          description: Template used to create squash commit message
+        - name: override_params[issue_branch_template]
+          in: formData
+          type: string
+          description: Template used to create a branch from an issue
+        - name: override_params[auto_devops_enabled]
+          in: formData
+          type: boolean
+          description: Flag indication if Auto DevOps is enabled
+        - name: override_params[auto_devops_deploy_strategy]
+          in: formData
+          type: string
+          description: Auto Deploy strategy
+        - name: override_params[autoclose_referenced_issues]
+          in: formData
+          type: boolean
+          description: Flag indication if referenced issues auto-closing is enabled
+        - name: override_params[repository_storage]
+          in: formData
+          type: string
+          description: Which storage shard the repository is on. Available only to admins
+        - name: override_params[squash_option]
+          in: formData
+          type: string
+          description: Squash default for project. One of `never`, `always`, `default_on`, or `default_off`.
+        - name: override_params[mr_default_target_self]
+          in: formData
+          type: boolean
+          description: Merge requests of this forked project targets itself by default
+        - name: override_params[mr_default_title_template]
+          in: formData
+          type: string
+          description: Template used to generate the default merge request title. Maximum 100 characters.
+        - name: override_params[only_allow_merge_if_all_status_checks_passed]
+          in: formData
+          type: boolean
+          description: Blocks merge requests from merging unless all status checks have passed
+        - name: override_params[approvals_before_merge]
+          in: formData
+          type: integer
+          description: How many approvers should approve merge request by default
+        - name: override_params[mirror]
+          in: formData
+          type: boolean
+          description: '[Deprecated] Enables pull mirroring in a project'
+        - name: override_params[mirror_trigger_builds]
+          in: formData
+          type: boolean
+          description: '[Deprecated] Pull mirroring triggers builds'
+        - name: override_params[external_authorization_classification_label]
+          in: formData
+          type: string
+          description: The classification label for the project
+        - name: override_params[requirements_access_level]
+          in: formData
+          type: string
+          description: Requirements feature access level. One of `disabled`, `private` or `enabled`
+        - name: override_params[prevent_merge_without_jira_issue]
+          in: formData
+          type: boolean
+          description: Require an associated issue from Jira
+        - name: override_params[auto_duo_code_review_enabled]
+          in: formData
+          type: boolean
+          description: Enable automatic reviews by GitLab Duo on merge requests
+        - name: override_params[duo_remote_flows_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo remote flows for this project
+        - name: override_params[duo_sast_fp_detection_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo SAST false positive detection for this project
+        - name: override_params[duo_secret_detection_fp_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo Secret Detection false positive detection for this project
+        - name: override_params[duo_sast_vr_workflow_enabled]
+          in: formData
+          type: boolean
+          description: Enable GitLab Duo SAST vulnerability resolution workflow for this project
+        - name: override_params[spp_repository_pipeline_access]
+          in: formData
+          type: boolean
+          description: Grant read-only access to security policy configurations for enforcement in linked CI/CD projects
+        - name: override_params[merge_request_title_regex]
+          in: formData
+          type: string
+          description: The regex the Merge Request must adhere to
+        - name: override_params[merge_request_title_regex_description]
+          in: formData
+          type: string
+          description: The description for the regex the Merge Request must adhere to
+    - name: api-v4-projects-id-export
+      path: /api/v4/projects/{id}/export
+      operations:
+      - name: getapiv4projectsidexport
+        method: GET
+        description: Get export status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+      - name: postapiv4projectsidexport
+        method: POST
+        description: Start export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdExport
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-export-download
+      path: /api/v4/projects/{id}/export/download
+      operations:
+      - name: getapiv4projectsidexportdownload
+        method: GET
+        description: Download export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-export_relations
+      path: /api/v4/projects/{id}/export_relations
+      operations:
+      - name: postapiv4projectsidexportrelations
+        method: POST
+        description: Start relations export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdExportRelations
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-export_relations-download
+      path: /api/v4/projects/{id}/export_relations/download
+      operations:
+      - name: getapiv4projectsidexportrelationsdownload
+        method: GET
+        description: Download relations export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: relation
+          in: query
+          type: string
+          description: Project relation name
+          required: true
+        - name: batched
+          in: query
+          type: boolean
+          description: Whether to download in batches
+        - name: batch_number
+          in: query
+          type: integer
+          description: Batch number to download
+    - name: api-v4-projects-id-export_relations-status
+      path: /api/v4/projects/{id}/export_relations/status
+      operations:
+      - name: getapiv4projectsidexportrelationsstatus
+        method: GET
+        description: Relations export status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: relation
+          in: query
+          type: string
+          description: Project relation name
+    - name: api-v4-projects-id-import
+      path: /api/v4/projects/{id}/import
+      operations:
+      - name: getapiv4projectsidimport
+        method: GET
+        description: Get a project import status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+    - name: api-v4-projects-id-import-git
+      path: /api/v4/projects/{id}/import/git
+      operations:
+      - name: postapiv4projectsidimportgit
+        method: POST
+        description: Import a project from a Git URL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdImportGit
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-relation-imports
+      path: /api/v4/projects/{id}/relation-imports
+      operations:
+      - name: getapiv4projectsidrelationimports
+        method: GET
+        description: Get the statuses of relation imports for specified project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-project-import-rest
+    port: 8080
+    description: REST adapter for GitLab API — project_import. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/import/bitbucket
+      name: api-v4-import-bitbucket
+      description: REST surface for api-v4-import-bitbucket.
+      operations:
+      - method: POST
+        name: postapiv4importbitbucket
+        description: Import a BitBucket Cloud repository
+        call: gitlab-ci-project-import.postapiv4importbitbucket
+        with:
+          postApiV4ImportBitbucket: rest.postApiV4ImportBitbucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/import/bitbucket-server
+      name: api-v4-import-bitbucket-server
+      description: REST surface for api-v4-import-bitbucket_server.
+      operations:
+      - method: POST
+        name: postapiv4importbitbucketserver
+        description: Import a BitBucket Server repository
+        call: gitlab-ci-project-import.postapiv4importbitbucketserver
+        with:
+          postApiV4ImportBitbucketServer: rest.postApiV4ImportBitbucketServer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/import/github
+      name: api-v4-import-github
+      description: REST surface for api-v4-import-github.
+      operations:
+      - method: POST
+        name: postapiv4importgithub
+        description: Import a GitHub project
+        call: gitlab-ci-project-import.postapiv4importgithub
+        with:
+          postApiV4ImportGithub: rest.postApiV4ImportGithub
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/import/github/cancel
+      name: api-v4-import-github-cancel
+      description: REST surface for api-v4-import-github-cancel.
+      operations:
+      - method: POST
+        name: postapiv4importgithubcancel
+        description: Cancel GitHub project import
+        call: gitlab-ci-project-import.postapiv4importgithubcancel
+        with:
+          postApiV4ImportGithubCancel: rest.postApiV4ImportGithubCancel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/import
+      name: api-v4-projects-import
+      description: REST surface for api-v4-projects-import.
+      operations:
+      - method: POST
+        name: postapiv4projectsimport
+        description: Create a new project import
+        call: gitlab-ci-project-import.postapiv4projectsimport
+        with:
+          path: rest.path
+          file: rest.file
+          name: rest.name
+          namespace: rest.namespace
+          namespace_id: rest.namespace_id
+          namespace_path: rest.namespace_path
+          overwrite: rest.overwrite
+          override_params[description]: rest.override_params[description]
+          override_params[build_git_strategy]: rest.override_params[build_git_strategy]
+          override_params[build_timeout]: rest.override_params[build_timeout]
+          override_params[auto_cancel_pending_pipelines]: rest.override_params[auto_cancel_pending_pipelines]
+          override_params[ci_config_path]: rest.override_params[ci_config_path]
+          override_params[service_desk_enabled]: rest.override_params[service_desk_enabled]
+          override_params[issues_enabled]: rest.override_params[issues_enabled]
+          override_params[merge_requests_enabled]: rest.override_params[merge_requests_enabled]
+          override_params[wiki_enabled]: rest.override_params[wiki_enabled]
+          override_params[jobs_enabled]: rest.override_params[jobs_enabled]
+          override_params[snippets_enabled]: rest.override_params[snippets_enabled]
+          override_params[issues_access_level]: rest.override_params[issues_access_level]
+          override_params[repository_access_level]: rest.override_params[repository_access_level]
+          override_params[merge_requests_access_level]: rest.override_params[merge_requests_access_level]
+          override_params[forking_access_level]: rest.override_params[forking_access_level]
+          override_params[wiki_access_level]: rest.override_params[wiki_access_level]
+          override_params[builds_access_level]: rest.override_params[builds_access_level]
+          override_params[snippets_access_level]: rest.override_params[snippets_access_level]
+          override_params[package_registry_access_level]: rest.override_params[package_registry_access_level]
+          override_params[pages_access_level]: rest.override_params[pages_access_level]
+          override_params[analytics_access_level]: rest.override_params[analytics_access_level]
+          override_params[container_registry_access_level]: rest.override_params[container_registry_access_level]
+          override_params[security_and_compliance_access_level]: rest.override_params[security_and_compliance_access_level]
+          override_params[releases_access_level]: rest.override_params[releases_access_level]
+          override_params[environments_access_level]: rest.override_params[environments_access_level]
+          override_params[feature_flags_access_level]: rest.override_params[feature_flags_access_level]
+          override_params[infrastructure_access_level]: rest.override_params[infrastructure_access_level]
+          override_params[monitor_access_level]: rest.override_params[monitor_access_level]
+          override_params[model_experiments_access_level]: rest.override_params[model_experiments_access_level]
+          override_params[model_registry_access_level]: rest.override_params[model_registry_access_level]
+          override_params[emails_disabled]: rest.override_params[emails_disabled]
+          override_params[emails_enabled]: rest.override_params[emails_enabled]
+          override_params[show_default_award_emojis]: rest.override_params[show_default_award_emojis]
+          override_params[show_diff_preview_in_email]: rest.override_params[show_diff_preview_in_email]
+          override_params[warn_about_potentially_unwanted_characters]: rest.override_params[warn_about_potentially_unwanted_characters]
+          override_params[enforce_auth_checks_on_uploads]: rest.override_params[enforce_auth_checks_on_uploads]
+          override_params[shared_runners_enabled]: rest.override_params[shared_runners_enabled]
+          override_params[group_runners_enabled]: rest.override_params[group_runners_enabled]
+          override_params[resource_group_default_process_mode]: rest.override_params[resource_group_default_process_mode]
+          override_params[resolve_outdated_diff_discussions]: rest.override_params[resolve_outdated_diff_discussions]
+          override_params[remove_source_branch_after_merge]: rest.override_params[remove_source_branch_after_merge]
+          override_params[packages_enabled]: rest.override_params[packages_enabled]
+          override_params[container_registry_enabled]: rest.override_params[container_registry_enabled]
+          override_params[container_expiration_policy_attributes][cadence]: rest.override_params[container_expiration_policy_attributes][cadence]
+          override_params[container_expiration_policy_attributes][keep_n]: rest.override_params[container_expiration_policy_attributes][keep_n]
+          override_params[container_expiration_policy_attributes][older_than]: rest.override_params[container_expiration_policy_attributes][older_than]
+          override_params[container_expiration_policy_attributes][name_regex]: rest.override_params[container_expiration_policy_attributes][name_regex]
+          override_params[container_expiration_policy_attributes][name_regex_keep]: rest.override_params[container_expiration_policy_attributes][name_regex_keep]
+          override_params[container_expiration_policy_attributes][enabled]: rest.override_params[container_expiration_policy_attributes][enabled]
+          override_params[lfs_enabled]: rest.override_params[lfs_enabled]
+          override_params[visibility]: rest.override_params[visibility]
+          override_params[public_builds]: rest.override_params[public_builds]
+          override_params[public_jobs]: rest.override_params[public_jobs]
+          override_params[request_access_enabled]: rest.override_params[request_access_enabled]
+          override_params[only_allow_merge_if_pipeline_succeeds]: rest.override_params[only_allow_merge_if_pipeline_succeeds]
+          override_params[allow_merge_on_skipped_pipeline]: rest.override_params[allow_merge_on_skipped_pipeline]
+          override_params[only_allow_merge_if_all_discussions_are_resolved]: rest.override_params[only_allow_merge_if_all_discussions_are_resolved]
+          override_params[tag_list]: rest.override_params[tag_list]
+          override_params[topics]: rest.override_params[topics]
+          override_params[avatar]: rest.override_params[avatar]
+          override_params[printing_merge_request_link_enabled]: rest.override_params[printing_merge_request_link_enabled]
+          override_params[merge_method]: rest.override_params[merge_method]
+          override_params[suggestion_commit_message]: rest.override_params[suggestion_commit_message]
+          override_params[merge_commit_template]: rest.override_params[merge_commit_template]
+          override_params[squash_commit_template]: rest.override_params[squash_commit_template]
+          override_params[issue_branch_template]: rest.override_params[issue_branch_template]
+          override_params[auto_devops_enabled]: rest.override_params[auto_devops_enabled]
+          override_params[auto_devops_deploy_strategy]: rest.override_params[auto_devops_deploy_strategy]
+          override_params[autoclose_referenced_issues]: rest.override_params[autoclose_referenced_issues]
+          override_params[repository_storage]: rest.override_params[repository_storage]
+          override_params[squash_option]: rest.override_params[squash_option]
+          override_params[mr_default_target_self]: rest.override_params[mr_default_target_self]
+          override_params[mr_default_title_template]: rest.override_params[mr_default_title_template]
+          override_params[only_allow_merge_if_all_status_checks_passed]: rest.override_params[only_allow_merge_if_all_status_checks_passed]
+          override_params[approvals_before_merge]: rest.override_params[approvals_before_merge]
+          override_params[mirror]: rest.override_params[mirror]
+          override_params[mirror_trigger_builds]: rest.override_params[mirror_trigger_builds]
+          override_params[external_authorization_classification_label]: rest.override_params[external_authorization_classification_label]
+          override_params[requirements_access_level]: rest.override_params[requirements_access_level]
+          override_params[prevent_merge_without_jira_issue]: rest.override_params[prevent_merge_without_jira_issue]
+          override_params[auto_duo_code_review_enabled]: rest.override_params[auto_duo_code_review_enabled]
+          override_params[duo_remote_flows_enabled]: rest.override_params[duo_remote_flows_enabled]
+          override_params[duo_sast_fp_detection_enabled]: rest.override_params[duo_sast_fp_detection_enabled]
+          override_params[duo_secret_detection_fp_enabled]: rest.override_params[duo_secret_detection_fp_enabled]
+          override_params[duo_sast_vr_workflow_enabled]: rest.override_params[duo_sast_vr_workflow_enabled]
+          override_params[spp_repository_pipeline_access]: rest.override_params[spp_repository_pipeline_access]
+          override_params[merge_request_title_regex]: rest.override_params[merge_request_title_regex]
+          override_params[merge_request_title_regex_description]: rest.override_params[merge_request_title_regex_description]
+          file.path: rest.file.path
+          file.name: rest.file.name
+          file.type: rest.file.type
+          file.size: rest.file.size
+          file.md5: rest.file.md5
+          file.sha1: rest.file.sha1
+          file.sha256: rest.file.sha256
+          file.etag: rest.file.etag
+          file.remote_id: rest.file.remote_id
+          file.remote_url: rest.file.remote_url
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/import-relation
+      name: api-v4-projects-import-relation
+      description: REST surface for api-v4-projects-import-relation.
+      operations:
+      - method: POST
+        name: postapiv4projectsimportrelation
+        description: Re-import a relation into a project
+        call: gitlab-ci-project-import.postapiv4projectsimportrelation
+        with:
+          path: rest.path
+          file: rest.file
+          relation: rest.relation
+          file.path: rest.file.path
+          file.name: rest.file.name
+          file.type: rest.file.type
+          file.size: rest.file.size
+          file.md5: rest.file.md5
+          file.sha1: rest.file.sha1
+          file.sha256: rest.file.sha256
+          file.etag: rest.file.etag
+          file.remote_id: rest.file.remote_id
+          file.remote_url: rest.file.remote_url
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/import-relation/authorize
+      name: api-v4-projects-import-relation-authorize
+      description: REST surface for api-v4-projects-import-relation-authorize.
+      operations:
+      - method: POST
+        name: postapiv4projectsimportrelationauthorize
+        description: Workhorse authorize the project relation import upload
+        call: gitlab-ci-project-import.postapiv4projectsimportrelationauthorize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/import/authorize
+      name: api-v4-projects-import-authorize
+      description: REST surface for api-v4-projects-import-authorize.
+      operations:
+      - method: POST
+        name: postapiv4projectsimportauthorize
+        description: Workhorse authorize the project import upload
+        call: gitlab-ci-project-import.postapiv4projectsimportauthorize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/remote-import
+      name: api-v4-projects-remote-import
+      description: REST surface for api-v4-projects-remote-import.
+      operations:
+      - method: POST
+        name: postapiv4projectsremoteimport
+        description: Create a new project import using a remote object storage path
+        call: gitlab-ci-project-import.postapiv4projectsremoteimport
+        with:
+          url: rest.url
+          path: rest.path
+          name: rest.name
+          namespace: rest.namespace
+          namespace_id: rest.namespace_id
+          namespace_path: rest.namespace_path
+          overwrite: rest.overwrite
+          override_params[description]: rest.override_params[description]
+          override_params[build_git_strategy]: rest.override_params[build_git_strategy]
+          override_params[build_timeout]: rest.override_params[build_timeout]
+          override_params[auto_cancel_pending_pipelines]: rest.override_params[auto_cancel_pending_pipelines]
+          override_params[ci_config_path]: rest.override_params[ci_config_path]
+          override_params[service_desk_enabled]: rest.override_params[service_desk_enabled]
+          override_params[issues_enabled]: rest.override_params[issues_enabled]
+          override_params[merge_requests_enabled]: rest.override_params[merge_requests_enabled]
+          override_params[wiki_enabled]: rest.override_params[wiki_enabled]
+          override_params[jobs_enabled]: rest.override_params[jobs_enabled]
+          override_params[snippets_enabled]: rest.override_params[snippets_enabled]
+          override_params[issues_access_level]: rest.override_params[issues_access_level]
+          override_params[repository_access_level]: rest.override_params[repository_access_level]
+          override_params[merge_requests_access_level]: rest.override_params[merge_requests_access_level]
+          override_params[forking_access_level]: rest.override_params[forking_access_level]
+          override_params[wiki_access_level]: rest.override_params[wiki_access_level]
+          override_params[builds_access_level]: rest.override_params[builds_access_level]
+          override_params[snippets_access_level]: rest.override_params[snippets_access_level]
+          override_params[package_registry_access_level]: rest.override_params[package_registry_access_level]
+          override_params[pages_access_level]: rest.override_params[pages_access_level]
+          override_params[analytics_access_level]: rest.override_params[analytics_access_level]
+          override_params[container_registry_access_level]: rest.override_params[container_registry_access_level]
+          override_params[security_and_compliance_access_level]: rest.override_params[security_and_compliance_access_level]
+          override_params[releases_access_level]: rest.override_params[releases_access_level]
+          override_params[environments_access_level]: rest.override_params[environments_access_level]
+          override_params[feature_flags_access_level]: rest.override_params[feature_flags_access_level]
+          override_params[infrastructure_access_level]: rest.override_params[infrastructure_access_level]
+          override_params[monitor_access_level]: rest.override_params[monitor_access_level]
+          override_params[model_experiments_access_level]: rest.override_params[model_experiments_access_level]
+          override_params[model_registry_access_level]: rest.override_params[model_registry_access_level]
+          override_params[emails_disabled]: rest.override_params[emails_disabled]
+          override_params[emails_enabled]: rest.override_params[emails_enabled]
+          override_params[show_default_award_emojis]: rest.override_params[show_default_award_emojis]
+          override_params[show_diff_preview_in_email]: rest.override_params[show_diff_preview_in_email]
+          override_params[warn_about_potentially_unwanted_characters]: rest.override_params[warn_about_potentially_unwanted_characters]
+          override_params[enforce_auth_checks_on_uploads]: rest.override_params[enforce_auth_checks_on_uploads]
+          override_params[shared_runners_enabled]: rest.override_params[shared_runners_enabled]
+          override_params[group_runners_enabled]: rest.override_params[group_runners_enabled]
+          override_params[resource_group_default_process_mode]: rest.override_params[resource_group_default_process_mode]
+          override_params[resolve_outdated_diff_discussions]: rest.override_params[resolve_outdated_diff_discussions]
+          override_params[remove_source_branch_after_merge]: rest.override_params[remove_source_branch_after_merge]
+          override_params[packages_enabled]: rest.override_params[packages_enabled]
+          override_params[container_registry_enabled]: rest.override_params[container_registry_enabled]
+          override_params[container_expiration_policy_attributes][cadence]: rest.override_params[container_expiration_policy_attributes][cadence]
+          override_params[container_expiration_policy_attributes][keep_n]: rest.override_params[container_expiration_policy_attributes][keep_n]
+          override_params[container_expiration_policy_attributes][older_than]: rest.override_params[container_expiration_policy_attributes][older_than]
+          override_params[container_expiration_policy_attributes][name_regex]: rest.override_params[container_expiration_policy_attributes][name_regex]
+          override_params[container_expiration_policy_attributes][name_regex_keep]: rest.override_params[container_expiration_policy_attributes][name_regex_keep]
+          override_params[container_expiration_policy_attributes][enabled]: rest.override_params[container_expiration_policy_attributes][enabled]
+          override_params[lfs_enabled]: rest.override_params[lfs_enabled]
+          override_params[visibility]: rest.override_params[visibility]
+          override_params[public_builds]: rest.override_params[public_builds]
+          override_params[public_jobs]: rest.override_params[public_jobs]
+          override_params[request_access_enabled]: rest.override_params[request_access_enabled]
+          override_params[only_allow_merge_if_pipeline_succeeds]: rest.override_params[only_allow_merge_if_pipeline_succeeds]
+          override_params[allow_merge_on_skipped_pipeline]: rest.override_params[allow_merge_on_skipped_pipeline]
+          override_params[only_allow_merge_if_all_discussions_are_resolved]: rest.override_params[only_allow_merge_if_all_discussions_are_resolved]
+          override_params[tag_list]: rest.override_params[tag_list]
+          override_params[topics]: rest.override_params[topics]
+          override_params[avatar]: rest.override_params[avatar]
+          override_params[printing_merge_request_link_enabled]: rest.override_params[printing_merge_request_link_enabled]
+          override_params[merge_method]: rest.override_params[merge_method]
+          override_params[suggestion_commit_message]: rest.override_params[suggestion_commit_message]
+          override_params[merge_commit_template]: rest.override_params[merge_commit_template]
+          override_params[squash_commit_template]: rest.override_params[squash_commit_template]
+          override_params[issue_branch_template]: rest.override_params[issue_branch_template]
+          override_params[auto_devops_enabled]: rest.override_params[auto_devops_enabled]
+          override_params[auto_devops_deploy_strategy]: rest.override_params[auto_devops_deploy_strategy]
+          override_params[autoclose_referenced_issues]: rest.override_params[autoclose_referenced_issues]
+          override_params[repository_storage]: rest.override_params[repository_storage]
+          override_params[squash_option]: rest.override_params[squash_option]
+          override_params[mr_default_target_self]: rest.override_params[mr_default_target_self]
+          override_params[mr_default_title_template]: rest.override_params[mr_default_title_template]
+          override_params[only_allow_merge_if_all_status_checks_passed]: rest.override_params[only_allow_merge_if_all_status_checks_passed]
+          override_params[approvals_before_merge]: rest.override_params[approvals_before_merge]
+          override_params[mirror]: rest.override_params[mirror]
+          override_params[mirror_trigger_builds]: rest.override_params[mirror_trigger_builds]
+          override_params[external_authorization_classification_label]: rest.override_params[external_authorization_classification_label]
+          override_params[requirements_access_level]: rest.override_params[requirements_access_level]
+          override_params[prevent_merge_without_jira_issue]: rest.override_params[prevent_merge_without_jira_issue]
+          override_params[auto_duo_code_review_enabled]: rest.override_params[auto_duo_code_review_enabled]
+          override_params[duo_remote_flows_enabled]: rest.override_params[duo_remote_flows_enabled]
+          override_params[duo_sast_fp_detection_enabled]: rest.override_params[duo_sast_fp_detection_enabled]
+          override_params[duo_secret_detection_fp_enabled]: rest.override_params[duo_secret_detection_fp_enabled]
+          override_params[duo_sast_vr_workflow_enabled]: rest.override_params[duo_sast_vr_workflow_enabled]
+          override_params[spp_repository_pipeline_access]: rest.override_params[spp_repository_pipeline_access]
+          override_params[merge_request_title_regex]: rest.override_params[merge_request_title_regex]
+          override_params[merge_request_title_regex_description]: rest.override_params[merge_request_title_regex_description]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/remote-import-s3
+      name: api-v4-projects-remote-import-s3
+      description: REST surface for api-v4-projects-remote-import-s3.
+      operations:
+      - method: POST
+        name: postapiv4projectsremoteimports3
+        description: Create a new project import using a file from AWS S3
+        call: gitlab-ci-project-import.postapiv4projectsremoteimports3
+        with:
+          region: rest.region
+          bucket_name: rest.bucket_name
+          file_key: rest.file_key
+          access_key_id: rest.access_key_id
+          secret_access_key: rest.secret_access_key
+          path: rest.path
+          name: rest.name
+          namespace: rest.namespace
+          namespace_id: rest.namespace_id
+          namespace_path: rest.namespace_path
+          overwrite: rest.overwrite
+          override_params[description]: rest.override_params[description]
+          override_params[build_git_strategy]: rest.override_params[build_git_strategy]
+          override_params[build_timeout]: rest.override_params[build_timeout]
+          override_params[auto_cancel_pending_pipelines]: rest.override_params[auto_cancel_pending_pipelines]
+          override_params[ci_config_path]: rest.override_params[ci_config_path]
+          override_params[service_desk_enabled]: rest.override_params[service_desk_enabled]
+          override_params[issues_enabled]: rest.override_params[issues_enabled]
+          override_params[merge_requests_enabled]: rest.override_params[merge_requests_enabled]
+          override_params[wiki_enabled]: rest.override_params[wiki_enabled]
+          override_params[jobs_enabled]: rest.override_params[jobs_enabled]
+          override_params[snippets_enabled]: rest.override_params[snippets_enabled]
+          override_params[issues_access_level]: rest.override_params[issues_access_level]
+          override_params[repository_access_level]: rest.override_params[repository_access_level]
+          override_params[merge_requests_access_level]: rest.override_params[merge_requests_access_level]
+          override_params[forking_access_level]: rest.override_params[forking_access_level]
+          override_params[wiki_access_level]: rest.override_params[wiki_access_level]
+          override_params[builds_access_level]: rest.override_params[builds_access_level]
+          override_params[snippets_access_level]: rest.override_params[snippets_access_level]
+          override_params[package_registry_access_level]: rest.override_params[package_registry_access_level]
+          override_params[pages_access_level]: rest.override_params[pages_access_level]
+          override_params[analytics_access_level]: rest.override_params[analytics_access_level]
+          override_params[container_registry_access_level]: rest.override_params[container_registry_access_level]
+          override_params[security_and_compliance_access_level]: rest.override_params[security_and_compliance_access_level]
+          override_params[releases_access_level]: rest.override_params[releases_access_level]
+          override_params[environments_access_level]: rest.override_params[environments_access_level]
+          override_params[feature_flags_access_level]: rest.override_params[feature_flags_access_level]
+          override_params[infrastructure_access_level]: rest.override_params[infrastructure_access_level]
+          override_params[monitor_access_level]: rest.override_params[monitor_access_level]
+          override_params[model_experiments_access_level]: rest.override_params[model_experiments_access_level]
+          override_params[model_registry_access_level]: rest.override_params[model_registry_access_level]
+          override_params[emails_disabled]: rest.override_params[emails_disabled]
+          override_params[emails_enabled]: rest.override_params[emails_enabled]
+          override_params[show_default_award_emojis]: rest.override_params[show_default_award_emojis]
+          override_params[show_diff_preview_in_email]: rest.override_params[show_diff_preview_in_email]
+          override_params[warn_about_potentially_unwanted_characters]: rest.override_params[warn_about_potentially_unwanted_characters]
+          override_params[enforce_auth_checks_on_uploads]: rest.override_params[enforce_auth_checks_on_uploads]
+          override_params[shared_runners_enabled]: rest.override_params[shared_runners_enabled]
+          override_params[group_runners_enabled]: rest.override_params[group_runners_enabled]
+          override_params[resource_group_default_process_mode]: rest.override_params[resource_group_default_process_mode]
+          override_params[resolve_outdated_diff_discussions]: rest.override_params[resolve_outdated_diff_discussions]
+          override_params[remove_source_branch_after_merge]: rest.override_params[remove_source_branch_after_merge]
+          override_params[packages_enabled]: rest.override_params[packages_enabled]
+          override_params[container_registry_enabled]: rest.override_params[container_registry_enabled]
+          override_params[container_expiration_policy_attributes][cadence]: rest.override_params[container_expiration_policy_attributes][cadence]
+          override_params[container_expiration_policy_attributes][keep_n]: rest.override_params[container_expiration_policy_attributes][keep_n]
+          override_params[container_expiration_policy_attributes][older_than]: rest.override_params[container_expiration_policy_attributes][older_than]
+          override_params[container_expiration_policy_attributes][name_regex]: rest.override_params[container_expiration_policy_attributes][name_regex]
+          override_params[container_expiration_policy_attributes][name_regex_keep]: rest.override_params[container_expiration_policy_attributes][name_regex_keep]
+          override_params[container_expiration_policy_attributes][enabled]: rest.override_params[container_expiration_policy_attributes][enabled]
+          override_params[lfs_enabled]: rest.override_params[lfs_enabled]
+          override_params[visibility]: rest.override_params[visibility]
+          override_params[public_builds]: rest.override_params[public_builds]
+          override_params[public_jobs]: rest.override_params[public_jobs]
+          override_params[request_access_enabled]: rest.override_params[request_access_enabled]
+          override_params[only_allow_merge_if_pipeline_succeeds]: rest.override_params[only_allow_merge_if_pipeline_succeeds]
+          override_params[allow_merge_on_skipped_pipeline]: rest.override_params[allow_merge_on_skipped_pipeline]
+          override_params[only_allow_merge_if_all_discussions_are_resolved]: rest.override_params[only_allow_merge_if_all_discussions_are_resolved]
+          override_params[tag_list]: rest.override_params[tag_list]
+          override_params[topics]: rest.override_params[topics]
+          override_params[avatar]: rest.override_params[avatar]
+          override_params[printing_merge_request_link_enabled]: rest.override_params[printing_merge_request_link_enabled]
+          override_params[merge_method]: rest.override_params[merge_method]
+          override_params[suggestion_commit_message]: rest.override_params[suggestion_commit_message]
+          override_params[merge_commit_template]: rest.override_params[merge_commit_template]
+          override_params[squash_commit_template]: rest.override_params[squash_commit_template]
+          override_params[issue_branch_template]: rest.override_params[issue_branch_template]
+          override_params[auto_devops_enabled]: rest.override_params[auto_devops_enabled]
+          override_params[auto_devops_deploy_strategy]: rest.override_params[auto_devops_deploy_strategy]
+          override_params[autoclose_referenced_issues]: rest.override_params[autoclose_referenced_issues]
+          override_params[repository_storage]: rest.override_params[repository_storage]
+          override_params[squash_option]: rest.override_params[squash_option]
+          override_params[mr_default_target_self]: rest.override_params[mr_default_target_self]
+          override_params[mr_default_title_template]: rest.override_params[mr_default_title_template]
+          override_params[only_allow_merge_if_all_status_checks_passed]: rest.override_params[only_allow_merge_if_all_status_checks_passed]
+          override_params[approvals_before_merge]: rest.override_params[approvals_before_merge]
+          override_params[mirror]: rest.override_params[mirror]
+          override_params[mirror_trigger_builds]: rest.override_params[mirror_trigger_builds]
+          override_params[external_authorization_classification_label]: rest.override_params[external_authorization_classification_label]
+          override_params[requirements_access_level]: rest.override_params[requirements_access_level]
+          override_params[prevent_merge_without_jira_issue]: rest.override_params[prevent_merge_without_jira_issue]
+          override_params[auto_duo_code_review_enabled]: rest.override_params[auto_duo_code_review_enabled]
+          override_params[duo_remote_flows_enabled]: rest.override_params[duo_remote_flows_enabled]
+          override_params[duo_sast_fp_detection_enabled]: rest.override_params[duo_sast_fp_detection_enabled]
+          override_params[duo_secret_detection_fp_enabled]: rest.override_params[duo_secret_detection_fp_enabled]
+          override_params[duo_sast_vr_workflow_enabled]: rest.override_params[duo_sast_vr_workflow_enabled]
+          override_params[spp_repository_pipeline_access]: rest.override_params[spp_repository_pipeline_access]
+          override_params[merge_request_title_regex]: rest.override_params[merge_request_title_regex]
+          override_params[merge_request_title_regex_description]: rest.override_params[merge_request_title_regex_description]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/export
+      name: api-v4-projects-id-export
+      description: REST surface for api-v4-projects-id-export.
+      operations:
+      - method: GET
+        name: getapiv4projectsidexport
+        description: Get export status
+        call: gitlab-ci-project-import.getapiv4projectsidexport
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidexport
+        description: Start export
+        call: gitlab-ci-project-import.postapiv4projectsidexport
+        with:
+          id: rest.id
+          postApiV4ProjectsIdExport: rest.postApiV4ProjectsIdExport
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/export/download
+      name: api-v4-projects-id-export-download
+      description: REST surface for api-v4-projects-id-export-download.
+      operations:
+      - method: GET
+        name: getapiv4projectsidexportdownload
+        description: Download export
+        call: gitlab-ci-project-import.getapiv4projectsidexportdownload
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/export-relations
+      name: api-v4-projects-id-export-relations
+      description: REST surface for api-v4-projects-id-export_relations.
+      operations:
+      - method: POST
+        name: postapiv4projectsidexportrelations
+        description: Start relations export
+        call: gitlab-ci-project-import.postapiv4projectsidexportrelations
+        with:
+          id: rest.id
+          postApiV4ProjectsIdExportRelations: rest.postApiV4ProjectsIdExportRelations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/export-relations/download
+      name: api-v4-projects-id-export-relations-download
+      description: REST surface for api-v4-projects-id-export_relations-download.
+      operations:
+      - method: GET
+        name: getapiv4projectsidexportrelationsdownload
+        description: Download relations export
+        call: gitlab-ci-project-import.getapiv4projectsidexportrelationsdownload
+        with:
+          id: rest.id
+          relation: rest.relation
+          batched: rest.batched
+          batch_number: rest.batch_number
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/export-relations/status
+      name: api-v4-projects-id-export-relations-status
+      description: REST surface for api-v4-projects-id-export_relations-status.
+      operations:
+      - method: GET
+        name: getapiv4projectsidexportrelationsstatus
+        description: Relations export status
+        call: gitlab-ci-project-import.getapiv4projectsidexportrelationsstatus
+        with:
+          id: rest.id
+          relation: rest.relation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/import
+      name: api-v4-projects-id-import
+      description: REST surface for api-v4-projects-id-import.
+      operations:
+      - method: GET
+        name: getapiv4projectsidimport
+        description: Get a project import status
+        call: gitlab-ci-project-import.getapiv4projectsidimport
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/import/git
+      name: api-v4-projects-id-import-git
+      description: REST surface for api-v4-projects-id-import-git.
+      operations:
+      - method: POST
+        name: postapiv4projectsidimportgit
+        description: Import a project from a Git URL
+        call: gitlab-ci-project-import.postapiv4projectsidimportgit
+        with:
+          id: rest.id
+          postApiV4ProjectsIdImportGit: rest.postApiV4ProjectsIdImportGit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/relation-imports
+      name: api-v4-projects-id-relation-imports
+      description: REST surface for api-v4-projects-id-relation-imports.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrelationimports
+        description: Get the statuses of relation imports for specified project
+        call: gitlab-ci-project-import.getapiv4projectsidrelationimports
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-project-import-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — project_import. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: import-bitbucket-cloud-repository
+      description: Import a BitBucket Cloud repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4importbitbucket
+      with:
+        postApiV4ImportBitbucket: tools.postApiV4ImportBitbucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-bitbucket-server-repository
+      description: Import a BitBucket Server repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4importbitbucketserver
+      with:
+        postApiV4ImportBitbucketServer: tools.postApiV4ImportBitbucketServer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-github-project
+      description: Import a GitHub project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4importgithub
+      with:
+        postApiV4ImportGithub: tools.postApiV4ImportGithub
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-github-project-import
+      description: Cancel GitHub project import
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4importgithubcancel
+      with:
+        postApiV4ImportGithubCancel: tools.postApiV4ImportGithubCancel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-import
+      description: Create a new project import
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsimport
+      with:
+        path: tools.path
+        file: tools.file
+        name: tools.name
+        namespace: tools.namespace
+        namespace_id: tools.namespace_id
+        namespace_path: tools.namespace_path
+        overwrite: tools.overwrite
+        override_params[description]: tools.override_params[description]
+        override_params[build_git_strategy]: tools.override_params[build_git_strategy]
+        override_params[build_timeout]: tools.override_params[build_timeout]
+        override_params[auto_cancel_pending_pipelines]: tools.override_params[auto_cancel_pending_pipelines]
+        override_params[ci_config_path]: tools.override_params[ci_config_path]
+        override_params[service_desk_enabled]: tools.override_params[service_desk_enabled]
+        override_params[issues_enabled]: tools.override_params[issues_enabled]
+        override_params[merge_requests_enabled]: tools.override_params[merge_requests_enabled]
+        override_params[wiki_enabled]: tools.override_params[wiki_enabled]
+        override_params[jobs_enabled]: tools.override_params[jobs_enabled]
+        override_params[snippets_enabled]: tools.override_params[snippets_enabled]
+        override_params[issues_access_level]: tools.override_params[issues_access_level]
+        override_params[repository_access_level]: tools.override_params[repository_access_level]
+        override_params[merge_requests_access_level]: tools.override_params[merge_requests_access_level]
+        override_params[forking_access_level]: tools.override_params[forking_access_level]
+        override_params[wiki_access_level]: tools.override_params[wiki_access_level]
+        override_params[builds_access_level]: tools.override_params[builds_access_level]
+        override_params[snippets_access_level]: tools.override_params[snippets_access_level]
+        override_params[package_registry_access_level]: tools.override_params[package_registry_access_level]
+        override_params[pages_access_level]: tools.override_params[pages_access_level]
+        override_params[analytics_access_level]: tools.override_params[analytics_access_level]
+        override_params[container_registry_access_level]: tools.override_params[container_registry_access_level]
+        override_params[security_and_compliance_access_level]: tools.override_params[security_and_compliance_access_level]
+        override_params[releases_access_level]: tools.override_params[releases_access_level]
+        override_params[environments_access_level]: tools.override_params[environments_access_level]
+        override_params[feature_flags_access_level]: tools.override_params[feature_flags_access_level]
+        override_params[infrastructure_access_level]: tools.override_params[infrastructure_access_level]
+        override_params[monitor_access_level]: tools.override_params[monitor_access_level]
+        override_params[model_experiments_access_level]: tools.override_params[model_experiments_access_level]
+        override_params[model_registry_access_level]: tools.override_params[model_registry_access_level]
+        override_params[emails_disabled]: tools.override_params[emails_disabled]
+        override_params[emails_enabled]: tools.override_params[emails_enabled]
+        override_params[show_default_award_emojis]: tools.override_params[show_default_award_emojis]
+        override_params[show_diff_preview_in_email]: tools.override_params[show_diff_preview_in_email]
+        override_params[warn_about_potentially_unwanted_characters]: tools.override_params[warn_about_potentially_unwanted_characters]
+        override_params[enforce_auth_checks_on_uploads]: tools.override_params[enforce_auth_checks_on_uploads]
+        override_params[shared_runners_enabled]: tools.override_params[shared_runners_enabled]
+        override_params[group_runners_enabled]: tools.override_params[group_runners_enabled]
+        override_params[resource_group_default_process_mode]: tools.override_params[resource_group_default_process_mode]
+        override_params[resolve_outdated_diff_discussions]: tools.override_params[resolve_outdated_diff_discussions]
+        override_params[remove_source_branch_after_merge]: tools.override_params[remove_source_branch_after_merge]
+        override_params[packages_enabled]: tools.override_params[packages_enabled]
+        override_params[container_registry_enabled]: tools.override_params[container_registry_enabled]
+        override_params[container_expiration_policy_attributes][cadence]: tools.override_params[container_expiration_policy_attributes][cadence]
+        override_params[container_expiration_policy_attributes][keep_n]: tools.override_params[container_expiration_policy_attributes][keep_n]
+        override_params[container_expiration_policy_attributes][older_than]: tools.override_params[container_expiration_policy_attributes][older_than]
+        override_params[container_expiration_policy_attributes][name_regex]: tools.override_params[container_expiration_policy_attributes][name_regex]
+        override_params[container_expiration_policy_attributes][name_regex_keep]: tools.override_params[container_expiration_policy_attributes][name_regex_keep]
+        override_params[container_expiration_policy_attributes][enabled]: tools.override_params[container_expiration_policy_attributes][enabled]
+        override_params[lfs_enabled]: tools.override_params[lfs_enabled]
+        override_params[visibility]: tools.override_params[visibility]
+        override_params[public_builds]: tools.override_params[public_builds]
+        override_params[public_jobs]: tools.override_params[public_jobs]
+        override_params[request_access_enabled]: tools.override_params[request_access_enabled]
+        override_params[only_allow_merge_if_pipeline_succeeds]: tools.override_params[only_allow_merge_if_pipeline_succeeds]
+        override_params[allow_merge_on_skipped_pipeline]: tools.override_params[allow_merge_on_skipped_pipeline]
+        override_params[only_allow_merge_if_all_discussions_are_resolved]: tools.override_params[only_allow_merge_if_all_discussions_are_resolved]
+        override_params[tag_list]: tools.override_params[tag_list]
+        override_params[topics]: tools.override_params[topics]
+        override_params[avatar]: tools.override_params[avatar]
+        override_params[printing_merge_request_link_enabled]: tools.override_params[printing_merge_request_link_enabled]
+        override_params[merge_method]: tools.override_params[merge_method]
+        override_params[suggestion_commit_message]: tools.override_params[suggestion_commit_message]
+        override_params[merge_commit_template]: tools.override_params[merge_commit_template]
+        override_params[squash_commit_template]: tools.override_params[squash_commit_template]
+        override_params[issue_branch_template]: tools.override_params[issue_branch_template]
+        override_params[auto_devops_enabled]: tools.override_params[auto_devops_enabled]
+        override_params[auto_devops_deploy_strategy]: tools.override_params[auto_devops_deploy_strategy]
+        override_params[autoclose_referenced_issues]: tools.override_params[autoclose_referenced_issues]
+        override_params[repository_storage]: tools.override_params[repository_storage]
+        override_params[squash_option]: tools.override_params[squash_option]
+        override_params[mr_default_target_self]: tools.override_params[mr_default_target_self]
+        override_params[mr_default_title_template]: tools.override_params[mr_default_title_template]
+        override_params[only_allow_merge_if_all_status_checks_passed]: tools.override_params[only_allow_merge_if_all_status_checks_passed]
+        override_params[approvals_before_merge]: tools.override_params[approvals_before_merge]
+        override_params[mirror]: tools.override_params[mirror]
+        override_params[mirror_trigger_builds]: tools.override_params[mirror_trigger_builds]
+        override_params[external_authorization_classification_label]: tools.override_params[external_authorization_classification_label]
+        override_params[requirements_access_level]: tools.override_params[requirements_access_level]
+        override_params[prevent_merge_without_jira_issue]: tools.override_params[prevent_merge_without_jira_issue]
+        override_params[auto_duo_code_review_enabled]: tools.override_params[auto_duo_code_review_enabled]
+        override_params[duo_remote_flows_enabled]: tools.override_params[duo_remote_flows_enabled]
+        override_params[duo_sast_fp_detection_enabled]: tools.override_params[duo_sast_fp_detection_enabled]
+        override_params[duo_secret_detection_fp_enabled]: tools.override_params[duo_secret_detection_fp_enabled]
+        override_params[duo_sast_vr_workflow_enabled]: tools.override_params[duo_sast_vr_workflow_enabled]
+        override_params[spp_repository_pipeline_access]: tools.override_params[spp_repository_pipeline_access]
+        override_params[merge_request_title_regex]: tools.override_params[merge_request_title_regex]
+        override_params[merge_request_title_regex_description]: tools.override_params[merge_request_title_regex_description]
+        file.path: tools.file.path
+        file.name: tools.file.name
+        file.type: tools.file.type
+        file.size: tools.file.size
+        file.md5: tools.file.md5
+        file.sha1: tools.file.sha1
+        file.sha256: tools.file.sha256
+        file.etag: tools.file.etag
+        file.remote_id: tools.file.remote_id
+        file.remote_url: tools.file.remote_url
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: re-import-relation-project
+      description: Re-import a relation into a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsimportrelation
+      with:
+        path: tools.path
+        file: tools.file
+        relation: tools.relation
+        file.path: tools.file.path
+        file.name: tools.file.name
+        file.type: tools.file.type
+        file.size: tools.file.size
+        file.md5: tools.file.md5
+        file.sha1: tools.file.sha1
+        file.sha256: tools.file.sha256
+        file.etag: tools.file.etag
+        file.remote_id: tools.file.remote_id
+        file.remote_url: tools.file.remote_url
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workhorse-authorize-project-relation-import
+      description: Workhorse authorize the project relation import upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsimportrelationauthorize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workhorse-authorize-project-import-upload
+      description: Workhorse authorize the project import upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsimportauthorize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-import-using
+      description: Create a new project import using a remote object storage path
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsremoteimport
+      with:
+        url: tools.url
+        path: tools.path
+        name: tools.name
+        namespace: tools.namespace
+        namespace_id: tools.namespace_id
+        namespace_path: tools.namespace_path
+        overwrite: tools.overwrite
+        override_params[description]: tools.override_params[description]
+        override_params[build_git_strategy]: tools.override_params[build_git_strategy]
+        override_params[build_timeout]: tools.override_params[build_timeout]
+        override_params[auto_cancel_pending_pipelines]: tools.override_params[auto_cancel_pending_pipelines]
+        override_params[ci_config_path]: tools.override_params[ci_config_path]
+        override_params[service_desk_enabled]: tools.override_params[service_desk_enabled]
+        override_params[issues_enabled]: tools.override_params[issues_enabled]
+        override_params[merge_requests_enabled]: tools.override_params[merge_requests_enabled]
+        override_params[wiki_enabled]: tools.override_params[wiki_enabled]
+        override_params[jobs_enabled]: tools.override_params[jobs_enabled]
+        override_params[snippets_enabled]: tools.override_params[snippets_enabled]
+        override_params[issues_access_level]: tools.override_params[issues_access_level]
+        override_params[repository_access_level]: tools.override_params[repository_access_level]
+        override_params[merge_requests_access_level]: tools.override_params[merge_requests_access_level]
+        override_params[forking_access_level]: tools.override_params[forking_access_level]
+        override_params[wiki_access_level]: tools.override_params[wiki_access_level]
+        override_params[builds_access_level]: tools.override_params[builds_access_level]
+        override_params[snippets_access_level]: tools.override_params[snippets_access_level]
+        override_params[package_registry_access_level]: tools.override_params[package_registry_access_level]
+        override_params[pages_access_level]: tools.override_params[pages_access_level]
+        override_params[analytics_access_level]: tools.override_params[analytics_access_level]
+        override_params[container_registry_access_level]: tools.override_params[container_registry_access_level]
+        override_params[security_and_compliance_access_level]: tools.override_params[security_and_compliance_access_level]
+        override_params[releases_access_level]: tools.override_params[releases_access_level]
+        override_params[environments_access_level]: tools.override_params[environments_access_level]
+        override_params[feature_flags_access_level]: tools.override_params[feature_flags_access_level]
+        override_params[infrastructure_access_level]: tools.override_params[infrastructure_access_level]
+        override_params[monitor_access_level]: tools.override_params[monitor_access_level]
+        override_params[model_experiments_access_level]: tools.override_params[model_experiments_access_level]
+        override_params[model_registry_access_level]: tools.override_params[model_registry_access_level]
+        override_params[emails_disabled]: tools.override_params[emails_disabled]
+        override_params[emails_enabled]: tools.override_params[emails_enabled]
+        override_params[show_default_award_emojis]: tools.override_params[show_default_award_emojis]
+        override_params[show_diff_preview_in_email]: tools.override_params[show_diff_preview_in_email]
+        override_params[warn_about_potentially_unwanted_characters]: tools.override_params[warn_about_potentially_unwanted_characters]
+        override_params[enforce_auth_checks_on_uploads]: tools.override_params[enforce_auth_checks_on_uploads]
+        override_params[shared_runners_enabled]: tools.override_params[shared_runners_enabled]
+        override_params[group_runners_enabled]: tools.override_params[group_runners_enabled]
+        override_params[resource_group_default_process_mode]: tools.override_params[resource_group_default_process_mode]
+        override_params[resolve_outdated_diff_discussions]: tools.override_params[resolve_outdated_diff_discussions]
+        override_params[remove_source_branch_after_merge]: tools.override_params[remove_source_branch_after_merge]
+        override_params[packages_enabled]: tools.override_params[packages_enabled]
+        override_params[container_registry_enabled]: tools.override_params[container_registry_enabled]
+        override_params[container_expiration_policy_attributes][cadence]: tools.override_params[container_expiration_policy_attributes][cadence]
+        override_params[container_expiration_policy_attributes][keep_n]: tools.override_params[container_expiration_policy_attributes][keep_n]
+        override_params[container_expiration_policy_attributes][older_than]: tools.override_params[container_expiration_policy_attributes][older_than]
+        override_params[container_expiration_policy_attributes][name_regex]: tools.override_params[container_expiration_policy_attributes][name_regex]
+        override_params[container_expiration_policy_attributes][name_regex_keep]: tools.override_params[container_expiration_policy_attributes][name_regex_keep]
+        override_params[container_expiration_policy_attributes][enabled]: tools.override_params[container_expiration_policy_attributes][enabled]
+        override_params[lfs_enabled]: tools.override_params[lfs_enabled]
+        override_params[visibility]: tools.override_params[visibility]
+        override_params[public_builds]: tools.override_params[public_builds]
+        override_params[public_jobs]: tools.override_params[public_jobs]
+        override_params[request_access_enabled]: tools.override_params[request_access_enabled]
+        override_params[only_allow_merge_if_pipeline_succeeds]: tools.override_params[only_allow_merge_if_pipeline_succeeds]
+        override_params[allow_merge_on_skipped_pipeline]: tools.override_params[allow_merge_on_skipped_pipeline]
+        override_params[only_allow_merge_if_all_discussions_are_resolved]: tools.override_params[only_allow_merge_if_all_discussions_are_resolved]
+        override_params[tag_list]: tools.override_params[tag_list]
+        override_params[topics]: tools.override_params[topics]
+        override_params[avatar]: tools.override_params[avatar]
+        override_params[printing_merge_request_link_enabled]: tools.override_params[printing_merge_request_link_enabled]
+        override_params[merge_method]: tools.override_params[merge_method]
+        override_params[suggestion_commit_message]: tools.override_params[suggestion_commit_message]
+        override_params[merge_commit_template]: tools.override_params[merge_commit_template]
+        override_params[squash_commit_template]: tools.override_params[squash_commit_template]
+        override_params[issue_branch_template]: tools.override_params[issue_branch_template]
+        override_params[auto_devops_enabled]: tools.override_params[auto_devops_enabled]
+        override_params[auto_devops_deploy_strategy]: tools.override_params[auto_devops_deploy_strategy]
+        override_params[autoclose_referenced_issues]: tools.override_params[autoclose_referenced_issues]
+        override_params[repository_storage]: tools.override_params[repository_storage]
+        override_params[squash_option]: tools.override_params[squash_option]
+        override_params[mr_default_target_self]: tools.override_params[mr_default_target_self]
+        override_params[mr_default_title_template]: tools.override_params[mr_default_title_template]
+        override_params[only_allow_merge_if_all_status_checks_passed]: tools.override_params[only_allow_merge_if_all_status_checks_passed]
+        override_params[approvals_before_merge]: tools.override_params[approvals_before_merge]
+        override_params[mirror]: tools.override_params[mirror]
+        override_params[mirror_trigger_builds]: tools.override_params[mirror_trigger_builds]
+        override_params[external_authorization_classification_label]: tools.override_params[external_authorization_classification_label]
+        override_params[requirements_access_level]: tools.override_params[requirements_access_level]
+        override_params[prevent_merge_without_jira_issue]: tools.override_params[prevent_merge_without_jira_issue]
+        override_params[auto_duo_code_review_enabled]: tools.override_params[auto_duo_code_review_enabled]
+        override_params[duo_remote_flows_enabled]: tools.override_params[duo_remote_flows_enabled]
+        override_params[duo_sast_fp_detection_enabled]: tools.override_params[duo_sast_fp_detection_enabled]
+        override_params[duo_secret_detection_fp_enabled]: tools.override_params[duo_secret_detection_fp_enabled]
+        override_params[duo_sast_vr_workflow_enabled]: tools.override_params[duo_sast_vr_workflow_enabled]
+        override_params[spp_repository_pipeline_access]: tools.override_params[spp_repository_pipeline_access]
+        override_params[merge_request_title_regex]: tools.override_params[merge_request_title_regex]
+        override_params[merge_request_title_regex_description]: tools.override_params[merge_request_title_regex_description]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-import-using-2
+      description: Create a new project import using a file from AWS S3
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsremoteimports3
+      with:
+        region: tools.region
+        bucket_name: tools.bucket_name
+        file_key: tools.file_key
+        access_key_id: tools.access_key_id
+        secret_access_key: tools.secret_access_key
+        path: tools.path
+        name: tools.name
+        namespace: tools.namespace
+        namespace_id: tools.namespace_id
+        namespace_path: tools.namespace_path
+        overwrite: tools.overwrite
+        override_params[description]: tools.override_params[description]
+        override_params[build_git_strategy]: tools.override_params[build_git_strategy]
+        override_params[build_timeout]: tools.override_params[build_timeout]
+        override_params[auto_cancel_pending_pipelines]: tools.override_params[auto_cancel_pending_pipelines]
+        override_params[ci_config_path]: tools.override_params[ci_config_path]
+        override_params[service_desk_enabled]: tools.override_params[service_desk_enabled]
+        override_params[issues_enabled]: tools.override_params[issues_enabled]
+        override_params[merge_requests_enabled]: tools.override_params[merge_requests_enabled]
+        override_params[wiki_enabled]: tools.override_params[wiki_enabled]
+        override_params[jobs_enabled]: tools.override_params[jobs_enabled]
+        override_params[snippets_enabled]: tools.override_params[snippets_enabled]
+        override_params[issues_access_level]: tools.override_params[issues_access_level]
+        override_params[repository_access_level]: tools.override_params[repository_access_level]
+        override_params[merge_requests_access_level]: tools.override_params[merge_requests_access_level]
+        override_params[forking_access_level]: tools.override_params[forking_access_level]
+        override_params[wiki_access_level]: tools.override_params[wiki_access_level]
+        override_params[builds_access_level]: tools.override_params[builds_access_level]
+        override_params[snippets_access_level]: tools.override_params[snippets_access_level]
+        override_params[package_registry_access_level]: tools.override_params[package_registry_access_level]
+        override_params[pages_access_level]: tools.override_params[pages_access_level]
+        override_params[analytics_access_level]: tools.override_params[analytics_access_level]
+        override_params[container_registry_access_level]: tools.override_params[container_registry_access_level]
+        override_params[security_and_compliance_access_level]: tools.override_params[security_and_compliance_access_level]
+        override_params[releases_access_level]: tools.override_params[releases_access_level]
+        override_params[environments_access_level]: tools.override_params[environments_access_level]
+        override_params[feature_flags_access_level]: tools.override_params[feature_flags_access_level]
+        override_params[infrastructure_access_level]: tools.override_params[infrastructure_access_level]
+        override_params[monitor_access_level]: tools.override_params[monitor_access_level]
+        override_params[model_experiments_access_level]: tools.override_params[model_experiments_access_level]
+        override_params[model_registry_access_level]: tools.override_params[model_registry_access_level]
+        override_params[emails_disabled]: tools.override_params[emails_disabled]
+        override_params[emails_enabled]: tools.override_params[emails_enabled]
+        override_params[show_default_award_emojis]: tools.override_params[show_default_award_emojis]
+        override_params[show_diff_preview_in_email]: tools.override_params[show_diff_preview_in_email]
+        override_params[warn_about_potentially_unwanted_characters]: tools.override_params[warn_about_potentially_unwanted_characters]
+        override_params[enforce_auth_checks_on_uploads]: tools.override_params[enforce_auth_checks_on_uploads]
+        override_params[shared_runners_enabled]: tools.override_params[shared_runners_enabled]
+        override_params[group_runners_enabled]: tools.override_params[group_runners_enabled]
+        override_params[resource_group_default_process_mode]: tools.override_params[resource_group_default_process_mode]
+        override_params[resolve_outdated_diff_discussions]: tools.override_params[resolve_outdated_diff_discussions]
+        override_params[remove_source_branch_after_merge]: tools.override_params[remove_source_branch_after_merge]
+        override_params[packages_enabled]: tools.override_params[packages_enabled]
+        override_params[container_registry_enabled]: tools.override_params[container_registry_enabled]
+        override_params[container_expiration_policy_attributes][cadence]: tools.override_params[container_expiration_policy_attributes][cadence]
+        override_params[container_expiration_policy_attributes][keep_n]: tools.override_params[container_expiration_policy_attributes][keep_n]
+        override_params[container_expiration_policy_attributes][older_than]: tools.override_params[container_expiration_policy_attributes][older_than]
+        override_params[container_expiration_policy_attributes][name_regex]: tools.override_params[container_expiration_policy_attributes][name_regex]
+        override_params[container_expiration_policy_attributes][name_regex_keep]: tools.override_params[container_expiration_policy_attributes][name_regex_keep]
+        override_params[container_expiration_policy_attributes][enabled]: tools.override_params[container_expiration_policy_attributes][enabled]
+        override_params[lfs_enabled]: tools.override_params[lfs_enabled]
+        override_params[visibility]: tools.override_params[visibility]
+        override_params[public_builds]: tools.override_params[public_builds]
+        override_params[public_jobs]: tools.override_params[public_jobs]
+        override_params[request_access_enabled]: tools.override_params[request_access_enabled]
+        override_params[only_allow_merge_if_pipeline_succeeds]: tools.override_params[only_allow_merge_if_pipeline_succeeds]
+        override_params[allow_merge_on_skipped_pipeline]: tools.override_params[allow_merge_on_skipped_pipeline]
+        override_params[only_allow_merge_if_all_discussions_are_resolved]: tools.override_params[only_allow_merge_if_all_discussions_are_resolved]
+        override_params[tag_list]: tools.override_params[tag_list]
+        override_params[topics]: tools.override_params[topics]
+        override_params[avatar]: tools.override_params[avatar]
+        override_params[printing_merge_request_link_enabled]: tools.override_params[printing_merge_request_link_enabled]
+        override_params[merge_method]: tools.override_params[merge_method]
+        override_params[suggestion_commit_message]: tools.override_params[suggestion_commit_message]
+        override_params[merge_commit_template]: tools.override_params[merge_commit_template]
+        override_params[squash_commit_template]: tools.override_params[squash_commit_template]
+        override_params[issue_branch_template]: tools.override_params[issue_branch_template]
+        override_params[auto_devops_enabled]: tools.override_params[auto_devops_enabled]
+        override_params[auto_devops_deploy_strategy]: tools.override_params[auto_devops_deploy_strategy]
+        override_params[autoclose_referenced_issues]: tools.override_params[autoclose_referenced_issues]
+        override_params[repository_storage]: tools.override_params[repository_storage]
+        override_params[squash_option]: tools.override_params[squash_option]
+        override_params[mr_default_target_self]: tools.override_params[mr_default_target_self]
+        override_params[mr_default_title_template]: tools.override_params[mr_default_title_template]
+        override_params[only_allow_merge_if_all_status_checks_passed]: tools.override_params[only_allow_merge_if_all_status_checks_passed]
+        override_params[approvals_before_merge]: tools.override_params[approvals_before_merge]
+        override_params[mirror]: tools.override_params[mirror]
+        override_params[mirror_trigger_builds]: tools.override_params[mirror_trigger_builds]
+        override_params[external_authorization_classification_label]: tools.override_params[external_authorization_classification_label]
+        override_params[requirements_access_level]: tools.override_params[requirements_access_level]
+        override_params[prevent_merge_without_jira_issue]: tools.override_params[prevent_merge_without_jira_issue]
+        override_params[auto_duo_code_review_enabled]: tools.override_params[auto_duo_code_review_enabled]
+        override_params[duo_remote_flows_enabled]: tools.override_params[duo_remote_flows_enabled]
+        override_params[duo_sast_fp_detection_enabled]: tools.override_params[duo_sast_fp_detection_enabled]
+        override_params[duo_secret_detection_fp_enabled]: tools.override_params[duo_secret_detection_fp_enabled]
+        override_params[duo_sast_vr_workflow_enabled]: tools.override_params[duo_sast_vr_workflow_enabled]
+        override_params[spp_repository_pipeline_access]: tools.override_params[spp_repository_pipeline_access]
+        override_params[merge_request_title_regex]: tools.override_params[merge_request_title_regex]
+        override_params[merge_request_title_regex_description]: tools.override_params[merge_request_title_regex_description]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-export-status
+      description: Get export status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-project-import.getapiv4projectsidexport
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-export
+      description: Start export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsidexport
+      with:
+        id: tools.id
+        postApiV4ProjectsIdExport: tools.postApiV4ProjectsIdExport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-export
+      description: Download export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-project-import.getapiv4projectsidexportdownload
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-relations-export
+      description: Start relations export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsidexportrelations
+      with:
+        id: tools.id
+        postApiV4ProjectsIdExportRelations: tools.postApiV4ProjectsIdExportRelations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-relations-export
+      description: Download relations export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-project-import.getapiv4projectsidexportrelationsdownload
+      with:
+        id: tools.id
+        relation: tools.relation
+        batched: tools.batched
+        batch_number: tools.batch_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: relations-export-status
+      description: Relations export status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-project-import.getapiv4projectsidexportrelationsstatus
+      with:
+        id: tools.id
+        relation: tools.relation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-project-import-status
+      description: Get a project import status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-project-import.getapiv4projectsidimport
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-project-git-url
+      description: Import a project from a Git URL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-project-import.postapiv4projectsidimportgit
+      with:
+        id: tools.id
+        postApiV4ProjectsIdImportGit: tools.postApiV4ProjectsIdImportGit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-statuses-relation-imports-specified
+      description: Get the statuses of relation imports for specified project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-project-import.getapiv4projectsidrelationimports
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

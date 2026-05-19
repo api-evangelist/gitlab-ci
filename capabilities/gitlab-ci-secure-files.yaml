@@ -1,0 +1,269 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — secure_files
+  description: 'GitLab API — secure_files. 5 operations. Lead operation: secure_files. Self-contained Naftiko capability covering
+    one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - secure_files
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-secure-files
+    baseUri: https://gitlab.com
+    description: GitLab API — secure_files business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-secure_files
+      path: /api/v4/projects/{id}/secure_files
+      operations:
+      - name: getapiv4projectsidsecurefiles
+        method: GET
+        description: Get list of secure files in a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidsecurefiles
+        method: POST
+        description: Create a secure file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the
+          required: true
+        - name: postApiV4ProjectsIdSecureFiles
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-secure_files-secure_file_id
+      path: /api/v4/projects/{id}/secure_files/{secure_file_id}
+      operations:
+      - name: getapiv4projectsidsecurefilessecurefileid
+        method: GET
+        description: Get the details of a specific secure file in a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the
+          required: true
+        - name: secure_file_id
+          in: path
+          type: integer
+          description: The ID of a secure file
+          required: true
+      - name: deleteapiv4projectsidsecurefilessecurefileid
+        method: DELETE
+        description: Remove a secure file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the
+          required: true
+        - name: secure_file_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-secure_files-secure_file_id-download
+      path: /api/v4/projects/{id}/secure_files/{secure_file_id}/download
+      operations:
+      - name: getapiv4projectsidsecurefilessecurefileiddownload
+        method: GET
+        description: Download secure file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project owned by the
+          required: true
+        - name: secure_file_id
+          in: path
+          type: integer
+          description: The ID of a secure file
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-secure-files-rest
+    port: 8080
+    description: REST adapter for GitLab API — secure_files. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/secure-files
+      name: api-v4-projects-id-secure-files
+      description: REST surface for api-v4-projects-id-secure_files.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsecurefiles
+        description: Get list of secure files in a project
+        call: gitlab-ci-secure-files.getapiv4projectsidsecurefiles
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidsecurefiles
+        description: Create a secure file
+        call: gitlab-ci-secure-files.postapiv4projectsidsecurefiles
+        with:
+          id: rest.id
+          postApiV4ProjectsIdSecureFiles: rest.postApiV4ProjectsIdSecureFiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/secure-files/{secure-file-id}
+      name: api-v4-projects-id-secure-files-secure-file-id
+      description: REST surface for api-v4-projects-id-secure_files-secure_file_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsecurefilessecurefileid
+        description: Get the details of a specific secure file in a project
+        call: gitlab-ci-secure-files.getapiv4projectsidsecurefilessecurefileid
+        with:
+          id: rest.id
+          secure_file_id: rest.secure_file_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidsecurefilessecurefileid
+        description: Remove a secure file
+        call: gitlab-ci-secure-files.deleteapiv4projectsidsecurefilessecurefileid
+        with:
+          id: rest.id
+          secure_file_id: rest.secure_file_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/secure-files/{secure-file-id}/download
+      name: api-v4-projects-id-secure-files-secure-file-id-download
+      description: REST surface for api-v4-projects-id-secure_files-secure_file_id-download.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsecurefilessecurefileiddownload
+        description: Download secure file
+        call: gitlab-ci-secure-files.getapiv4projectsidsecurefilessecurefileiddownload
+        with:
+          id: rest.id
+          secure_file_id: rest.secure_file_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-secure-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — secure_files. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-list-secure-files-project
+      description: Get list of secure files in a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-secure-files.getapiv4projectsidsecurefiles
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-secure-file
+      description: Create a secure file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-secure-files.postapiv4projectsidsecurefiles
+      with:
+        id: tools.id
+        postApiV4ProjectsIdSecureFiles: tools.postApiV4ProjectsIdSecureFiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-details-specific-secure-file
+      description: Get the details of a specific secure file in a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-secure-files.getapiv4projectsidsecurefilessecurefileid
+      with:
+        id: tools.id
+        secure_file_id: tools.secure_file_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-secure-file
+      description: Remove a secure file
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-secure-files.deleteapiv4projectsidsecurefilessecurefileid
+      with:
+        id: tools.id
+        secure_file_id: tools.secure_file_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-secure-file
+      description: Download secure file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-secure-files.getapiv4projectsidsecurefilessecurefileiddownload
+      with:
+        id: tools.id
+        secure_file_id: tools.secure_file_id
+      outputParameters:
+      - type: object
+        mapping: $.

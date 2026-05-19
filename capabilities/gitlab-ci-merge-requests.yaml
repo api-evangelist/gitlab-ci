@@ -1,0 +1,2594 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — merge_requests
+  description: 'GitLab API — merge_requests. 32 operations. Lead operation: List group merge requests. Self-contained Naftiko
+    capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - merge_requests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-merge-requests
+    baseUri: https://gitlab.com
+    description: GitLab API — merge_requests business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-groups-id-merge_requests
+      path: /api/v4/groups/{id}/merge_requests
+      operations:
+      - name: getapiv4groupsidmergerequests
+        method: GET
+        description: List group merge requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the group owned by the authenticated user.
+          required: true
+        - name: author_id
+          in: query
+          type: integer
+          description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine
+            with `scope=all` or `scope=assigned_to_me`.
+        - name: author_username
+          in: query
+          type: string
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: assignee_id
+          in: query
+          type: integer
+          description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any`
+            returns merge requests with an assignee.
+        - name: assignee_username
+          in: query
+          type: array
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: reviewer_username
+          in: query
+          type: string
+          description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns
+            merge requests with no reviewers. `Any` returns merge request
+        - name: labels
+          in: query
+          type: array
+          description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with
+            no labels. `Any` lists all merge requests with at least o
+        - name: milestone
+          in: query
+          type: string
+          description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any`
+            returns merge requests that have an assigned milestone.
+        - name: my_reaction_emoji
+          in: query
+          type: string
+          description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues
+            not given a reaction. `Any` returns issues given at least o
+        - name: reviewer_id
+          in: query
+          type: integer
+          description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge
+            requests with no reviewers. `Any` returns merge requests
+        - name: state
+          in: query
+          type: string
+          description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
+        - name: order_by
+          in: query
+          type: string
+          description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`,
+            `title`, `updated_at` or `merged_at` fields. Introd
+        - name: sort
+          in: query
+          type: string
+          description: Returns merge requests sorted in `asc` or `desc` order.
+        - name: with_labels_details
+          in: query
+          type: boolean
+          description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`,
+            `:description_html`, `:text_color`'
+        - name: with_merge_status_recheck
+          in: query
+          type: boolean
+          description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated
+            asynchronously. Introduced in GitLab 13.0.
+        - name: created_after
+          in: query
+          type: string
+          description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
+        - name: created_before
+          in: query
+          type: string
+          description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
+        - name: updated_after
+          in: query
+          type: string
+          description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
+        - name: updated_before
+          in: query
+          type: string
+          description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
+        - name: view
+          in: query
+          type: string
+          description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
+        - name: scope
+          in: query
+          type: string
+          description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or
+            `all`'
+        - name: source_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given source branch
+        - name: source_project_id
+          in: query
+          type: integer
+          description: Returns merge requests with the given source project id
+        - name: target_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given target branch
+        - name: search
+          in: query
+          type: string
+          description: Search merge requests against their `title` and `description`.
+        - name: in
+          in: query
+          type: string
+          description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
+        - name: wip
+          in: query
+          type: string
+          description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return
+            only draft merge requests, `no` to return non-draft merge req
+        - name: draft
+          in: query
+          type: boolean
+          description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false`
+            to return non-draft merge requests.
+        - name: not[author_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`.
+            Combine with `scope=all` or `scope=assigned_to_me`'
+        - name: not[author_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[assignee_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge
+            requests. `Any` returns merge requests with an assignee.'
+        - name: not[assignee_username]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[reviewer_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None`
+            returns merge requests with no reviewers. `Any` returns m'
+        - name: not[labels]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge
+            requests with no labels. `Any` lists all merge requests wit'
+        - name: not[milestone]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no
+            milestone. `Any` returns merge requests that have an assigned'
+        - name: not[my_reaction_emoji]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None`
+            returns issues not given a reaction. `Any` returns issues give'
+        - name: not[reviewer_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None`
+            returns merge requests with no reviewers. `Any` returns me'
+        - name: deployed_before
+          in: query
+          type: string
+          description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
+        - name: deployed_after
+          in: query
+          type: string
+          description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
+        - name: environment
+          in: query
+          type: string
+          description: Returns merge requests deployed to the given environment
+        - name: approved
+          in: query
+          type: string
+          description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no`
+            returns only non-approved merge requests.
+        - name: merge_user_id
+          in: query
+          type: integer
+          description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive
+            with `merge_user_username`.
+        - name: merge_user_username
+          in: query
+          type: string
+          description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive
+            with `merge_user_id`.
+        - name: approver_ids
+          in: query
+          type: string
+          description: Return merge requests which have specified the users with the given IDs as an individual approver
+        - name: approved_by_ids
+          in: query
+          type: string
+          description: Return merge requests which have been approved by the specified users with the given IDs
+        - name: approved_by_usernames
+          in: query
+          type: string
+          description: Return merge requests which have been approved by the specified users with the given
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: non_archived
+          in: query
+          type: boolean
+          description: Returns merge requests from non archived projects only.
+    - name: api-v4-merge_requests
+      path: /api/v4/merge_requests
+      operations:
+      - name: getapiv4mergerequests
+        method: GET
+        description: List merge requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: author_id
+          in: query
+          type: integer
+          description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine
+            with `scope=all` or `scope=assigned_to_me`.
+        - name: author_username
+          in: query
+          type: string
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: assignee_id
+          in: query
+          type: integer
+          description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any`
+            returns merge requests with an assignee.
+        - name: assignee_username
+          in: query
+          type: array
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: reviewer_username
+          in: query
+          type: string
+          description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns
+            merge requests with no reviewers. `Any` returns merge request
+        - name: labels
+          in: query
+          type: array
+          description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with
+            no labels. `Any` lists all merge requests with at least o
+        - name: milestone
+          in: query
+          type: string
+          description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any`
+            returns merge requests that have an assigned milestone.
+        - name: my_reaction_emoji
+          in: query
+          type: string
+          description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues
+            not given a reaction. `Any` returns issues given at least o
+        - name: reviewer_id
+          in: query
+          type: integer
+          description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge
+            requests with no reviewers. `Any` returns merge requests
+        - name: state
+          in: query
+          type: string
+          description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
+        - name: order_by
+          in: query
+          type: string
+          description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`,
+            `title`, `updated_at` or `merged_at` fields. Introd
+        - name: sort
+          in: query
+          type: string
+          description: Returns merge requests sorted in `asc` or `desc` order.
+        - name: with_labels_details
+          in: query
+          type: boolean
+          description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`,
+            `:description_html`, `:text_color`'
+        - name: with_merge_status_recheck
+          in: query
+          type: boolean
+          description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated
+            asynchronously. Introduced in GitLab 13.0.
+        - name: created_after
+          in: query
+          type: string
+          description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
+        - name: created_before
+          in: query
+          type: string
+          description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
+        - name: updated_after
+          in: query
+          type: string
+          description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
+        - name: updated_before
+          in: query
+          type: string
+          description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
+        - name: view
+          in: query
+          type: string
+          description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
+        - name: scope
+          in: query
+          type: string
+          description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or
+            `all`'
+        - name: source_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given source branch
+        - name: source_project_id
+          in: query
+          type: integer
+          description: Returns merge requests with the given source project id
+        - name: target_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given target branch
+        - name: search
+          in: query
+          type: string
+          description: Search merge requests against their `title` and `description`.
+        - name: in
+          in: query
+          type: string
+          description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
+        - name: wip
+          in: query
+          type: string
+          description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return
+            only draft merge requests, `no` to return non-draft merge req
+        - name: draft
+          in: query
+          type: boolean
+          description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false`
+            to return non-draft merge requests.
+        - name: not[author_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`.
+            Combine with `scope=all` or `scope=assigned_to_me`'
+        - name: not[author_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[assignee_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge
+            requests. `Any` returns merge requests with an assignee.'
+        - name: not[assignee_username]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[reviewer_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None`
+            returns merge requests with no reviewers. `Any` returns m'
+        - name: not[labels]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge
+            requests with no labels. `Any` lists all merge requests wit'
+        - name: not[milestone]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no
+            milestone. `Any` returns merge requests that have an assigned'
+        - name: not[my_reaction_emoji]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None`
+            returns issues not given a reaction. `Any` returns issues give'
+        - name: not[reviewer_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None`
+            returns merge requests with no reviewers. `Any` returns me'
+        - name: deployed_before
+          in: query
+          type: string
+          description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
+        - name: deployed_after
+          in: query
+          type: string
+          description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
+        - name: environment
+          in: query
+          type: string
+          description: Returns merge requests deployed to the given environment
+        - name: approved
+          in: query
+          type: string
+          description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no`
+            returns only non-approved merge requests.
+        - name: merge_user_id
+          in: query
+          type: integer
+          description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive
+            with `merge_user_username`.
+        - name: merge_user_username
+          in: query
+          type: string
+          description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive
+            with `merge_user_id`.
+        - name: approver_ids
+          in: query
+          type: string
+          description: Return merge requests which have specified the users with the given IDs as an individual approver
+        - name: approved_by_ids
+          in: query
+          type: string
+          description: Return merge requests which have been approved by the specified users with the given IDs
+        - name: approved_by_usernames
+          in: query
+          type: string
+          description: Return merge requests which have been approved by the specified users with the given
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: non_archived
+          in: query
+          type: boolean
+          description: Returns merge requests from non archived projects only.
+    - name: api-v4-projects-id-create_ci_config
+      path: /api/v4/projects/{id}/create_ci_config
+      operations:
+      - name: postapiv4projectsidcreateciconfig
+        method: POST
+        description: Create merge request for missing ci config in project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests
+      path: /api/v4/projects/{id}/merge_requests
+      operations:
+      - name: getapiv4projectsidmergerequests
+        method: GET
+        description: List project merge requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: author_id
+          in: query
+          type: integer
+          description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine
+            with `scope=all` or `scope=assigned_to_me`.
+        - name: author_username
+          in: query
+          type: string
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: assignee_id
+          in: query
+          type: integer
+          description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any`
+            returns merge requests with an assignee.
+        - name: assignee_username
+          in: query
+          type: array
+          description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
+        - name: reviewer_username
+          in: query
+          type: string
+          description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns
+            merge requests with no reviewers. `Any` returns merge request
+        - name: labels
+          in: query
+          type: array
+          description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with
+            no labels. `Any` lists all merge requests with at least o
+        - name: milestone
+          in: query
+          type: string
+          description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any`
+            returns merge requests that have an assigned milestone.
+        - name: my_reaction_emoji
+          in: query
+          type: string
+          description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues
+            not given a reaction. `Any` returns issues given at least o
+        - name: reviewer_id
+          in: query
+          type: integer
+          description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge
+            requests with no reviewers. `Any` returns merge requests
+        - name: state
+          in: query
+          type: string
+          description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
+        - name: order_by
+          in: query
+          type: string
+          description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`,
+            `title`, `updated_at` or `merged_at` fields. Introd
+        - name: sort
+          in: query
+          type: string
+          description: Returns merge requests sorted in `asc` or `desc` order.
+        - name: with_labels_details
+          in: query
+          type: boolean
+          description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`,
+            `:description_html`, `:text_color`'
+        - name: with_merge_status_recheck
+          in: query
+          type: boolean
+          description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated
+            asynchronously. Introduced in GitLab 13.0.
+        - name: created_after
+          in: query
+          type: string
+          description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
+        - name: created_before
+          in: query
+          type: string
+          description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
+        - name: updated_after
+          in: query
+          type: string
+          description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
+        - name: updated_before
+          in: query
+          type: string
+          description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
+        - name: view
+          in: query
+          type: string
+          description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
+        - name: scope
+          in: query
+          type: string
+          description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or
+            `all`'
+        - name: source_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given source branch
+        - name: source_project_id
+          in: query
+          type: integer
+          description: Returns merge requests with the given source project id
+        - name: target_branch
+          in: query
+          type: string
+          description: Returns merge requests with the given target branch
+        - name: search
+          in: query
+          type: string
+          description: Search merge requests against their `title` and `description`.
+        - name: in
+          in: query
+          type: string
+          description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
+        - name: wip
+          in: query
+          type: string
+          description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return
+            only draft merge requests, `no` to return non-draft merge req
+        - name: draft
+          in: query
+          type: boolean
+          description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false`
+            to return non-draft merge requests.
+        - name: not[author_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`.
+            Combine with `scope=all` or `scope=assigned_to_me`'
+        - name: not[author_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[assignee_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge
+            requests. `Any` returns merge requests with an assignee.'
+        - name: not[assignee_username]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
+        - name: not[reviewer_username]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None`
+            returns merge requests with no reviewers. `Any` returns m'
+        - name: not[labels]
+          in: query
+          type: array
+          description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge
+            requests with no labels. `Any` lists all merge requests wit'
+        - name: not[milestone]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no
+            milestone. `Any` returns merge requests that have an assigned'
+        - name: not[my_reaction_emoji]
+          in: query
+          type: string
+          description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None`
+            returns issues not given a reaction. `Any` returns issues give'
+        - name: not[reviewer_id]
+          in: query
+          type: integer
+          description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None`
+            returns merge requests with no reviewers. `Any` returns me'
+        - name: deployed_before
+          in: query
+          type: string
+          description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
+        - name: deployed_after
+          in: query
+          type: string
+          description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
+        - name: environment
+          in: query
+          type: string
+          description: Returns merge requests deployed to the given environment
+        - name: approved
+          in: query
+          type: string
+          description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no`
+            returns only non-approved merge requests.
+        - name: merge_user_id
+          in: query
+          type: integer
+          description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive
+            with `merge_user_username`.
+        - name: merge_user_username
+          in: query
+          type: string
+          description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive
+            with `merge_user_id`.
+        - name: approver_ids
+          in: query
+          type: string
+          description: Return merge requests which have specified the users with the given IDs as an individual approver
+        - name: approved_by_ids
+          in: query
+          type: string
+          description: Return merge requests which have been approved by the specified users with the given IDs
+        - name: approved_by_usernames
+          in: query
+          type: string
+          description: Return merge requests which have been approved by the specified users with the given
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: iids
+          in: query
+          type: array
+          description: Returns the request having the given `iid`.
+      - name: postapiv4projectsidmergerequests
+        method: POST
+        description: Create merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: postApiV4ProjectsIdMergeRequests
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}
+      operations:
+      - name: deleteapiv4projectsidmergerequestsmergerequestiid
+        method: DELETE
+        description: Delete a merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request.
+          required: true
+      - name: getapiv4projectsidmergerequestsmergerequestiid
+        method: GET
+        description: Get single merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request.
+          required: true
+        - name: render_html
+          in: query
+          type: boolean
+          description: If `true`, response includes rendered HTML for title and description.
+        - name: include_diverged_commits_count
+          in: query
+          type: boolean
+          description: If `true`, response includes the commits behind the target branch.
+        - name: include_rebase_in_progress
+          in: query
+          type: boolean
+          description: If `true`, response includes whether a rebase operation is in progress.
+      - name: putapiv4projectsidmergerequestsmergerequestiid
+        method: PUT
+        description: Update merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: putApiV4ProjectsIdMergeRequestsMergeRequestIid
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-add_spent_time
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/add_spent_time
+      operations:
+      - name: postapiv4projectsidmergerequestsmergerequestiidaddspenttime
+        method: POST
+        description: Add spent time for a merge_request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge_request.
+          required: true
+        - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-cancel_merge_when_pipeline_s
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/cancel_merge_when_pipeline_succeeds
+      operations:
+      - name: postapiv4projectsidmergerequestsmergerequestiidcancelmergewhenpipelinesucceeds
+        method: POST
+        description: Cancel Merge When Pipeline Succeeds
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-changes
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/changes
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidchanges
+        method: GET
+        description: Get single merge request changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: unidiff
+          in: query
+          type: boolean
+          description: A diff in a Unified diff format
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-closes_issues
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/closes_issues
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidclosesissues
+        method: GET
+        description: List issues that close on merge
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-commits
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/commits
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidcommits
+        method: GET
+        description: Get single merge request commits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-context_commits
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/context_commits
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        method: GET
+        description: List merge request context commits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+      - name: postapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        method: POST
+        description: Create merge request context commits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        method: DELETE
+        description: Delete merge request context commits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: commits
+          in: query
+          type: array
+          description: The context commits’ SHA.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-diffs
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/diffs
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiiddiffs
+        method: GET
+        description: Get the merge request diffs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: unidiff
+          in: query
+          type: boolean
+          description: A diff in a Unified diff format
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-merge
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/merge
+      operations:
+      - name: putapiv4projectsidmergerequestsmergerequestiidmerge
+        method: PUT
+        description: Merge a merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-merge_ref
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/merge_ref
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidmergeref
+        method: GET
+        description: Returns the up to date merge-ref HEAD commit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-participants
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/participants
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidparticipants
+        method: GET
+        description: Get single merge request participants
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-pipelines
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/pipelines
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidpipelines
+        method: GET
+        description: Get single merge request pipelines
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request.
+          required: true
+      - name: postapiv4projectsidmergerequestsmergerequestiidpipelines
+        method: POST
+        description: Create merge request pipeline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-raw_diffs
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/raw_diffs
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidrawdiffs
+        method: GET
+        description: Get the merge request raw diffs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-rebase
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/rebase
+      operations:
+      - name: putapiv4projectsidmergerequestsmergerequestiidrebase
+        method: PUT
+        description: Rebase a merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+        - name: putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-related_issues
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/related_issues
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidrelatedissues
+        method: GET
+        description: List issues related to merge request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-reset_spent_time
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_spent_time
+      operations:
+      - name: postapiv4projectsidmergerequestsmergerequestiidresetspenttime
+        method: POST
+        description: Reset spent time for a merge_request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge_request
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-reset_time_estimate
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_time_estimate
+      operations:
+      - name: postapiv4projectsidmergerequestsmergerequestiidresettimeestimate
+        method: POST
+        description: Reset the time estimate for a project merge_request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge_request.
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-reviewers
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reviewers
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidreviewers
+        method: GET
+        description: Get single merge request reviewers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-time_estimate
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/time_estimate
+      operations:
+      - name: postapiv4projectsidmergerequestsmergerequestiidtimeestimate
+        method: POST
+        description: Set a time estimate for a merge_request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge_request.
+          required: true
+        - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-time_stats
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/time_stats
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidtimestats
+        method: GET
+        description: Get time tracking stats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project.
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge_request
+          required: true
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-versions
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/versions
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidversions
+        method: GET
+        description: Get a list of merge request diff versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-merge_requests-merge_request_iid-versions-version_id
+      path: /api/v4/projects/{id}/merge_requests/{merge_request_iid}/versions/{version_id}
+      operations:
+      - name: getapiv4projectsidmergerequestsmergerequestiidversionsversionid
+        method: GET
+        description: Get a single merge request diff version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: merge_request_iid
+          in: path
+          type: integer
+          description: The internal ID of the merge request
+          required: true
+        - name: version_id
+          in: path
+          type: integer
+          description: The ID of the merge request diff version
+          required: true
+        - name: unidiff
+          in: query
+          type: boolean
+          description: A diff in a Unified diff format
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-merge-requests-rest
+    port: 8080
+    description: REST adapter for GitLab API — merge_requests. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/groups/{id}/merge-requests
+      name: api-v4-groups-id-merge-requests
+      description: REST surface for api-v4-groups-id-merge_requests.
+      operations:
+      - method: GET
+        name: getapiv4groupsidmergerequests
+        description: List group merge requests
+        call: gitlab-ci-merge-requests.getapiv4groupsidmergerequests
+        with:
+          id: rest.id
+          author_id: rest.author_id
+          author_username: rest.author_username
+          assignee_id: rest.assignee_id
+          assignee_username: rest.assignee_username
+          reviewer_username: rest.reviewer_username
+          labels: rest.labels
+          milestone: rest.milestone
+          my_reaction_emoji: rest.my_reaction_emoji
+          reviewer_id: rest.reviewer_id
+          state: rest.state
+          order_by: rest.order_by
+          sort: rest.sort
+          with_labels_details: rest.with_labels_details
+          with_merge_status_recheck: rest.with_merge_status_recheck
+          created_after: rest.created_after
+          created_before: rest.created_before
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          view: rest.view
+          scope: rest.scope
+          source_branch: rest.source_branch
+          source_project_id: rest.source_project_id
+          target_branch: rest.target_branch
+          search: rest.search
+          in: rest.in
+          wip: rest.wip
+          draft: rest.draft
+          not[author_id]: rest.not[author_id]
+          not[author_username]: rest.not[author_username]
+          not[assignee_id]: rest.not[assignee_id]
+          not[assignee_username]: rest.not[assignee_username]
+          not[reviewer_username]: rest.not[reviewer_username]
+          not[labels]: rest.not[labels]
+          not[milestone]: rest.not[milestone]
+          not[my_reaction_emoji]: rest.not[my_reaction_emoji]
+          not[reviewer_id]: rest.not[reviewer_id]
+          deployed_before: rest.deployed_before
+          deployed_after: rest.deployed_after
+          environment: rest.environment
+          approved: rest.approved
+          merge_user_id: rest.merge_user_id
+          merge_user_username: rest.merge_user_username
+          approver_ids: rest.approver_ids
+          approved_by_ids: rest.approved_by_ids
+          approved_by_usernames: rest.approved_by_usernames
+          page: rest.page
+          per_page: rest.per_page
+          non_archived: rest.non_archived
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/merge-requests
+      name: api-v4-merge-requests
+      description: REST surface for api-v4-merge_requests.
+      operations:
+      - method: GET
+        name: getapiv4mergerequests
+        description: List merge requests
+        call: gitlab-ci-merge-requests.getapiv4mergerequests
+        with:
+          author_id: rest.author_id
+          author_username: rest.author_username
+          assignee_id: rest.assignee_id
+          assignee_username: rest.assignee_username
+          reviewer_username: rest.reviewer_username
+          labels: rest.labels
+          milestone: rest.milestone
+          my_reaction_emoji: rest.my_reaction_emoji
+          reviewer_id: rest.reviewer_id
+          state: rest.state
+          order_by: rest.order_by
+          sort: rest.sort
+          with_labels_details: rest.with_labels_details
+          with_merge_status_recheck: rest.with_merge_status_recheck
+          created_after: rest.created_after
+          created_before: rest.created_before
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          view: rest.view
+          scope: rest.scope
+          source_branch: rest.source_branch
+          source_project_id: rest.source_project_id
+          target_branch: rest.target_branch
+          search: rest.search
+          in: rest.in
+          wip: rest.wip
+          draft: rest.draft
+          not[author_id]: rest.not[author_id]
+          not[author_username]: rest.not[author_username]
+          not[assignee_id]: rest.not[assignee_id]
+          not[assignee_username]: rest.not[assignee_username]
+          not[reviewer_username]: rest.not[reviewer_username]
+          not[labels]: rest.not[labels]
+          not[milestone]: rest.not[milestone]
+          not[my_reaction_emoji]: rest.not[my_reaction_emoji]
+          not[reviewer_id]: rest.not[reviewer_id]
+          deployed_before: rest.deployed_before
+          deployed_after: rest.deployed_after
+          environment: rest.environment
+          approved: rest.approved
+          merge_user_id: rest.merge_user_id
+          merge_user_username: rest.merge_user_username
+          approver_ids: rest.approver_ids
+          approved_by_ids: rest.approved_by_ids
+          approved_by_usernames: rest.approved_by_usernames
+          page: rest.page
+          per_page: rest.per_page
+          non_archived: rest.non_archived
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/create-ci-config
+      name: api-v4-projects-id-create-ci-config
+      description: REST surface for api-v4-projects-id-create_ci_config.
+      operations:
+      - method: POST
+        name: postapiv4projectsidcreateciconfig
+        description: Create merge request for missing ci config in project
+        call: gitlab-ci-merge-requests.postapiv4projectsidcreateciconfig
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests
+      name: api-v4-projects-id-merge-requests
+      description: REST surface for api-v4-projects-id-merge_requests.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequests
+        description: List project merge requests
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequests
+        with:
+          id: rest.id
+          author_id: rest.author_id
+          author_username: rest.author_username
+          assignee_id: rest.assignee_id
+          assignee_username: rest.assignee_username
+          reviewer_username: rest.reviewer_username
+          labels: rest.labels
+          milestone: rest.milestone
+          my_reaction_emoji: rest.my_reaction_emoji
+          reviewer_id: rest.reviewer_id
+          state: rest.state
+          order_by: rest.order_by
+          sort: rest.sort
+          with_labels_details: rest.with_labels_details
+          with_merge_status_recheck: rest.with_merge_status_recheck
+          created_after: rest.created_after
+          created_before: rest.created_before
+          updated_after: rest.updated_after
+          updated_before: rest.updated_before
+          view: rest.view
+          scope: rest.scope
+          source_branch: rest.source_branch
+          source_project_id: rest.source_project_id
+          target_branch: rest.target_branch
+          search: rest.search
+          in: rest.in
+          wip: rest.wip
+          draft: rest.draft
+          not[author_id]: rest.not[author_id]
+          not[author_username]: rest.not[author_username]
+          not[assignee_id]: rest.not[assignee_id]
+          not[assignee_username]: rest.not[assignee_username]
+          not[reviewer_username]: rest.not[reviewer_username]
+          not[labels]: rest.not[labels]
+          not[milestone]: rest.not[milestone]
+          not[my_reaction_emoji]: rest.not[my_reaction_emoji]
+          not[reviewer_id]: rest.not[reviewer_id]
+          deployed_before: rest.deployed_before
+          deployed_after: rest.deployed_after
+          environment: rest.environment
+          approved: rest.approved
+          merge_user_id: rest.merge_user_id
+          merge_user_username: rest.merge_user_username
+          approver_ids: rest.approver_ids
+          approved_by_ids: rest.approved_by_ids
+          approved_by_usernames: rest.approved_by_usernames
+          page: rest.page
+          per_page: rest.per_page
+          iids: rest.iids
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidmergerequests
+        description: Create merge request
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequests
+        with:
+          id: rest.id
+          postApiV4ProjectsIdMergeRequests: rest.postApiV4ProjectsIdMergeRequests
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}
+      name: api-v4-projects-id-merge-requests-merge-request-iid
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid.
+      operations:
+      - method: DELETE
+        name: deleteapiv4projectsidmergerequestsmergerequestiid
+        description: Delete a merge request
+        call: gitlab-ci-merge-requests.deleteapiv4projectsidmergerequestsmergerequestiid
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiid
+        description: Get single merge request
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiid
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          render_html: rest.render_html
+          include_diverged_commits_count: rest.include_diverged_commits_count
+          include_rebase_in_progress: rest.include_rebase_in_progress
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidmergerequestsmergerequestiid
+        description: Update merge request
+        call: gitlab-ci-merge-requests.putapiv4projectsidmergerequestsmergerequestiid
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          putApiV4ProjectsIdMergeRequestsMergeRequestIid: rest.putApiV4ProjectsIdMergeRequestsMergeRequestIid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/add-spent-time
+      name: api-v4-projects-id-merge-requests-merge-request-iid-add-spent-time
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-add_spent_time.
+      operations:
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidaddspenttime
+        description: Add spent time for a merge_request
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidaddspenttime
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime: rest.postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/cancel-merge-when-pipeline-succeeds
+      name: api-v4-projects-id-merge-requests-merge-request-iid-cancel-merge-when-pipeline-s
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-cancel_merge_when_pipeline_s.
+      operations:
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidcancelmergewhenpipelinesucceeds
+        description: Cancel Merge When Pipeline Succeeds
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidcancelmergewhenpipelinesucceeds
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/changes
+      name: api-v4-projects-id-merge-requests-merge-request-iid-changes
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-changes.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidchanges
+        description: Get single merge request changes
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidchanges
+        with:
+          id: rest.id
+          unidiff: rest.unidiff
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/closes-issues
+      name: api-v4-projects-id-merge-requests-merge-request-iid-closes-issues
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-closes_issues.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidclosesissues
+        description: List issues that close on merge
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidclosesissues
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/commits
+      name: api-v4-projects-id-merge-requests-merge-request-iid-commits
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-commits.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidcommits
+        description: Get single merge request commits
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidcommits
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/context-commits
+      name: api-v4-projects-id-merge-requests-merge-request-iid-context-commits
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-context_commits.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        description: List merge request context commits
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        description: Create merge request context commits
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits: rest.postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        description: Delete merge request context commits
+        call: gitlab-ci-merge-requests.deleteapiv4projectsidmergerequestsmergerequestiidcontextcommits
+        with:
+          id: rest.id
+          commits: rest.commits
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/diffs
+      name: api-v4-projects-id-merge-requests-merge-request-iid-diffs
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-diffs.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiiddiffs
+        description: Get the merge request diffs
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiiddiffs
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          page: rest.page
+          per_page: rest.per_page
+          unidiff: rest.unidiff
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/merge
+      name: api-v4-projects-id-merge-requests-merge-request-iid-merge
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-merge.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidmergerequestsmergerequestiidmerge
+        description: Merge a merge request
+        call: gitlab-ci-merge-requests.putapiv4projectsidmergerequestsmergerequestiidmerge
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge: rest.putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/merge-ref
+      name: api-v4-projects-id-merge-requests-merge-request-iid-merge-ref
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-merge_ref.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidmergeref
+        description: Returns the up to date merge-ref HEAD commit
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidmergeref
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/participants
+      name: api-v4-projects-id-merge-requests-merge-request-iid-participants
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-participants.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidparticipants
+        description: Get single merge request participants
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidparticipants
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/pipelines
+      name: api-v4-projects-id-merge-requests-merge-request-iid-pipelines
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-pipelines.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidpipelines
+        description: Get single merge request pipelines
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidpipelines
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidpipelines
+        description: Create merge request pipeline
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidpipelines
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines: rest.postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/raw-diffs
+      name: api-v4-projects-id-merge-requests-merge-request-iid-raw-diffs
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-raw_diffs.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidrawdiffs
+        description: Get the merge request raw diffs
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidrawdiffs
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/rebase
+      name: api-v4-projects-id-merge-requests-merge-request-iid-rebase
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-rebase.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidmergerequestsmergerequestiidrebase
+        description: Rebase a merge request
+        call: gitlab-ci-merge-requests.putapiv4projectsidmergerequestsmergerequestiidrebase
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase: rest.putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/related-issues
+      name: api-v4-projects-id-merge-requests-merge-request-iid-related-issues
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-related_issues.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidrelatedissues
+        description: List issues related to merge request
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidrelatedissues
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/reset-spent-time
+      name: api-v4-projects-id-merge-requests-merge-request-iid-reset-spent-time
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-reset_spent_time.
+      operations:
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidresetspenttime
+        description: Reset spent time for a merge_request
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidresetspenttime
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/reset-time-estimate
+      name: api-v4-projects-id-merge-requests-merge-request-iid-reset-time-estimate
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-reset_time_estimate.
+      operations:
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidresettimeestimate
+        description: Reset the time estimate for a project merge_request
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidresettimeestimate
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/reviewers
+      name: api-v4-projects-id-merge-requests-merge-request-iid-reviewers
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-reviewers.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidreviewers
+        description: Get single merge request reviewers
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidreviewers
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/time-estimate
+      name: api-v4-projects-id-merge-requests-merge-request-iid-time-estimate
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-time_estimate.
+      operations:
+      - method: POST
+        name: postapiv4projectsidmergerequestsmergerequestiidtimeestimate
+        description: Set a time estimate for a merge_request
+        call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidtimeestimate
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate: rest.postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/time-stats
+      name: api-v4-projects-id-merge-requests-merge-request-iid-time-stats
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-time_stats.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidtimestats
+        description: Get time tracking stats
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidtimestats
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/versions
+      name: api-v4-projects-id-merge-requests-merge-request-iid-versions
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-versions.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidversions
+        description: Get a list of merge request diff versions
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidversions
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/merge-requests/{merge-request-iid}/versions/{version-id}
+      name: api-v4-projects-id-merge-requests-merge-request-iid-versions-version-id
+      description: REST surface for api-v4-projects-id-merge_requests-merge_request_iid-versions-version_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmergerequestsmergerequestiidversionsversionid
+        description: Get a single merge request diff version
+        call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidversionsversionid
+        with:
+          id: rest.id
+          merge_request_iid: rest.merge_request_iid
+          version_id: rest.version_id
+          unidiff: rest.unidiff
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-merge-requests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — merge_requests. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-group-merge-requests
+      description: List group merge requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4groupsidmergerequests
+      with:
+        id: tools.id
+        author_id: tools.author_id
+        author_username: tools.author_username
+        assignee_id: tools.assignee_id
+        assignee_username: tools.assignee_username
+        reviewer_username: tools.reviewer_username
+        labels: tools.labels
+        milestone: tools.milestone
+        my_reaction_emoji: tools.my_reaction_emoji
+        reviewer_id: tools.reviewer_id
+        state: tools.state
+        order_by: tools.order_by
+        sort: tools.sort
+        with_labels_details: tools.with_labels_details
+        with_merge_status_recheck: tools.with_merge_status_recheck
+        created_after: tools.created_after
+        created_before: tools.created_before
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        view: tools.view
+        scope: tools.scope
+        source_branch: tools.source_branch
+        source_project_id: tools.source_project_id
+        target_branch: tools.target_branch
+        search: tools.search
+        in: tools.in
+        wip: tools.wip
+        draft: tools.draft
+        not[author_id]: tools.not[author_id]
+        not[author_username]: tools.not[author_username]
+        not[assignee_id]: tools.not[assignee_id]
+        not[assignee_username]: tools.not[assignee_username]
+        not[reviewer_username]: tools.not[reviewer_username]
+        not[labels]: tools.not[labels]
+        not[milestone]: tools.not[milestone]
+        not[my_reaction_emoji]: tools.not[my_reaction_emoji]
+        not[reviewer_id]: tools.not[reviewer_id]
+        deployed_before: tools.deployed_before
+        deployed_after: tools.deployed_after
+        environment: tools.environment
+        approved: tools.approved
+        merge_user_id: tools.merge_user_id
+        merge_user_username: tools.merge_user_username
+        approver_ids: tools.approver_ids
+        approved_by_ids: tools.approved_by_ids
+        approved_by_usernames: tools.approved_by_usernames
+        page: tools.page
+        per_page: tools.per_page
+        non_archived: tools.non_archived
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-merge-requests
+      description: List merge requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4mergerequests
+      with:
+        author_id: tools.author_id
+        author_username: tools.author_username
+        assignee_id: tools.assignee_id
+        assignee_username: tools.assignee_username
+        reviewer_username: tools.reviewer_username
+        labels: tools.labels
+        milestone: tools.milestone
+        my_reaction_emoji: tools.my_reaction_emoji
+        reviewer_id: tools.reviewer_id
+        state: tools.state
+        order_by: tools.order_by
+        sort: tools.sort
+        with_labels_details: tools.with_labels_details
+        with_merge_status_recheck: tools.with_merge_status_recheck
+        created_after: tools.created_after
+        created_before: tools.created_before
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        view: tools.view
+        scope: tools.scope
+        source_branch: tools.source_branch
+        source_project_id: tools.source_project_id
+        target_branch: tools.target_branch
+        search: tools.search
+        in: tools.in
+        wip: tools.wip
+        draft: tools.draft
+        not[author_id]: tools.not[author_id]
+        not[author_username]: tools.not[author_username]
+        not[assignee_id]: tools.not[assignee_id]
+        not[assignee_username]: tools.not[assignee_username]
+        not[reviewer_username]: tools.not[reviewer_username]
+        not[labels]: tools.not[labels]
+        not[milestone]: tools.not[milestone]
+        not[my_reaction_emoji]: tools.not[my_reaction_emoji]
+        not[reviewer_id]: tools.not[reviewer_id]
+        deployed_before: tools.deployed_before
+        deployed_after: tools.deployed_after
+        environment: tools.environment
+        approved: tools.approved
+        merge_user_id: tools.merge_user_id
+        merge_user_username: tools.merge_user_username
+        approver_ids: tools.approver_ids
+        approved_by_ids: tools.approved_by_ids
+        approved_by_usernames: tools.approved_by_usernames
+        page: tools.page
+        per_page: tools.per_page
+        non_archived: tools.non_archived
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-merge-request-missing-ci
+      description: Create merge request for missing ci config in project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidcreateciconfig
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-project-merge-requests
+      description: List project merge requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequests
+      with:
+        id: tools.id
+        author_id: tools.author_id
+        author_username: tools.author_username
+        assignee_id: tools.assignee_id
+        assignee_username: tools.assignee_username
+        reviewer_username: tools.reviewer_username
+        labels: tools.labels
+        milestone: tools.milestone
+        my_reaction_emoji: tools.my_reaction_emoji
+        reviewer_id: tools.reviewer_id
+        state: tools.state
+        order_by: tools.order_by
+        sort: tools.sort
+        with_labels_details: tools.with_labels_details
+        with_merge_status_recheck: tools.with_merge_status_recheck
+        created_after: tools.created_after
+        created_before: tools.created_before
+        updated_after: tools.updated_after
+        updated_before: tools.updated_before
+        view: tools.view
+        scope: tools.scope
+        source_branch: tools.source_branch
+        source_project_id: tools.source_project_id
+        target_branch: tools.target_branch
+        search: tools.search
+        in: tools.in
+        wip: tools.wip
+        draft: tools.draft
+        not[author_id]: tools.not[author_id]
+        not[author_username]: tools.not[author_username]
+        not[assignee_id]: tools.not[assignee_id]
+        not[assignee_username]: tools.not[assignee_username]
+        not[reviewer_username]: tools.not[reviewer_username]
+        not[labels]: tools.not[labels]
+        not[milestone]: tools.not[milestone]
+        not[my_reaction_emoji]: tools.not[my_reaction_emoji]
+        not[reviewer_id]: tools.not[reviewer_id]
+        deployed_before: tools.deployed_before
+        deployed_after: tools.deployed_after
+        environment: tools.environment
+        approved: tools.approved
+        merge_user_id: tools.merge_user_id
+        merge_user_username: tools.merge_user_username
+        approver_ids: tools.approver_ids
+        approved_by_ids: tools.approved_by_ids
+        approved_by_usernames: tools.approved_by_usernames
+        page: tools.page
+        per_page: tools.per_page
+        iids: tools.iids
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-merge-request
+      description: Create merge request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequests
+      with:
+        id: tools.id
+        postApiV4ProjectsIdMergeRequests: tools.postApiV4ProjectsIdMergeRequests
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-merge-request
+      description: Delete a merge request
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-merge-requests.deleteapiv4projectsidmergerequestsmergerequestiid
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request
+      description: Get single merge request
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiid
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        render_html: tools.render_html
+        include_diverged_commits_count: tools.include_diverged_commits_count
+        include_rebase_in_progress: tools.include_rebase_in_progress
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-merge-request
+      description: Update merge request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.putapiv4projectsidmergerequestsmergerequestiid
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        putApiV4ProjectsIdMergeRequestsMergeRequestIid: tools.putApiV4ProjectsIdMergeRequestsMergeRequestIid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-spent-time-merge-request
+      description: Add spent time for a merge_request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidaddspenttime
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime: tools.postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-merge-when-pipeline-succeeds
+      description: Cancel Merge When Pipeline Succeeds
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidcancelmergewhenpipelinesucceeds
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-changes
+      description: Get single merge request changes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidchanges
+      with:
+        id: tools.id
+        unidiff: tools.unidiff
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-issues-that-close-merge
+      description: List issues that close on merge
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidclosesissues
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-commits
+      description: Get single merge request commits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidcommits
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-merge-request-context-commits
+      description: List merge request context commits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidcontextcommits
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-merge-request-context-commits
+      description: Create merge request context commits
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidcontextcommits
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits: tools.postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-merge-request-context-commits
+      description: Delete merge request context commits
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-merge-requests.deleteapiv4projectsidmergerequestsmergerequestiidcontextcommits
+      with:
+        id: tools.id
+        commits: tools.commits
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-merge-request-diffs
+      description: Get the merge request diffs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiiddiffs
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        page: tools.page
+        per_page: tools.per_page
+        unidiff: tools.unidiff
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: merge-merge-request
+      description: Merge a merge request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.putapiv4projectsidmergerequestsmergerequestiidmerge
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge: tools.putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: returns-up-date-merge-ref
+      description: Returns the up to date merge-ref HEAD commit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidmergeref
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-participants
+      description: Get single merge request participants
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidparticipants
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-pipelines
+      description: Get single merge request pipelines
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidpipelines
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-merge-request-pipeline
+      description: Create merge request pipeline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidpipelines
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines: tools.postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-merge-request-raw-diffs
+      description: Get the merge request raw diffs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidrawdiffs
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rebase-merge-request
+      description: Rebase a merge request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.putapiv4projectsidmergerequestsmergerequestiidrebase
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase: tools.putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-issues-related-merge-request
+      description: List issues related to merge request
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidrelatedissues
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-spent-time-merge-request
+      description: Reset spent time for a merge_request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidresetspenttime
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-time-estimate-project-merge
+      description: Reset the time estimate for a project merge_request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidresettimeestimate
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-reviewers
+      description: Get single merge request reviewers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidreviewers
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-time-estimate-merge-request
+      description: Set a time estimate for a merge_request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-merge-requests.postapiv4projectsidmergerequestsmergerequestiidtimeestimate
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate: tools.postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-time-tracking-stats
+      description: Get time tracking stats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidtimestats
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-merge-request-diff
+      description: Get a list of merge request diff versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidversions
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-merge-request-diff
+      description: Get a single merge request diff version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-merge-requests.getapiv4projectsidmergerequestsmergerequestiidversionsversionid
+      with:
+        id: tools.id
+        merge_request_iid: tools.merge_request_iid
+        version_id: tools.version_id
+        unidiff: tools.unidiff
+      outputParameters:
+      - type: object
+        mapping: $.

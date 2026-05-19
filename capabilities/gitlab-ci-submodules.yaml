@@ -1,0 +1,90 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — submodules
+  description: 'GitLab API — submodules. 1 operations. Lead operation: submodules. Self-contained Naftiko capability covering
+    one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - submodules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-submodules
+    baseUri: https://gitlab.com
+    description: GitLab API — submodules business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-repository-submodules-submodule
+      path: /api/v4/projects/{id}/repository/submodules/{submodule}
+      operations:
+      - name: putapiv4projectsidrepositorysubmodulessubmodule
+        method: PUT
+        description: Update existing submodule reference in repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of a project
+          required: true
+        - name: submodule
+          in: path
+          type: string
+          description: URL-encoded full path to submodule.
+          required: true
+        - name: putApiV4ProjectsIdRepositorySubmodulesSubmodule
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-submodules-rest
+    port: 8080
+    description: REST adapter for GitLab API — submodules. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/repository/submodules/{submodule}
+      name: api-v4-projects-id-repository-submodules-submodule
+      description: REST surface for api-v4-projects-id-repository-submodules-submodule.
+      operations:
+      - method: PUT
+        name: putapiv4projectsidrepositorysubmodulessubmodule
+        description: Update existing submodule reference in repository
+        call: gitlab-ci-submodules.putapiv4projectsidrepositorysubmodulessubmodule
+        with:
+          id: rest.id
+          submodule: rest.submodule
+          putApiV4ProjectsIdRepositorySubmodulesSubmodule: rest.putApiV4ProjectsIdRepositorySubmodulesSubmodule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-submodules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — submodules. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: update-existing-submodule-reference-repository
+      description: Update existing submodule reference in repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-submodules.putapiv4projectsidrepositorysubmodulessubmodule
+      with:
+        id: tools.id
+        submodule: tools.submodule
+        putApiV4ProjectsIdRepositorySubmodulesSubmodule: tools.putApiV4ProjectsIdRepositorySubmodulesSubmodule
+      outputParameters:
+      - type: object
+        mapping: $.

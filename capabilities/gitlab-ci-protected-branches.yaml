@@ -1,0 +1,275 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — protected_branches
+  description: 'GitLab API — protected_branches. 5 operations. Lead operation: protected_branches. Self-contained Naftiko
+    capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - protected_branches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-protected-branches
+    baseUri: https://gitlab.com
+    description: GitLab API — protected_branches business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-protected_branches
+      path: /api/v4/projects/{id}/protected_branches
+      operations:
+      - name: getapiv4projectsidprotectedbranches
+        method: GET
+        description: Get a project's protected branches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: search
+          in: query
+          type: string
+          description: Search for a protected branch by name
+      - name: postapiv4projectsidprotectedbranches
+        method: POST
+        description: Protect a single branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdProtectedBranches
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-protected_branches-name
+      path: /api/v4/projects/{id}/protected_branches/{name}
+      operations:
+      - name: getapiv4projectsidprotectedbranchesname
+        method: GET
+        description: Get a single protected branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of the branch or wildcard
+          required: true
+      - name: patchapiv4projectsidprotectedbranchesname
+        method: PATCH
+        description: Update a protected branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of the branch
+          required: true
+        - name: patchApiV4ProjectsIdProtectedBranchesName
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidprotectedbranchesname
+        method: DELETE
+        description: Unprotect a single branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: The name of the protected branch
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-protected-branches-rest
+    port: 8080
+    description: REST adapter for GitLab API — protected_branches. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/protected-branches
+      name: api-v4-projects-id-protected-branches
+      description: REST surface for api-v4-projects-id-protected_branches.
+      operations:
+      - method: GET
+        name: getapiv4projectsidprotectedbranches
+        description: Get a project's protected branches
+        call: gitlab-ci-protected-branches.getapiv4projectsidprotectedbranches
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          search: rest.search
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidprotectedbranches
+        description: Protect a single branch
+        call: gitlab-ci-protected-branches.postapiv4projectsidprotectedbranches
+        with:
+          id: rest.id
+          postApiV4ProjectsIdProtectedBranches: rest.postApiV4ProjectsIdProtectedBranches
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/protected-branches/{name}
+      name: api-v4-projects-id-protected-branches-name
+      description: REST surface for api-v4-projects-id-protected_branches-name.
+      operations:
+      - method: GET
+        name: getapiv4projectsidprotectedbranchesname
+        description: Get a single protected branch
+        call: gitlab-ci-protected-branches.getapiv4projectsidprotectedbranchesname
+        with:
+          id: rest.id
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchapiv4projectsidprotectedbranchesname
+        description: Update a protected branch
+        call: gitlab-ci-protected-branches.patchapiv4projectsidprotectedbranchesname
+        with:
+          id: rest.id
+          name: rest.name
+          patchApiV4ProjectsIdProtectedBranchesName: rest.patchApiV4ProjectsIdProtectedBranchesName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidprotectedbranchesname
+        description: Unprotect a single branch
+        call: gitlab-ci-protected-branches.deleteapiv4projectsidprotectedbranchesname
+        with:
+          id: rest.id
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-protected-branches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — protected_branches. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-project-s-protected-branches
+      description: Get a project's protected branches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-protected-branches.getapiv4projectsidprotectedbranches
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        search: tools.search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: protect-single-branch
+      description: Protect a single branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-protected-branches.postapiv4projectsidprotectedbranches
+      with:
+        id: tools.id
+        postApiV4ProjectsIdProtectedBranches: tools.postApiV4ProjectsIdProtectedBranches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-protected-branch
+      description: Get a single protected branch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-protected-branches.getapiv4projectsidprotectedbranchesname
+      with:
+        id: tools.id
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-protected-branch
+      description: Update a protected branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-protected-branches.patchapiv4projectsidprotectedbranchesname
+      with:
+        id: tools.id
+        name: tools.name
+        patchApiV4ProjectsIdProtectedBranchesName: tools.patchApiV4ProjectsIdProtectedBranchesName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unprotect-single-branch
+      description: Unprotect a single branch
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-protected-branches.deleteapiv4projectsidprotectedbranchesname
+      with:
+        id: tools.id
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.

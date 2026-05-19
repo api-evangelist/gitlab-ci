@@ -1,0 +1,76 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — glql
+  description: 'GitLab API — glql. 1 operations. Lead operation: Execute GLQL query. Self-contained Naftiko capability covering
+    one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - glql
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-glql
+    baseUri: https://gitlab.com
+    description: GitLab API — glql business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-glql
+      path: /api/v4/glql
+      operations:
+      - name: postapiv4glql
+        method: POST
+        description: Execute GLQL query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4Glql
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-glql-rest
+    port: 8080
+    description: REST adapter for GitLab API — glql. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/glql
+      name: api-v4-glql
+      description: REST surface for api-v4-glql.
+      operations:
+      - method: POST
+        name: postapiv4glql
+        description: Execute GLQL query
+        call: gitlab-ci-glql.postapiv4glql
+        with:
+          postApiV4Glql: rest.postApiV4Glql
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-glql-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — glql. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: execute-glql-query
+      description: Execute GLQL query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-glql.postapiv4glql
+      with:
+        postApiV4Glql: tools.postApiV4Glql
+      outputParameters:
+      - type: object
+        mapping: $.

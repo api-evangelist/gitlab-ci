@@ -1,0 +1,293 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — unleash
+  description: 'GitLab API — unleash. 5 operations. Lead operation: Get a list of features (v2 client support). Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - unleash
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-unleash
+    baseUri: https://gitlab.com
+    description: GitLab API — unleash business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-feature_flags-unleash-project_id
+      path: /api/v4/feature_flags/unleash/{project_id}
+      operations:
+      - name: getapiv4featureflagsunleashprojectid
+        method: GET
+        description: Get Unleash features
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: The ID of a project
+          required: true
+        - name: instance_id
+          in: query
+          type: string
+          description: The instance ID of Unleash Client
+        - name: app_name
+          in: query
+          type: string
+          description: The application name of Unleash Client
+    - name: api-v4-feature_flags-unleash-project_id-client-features
+      path: /api/v4/feature_flags/unleash/{project_id}/client/features
+      operations:
+      - name: getapiv4featureflagsunleashprojectidclientfeatures
+        method: GET
+        description: Get a list of features
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: The ID of a project
+          required: true
+        - name: instance_id
+          in: query
+          type: string
+          description: The instance ID of Unleash Client
+        - name: app_name
+          in: query
+          type: string
+          description: The application name of Unleash Client
+    - name: api-v4-feature_flags-unleash-project_id-client-metrics
+      path: /api/v4/feature_flags/unleash/{project_id}/client/metrics
+      operations:
+      - name: postapiv4featureflagsunleashprojectidclientmetrics
+        method: POST
+        description: Report Unleash client metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: The ID of a project
+          required: true
+        - name: postApiV4FeatureFlagsUnleashProjectIdClientMetrics
+          in: body
+          type: string
+          required: true
+    - name: api-v4-feature_flags-unleash-project_id-client-register
+      path: /api/v4/feature_flags/unleash/{project_id}/client/register
+      operations:
+      - name: postapiv4featureflagsunleashprojectidclientregister
+        method: POST
+        description: Register Unleash client
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: The ID of a project
+          required: true
+        - name: postApiV4FeatureFlagsUnleashProjectIdClientRegister
+          in: body
+          type: string
+          required: true
+    - name: api-v4-feature_flags-unleash-project_id-features
+      path: /api/v4/feature_flags/unleash/{project_id}/features
+      operations:
+      - name: getapiv4featureflagsunleashprojectidfeatures
+        method: GET
+        description: Get a list of features (v2 client support)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: The ID of a project
+          required: true
+        - name: instance_id
+          in: query
+          type: string
+          description: The instance ID of Unleash Client
+        - name: app_name
+          in: query
+          type: string
+          description: The application name of Unleash Client
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-unleash-rest
+    port: 8080
+    description: REST adapter for GitLab API — unleash. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/feature-flags/unleash/{project-id}
+      name: api-v4-feature-flags-unleash-project-id
+      description: REST surface for api-v4-feature_flags-unleash-project_id.
+      operations:
+      - method: GET
+        name: getapiv4featureflagsunleashprojectid
+        description: Get Unleash features
+        call: gitlab-ci-unleash.getapiv4featureflagsunleashprojectid
+        with:
+          project_id: rest.project_id
+          instance_id: rest.instance_id
+          app_name: rest.app_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/feature-flags/unleash/{project-id}/client/features
+      name: api-v4-feature-flags-unleash-project-id-client-features
+      description: REST surface for api-v4-feature_flags-unleash-project_id-client-features.
+      operations:
+      - method: GET
+        name: getapiv4featureflagsunleashprojectidclientfeatures
+        description: Get a list of features
+        call: gitlab-ci-unleash.getapiv4featureflagsunleashprojectidclientfeatures
+        with:
+          project_id: rest.project_id
+          instance_id: rest.instance_id
+          app_name: rest.app_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/feature-flags/unleash/{project-id}/client/metrics
+      name: api-v4-feature-flags-unleash-project-id-client-metrics
+      description: REST surface for api-v4-feature_flags-unleash-project_id-client-metrics.
+      operations:
+      - method: POST
+        name: postapiv4featureflagsunleashprojectidclientmetrics
+        description: Report Unleash client metrics
+        call: gitlab-ci-unleash.postapiv4featureflagsunleashprojectidclientmetrics
+        with:
+          project_id: rest.project_id
+          postApiV4FeatureFlagsUnleashProjectIdClientMetrics: rest.postApiV4FeatureFlagsUnleashProjectIdClientMetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/feature-flags/unleash/{project-id}/client/register
+      name: api-v4-feature-flags-unleash-project-id-client-register
+      description: REST surface for api-v4-feature_flags-unleash-project_id-client-register.
+      operations:
+      - method: POST
+        name: postapiv4featureflagsunleashprojectidclientregister
+        description: Register Unleash client
+        call: gitlab-ci-unleash.postapiv4featureflagsunleashprojectidclientregister
+        with:
+          project_id: rest.project_id
+          postApiV4FeatureFlagsUnleashProjectIdClientRegister: rest.postApiV4FeatureFlagsUnleashProjectIdClientRegister
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/feature-flags/unleash/{project-id}/features
+      name: api-v4-feature-flags-unleash-project-id-features
+      description: REST surface for api-v4-feature_flags-unleash-project_id-features.
+      operations:
+      - method: GET
+        name: getapiv4featureflagsunleashprojectidfeatures
+        description: Get a list of features (v2 client support)
+        call: gitlab-ci-unleash.getapiv4featureflagsunleashprojectidfeatures
+        with:
+          project_id: rest.project_id
+          instance_id: rest.instance_id
+          app_name: rest.app_name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-unleash-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — unleash. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-unleash-features
+      description: Get Unleash features
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-unleash.getapiv4featureflagsunleashprojectid
+      with:
+        project_id: tools.project_id
+        instance_id: tools.instance_id
+        app_name: tools.app_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-features
+      description: Get a list of features
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-unleash.getapiv4featureflagsunleashprojectidclientfeatures
+      with:
+        project_id: tools.project_id
+        instance_id: tools.instance_id
+        app_name: tools.app_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: report-unleash-client-metrics
+      description: Report Unleash client metrics
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-unleash.postapiv4featureflagsunleashprojectidclientmetrics
+      with:
+        project_id: tools.project_id
+        postApiV4FeatureFlagsUnleashProjectIdClientMetrics: tools.postApiV4FeatureFlagsUnleashProjectIdClientMetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: register-unleash-client
+      description: Register Unleash client
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-unleash.postapiv4featureflagsunleashprojectidclientregister
+      with:
+        project_id: tools.project_id
+        postApiV4FeatureFlagsUnleashProjectIdClientRegister: tools.postApiV4FeatureFlagsUnleashProjectIdClientRegister
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-features-v2-client
+      description: Get a list of features (v2 client support)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-unleash.getapiv4featureflagsunleashprojectidfeatures
+      with:
+        project_id: tools.project_id
+        instance_id: tools.instance_id
+        app_name: tools.app_name
+      outputParameters:
+      - type: object
+        mapping: $.

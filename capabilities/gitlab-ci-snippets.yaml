@@ -1,0 +1,903 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — snippets
+  description: 'GitLab API — snippets. 18 operations. Lead operation: Get a snippets list for an authenticated user. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - snippets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-snippets
+    baseUri: https://gitlab.com
+    description: GitLab API — snippets business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-snippets
+      path: /api/v4/projects/{id}/snippets
+      operations:
+      - name: getapiv4projectsidsnippets
+        method: GET
+        description: Get all project snippets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidsnippets
+        method: POST
+        description: Create a new project snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: postApiV4ProjectsIdSnippets
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id
+      path: /api/v4/projects/{id}/snippets/{snippet_id}
+      operations:
+      - name: getapiv4projectsidsnippetssnippetid
+        method: GET
+        description: Get a single project snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          description: The ID of a project snippet
+          required: true
+      - name: putapiv4projectsidsnippetssnippetid
+        method: PUT
+        description: Update an existing project snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          description: The ID of a project snippet
+          required: true
+        - name: putApiV4ProjectsIdSnippetsSnippetId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidsnippetssnippetid
+        method: DELETE
+        description: Delete a project snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          description: The ID of a project snippet
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-files-ref-file_path-raw
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/files/{ref}/{file_path}/raw
+      operations:
+      - name: getapiv4projectsidsnippetssnippetidfilesreffilepathraw
+        method: GET
+        description: Get raw project snippet file contents from the repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file, like lib%2Fclass%2Erb
+          required: true
+        - name: ref
+          in: path
+          type: string
+          description: The name of branch, tag or commit
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-raw
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/raw
+      operations:
+      - name: getapiv4projectsidsnippetssnippetidraw
+        method: GET
+        description: Get a raw project snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          description: The ID of a project snippet
+          required: true
+    - name: api-v4-projects-id-snippets-snippet_id-user_agent_detail
+      path: /api/v4/projects/{id}/snippets/{snippet_id}/user_agent_detail
+      operations:
+      - name: getapiv4projectsidsnippetssnippetiduseragentdetail
+        method: GET
+        description: Get the user agent details for a project snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID or URL-encoded path of the project
+          required: true
+        - name: snippet_id
+          in: path
+          type: integer
+          description: The ID of a project snippet
+          required: true
+    - name: api-v4-snippets
+      path: /api/v4/snippets
+      operations:
+      - name: getapiv4snippets
+        method: GET
+        description: Get a snippets list for an authenticated user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: created_after
+          in: query
+          type: string
+          description: Return snippets created after the specified time
+        - name: created_before
+          in: query
+          type: string
+          description: Return snippets created before the specified time
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4snippets
+        method: POST
+        description: Create new snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4Snippets
+          in: body
+          type: string
+          required: true
+    - name: api-v4-snippets-all
+      path: /api/v4/snippets/all
+      operations:
+      - name: getapiv4snippetsall
+        method: GET
+        description: List all snippets current_user has access to
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: created_after
+          in: query
+          type: string
+          description: Return snippets created after the specified time
+        - name: created_before
+          in: query
+          type: string
+          description: Return snippets created before the specified time
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+        - name: repository_storage
+          in: query
+          type: string
+          description: Filter by repository storage used by the snippet
+    - name: api-v4-snippets-public
+      path: /api/v4/snippets/public
+      operations:
+      - name: getapiv4snippetspublic
+        method: GET
+        description: List all public personal snippets current_user has access to
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: created_after
+          in: query
+          type: string
+          description: Return snippets created after the specified time
+        - name: created_before
+          in: query
+          type: string
+          description: Return snippets created before the specified time
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-snippets-id
+      path: /api/v4/snippets/{id}
+      operations:
+      - name: getapiv4snippetsid
+        method: GET
+        description: Get a single snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of a snippet
+          required: true
+      - name: putapiv4snippetsid
+        method: PUT
+        description: Update an existing snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of a snippet
+          required: true
+        - name: putApiV4SnippetsId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4snippetsid
+        method: DELETE
+        description: Remove snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of a snippet
+          required: true
+    - name: api-v4-snippets-id-files-ref-file_path-raw
+      path: /api/v4/snippets/{id}/files/{ref}/{file_path}/raw
+      operations:
+      - name: getapiv4snippetsidfilesreffilepathraw
+        method: GET
+        description: Get raw snippet file contents from the repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file, like lib%2Fclass%2Erb
+          required: true
+        - name: ref
+          in: path
+          type: string
+          description: The name of branch, tag or commit
+          required: true
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: api-v4-snippets-id-raw
+      path: /api/v4/snippets/{id}/raw
+      operations:
+      - name: getapiv4snippetsidraw
+        method: GET
+        description: Get a raw snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of a snippet
+          required: true
+    - name: api-v4-snippets-id-user_agent_detail
+      path: /api/v4/snippets/{id}/user_agent_detail
+      operations:
+      - name: getapiv4snippetsiduseragentdetail
+        method: GET
+        description: Get the user agent details for a snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of a snippet
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-snippets-rest
+    port: 8080
+    description: REST adapter for GitLab API — snippets. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/snippets
+      name: api-v4-projects-id-snippets
+      description: REST surface for api-v4-projects-id-snippets.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippets
+        description: Get all project snippets
+        call: gitlab-ci-snippets.getapiv4projectsidsnippets
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidsnippets
+        description: Create a new project snippet
+        call: gitlab-ci-snippets.postapiv4projectsidsnippets
+        with:
+          id: rest.id
+          postApiV4ProjectsIdSnippets: rest.postApiV4ProjectsIdSnippets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}
+      name: api-v4-projects-id-snippets-snippet-id
+      description: REST surface for api-v4-projects-id-snippets-snippet_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetid
+        description: Get a single project snippet
+        call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetid
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidsnippetssnippetid
+        description: Update an existing project snippet
+        call: gitlab-ci-snippets.putapiv4projectsidsnippetssnippetid
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+          putApiV4ProjectsIdSnippetsSnippetId: rest.putApiV4ProjectsIdSnippetsSnippetId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidsnippetssnippetid
+        description: Delete a project snippet
+        call: gitlab-ci-snippets.deleteapiv4projectsidsnippetssnippetid
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/files/{ref}/{file-path}/raw
+      name: api-v4-projects-id-snippets-snippet-id-files-ref-file-path-raw
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-files-ref-file_path-raw.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetidfilesreffilepathraw
+        description: Get raw project snippet file contents from the repository
+        call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetidfilesreffilepathraw
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          ref: rest.ref
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/raw
+      name: api-v4-projects-id-snippets-snippet-id-raw
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-raw.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetidraw
+        description: Get a raw project snippet
+        call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetidraw
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/snippets/{snippet-id}/user-agent-detail
+      name: api-v4-projects-id-snippets-snippet-id-user-agent-detail
+      description: REST surface for api-v4-projects-id-snippets-snippet_id-user_agent_detail.
+      operations:
+      - method: GET
+        name: getapiv4projectsidsnippetssnippetiduseragentdetail
+        description: Get the user agent details for a project snippet
+        call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetiduseragentdetail
+        with:
+          id: rest.id
+          snippet_id: rest.snippet_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets
+      name: api-v4-snippets
+      description: REST surface for api-v4-snippets.
+      operations:
+      - method: GET
+        name: getapiv4snippets
+        description: Get a snippets list for an authenticated user
+        call: gitlab-ci-snippets.getapiv4snippets
+        with:
+          created_after: rest.created_after
+          created_before: rest.created_before
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4snippets
+        description: Create new snippet
+        call: gitlab-ci-snippets.postapiv4snippets
+        with:
+          postApiV4Snippets: rest.postApiV4Snippets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets/all
+      name: api-v4-snippets-all
+      description: REST surface for api-v4-snippets-all.
+      operations:
+      - method: GET
+        name: getapiv4snippetsall
+        description: List all snippets current_user has access to
+        call: gitlab-ci-snippets.getapiv4snippetsall
+        with:
+          created_after: rest.created_after
+          created_before: rest.created_before
+          page: rest.page
+          per_page: rest.per_page
+          repository_storage: rest.repository_storage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets/public
+      name: api-v4-snippets-public
+      description: REST surface for api-v4-snippets-public.
+      operations:
+      - method: GET
+        name: getapiv4snippetspublic
+        description: List all public personal snippets current_user has access to
+        call: gitlab-ci-snippets.getapiv4snippetspublic
+        with:
+          created_after: rest.created_after
+          created_before: rest.created_before
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets/{id}
+      name: api-v4-snippets-id
+      description: REST surface for api-v4-snippets-id.
+      operations:
+      - method: GET
+        name: getapiv4snippetsid
+        description: Get a single snippet
+        call: gitlab-ci-snippets.getapiv4snippetsid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4snippetsid
+        description: Update an existing snippet
+        call: gitlab-ci-snippets.putapiv4snippetsid
+        with:
+          id: rest.id
+          putApiV4SnippetsId: rest.putApiV4SnippetsId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4snippetsid
+        description: Remove snippet
+        call: gitlab-ci-snippets.deleteapiv4snippetsid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets/{id}/files/{ref}/{file-path}/raw
+      name: api-v4-snippets-id-files-ref-file-path-raw
+      description: REST surface for api-v4-snippets-id-files-ref-file_path-raw.
+      operations:
+      - method: GET
+        name: getapiv4snippetsidfilesreffilepathraw
+        description: Get raw snippet file contents from the repository
+        call: gitlab-ci-snippets.getapiv4snippetsidfilesreffilepathraw
+        with:
+          file_path: rest.file_path
+          ref: rest.ref
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets/{id}/raw
+      name: api-v4-snippets-id-raw
+      description: REST surface for api-v4-snippets-id-raw.
+      operations:
+      - method: GET
+        name: getapiv4snippetsidraw
+        description: Get a raw snippet
+        call: gitlab-ci-snippets.getapiv4snippetsidraw
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/snippets/{id}/user-agent-detail
+      name: api-v4-snippets-id-user-agent-detail
+      description: REST surface for api-v4-snippets-id-user_agent_detail.
+      operations:
+      - method: GET
+        name: getapiv4snippetsiduseragentdetail
+        description: Get the user agent details for a snippet
+        call: gitlab-ci-snippets.getapiv4snippetsiduseragentdetail
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-snippets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — snippets. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-all-project-snippets
+      description: Get all project snippets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4projectsidsnippets
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-snippet
+      description: Create a new project snippet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-snippets.postapiv4projectsidsnippets
+      with:
+        id: tools.id
+        postApiV4ProjectsIdSnippets: tools.postApiV4ProjectsIdSnippets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-project-snippet
+      description: Get a single project snippet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetid
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-project-snippet
+      description: Update an existing project snippet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.putapiv4projectsidsnippetssnippetid
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+        putApiV4ProjectsIdSnippetsSnippetId: tools.putApiV4ProjectsIdSnippetsSnippetId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-project-snippet
+      description: Delete a project snippet
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-snippets.deleteapiv4projectsidsnippetssnippetid
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-project-snippet-file
+      description: Get raw project snippet file contents from the repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetidfilesreffilepathraw
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        ref: tools.ref
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-project-snippet
+      description: Get a raw project snippet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetidraw
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-agent-details-project
+      description: Get the user agent details for a project snippet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4projectsidsnippetssnippetiduseragentdetail
+      with:
+        id: tools.id
+        snippet_id: tools.snippet_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-snippets-list-authenticated-user
+      description: Get a snippets list for an authenticated user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippets
+      with:
+        created_after: tools.created_after
+        created_before: tools.created_before
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-snippet
+      description: Create new snippet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-snippets.postapiv4snippets
+      with:
+        postApiV4Snippets: tools.postApiV4Snippets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-snippets-current-user
+      description: List all snippets current_user has access to
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippetsall
+      with:
+        created_after: tools.created_after
+        created_before: tools.created_before
+        page: tools.page
+        per_page: tools.per_page
+        repository_storage: tools.repository_storage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-public-personal-snippets
+      description: List all public personal snippets current_user has access to
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippetspublic
+      with:
+        created_after: tools.created_after
+        created_before: tools.created_before
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-snippet
+      description: Get a single snippet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippetsid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-snippet
+      description: Update an existing snippet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.putapiv4snippetsid
+      with:
+        id: tools.id
+        putApiV4SnippetsId: tools.putApiV4SnippetsId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-snippet
+      description: Remove snippet
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-snippets.deleteapiv4snippetsid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-snippet-file-contents
+      description: Get raw snippet file contents from the repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippetsidfilesreffilepathraw
+      with:
+        file_path: tools.file_path
+        ref: tools.ref
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-snippet
+      description: Get a raw snippet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippetsidraw
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-agent-details-snippet
+      description: Get the user agent details for a snippet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-snippets.getapiv4snippetsiduseragentdetail
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

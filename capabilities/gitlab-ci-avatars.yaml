@@ -1,0 +1,167 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — avatars
+  description: 'GitLab API — avatars. 3 operations. Lead operation: Download the group avatar. Self-contained Naftiko capability
+    covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - avatars
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-avatars
+    baseUri: https://gitlab.com
+    description: GitLab API — avatars business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-avatar
+      path: /api/v4/avatar
+      operations:
+      - name: getapiv4avatar
+        method: GET
+        description: Return avatar url for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: query
+          type: string
+          description: Public email address of the user
+          required: true
+        - name: size
+          in: query
+          type: integer
+          description: Single pixel dimension for Gravatar images
+    - name: api-v4-groups-id-avatar
+      path: /api/v4/groups/{id}/avatar
+      operations:
+      - name: getapiv4groupsidavatar
+        method: GET
+        description: Download the group avatar
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the group
+          required: true
+    - name: api-v4-projects-id-avatar
+      path: /api/v4/projects/{id}/avatar
+      operations:
+      - name: getapiv4projectsidavatar
+        method: GET
+        description: Download a project avatar
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: ID or URL-encoded path of the project
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-avatars-rest
+    port: 8080
+    description: REST adapter for GitLab API — avatars. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/avatar
+      name: api-v4-avatar
+      description: REST surface for api-v4-avatar.
+      operations:
+      - method: GET
+        name: getapiv4avatar
+        description: Return avatar url for a user
+        call: gitlab-ci-avatars.getapiv4avatar
+        with:
+          email: rest.email
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/avatar
+      name: api-v4-groups-id-avatar
+      description: REST surface for api-v4-groups-id-avatar.
+      operations:
+      - method: GET
+        name: getapiv4groupsidavatar
+        description: Download the group avatar
+        call: gitlab-ci-avatars.getapiv4groupsidavatar
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/avatar
+      name: api-v4-projects-id-avatar
+      description: REST surface for api-v4-projects-id-avatar.
+      operations:
+      - method: GET
+        name: getapiv4projectsidavatar
+        description: Download a project avatar
+        call: gitlab-ci-avatars.getapiv4projectsidavatar
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-avatars-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — avatars. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: return-avatar-url-user
+      description: Return avatar url for a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-avatars.getapiv4avatar
+      with:
+        email: tools.email
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-group-avatar
+      description: Download the group avatar
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-avatars.getapiv4groupsidavatar
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-project-avatar
+      description: Download a project avatar
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-avatars.getapiv4projectsidavatar
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

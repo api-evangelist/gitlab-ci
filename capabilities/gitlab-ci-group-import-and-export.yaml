@@ -1,0 +1,376 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — group_import_and_export
+  description: 'GitLab API — group_import_and_export. 7 operations. Lead operation: Create a new group import. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - group_import_and_export
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-group-import-and-export
+    baseUri: https://gitlab.com
+    description: GitLab API — group_import_and_export business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-groups-import
+      path: /api/v4/groups/import
+      operations:
+      - name: postapiv4groupsimport
+        method: POST
+        description: Create a new group import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: formData
+          type: string
+          description: Group path
+          required: true
+        - name: name
+          in: formData
+          type: string
+          description: Group name
+          required: true
+        - name: file
+          in: formData
+          type: file
+          description: The group export file to be imported
+          required: true
+        - name: parent_id
+          in: formData
+          type: integer
+          description: The ID of the parent group that the group will be imported into. Defaults to the current user's namespace.
+        - name: organization_id
+          in: formData
+          type: integer
+          description: The ID of the organization that the group will be part of.
+    - name: api-v4-groups-import-authorize
+      path: /api/v4/groups/import/authorize
+      operations:
+      - name: postapiv4groupsimportauthorize
+        method: POST
+        description: Workhorse authorize the group import upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v4-groups-id-export
+      path: /api/v4/groups/{id}/export
+      operations:
+      - name: postapiv4groupsidexport
+        method: POST
+        description: Start export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+    - name: api-v4-groups-id-export-download
+      path: /api/v4/groups/{id}/export/download
+      operations:
+      - name: getapiv4groupsidexportdownload
+        method: GET
+        description: Download export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+    - name: api-v4-groups-id-export_relations
+      path: /api/v4/groups/{id}/export_relations
+      operations:
+      - name: postapiv4groupsidexportrelations
+        method: POST
+        description: Start relations export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: postApiV4GroupsIdExportRelations
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-export_relations-download
+      path: /api/v4/groups/{id}/export_relations/download
+      operations:
+      - name: getapiv4groupsidexportrelationsdownload
+        method: GET
+        description: Download relations export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: relation
+          in: query
+          type: string
+          description: Group relation name
+          required: true
+        - name: batched
+          in: query
+          type: boolean
+          description: Whether to download in batches
+        - name: batch_number
+          in: query
+          type: integer
+          description: Batch number to download
+    - name: api-v4-groups-id-export_relations-status
+      path: /api/v4/groups/{id}/export_relations/status
+      operations:
+      - name: getapiv4groupsidexportrelationsstatus
+        method: GET
+        description: Relations export status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: relation
+          in: query
+          type: string
+          description: Group relation name
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-group-import-and-export-rest
+    port: 8080
+    description: REST adapter for GitLab API — group_import_and_export. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v4/groups/import
+      name: api-v4-groups-import
+      description: REST surface for api-v4-groups-import.
+      operations:
+      - method: POST
+        name: postapiv4groupsimport
+        description: Create a new group import
+        call: gitlab-ci-group-import-and-export.postapiv4groupsimport
+        with:
+          path: rest.path
+          name: rest.name
+          file: rest.file
+          parent_id: rest.parent_id
+          organization_id: rest.organization_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/import/authorize
+      name: api-v4-groups-import-authorize
+      description: REST surface for api-v4-groups-import-authorize.
+      operations:
+      - method: POST
+        name: postapiv4groupsimportauthorize
+        description: Workhorse authorize the group import upload
+        call: gitlab-ci-group-import-and-export.postapiv4groupsimportauthorize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/export
+      name: api-v4-groups-id-export
+      description: REST surface for api-v4-groups-id-export.
+      operations:
+      - method: POST
+        name: postapiv4groupsidexport
+        description: Start export
+        call: gitlab-ci-group-import-and-export.postapiv4groupsidexport
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/export/download
+      name: api-v4-groups-id-export-download
+      description: REST surface for api-v4-groups-id-export-download.
+      operations:
+      - method: GET
+        name: getapiv4groupsidexportdownload
+        description: Download export
+        call: gitlab-ci-group-import-and-export.getapiv4groupsidexportdownload
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/export-relations
+      name: api-v4-groups-id-export-relations
+      description: REST surface for api-v4-groups-id-export_relations.
+      operations:
+      - method: POST
+        name: postapiv4groupsidexportrelations
+        description: Start relations export
+        call: gitlab-ci-group-import-and-export.postapiv4groupsidexportrelations
+        with:
+          id: rest.id
+          postApiV4GroupsIdExportRelations: rest.postApiV4GroupsIdExportRelations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/export-relations/download
+      name: api-v4-groups-id-export-relations-download
+      description: REST surface for api-v4-groups-id-export_relations-download.
+      operations:
+      - method: GET
+        name: getapiv4groupsidexportrelationsdownload
+        description: Download relations export
+        call: gitlab-ci-group-import-and-export.getapiv4groupsidexportrelationsdownload
+        with:
+          id: rest.id
+          relation: rest.relation
+          batched: rest.batched
+          batch_number: rest.batch_number
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/export-relations/status
+      name: api-v4-groups-id-export-relations-status
+      description: REST surface for api-v4-groups-id-export_relations-status.
+      operations:
+      - method: GET
+        name: getapiv4groupsidexportrelationsstatus
+        description: Relations export status
+        call: gitlab-ci-group-import-and-export.getapiv4groupsidexportrelationsstatus
+        with:
+          id: rest.id
+          relation: rest.relation
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-group-import-and-export-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — group_import_and_export. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-new-group-import
+      description: Create a new group import
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-group-import-and-export.postapiv4groupsimport
+      with:
+        path: tools.path
+        name: tools.name
+        file: tools.file
+        parent_id: tools.parent_id
+        organization_id: tools.organization_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workhorse-authorize-group-import-upload
+      description: Workhorse authorize the group import upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-group-import-and-export.postapiv4groupsimportauthorize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-export
+      description: Start export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-group-import-and-export.postapiv4groupsidexport
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-export
+      description: Download export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-group-import-and-export.getapiv4groupsidexportdownload
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-relations-export
+      description: Start relations export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-group-import-and-export.postapiv4groupsidexportrelations
+      with:
+        id: tools.id
+        postApiV4GroupsIdExportRelations: tools.postApiV4GroupsIdExportRelations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-relations-export
+      description: Download relations export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-group-import-and-export.getapiv4groupsidexportrelationsdownload
+      with:
+        id: tools.id
+        relation: tools.relation
+        batched: tools.batched
+        batch_number: tools.batch_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: relations-export-status
+      description: Relations export status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-group-import-and-export.getapiv4groupsidexportrelationsstatus
+      with:
+        id: tools.id
+        relation: tools.relation
+      outputParameters:
+      - type: object
+        mapping: $.

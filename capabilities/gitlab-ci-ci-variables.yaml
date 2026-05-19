@@ -1,0 +1,719 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — ci_variables
+  description: 'GitLab API — ci_variables. 15 operations. Lead operation: ci_variables. Self-contained Naftiko capability
+    covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - ci_variables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-ci-variables
+    baseUri: https://gitlab.com
+    description: GitLab API — ci_variables business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-admin-ci-variables
+      path: /api/v4/admin/ci/variables
+      operations:
+      - name: getapiv4admincivariables
+        method: GET
+        description: List all instance-level variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4admincivariables
+        method: POST
+        description: Create a new instance-level variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4AdminCiVariables
+          in: body
+          type: string
+          required: true
+    - name: api-v4-admin-ci-variables-key
+      path: /api/v4/admin/ci/variables/{key}
+      operations:
+      - name: getapiv4admincivariableskey
+        method: GET
+        description: Get the details of a specific instance-level variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+      - name: putapiv4admincivariableskey
+        method: PUT
+        description: Update an instance-level variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+        - name: putApiV4AdminCiVariablesKey
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4admincivariableskey
+        method: DELETE
+        description: Delete an existing instance-level variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+    - name: api-v4-groups-id-variables
+      path: /api/v4/groups/{id}/variables
+      operations:
+      - name: getapiv4groupsidvariables
+        method: GET
+        description: Get a list of group-level variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group or URL-encoded path of the group owned by the authenticated
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4groupsidvariables
+        method: POST
+        description: Create a new variable in a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group or URL-encoded path of the group owned by the authenticated
+          required: true
+        - name: postApiV4GroupsIdVariables
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-variables-key
+      path: /api/v4/groups/{id}/variables/{key}
+      operations:
+      - name: getapiv4groupsidvariableskey
+        method: GET
+        description: Get the details of a group’s specific variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group or URL-encoded path of the group owned by the authenticated
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: The key of the variable
+          required: true
+      - name: putapiv4groupsidvariableskey
+        method: PUT
+        description: Update an existing variable from a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group or URL-encoded path of the group owned by the authenticated
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+        - name: putApiV4GroupsIdVariablesKey
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4groupsidvariableskey
+        method: DELETE
+        description: Delete an existing variable from a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group or URL-encoded path of the group owned by the authenticated
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+    - name: api-v4-projects-id-variables
+      path: /api/v4/projects/{id}/variables
+      operations:
+      - name: getapiv4projectsidvariables
+        method: GET
+        description: Get project variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated
+            user
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidvariables
+        method: POST
+        description: Create a new variable in a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated
+            user
+          required: true
+        - name: postApiV4ProjectsIdVariables
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-variables-key
+      path: /api/v4/projects/{id}/variables/{key}
+      operations:
+      - name: getapiv4projectsidvariableskey
+        method: GET
+        description: Get the details of a single variable from a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated
+            user
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+        - name: filter[environment_scope]
+          in: query
+          type: string
+          description: The environment scope of a variable
+      - name: putapiv4projectsidvariableskey
+        method: PUT
+        description: Update an existing variable from a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated
+            user
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+        - name: putApiV4ProjectsIdVariablesKey
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidvariableskey
+        method: DELETE
+        description: Delete an existing variable from a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated
+            user
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: The key of a variable
+          required: true
+        - name: filter[environment_scope]
+          in: query
+          type: string
+          description: The environment scope of the variable
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-ci-variables-rest
+    port: 8080
+    description: REST adapter for GitLab API — ci_variables. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/admin/ci/variables
+      name: api-v4-admin-ci-variables
+      description: REST surface for api-v4-admin-ci-variables.
+      operations:
+      - method: GET
+        name: getapiv4admincivariables
+        description: List all instance-level variables
+        call: gitlab-ci-ci-variables.getapiv4admincivariables
+        with:
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4admincivariables
+        description: Create a new instance-level variable
+        call: gitlab-ci-ci-variables.postapiv4admincivariables
+        with:
+          postApiV4AdminCiVariables: rest.postApiV4AdminCiVariables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/admin/ci/variables/{key}
+      name: api-v4-admin-ci-variables-key
+      description: REST surface for api-v4-admin-ci-variables-key.
+      operations:
+      - method: GET
+        name: getapiv4admincivariableskey
+        description: Get the details of a specific instance-level variable
+        call: gitlab-ci-ci-variables.getapiv4admincivariableskey
+        with:
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4admincivariableskey
+        description: Update an instance-level variable
+        call: gitlab-ci-ci-variables.putapiv4admincivariableskey
+        with:
+          key: rest.key
+          putApiV4AdminCiVariablesKey: rest.putApiV4AdminCiVariablesKey
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4admincivariableskey
+        description: Delete an existing instance-level variable
+        call: gitlab-ci-ci-variables.deleteapiv4admincivariableskey
+        with:
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/variables
+      name: api-v4-groups-id-variables
+      description: REST surface for api-v4-groups-id-variables.
+      operations:
+      - method: GET
+        name: getapiv4groupsidvariables
+        description: Get a list of group-level variables
+        call: gitlab-ci-ci-variables.getapiv4groupsidvariables
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4groupsidvariables
+        description: Create a new variable in a group
+        call: gitlab-ci-ci-variables.postapiv4groupsidvariables
+        with:
+          id: rest.id
+          postApiV4GroupsIdVariables: rest.postApiV4GroupsIdVariables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/variables/{key}
+      name: api-v4-groups-id-variables-key
+      description: REST surface for api-v4-groups-id-variables-key.
+      operations:
+      - method: GET
+        name: getapiv4groupsidvariableskey
+        description: Get the details of a group’s specific variable
+        call: gitlab-ci-ci-variables.getapiv4groupsidvariableskey
+        with:
+          id: rest.id
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4groupsidvariableskey
+        description: Update an existing variable from a group
+        call: gitlab-ci-ci-variables.putapiv4groupsidvariableskey
+        with:
+          id: rest.id
+          key: rest.key
+          putApiV4GroupsIdVariablesKey: rest.putApiV4GroupsIdVariablesKey
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4groupsidvariableskey
+        description: Delete an existing variable from a group
+        call: gitlab-ci-ci-variables.deleteapiv4groupsidvariableskey
+        with:
+          id: rest.id
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/variables
+      name: api-v4-projects-id-variables
+      description: REST surface for api-v4-projects-id-variables.
+      operations:
+      - method: GET
+        name: getapiv4projectsidvariables
+        description: Get project variables
+        call: gitlab-ci-ci-variables.getapiv4projectsidvariables
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidvariables
+        description: Create a new variable in a project
+        call: gitlab-ci-ci-variables.postapiv4projectsidvariables
+        with:
+          id: rest.id
+          postApiV4ProjectsIdVariables: rest.postApiV4ProjectsIdVariables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/variables/{key}
+      name: api-v4-projects-id-variables-key
+      description: REST surface for api-v4-projects-id-variables-key.
+      operations:
+      - method: GET
+        name: getapiv4projectsidvariableskey
+        description: Get the details of a single variable from a project
+        call: gitlab-ci-ci-variables.getapiv4projectsidvariableskey
+        with:
+          id: rest.id
+          key: rest.key
+          filter[environment_scope]: rest.filter[environment_scope]
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidvariableskey
+        description: Update an existing variable from a project
+        call: gitlab-ci-ci-variables.putapiv4projectsidvariableskey
+        with:
+          id: rest.id
+          key: rest.key
+          putApiV4ProjectsIdVariablesKey: rest.putApiV4ProjectsIdVariablesKey
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidvariableskey
+        description: Delete an existing variable from a project
+        call: gitlab-ci-ci-variables.deleteapiv4projectsidvariableskey
+        with:
+          id: rest.id
+          key: rest.key
+          filter[environment_scope]: rest.filter[environment_scope]
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-ci-variables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — ci_variables. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-instance-level-variables
+      description: List all instance-level variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.getapiv4admincivariables
+      with:
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-instance-level-variable
+      description: Create a new instance-level variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-ci-variables.postapiv4admincivariables
+      with:
+        postApiV4AdminCiVariables: tools.postApiV4AdminCiVariables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-details-specific-instance-level
+      description: Get the details of a specific instance-level variable
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.getapiv4admincivariableskey
+      with:
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-instance-level-variable
+      description: Update an instance-level variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.putapiv4admincivariableskey
+      with:
+        key: tools.key
+        putApiV4AdminCiVariablesKey: tools.putApiV4AdminCiVariablesKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-existing-instance-level-variable
+      description: Delete an existing instance-level variable
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-ci-variables.deleteapiv4admincivariableskey
+      with:
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-group-level-variables
+      description: Get a list of group-level variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.getapiv4groupsidvariables
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-variable-group
+      description: Create a new variable in a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-ci-variables.postapiv4groupsidvariables
+      with:
+        id: tools.id
+        postApiV4GroupsIdVariables: tools.postApiV4GroupsIdVariables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-details-group-s-specific-variable
+      description: Get the details of a group’s specific variable
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.getapiv4groupsidvariableskey
+      with:
+        id: tools.id
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-variable-group
+      description: Update an existing variable from a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.putapiv4groupsidvariableskey
+      with:
+        id: tools.id
+        key: tools.key
+        putApiV4GroupsIdVariablesKey: tools.putApiV4GroupsIdVariablesKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-existing-variable-group
+      description: Delete an existing variable from a group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-ci-variables.deleteapiv4groupsidvariableskey
+      with:
+        id: tools.id
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-project-variables
+      description: Get project variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.getapiv4projectsidvariables
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-variable-project
+      description: Create a new variable in a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-ci-variables.postapiv4projectsidvariables
+      with:
+        id: tools.id
+        postApiV4ProjectsIdVariables: tools.postApiV4ProjectsIdVariables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-details-single-variable-project
+      description: Get the details of a single variable from a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.getapiv4projectsidvariableskey
+      with:
+        id: tools.id
+        key: tools.key
+        filter[environment_scope]: tools.filter[environment_scope]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-variable-project
+      description: Update an existing variable from a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-ci-variables.putapiv4projectsidvariableskey
+      with:
+        id: tools.id
+        key: tools.key
+        putApiV4ProjectsIdVariablesKey: tools.putApiV4ProjectsIdVariablesKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-existing-variable-project
+      description: Delete an existing variable from a project
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-ci-variables.deleteapiv4projectsidvariableskey
+      with:
+        id: tools.id
+        key: tools.key
+        filter[environment_scope]: tools.filter[environment_scope]
+      outputParameters:
+      - type: object
+        mapping: $.

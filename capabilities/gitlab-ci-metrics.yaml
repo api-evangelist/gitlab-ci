@@ -1,0 +1,76 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — metrics
+  description: 'GitLab API — metrics. 1 operations. Lead operation: Get a list of all metric definitions. Self-contained Naftiko
+    capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-metrics
+    baseUri: https://gitlab.com
+    description: GitLab API — metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-usage_data-metric_definitions
+      path: /api/v4/usage_data/metric_definitions
+      operations:
+      - name: getapiv4usagedatametricdefinitions
+        method: GET
+        description: Get a list of all metric definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include_paths
+          in: query
+          type: boolean
+          description: Include file paths in the metric definitions
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-metrics-rest
+    port: 8080
+    description: REST adapter for GitLab API — metrics. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/usage-data/metric-definitions
+      name: api-v4-usage-data-metric-definitions
+      description: REST surface for api-v4-usage_data-metric_definitions.
+      operations:
+      - method: GET
+        name: getapiv4usagedatametricdefinitions
+        description: Get a list of all metric definitions
+        call: gitlab-ci-metrics.getapiv4usagedatametricdefinitions
+        with:
+          include_paths: rest.include_paths
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — metrics. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-list-all-metric-definitions
+      description: Get a list of all metric definitions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-metrics.getapiv4usagedatametricdefinitions
+      with:
+        include_paths: tools.include_paths
+      outputParameters:
+      - type: object
+        mapping: $.

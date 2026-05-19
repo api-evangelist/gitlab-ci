@@ -1,0 +1,1307 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — members
+  description: 'GitLab API — members. 23 operations. Lead operation: members. Self-contained Naftiko capability covering one
+    Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - members
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-members
+    baseUri: https://gitlab.com
+    description: GitLab API — members business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-groups-id-billable_members-user_id
+      path: /api/v4/groups/{id}/billable_members/{user_id}
+      operations:
+      - name: deleteapiv4groupsidbillablemembersuserid
+        method: DELETE
+        description: Removes a billable member from a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+    - name: api-v4-groups-id-billable_members-user_id-indirect
+      path: /api/v4/groups/{id}/billable_members/{user_id}/indirect
+      operations:
+      - name: getapiv4groupsidbillablemembersuseridindirect
+        method: GET
+        description: Get the indirect memberships of a billable user of a top-level group.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-groups-id-billable_members-user_id-memberships
+      path: /api/v4/groups/{id}/billable_members/{user_id}/memberships
+      operations:
+      - name: getapiv4groupsidbillablemembersuseridmemberships
+        method: GET
+        description: Get the direct memberships of a billable user of a top-level group.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-groups-id-members
+      path: /api/v4/groups/{id}/members
+      operations:
+      - name: getapiv4groupsidmembers
+        method: GET
+        description: Gets a list of group or project members viewable by the authenticated user,
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: A query string to search for members
+        - name: user_ids
+          in: query
+          type: array
+          description: Array of user ids to look up for membership
+        - name: skip_users
+          in: query
+          type: array
+          description: Array of user ids to be skipped for membership
+        - name: show_seat_info
+          in: query
+          type: boolean
+          description: Show seat information for members
+        - name: with_saml_identity
+          in: query
+          type: boolean
+          description: List only members with linked SAML identity
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4groupsidmembers
+        method: POST
+        description: Adds a member to a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: postApiV4GroupsIdMembers
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-members-all
+      path: /api/v4/groups/{id}/members/all
+      operations:
+      - name: getapiv4groupsidmembersall
+        method: GET
+        description: Gets a list of group or project members viewable by the authenticated user,
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: A query string to search for members
+        - name: user_ids
+          in: query
+          type: array
+          description: Array of user ids to look up for membership
+        - name: show_seat_info
+          in: query
+          type: boolean
+          description: Show seat information for members
+        - name: state
+          in: query
+          type: string
+          description: Filter results by member state
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-groups-id-members-all-user_id
+      path: /api/v4/groups/{id}/members/all/{user_id}
+      operations:
+      - name: getapiv4groupsidmembersalluserid
+        method: GET
+        description: Gets a member of a group or project, including those who gained membership through ancestor group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+    - name: api-v4-groups-id-members-approve_all
+      path: /api/v4/groups/{id}/members/approve_all
+      operations:
+      - name: postapiv4groupsidmembersapproveall
+        method: POST
+        description: Approves all pending members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+    - name: api-v4-groups-id-members-member_id-approve
+      path: /api/v4/groups/{id}/members/{member_id}/approve
+      operations:
+      - name: putapiv4groupsidmembersmemberidapprove
+        method: PUT
+        description: Approves a pending member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: member_id
+          in: path
+          type: integer
+          description: The ID of the member requiring approval
+          required: true
+    - name: api-v4-groups-id-members-user_id
+      path: /api/v4/groups/{id}/members/{user_id}
+      operations:
+      - name: getapiv4groupsidmembersuserid
+        method: GET
+        description: Gets a member of a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+      - name: putapiv4groupsidmembersuserid
+        method: PUT
+        description: Updates a member of a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the new member
+          required: true
+        - name: putApiV4GroupsIdMembersUserId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4groupsidmembersuserid
+        method: DELETE
+        description: Removes a user from a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+        - name: skip_subresources
+          in: query
+          type: boolean
+          description: Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects
+            should be skipped
+        - name: unassign_issuables
+          in: query
+          type: boolean
+          description: Flag indicating if the removed member should be unassigned from any issues or merge requests within
+            given group or project
+    - name: api-v4-groups-id-members-user_id-override
+      path: /api/v4/groups/{id}/members/{user_id}/override
+      operations:
+      - name: postapiv4groupsidmembersuseridoverride
+        method: POST
+        description: Overrides the access level of an LDAP group member.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+      - name: deleteapiv4groupsidmembersuseridoverride
+        method: DELETE
+        description: Remove an LDAP group member access level override.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+    - name: api-v4-groups-id-members-user_id-state
+      path: /api/v4/groups/{id}/members/{user_id}/state
+      operations:
+      - name: putapiv4groupsidmembersuseridstate
+        method: PUT
+        description: Changes the state of the memberships of a user in the group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the user
+          required: true
+        - name: putApiV4GroupsIdMembersUserIdState
+          in: body
+          type: string
+          required: true
+    - name: api-v4-groups-id-pending_members
+      path: /api/v4/groups/{id}/pending_members
+      operations:
+      - name: getapiv4groupsidpendingmembers
+        method: GET
+        description: Lists all pending members for a group including invited users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of a group
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-members
+      path: /api/v4/projects/{id}/members
+      operations:
+      - name: getapiv4projectsidmembers
+        method: GET
+        description: Gets a list of group or project members viewable by the authenticated user,
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: A query string to search for members
+        - name: user_ids
+          in: query
+          type: array
+          description: Array of user ids to look up for membership
+        - name: skip_users
+          in: query
+          type: array
+          description: Array of user ids to be skipped for membership
+        - name: show_seat_info
+          in: query
+          type: boolean
+          description: Show seat information for members
+        - name: with_saml_identity
+          in: query
+          type: boolean
+          description: List only members with linked SAML identity
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+      - name: postapiv4projectsidmembers
+        method: POST
+        description: Adds a member to a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: postApiV4ProjectsIdMembers
+          in: body
+          type: string
+          required: true
+    - name: api-v4-projects-id-members-all
+      path: /api/v4/projects/{id}/members/all
+      operations:
+      - name: getapiv4projectsidmembersall
+        method: GET
+        description: Gets a list of group or project members viewable by the authenticated user,
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: A query string to search for members
+        - name: user_ids
+          in: query
+          type: array
+          description: Array of user ids to look up for membership
+        - name: show_seat_info
+          in: query
+          type: boolean
+          description: Show seat information for members
+        - name: state
+          in: query
+          type: string
+          description: Filter results by member state
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-members-all-user_id
+      path: /api/v4/projects/{id}/members/all/{user_id}
+      operations:
+      - name: getapiv4projectsidmembersalluserid
+        method: GET
+        description: Gets a member of a group or project, including those who gained membership through ancestor group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+    - name: api-v4-projects-id-members-user_id
+      path: /api/v4/projects/{id}/members/{user_id}
+      operations:
+      - name: getapiv4projectsidmembersuserid
+        method: GET
+        description: Gets a member of a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+      - name: putapiv4projectsidmembersuserid
+        method: PUT
+        description: Updates a member of a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the new member
+          required: true
+        - name: putApiV4ProjectsIdMembersUserId
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidmembersuserid
+        method: DELETE
+        description: Removes a user from a group or project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          description: The user ID of the member
+          required: true
+        - name: skip_subresources
+          in: query
+          type: boolean
+          description: Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects
+            should be skipped
+        - name: unassign_issuables
+          in: query
+          type: boolean
+          description: Flag indicating if the removed member should be unassigned from any issues or merge requests within
+            given group or project
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-members-rest
+    port: 8080
+    description: REST adapter for GitLab API — members. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/groups/{id}/billable-members/{user-id}
+      name: api-v4-groups-id-billable-members-user-id
+      description: REST surface for api-v4-groups-id-billable_members-user_id.
+      operations:
+      - method: DELETE
+        name: deleteapiv4groupsidbillablemembersuserid
+        description: Removes a billable member from a group or project.
+        call: gitlab-ci-members.deleteapiv4groupsidbillablemembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/billable-members/{user-id}/indirect
+      name: api-v4-groups-id-billable-members-user-id-indirect
+      description: REST surface for api-v4-groups-id-billable_members-user_id-indirect.
+      operations:
+      - method: GET
+        name: getapiv4groupsidbillablemembersuseridindirect
+        description: Get the indirect memberships of a billable user of a top-level group.
+        call: gitlab-ci-members.getapiv4groupsidbillablemembersuseridindirect
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/billable-members/{user-id}/memberships
+      name: api-v4-groups-id-billable-members-user-id-memberships
+      description: REST surface for api-v4-groups-id-billable_members-user_id-memberships.
+      operations:
+      - method: GET
+        name: getapiv4groupsidbillablemembersuseridmemberships
+        description: Get the direct memberships of a billable user of a top-level group.
+        call: gitlab-ci-members.getapiv4groupsidbillablemembersuseridmemberships
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members
+      name: api-v4-groups-id-members
+      description: REST surface for api-v4-groups-id-members.
+      operations:
+      - method: GET
+        name: getapiv4groupsidmembers
+        description: Gets a list of group or project members viewable by the authenticated user,
+        call: gitlab-ci-members.getapiv4groupsidmembers
+        with:
+          id: rest.id
+          query: rest.query
+          user_ids: rest.user_ids
+          skip_users: rest.skip_users
+          show_seat_info: rest.show_seat_info
+          with_saml_identity: rest.with_saml_identity
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4groupsidmembers
+        description: Adds a member to a group or project.
+        call: gitlab-ci-members.postapiv4groupsidmembers
+        with:
+          id: rest.id
+          postApiV4GroupsIdMembers: rest.postApiV4GroupsIdMembers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/all
+      name: api-v4-groups-id-members-all
+      description: REST surface for api-v4-groups-id-members-all.
+      operations:
+      - method: GET
+        name: getapiv4groupsidmembersall
+        description: Gets a list of group or project members viewable by the authenticated user,
+        call: gitlab-ci-members.getapiv4groupsidmembersall
+        with:
+          id: rest.id
+          query: rest.query
+          user_ids: rest.user_ids
+          show_seat_info: rest.show_seat_info
+          state: rest.state
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/all/{user-id}
+      name: api-v4-groups-id-members-all-user-id
+      description: REST surface for api-v4-groups-id-members-all-user_id.
+      operations:
+      - method: GET
+        name: getapiv4groupsidmembersalluserid
+        description: Gets a member of a group or project, including those who gained membership through ancestor group
+        call: gitlab-ci-members.getapiv4groupsidmembersalluserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/approve-all
+      name: api-v4-groups-id-members-approve-all
+      description: REST surface for api-v4-groups-id-members-approve_all.
+      operations:
+      - method: POST
+        name: postapiv4groupsidmembersapproveall
+        description: Approves all pending members
+        call: gitlab-ci-members.postapiv4groupsidmembersapproveall
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/{member-id}/approve
+      name: api-v4-groups-id-members-member-id-approve
+      description: REST surface for api-v4-groups-id-members-member_id-approve.
+      operations:
+      - method: PUT
+        name: putapiv4groupsidmembersmemberidapprove
+        description: Approves a pending member
+        call: gitlab-ci-members.putapiv4groupsidmembersmemberidapprove
+        with:
+          id: rest.id
+          member_id: rest.member_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/{user-id}
+      name: api-v4-groups-id-members-user-id
+      description: REST surface for api-v4-groups-id-members-user_id.
+      operations:
+      - method: GET
+        name: getapiv4groupsidmembersuserid
+        description: Gets a member of a group or project.
+        call: gitlab-ci-members.getapiv4groupsidmembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4groupsidmembersuserid
+        description: Updates a member of a group or project.
+        call: gitlab-ci-members.putapiv4groupsidmembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          putApiV4GroupsIdMembersUserId: rest.putApiV4GroupsIdMembersUserId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4groupsidmembersuserid
+        description: Removes a user from a group or project.
+        call: gitlab-ci-members.deleteapiv4groupsidmembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          skip_subresources: rest.skip_subresources
+          unassign_issuables: rest.unassign_issuables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/{user-id}/override
+      name: api-v4-groups-id-members-user-id-override
+      description: REST surface for api-v4-groups-id-members-user_id-override.
+      operations:
+      - method: POST
+        name: postapiv4groupsidmembersuseridoverride
+        description: Overrides the access level of an LDAP group member.
+        call: gitlab-ci-members.postapiv4groupsidmembersuseridoverride
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4groupsidmembersuseridoverride
+        description: Remove an LDAP group member access level override.
+        call: gitlab-ci-members.deleteapiv4groupsidmembersuseridoverride
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/members/{user-id}/state
+      name: api-v4-groups-id-members-user-id-state
+      description: REST surface for api-v4-groups-id-members-user_id-state.
+      operations:
+      - method: PUT
+        name: putapiv4groupsidmembersuseridstate
+        description: Changes the state of the memberships of a user in the group
+        call: gitlab-ci-members.putapiv4groupsidmembersuseridstate
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          putApiV4GroupsIdMembersUserIdState: rest.putApiV4GroupsIdMembersUserIdState
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/groups/{id}/pending-members
+      name: api-v4-groups-id-pending-members
+      description: REST surface for api-v4-groups-id-pending_members.
+      operations:
+      - method: GET
+        name: getapiv4groupsidpendingmembers
+        description: Lists all pending members for a group including invited users
+        call: gitlab-ci-members.getapiv4groupsidpendingmembers
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/members
+      name: api-v4-projects-id-members
+      description: REST surface for api-v4-projects-id-members.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmembers
+        description: Gets a list of group or project members viewable by the authenticated user,
+        call: gitlab-ci-members.getapiv4projectsidmembers
+        with:
+          id: rest.id
+          query: rest.query
+          user_ids: rest.user_ids
+          skip_users: rest.skip_users
+          show_seat_info: rest.show_seat_info
+          with_saml_identity: rest.with_saml_identity
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidmembers
+        description: Adds a member to a group or project.
+        call: gitlab-ci-members.postapiv4projectsidmembers
+        with:
+          id: rest.id
+          postApiV4ProjectsIdMembers: rest.postApiV4ProjectsIdMembers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/members/all
+      name: api-v4-projects-id-members-all
+      description: REST surface for api-v4-projects-id-members-all.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmembersall
+        description: Gets a list of group or project members viewable by the authenticated user,
+        call: gitlab-ci-members.getapiv4projectsidmembersall
+        with:
+          id: rest.id
+          query: rest.query
+          user_ids: rest.user_ids
+          show_seat_info: rest.show_seat_info
+          state: rest.state
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/members/all/{user-id}
+      name: api-v4-projects-id-members-all-user-id
+      description: REST surface for api-v4-projects-id-members-all-user_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmembersalluserid
+        description: Gets a member of a group or project, including those who gained membership through ancestor group
+        call: gitlab-ci-members.getapiv4projectsidmembersalluserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/members/{user-id}
+      name: api-v4-projects-id-members-user-id
+      description: REST surface for api-v4-projects-id-members-user_id.
+      operations:
+      - method: GET
+        name: getapiv4projectsidmembersuserid
+        description: Gets a member of a group or project.
+        call: gitlab-ci-members.getapiv4projectsidmembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidmembersuserid
+        description: Updates a member of a group or project.
+        call: gitlab-ci-members.putapiv4projectsidmembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          putApiV4ProjectsIdMembersUserId: rest.putApiV4ProjectsIdMembersUserId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidmembersuserid
+        description: Removes a user from a group or project.
+        call: gitlab-ci-members.deleteapiv4projectsidmembersuserid
+        with:
+          id: rest.id
+          user_id: rest.user_id
+          skip_subresources: rest.skip_subresources
+          unassign_issuables: rest.unassign_issuables
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-members-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — members. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: removes-billable-member-group-project
+      description: Removes a billable member from a group or project.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-members.deleteapiv4groupsidbillablemembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-indirect-memberships-billable-user
+      description: Get the indirect memberships of a billable user of a top-level group.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidbillablemembersuseridindirect
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-direct-memberships-billable-user
+      description: Get the direct memberships of a billable user of a top-level group.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidbillablemembersuseridmemberships
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-list-group-project-members
+      description: Gets a list of group or project members viewable by the authenticated user,
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidmembers
+      with:
+        id: tools.id
+        query: tools.query
+        user_ids: tools.user_ids
+        skip_users: tools.skip_users
+        show_seat_info: tools.show_seat_info
+        with_saml_identity: tools.with_saml_identity
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adds-member-group-project
+      description: Adds a member to a group or project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-members.postapiv4groupsidmembers
+      with:
+        id: tools.id
+        postApiV4GroupsIdMembers: tools.postApiV4GroupsIdMembers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-list-group-project-members-2
+      description: Gets a list of group or project members viewable by the authenticated user,
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidmembersall
+      with:
+        id: tools.id
+        query: tools.query
+        user_ids: tools.user_ids
+        show_seat_info: tools.show_seat_info
+        state: tools.state
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-member-group-project-including
+      description: Gets a member of a group or project, including those who gained membership through ancestor group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidmembersalluserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: approves-all-pending-members
+      description: Approves all pending members
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-members.postapiv4groupsidmembersapproveall
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: approves-pending-member
+      description: Approves a pending member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.putapiv4groupsidmembersmemberidapprove
+      with:
+        id: tools.id
+        member_id: tools.member_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-member-group-project
+      description: Gets a member of a group or project.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidmembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updates-member-group-project
+      description: Updates a member of a group or project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.putapiv4groupsidmembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        putApiV4GroupsIdMembersUserId: tools.putApiV4GroupsIdMembersUserId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removes-user-group-project
+      description: Removes a user from a group or project.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-members.deleteapiv4groupsidmembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        skip_subresources: tools.skip_subresources
+        unassign_issuables: tools.unassign_issuables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: overrides-access-level-ldap-group
+      description: Overrides the access level of an LDAP group member.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-members.postapiv4groupsidmembersuseridoverride
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-ldap-group-member-access
+      description: Remove an LDAP group member access level override.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-members.deleteapiv4groupsidmembersuseridoverride
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: changes-state-memberships-user-group
+      description: Changes the state of the memberships of a user in the group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.putapiv4groupsidmembersuseridstate
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        putApiV4GroupsIdMembersUserIdState: tools.putApiV4GroupsIdMembersUserIdState
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lists-all-pending-members-group
+      description: Lists all pending members for a group including invited users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4groupsidpendingmembers
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-list-group-project-members-3
+      description: Gets a list of group or project members viewable by the authenticated user,
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4projectsidmembers
+      with:
+        id: tools.id
+        query: tools.query
+        user_ids: tools.user_ids
+        skip_users: tools.skip_users
+        show_seat_info: tools.show_seat_info
+        with_saml_identity: tools.with_saml_identity
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adds-member-group-project-2
+      description: Adds a member to a group or project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-members.postapiv4projectsidmembers
+      with:
+        id: tools.id
+        postApiV4ProjectsIdMembers: tools.postApiV4ProjectsIdMembers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-list-group-project-members-4
+      description: Gets a list of group or project members viewable by the authenticated user,
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4projectsidmembersall
+      with:
+        id: tools.id
+        query: tools.query
+        user_ids: tools.user_ids
+        show_seat_info: tools.show_seat_info
+        state: tools.state
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-member-group-project-including-2
+      description: Gets a member of a group or project, including those who gained membership through ancestor group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4projectsidmembersalluserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gets-member-group-project-2
+      description: Gets a member of a group or project.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.getapiv4projectsidmembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updates-member-group-project-2
+      description: Updates a member of a group or project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-members.putapiv4projectsidmembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        putApiV4ProjectsIdMembersUserId: tools.putApiV4ProjectsIdMembersUserId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removes-user-group-project-2
+      description: Removes a user from a group or project.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-members.deleteapiv4projectsidmembersuserid
+      with:
+        id: tools.id
+        user_id: tools.user_id
+        skip_subresources: tools.skip_subresources
+        unassign_issuables: tools.unassign_issuables
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,496 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — files
+  description: 'GitLab API — files. 8 operations. Lead operation: files. Self-contained Naftiko capability covering one Gitlab
+    Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - files
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-files
+    baseUri: https://gitlab.com
+    description: GitLab API — files business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-repository-files-file_path
+      path: /api/v4/projects/{id}/repository/files/{file_path}
+      operations:
+      - name: headapiv4projectsidrepositoryfilesfilepath
+        method: HEAD
+        description: Get file metadata from repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: The name of branch, tag or commit
+          required: true
+      - name: getapiv4projectsidrepositoryfilesfilepath
+        method: GET
+        description: Get a file from the repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: The name of branch, tag or commit
+          required: true
+      - name: postapiv4projectsidrepositoryfilesfilepath
+        method: POST
+        description: Create new file in repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: postApiV4ProjectsIdRepositoryFilesFilePath
+          in: body
+          type: string
+          required: true
+      - name: putapiv4projectsidrepositoryfilesfilepath
+        method: PUT
+        description: Update existing file in repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: putApiV4ProjectsIdRepositoryFilesFilePath
+          in: body
+          type: string
+          required: true
+      - name: deleteapiv4projectsidrepositoryfilesfilepath
+        method: DELETE
+        description: Delete an existing file in repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: branch
+          in: query
+          type: string
+          description: Name of the branch to commit into. To create a new branch, also provide `start_branch`.
+          required: true
+        - name: commit_message
+          in: query
+          type: string
+          description: Commit message
+          required: true
+        - name: start_branch
+          in: query
+          type: string
+          description: Name of the branch to start the new commit from
+        - name: author_email
+          in: query
+          type: string
+          description: The email of the author
+        - name: author_name
+          in: query
+          type: string
+          description: The name of the author
+        - name: last_commit_id
+          in: query
+          type: string
+          description: Last known file commit id
+    - name: api-v4-projects-id-repository-files-file_path-blame
+      path: /api/v4/projects/{id}/repository/files/{file_path}/blame
+      operations:
+      - name: headapiv4projectsidrepositoryfilesfilepathblame
+        method: HEAD
+        description: Get blame file metadata from repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: The name of branch, tag or commit
+          required: true
+      - name: getapiv4projectsidrepositoryfilesfilepathblame
+        method: GET
+        description: Get blame file from the repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: The name of branch, tag or commit
+          required: true
+        - name: range[start]
+          in: query
+          type: integer
+          description: The first line of the range to blame
+          required: true
+        - name: range[end]
+          in: query
+          type: integer
+          description: The last line of the range to blame
+          required: true
+    - name: api-v4-projects-id-repository-files-file_path-raw
+      path: /api/v4/projects/{id}/repository/files/{file_path}/raw
+      operations:
+      - name: getapiv4projectsidrepositoryfilesfilepathraw
+        method: GET
+        description: Get raw file contents from the repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project ID
+          required: true
+        - name: file_path
+          in: path
+          type: string
+          description: The URL-encoded path to the file.
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: The name of branch, tag or commit
+        - name: lfs
+          in: query
+          type: boolean
+          description: Retrieve binary data for a file that is an lfs pointer
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-files-rest
+    port: 8080
+    description: REST adapter for GitLab API — files. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/repository/files/{file-path}
+      name: api-v4-projects-id-repository-files-file-path
+      description: REST surface for api-v4-projects-id-repository-files-file_path.
+      operations:
+      - method: HEAD
+        name: headapiv4projectsidrepositoryfilesfilepath
+        description: Get file metadata from repository
+        call: gitlab-ci-files.headapiv4projectsidrepositoryfilesfilepath
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          ref: rest.ref
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getapiv4projectsidrepositoryfilesfilepath
+        description: Get a file from the repository
+        call: gitlab-ci-files.getapiv4projectsidrepositoryfilesfilepath
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          ref: rest.ref
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postapiv4projectsidrepositoryfilesfilepath
+        description: Create new file in repository
+        call: gitlab-ci-files.postapiv4projectsidrepositoryfilesfilepath
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          postApiV4ProjectsIdRepositoryFilesFilePath: rest.postApiV4ProjectsIdRepositoryFilesFilePath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putapiv4projectsidrepositoryfilesfilepath
+        description: Update existing file in repository
+        call: gitlab-ci-files.putapiv4projectsidrepositoryfilesfilepath
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          putApiV4ProjectsIdRepositoryFilesFilePath: rest.putApiV4ProjectsIdRepositoryFilesFilePath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiv4projectsidrepositoryfilesfilepath
+        description: Delete an existing file in repository
+        call: gitlab-ci-files.deleteapiv4projectsidrepositoryfilesfilepath
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          branch: rest.branch
+          commit_message: rest.commit_message
+          start_branch: rest.start_branch
+          author_email: rest.author_email
+          author_name: rest.author_name
+          last_commit_id: rest.last_commit_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/files/{file-path}/blame
+      name: api-v4-projects-id-repository-files-file-path-blame
+      description: REST surface for api-v4-projects-id-repository-files-file_path-blame.
+      operations:
+      - method: HEAD
+        name: headapiv4projectsidrepositoryfilesfilepathblame
+        description: Get blame file metadata from repository
+        call: gitlab-ci-files.headapiv4projectsidrepositoryfilesfilepathblame
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          ref: rest.ref
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getapiv4projectsidrepositoryfilesfilepathblame
+        description: Get blame file from the repository
+        call: gitlab-ci-files.getapiv4projectsidrepositoryfilesfilepathblame
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          ref: rest.ref
+          range[start]: rest.range[start]
+          range[end]: rest.range[end]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/repository/files/{file-path}/raw
+      name: api-v4-projects-id-repository-files-file-path-raw
+      description: REST surface for api-v4-projects-id-repository-files-file_path-raw.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositoryfilesfilepathraw
+        description: Get raw file contents from the repository
+        call: gitlab-ci-files.getapiv4projectsidrepositoryfilesfilepathraw
+        with:
+          id: rest.id
+          file_path: rest.file_path
+          ref: rest.ref
+          lfs: rest.lfs
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — files. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-file-metadata-repository
+      description: Get file metadata from repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-files.headapiv4projectsidrepositoryfilesfilepath
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        ref: tools.ref
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-file-repository
+      description: Get a file from the repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-files.getapiv4projectsidrepositoryfilesfilepath
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        ref: tools.ref
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-file-repository
+      description: Create new file in repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-files.postapiv4projectsidrepositoryfilesfilepath
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        postApiV4ProjectsIdRepositoryFilesFilePath: tools.postApiV4ProjectsIdRepositoryFilesFilePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-file-repository
+      description: Update existing file in repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-files.putapiv4projectsidrepositoryfilesfilepath
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        putApiV4ProjectsIdRepositoryFilesFilePath: tools.putApiV4ProjectsIdRepositoryFilesFilePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-existing-file-repository
+      description: Delete an existing file in repository
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gitlab-ci-files.deleteapiv4projectsidrepositoryfilesfilepath
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        branch: tools.branch
+        commit_message: tools.commit_message
+        start_branch: tools.start_branch
+        author_email: tools.author_email
+        author_name: tools.author_name
+        last_commit_id: tools.last_commit_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-blame-file-metadata-repository
+      description: Get blame file metadata from repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-files.headapiv4projectsidrepositoryfilesfilepathblame
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        ref: tools.ref
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-blame-file-repository
+      description: Get blame file from the repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-files.getapiv4projectsidrepositoryfilesfilepathblame
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        ref: tools.ref
+        range[start]: tools.range[start]
+        range[end]: tools.range[end]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-file-contents-repository
+      description: Get raw file contents from the repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-files.getapiv4projectsidrepositoryfilesfilepathraw
+      with:
+        id: tools.id
+        file_path: tools.file_path
+        ref: tools.ref
+        lfs: tools.lfs
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,193 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — commit_statuses
+  description: 'GitLab API — commit_statuses. 2 operations. Lead operation: commit_statuses. Self-contained Naftiko capability
+    covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - commit_statuses
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-commit-statuses
+    baseUri: https://gitlab.com
+    description: GitLab API — commit_statuses business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-projects-id-repository-commits-sha-statuses
+      path: /api/v4/projects/{id}/repository/commits/{sha}/statuses
+      operations:
+      - name: getapiv4projectsidrepositorycommitsshastatuses
+        method: GET
+        description: Get a commit's statuses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: ID or URL-encoded path of the project.
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: Hash of the commit.
+          required: true
+        - name: ref
+          in: query
+          type: string
+          description: Name of the branch or tag. Default is the default branch.
+        - name: stage
+          in: query
+          type: string
+          description: Filter statuses by build stage.
+        - name: name
+          in: query
+          type: string
+          description: Filter statuses by job name.
+        - name: pipeline_id
+          in: query
+          type: integer
+          description: Filter statuses by pipeline ID.
+        - name: all
+          in: query
+          type: boolean
+          description: Include all statuses instead of latest only. Default is `false`.
+        - name: order_by
+          in: query
+          type: string
+          description: Values for sorting statuses. Valid values are `id` and `pipeline_id`. Default is `id`.
+        - name: sort
+          in: query
+          type: string
+          description: Sort statuses in ascending or descending order. Valid values are `asc` and `desc`. Default is `asc`.
+        - name: page
+          in: query
+          type: integer
+          description: Current page number
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-v4-projects-id-statuses-sha
+      path: /api/v4/projects/{id}/statuses/{sha}
+      operations:
+      - name: postapiv4projectsidstatusessha
+        method: POST
+        description: Post status to a commit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: ID or URL-encoded path of the project.
+          required: true
+        - name: sha
+          in: path
+          type: string
+          description: The commit hash
+          required: true
+        - name: postApiV4ProjectsIdStatusesSha
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-commit-statuses-rest
+    port: 8080
+    description: REST adapter for GitLab API — commit_statuses. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/projects/{id}/repository/commits/{sha}/statuses
+      name: api-v4-projects-id-repository-commits-sha-statuses
+      description: REST surface for api-v4-projects-id-repository-commits-sha-statuses.
+      operations:
+      - method: GET
+        name: getapiv4projectsidrepositorycommitsshastatuses
+        description: Get a commit's statuses
+        call: gitlab-ci-commit-statuses.getapiv4projectsidrepositorycommitsshastatuses
+        with:
+          id: rest.id
+          sha: rest.sha
+          ref: rest.ref
+          stage: rest.stage
+          name: rest.name
+          pipeline_id: rest.pipeline_id
+          all: rest.all
+          order_by: rest.order_by
+          sort: rest.sort
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v4/projects/{id}/statuses/{sha}
+      name: api-v4-projects-id-statuses-sha
+      description: REST surface for api-v4-projects-id-statuses-sha.
+      operations:
+      - method: POST
+        name: postapiv4projectsidstatusessha
+        description: Post status to a commit
+        call: gitlab-ci-commit-statuses.postapiv4projectsidstatusessha
+        with:
+          id: rest.id
+          sha: rest.sha
+          postApiV4ProjectsIdStatusesSha: rest.postApiV4ProjectsIdStatusesSha
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-commit-statuses-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — commit_statuses. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-commit-s-statuses
+      description: Get a commit's statuses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gitlab-ci-commit-statuses.getapiv4projectsidrepositorycommitsshastatuses
+      with:
+        id: tools.id
+        sha: tools.sha
+        ref: tools.ref
+        stage: tools.stage
+        name: tools.name
+        pipeline_id: tools.pipeline_id
+        all: tools.all
+        order_by: tools.order_by
+        sort: tools.sort
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-status-commit
+      description: Post status to a commit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-commit-statuses.postapiv4projectsidstatusessha
+      with:
+        id: tools.id
+        sha: tools.sha
+        postApiV4ProjectsIdStatusesSha: tools.postApiV4ProjectsIdStatusesSha
+      outputParameters:
+      - type: object
+        mapping: $.

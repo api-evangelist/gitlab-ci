@@ -1,0 +1,76 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitLab API — markdown
+  description: 'GitLab API — markdown. 1 operations. Lead operation: Render an arbitrary Markdown document. Self-contained
+    Naftiko capability covering one Gitlab Ci business surface.'
+  tags:
+  - Gitlab Ci
+  - markdown
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITLAB_CI_API_KEY: GITLAB_CI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gitlab-ci-markdown
+    baseUri: https://gitlab.com
+    description: GitLab API — markdown business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v4-markdown
+      path: /api/v4/markdown
+      operations:
+      - name: postapiv4markdown
+        method: POST
+        description: Render an arbitrary Markdown document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: postApiV4Markdown
+          in: body
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: gitlab-ci-markdown-rest
+    port: 8080
+    description: REST adapter for GitLab API — markdown. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v4/markdown
+      name: api-v4-markdown
+      description: REST surface for api-v4-markdown.
+      operations:
+      - method: POST
+        name: postapiv4markdown
+        description: Render an arbitrary Markdown document
+        call: gitlab-ci-markdown.postapiv4markdown
+        with:
+          postApiV4Markdown: rest.postApiV4Markdown
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gitlab-ci-markdown-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitLab API — markdown. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: render-arbitrary-markdown-document
+      description: Render an arbitrary Markdown document
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gitlab-ci-markdown.postapiv4markdown
+      with:
+        postApiV4Markdown: tools.postApiV4Markdown
+      outputParameters:
+      - type: object
+        mapping: $.
