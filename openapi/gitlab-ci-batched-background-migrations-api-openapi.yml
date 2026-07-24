@@ -1,0 +1,234 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests batched_background_migrations API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: batched_background_migrations
+  description: Operations about batched_background_migrations
+paths:
+  /api/v4/admin/batched_background_migrations/{id}:
+    get:
+      description: Retrieve a batched background migration
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: database
+        description: The name of the database
+        type: string
+        default: main
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        required: false
+      - in: path
+        name: id
+        description: The batched background migration id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Retrieve a batched background migration
+          schema:
+            $ref: '#/definitions/API_Entities_BatchedBackgroundMigration'
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Not found
+      tags:
+      - batched_background_migrations
+      operationId: getApiV4AdminBatchedBackgroundMigrationsId
+  /api/v4/admin/batched_background_migrations/{id}/resume:
+    put:
+      description: Resume a batched background migration
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The batched background migration id
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4AdminBatchedBackgroundMigrationsIdResume
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4AdminBatchedBackgroundMigrationsIdResume'
+      responses:
+        '200':
+          description: Resume a batched background migration
+          schema:
+            $ref: '#/definitions/API_Entities_BatchedBackgroundMigration'
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Not found
+        '422':
+          description: You can resume only `paused` batched background migrations.
+      tags:
+      - batched_background_migrations
+      operationId: putApiV4AdminBatchedBackgroundMigrationsIdResume
+  /api/v4/admin/batched_background_migrations/{id}/pause:
+    put:
+      description: Pause a batched background migration
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The batched background migration id
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4AdminBatchedBackgroundMigrationsIdPause
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4AdminBatchedBackgroundMigrationsIdPause'
+      responses:
+        '200':
+          description: Pause a batched background migration
+          schema:
+            $ref: '#/definitions/API_Entities_BatchedBackgroundMigration'
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Not found
+        '422':
+          description: You can pause only `active` batched background migrations.
+      tags:
+      - batched_background_migrations
+      operationId: putApiV4AdminBatchedBackgroundMigrationsIdPause
+  /api/v4/admin/batched_background_migrations:
+    get:
+      description: Get the list of batched background migrations
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: database
+        description: The name of the database, the default `main`
+        type: string
+        default: main
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        required: false
+      - in: query
+        name: job_class_name
+        description: Filter migrations by job class name.
+        type: string
+        required: false
+      responses:
+        '200':
+          description: Get the list of batched background migrations
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_BatchedBackgroundMigration'
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+      tags:
+      - batched_background_migrations
+      operationId: getApiV4AdminBatchedBackgroundMigrations
+definitions:
+  putApiV4AdminBatchedBackgroundMigrationsIdResume:
+    type: object
+    properties:
+      database:
+        type: string
+        description: The name of the database
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        default: main
+    description: Resume a batched background migration
+  API_Entities_BatchedBackgroundMigration:
+    type: object
+    properties:
+      id:
+        type: string
+        example: '1234'
+      job_class_name:
+        type: string
+        example: CopyColumnUsingBackgroundMigrationJob
+      table_name:
+        type: string
+        example: events
+      column_name:
+        type: string
+        example: id
+      status:
+        type: string
+        example: active
+      progress:
+        type: number
+        format: float
+        example: 50
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-11-28T16:26:39+02:00'
+      estimated_time_remaining:
+        type: string
+        example: 1 day
+    required:
+    - id
+    - job_class_name
+    - table_name
+    - column_name
+    - status
+    - progress
+    - created_at
+    - estimated_time_remaining
+    description: API_Entities_BatchedBackgroundMigration model
+  putApiV4AdminBatchedBackgroundMigrationsIdPause:
+    type: object
+    properties:
+      database:
+        type: string
+        description: The name of the database
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        default: main
+    description: Pause a batched background migration
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

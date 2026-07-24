@@ -1,0 +1,861 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests repositories API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: repositories
+  description: Operations about repositories
+paths:
+  /api/v4/projects/{id}/repository/tree:
+    get:
+      description: Get a project repository tree
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: ref
+        description: The name of a repository branch or tag, if not given the default branch is used
+        type: string
+        required: false
+        example: main
+      - in: query
+        name: path
+        description: The path of the tree
+        type: string
+        required: false
+        example: files/html
+      - in: query
+        name: recursive
+        description: Used to get a recursive tree
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: pagination
+        description: Specify the pagination method ("none" is only valid if "recursive" is true)
+        type: string
+        default: legacy
+        enum:
+        - legacy
+        - keyset
+        - none
+        required: false
+      - in: query
+        name: page_token
+        description: Record from which to start the keyset pagination
+        type: string
+        required: false
+        example: a1e8f8d745cc87e3a9248358d9352bb7f9a0aeba
+      responses:
+        '200':
+          description: Get a project repository tree
+          schema:
+            $ref: '#/definitions/API_Entities_TreeObject'
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryTree
+  /api/v4/projects/{id}/repository/blobs/{sha}/raw:
+    get:
+      description: Get raw blob contents from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: path
+        name: sha
+        description: The commit hash
+        type: string
+        required: true
+        example: 7d70e02340bac451f281cecf0a980907974bd8be
+      responses:
+        '200':
+          description: Get raw blob contents from the repository
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryBlobsShaRaw
+  /api/v4/projects/{id}/repository/blobs/{sha}:
+    get:
+      description: Get a blob from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: path
+        name: sha
+        description: The commit hash
+        type: string
+        required: true
+        example: 7d70e02340bac451f281cecf0a980907974bd8be
+      responses:
+        '200':
+          description: Get a blob from the repository
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryBlobsSha
+  /api/v4/projects/{id}/repository/archive:
+    get:
+      description: Get an archive of the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: sha
+        description: The commit sha of the archive to be downloaded
+        type: string
+        required: false
+        example: 7d70e02340bac451f281cecf0a980907974bd8be
+      - in: query
+        name: format
+        description: The archive format
+        type: string
+        required: false
+        example: tar.gz
+      - in: query
+        name: path
+        description: Subfolder of the repository to be downloaded
+        type: string
+        required: false
+        example: files/archives
+      - in: query
+        name: include_lfs_blobs
+        description: Used to exclude LFS objects from archive
+        type: boolean
+        default: true
+        required: false
+      - in: query
+        name: exclude_paths
+        description: Comma-separated list of paths to exclude from the archive
+        type: array
+        items:
+          type: string
+        required: false
+      responses:
+        '200':
+          description: Get an archive of the repository
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryArchive
+  /api/v4/projects/{id}/repository/compare:
+    get:
+      description: Compare two branches, tags, or commits
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: from
+        description: The commit, branch name, or tag name to start comparison
+        type: string
+        required: true
+        example: main
+      - in: query
+        name: to
+        description: The commit, branch name, or tag name to stop comparison
+        type: string
+        required: true
+        example: feature
+      - in: query
+        name: from_project_id
+        description: The project to compare from
+        type: integer
+        format: int32
+        required: false
+        example: 1
+      - in: query
+        name: straight
+        description: Comparison method, `true` for direct comparison between `from` and `to` (`from`..`to`), `false` to compare using merge base (`from`...`to`)
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: unidiff
+        description: A diff in a Unified diff format
+        type: boolean
+        default: false
+        required: false
+      responses:
+        '200':
+          description: Compare two branches, tags, or commits
+          schema:
+            $ref: '#/definitions/API_Entities_Compare'
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryCompare
+  /api/v4/projects/{id}/repository/health:
+    get:
+      description: Get repository health
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: generate
+        description: Triggers a new health report to be generated
+        type: boolean
+        default: false
+        required: false
+      responses:
+        '200':
+          description: Get repository health
+          schema:
+            $ref: '#/definitions/API_Entities_RepositoryHealth'
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryHealth
+  /api/v4/projects/{id}/repository/contributors:
+    get:
+      description: Get repository contributors
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: ref
+        description: The name of a repository branch or tag, if not given the default branch is used
+        type: string
+        required: false
+        example: main
+      - in: query
+        name: order_by
+        description: Return contributors ordered by `name` or `email` or `commits`
+        type: string
+        default: commits
+        enum:
+        - email
+        - name
+        - commits
+        required: false
+      - in: query
+        name: sort
+        description: Sort by asc (ascending) or desc (descending)
+        type: string
+        default: asc
+        enum:
+        - asc
+        - desc
+        required: false
+      responses:
+        '200':
+          description: Get repository contributors
+          schema:
+            $ref: '#/definitions/API_Entities_Contributor'
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryContributors
+  /api/v4/projects/{id}/repository/merge_base:
+    get:
+      description: Get the common ancestor between commits
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: refs
+        description: The refs to find the common ancestor of, multiple refs can be passed
+        type: array
+        items:
+          type: string
+        required: true
+        example: main
+      responses:
+        '200':
+          description: Get the common ancestor between commits
+          schema:
+            $ref: '#/definitions/API_Entities_Commit'
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryMergeBase
+  /api/v4/projects/{id}/repository/changelog:
+    get:
+      summary: Generates a changelog section for a release and returns it
+      description: This feature was introduced in GitLab 14.6
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - in: query
+        name: version
+        description: The version of the release, using the semantic versioning format
+        type: string
+        required: true
+        example: 1.0.0
+      - in: query
+        name: from
+        description: The first commit in the range of commits to use for the changelog
+        type: string
+        required: false
+        example: ed899a2f4b50b4370feeea94676502b42383c746
+      - in: query
+        name: to
+        description: The last commit in the range of commits to use for the changelog
+        type: string
+        required: false
+        example: 6104942438c14ec7bd21c6cd5bd995272b3faff6
+      - in: query
+        name: date
+        description: The date and time of the release
+        type: string
+        format: date-time
+        required: false
+        example: '2021-09-20T11:50:22.001+00:00'
+      - in: query
+        name: trailer
+        description: The Git trailer to use for determining if commits are to be included in the changelog
+        type: string
+        default: Changelog
+        required: false
+        example: Changelog
+      - in: query
+        name: config_file
+        description: The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'
+        type: string
+        required: false
+        example: .gitlab/changelog_config.yml
+      - in: query
+        name: config_file_ref
+        description: The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch.
+        type: string
+        required: false
+        example: main
+      responses:
+        '200':
+          description: Generates a changelog section for a release and returns it
+          schema:
+            $ref: '#/definitions/API_Entities_Changelog'
+      tags:
+      - repositories
+      operationId: getApiV4ProjectsIdRepositoryChangelog
+    post:
+      summary: Generates a changelog section for a release and commits it in a changelog file
+      description: This feature was introduced in GitLab 13.9
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 1
+      - name: postApiV4ProjectsIdRepositoryChangelog
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryChangelog'
+      responses:
+        '200':
+          description: Generates a changelog section for a release and commits it in a changelog file
+      tags:
+      - repositories
+      operationId: postApiV4ProjectsIdRepositoryChangelog
+definitions:
+  API_Entities_RepositoryHealth_Objects:
+    type: object
+    properties:
+      size:
+        type: integer
+        format: int32
+      recent_size:
+        type: integer
+        format: int32
+      stale_size:
+        type: integer
+        format: int32
+      keep_size:
+        type: integer
+        format: int32
+      packfile_count:
+        type: integer
+        format: int32
+      reverse_index_count:
+        type: integer
+        format: int32
+      cruft_count:
+        type: integer
+        format: int32
+      keep_count:
+        type: integer
+        format: int32
+      loose_objects_count:
+        type: integer
+        format: int32
+      stale_loose_objects_count:
+        type: integer
+        format: int32
+      loose_objects_garbage_count:
+        type: integer
+        format: int32
+    required:
+    - size
+    - recent_size
+    - stale_size
+    - keep_size
+    - packfile_count
+    - reverse_index_count
+    - cruft_count
+    - keep_count
+    - loose_objects_count
+    - stale_loose_objects_count
+    - loose_objects_garbage_count
+  API_Entities_RepositoryHealth_References:
+    type: object
+    properties:
+      loose_count:
+        type: integer
+        format: int32
+      packed_size:
+        type: integer
+        format: int32
+      reference_backend:
+        type: string
+    required:
+    - loose_count
+    - packed_size
+    - reference_backend
+  API_Entities_RepositoryHealth_Bitmap:
+    type: object
+    properties:
+      has_hash_cache:
+        type: boolean
+      has_lookup_table:
+        type: boolean
+      version:
+        type: integer
+        format: int32
+    required:
+    - has_hash_cache
+    - has_lookup_table
+    - version
+  API_Entities_Compare:
+    type: object
+    properties:
+      commit:
+        $ref: '#/definitions/API_Entities_Commit'
+      commits:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_Commit'
+      diffs:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_Diff'
+      compare_timeout:
+        type: boolean
+      compare_same_ref:
+        type: boolean
+      web_url:
+        type: string
+        example: https://gitlab.example.com/gitlab/gitlab-foss/-/compare/main...feature
+    required:
+    - commit
+    - commits
+    - diffs
+    - compare_timeout
+    - compare_same_ref
+    - web_url
+    description: API_Entities_Compare model
+  API_Entities_Diff:
+    type: object
+    properties:
+      diff:
+        type: string
+        example: '@@ -71,6 +71,8 @@\n...'
+      collapsed:
+        type: boolean
+      too_large:
+        type: boolean
+      new_path:
+        type: string
+        example: doc/update/5.4-to-6.0.md
+      old_path:
+        type: string
+        example: doc/update/5.4-to-6.0.md
+      a_mode:
+        type: string
+        example: '100755'
+      b_mode:
+        type: string
+        example: '100644'
+      new_file:
+        type: boolean
+      renamed_file:
+        type: boolean
+      deleted_file:
+        type: boolean
+      generated_file:
+        type: boolean
+    required:
+    - diff
+    - collapsed
+    - too_large
+    - new_path
+    - old_path
+    - a_mode
+    - b_mode
+    - new_file
+    - renamed_file
+    - deleted_file
+    - generated_file
+    description: API_Entities_Diff model
+  API_Entities_Commit:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      short_id:
+        type: string
+        example: 2695effb
+      created_at:
+        type: string
+        format: date-time
+        example: '2017-07-26T11:08:53.000+02:00'
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      title:
+        type: string
+        example: Initial commit
+      message:
+        type: string
+        example: Initial commit
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      trailers:
+        type: object
+        example:
+          Merged-By: Jane Doe janedoe@gitlab.com
+      extended_trailers:
+        type: object
+        example:
+          Signed-off-by:
+          - John Doe <johndoe@gitlab.com>
+          - Jane Doe <janedoe@gitlab.com>
+      web_url:
+        type: string
+        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+    required:
+    - id
+    - short_id
+    - created_at
+    - parent_ids
+    - title
+    - message
+    - author_name
+    - author_email
+    - authored_date
+    - committer_name
+    - committer_email
+    - committed_date
+    - trailers
+    - extended_trailers
+    - web_url
+    description: API_Entities_Commit model
+  API_Entities_RepositoryHealth_MultiPackIndex:
+    type: object
+    properties:
+      packfile_count:
+        type: integer
+        format: int32
+      version:
+        type: integer
+        format: int32
+    required:
+    - packfile_count
+    - version
+  API_Entities_RepositoryHealth_LastFullRepack:
+    type: object
+    properties:
+      seconds:
+        type: integer
+        format: int32
+      nanos:
+        type: integer
+        format: int32
+    required:
+    - seconds
+    - nanos
+  API_Entities_TreeObject:
+    type: object
+    properties:
+      id:
+        type: string
+        example: a1e8f8d745cc87e3a9248358d9352bb7f9a0aeba
+      name:
+        type: string
+        example: html
+      type:
+        type: string
+        example: tree
+      path:
+        type: string
+        example: files/html
+      mode:
+        type: string
+        example: '040000'
+    required:
+    - id
+    - name
+    - type
+    - path
+    - mode
+    description: API_Entities_TreeObject model
+  API_Entities_RepositoryHealth:
+    type: object
+    properties:
+      size:
+        type: integer
+        format: int32
+      references:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_References'
+      objects:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_Objects'
+      commit_graph:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_CommitGraph'
+      bitmap:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_Bitmap'
+      multi_pack_index:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_MultiPackIndex'
+      multi_pack_index_bitmap:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_Bitmap'
+      alternates:
+        type: object
+      is_object_pool:
+        type: boolean
+      last_full_repack:
+        $ref: '#/definitions/API_Entities_RepositoryHealth_LastFullRepack'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2025-02-24T09:05:50.355Z'
+    required:
+    - size
+    - references
+    - objects
+    - commit_graph
+    - bitmap
+    - multi_pack_index
+    - multi_pack_index_bitmap
+    - alternates
+    - is_object_pool
+    - last_full_repack
+    - updated_at
+    description: API_Entities_RepositoryHealth model
+  API_Entities_RepositoryHealth_CommitGraph:
+    type: object
+    properties:
+      commit_graph_chain_length:
+        type: integer
+        format: int32
+      has_bloom_filters:
+        type: boolean
+      has_generation_data:
+        type: boolean
+      has_generation_data_overflow:
+        type: boolean
+    required:
+    - commit_graph_chain_length
+    - has_bloom_filters
+    - has_generation_data
+    - has_generation_data_overflow
+  API_Entities_Changelog:
+    type: object
+    properties:
+      notes:
+        type: string
+        example: '## 1.0.0 (2023-01-01)'
+    required:
+    - notes
+    description: API_Entities_Changelog model
+  API_Entities_Contributor:
+    type: object
+    properties:
+      name:
+        type: string
+        example: John Doe
+      email:
+        type: string
+        example: johndoe@example.com
+      commits:
+        type: integer
+        format: int32
+        example: 117
+      additions:
+        type: integer
+        format: int32
+        example: 3
+      deletions:
+        type: integer
+        format: int32
+        example: 5
+    required:
+    - name
+    - email
+    - commits
+    - additions
+    - deletions
+    description: API_Entities_Contributor model
+  postApiV4ProjectsIdRepositoryChangelog:
+    type: object
+    properties:
+      version:
+        type: string
+        description: The version of the release, using the semantic versioning format
+        example: 1.0.0
+      from:
+        type: string
+        description: The first commit in the range of commits to use for the changelog
+        example: ed899a2f4b50b4370feeea94676502b42383c746
+      to:
+        type: string
+        description: The last commit in the range of commits to use for the changelog
+        example: 6104942438c14ec7bd21c6cd5bd995272b3faff6
+      date:
+        type: string
+        format: date-time
+        description: The date and time of the release
+        example: '2021-09-20T11:50:22.001+00:00'
+      trailer:
+        type: string
+        description: The Git trailer to use for determining if commits are to be included in the changelog
+        default: Changelog
+        example: Changelog
+      config_file:
+        type: string
+        description: The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'
+        example: .gitlab/changelog_config.yml
+      config_file_ref:
+        type: string
+        description: The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch.
+        example: main
+      branch:
+        type: string
+        description: The branch to commit the changelog changes to
+        example: main
+      file:
+        type: string
+        description: The file to commit the changelog changes to
+        default: CHANGELOG.md
+        example: CHANGELOG.md
+      message:
+        type: string
+        description: The commit message to use when committing the changelog
+        example: Initial commit
+    required:
+    - version
+    description: Generates a changelog section for a release and commits it in a changelog file
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

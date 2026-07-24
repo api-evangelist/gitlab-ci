@@ -1,0 +1,657 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests access_tokens API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: access_tokens
+  description: Operations about access_tokens
+paths:
+  /api/v4/groups/{id}/access_tokens/self/rotate:
+    post:
+      summary: Rotate a resource access token
+      description: Rotates a resource access token by passing it to the API in a header
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The group ID
+        type: string
+        required: true
+      - name: postApiV4GroupsIdAccessTokensSelfRotate
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4GroupsIdAccessTokensSelfRotate'
+      responses:
+        '200':
+          description: Rotate a resource access token
+          schema:
+            $ref: '#/definitions/API_Entities_ResourceAccessTokenWithToken'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '405':
+          description: Method not allowed
+      tags:
+      - access_tokens
+      operationId: postApiV4GroupsIdAccessTokensSelfRotate
+  /api/v4/projects/{id}/access_tokens/self/rotate:
+    post:
+      summary: Rotate a resource access token
+      description: Rotates a resource access token by passing it to the API in a header
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdAccessTokensSelfRotate
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdAccessTokensSelfRotate'
+      responses:
+        '200':
+          description: Rotate a resource access token
+          schema:
+            $ref: '#/definitions/API_Entities_ResourceAccessTokenWithToken'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '405':
+          description: Method not allowed
+      tags:
+      - access_tokens
+      operationId: postApiV4ProjectsIdAccessTokensSelfRotate
+  /api/v4/personal_access_tokens/self:
+    get:
+      summary: Get single personal access token
+      description: Get the details of a personal access token by passing it to the API in a header
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Get single personal access token
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalAccessTokenWithLastUsedIps'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - access_tokens
+      operationId: getApiV4PersonalAccessTokensSelf
+    delete:
+      summary: Revoke a personal access token
+      description: Revoke a personal access token by passing it to the API in a header
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Revoke a personal access token
+        '400':
+          description: Bad Request
+      tags:
+      - access_tokens
+      operationId: deleteApiV4PersonalAccessTokensSelf
+  /api/v4/personal_access_tokens/self/associations:
+    get:
+      summary: Return personal access token associations
+      description: Get groups and projects this personal access token can access by passing it to the API in a header
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: min_access_level
+        description: Limit by minimum access level of authenticated user
+        type: integer
+        format: int32
+        enum:
+        - 10
+        - 15
+        - 20
+        - 30
+        - 40
+        - 50
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Return personal access token associations
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalAccessToken'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - access_tokens
+      operationId: getApiV4PersonalAccessTokensSelfAssociations
+  /api/v4/personal_access_tokens/self/rotate:
+    post:
+      summary: Rotate a personal access token
+      description: Rotates a personal access token by passing it to the API in a header
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: postApiV4PersonalAccessTokensSelfRotate
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4PersonalAccessTokensSelfRotate'
+      responses:
+        '200':
+          description: Rotate a personal access token
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalAccessTokenWithToken'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '405':
+          description: Method not allowed
+      tags:
+      - access_tokens
+      operationId: postApiV4PersonalAccessTokensSelfRotate
+  /api/v4/personal_access_tokens:
+    get:
+      summary: List personal access tokens
+      description: Get all personal access tokens the authenticated user has access to.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: user_id
+        description: Filter PATs by User ID
+        type: integer
+        format: int32
+        required: false
+        example: 2
+      - in: query
+        name: revoked
+        description: Filter tokens where revoked state matches parameter
+        type: boolean
+        required: false
+      - in: query
+        name: state
+        description: Filter tokens which are either active or not
+        type: string
+        enum:
+        - active
+        - inactive
+        required: false
+        example: active
+      - in: query
+        name: created_before
+        description: Filter tokens which were created before given datetime
+        type: string
+        format: date-time
+        required: false
+        example: '2022-01-01'
+      - in: query
+        name: created_after
+        description: Filter tokens which were created after given datetime
+        type: string
+        format: date-time
+        required: false
+        example: '2021-01-01'
+      - in: query
+        name: last_used_before
+        description: Filter tokens which were used before given datetime
+        type: string
+        format: date-time
+        required: false
+        example: '2021-01-01'
+      - in: query
+        name: last_used_after
+        description: Filter tokens which were used after given datetime
+        type: string
+        format: date-time
+        required: false
+        example: '2022-01-01'
+      - in: query
+        name: expires_before
+        description: Filter tokens which expire before given datetime
+        type: string
+        format: date
+        required: false
+        example: '2022-01-01'
+      - in: query
+        name: expires_after
+        description: Filter tokens which expire after given datetime
+        type: string
+        format: date
+        required: false
+        example: '2021-01-01'
+      - in: query
+        name: search
+        description: Filters tokens by name
+        type: string
+        required: false
+        example: token
+      - in: query
+        name: sort
+        description: Sort tokens
+        type: string
+        required: false
+        example: created_at_desc
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List personal access tokens
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_PersonalAccessTokenWithLastUsedIps'
+        '401':
+          description: Unauthorized
+      tags:
+      - access_tokens
+      operationId: getApiV4PersonalAccessTokens
+  /api/v4/personal_access_tokens/{id}:
+    get:
+      summary: Get single personal access token
+      description: Get a personal access token by using the ID of the personal access token.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get single personal access token
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalAccessTokenWithLastUsedIps'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - access_tokens
+      operationId: getApiV4PersonalAccessTokensId
+    delete:
+      summary: Revoke a personal access token
+      description: Revoke a personal access token by using the ID of the personal access token.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Revoke a personal access token
+        '400':
+          description: Bad Request
+      tags:
+      - access_tokens
+      operationId: deleteApiV4PersonalAccessTokensId
+  /api/v4/personal_access_tokens/{id}/rotate:
+    post:
+      summary: Rotate personal access token
+      description: Rotates a personal access token.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4PersonalAccessTokensIdRotate
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4PersonalAccessTokensIdRotate'
+      responses:
+        '201':
+          description: Rotate personal access token
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalAccessTokenWithToken'
+      tags:
+      - access_tokens
+      operationId: postApiV4PersonalAccessTokensIdRotate
+definitions:
+  postApiV4PersonalAccessTokensIdRotate:
+    type: object
+    properties:
+      expires_at:
+        type: string
+        format: date
+        description: The expiration date of the token
+        example: '2021-01-31'
+    description: Rotate personal access token
+  API_Entities_PersonalAccessTokenWithToken:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      name:
+        type: string
+        example: John Doe
+      revoked:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+      description:
+        type: string
+        example: Token to manage api
+      scopes:
+        type: array
+        example:
+        - api
+      user_id:
+        type: integer
+        format: int32
+        example: 3
+      last_used_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      active:
+        type: boolean
+      granular:
+        type: boolean
+      expires_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      token:
+        type: string
+    required:
+    - id
+    - name
+    - revoked
+    - created_at
+    - description
+    - scopes
+    - user_id
+    - last_used_at
+    - active
+    - granular
+    - expires_at
+    - token
+    description: API_Entities_PersonalAccessTokenWithToken model
+  API_Entities_ResourceAccessTokenWithToken:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      name:
+        type: string
+        example: John Doe
+      revoked:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+      description:
+        type: string
+        example: Token to manage api
+      scopes:
+        type: array
+        example:
+        - api
+      user_id:
+        type: integer
+        format: int32
+        example: 3
+      last_used_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      active:
+        type: boolean
+      granular:
+        type: boolean
+      expires_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      access_level:
+        type: integer
+        format: int32
+        enum:
+        - 10
+        - 20
+        - 30
+        - 40
+        - 50
+        example: 40
+      resource_type:
+        type: string
+        enum:
+        - project
+        - group
+        example: project
+      resource_id:
+        type: integer
+        format: int32
+        example: 1234
+      token:
+        type: string
+    required:
+    - id
+    - name
+    - revoked
+    - created_at
+    - description
+    - scopes
+    - user_id
+    - last_used_at
+    - active
+    - granular
+    - expires_at
+    - access_level
+    - resource_type
+    - resource_id
+    - token
+    description: API_Entities_ResourceAccessTokenWithToken model
+  API_Entities_PersonalAccessToken:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      name:
+        type: string
+        example: John Doe
+      revoked:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+      description:
+        type: string
+        example: Token to manage api
+      scopes:
+        type: array
+        example:
+        - api
+      user_id:
+        type: integer
+        format: int32
+        example: 3
+      last_used_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      active:
+        type: boolean
+      granular:
+        type: boolean
+      expires_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+    required:
+    - id
+    - name
+    - revoked
+    - created_at
+    - description
+    - scopes
+    - user_id
+    - last_used_at
+    - active
+    - granular
+    - expires_at
+    description: API_Entities_PersonalAccessToken model
+  postApiV4PersonalAccessTokensSelfRotate:
+    type: object
+    properties:
+      expires_at:
+        type: string
+        format: date
+        description: The expiration date of the token
+        example: '2021-01-31'
+    description: Rotate a personal access token
+  postApiV4ProjectsIdAccessTokensSelfRotate:
+    type: object
+    properties:
+      expires_at:
+        type: string
+        format: date
+        description: The expiration date of the token
+        example: '2021-01-31'
+    description: Rotate a resource access token
+  API_Entities_PersonalAccessTokenWithLastUsedIps:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      name:
+        type: string
+        example: John Doe
+      revoked:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+      description:
+        type: string
+        example: Token to manage api
+      scopes:
+        type: array
+        example:
+        - api
+      user_id:
+        type: integer
+        format: int32
+        example: 3
+      last_used_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      active:
+        type: boolean
+      granular:
+        type: boolean
+      expires_at:
+        type: string
+        format: date-time
+        example: '2020-08-31T15:53:00.073Z'
+      last_used_ips:
+        type: array
+        example:
+        - 127.0.0.1
+        - 127.0.0.2
+        - 127.0.0.3
+    required:
+    - id
+    - name
+    - revoked
+    - created_at
+    - description
+    - scopes
+    - user_id
+    - last_used_at
+    - active
+    - granular
+    - expires_at
+    - last_used_ips
+    description: API_Entities_PersonalAccessTokenWithLastUsedIps model
+  postApiV4GroupsIdAccessTokensSelfRotate:
+    type: object
+    properties:
+      expires_at:
+        type: string
+        format: date
+        description: The expiration date of the token
+        example: '2021-01-31'
+    description: Rotate a resource access token
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

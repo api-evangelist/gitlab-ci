@@ -1,0 +1,540 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests namespaces API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: namespaces
+  description: Operations about namespaces
+paths:
+  /api/v4/namespaces/{id}:
+    put:
+      summary: Update a namespace
+      description: Deprecated in 17.8
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4NamespacesId
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4NamespacesId'
+      responses:
+        '200':
+          description: Update a namespace
+          schema:
+            $ref: '#/definitions/API_Entities_Namespace'
+      tags:
+      - namespaces
+      operationId: putApiV4NamespacesId
+    get:
+      summary: Get namespace by ID
+      description: Get a namespace by ID
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: ID or URL-encoded path of the namespace
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get namespace by ID
+          schema:
+            $ref: '#/definitions/API_Entities_Namespace'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - namespaces
+      operationId: getApiV4NamespacesId
+  /api/v4/namespaces/{id}/gitlab_subscription:
+    get:
+      description: Returns the subscription for the namespace
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Returns the subscription for the namespace
+          schema:
+            $ref: '#/definitions/API_Entities_GitlabSubscription'
+      tags:
+      - namespaces
+      operationId: getApiV4NamespacesIdGitlabSubscription
+  /api/v4/namespaces/{id}/storage/limit_exclusion:
+    post:
+      summary: Creates a storage limit exclusion for a Namespace
+      description: Creates a Namespaces::Storage::LimitExclusion
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4NamespacesIdStorageLimitExclusion
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4NamespacesIdStorageLimitExclusion'
+      responses:
+        '201':
+          description: Creates a storage limit exclusion for a Namespace
+          schema:
+            $ref: '#/definitions/API_Entities_Namespaces_Storage_LimitExclusion'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - namespaces
+      operationId: postApiV4NamespacesIdStorageLimitExclusion
+    delete:
+      summary: Removes a storage limit exclusion for a Namespace
+      description: Removes a Namespaces::Storage::LimitExclusion
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Removes a storage limit exclusion for a Namespace
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable entity
+      tags:
+      - namespaces
+      operationId: deleteApiV4NamespacesIdStorageLimitExclusion
+  /api/v4/namespaces/storage/limit_exclusions:
+    get:
+      summary: Retrieve all limit exclusions
+      description: Gets all records for namespaces that have been excluded
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Retrieve all limit exclusions
+          schema:
+            $ref: '#/definitions/API_Entities_Namespaces_Storage_LimitExclusion'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - namespaces
+      operationId: getApiV4NamespacesStorageLimitExclusions
+  /api/v4/namespaces:
+    get:
+      summary: List namespaces
+      description: Get a list of the namespaces of the authenticated user. If the user is an administrator, a list of all namespaces in the GitLab instance is shown.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: search
+        description: Returns a list of namespaces the user is authorized to view based on the search criteria
+        type: string
+        required: false
+      - in: query
+        name: owned_only
+        description: In GitLab 14.2 and later, returns a list of owned namespaces only
+        type: boolean
+        required: false
+      - in: query
+        name: top_level_only
+        description: Only include top level namespaces
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: full_path_search
+        description: If `true`, the `search` parameter is matched against the full path of the namespaces
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: requested_hosted_plan
+        description: Name of the hosted plan requested by the customer
+        type: string
+        required: false
+      responses:
+        '200':
+          description: List namespaces
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Namespace'
+        '401':
+          description: Unauthorized
+      tags:
+      - namespaces
+      operationId: getApiV4Namespaces
+  /api/v4/namespaces/{id}/exists:
+    get:
+      summary: Get existence of a namespace
+      description: Get existence of a namespace by path. Suggests a new namespace path that does not already exist.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Namespace’s path
+        type: string
+        required: true
+      - in: query
+        name: parent_id
+        description: The ID of the parent namespace. If no ID is specified, only top-level namespaces are considered.
+        type: integer
+        format: int32
+        required: false
+      responses:
+        '200':
+          description: Get existence of a namespace
+          schema:
+            $ref: '#/definitions/API_Entities_NamespaceExistence'
+        '401':
+          description: Unauthorized
+      tags:
+      - namespaces
+      operationId: getApiV4NamespacesIdExists
+definitions:
+  putApiV4NamespacesId:
+    type: object
+    properties:
+      shared_runners_minutes_limit:
+        type: integer
+        format: int32
+        description: Compute minutes quota for this namespace
+      extra_shared_runners_minutes_limit:
+        type: integer
+        format: int32
+        description: Extra compute minutes for this namespace
+      additional_purchased_storage_size:
+        type: integer
+        format: int32
+        description: Additional storage size for this namespace
+      additional_purchased_storage_ends_on:
+        type: string
+        format: date
+        description: End of subscription of the additional purchased storage
+      gitlab_subscription_attributes:
+        type: object
+        description: Object that contains information on the GitLab subscription
+        properties:
+          start_date:
+            type: string
+            format: date
+            description: Start date of subscription
+          seats:
+            type: integer
+            format: int32
+            description: Number of seats in subscription
+          max_seats_used:
+            type: integer
+            format: int32
+            description: Highest number of active users in the last month
+          plan_code:
+            type: string
+            description: Subscription tier code
+          end_date:
+            type: string
+            format: date
+            description: End date of subscription
+          auto_renew:
+            type: boolean
+            description: Whether subscription will auto renew on end date
+          trial:
+            type: boolean
+            description: Whether the subscription is a trial
+          trial_ends_on:
+            type: string
+            format: date
+            description: End date of trial
+          trial_starts_on:
+            type: string
+            format: date
+            description: Start date of trial
+          trial_extension_type:
+            type: integer
+            format: int32
+            description: Whether subscription is an extended or reactivated trial
+    description: Update a namespace
+  API_Entities_GitlabSubscription:
+    type: object
+    properties:
+      plan:
+        type: object
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+          trial:
+            type: string
+          auto_renew:
+            type: string
+          upgradable:
+            type: string
+          exclude_guests:
+            type: string
+        required:
+        - code
+        - name
+        - trial
+        - auto_renew
+        - upgradable
+        - exclude_guests
+      usage:
+        type: object
+        properties:
+          seats_in_subscription:
+            type: string
+          seats_in_use:
+            type: string
+          max_seats_used:
+            type: string
+          seats_owed:
+            type: string
+        required:
+        - seats_in_subscription
+        - seats_in_use
+        - max_seats_used
+        - seats_owed
+      billing:
+        type: object
+        properties:
+          subscription_start_date:
+            type: string
+          subscription_end_date:
+            type: string
+          trial_ends_on:
+            type: string
+        required:
+        - subscription_start_date
+        - subscription_end_date
+        - trial_ends_on
+    required:
+    - plan
+    - usage
+    - billing
+    description: API_Entities_GitlabSubscription model
+  API_Entities_NamespaceExistence:
+    type: object
+    properties:
+      exists:
+        type: boolean
+      suggests:
+        type: array
+        items:
+          type: string
+        example:
+        - my-group1
+    required:
+    - exists
+    - suggests
+    description: API_Entities_NamespaceExistence model
+  postApiV4NamespacesIdStorageLimitExclusion:
+    type: object
+    properties:
+      reason:
+        type: string
+        description: The reason the Namespace is being excluded
+    required:
+    - reason
+    description: Creates a storage limit exclusion for a Namespace
+  API_Entities_Namespaces_Storage_LimitExclusion:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      namespace_id:
+        type: integer
+        format: int32
+        example: 123
+      namespace_name:
+        type: string
+        example: GitLab
+      reason:
+        type: string
+        example: a reason
+    required:
+    - id
+    - namespace_id
+    - namespace_name
+    - reason
+    description: API_Entities_Namespaces_Storage_LimitExclusion model
+  API_Entities_Namespace:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      name:
+        type: string
+        example: project
+      path:
+        type: string
+        example: my_project
+      kind:
+        type: string
+        example: project
+      full_path:
+        type: string
+        example: group/my_project
+      parent_id:
+        type: integer
+        format: int32
+        example: 1
+      avatar_url:
+        type: string
+        example: https://example.com/avatar/12345
+      web_url:
+        type: string
+        example: https://example.com/group/my_project
+      members_count_with_descendants:
+        type: integer
+        format: int32
+        example: 5
+      root_repository_size:
+        type: integer
+        format: int32
+        example: 123
+      projects_count:
+        type: integer
+        format: int32
+        example: 123
+      shared_runners_minutes_limit:
+        type: integer
+        format: int32
+        example: 133
+      extra_shared_runners_minutes_limit:
+        type: integer
+        format: int32
+        example: 133
+      additional_purchased_storage_size:
+        type: integer
+        format: int32
+        example: 1000
+      additional_purchased_storage_ends_on:
+        type: string
+        format: date
+        example: '2022-06-18'
+      billable_members_count:
+        type: integer
+        format: int32
+        example: 2
+      seats_in_use:
+        type: integer
+        format: int32
+        example: 5
+      max_seats_used:
+        type: integer
+        format: int32
+        example: 100
+      max_seats_used_changed_at:
+        type: string
+        format: date
+        example: '2022-06-18'
+      end_date:
+        type: string
+        format: date
+        example: '2022-06-18'
+      plan:
+        type: string
+        example: default
+      trial_ends_on:
+        type: string
+        format: date
+        example: '2022-06-18'
+      trial:
+        type: boolean
+    required:
+    - id
+    - name
+    - path
+    - kind
+    - full_path
+    - parent_id
+    - avatar_url
+    - web_url
+    - billable_members_count
+    description: API_Entities_Namespace model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

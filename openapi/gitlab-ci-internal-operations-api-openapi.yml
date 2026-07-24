@@ -1,0 +1,49 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests internal_operations API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: internal_operations
+  description: Operations about internal_operations
+paths:
+  /api/v4/integrations/slack/interactions:
+    post:
+      summary: Process Slack interaction events
+      description: Processes interaction events from Slack
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      responses:
+        '201':
+          description: Process Slack interaction events
+      tags:
+      - internal_operations
+      operationId: postApiV4IntegrationsSlackInteractions
+  /api/v4/integrations/slack/options:
+    post:
+      summary: Get Slack interactive component options
+      description: Retrieves options for Slack interactive components
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      responses:
+        '201':
+          description: Get Slack interactive component options
+      tags:
+      - internal_operations
+      operationId: postApiV4IntegrationsSlackOptions
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

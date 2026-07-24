@@ -1,0 +1,248 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests protected_tags API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: protected_tags
+  description: Operations about protected_tags
+paths:
+  /api/v4/projects/{id}/protected_tags:
+    get:
+      summary: Get a project's protected tags
+      description: This feature was introduced in GitLab 11.3.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get a project's protected tags
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_ProtectedTag'
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+      tags:
+      - protected_tags
+      operationId: getApiV4ProjectsIdProtectedTags
+    post:
+      summary: Protect a single tag or wildcard
+      description: This feature was introduced in GitLab 11.3.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdProtectedTags
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdProtectedTags'
+      responses:
+        '201':
+          description: Protect a single tag or wildcard
+          schema:
+            $ref: '#/definitions/API_Entities_ProtectedTag'
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - protected_tags
+      operationId: postApiV4ProjectsIdProtectedTags
+  /api/v4/projects/{id}/protected_tags/{name}:
+    get:
+      summary: Get a single protected tag
+      description: This feature was introduced in GitLab 11.3.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: name
+        description: The name of the tag or wildcard
+        type: string
+        required: true
+        example: release*
+      responses:
+        '200':
+          description: Get a single protected tag
+          schema:
+            $ref: '#/definitions/API_Entities_ProtectedTag'
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+      tags:
+      - protected_tags
+      operationId: getApiV4ProjectsIdProtectedTagsName
+    delete:
+      summary: Unprotect a single tag
+      description: This feature was introduced in GitLab 11.3.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: name
+        description: The name of the protected tag
+        type: string
+        required: true
+        example: release-1-0
+      responses:
+        '204':
+          description: Unprotect a single tag
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+        '412':
+          description: Precondition Failed
+      tags:
+      - protected_tags
+      operationId: deleteApiV4ProjectsIdProtectedTagsName
+definitions:
+  API_Entities_ProtectedRefAccess:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      access_level:
+        type: integer
+        format: int32
+        example: 40
+      access_level_description:
+        type: string
+        example: Maintainers
+      deploy_key_id:
+        type: integer
+        format: int32
+        example: 1
+      user_id:
+        type: integer
+        format: int32
+        example: 1
+      group_id:
+        type: integer
+        format: int32
+        example: 1
+    required:
+    - id
+    - access_level
+    - access_level_description
+    - user_id
+    - group_id
+  API_Entities_ProtectedTag:
+    type: object
+    properties:
+      name:
+        type: string
+        example: release-1-0
+      create_access_levels:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_ProtectedRefAccess'
+    required:
+    - name
+    - create_access_levels
+    description: API_Entities_ProtectedTag model
+  postApiV4ProjectsIdProtectedTags:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the protected tag
+        example: release-1-0
+      create_access_level:
+        type: integer
+        format: int32
+        description: 'Access levels allowed to create (defaults: `40`, maintainer access level)'
+        enum:
+        - 30
+        - 40
+        - 60
+        - 0
+        example: 30
+      allowed_to_create:
+        type: array
+        description: Array of users, groups, deploy keys, or access levels allowed to create protected branches
+        items:
+          type: object
+          properties:
+            deploy_key_id:
+              type: integer
+              format: int32
+              description: ID of a deploy key
+            access_level:
+              type: integer
+              format: int32
+              description: ID of an access level
+              enum:
+              - 30
+              - 40
+              - 60
+              - 0
+            user_id:
+              type: integer
+              format: int32
+              description: ID of a user
+            group_id:
+              type: integer
+              format: int32
+              description: ID of a group
+    required:
+    - name
+    description: Protect a single tag or wildcard
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

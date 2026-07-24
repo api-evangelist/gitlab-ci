@@ -1,0 +1,417 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests gitlab_pages API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: gitlab_pages
+  description: Operations about gitlab_pages
+paths:
+  /api/v4/projects/{id}/pages:
+    delete:
+      summary: Unpublish pages
+      description: Remove pages. The user must have administrator access. This feature was introduced in GitLab 12.6
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Unpublish pages
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - gitlab_pages
+      operationId: deleteApiV4ProjectsIdPages
+    patch:
+      summary: Update pages settings
+      description: Update page settings for a project. User must have administrative access.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - name: patchApiV4ProjectsIdPages
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/patchApiV4ProjectsIdPages'
+      responses:
+        '200':
+          description: Update pages settings
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - gitlab_pages
+      operationId: patchApiV4ProjectsIdPages
+    get:
+      summary: Get pages settings
+      description: Get pages URL and other settings. This feature was introduced in Gitlab 16.8
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get pages settings
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      tags:
+      - gitlab_pages
+      operationId: getApiV4ProjectsIdPages
+  /api/v4/projects/{id}/pages/domains:
+    get:
+      description: Get all pages domains
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get all pages domains
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_PagesDomain'
+      tags:
+      - gitlab_pages
+      operationId: getApiV4ProjectsIdPagesDomains
+    post:
+      description: Create a new pages domain
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdPagesDomains
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdPagesDomains'
+      responses:
+        '201':
+          description: Create a new pages domain
+          schema:
+            $ref: '#/definitions/API_Entities_PagesDomain'
+      tags:
+      - gitlab_pages
+      operationId: postApiV4ProjectsIdPagesDomains
+  /api/v4/projects/{id}/pages/domains/{domain}:
+    get:
+      description: Get a single pages domain
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: domain
+        description: The domain
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a single pages domain
+          schema:
+            $ref: '#/definitions/API_Entities_PagesDomain'
+      tags:
+      - gitlab_pages
+      operationId: getApiV4ProjectsIdPagesDomainsDomain
+    put:
+      description: Updates a pages domain
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: domain
+        description: The domain
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdPagesDomainsDomain
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdPagesDomainsDomain'
+      responses:
+        '200':
+          description: Updates a pages domain
+      tags:
+      - gitlab_pages
+      operationId: putApiV4ProjectsIdPagesDomainsDomain
+    delete:
+      description: Delete a pages domain
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: domain
+        description: The domain
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Delete a pages domain
+      tags:
+      - gitlab_pages
+      operationId: deleteApiV4ProjectsIdPagesDomainsDomain
+  /api/v4/projects/{id}/pages/domains/{domain}/verify:
+    put:
+      description: Verify a pages domain
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: domain
+        description: The domain to verify
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Verify a pages domain
+          schema:
+            $ref: '#/definitions/API_Entities_PagesDomain'
+      tags:
+      - gitlab_pages
+      operationId: putApiV4ProjectsIdPagesDomainsDomainVerify
+  /api/v4/pages/domains:
+    get:
+      description: Get all pages domains
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: domain
+        description: The domain of the GitLab Pages site to filter on.
+        type: string
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get all pages domains
+          schema:
+            $ref: '#/definitions/API_Entities_PagesDomainBasic'
+      tags:
+      - gitlab_pages
+      operationId: getApiV4PagesDomains
+definitions:
+  API_Entities_PagesDomain:
+    type: object
+    properties:
+      domain:
+        type: string
+      url:
+        type: string
+      verified:
+        type: string
+      verification_code:
+        type: string
+      enabled_until:
+        type: string
+      auto_ssl_enabled:
+        type: string
+      certificate:
+        $ref: '#/definitions/API_Entities_PagesDomainCertificate'
+    required:
+    - domain
+    - url
+    - verified
+    - verification_code
+    - enabled_until
+    - auto_ssl_enabled
+    description: API_Entities_PagesDomain model
+  API_Entities_PagesDomainCertificate:
+    type: object
+    properties:
+      subject:
+        type: string
+      expired:
+        type: string
+      certificate:
+        type: string
+      certificate_text:
+        type: string
+    required:
+    - subject
+    - expired
+    - certificate
+    - certificate_text
+  API_Entities_PagesDomainBasic:
+    type: object
+    properties:
+      domain:
+        type: string
+      url:
+        type: string
+      project_id:
+        type: string
+      verified:
+        type: string
+      verification_code:
+        type: string
+      enabled_until:
+        type: string
+      auto_ssl_enabled:
+        type: string
+      certificate_expiration:
+        $ref: '#/definitions/API_Entities_PagesDomainCertificateExpiration'
+    required:
+    - domain
+    - url
+    - project_id
+    - verified
+    - verification_code
+    - enabled_until
+    - auto_ssl_enabled
+    description: API_Entities_PagesDomainBasic model
+  postApiV4ProjectsIdPagesDomains:
+    type: object
+    properties:
+      domain:
+        type: string
+        description: The domain
+      certificate:
+        type: file
+        description: The certificate
+      key:
+        type: file
+        description: The key
+      auto_ssl_enabled:
+        type: boolean
+        description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
+        default: false
+      user_provided_certificate:
+        type: string
+      user_provided_key:
+        type: string
+    required:
+    - domain
+    description: Create a new pages domain
+  patchApiV4ProjectsIdPages:
+    type: object
+    properties:
+      pages_unique_domain_enabled:
+        type: boolean
+        description: Whether to use unique domain
+      pages_https_only:
+        type: boolean
+        description: Whether to force HTTPS
+      pages_primary_domain:
+        type: string
+        description: Set pages primary domain
+    description: Update pages settings
+  putApiV4ProjectsIdPagesDomainsDomain:
+    type: object
+    properties:
+      certificate:
+        type: file
+        description: The certificate
+      key:
+        type: file
+        description: The key
+      auto_ssl_enabled:
+        type: boolean
+        description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
+    description: Updates a pages domain
+  API_Entities_PagesDomainCertificateExpiration:
+    type: object
+    properties:
+      expired:
+        type: string
+      expiration:
+        type: string
+    required:
+    - expired
+    - expiration
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

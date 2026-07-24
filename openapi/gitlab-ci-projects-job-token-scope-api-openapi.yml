@@ -1,0 +1,537 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests projects_job_token_scope API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: projects_job_token_scope
+  description: Operations about projects_job_token_scopes
+paths:
+  /api/v4/projects/{id}/job_token_scope:
+    get:
+      description: Fetch CI_JOB_TOKEN access settings.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Fetch CI_JOB_TOKEN access settings.
+          schema:
+            $ref: '#/definitions/API_Entities_ProjectJobTokenScope'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - projects_job_token_scope
+      operationId: getApiV4ProjectsIdJobTokenScope
+    patch:
+      description: Patch CI_JOB_TOKEN access settings.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: patchApiV4ProjectsIdJobTokenScope
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/patchApiV4ProjectsIdJobTokenScope'
+      responses:
+        '204':
+          description: Patch CI_JOB_TOKEN access settings.
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - projects_job_token_scope
+      operationId: patchApiV4ProjectsIdJobTokenScope
+  /api/v4/projects/{id}/job_token_scope/allowlist:
+    get:
+      description: Fetch project inbound allowlist for CI_JOB_TOKEN access settings.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Fetch project inbound allowlist for CI_JOB_TOKEN access settings.
+          schema:
+            $ref: '#/definitions/API_Entities_BasicProjectDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - projects_job_token_scope
+      operationId: getApiV4ProjectsIdJobTokenScopeAllowlist
+    post:
+      description: Add target project to allowlist.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: ID of user project
+        type: integer
+        format: int32
+        required: true
+        example: 1
+      - name: postApiV4ProjectsIdJobTokenScopeAllowlist
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdJobTokenScopeAllowlist'
+      responses:
+        '201':
+          description: Add target project to allowlist.
+          schema:
+            $ref: '#/definitions/API_Entities_BasicProjectDetails'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - projects_job_token_scope
+      operationId: postApiV4ProjectsIdJobTokenScopeAllowlist
+  /api/v4/projects/{id}/job_token_scope/groups_allowlist:
+    get:
+      description: Fetch project groups allowlist for CI_JOB_TOKEN access settings.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Fetch project groups allowlist for CI_JOB_TOKEN access settings.
+          schema:
+            $ref: '#/definitions/API_Entities_BasicProjectDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - projects_job_token_scope
+      operationId: getApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+    post:
+      description: Add target group to allowlist.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: ID of user project
+        type: integer
+        format: int32
+        required: true
+        example: 1
+      - name: postApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdJobTokenScopeGroupsAllowlist'
+      responses:
+        '201':
+          description: Add target group to allowlist.
+          schema:
+            $ref: '#/definitions/API_Entities_BasicGroupDetails'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - projects_job_token_scope
+      operationId: postApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+  /api/v4/projects/{id}/job_token_scope/groups_allowlist/{target_group_id}:
+    delete:
+      description: Delete target group from allowlist.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: ID of user project
+        type: integer
+        format: int32
+        required: true
+        example: 1
+      - in: path
+        name: target_group_id
+        description: ID of the group to be removed from the allowlist
+        type: integer
+        format: int32
+        required: true
+        example: 2
+      responses:
+        '204':
+          description: Delete target group from allowlist.
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - projects_job_token_scope
+      operationId: deleteApiV4ProjectsIdJobTokenScopeGroupsAllowlistTargetGroupId
+  /api/v4/projects/{id}/job_token_scope/allowlist/{target_project_id}:
+    delete:
+      description: Delete project from allowlist.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: ID of user project
+        type: integer
+        format: int32
+        required: true
+        example: 1
+      - in: path
+        name: target_project_id
+        description: ID of the project to be removed from the allowlist
+        type: integer
+        format: int32
+        required: true
+        example: 2
+      responses:
+        '204':
+          description: Delete project from allowlist.
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - projects_job_token_scope
+      operationId: deleteApiV4ProjectsIdJobTokenScopeAllowlistTargetProjectId
+definitions:
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_NamespaceBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      name:
+        type: string
+        example: project
+      path:
+        type: string
+        example: my_project
+      kind:
+        type: string
+        example: project
+      full_path:
+        type: string
+        example: group/my_project
+      parent_id:
+        type: integer
+        format: int32
+        example: 1
+      avatar_url:
+        type: string
+        example: https://example.com/avatar/12345
+      web_url:
+        type: string
+        example: https://example.com/group/my_project
+    required:
+    - id
+    - name
+    - path
+    - kind
+    - full_path
+    - parent_id
+    - avatar_url
+    - web_url
+  postApiV4ProjectsIdJobTokenScopeAllowlist:
+    type: object
+    properties:
+      target_project_id:
+        type: integer
+        format: int32
+        description: ID of target project
+        example: 2
+    required:
+    - target_project_id
+    description: Add target project to allowlist.
+  postApiV4ProjectsIdJobTokenScopeGroupsAllowlist:
+    type: object
+    properties:
+      target_group_id:
+        type: integer
+        format: int32
+        description: ID of target group
+        example: 2
+    required:
+    - target_group_id
+    description: Add target group to allowlist.
+  API_Entities_ProjectJobTokenScope:
+    type: object
+    properties:
+      inbound_enabled:
+        type: boolean
+      outbound_enabled:
+        type: boolean
+    required:
+    - inbound_enabled
+    - outbound_enabled
+    description: API_Entities_ProjectJobTokenScope model
+  API_Entities_BasicProjectDetails:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      description:
+        type: string
+        example: desc
+      name:
+        type: string
+        example: project1
+      name_with_namespace:
+        type: string
+        example: John Doe / project1
+      path:
+        type: string
+        example: project1
+      path_with_namespace:
+        type: string
+        example: namespace1/project1
+      created_at:
+        type: string
+        format: date-time
+        example: '2020-05-07T04:27:17.016Z'
+      default_branch:
+        type: string
+        example: main
+      tag_list:
+        type: array
+        items:
+          type: string
+        example:
+        - tag
+      topics:
+        type: array
+        items:
+          type: string
+        example:
+        - topic
+      ssh_url_to_repo:
+        type: string
+        example: git@gitlab.example.com:gitlab/gitlab.git
+      http_url_to_repo:
+        type: string
+        example: https://gitlab.example.com/gitlab/gitlab.git
+      web_url:
+        type: string
+        example: https://gitlab.example.com/gitlab/gitlab
+      readme_url:
+        type: string
+        example: https://gitlab.example.com/gitlab/gitlab/blob/master/README.md
+      forks_count:
+        type: integer
+        format: int32
+        example: 1
+      license_url:
+        type: string
+        example: https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE
+      license:
+        $ref: '#/definitions/API_Entities_LicenseBasic'
+      avatar_url:
+        type: string
+        example: http://example.com/uploads/project/avatar/3/uploads/avatar.png
+      star_count:
+        type: integer
+        format: int32
+        example: 1
+      last_activity_at:
+        type: string
+        format: date-time
+        example: '2013-09-30T13:46:02Z'
+      visibility:
+        type: string
+        example: public
+      namespace:
+        $ref: '#/definitions/API_Entities_NamespaceBasic'
+      custom_attributes:
+        $ref: '#/definitions/API_Entities_CustomAttribute'
+      repository_storage:
+        type: string
+        example: default
+    required:
+    - id
+    - description
+    - name
+    - name_with_namespace
+    - path
+    - path_with_namespace
+    - created_at
+    - tag_list
+    - topics
+    - ssh_url_to_repo
+    - http_url_to_repo
+    - web_url
+    - avatar_url
+    - star_count
+    - last_activity_at
+    - visibility
+    - namespace
+    description: API_Entities_BasicProjectDetails model
+  API_Entities_BasicGroupDetails:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      web_url:
+        type: string
+        example: http://gitlab.example.com/groups/diaspora
+      name:
+        type: string
+        example: Diaspora
+    required:
+    - id
+    - web_url
+    - name
+    description: API_Entities_BasicGroupDetails model
+  patchApiV4ProjectsIdJobTokenScope:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        description: Indicates CI/CD job tokens generated in other projects have restricted access to this project.
+    required:
+    - enabled
+    description: Patch CI_JOB_TOKEN access settings.
+  API_Entities_LicenseBasic:
+    type: object
+    properties:
+      key:
+        type: string
+        example: gpl-3.0
+      name:
+        type: string
+        example: GNU General Public License v3.0
+      nickname:
+        type: string
+        example: GNU GPLv3
+      html_url:
+        type: string
+        example: http://choosealicense.com/licenses/gpl-3.0
+      source_url:
+        type: string
+    required:
+    - key
+    - name
+    - nickname
+    - html_url
+    - source_url
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

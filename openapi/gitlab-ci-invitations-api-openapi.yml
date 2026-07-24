@@ -1,0 +1,427 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests invitations API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: invitations
+  description: Operations about invitations
+paths:
+  /api/v4/groups/{id}/invitations:
+    post:
+      summary: Invite non-members by email address to a group or project.
+      description: This feature was introduced in GitLab 13.6
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The group ID
+        type: string
+        required: true
+      - name: postApiV4GroupsIdInvitations
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4GroupsIdInvitations'
+      responses:
+        '201':
+          description: Invite non-members by email address to a group or project.
+          schema:
+            $ref: '#/definitions/API_Entities_Invitation'
+      tags:
+      - invitations
+      operationId: postApiV4GroupsIdInvitations
+    get:
+      summary: Get a list of group or project invitations viewable by the authenticated user
+      description: This feature was introduced in GitLab 13.6
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The group ID
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: query
+        description: A query string to search for members
+        type: string
+        required: false
+      responses:
+        '200':
+          description: Get a list of group or project invitations viewable by the authenticated user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Invitation'
+      tags:
+      - invitations
+      operationId: getApiV4GroupsIdInvitations
+  /api/v4/groups/{id}/invitations/{email}:
+    put:
+      description: Updates a group or project invitation.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The group ID
+        type: string
+        required: true
+      - in: path
+        name: email
+        description: The email address of the invitation
+        type: string
+        required: true
+      - name: putApiV4GroupsIdInvitationsEmail
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4GroupsIdInvitationsEmail'
+      responses:
+        '200':
+          description: Updates a group or project invitation.
+          schema:
+            $ref: '#/definitions/API_Entities_Invitation'
+      tags:
+      - invitations
+      operationId: putApiV4GroupsIdInvitationsEmail
+    delete:
+      description: Removes an invitation from a group or project.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The group ID
+        type: string
+        required: true
+      - in: path
+        name: email
+        description: The email address of the invitation
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Removes an invitation from a group or project.
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '409':
+          description: Could not delete invitation
+      tags:
+      - invitations
+      operationId: deleteApiV4GroupsIdInvitationsEmail
+  /api/v4/projects/{id}/invitations:
+    post:
+      summary: Invite non-members by email address to a group or project.
+      description: This feature was introduced in GitLab 13.6
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdInvitations
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdInvitations'
+      responses:
+        '201':
+          description: Invite non-members by email address to a group or project.
+          schema:
+            $ref: '#/definitions/API_Entities_Invitation'
+      tags:
+      - invitations
+      operationId: postApiV4ProjectsIdInvitations
+    get:
+      summary: Get a list of group or project invitations viewable by the authenticated user
+      description: This feature was introduced in GitLab 13.6
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: query
+        description: A query string to search for members
+        type: string
+        required: false
+      responses:
+        '200':
+          description: Get a list of group or project invitations viewable by the authenticated user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Invitation'
+      tags:
+      - invitations
+      operationId: getApiV4ProjectsIdInvitations
+  /api/v4/projects/{id}/invitations/{email}:
+    put:
+      description: Updates a group or project invitation.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+      - in: path
+        name: email
+        description: The email address of the invitation
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdInvitationsEmail
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdInvitationsEmail'
+      responses:
+        '200':
+          description: Updates a group or project invitation.
+          schema:
+            $ref: '#/definitions/API_Entities_Invitation'
+      tags:
+      - invitations
+      operationId: putApiV4ProjectsIdInvitationsEmail
+    delete:
+      description: Removes an invitation from a group or project.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+      - in: path
+        name: email
+        description: The email address of the invitation
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Removes an invitation from a group or project.
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '409':
+          description: Could not delete invitation
+      tags:
+      - invitations
+      operationId: deleteApiV4ProjectsIdInvitationsEmail
+definitions:
+  postApiV4ProjectsIdInvitations:
+    type: object
+    properties:
+      access_level:
+        type: integer
+        format: int32
+        description: 'A valid access level (defaults: `30`, developer access level)'
+        enum:
+        - 10
+        - 15
+        - 20
+        - 30
+        - 40
+        - 50
+        - 5
+      email:
+        type: array
+        description: The email address to invite, or multiple emails separated by comma
+        items:
+          type: string
+      user_id:
+        type: array
+        description: The user ID of the new member or multiple IDs separated by commas.
+        items:
+          type: string
+      expires_at:
+        type: string
+        format: date-time
+        description: Date string in the format YEAR-MONTH-DAY
+      invite_source:
+        type: string
+        description: Source that triggered the member creation process
+        default: invitations-api
+      member_role_id:
+        type: integer
+        format: int32
+        description: The ID of a member role for the invited user
+    required:
+    - access_level
+    description: Invite non-members by email address to a group or project.
+  putApiV4ProjectsIdInvitationsEmail:
+    type: object
+    properties:
+      access_level:
+        type: integer
+        format: int32
+        description: 'A valid access level (defaults: `30`, developer access level)'
+        enum:
+        - 10
+        - 15
+        - 20
+        - 30
+        - 40
+        - 50
+      expires_at:
+        type: string
+        format: date-time
+        description: Date string in ISO 8601 format (`YYYY-MM-DDTHH:MM:SSZ`)
+      member_role_id:
+        type: integer
+        format: int32
+        description: The ID of a member role for the invited user
+    description: Updates a group or project invitation.
+  putApiV4GroupsIdInvitationsEmail:
+    type: object
+    properties:
+      access_level:
+        type: integer
+        format: int32
+        description: 'A valid access level (defaults: `30`, developer access level)'
+        enum:
+        - 10
+        - 15
+        - 20
+        - 30
+        - 40
+        - 50
+      expires_at:
+        type: string
+        format: date-time
+        description: Date string in ISO 8601 format (`YYYY-MM-DDTHH:MM:SSZ`)
+      member_role_id:
+        type: integer
+        format: int32
+        description: The ID of a member role for the invited user
+    description: Updates a group or project invitation.
+  API_Entities_Invitation:
+    type: object
+    properties:
+      access_level:
+        type: string
+      created_at:
+        type: string
+      expires_at:
+        type: string
+      invite_email:
+        type: string
+      invite_token:
+        type: string
+      user_name:
+        type: string
+      created_by_name:
+        type: string
+    required:
+    - access_level
+    - created_at
+    - expires_at
+    - invite_email
+    - invite_token
+    - created_by_name
+    description: API_Entities_Invitation model
+  postApiV4GroupsIdInvitations:
+    type: object
+    properties:
+      access_level:
+        type: integer
+        format: int32
+        description: 'A valid access level (defaults: `30`, developer access level)'
+        enum:
+        - 10
+        - 15
+        - 20
+        - 30
+        - 40
+        - 50
+        - 5
+      email:
+        type: array
+        description: The email address to invite, or multiple emails separated by comma
+        items:
+          type: string
+      user_id:
+        type: array
+        description: The user ID of the new member or multiple IDs separated by commas.
+        items:
+          type: string
+      expires_at:
+        type: string
+        format: date-time
+        description: Date string in the format YEAR-MONTH-DAY
+      invite_source:
+        type: string
+        description: Source that triggered the member creation process
+        default: invitations-api
+      member_role_id:
+        type: integer
+        format: int32
+        description: The ID of a member role for the invited user
+    required:
+    - access_level
+    description: Invite non-members by email address to a group or project.
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

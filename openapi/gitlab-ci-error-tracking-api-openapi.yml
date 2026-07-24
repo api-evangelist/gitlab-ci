@@ -1,0 +1,245 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests error_tracking API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: error_tracking
+  description: Operations about error_trackings
+paths:
+  /api/v4/projects/{id}/error_tracking/client_keys:
+    get:
+      summary: List project client keys
+      description: List all client keys. This feature was introduced in GitLab 14.3.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      responses:
+        '200':
+          description: List project client keys
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_ErrorTracking_ClientKey'
+      tags:
+      - error_tracking
+      operationId: getApiV4ProjectsIdErrorTrackingClientKeys
+    post:
+      summary: Create a client key
+      description: Creates a new client key for a project. The public key attribute is generated automatically.This feature was introduced in GitLab 14.3.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      responses:
+        '201':
+          description: Create a client key
+          schema:
+            $ref: '#/definitions/API_Entities_ErrorTracking_ClientKey'
+      tags:
+      - error_tracking
+      operationId: postApiV4ProjectsIdErrorTrackingClientKeys
+  /api/v4/projects/{id}/error_tracking/client_keys/{key_id}:
+    delete:
+      summary: Delete a client key
+      description: Removes a client key from the project. This feature was introduced in GitLab 14.3.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: key_id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - error_tracking
+      operationId: deleteApiV4ProjectsIdErrorTrackingClientKeysKeyId
+  /api/v4/projects/{id}/error_tracking/settings:
+    get:
+      summary: Get Error Tracking settings
+      description: Get error tracking settings for the project. This feature was introduced in GitLab 12.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get Error Tracking settings
+          schema:
+            $ref: '#/definitions/API_Entities_ErrorTracking_ProjectSetting'
+      tags:
+      - error_tracking
+      operationId: getApiV4ProjectsIdErrorTrackingSettings
+    patch:
+      summary: Enable or disable the Error Tracking project settings
+      description: The API allows you to enable or disable the Error Tracking settings for a project.Only for users with the Maintainer role for the project.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - name: patchApiV4ProjectsIdErrorTrackingSettings
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/patchApiV4ProjectsIdErrorTrackingSettings'
+      responses:
+        '200':
+          description: Enable or disable the Error Tracking project settings
+          schema:
+            $ref: '#/definitions/API_Entities_ErrorTracking_ProjectSetting'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - error_tracking
+      operationId: patchApiV4ProjectsIdErrorTrackingSettings
+    put:
+      summary: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+      description: Update Error Tracking settings for a project. Only for users with Maintainer role for the project.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdErrorTrackingSettings
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdErrorTrackingSettings'
+      responses:
+        '200':
+          description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+          schema:
+            $ref: '#/definitions/API_Entities_ErrorTracking_ProjectSetting'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - error_tracking
+      operationId: putApiV4ProjectsIdErrorTrackingSettings
+definitions:
+  putApiV4ProjectsIdErrorTrackingSettings:
+    type: object
+    properties:
+      active:
+        type: boolean
+        description: Pass true to enable the configured Error Tracking settings or false to disable it.
+      integrated:
+        type: boolean
+        description: Pass true to enable the integrated Error Tracking backend.
+    required:
+    - active
+    - integrated
+    description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+  patchApiV4ProjectsIdErrorTrackingSettings:
+    type: object
+    properties:
+      active:
+        type: boolean
+        description: Pass true to enable the already configured Error Tracking settings or false to disable it.
+      integrated:
+        type: boolean
+        description: Pass true to enable the integrated Error Tracking backend. Available in GitLab 14.2 and later.
+    required:
+    - active
+    description: Enable or disable the Error Tracking project settings
+  API_Entities_ErrorTracking_ProjectSetting:
+    type: object
+    properties:
+      active:
+        type: boolean
+      project_name:
+        type: string
+        example: sample sentry project
+      sentry_external_url:
+        type: string
+        example: https://sentry.io/myawesomeproject/project
+      api_url:
+        type: string
+        example: https://sentry.io/api/0/projects/myawesomeproject/project
+      integrated:
+        type: boolean
+    required:
+    - active
+    - project_name
+    - sentry_external_url
+    - api_url
+    - integrated
+    description: API_Entities_ErrorTracking_ProjectSetting model
+  API_Entities_ErrorTracking_ClientKey:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      active:
+        type: boolean
+      public_key:
+        type: string
+        example: glet_aa77551d849c083f76d0bc545ed053a3
+      sentry_dsn:
+        type: string
+        example: https://glet_aa77551d849c083f76d0bc545ed053a3@example.com/errortracking/api/v1/projects/5
+    required:
+    - id
+    - active
+    - public_key
+    - sentry_dsn
+    description: API_Entities_ErrorTracking_ClientKey model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

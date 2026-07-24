@@ -1,0 +1,338 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests group_import_and_export API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: group_import_and_export
+  description: Operations about group_import_and_exports
+paths:
+  /api/v4/groups/{id}/export/download:
+    get:
+      summary: Download export
+      description: This feature was introduced in GitLab 12.5.
+      produces:
+      - application/octet-stream
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a group
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Download export
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '503':
+          description: Service unavailable
+      tags:
+      - group_import_and_export
+      operationId: getApiV4GroupsIdExportDownload
+  /api/v4/groups/{id}/export:
+    post:
+      summary: Start export
+      description: This feature was introduced in GitLab 12.5.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a group
+        type: string
+        required: true
+      responses:
+        '202':
+          description: Start export
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '429':
+          description: Too many requests
+        '503':
+          description: Service unavailable
+      tags:
+      - group_import_and_export
+      operationId: postApiV4GroupsIdExport
+  /api/v4/groups/{id}/export_relations:
+    post:
+      summary: Start relations export
+      description: This feature was introduced in GitLab 13.12
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a group
+        type: string
+        required: true
+      - name: postApiV4GroupsIdExportRelations
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4GroupsIdExportRelations'
+      responses:
+        '202':
+          description: Start relations export
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '503':
+          description: Service unavailable
+      tags:
+      - group_import_and_export
+      operationId: postApiV4GroupsIdExportRelations
+  /api/v4/groups/{id}/export_relations/download:
+    get:
+      summary: Download relations export
+      description: This feature was introduced in GitLab 13.12
+      produces:
+      - application/octet-stream
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a group
+        type: string
+        required: true
+      - in: query
+        name: relation
+        description: Group relation name
+        type: string
+        required: true
+      - in: query
+        name: batched
+        description: Whether to download in batches
+        type: boolean
+        required: false
+      - in: query
+        name: batch_number
+        description: Batch number to download
+        type: integer
+        format: int32
+        required: false
+      responses:
+        '200':
+          description: Download relations export
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '503':
+          description: Service unavailable
+      tags:
+      - group_import_and_export
+      operationId: getApiV4GroupsIdExportRelationsDownload
+  /api/v4/groups/{id}/export_relations/status:
+    get:
+      summary: Relations export status
+      description: This feature was introduced in GitLab 13.12
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a group
+        type: string
+        required: true
+      - in: query
+        name: relation
+        description: Group relation name
+        type: string
+        required: false
+      responses:
+        '200':
+          description: Relations export status
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_BulkImports_ExportStatus'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '503':
+          description: Service unavailable
+      tags:
+      - group_import_and_export
+      operationId: getApiV4GroupsIdExportRelationsStatus
+  /api/v4/groups/import/authorize:
+    post:
+      summary: Workhorse authorize the group import upload
+      description: This feature was introduced in GitLab 12.8
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      responses:
+        '201':
+          description: Workhorse authorize the group import upload
+      tags:
+      - group_import_and_export
+      operationId: postApiV4GroupsImportAuthorize
+  /api/v4/groups/import:
+    post:
+      summary: Create a new group import
+      description: This feature was introduced in GitLab 12.8
+      produces:
+      - application/json
+      consumes:
+      - multipart/form-data
+      parameters:
+      - in: formData
+        name: path
+        description: Group path
+        type: string
+        required: true
+      - in: formData
+        name: name
+        description: Group name
+        type: string
+        required: true
+      - in: formData
+        name: file
+        description: The group export file to be imported
+        type: file
+        required: true
+      - in: formData
+        name: parent_id
+        description: The ID of the parent group that the group will be imported into. Defaults to the current user's namespace.
+        type: integer
+        format: int32
+        required: false
+      - in: formData
+        name: organization_id
+        description: 'The ID of the organization that the group will be part of. '
+        type: integer
+        format: int32
+        default: {}
+        required: false
+      responses:
+        '202':
+          description: Create a new group import
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '400':
+          description: Bad request
+        '503':
+          description: Service unavailable
+      tags:
+      - group_import_and_export
+      operationId: postApiV4GroupsImport
+definitions:
+  postApiV4GroupsIdExportRelations:
+    type: object
+    properties:
+      batched:
+        type: boolean
+        description: Whether to export in batches
+    description: Start relations export
+  API_Entities_BulkImports_ExportStatus:
+    type: object
+    properties:
+      relation:
+        type: string
+        example: issues
+      status:
+        type: string
+        enum:
+        - pending
+        - started
+        - finished
+        - failed
+        example: started
+      error:
+        type: string
+        example: Error message
+      updated_at:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      batched:
+        type: boolean
+        example: true
+      batches_count:
+        type: integer
+        format: int32
+        example: 2
+      total_objects_count:
+        type: integer
+        format: int32
+        example: 100
+      batches:
+        $ref: '#/definitions/API_Entities_BulkImports_ExportBatchStatus'
+    required:
+    - relation
+    - status
+    - error
+    - updated_at
+    - batched
+    - batches_count
+    - total_objects_count
+    description: API_Entities_BulkImports_ExportStatus model
+  API_Entities_BulkImports_ExportBatchStatus:
+    type: object
+    properties:
+      status:
+        type: string
+        enum:
+        - started
+        - finished
+        - failed
+        example: started
+      batch_number:
+        type: integer
+        format: int32
+        example: 1
+      objects_count:
+        type: integer
+        format: int32
+        example: 100
+      error:
+        type: string
+        example: Error message
+      updated_at:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+    required:
+    - status
+    - batch_number
+    - objects_count
+    - error
+    - updated_at
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

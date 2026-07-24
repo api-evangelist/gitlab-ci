@@ -1,0 +1,433 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests cluster_agents API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: cluster_agents
+  description: Operations related to the GitLab agent for Kubernetes
+paths:
+  /api/v4/projects/{id}/cluster_agents/{agent_id}/tokens:
+    get:
+      summary: List tokens for an agent
+      description: This feature was introduced in GitLab 15.0. Returns a list of tokens for an agent.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: agent_id
+        description: The ID of an agent
+        type: integer
+        format: int32
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List tokens for an agent
+          schema:
+            $ref: '#/definitions/API_Entities_Clusters_AgentTokenBasic'
+      tags:
+      - cluster_agents
+      operationId: getApiV4ProjectsIdClusterAgentsAgentIdTokens
+    post:
+      summary: Create an agent token
+      description: This feature was introduced in GitLab 15.0. Creates a new token for an agent.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: agent_id
+        description: The ID of an agent
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdClusterAgentsAgentIdTokens
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdClusterAgentsAgentIdTokens'
+      responses:
+        '201':
+          description: Create an agent token
+          schema:
+            $ref: '#/definitions/API_Entities_Clusters_AgentTokenWithToken'
+      tags:
+      - cluster_agents
+      operationId: postApiV4ProjectsIdClusterAgentsAgentIdTokens
+  /api/v4/projects/{id}/cluster_agents/{agent_id}/tokens/{token_id}:
+    get:
+      summary: Get a single agent token
+      description: This feature was introduced in GitLab 15.0. Gets a single agent token.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: agent_id
+        description: The ID of an agent
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: token_id
+        description: The ID of the agent token
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a single agent token
+          schema:
+            $ref: '#/definitions/API_Entities_Clusters_AgentToken'
+      tags:
+      - cluster_agents
+      operationId: getApiV4ProjectsIdClusterAgentsAgentIdTokensTokenId
+    delete:
+      summary: Revoke an agent token
+      description: This feature was introduced in GitLab 15.0. Revokes an agent token.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: agent_id
+        description: The ID of an agent
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: token_id
+        description: The ID of the agent token
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Revoke an agent token
+      tags:
+      - cluster_agents
+      operationId: deleteApiV4ProjectsIdClusterAgentsAgentIdTokensTokenId
+  /api/v4/projects/{id}/cluster_agents:
+    get:
+      summary: List the agents for a project
+      description: This feature was introduced in GitLab 14.10. Returns the list of agents registered for the project.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List the agents for a project
+          schema:
+            $ref: '#/definitions/API_Entities_Clusters_Agent'
+      tags:
+      - cluster_agents
+      operationId: getApiV4ProjectsIdClusterAgents
+    post:
+      summary: Register an agent with a project
+      description: This feature was introduced in GitLab 14.10. Registers an agent to the project.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdClusterAgents
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdClusterAgents'
+      responses:
+        '201':
+          description: Register an agent with a project
+          schema:
+            $ref: '#/definitions/API_Entities_Clusters_Agent'
+      tags:
+      - cluster_agents
+      operationId: postApiV4ProjectsIdClusterAgents
+  /api/v4/projects/{id}/cluster_agents/{agent_id}:
+    get:
+      summary: Get details about an agent
+      description: This feature was introduced in GitLab 14.10. Gets a single agent details.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: agent_id
+        description: The ID of an agent
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get details about an agent
+          schema:
+            $ref: '#/definitions/API_Entities_Clusters_Agent'
+      tags:
+      - cluster_agents
+      operationId: getApiV4ProjectsIdClusterAgentsAgentId
+    delete:
+      summary: Delete a registered agent
+      description: This feature was introduced in GitLab 14.10. Deletes an existing agent registration.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: agent_id
+        description: The ID of an agent
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Delete a registered agent
+      tags:
+      - cluster_agents
+      operationId: deleteApiV4ProjectsIdClusterAgentsAgentId
+definitions:
+  postApiV4ProjectsIdClusterAgents:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the agent
+    required:
+    - name
+    description: Register an agent with a project
+  postApiV4ProjectsIdClusterAgentsAgentIdTokens:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name for the token
+      description:
+        type: string
+        description: The description for the token
+    required:
+    - name
+    description: Create an agent token
+  API_Entities_Clusters_Agent:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      config_project:
+        $ref: '#/definitions/API_Entities_ProjectIdentity'
+      created_at:
+        type: string
+      created_by_user_id:
+        type: string
+      is_receptive:
+        type: string
+    required:
+    - id
+    - name
+    - config_project
+    - created_at
+    - created_by_user_id
+    - is_receptive
+    description: API_Entities_Clusters_Agent model
+  API_Entities_Clusters_AgentToken:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      agent_id:
+        type: string
+      status:
+        type: string
+      created_at:
+        type: string
+      created_by_user_id:
+        type: string
+      last_used_at:
+        type: string
+    required:
+    - id
+    - name
+    - description
+    - agent_id
+    - status
+    - created_at
+    - created_by_user_id
+    - last_used_at
+    description: API_Entities_Clusters_AgentToken model
+  API_Entities_Clusters_AgentTokenBasic:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      agent_id:
+        type: string
+      status:
+        type: string
+      created_at:
+        type: string
+      created_by_user_id:
+        type: string
+    required:
+    - id
+    - name
+    - description
+    - agent_id
+    - status
+    - created_at
+    - created_by_user_id
+    description: API_Entities_Clusters_AgentTokenBasic model
+  API_Entities_ProjectIdentity:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      description:
+        type: string
+        example: desc
+      name:
+        type: string
+        example: project1
+      name_with_namespace:
+        type: string
+        example: John Doe / project1
+      path:
+        type: string
+        example: project1
+      path_with_namespace:
+        type: string
+        example: namespace1/project1
+      created_at:
+        type: string
+        format: date-time
+        example: '2020-05-07T04:27:17.016Z'
+    required:
+    - id
+    - description
+    - name
+    - name_with_namespace
+    - path
+    - path_with_namespace
+    - created_at
+  API_Entities_Clusters_AgentTokenWithToken:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      agent_id:
+        type: string
+      status:
+        type: string
+      created_at:
+        type: string
+      created_by_user_id:
+        type: string
+      last_used_at:
+        type: string
+      token:
+        type: string
+    required:
+    - id
+    - name
+    - description
+    - agent_id
+    - status
+    - created_at
+    - created_by_user_id
+    - last_used_at
+    - token
+    description: API_Entities_Clusters_AgentTokenWithToken model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

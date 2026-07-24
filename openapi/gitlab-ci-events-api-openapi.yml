@@ -1,0 +1,576 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests events API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: events
+  description: Operations about events
+paths:
+  /api/v4/projects/{id}/events:
+    get:
+      description: List a project's visible events
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: action
+        description: Event action to filter on
+        type: string
+        required: false
+      - in: query
+        name: target_type
+        description: Event target type to filter on
+        type: string
+        enum:
+        - issue
+        - milestone
+        - merge_request
+        - note
+        - project
+        - snippet
+        - user
+        - wiki
+        - design
+        required: false
+      - in: query
+        name: before
+        description: Include only events created before this date
+        type: string
+        format: date
+        required: false
+      - in: query
+        name: after
+        description: Include only events created after this date
+        type: string
+        format: date
+        required: false
+      - in: query
+        name: sort
+        description: Return events sorted in ascending and descending order
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List a project's visible events
+          schema:
+            $ref: '#/definitions/API_Entities_Event'
+      tags:
+      - events
+      operationId: getApiV4ProjectsIdEvents
+  /api/v4/events:
+    get:
+      summary: List currently authenticated user's events
+      description: This feature was introduced in GitLab 9.3.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: scope
+        description: Include all events across a user’s projects
+        type: string
+        required: false
+        example: all
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: action
+        description: Event action to filter on
+        type: string
+        required: false
+      - in: query
+        name: target_type
+        description: Event target type to filter on
+        type: string
+        enum:
+        - issue
+        - milestone
+        - merge_request
+        - note
+        - project
+        - snippet
+        - user
+        - wiki
+        - design
+        required: false
+      - in: query
+        name: before
+        description: Include only events created before this date
+        type: string
+        format: date
+        required: false
+      - in: query
+        name: after
+        description: Include only events created after this date
+        type: string
+        format: date
+        required: false
+      - in: query
+        name: sort
+        description: Return events sorted in ascending and descending order
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      responses:
+        '200':
+          description: List currently authenticated user's events
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Event'
+        '401':
+          description: Unauthorized
+      tags:
+      - events
+      operationId: getApiV4Events
+  /api/v4/users/{id}/events:
+    get:
+      summary: Get the contribution events of a specified user
+      description: This feature was introduced in GitLab 8.13.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or username of the user
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: action
+        description: Event action to filter on
+        type: string
+        required: false
+      - in: query
+        name: target_type
+        description: Event target type to filter on
+        type: string
+        enum:
+        - issue
+        - milestone
+        - merge_request
+        - note
+        - project
+        - snippet
+        - user
+        - wiki
+        - design
+        required: false
+      - in: query
+        name: before
+        description: Include only events created before this date
+        type: string
+        format: date
+        required: false
+      - in: query
+        name: after
+        description: Include only events created after this date
+        type: string
+        format: date
+        required: false
+      - in: query
+        name: sort
+        description: Return events sorted in ascending and descending order
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      responses:
+        '200':
+          description: Get the contribution events of a specified user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Event'
+        '404':
+          description: Not found
+      tags:
+      - events
+      operationId: getApiV4UsersIdEvents
+definitions:
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_WikiPageBasic:
+    type: object
+    properties:
+      format:
+        type: string
+        example: markdown
+      slug:
+        type: string
+        example: deploy
+      title:
+        type: string
+        example: deploy
+      wiki_page_meta_id:
+        type: integer
+        format: int32
+        example: 123
+    required:
+    - format
+    - slug
+    - title
+    - wiki_page_meta_id
+    description: API_Entities_WikiPageBasic model
+  API_Entities_Suggestion:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      from_line:
+        type: integer
+        format: int32
+        example: 1
+      to_line:
+        type: integer
+        format: int32
+        example: 1
+      appliable:
+        type: boolean
+        example: true
+      applied:
+        type: boolean
+        example: false
+      from_content:
+        type: string
+        example: 'Original content
+
+          '
+      to_content:
+        type: string
+        example: 'New content
+
+          '
+    required:
+    - id
+    - from_line
+    - to_line
+    - appliable
+    - applied
+    - from_content
+    - to_content
+    description: API_Entities_Suggestion model
+  API_Entities_PushEventPayload:
+    type: object
+    properties:
+      commit_count:
+        type: integer
+        format: int32
+        example: 1
+      action:
+        type: string
+        example: pushed
+      ref_type:
+        type: string
+        example: branch
+      commit_from:
+        type: string
+        example: 50d4420237a9de7be1304607147aec22e4a14af7
+      commit_to:
+        type: string
+        example: c5feabde2d8cd023215af4d2ceeb7a64839fc428
+      ref:
+        type: string
+        example: master
+      commit_title:
+        type: string
+        example: Add simple search to projects in public area
+      ref_count:
+        type: integer
+        format: int32
+        example: 1
+    required:
+    - commit_count
+    - action
+    - ref_type
+    - commit_from
+    - commit_to
+    - ref
+    - commit_title
+    - ref_count
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  API_Entities_Note:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      type:
+        type: string
+        example: DiscussionNote
+      body:
+        type: string
+        example: Note body.
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:44.988Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:44.988Z'
+      system:
+        type: boolean
+        example: false
+      noteable_id:
+        type: integer
+        format: int32
+        example: 1
+      noteable_type:
+        type: string
+        example: Issue
+      project_id:
+        type: integer
+        format: int32
+        example: 1
+      commit_id:
+        type: string
+        example: 7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d
+      position:
+        type: object
+      resolvable:
+        type: boolean
+        example: false
+      resolved:
+        type: boolean
+        example: false
+      resolved_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      resolved_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:44.988Z'
+      suggestions:
+        $ref: '#/definitions/API_Entities_Suggestion'
+      confidential:
+        type: boolean
+        example: false
+      internal:
+        type: boolean
+        example: false
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: github
+      noteable_iid:
+        type: integer
+        format: int32
+        example: 1
+      commands_changes:
+        type: object
+    required:
+    - id
+    - type
+    - body
+    - author
+    - created_at
+    - updated_at
+    - system
+    - noteable_id
+    - noteable_type
+    - project_id
+    - resolvable
+    - confidential
+    - internal
+    - imported
+    - imported_from
+    - noteable_iid
+    - commands_changes
+  API_Entities_Event:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      project_id:
+        type: integer
+        format: int32
+        example: 2
+      action_name:
+        type: string
+        example: closed
+      target_id:
+        type: integer
+        format: int32
+        example: 160
+      target_iid:
+        type: integer
+        format: int32
+        example: 157
+      target_type:
+        type: string
+        example: Issue
+      author_id:
+        type: integer
+        format: int32
+        example: 25
+      target_title:
+        type: string
+        example: Public project search field
+      created_at:
+        type: string
+        example: '2017-02-09T10:43:19.667Z'
+      note:
+        $ref: '#/definitions/API_Entities_Note'
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      wiki_page:
+        $ref: '#/definitions/API_Entities_WikiPageBasic'
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: none
+      push_data:
+        $ref: '#/definitions/API_Entities_PushEventPayload'
+      author_username:
+        type: string
+        example: root
+    required:
+    - id
+    - project_id
+    - action_name
+    - target_id
+    - target_iid
+    - target_type
+    - author_id
+    - target_title
+    - created_at
+    - imported
+    - imported_from
+    - author_username
+    description: API_Entities_Event model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests migrations API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: migrations
+  description: Operations about migrations
+paths:
+  /api/v4/admin/migrations/pending:
+    get:
+      description: List pending database migrations
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: database
+        description: The name of the database
+        type: string
+        default: main
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        required: false
+      responses:
+        '200':
+          description: 200 OK
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+      tags:
+      - migrations
+      operationId: getApiV4AdminMigrationsPending
+  /api/v4/admin/migrations/{timestamp}/mark:
+    post:
+      description: Mark the migration as successfully executed
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: timestamp
+        description: The migration version timestamp
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4AdminMigrationsTimestampMark
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4AdminMigrationsTimestampMark'
+      responses:
+        '201':
+          description: 201 Created
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Not found
+        '422':
+          description: You can mark only pending migrations
+      tags:
+      - migrations
+      operationId: postApiV4AdminMigrationsTimestampMark
+definitions:
+  postApiV4AdminMigrationsTimestampMark:
+    type: object
+    properties:
+      database:
+        type: string
+        description: The name of the database
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        default: main
+    description: Mark the migration as successfully executed
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

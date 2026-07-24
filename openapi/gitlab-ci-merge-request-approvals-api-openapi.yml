@@ -1,0 +1,803 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests merge_request_approvals API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: merge_request_approvals
+  description: Operations about merge_request_approvals
+paths:
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/approvals:
+    get:
+      description: List approvals for merge request
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: merge_request_iid
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: List approvals for merge request
+          schema:
+            $ref: '#/definitions/API_Entities_MergeRequestApprovals'
+        '404':
+          description: Not found
+      tags:
+      - merge_request_approvals
+      operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals
+    post:
+      summary: Change approval-related configuration
+      description: Deprecated in 16.0. Use the merge request approvals API instead.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The IID of a merge request
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals'
+      responses:
+        '201':
+          description: Change approval-related configuration
+          schema:
+            $ref: '#/definitions/API_Entities_ApprovalState'
+      tags:
+      - merge_request_approvals
+      operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals
+      deprecated: true
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/approve:
+    post:
+      description: Approve a merge request
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: merge_request_iid
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove'
+      responses:
+        '201':
+          description: Approve a merge request
+          schema:
+            $ref: '#/definitions/API_Entities_MergeRequestApprovals'
+        '404':
+          description: Not found
+        '401':
+          description: Unauthorized
+      tags:
+      - merge_request_approvals
+      operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/unapprove:
+    post:
+      description: Remove an approval from a merge request
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: merge_request_iid
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '201':
+          description: Remove an approval from a merge request
+          schema:
+            $ref: '#/definitions/API_Entities_MergeRequestApprovals'
+        '404':
+          description: Not found
+        '401':
+          description: Unauthorized
+      tags:
+      - merge_request_approvals
+      operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidUnapprove
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_approvals:
+    put:
+      summary: Remove all merge request approvals
+      description: Clear all approvals of merge request. This feature was added in GitLab 15.4
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: merge_request_iid
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Remove all merge request approvals
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - merge_request_approvals
+      operationId: putApiV4ProjectsIdMergeRequestsMergeRequestIidResetApprovals
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/approval_state:
+    get:
+      description: Get approval state of merge request
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The IID of a merge request
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get approval state of merge request
+          schema:
+            $ref: '#/definitions/API_Entities_MergeRequestApprovalState'
+      tags:
+      - merge_request_approvals
+      operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovalState
+definitions:
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_Namespace_RootStorageStatistics:
+    type: object
+    properties:
+      build_artifacts_size:
+        type: integer
+        format: int32
+        description: CI artifacts size in bytes.
+      container_registry_size:
+        type: integer
+        format: int32
+        description: container registry size in bytes.
+      container_registry_size_is_estimated:
+        type: boolean
+        description: Indicates whether the deduplicated container registry size for the namespace is an estimated value or not.
+      dependency_proxy_size:
+        type: integer
+        format: int32
+        description: Dependency Proxy sizes in bytes.
+      lfs_objects_size:
+        type: integer
+        format: int32
+        description: LFS objects size in bytes.
+      packages_size:
+        type: integer
+        format: int32
+        description: Packages size in bytes.
+      pipeline_artifacts_size:
+        type: integer
+        format: int32
+        description: CI pipeline artifacts size in bytes.
+      repository_size:
+        type: integer
+        format: int32
+        description: Git repository size in bytes.
+      snippets_size:
+        type: integer
+        format: int32
+        description: Snippets size in bytes.
+      storage_size:
+        type: integer
+        format: int32
+        description: Total storage in bytes.
+      uploads_size:
+        type: integer
+        format: int32
+        description: Uploads size in bytes.
+      wiki_size:
+        type: integer
+        format: int32
+        description: Wiki size in bytes.
+    required:
+    - build_artifacts_size
+    - container_registry_size
+    - container_registry_size_is_estimated
+    - dependency_proxy_size
+    - lfs_objects_size
+    - packages_size
+    - pipeline_artifacts_size
+    - repository_size
+    - snippets_size
+    - storage_size
+    - uploads_size
+    - wiki_size
+  postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals:
+    type: object
+    properties:
+      approvals_required:
+        type: integer
+        format: int32
+        description: The amount of approvals required. Must be higher than the project approvals
+        example: 2
+    required:
+    - approvals_required
+    description: Change approval-related configuration
+  API_Entities_MergeRequestApprovalRule_SourceRule:
+    type: object
+    properties:
+      approvals_required:
+        type: integer
+        format: int32
+        example: 2
+    required:
+    - approvals_required
+  API_Entities_LdapGroupLink:
+    type: object
+    properties:
+      cn:
+        type: string
+        example: ldap-group-1
+      group_access:
+        type: integer
+        format: int32
+        example: 10
+      provider:
+        type: string
+        example: ldapmain
+      filter:
+        type: string
+        example: id >= 500
+      member_role_id:
+        type: integer
+        format: int32
+        example: 12
+    required:
+    - cn
+    - group_access
+    - provider
+  API_Entities_SamlGroupLink:
+    type: object
+    properties:
+      name:
+        type: string
+        example: saml-group-1
+      access_level:
+        type: integer
+        format: int32
+        example: 40
+      member_role_id:
+        type: integer
+        format: int32
+        example: 12
+      provider:
+        type: string
+        example: saml
+    required:
+    - name
+    - access_level
+    - provider
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  API_Entities_Group:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      web_url:
+        type: string
+        example: http://gitlab.example.com/groups/diaspora
+      name:
+        type: string
+        example: Diaspora
+      path:
+        type: string
+      description:
+        type: string
+      visibility:
+        type: string
+      share_with_group_lock:
+        type: boolean
+      require_two_factor_authentication:
+        type: boolean
+      two_factor_grace_period:
+        type: integer
+        format: int32
+      project_creation_level:
+        type: string
+      auto_devops_enabled:
+        type: string
+      subgroup_creation_level:
+        type: string
+      emails_disabled:
+        type: boolean
+      emails_enabled:
+        type: boolean
+      show_diff_preview_in_email:
+        type: boolean
+      mentions_disabled:
+        type: string
+      lfs_enabled:
+        type: boolean
+      archived:
+        type: boolean
+      math_rendering_limits_enabled:
+        type: boolean
+      lock_math_rendering_limits_enabled:
+        type: boolean
+      default_branch:
+        type: string
+      default_branch_protection:
+        type: integer
+        format: int32
+      default_branch_protection_defaults:
+        type: string
+      avatar_url:
+        type: string
+      request_access_enabled:
+        type: boolean
+      full_name:
+        type: string
+      full_path:
+        type: string
+      created_at:
+        type: string
+      parent_id:
+        type: string
+      organization_id:
+        type: integer
+        format: int32
+      shared_runners_setting:
+        type: string
+      max_artifacts_size:
+        type: integer
+        format: int32
+      custom_attributes:
+        $ref: '#/definitions/API_Entities_CustomAttribute'
+      statistics:
+        type: object
+        properties:
+          storage_size:
+            type: string
+          repository_size:
+            type: string
+          wiki_size:
+            type: string
+          lfs_objects_size:
+            type: string
+          job_artifacts_size:
+            type: string
+          pipeline_artifacts_size:
+            type: string
+          packages_size:
+            type: string
+          snippets_size:
+            type: string
+          uploads_size:
+            type: string
+        required:
+        - storage_size
+        - repository_size
+        - wiki_size
+        - lfs_objects_size
+        - job_artifacts_size
+        - pipeline_artifacts_size
+        - packages_size
+        - snippets_size
+        - uploads_size
+      marked_for_deletion_on:
+        type: string
+      root_storage_statistics:
+        $ref: '#/definitions/API_Entities_Namespace_RootStorageStatistics'
+      ldap_cn:
+        type: string
+      ldap_access:
+        type: string
+      ldap_group_links:
+        $ref: '#/definitions/API_Entities_LdapGroupLink'
+      saml_group_links:
+        $ref: '#/definitions/API_Entities_SamlGroupLink'
+      file_template_project_id:
+        type: string
+      wiki_access_level:
+        type: string
+      repository_storage:
+        type: string
+      duo_core_features_enabled:
+        type: boolean
+        description: '[Experimental] Indicates whether GitLab Duo Core features are enabled for the group'
+      duo_features_enabled:
+        type: string
+      lock_duo_features_enabled:
+        type: string
+      auto_duo_code_review_enabled:
+        type: string
+      web_based_commit_signing_enabled:
+        type: string
+      allow_personal_snippets:
+        type: string
+      duo_namespace_access_rules:
+        type: string
+    required:
+    - id
+    - web_url
+    - name
+    - path
+    - description
+    - visibility
+    - share_with_group_lock
+    - require_two_factor_authentication
+    - two_factor_grace_period
+    - project_creation_level
+    - auto_devops_enabled
+    - subgroup_creation_level
+    - emails_disabled
+    - emails_enabled
+    - show_diff_preview_in_email
+    - mentions_disabled
+    - lfs_enabled
+    - archived
+    - math_rendering_limits_enabled
+    - lock_math_rendering_limits_enabled
+    - default_branch
+    - default_branch_protection
+    - default_branch_protection_defaults
+    - avatar_url
+    - request_access_enabled
+    - full_name
+    - full_path
+    - created_at
+    - parent_id
+    - organization_id
+    - shared_runners_setting
+    - max_artifacts_size
+    - marked_for_deletion_on
+    - ldap_cn
+    - ldap_access
+    - wiki_access_level
+    description: API_Entities_Group model
+  API_Entities_MergeRequestApprovals:
+    type: object
+    properties:
+      user_has_approved:
+        type: boolean
+      user_can_approve:
+        type: boolean
+      approved:
+        type: boolean
+      approved_by:
+        $ref: '#/definitions/API_Entities_Approvals'
+    required:
+    - user_has_approved
+    - user_can_approve
+    - approved
+    - approved_by
+    description: API_Entities_MergeRequestApprovals model
+  API_Entities_ApprovalRuleShort:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: QA
+      rule_type:
+        type: string
+        example: regular
+    required:
+    - id
+    - name
+    - rule_type
+  API_Entities_MergeRequestApprovalState:
+    type: object
+    properties:
+      approval_rules_overwritten:
+        type: boolean
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_MergeRequestApprovalStateRule'
+    required:
+    - approval_rules_overwritten
+    - rules
+    description: API_Entities_MergeRequestApprovalState model
+  API_Entities_Approvals:
+    type: object
+    properties:
+      user:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      approved_at:
+        type: string
+        format: date-time
+        example: '2025-01-01T10:00:00Z'
+    required:
+    - user
+    - approved_at
+  postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove:
+    type: object
+    properties:
+      sha:
+        type: string
+        description: When present, must have the HEAD SHA of the source branch
+      publish_review:
+        type: boolean
+        description: When `true` submits pending review comments
+      approval_password:
+        type: string
+        description: Current user's password if project is set to require explicit auth on approval
+        example: secret
+    description: Approve a merge request
+  API_Entities_MergeRequestApprovalStateRule:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: QA
+      rule_type:
+        type: string
+        example: regular
+      eligible_approvers:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_UserBasic'
+      approvals_required:
+        type: integer
+        format: int32
+        example: 2
+      users:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_UserBasic'
+      groups:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_Group'
+      contains_hidden_groups:
+        type: boolean
+      report_type:
+        type: string
+      section:
+        type: string
+        example: Backend
+      source_rule:
+        $ref: '#/definitions/API_Entities_MergeRequestApprovalRule_SourceRule'
+      overridden:
+        type: boolean
+      code_owner:
+        type: boolean
+      approved_by:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_UserBasic'
+      approved:
+        type: boolean
+    required:
+    - id
+    - name
+    - rule_type
+    - eligible_approvers
+    - approvals_required
+    - users
+    - groups
+    - contains_hidden_groups
+    - report_type
+    - section
+    - source_rule
+    - overridden
+    - code_owner
+    - approved_by
+    - approved
+  API_Entities_ApprovalState:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 84
+      iid:
+        type: integer
+        format: int32
+        example: 14
+      project_id:
+        type: integer
+        format: int32
+        example: 4
+      title:
+        type: string
+        example: Impedit et ut et dolores vero provident ullam est
+      description:
+        type: string
+        example: Repellendus impedit et vel velit dignissimos.
+      state:
+        type: string
+        example: closed
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-08-17T12:46:35.053Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-11-14T17:22:01.470Z'
+      merge_status:
+        type: string
+        example: can_be_merged
+      approved:
+        type: boolean
+      approvals_required:
+        type: integer
+        format: int32
+        example: 2
+      approvals_left:
+        type: integer
+        format: int32
+        example: 2
+      require_password_to_approve:
+        type: boolean
+      approved_by:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_Approvals'
+      suggested_approvers:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_UserBasic'
+      approvers:
+        type: string
+      approver_groups:
+        type: string
+      user_has_approved:
+        type: boolean
+      user_can_approve:
+        type: boolean
+      approval_rules_left:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_ApprovalRuleShort'
+      has_approval_rules:
+        type: boolean
+      merge_request_approvers_available:
+        type: boolean
+      multiple_approval_rules_available:
+        type: boolean
+      invalid_approvers_rules:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_ApprovalRuleShort'
+    required:
+    - id
+    - iid
+    - project_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - merge_status
+    - approved
+    - approvals_required
+    - approvals_left
+    - require_password_to_approve
+    - approved_by
+    - suggested_approvers
+    - approvers
+    - approver_groups
+    - user_has_approved
+    - user_can_approve
+    - approval_rules_left
+    - has_approval_rules
+    - merge_request_approvers_available
+    - multiple_approval_rules_available
+    - invalid_approvers_rules
+    description: API_Entities_ApprovalState model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

@@ -1,0 +1,41 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests dependency_proxy API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: dependency_proxy
+  description: Operations to manage dependency proxy for a groups
+paths:
+  /api/v4/groups/{id}/dependency_proxy/cache:
+    delete:
+      summary: Purge the dependency proxy for a group
+      description: Schedules for deletion the cached manifests and blobs for a group.This endpoint requires the Owner role for the group.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the group owned by the authenticated user
+        type: string
+        required: true
+      responses:
+        '202':
+          description: Purge the dependency proxy for a group
+        '401':
+          description: Unauthorized
+      tags:
+      - dependency_proxy
+      operationId: deleteApiV4GroupsIdDependencyProxyCache
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

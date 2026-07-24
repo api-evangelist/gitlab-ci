@@ -1,0 +1,1039 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests releases API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: releases
+  description: Operations related to releases
+paths:
+  /api/v4/groups/{id}/releases:
+    get:
+      summary: List group releases
+      description: Returns a list of group releases.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the group owned by the authenticated user
+        type: string
+        required: true
+      - in: query
+        name: sort
+        description: The direction of the order. Either `desc` (default) for descending order or `asc` for ascending order
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      - in: query
+        name: simple
+        description: Return only limited fields for each release
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List group releases
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Release'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: getApiV4GroupsIdReleases
+  /api/v4/projects/{id}/releases:
+    get:
+      summary: List Releases
+      description: Returns a paginated list of releases. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: order_by
+        description: The field to use as order. Either `released_at` (default) or `created_at`
+        type: string
+        default: released_at
+        enum:
+        - released_at
+        - created_at
+        required: false
+      - in: query
+        name: sort
+        description: The direction of the order. Either `desc` (default) for descending order or `asc` for ascending order
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      - in: query
+        name: include_html_description
+        description: If `true`, a response includes HTML rendered markdown of the release description
+        type: boolean
+        required: false
+      - in: query
+        name: updated_before
+        description: 'Return releases updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: updated_after
+        description: 'Return releases updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+        format: date-time
+        required: false
+      responses:
+        '200':
+          description: List Releases
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Release'
+      tags:
+      - releases
+      operationId: getApiV4ProjectsIdReleases
+    post:
+      summary: Create a release
+      description: Creates a release. Developer level access to the project is required to create a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdReleases
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdReleases'
+      responses:
+        '201':
+          description: Create a release
+          schema:
+            $ref: '#/definitions/API_Entities_Release'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Unprocessable entity
+      tags:
+      - releases
+      operationId: postApiV4ProjectsIdReleases
+  /api/v4/projects/{id}/releases/{tag_name}:
+    get:
+      summary: Get a release by a tag name
+      description: Gets a release for the given tag. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The Git tag the release is associated with
+        type: string
+        required: true
+      - in: query
+        name: include_html_description
+        description: If `true`, a response includes HTML rendered markdown of the release description
+        type: boolean
+        required: false
+      responses:
+        '200':
+          description: Get a release by a tag name
+          schema:
+            $ref: '#/definitions/API_Entities_Release'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: getApiV4ProjectsIdReleasesTagName
+    put:
+      summary: Update a release
+      description: Updates a release. Developer level access to the project is required to update a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The Git tag the release is associated with
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdReleasesTagName
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdReleasesTagName'
+      responses:
+        '200':
+          description: Update a release
+          schema:
+            $ref: '#/definitions/API_Entities_Release'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: putApiV4ProjectsIdReleasesTagName
+    delete:
+      summary: Delete a release
+      description: Delete a release. Deleting a release doesn't delete the associated tag. Maintainer level access to the project is required to delete a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The Git tag the release is associated with
+        type: string
+        required: true
+      responses:
+        '400':
+          description: Bad request
+        '204':
+          description: Delete a release
+          schema:
+            $ref: '#/definitions/API_Entities_Release'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: deleteApiV4ProjectsIdReleasesTagName
+  /api/v4/projects/{id}/releases/{tag_name}/downloads/*direct_asset_path:
+    get:
+      summary: Download a project release asset file
+      description: This feature was introduced in GitLab 15.4.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The Git tag the release is associated with
+        type: string
+        required: true
+      - in: query
+        name: direct_asset_path
+        description: The path to the file to download, as specified when creating the release asset
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Download a project release asset file
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: getApiV4ProjectsIdReleasesTagNameDownloads*directAssetPath
+  /api/v4/projects/{id}/releases/permalink/latest(/)(*suffix_path):
+    get:
+      summary: Get the latest project release
+      description: This feature was introduced in GitLab 15.4.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: suffix_path
+        description: The path to be suffixed to the latest release
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get the latest project release
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: getApiV4ProjectsIdReleasesPermalinkLatest()(*suffixPath)
+  /api/v4/projects/{id}/releases/{tag_name}/evidence:
+    post:
+      summary: Collect release evidence
+      description: Creates an evidence for an existing Release. This feature was introduced in GitLab 12.10.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: tag_name
+        description: The Git tag the release is associated with
+        type: string
+        required: true
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '201':
+          description: Collect release evidence
+          schema:
+            $ref: '#/definitions/API_Entities_Release'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: postApiV4ProjectsIdReleasesTagNameEvidence
+  /api/v4/projects/{id}/releases/{tag_name}/assets/links:
+    get:
+      summary: List links of a release
+      description: Get assets as links from a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The tag associated with the release
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List links of a release
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Releases_Link'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: getApiV4ProjectsIdReleasesTagNameAssetsLinks
+    post:
+      summary: Create a release link
+      description: Create an asset as a link from a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The tag associated with the release
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdReleasesTagNameAssetsLinks
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdReleasesTagNameAssetsLinks'
+      responses:
+        '201':
+          description: Create a release link
+          schema:
+            $ref: '#/definitions/API_Entities_Releases_Link'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      tags:
+      - releases
+      operationId: postApiV4ProjectsIdReleasesTagNameAssetsLinks
+  /api/v4/projects/{id}/releases/{tag_name}/assets/links/{link_id}:
+    get:
+      summary: Get a release link
+      description: Get an asset as a link from a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The tag associated with the release
+        type: string
+        required: true
+      - in: path
+        name: link_id
+        description: The ID of the link
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a release link
+          schema:
+            $ref: '#/definitions/API_Entities_Releases_Link'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - releases
+      operationId: getApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+    put:
+      summary: Update a release link
+      description: Update an asset as a link from a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The tag associated with the release
+        type: string
+        required: true
+      - in: path
+        name: link_id
+        description: The ID of the link
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId'
+      responses:
+        '200':
+          description: Update a release link
+          schema:
+            $ref: '#/definitions/API_Entities_Releases_Link'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      tags:
+      - releases
+      operationId: putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+    delete:
+      summary: Delete a release link
+      description: Deletes an asset as a link from a release. This feature was introduced in GitLab 11.7.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The tag associated with the release
+        type: string
+        required: true
+      - in: path
+        name: link_id
+        description: The ID of the link
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      tags:
+      - releases
+      operationId: deleteApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
+definitions:
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_Releases_Link:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: app-v1.0.dmg
+      url:
+        type: string
+        example: https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg
+      direct_asset_url:
+        type: string
+        example: https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg
+      link_type:
+        type: string
+        example: other
+    required:
+    - id
+    - name
+    - url
+    - direct_asset_url
+    - link_type
+    description: API_Entities_Releases_Link model
+  postApiV4ProjectsIdReleases:
+    type: object
+    properties:
+      tag_name:
+        type: string
+        description: The tag where the release is created from
+      tag_message:
+        type: string
+        description: Message to use if creating a new annotated tag
+      name:
+        type: string
+        description: The release name
+      description:
+        type: string
+        description: The description of the release. You can use Markdown
+      ref:
+        type: string
+        description: If a tag specified in `tag_name` doesn't exist, the release is created from `ref` and tagged with `tag_name`. It can be a commit SHA, another tag name, or a branch name.
+      assets:
+        type: object
+        description: Object that contains assets for the release
+        properties:
+          links:
+            type: array
+            description: Link information about the release
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the link. Link names must be unique within the release
+                url:
+                  type: string
+                  description: The URL of the link. Link URLs must be unique within the release
+                direct_asset_path:
+                  type: string
+                  description: Optional path for a direct asset link
+                filepath:
+                  type: string
+                  description: 'Deprecated: optional path for a direct asset link'
+                link_type:
+                  type: string
+                  description: 'The type of the link: `other`, `runbook`, `image`, `package`. Defaults to `other`'
+              required:
+              - name
+              - url
+      milestones:
+        type: array
+        description: The title of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestone_ids` parameter.
+        items:
+          type: string
+      milestone_ids:
+        type: string
+        description: The ID of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestones` parameter.
+      released_at:
+        type: string
+        format: date-time
+        description: Date and time for the release. Defaults to the current time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). Only provide this field if creating an upcoming or historical release.
+      legacy_catalog_publish:
+        type: boolean
+        description: If true, the release will be published to the CI catalog. This parameter is for internal use only and will be removed in a future release. If the feature flag ci_release_cli_catalog_publish_option is disabled, this parameter will be ignored and the release will published to the CI catalog as it was before this parameter was introduced.
+    required:
+    - tag_name
+    description: Create a release
+  putApiV4ProjectsIdReleasesTagName:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The release name
+      description:
+        type: string
+        description: The description of the release. You can use Markdown
+      released_at:
+        type: string
+        format: date-time
+        description: The date when the release is/was ready. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
+      milestones:
+        type: array
+        description: The title of each milestone to associate with the release. GitLab Premium customers can specify group milestones. Cannot be combined with `milestone_ids` parameter. To remove all milestones from the release, specify `[]`
+        items:
+          type: string
+      milestone_ids:
+        type: string
+        description: The ID of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestones` parameter. To remove all milestones from the release, specify `[]`
+    description: Update a release
+  API_Entities_MilestoneWithStats:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      iid:
+        type: integer
+        format: int32
+      project_id:
+        type: integer
+        format: int32
+      group_id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      state:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      due_date:
+        type: string
+      start_date:
+        type: string
+      expired:
+        type: boolean
+      web_url:
+        type: string
+      issue_stats:
+        type: object
+        properties:
+          total:
+            type: integer
+            format: int32
+            example: 10
+          closed:
+            type: integer
+            format: int32
+            example: 5
+        required:
+        - total
+        - closed
+    required:
+    - id
+    - iid
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - due_date
+    - start_date
+    - expired
+    - web_url
+    - issue_stats
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  API_Entities_Commit:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      short_id:
+        type: string
+        example: 2695effb
+      created_at:
+        type: string
+        format: date-time
+        example: '2017-07-26T11:08:53.000+02:00'
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      title:
+        type: string
+        example: Initial commit
+      message:
+        type: string
+        example: Initial commit
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      trailers:
+        type: object
+        example:
+          Merged-By: Jane Doe janedoe@gitlab.com
+      extended_trailers:
+        type: object
+        example:
+          Signed-off-by:
+          - John Doe <johndoe@gitlab.com>
+          - Jane Doe <janedoe@gitlab.com>
+      web_url:
+        type: string
+        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+    required:
+    - id
+    - short_id
+    - created_at
+    - parent_ids
+    - title
+    - message
+    - author_name
+    - author_email
+    - authored_date
+    - committer_name
+    - committer_email
+    - committed_date
+    - trailers
+    - extended_trailers
+    - web_url
+    description: API_Entities_Commit model
+  putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the link
+      url:
+        type: string
+        description: The URL of the link
+      direct_asset_path:
+        type: string
+        description: Optional path for a direct asset link
+      filepath:
+        type: string
+        description: 'Deprecated: optional path for a direct asset link'
+      link_type:
+        type: string
+        description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
+        enum:
+        - other
+        - runbook
+        - image
+        - package
+        default: other
+    description: Update a release link
+  API_Entities_Release:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Release v1.0
+      tag_name:
+        type: string
+        example: v1.0
+      description:
+        type: string
+        example: Finally released v1.0
+      created_at:
+        type: string
+        format: date-time
+        example: '2019-01-03T01:56:19.539Z'
+      released_at:
+        type: string
+        format: date-time
+        example: '2019-01-03T01:56:19.539Z'
+      upcoming_release:
+        type: boolean
+      description_html:
+        type: string
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      commit:
+        $ref: '#/definitions/API_Entities_Commit'
+      milestones:
+        $ref: '#/definitions/API_Entities_MilestoneWithStats'
+      commit_path:
+        type: string
+        example: /root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a
+      tag_path:
+        type: string
+        example: /root/app/-/tags/v1.0
+      assets:
+        type: object
+        properties:
+          count:
+            type: integer
+            format: int32
+            example: 2
+          sources:
+            $ref: '#/definitions/API_Entities_Releases_Source'
+          links:
+            $ref: '#/definitions/API_Entities_Releases_Link'
+        required:
+        - count
+        - links
+      evidences:
+        $ref: '#/definitions/API_Entities_Releases_Evidence'
+      _links:
+        type: object
+        properties:
+          closed_issues_url:
+            type: string
+          closed_merge_requests_url:
+            type: string
+          edit_url:
+            type: string
+          merged_merge_requests_url:
+            type: string
+          opened_issues_url:
+            type: string
+          opened_merge_requests_url:
+            type: string
+          self:
+            type: string
+    required:
+    - name
+    - tag_name
+    - description
+    - created_at
+    - released_at
+    - upcoming_release
+    - assets
+    - _links
+    description: API_Entities_Release model
+  postApiV4ProjectsIdReleasesTagNameAssetsLinks:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the link. Link names must be unique in the release
+      url:
+        type: string
+        description: The URL of the link. Link URLs must be unique in the release.
+      direct_asset_path:
+        type: string
+        description: Optional path for a direct asset link
+      filepath:
+        type: string
+        description: 'Deprecated: optional path for a direct asset link'
+      link_type:
+        type: string
+        description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
+        enum:
+        - other
+        - runbook
+        - image
+        - package
+        default: other
+    required:
+    - name
+    - url
+    description: Create a release link
+  API_Entities_Releases_Evidence:
+    type: object
+    properties:
+      sha:
+        type: string
+        example: 760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d
+      filepath:
+        type: string
+        example: https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json
+      collected_at:
+        type: string
+        format: date-time
+        example: '2019-01-03T01:56:19.539Z'
+    required:
+    - sha
+    - filepath
+    - collected_at
+  API_Entities_Releases_Source:
+    type: object
+    properties:
+      format:
+        type: string
+        example: zip
+      url:
+        type: string
+        example: https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip
+    required:
+    - format
+    - url
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

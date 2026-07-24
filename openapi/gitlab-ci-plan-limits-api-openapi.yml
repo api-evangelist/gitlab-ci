@@ -1,0 +1,360 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests plan_limits API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: plan_limits
+  description: Operations related to plan limits
+paths:
+  /api/v4/application/plan_limits:
+    get:
+      summary: Get current plan limits
+      description: List the current limits of a plan on the GitLab instance.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: plan_name
+        description: 'Name of the plan to get the limits from. Default: default.'
+        type: string
+        default: default
+        enum:
+        - default
+        - free
+        - bronze
+        - silver
+        - premium
+        - gold
+        - ultimate
+        - ultimate_trial
+        - ultimate_trial_paid_customer
+        - premium_trial
+        - opensource
+        required: false
+      responses:
+        '200':
+          description: Get current plan limits
+          schema:
+            $ref: '#/definitions/API_Entities_PlanLimit'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - plan_limits
+      operationId: getApiV4ApplicationPlanLimits
+    put:
+      summary: Change plan limits
+      description: Modify the limits of a plan on the GitLab instance.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: putApiV4ApplicationPlanLimits
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ApplicationPlanLimits'
+      responses:
+        '200':
+          description: Change plan limits
+          schema:
+            $ref: '#/definitions/API_Entities_PlanLimit'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - plan_limits
+      operationId: putApiV4ApplicationPlanLimits
+definitions:
+  API_Entities_PlanLimit:
+    type: object
+    properties:
+      ci_instance_level_variables:
+        type: integer
+        format: int32
+        example: 25
+      ci_pipeline_size:
+        type: integer
+        format: int32
+        example: 0
+      ci_active_jobs:
+        type: integer
+        format: int32
+        example: 0
+      ci_project_subscriptions:
+        type: integer
+        format: int32
+        example: 2
+      ci_pipeline_schedules:
+        type: integer
+        format: int32
+        example: 10
+      ci_needs_size_limit:
+        type: integer
+        format: int32
+        example: 50
+      ci_registered_group_runners:
+        type: integer
+        format: int32
+        example: 1000
+      ci_registered_project_runners:
+        type: integer
+        format: int32
+        example: 1000
+      conan_max_file_size:
+        type: integer
+        format: int32
+        example: 3221225472
+      dotenv_variables:
+        type: integer
+        format: int32
+        example: 20
+      dotenv_size:
+        type: integer
+        format: int32
+        example: 5120
+      enforcement_limit:
+        type: integer
+        format: int32
+        example: 15000
+      generic_packages_max_file_size:
+        type: integer
+        format: int32
+        example: 5368709120
+      helm_max_file_size:
+        type: integer
+        format: int32
+        example: 5242880
+      limits_history:
+        type: object
+        example:
+          enforcement_limit:
+          - timestamp: 1686909124
+            user_id: 1
+            username: x
+            value: 5
+          notification_limit:
+          - timestamp: 1686909124
+            user_id: 2
+            username: y
+            value: 7
+      maven_max_file_size:
+        type: integer
+        format: int32
+        example: 3221225472
+      notification_limit:
+        type: integer
+        format: int32
+        example: 15000
+      npm_max_file_size:
+        type: integer
+        format: int32
+        example: 524288000
+      nuget_max_file_size:
+        type: integer
+        format: int32
+        example: 524288000
+      pipeline_hierarchy_size:
+        type: integer
+        format: int32
+        example: 1000
+      pypi_max_file_size:
+        type: integer
+        format: int32
+        example: 3221225472
+      terraform_module_max_file_size:
+        type: integer
+        format: int32
+        example: 1073741824
+      storage_size_limit:
+        type: integer
+        format: int32
+        example: 15000
+      web_hook_calls:
+        type: integer
+        format: int32
+        example: 500
+      web_hook_calls_low:
+        type: integer
+        format: int32
+        example: 500
+      web_hook_calls_mid:
+        type: integer
+        format: int32
+        example: 500
+      max_pipelines_per_merge_train:
+        type: integer
+        format: int32
+        example: 20
+    required:
+    - ci_instance_level_variables
+    - ci_pipeline_size
+    - ci_active_jobs
+    - ci_project_subscriptions
+    - ci_pipeline_schedules
+    - ci_needs_size_limit
+    - ci_registered_group_runners
+    - ci_registered_project_runners
+    - conan_max_file_size
+    - dotenv_variables
+    - dotenv_size
+    - enforcement_limit
+    - generic_packages_max_file_size
+    - helm_max_file_size
+    - limits_history
+    - maven_max_file_size
+    - notification_limit
+    - npm_max_file_size
+    - nuget_max_file_size
+    - pipeline_hierarchy_size
+    - pypi_max_file_size
+    - terraform_module_max_file_size
+    - storage_size_limit
+    - web_hook_calls
+    - web_hook_calls_low
+    - web_hook_calls_mid
+    - max_pipelines_per_merge_train
+    description: API_Entities_PlanLimit model
+  putApiV4ApplicationPlanLimits:
+    type: object
+    properties:
+      plan_name:
+        type: string
+        description: Name of the plan to update
+        enum:
+        - default
+        - free
+        - bronze
+        - silver
+        - premium
+        - gold
+        - ultimate
+        - ultimate_trial
+        - ultimate_trial_paid_customer
+        - premium_trial
+        - opensource
+      ci_instance_level_variables:
+        type: integer
+        format: int32
+        description: Maximum number of Instance-level CI/CD variables that can be defined
+      ci_pipeline_size:
+        type: integer
+        format: int32
+        description: Maximum number of jobs in a single pipeline
+      ci_active_jobs:
+        type: integer
+        format: int32
+        description: Total number of jobs in currently active pipelines
+      ci_project_subscriptions:
+        type: integer
+        format: int32
+        description: Maximum number of pipeline subscriptions to and from a project
+      ci_pipeline_schedules:
+        type: integer
+        format: int32
+        description: Maximum number of pipeline schedules
+      ci_needs_size_limit:
+        type: integer
+        format: int32
+        description: Maximum number of needs dependencies that a job can have
+      ci_registered_group_runners:
+        type: integer
+        format: int32
+        description: Maximum number of runners created or active in a group during the past seven days
+      ci_registered_project_runners:
+        type: integer
+        format: int32
+        description: Maximum number of runners created or active in a project during the past seven days
+      conan_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum Conan package file size in bytes
+      dotenv_size:
+        type: integer
+        format: int32
+        description: Maximum size of a dotenv artifact in bytes
+      dotenv_variables:
+        type: integer
+        format: int32
+        description: Maximum number of variables in a dotenv artifact
+      enforcement_limit:
+        type: integer
+        format: int32
+        description: Maximum storage size for the root namespace enforcement in MiB
+      generic_packages_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum generic package file size in bytes
+      helm_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum Helm chart file size in bytes
+      maven_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum Maven package file size in bytes
+      notification_limit:
+        type: integer
+        format: int32
+        description: Maximum storage size for the root namespace notifications in MiB
+      npm_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum NPM package file size in bytes
+      nuget_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum NuGet package file size in bytes
+      pypi_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum PyPI package file size in bytes
+      terraform_module_max_file_size:
+        type: integer
+        format: int32
+        description: Maximum Terraform Module package file size in bytes
+      storage_size_limit:
+        type: integer
+        format: int32
+        description: Maximum storage size for the root namespace in MiB
+      pipeline_hierarchy_size:
+        type: integer
+        format: int32
+        description: Maximum number of downstream pipelines in a pipeline's hierarchy tree
+      web_hook_calls:
+        type: integer
+        format: int32
+        description: Maximum number of times a webhook can be called per minute, per top-level namespace. 0 for unlimited.
+      web_hook_calls_low:
+        type: integer
+        format: int32
+        description: Maximum number of times a webhook can be called per minute, per top-level namespace. 0 for unlimited (GitLab.com only).
+      web_hook_calls_mid:
+        type: integer
+        format: int32
+        description: Maximum number of times a webhook can be called per minute, per top-level namespace. 0 for unlimited (GitLab.com only).
+      max_pipelines_per_merge_train:
+        type: integer
+        format: int32
+        description: Maximum number of parallel pipelines per merge train
+    required:
+    - plan_name
+    description: Change plan limits
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

@@ -1,0 +1,617 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests wikis API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: wikis
+  description: Operations about wikis
+paths:
+  /api/v4/groups/{id}/wikis:
+    get:
+      description: Get a list of wiki pages
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: with_content
+        description: Include pages' content
+        type: boolean
+        default: false
+        required: false
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a list of wiki pages
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_WikiPageBasic'
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: getApiV4GroupsIdWikis
+    post:
+      description: Create a wiki page
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4GroupsIdWikis
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4GroupsIdWikis'
+      responses:
+        '201':
+          description: Create a wiki page
+          schema:
+            $ref: '#/definitions/API_Entities_WikiPage'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - wikis
+      operationId: postApiV4GroupsIdWikis
+  /api/v4/groups/{id}/wikis/{slug}:
+    get:
+      description: Get a wiki page
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: slug
+        description: The slug of a wiki page
+        type: string
+        required: true
+      - in: query
+        name: version
+        description: The version hash of a wiki page
+        type: string
+        required: false
+      - in: query
+        name: render_html
+        description: Render content to HTML
+        type: boolean
+        default: false
+        required: false
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a wiki page
+          schema:
+            $ref: '#/definitions/API_Entities_WikiPage'
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: getApiV4GroupsIdWikisSlug
+    put:
+      description: Update a wiki page
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: slug
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4GroupsIdWikisSlug
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4GroupsIdWikisSlug'
+      responses:
+        '200':
+          description: Update a wiki page
+          schema:
+            $ref: '#/definitions/API_Entities_WikiPage'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - wikis
+      operationId: putApiV4GroupsIdWikisSlug
+    delete:
+      description: Delete a wiki page
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: slug
+        description: The slug of a wiki page
+        type: string
+        required: true
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Delete a wiki page
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: deleteApiV4GroupsIdWikisSlug
+  /api/v4/groups/{id}/wikis/attachments:
+    post:
+      summary: Upload an attachment to the wiki repository
+      description: This feature was introduced in GitLab 11.3.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4GroupsIdWikisAttachments
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4GroupsIdWikisAttachments'
+      responses:
+        '201':
+          description: Upload an attachment to the wiki repository
+          schema:
+            $ref: '#/definitions/API_Entities_WikiAttachment'
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: postApiV4GroupsIdWikisAttachments
+  /api/v4/projects/{id}/wikis:
+    get:
+      description: Get a list of wiki pages
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: with_content
+        description: Include pages' content
+        type: boolean
+        default: false
+        required: false
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a list of wiki pages
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_WikiPageBasic'
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: getApiV4ProjectsIdWikis
+    post:
+      description: Create a wiki page
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdWikis
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdWikis'
+      responses:
+        '201':
+          description: Create a wiki page
+          schema:
+            $ref: '#/definitions/API_Entities_WikiPage'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - wikis
+      operationId: postApiV4ProjectsIdWikis
+  /api/v4/projects/{id}/wikis/{slug}:
+    get:
+      description: Get a wiki page
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: slug
+        description: The slug of a wiki page
+        type: string
+        required: true
+      - in: query
+        name: version
+        description: The version hash of a wiki page
+        type: string
+        required: false
+      - in: query
+        name: render_html
+        description: Render content to HTML
+        type: boolean
+        default: false
+        required: false
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a wiki page
+          schema:
+            $ref: '#/definitions/API_Entities_WikiPage'
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: getApiV4ProjectsIdWikisSlug
+    put:
+      description: Update a wiki page
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: slug
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4ProjectsIdWikisSlug
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdWikisSlug'
+      responses:
+        '200':
+          description: Update a wiki page
+          schema:
+            $ref: '#/definitions/API_Entities_WikiPage'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - wikis
+      operationId: putApiV4ProjectsIdWikisSlug
+    delete:
+      description: Delete a wiki page
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: slug
+        description: The slug of a wiki page
+        type: string
+        required: true
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Delete a wiki page
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: deleteApiV4ProjectsIdWikisSlug
+  /api/v4/projects/{id}/wikis/attachments:
+    post:
+      summary: Upload an attachment to the wiki repository
+      description: This feature was introduced in GitLab 11.3.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdWikisAttachments
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdWikisAttachments'
+      responses:
+        '201':
+          description: Upload an attachment to the wiki repository
+          schema:
+            $ref: '#/definitions/API_Entities_WikiAttachment'
+        '404':
+          description: Not found
+      tags:
+      - wikis
+      operationId: postApiV4ProjectsIdWikisAttachments
+definitions:
+  putApiV4ProjectsIdWikisSlug:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of a wiki page
+      front_matter:
+        type: object
+        description: Object that contains YAML frontmatter
+        properties:
+          title:
+            type: string
+            description: Frontmatter title of a wiki page
+      content:
+        type: string
+        description: Content of a wiki page
+      format:
+        type: string
+        description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+        enum:
+        - markdown
+        - rdoc
+        - asciidoc
+        - org
+        default: markdown
+    description: Update a wiki page
+  putApiV4GroupsIdWikisSlug:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of a wiki page
+      front_matter:
+        type: object
+        description: Object that contains YAML frontmatter
+        properties:
+          title:
+            type: string
+            description: Frontmatter title of a wiki page
+      content:
+        type: string
+        description: Content of a wiki page
+      format:
+        type: string
+        description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+        enum:
+        - markdown
+        - rdoc
+        - asciidoc
+        - org
+        default: markdown
+    description: Update a wiki page
+  API_Entities_WikiPageBasic:
+    type: object
+    properties:
+      format:
+        type: string
+        example: markdown
+      slug:
+        type: string
+        example: deploy
+      title:
+        type: string
+        example: deploy
+      wiki_page_meta_id:
+        type: integer
+        format: int32
+        example: 123
+    required:
+    - format
+    - slug
+    - title
+    - wiki_page_meta_id
+    description: API_Entities_WikiPageBasic model
+  API_Entities_WikiPage:
+    type: object
+    properties:
+      format:
+        type: string
+        example: markdown
+      slug:
+        type: string
+        example: deploy
+      title:
+        type: string
+        example: deploy
+      wiki_page_meta_id:
+        type: integer
+        format: int32
+        example: 123
+      content:
+        type: string
+        example: Here is an instruction how to deploy this project.
+      encoding:
+        type: string
+        example: UTF-8
+      front_matter:
+        type: object
+        example:
+          title: deploy
+    required:
+    - format
+    - slug
+    - title
+    - wiki_page_meta_id
+    - content
+    - encoding
+    - front_matter
+    description: API_Entities_WikiPage model
+  postApiV4ProjectsIdWikisAttachments:
+    type: object
+    properties:
+      file:
+        type: file
+        description: The attachment file to be uploaded
+      branch:
+        type: string
+        description: The name of the branch
+    required:
+    - file
+    description: Upload an attachment to the wiki repository
+  postApiV4GroupsIdWikisAttachments:
+    type: object
+    properties:
+      file:
+        type: file
+        description: The attachment file to be uploaded
+      branch:
+        type: string
+        description: The name of the branch
+    required:
+    - file
+    description: Upload an attachment to the wiki repository
+  API_Entities_WikiAttachment:
+    type: object
+    properties:
+      file_name:
+        type: string
+        example: dk.png
+      file_path:
+        type: string
+        example: uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png
+      branch:
+        type: string
+        example: main
+      link:
+        type: object
+        properties:
+          url:
+            type: string
+            example: uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png
+          markdown:
+            type: string
+            example: '![dk](uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png)'
+        required:
+        - url
+        - markdown
+    required:
+    - file_name
+    - file_path
+    - branch
+    - link
+    description: API_Entities_WikiAttachment model
+  postApiV4GroupsIdWikis:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of a wiki page
+      front_matter:
+        type: object
+        description: Object that contains YAML frontmatter
+        properties:
+          title:
+            type: string
+            description: Frontmatter title of a wiki page
+      content:
+        type: string
+        description: Content of a wiki page
+      format:
+        type: string
+        description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+        enum:
+        - markdown
+        - rdoc
+        - asciidoc
+        - org
+        default: markdown
+    required:
+    - title
+    - content
+    description: Create a wiki page
+  postApiV4ProjectsIdWikis:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Title of a wiki page
+      front_matter:
+        type: object
+        description: Object that contains YAML frontmatter
+        properties:
+          title:
+            type: string
+            description: Frontmatter title of a wiki page
+      content:
+        type: string
+        description: Content of a wiki page
+      format:
+        type: string
+        description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+        enum:
+        - markdown
+        - rdoc
+        - asciidoc
+        - org
+        default: markdown
+    required:
+    - title
+    - content
+    description: Create a wiki page
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

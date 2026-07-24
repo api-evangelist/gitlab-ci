@@ -1,0 +1,391 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests files API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: files
+  description: Operations about files
+paths:
+  /api/v4/projects/{id}/repository/files/{file_path}/blame:
+    head:
+      description: Get blame file metadata from repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - in: query
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: true
+        example: main
+      responses:
+        '200':
+          description: Get blame file metadata from repository
+      tags:
+      - files
+      operationId: headApiV4ProjectsIdRepositoryFilesFilePathBlame
+    get:
+      description: Get blame file from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - in: query
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: true
+        example: main
+      - in: query
+        name: range[start]
+        description: The first line of the range to blame
+        type: integer
+        format: int32
+        minimum: 1
+        required: true
+      - in: query
+        name: range[end]
+        description: The last line of the range to blame
+        type: integer
+        format: int32
+        minimum: 1
+        required: true
+      responses:
+        '200':
+          description: Get blame file from the repository
+          schema:
+            $ref: '#/definitions/API_Entities_BlameRange'
+      tags:
+      - files
+      operationId: getApiV4ProjectsIdRepositoryFilesFilePathBlame
+  /api/v4/projects/{id}/repository/files/{file_path}/raw:
+    get:
+      description: Get raw file contents from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - in: query
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: false
+        example: main
+      - in: query
+        name: lfs
+        description: Retrieve binary data for a file that is an lfs pointer
+        type: boolean
+        default: false
+        required: false
+      responses:
+        '200':
+          description: Get raw file contents from the repository
+          schema:
+            type: file
+      tags:
+      - files
+      operationId: getApiV4ProjectsIdRepositoryFilesFilePathRaw
+  /api/v4/projects/{id}/repository/files/{file_path}:
+    head:
+      description: Get file metadata from repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - in: query
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: true
+        example: main
+      responses:
+        '200':
+          description: Get file metadata from repository
+      tags:
+      - files
+      operationId: headApiV4ProjectsIdRepositoryFilesFilePath
+    get:
+      description: Get a file from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - in: query
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: true
+        example: main
+      responses:
+        '200':
+          description: Get a file from the repository
+      tags:
+      - files
+      operationId: getApiV4ProjectsIdRepositoryFilesFilePath
+    post:
+      description: Create new file in repository
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - name: postApiV4ProjectsIdRepositoryFilesFilePath
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryFilesFilePath'
+      responses:
+        '201':
+          description: Create new file in repository
+      tags:
+      - files
+      operationId: postApiV4ProjectsIdRepositoryFilesFilePath
+    put:
+      description: Update existing file in repository
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - name: putApiV4ProjectsIdRepositoryFilesFilePath
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdRepositoryFilesFilePath'
+      responses:
+        '200':
+          description: Update existing file in repository
+      tags:
+      - files
+      operationId: putApiV4ProjectsIdRepositoryFilesFilePath
+    delete:
+      description: Delete an existing file in repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID
+        type: string
+        required: true
+        example: gitlab-org/gitlab
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file.
+        type: string
+        required: true
+        example: lib%2Fclass%2Erb
+      - in: query
+        name: branch
+        description: Name of the branch to commit into. To create a new branch, also provide `start_branch`.
+        type: string
+        required: true
+        example: main
+      - in: query
+        name: commit_message
+        description: Commit message
+        type: string
+        required: true
+        example: Initial commit
+      - in: query
+        name: start_branch
+        description: Name of the branch to start the new commit from
+        type: string
+        required: false
+        example: main
+      - in: query
+        name: author_email
+        description: The email of the author
+        type: string
+        required: false
+        example: johndoe@example.com
+      - in: query
+        name: author_name
+        description: The name of the author
+        type: string
+        required: false
+        example: John Doe
+      - in: query
+        name: last_commit_id
+        description: Last known file commit id
+        type: string
+        required: false
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      responses:
+        '204':
+          description: Delete an existing file in repository
+      tags:
+      - files
+      operationId: deleteApiV4ProjectsIdRepositoryFilesFilePath
+definitions:
+  API_Entities_BlameRangeCommit:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      message:
+        type: string
+        example: Initial commit
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+    required:
+    - id
+    - parent_ids
+    - message
+    - authored_date
+    - author_name
+    - author_email
+    - committed_date
+    - committer_name
+    - committer_email
+  putApiV4ProjectsIdRepositoryFilesFilePath:
+    type: object
+    properties:
+      file:
+        type: file
+        description: The file content to be updated (generated by Multipart middleware)
+    required:
+    - file
+    description: Update existing file in repository
+  API_Entities_BlameRange:
+    type: object
+    properties:
+      commit:
+        $ref: '#/definitions/API_Entities_BlameRangeCommit'
+      lines:
+        type: array
+        items:
+          type: string
+        example:
+        - lorem ipsum
+    required:
+    - commit
+    - lines
+    description: API_Entities_BlameRange model
+  postApiV4ProjectsIdRepositoryFilesFilePath:
+    type: object
+    properties:
+      file:
+        type: file
+        description: The file content to be created (generated by Multipart middleware)
+    required:
+    - file
+    description: Create new file in repository
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

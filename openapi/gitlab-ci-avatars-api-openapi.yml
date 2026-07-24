@@ -1,0 +1,91 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests avatars API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: avatars
+  description: Operations about avatars
+paths:
+  /api/v4/groups/{id}/avatar:
+    get:
+      summary: Download the group avatar
+      description: This feature was introduced in GitLab 14.0
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the group
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Download the group avatar
+      tags:
+      - avatars
+      operationId: getApiV4GroupsIdAvatar
+  /api/v4/projects/{id}/avatar:
+    get:
+      summary: Download a project avatar
+      description: This feature was introduced in GitLab 16.9
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: ID or URL-encoded path of the project
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Download a project avatar
+      tags:
+      - avatars
+      operationId: getApiV4ProjectsIdAvatar
+  /api/v4/avatar:
+    get:
+      description: Return avatar url for a user
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: email
+        description: Public email address of the user
+        type: string
+        required: true
+      - in: query
+        name: size
+        description: Single pixel dimension for Gravatar images
+        type: integer
+        format: int32
+        required: false
+      responses:
+        '200':
+          description: Return avatar url for a user
+          schema:
+            $ref: '#/definitions/API_Entities_Avatar'
+      tags:
+      - avatars
+      operationId: getApiV4Avatar
+definitions:
+  API_Entities_Avatar:
+    type: object
+    properties:
+      avatar_url:
+        type: string
+    required:
+    - avatar_url
+    description: API_Entities_Avatar model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

@@ -1,0 +1,1947 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests pipelines API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: pipelines
+  description: Operations about pipelines
+paths:
+  /api/v4/projects/{id}/pipelines:
+    get:
+      summary: Get all Pipelines of the project
+      description: This feature was introduced in GitLab 8.11.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: scope
+        description: The scope of pipelines
+        type: string
+        enum:
+        - running
+        - pending
+        - finished
+        - branches
+        - tags
+        required: false
+        example: pending
+      - in: query
+        name: status
+        description: The status of pipelines
+        type: string
+        enum:
+        - created
+        - waiting_for_resource
+        - preparing
+        - waiting_for_callback
+        - pending
+        - running
+        - success
+        - failed
+        - canceling
+        - canceled
+        - skipped
+        - manual
+        - scheduled
+        required: false
+        example: pending
+      - in: query
+        name: ref
+        description: The ref of pipelines
+        type: string
+        required: false
+        example: develop
+      - in: query
+        name: sha
+        description: The sha of pipelines
+        type: string
+        required: false
+        example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
+      - in: query
+        name: yaml_errors
+        description: Returns pipelines with invalid configurations
+        type: boolean
+        required: false
+      - in: query
+        name: username
+        description: The username of the user who triggered pipelines
+        type: string
+        required: false
+        example: root
+      - in: query
+        name: updated_before
+        description: 'Return pipelines updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+        format: date-time
+        required: false
+        example: '2015-12-24T15:51:21.880Z'
+      - in: query
+        name: updated_after
+        description: 'Return pipelines updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+        format: date-time
+        required: false
+        example: '2015-12-24T15:51:21.880Z'
+      - in: query
+        name: created_before
+        description: 'Return pipelines created before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+        format: date-time
+        required: false
+        example: '2015-12-24T15:51:21.880Z'
+      - in: query
+        name: created_after
+        description: 'Return pipelines created after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+        format: date-time
+        required: false
+        example: '2015-12-24T15:51:21.880Z'
+      - in: query
+        name: order_by
+        description: Order pipelines
+        type: string
+        default: id
+        enum:
+        - id
+        - status
+        - ref
+        - updated_at
+        - user_id
+        required: false
+        example: status
+      - in: query
+        name: sort
+        description: Sort pipelines
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+        example: asc
+      - in: query
+        name: source
+        description: The source of pipelines
+        type: string
+        enum:
+        - unknown
+        - push
+        - web
+        - trigger
+        - schedule
+        - api
+        - external
+        - pipeline
+        - chat
+        - webide
+        - merge_request_event
+        - external_pull_request_event
+        - parent_pipeline
+        - ondemand_dast_scan
+        - ondemand_dast_validation
+        - security_orchestration_policy
+        - container_registry_push
+        - duo_workflow
+        - pipeline_execution_policy_schedule
+        - dependency_management_security_update
+        required: false
+        example: push
+      - in: query
+        name: name
+        description: Filter pipelines by name
+        type: string
+        required: false
+        example: Build pipeline
+      responses:
+        '200':
+          description: Get all Pipelines of the project
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelines
+  /api/v4/projects/{id}/pipeline:
+    post:
+      summary: Create a new pipeline
+      description: This feature was introduced in GitLab 8.14
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - name: postApiV4ProjectsIdPipeline
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdPipeline'
+      responses:
+        '201':
+          description: Create a new pipeline
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Pipeline'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: postApiV4ProjectsIdPipeline
+  /api/v4/projects/{id}/pipelines/latest:
+    get:
+      summary: Gets the latest pipeline for the project branch
+      description: This feature was introduced in GitLab 12.3
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: query
+        name: ref
+        description: Branch ref of pipeline. Uses project default branch if not specified.
+        type: string
+        required: false
+        example: develop
+      responses:
+        '200':
+          description: Gets the latest pipeline for the project branch
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_PipelineWithMetadata'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesLatest
+  /api/v4/projects/{id}/pipelines/{pipeline_id}:
+    get:
+      summary: Gets a specific pipeline for the project
+      description: This feature was introduced in GitLab 8.11
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '200':
+          description: Gets a specific pipeline for the project
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_PipelineWithMetadata'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesPipelineId
+    delete:
+      summary: Deletes a pipeline
+      description: This feature was introduced in GitLab 11.6
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '204':
+          description: Pipeline was deleted
+        '403':
+          description: Forbidden
+      tags:
+      - pipelines
+      operationId: deleteApiV4ProjectsIdPipelinesPipelineId
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/jobs:
+    get:
+      description: Get pipeline jobs
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      - in: query
+        name: include_retried
+        description: Includes retried jobs
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: scope
+        description: The scope of builds to show
+        type: string
+        enum:
+        - created
+        - waiting_for_resource
+        - preparing
+        - waiting_for_callback
+        - pending
+        - running
+        - success
+        - failed
+        - canceling
+        - canceled
+        - skipped
+        - manual
+        - scheduled
+        required: false
+        example:
+        - pending
+        - running
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get pipeline jobs
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Ci_Job'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesPipelineIdJobs
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/bridges:
+    get:
+      description: Get pipeline bridge jobs
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      - in: query
+        name: scope
+        description: The scope of builds to show
+        type: string
+        enum:
+        - created
+        - waiting_for_resource
+        - preparing
+        - waiting_for_callback
+        - pending
+        - running
+        - success
+        - failed
+        - canceling
+        - canceled
+        - skipped
+        - manual
+        - scheduled
+        required: false
+        example:
+        - pending
+        - running
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get pipeline bridge jobs
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Ci_Bridge'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesPipelineIdBridges
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/variables:
+    get:
+      summary: Gets the variables for a given pipeline
+      description: This feature was introduced in GitLab 11.11
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '200':
+          description: Gets the variables for a given pipeline
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Ci_Variable'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesPipelineIdVariables
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/test_report:
+    get:
+      summary: Gets the test report for a given pipeline
+      description: This feature was introduced in GitLab 13.0.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '200':
+          description: Gets the test report for a given pipeline
+          schema:
+            $ref: '#/definitions/TestReportEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesPipelineIdTestReport
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/test_report_summary:
+    get:
+      summary: Gets the test report summary for a given pipeline
+      description: This feature was introduced in GitLab 14.2
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '200':
+          description: Gets the test report summary for a given pipeline
+          schema:
+            $ref: '#/definitions/TestReportSummaryEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: getApiV4ProjectsIdPipelinesPipelineIdTestReportSummary
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/metadata:
+    put:
+      summary: Updates pipeline metadata
+      description: This feature was introduced in GitLab 16.6
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      - name: putApiV4ProjectsIdPipelinesPipelineIdMetadata
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdPipelinesPipelineIdMetadata'
+      responses:
+        '200':
+          description: Updates pipeline metadata
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_PipelineWithMetadata'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: putApiV4ProjectsIdPipelinesPipelineIdMetadata
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/retry:
+    post:
+      summary: Retry builds in the pipeline
+      description: This feature was introduced in GitLab 8.11.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '201':
+          description: Retry builds in the pipeline
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Pipeline'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: postApiV4ProjectsIdPipelinesPipelineIdRetry
+  /api/v4/projects/{id}/pipelines/{pipeline_id}/cancel:
+    post:
+      summary: Cancel all builds in the pipeline
+      description: This feature was introduced in GitLab 8.11.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The project ID or URL-encoded path
+        type: string
+        required: true
+        example: 11
+      - in: path
+        name: pipeline_id
+        description: The pipeline ID
+        type: integer
+        format: int32
+        required: true
+        example: 18
+      responses:
+        '201':
+          description: Cancel all builds in the pipeline
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Pipeline'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - pipelines
+      operationId: postApiV4ProjectsIdPipelinesPipelineIdCancel
+definitions:
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_Ci_Runner:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 8
+      description:
+        type: string
+        example: test-1-20150125
+      ip_address:
+        type: string
+        example: 127.0.0.1
+      active:
+        type: boolean
+        example: true
+      paused:
+        type: boolean
+        example: false
+      is_shared:
+        type: boolean
+        example: true
+      runner_type:
+        type: string
+        enum:
+        - instance_type
+        - group_type
+        - project_type
+        example: instance_type
+      name:
+        type: string
+        example: test
+      online:
+        type: boolean
+        example: true
+      created_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      created_at:
+        type: string
+        format: date-time
+        example: '2025-05-03T00:00:00.000Z'
+      status:
+        type: string
+        example: online
+      job_execution_status:
+        type: string
+        enum:
+        - active
+        - idle
+        example: idle
+    required:
+    - id
+    - description
+    - ip_address
+    - active
+    - paused
+    - is_shared
+    - runner_type
+    - name
+    - online
+    - created_at
+    - status
+    - job_execution_status
+    description: API_Entities_Ci_Runner model
+  API_Entities_Ci_RunnerManager:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 8
+      system_id:
+        type: string
+        example: runner-1
+      version:
+        type: string
+        example: 16.11.0
+      revision:
+        type: string
+        example: 91a27b2a
+      platform:
+        type: string
+        example: linux
+      architecture:
+        type: string
+        example: amd64
+      created_at:
+        type: string
+        example: '2023-10-24T01:27:06.549Z'
+      contacted_at:
+        type: string
+        example: '2023-10-24T01:27:06.549Z'
+      ip_address:
+        type: string
+        example: 127.0.0.1
+      status:
+        type: string
+        example: online
+      job_execution_status:
+        type: string
+        enum:
+        - active
+        - idle
+        example: idle
+    required:
+    - id
+    - system_id
+    - version
+    - revision
+    - platform
+    - architecture
+    - created_at
+    - contacted_at
+    - ip_address
+    - status
+    - job_execution_status
+    description: API_Entities_Ci_RunnerManager model
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  API_Entities_User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+      created_at:
+        type: string
+      bio:
+        type: string
+      location:
+        type: string
+      linkedin:
+        type: string
+      twitter:
+        type: string
+      discord:
+        type: string
+      website_url:
+        type: string
+      github:
+        type: string
+      job_title:
+        type: string
+      pronouns:
+        type: string
+      organization:
+        type: string
+      bot:
+        type: boolean
+      work_information:
+        type: string
+      followers:
+        type: string
+      following:
+        type: string
+      is_followed:
+        type: string
+      local_time:
+        type: string
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    - bio
+    - location
+    - linkedin
+    - twitter
+    - discord
+    - website_url
+    - github
+    - job_title
+    - pronouns
+    - organization
+    - bot
+    - work_information
+    - local_time
+  API_Entities_Ci_Variable:
+    type: object
+    properties:
+      variable_type:
+        type: string
+        example: env_var
+      key:
+        type: string
+        example: TEST_VARIABLE_1
+      value:
+        type: string
+        example: TEST_1
+      hidden:
+        type: boolean
+      protected:
+        type: boolean
+      masked:
+        type: boolean
+      raw:
+        type: boolean
+      environment_scope:
+        type: string
+        example: '*'
+      description:
+        type: string
+        example: This variable is being used for ...
+    required:
+    - variable_type
+    - key
+    - value
+    description: API_Entities_Ci_Variable model
+  API_Entities_Ci_PipelineWithMetadata:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 2
+      project_id:
+        type: integer
+        format: int32
+        example: 3
+      sha:
+        type: string
+        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+      ref:
+        type: string
+        example: feature-branch
+      status:
+        type: string
+        example: success
+      source:
+        type: string
+        example: push
+      created_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T15:51:21.880Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:31.198Z'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      before_sha:
+        type: string
+        example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
+      tag:
+        type: boolean
+        example: false
+      yaml_errors:
+        type: string
+        example: 'widgets:build: needs ''widgets:test'''
+      user:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      started_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:30.733Z'
+      finished_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:31.198Z'
+      committed_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T15:51:21.880Z'
+      duration:
+        type: integer
+        format: int32
+        example: 127
+        description: Time spent running in seconds
+      queued_duration:
+        type: integer
+        format: int32
+        example: 63
+        description: Time spent enqueued in seconds
+      coverage:
+        type: number
+        format: float
+        example: 98.29
+      detailed_status:
+        $ref: '#/definitions/DetailedStatusEntity'
+      archived:
+        type: boolean
+        example: false
+      name:
+        type: string
+        example: Build pipeline
+    required:
+    - id
+    - iid
+    - project_id
+    - sha
+    - ref
+    - status
+    - source
+    - created_at
+    - updated_at
+    - web_url
+    - before_sha
+    - tag
+    - yaml_errors
+    - user
+    - started_at
+    - finished_at
+    - committed_at
+    - duration
+    - queued_duration
+    - coverage
+    - detailed_status
+    - archived
+    - name
+    description: API_Entities_Ci_PipelineWithMetadata model
+  API_Entities_Ci_PipelineBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 2
+      project_id:
+        type: integer
+        format: int32
+        example: 3
+      sha:
+        type: string
+        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+      ref:
+        type: string
+        example: feature-branch
+      status:
+        type: string
+        example: success
+      source:
+        type: string
+        example: push
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-10-21T16:49:48.000+02:00'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-10-21T16:49:48.000+02:00'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+    required:
+    - id
+    - iid
+    - project_id
+    - sha
+    - ref
+    - status
+    - source
+    - created_at
+    - updated_at
+    - web_url
+    description: API_Entities_Ci_PipelineBasic model
+  API_Entities_Ci_JobArtifact:
+    type: object
+    properties:
+      file_type:
+        type: string
+        enum:
+        - archive
+        - metadata
+        - trace
+        - junit
+        - sast
+        - dependency_scanning
+        - container_scanning
+        - dast
+        - codequality
+        - license_scanning
+        - performance
+        - metrics
+        - metrics_referee
+        - network_referee
+        - lsif
+        - dotenv
+        - cobertura
+        - terraform
+        - accessibility
+        - cluster_applications
+        - secret_detection
+        - requirements
+        - coverage_fuzzing
+        - browser_performance
+        - load_performance
+        - api_fuzzing
+        - cluster_image_scanning
+        - cyclonedx
+        - requirements_v2
+        - annotations
+        - repository_xray
+        - jacoco
+        - scip
+        - sarif
+        - environment_key
+        example: archive
+      size:
+        type: integer
+        format: int32
+        example: 1000
+      filename:
+        type: string
+        example: artifacts.zip
+      file_format:
+        type: string
+        enum:
+        - raw
+        - zip
+        - gzip
+        example: zip
+    required:
+    - file_type
+    - size
+    - filename
+    - file_format
+  TestReportEntity:
+    type: object
+    properties:
+      total_time:
+        type: integer
+        format: int32
+        example: 180
+      total_count:
+        type: integer
+        format: int32
+        example: 1
+      success_count:
+        type: integer
+        format: int32
+        example: 1
+      failed_count:
+        type: integer
+        format: int32
+        example: 0
+      skipped_count:
+        type: integer
+        format: int32
+        example: 0
+      error_count:
+        type: integer
+        format: int32
+        example: 0
+      test_suites:
+        type: array
+        items:
+          $ref: '#/definitions/TestSuiteEntity'
+    required:
+    - total_time
+    - total_count
+    - success_count
+    - failed_count
+    - skipped_count
+    - error_count
+    - test_suites
+    description: TestReportEntity model
+  API_Entities_Commit:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      short_id:
+        type: string
+        example: 2695effb
+      created_at:
+        type: string
+        format: date-time
+        example: '2017-07-26T11:08:53.000+02:00'
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      title:
+        type: string
+        example: Initial commit
+      message:
+        type: string
+        example: Initial commit
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      trailers:
+        type: object
+        example:
+          Merged-By: Jane Doe janedoe@gitlab.com
+      extended_trailers:
+        type: object
+        example:
+          Signed-off-by:
+          - John Doe <johndoe@gitlab.com>
+          - Jane Doe <janedoe@gitlab.com>
+      web_url:
+        type: string
+        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+    required:
+    - id
+    - short_id
+    - created_at
+    - parent_ids
+    - title
+    - message
+    - author_name
+    - author_email
+    - authored_date
+    - committer_name
+    - committer_email
+    - committed_date
+    - trailers
+    - extended_trailers
+    - web_url
+    description: API_Entities_Commit model
+  TestSuiteSummaryEntity:
+    type: object
+    properties:
+      name:
+        type: string
+        example: test
+      total_time:
+        type: integer
+        format: int32
+        example: 1904
+      total_count:
+        type: integer
+        format: int32
+        example: 3363
+      success_count:
+        type: integer
+        format: int32
+        example: 3351
+      failed_count:
+        type: integer
+        format: int32
+        example: 0
+      skipped_count:
+        type: integer
+        format: int32
+        example: 12
+      error_count:
+        type: integer
+        format: int32
+        example: 0
+      suite_error:
+        type: string
+        example: 'JUnit XML parsing failed: 1:1: FATAL: Document is empty'
+      test_cases:
+        type: array
+        items:
+          $ref: '#/definitions/TestCaseEntity'
+      build_ids:
+        type: array
+        items:
+          type: integer
+          format: int32
+        example:
+        - 66004
+    required:
+    - name
+    - total_time
+    - total_count
+    - success_count
+    - failed_count
+    - skipped_count
+    - error_count
+    - suite_error
+    - build_ids
+  putApiV4ProjectsIdPipelinesPipelineIdMetadata:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the pipeline
+        example: Deployment to production
+    required:
+    - name
+    description: Updates pipeline metadata
+  TestReportSummaryEntity:
+    type: object
+    properties:
+      total:
+        type: object
+        example:
+          time: 0.42
+          count: 2
+          success: 2
+          failed: 0
+          skipped: 0
+          error: 0
+          suite_error: null
+      test_suites:
+        $ref: '#/definitions/TestSuiteSummaryEntity'
+    required:
+    - total
+    - test_suites
+    description: TestReportSummaryEntity model
+  postApiV4ProjectsIdPipeline:
+    type: object
+    properties:
+      ref:
+        type: string
+        description: Reference
+        example: develop
+      variables:
+        type: array
+        description: Array of variables available in the pipeline
+        items:
+          type: object
+          properties:
+            key:
+              type: string
+              description: The key of the variable
+              example: UPLOAD_TO_S3
+            value:
+              type: string
+              description: The value of the variable
+              example: 'true'
+            variable_type:
+              type: string
+              description: The type of variable, must be one of env_var or file. Defaults to env_var
+              enum:
+              - env_var
+              - file
+              default: env_var
+      inputs:
+        type: object
+        description: The list of inputs to be used to create the pipeline.
+    required:
+    - ref
+    description: Create a new pipeline
+  API_Entities_Ci_Bridge:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      status:
+        type: string
+        example: waiting_for_resource
+      stage:
+        type: string
+        example: deploy
+      name:
+        type: string
+        example: deploy_to_production
+      ref:
+        type: string
+        example: main
+      tag:
+        type: boolean
+      coverage:
+        type: number
+        format: float
+        example: 98.29
+      allow_failure:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T15:51:21.880Z'
+      started_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:30.733Z'
+      finished_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:31.198Z'
+      erased_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T18:00:29.728Z'
+      duration:
+        type: number
+        format: float
+        example: 0.465
+        description: Time spent running
+      queued_duration:
+        type: number
+        format: float
+        example: 0.123
+        description: Time spent enqueued
+      user:
+        $ref: '#/definitions/API_Entities_User'
+      commit:
+        $ref: '#/definitions/API_Entities_Commit'
+      pipeline:
+        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
+      failure_reason:
+        type: string
+        example: script_failure
+      web_url:
+        type: string
+        example: https://example.com/foo/bar/-/jobs/1
+      project:
+        type: object
+        properties:
+          ci_job_token_scope_enabled:
+            type: string
+            example: false
+        required:
+        - ci_job_token_scope_enabled
+      downstream_pipeline:
+        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
+    required:
+    - id
+    - status
+    - stage
+    - name
+    - ref
+    - tag
+    - coverage
+    - allow_failure
+    - created_at
+    - started_at
+    - finished_at
+    - erased_at
+    - duration
+    - queued_duration
+    - user
+    - commit
+    - pipeline
+    - web_url
+    - project
+    - downstream_pipeline
+    description: API_Entities_Ci_Bridge model
+  DetailedStatusEntity:
+    type: object
+    properties:
+      icon:
+        type: string
+        example: status_success
+      text:
+        type: string
+        example: passed
+      label:
+        type: string
+        example: passed
+      group:
+        type: string
+        example: success
+      tooltip:
+        type: string
+        example: passed
+      has_details:
+        type: boolean
+        example: true
+      details_path:
+        type: string
+        example: /test-group/test-project/-/pipelines/287
+      illustration:
+        type: object
+        example:
+          image: illustrations/empty-state/empty-job-not-triggered-md.svg
+          size: ''
+          title: This job has not been triggered yet
+          content: This job depends on upstream jobs that need to succeed in order for this job to be triggered
+      favicon:
+        type: string
+        example: /assets/ci_favicons/favicon_status_success.png
+      action:
+        type: object
+        properties:
+          icon:
+            type: string
+            example: cancel
+          title:
+            type: string
+            example: Cancel
+          path:
+            type: string
+            example: /namespace1/project1/-/jobs/2/cancel
+          method:
+            type: string
+            example: post
+          button_title:
+            type: string
+            example: Cancel this job
+          confirmation_message:
+            type: string
+            example: Are you sure?
+        required:
+        - icon
+        - title
+        - path
+        - method
+        - button_title
+        - confirmation_message
+    required:
+    - icon
+    - text
+    - label
+    - group
+    - tooltip
+    - has_details
+    - details_path
+    - illustration
+    - favicon
+  API_Entities_Ci_Pipeline:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 2
+      project_id:
+        type: integer
+        format: int32
+        example: 3
+      sha:
+        type: string
+        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+      ref:
+        type: string
+        example: feature-branch
+      status:
+        type: string
+        example: success
+      source:
+        type: string
+        example: push
+      created_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T15:51:21.880Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:31.198Z'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      before_sha:
+        type: string
+        example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
+      tag:
+        type: boolean
+        example: false
+      yaml_errors:
+        type: string
+        example: 'widgets:build: needs ''widgets:test'''
+      user:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      started_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:30.733Z'
+      finished_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:31.198Z'
+      committed_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T15:51:21.880Z'
+      duration:
+        type: integer
+        format: int32
+        example: 127
+        description: Time spent running in seconds
+      queued_duration:
+        type: integer
+        format: int32
+        example: 63
+        description: Time spent enqueued in seconds
+      coverage:
+        type: number
+        format: float
+        example: 98.29
+      detailed_status:
+        $ref: '#/definitions/DetailedStatusEntity'
+      archived:
+        type: boolean
+        example: false
+    required:
+    - id
+    - iid
+    - project_id
+    - sha
+    - ref
+    - status
+    - source
+    - created_at
+    - updated_at
+    - web_url
+    - before_sha
+    - tag
+    - yaml_errors
+    - user
+    - started_at
+    - finished_at
+    - committed_at
+    - duration
+    - queued_duration
+    - coverage
+    - detailed_status
+    - archived
+    description: API_Entities_Ci_Pipeline model
+  API_Entities_Ci_Job:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      status:
+        type: string
+        example: waiting_for_resource
+      stage:
+        type: string
+        example: deploy
+      name:
+        type: string
+        example: deploy_to_production
+      ref:
+        type: string
+        example: main
+      tag:
+        type: boolean
+      coverage:
+        type: number
+        format: float
+        example: 98.29
+      allow_failure:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T15:51:21.880Z'
+      started_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:30.733Z'
+      finished_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T17:54:31.198Z'
+      erased_at:
+        type: string
+        format: date-time
+        example: '2015-12-24T18:00:29.728Z'
+      duration:
+        type: number
+        format: float
+        example: 0.465
+        description: Time spent running
+      queued_duration:
+        type: number
+        format: float
+        example: 0.123
+        description: Time spent enqueued
+      user:
+        $ref: '#/definitions/API_Entities_User'
+      commit:
+        $ref: '#/definitions/API_Entities_Commit'
+      pipeline:
+        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
+      failure_reason:
+        type: string
+        example: script_failure
+      web_url:
+        type: string
+        example: https://example.com/foo/bar/-/jobs/1
+      project:
+        type: object
+        properties:
+          ci_job_token_scope_enabled:
+            type: string
+            example: false
+        required:
+        - ci_job_token_scope_enabled
+      artifacts_file:
+        $ref: '#/definitions/API_Entities_Ci_JobArtifactFile'
+      artifacts:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_Ci_JobArtifact'
+      runner:
+        $ref: '#/definitions/API_Entities_Ci_Runner'
+      runner_manager:
+        $ref: '#/definitions/API_Entities_Ci_RunnerManager'
+      artifacts_expire_at:
+        type: string
+        format: date-time
+        example: '2016-01-19T09:05:50.355Z'
+      archived:
+        type: boolean
+        example: false
+      tag_list:
+        type: array
+        items:
+          type: string
+        example:
+        - ubuntu18
+        - docker runner
+    required:
+    - id
+    - status
+    - stage
+    - name
+    - ref
+    - tag
+    - coverage
+    - allow_failure
+    - created_at
+    - started_at
+    - finished_at
+    - erased_at
+    - duration
+    - queued_duration
+    - user
+    - commit
+    - pipeline
+    - web_url
+    - project
+    - artifacts
+    - runner
+    - artifacts_expire_at
+    - archived
+    - tag_list
+    description: API_Entities_Ci_Job model
+  API_Entities_Ci_JobArtifactFile:
+    type: object
+    properties:
+      filename:
+        type: string
+        example: artifacts.zip
+      size:
+        type: integer
+        format: int32
+        example: 1000
+    required:
+    - filename
+    - size
+  TestCaseEntity:
+    type: object
+    properties:
+      status:
+        type: string
+        example: success
+      name:
+        type: string
+        example: Security Reports can create an auto-remediation MR
+      classname:
+        type: string
+        example: vulnerability_management_spec
+      file:
+        type: string
+        example: ./spec/test_spec.rb
+      execution_time:
+        type: integer
+        format: int32
+        example: 180
+      system_output:
+        type: string
+        example: 'Failure/Error: is_expected.to eq(3)'
+      stack_trace:
+        type: string
+        example: 'Failure/Error: is_expected.to eq(3)'
+      recent_failures:
+        type: object
+        example:
+          count: 3
+          base_branch: develop
+      attachment_url:
+        type: string
+        example: http://localhost/namespace1/project1/-/jobs/1/artifacts/file/some/path.png
+    required:
+    - status
+    - name
+    - classname
+    - file
+    - execution_time
+    - system_output
+    - stack_trace
+    - recent_failures
+  TestSuiteEntity:
+    type: object
+    properties:
+      name:
+        type: string
+        example: test
+      total_time:
+        type: integer
+        format: int32
+        example: 1904
+      total_count:
+        type: integer
+        format: int32
+        example: 3363
+      success_count:
+        type: integer
+        format: int32
+        example: 3351
+      failed_count:
+        type: integer
+        format: int32
+        example: 0
+      skipped_count:
+        type: integer
+        format: int32
+        example: 12
+      error_count:
+        type: integer
+        format: int32
+        example: 0
+      suite_error:
+        type: string
+        example: 'JUnit XML parsing failed: 1:1: FATAL: Document is empty'
+      test_cases:
+        type: array
+        items:
+          $ref: '#/definitions/TestCaseEntity'
+    required:
+    - name
+    - total_time
+    - total_count
+    - success_count
+    - failed_count
+    - skipped_count
+    - error_count
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

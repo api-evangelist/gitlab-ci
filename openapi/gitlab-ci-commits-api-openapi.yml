@@ -1,0 +1,1333 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests commits API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: commits
+  description: Operations about commits
+paths:
+  /api/v4/projects/{id}/repository/commits:
+    get:
+      description: Get a project repository commits
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: ref_name
+        description: The name of a repository branch or tag, if not given the default branch is used
+        type: string
+        required: false
+        example: v1.1.0
+      - in: query
+        name: since
+        description: Only commits after or on this date will be returned
+        type: string
+        format: date-time
+        required: false
+        example: '2021-09-20T11:50:22.001'
+      - in: query
+        name: until
+        description: Only commits before or on this date will be returned
+        type: string
+        format: date-time
+        required: false
+        example: '2021-09-20T11:50:22.001'
+      - in: query
+        name: path
+        description: The file path
+        type: string
+        required: false
+        example: README.md
+      - in: query
+        name: follow
+        description: Follow file renames when filtering by path
+        type: boolean
+        required: false
+      - in: query
+        name: author
+        description: Search commits by commit author
+        type: string
+        required: false
+        example: John Smith
+      - in: query
+        name: all
+        description: Every commit will be returned
+        type: boolean
+        required: false
+      - in: query
+        name: with_stats
+        description: Stats about each commit will be added to the response
+        type: boolean
+        required: false
+      - in: query
+        name: first_parent
+        description: Only include the first parent of merges
+        type: boolean
+        required: false
+      - in: query
+        name: order
+        description: List commits in order
+        type: string
+        default: default
+        enum:
+        - default
+        - topo
+        required: false
+      - in: query
+        name: trailers
+        description: Parse and include Git trailers for every commit
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get a project repository commits
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Commit'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommits
+    post:
+      summary: Create a new commit
+      description: This feature was introduced in GitLab 8.13
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdRepositoryCommits
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryCommits'
+      responses:
+        '200':
+          description: Create a new commit
+          schema:
+            $ref: '#/definitions/API_Entities_CommitDetail'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: postApiV4ProjectsIdRepositoryCommits
+  /api/v4/projects/{id}/repository/commits/{sha}:
+    get:
+      description: Get a specific commit of a project
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag
+        type: string
+        required: true
+      - in: query
+        name: stats
+        description: Include commit stats
+        type: boolean
+        default: true
+        required: false
+      responses:
+        '200':
+          description: Get a specific commit of a project
+          schema:
+            $ref: '#/definitions/API_Entities_CommitDetail'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsSha
+  /api/v4/projects/{id}/repository/commits/{sha}/diff:
+    get:
+      description: Get the diff for a specific commit of a project
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: unidiff
+        description: A diff in a Unified diff format
+        type: boolean
+        default: false
+        required: false
+      responses:
+        '200':
+          description: Get the diff for a specific commit of a project
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Diff'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsShaDiff
+  /api/v4/projects/{id}/repository/commits/{sha}/comments:
+    get:
+      description: Get a commit's comments
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a commit's comments
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_CommitNote'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsShaComments
+    post:
+      description: Post comment to commit
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag on which to post a comment
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdRepositoryCommitsShaComments
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryCommitsShaComments'
+      responses:
+        '200':
+          description: Post comment to commit
+          schema:
+            $ref: '#/definitions/API_Entities_CommitNote'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: postApiV4ProjectsIdRepositoryCommitsShaComments
+  /api/v4/projects/{id}/repository/commits/{sha}/sequence:
+    get:
+      description: Get the sequence count of a commit SHA
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit SHA
+        type: string
+        required: true
+      - in: query
+        name: first_parent
+        description: Only include the first parent of merges
+        type: boolean
+        default: false
+        required: false
+      responses:
+        '200':
+          description: Get the sequence count of a commit SHA
+          schema:
+            $ref: '#/definitions/API_Entities_CommitSequence'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsShaSequence
+  /api/v4/projects/{id}/repository/commits/{sha}/cherry_pick:
+    post:
+      summary: Cherry pick commit into a branch
+      description: This feature was introduced in GitLab 8.15
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag to be cherry-picked
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdRepositoryCommitsShaCherryPick
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryCommitsShaCherryPick'
+      responses:
+        '200':
+          description: Cherry pick commit into a branch
+          schema:
+            $ref: '#/definitions/API_Entities_Commit'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: postApiV4ProjectsIdRepositoryCommitsShaCherryPick
+  /api/v4/projects/{id}/repository/commits/{sha}/revert:
+    post:
+      summary: Revert a commit in a branch
+      description: This feature was introduced in GitLab 11.5
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: Commit SHA to revert
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdRepositoryCommitsShaRevert
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryCommitsShaRevert'
+      responses:
+        '200':
+          description: Revert a commit in a branch
+          schema:
+            $ref: '#/definitions/API_Entities_Commit'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: postApiV4ProjectsIdRepositoryCommitsShaRevert
+  /api/v4/projects/{id}/repository/commits/{sha}/refs:
+    get:
+      summary: Get all references a commit is pushed to
+      description: This feature was introduced in GitLab 10.6
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha
+        type: string
+        required: true
+      - in: query
+        name: type
+        description: Scope
+        type: string
+        default: all
+        enum:
+        - branch
+        - tag
+        - all
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get all references a commit is pushed to
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_BasicRef'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsShaRefs
+  /api/v4/projects/{id}/repository/commits/{sha}/merge_requests:
+    get:
+      description: Get Merge Requests associated with a commit
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag on which to find Merge Requests
+        type: string
+        required: true
+      - in: query
+        name: state
+        description: Filter merge-requests by state
+        type: string
+        required: false
+        example: merged
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get Merge Requests associated with a commit
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_MergeRequestBasic'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsShaMergeRequests
+  /api/v4/projects/{id}/repository/commits/{sha}/signature:
+    get:
+      description: Get a commit's signature
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: sha
+        description: A commit sha, or the name of a branch or tag
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a commit's signature
+          schema:
+            $ref: '#/definitions/API_Entities_CommitSignature'
+        '404':
+          description: Not found
+      tags:
+      - commits
+      operationId: getApiV4ProjectsIdRepositoryCommitsShaSignature
+definitions:
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_CommitSignature:
+    type: object
+    properties:
+      signature_type:
+        type: string
+        example: PGP
+      signature:
+        type: object
+      commit_source:
+        type: string
+        example: gitaly
+    required:
+    - signature_type
+    - signature
+    - commit_source
+    description: API_Entities_CommitSignature model
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  API_Entities_IssuableTimeStats:
+    type: object
+    properties:
+      time_estimate:
+        type: integer
+        format: int32
+        example: 12600
+      total_time_spent:
+        type: integer
+        format: int32
+        example: 3600
+      human_time_estimate:
+        type: string
+        example: 3h 30m
+      human_total_time_spent:
+        type: string
+        example: 1h
+    required:
+    - time_estimate
+    - total_time_spent
+    - human_time_estimate
+    - human_total_time_spent
+    description: API_Entities_IssuableTimeStats model
+  API_Entities_Milestone:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      iid:
+        type: integer
+        format: int32
+      project_id:
+        type: integer
+        format: int32
+      group_id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      state:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      due_date:
+        type: string
+      start_date:
+        type: string
+      expired:
+        type: boolean
+      web_url:
+        type: string
+    required:
+    - id
+    - iid
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - due_date
+    - start_date
+    - expired
+    - web_url
+  API_Entities_Ci_PipelineBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 2
+      project_id:
+        type: integer
+        format: int32
+        example: 3
+      sha:
+        type: string
+        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+      ref:
+        type: string
+        example: feature-branch
+      status:
+        type: string
+        example: success
+      source:
+        type: string
+        example: push
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-10-21T16:49:48.000+02:00'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-10-21T16:49:48.000+02:00'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+    required:
+    - id
+    - iid
+    - project_id
+    - sha
+    - ref
+    - status
+    - source
+    - created_at
+    - updated_at
+    - web_url
+    description: API_Entities_Ci_PipelineBasic model
+  API_Entities_Commit:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      short_id:
+        type: string
+        example: 2695effb
+      created_at:
+        type: string
+        format: date-time
+        example: '2017-07-26T11:08:53.000+02:00'
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      title:
+        type: string
+        example: Initial commit
+      message:
+        type: string
+        example: Initial commit
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      trailers:
+        type: object
+        example:
+          Merged-By: Jane Doe janedoe@gitlab.com
+      extended_trailers:
+        type: object
+        example:
+          Signed-off-by:
+          - John Doe <johndoe@gitlab.com>
+          - Jane Doe <janedoe@gitlab.com>
+      web_url:
+        type: string
+        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+    required:
+    - id
+    - short_id
+    - created_at
+    - parent_ids
+    - title
+    - message
+    - author_name
+    - author_email
+    - authored_date
+    - committer_name
+    - committer_email
+    - committed_date
+    - trailers
+    - extended_trailers
+    - web_url
+    description: API_Entities_Commit model
+  postApiV4ProjectsIdRepositoryCommitsShaComments:
+    type: object
+    properties:
+      note:
+        type: string
+        description: The text of the comment
+        example: Nice code!
+      path:
+        type: string
+        description: The file path
+        example: doc/update/5.4-to-6.0.md
+      line:
+        type: integer
+        format: int32
+        description: The line number
+        example: 11
+      line_type:
+        type: string
+        description: The type of the line
+        enum:
+        - new
+        - old
+        default: new
+    required:
+    - note
+    - line
+    - line_type
+    description: Post comment to commit
+  API_Entities_CommitDetail:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      short_id:
+        type: string
+        example: 2695effb
+      created_at:
+        type: string
+        format: date-time
+        example: '2017-07-26T11:08:53.000+02:00'
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      title:
+        type: string
+        example: Initial commit
+      message:
+        type: string
+        example: Initial commit
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      trailers:
+        type: object
+        example:
+          Merged-By: Jane Doe janedoe@gitlab.com
+      extended_trailers:
+        type: object
+        example:
+          Signed-off-by:
+          - John Doe <johndoe@gitlab.com>
+          - Jane Doe <janedoe@gitlab.com>
+      web_url:
+        type: string
+        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+      stats:
+        $ref: '#/definitions/API_Entities_CommitStats'
+      status:
+        type: string
+        example: success
+      project_id:
+        type: integer
+        format: int32
+        example: 1
+      last_pipeline:
+        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
+    required:
+    - id
+    - short_id
+    - created_at
+    - parent_ids
+    - title
+    - message
+    - author_name
+    - author_email
+    - authored_date
+    - committer_name
+    - committer_email
+    - committed_date
+    - trailers
+    - extended_trailers
+    - web_url
+    - status
+    - project_id
+    - last_pipeline
+    description: API_Entities_CommitDetail model
+  postApiV4ProjectsIdRepositoryCommitsShaCherryPick:
+    type: object
+    properties:
+      branch:
+        type: string
+        description: The name of the branch
+        example: master
+      dry_run:
+        type: boolean
+        description: Does not commit any changes
+        default: false
+      message:
+        type: string
+        description: A custom commit message to use for the picked commit
+        example: Initial commit
+    required:
+    - branch
+    description: Cherry pick commit into a branch
+  API_Entities_CommitStats:
+    type: object
+    properties:
+      additions:
+        type: integer
+        format: int32
+        example: 1
+      deletions:
+        type: integer
+        format: int32
+        example: 0
+      total:
+        type: integer
+        format: int32
+        example: 1
+    required:
+    - additions
+    - deletions
+    - total
+  API_Entities_MergeRequestBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 84
+      iid:
+        type: integer
+        format: int32
+        example: 14
+      project_id:
+        type: integer
+        format: int32
+        example: 4
+      title:
+        type: string
+        example: Impedit et ut et dolores vero provident ullam est
+      description:
+        type: string
+        example: Repellendus impedit et vel velit dignissimos.
+      state:
+        type: string
+        example: closed
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-08-17T12:46:35.053Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-11-14T17:22:01.470Z'
+      merged_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      merge_user:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      merged_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      closed_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      closed_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      title_html:
+        type: string
+      description_html:
+        type: string
+      target_branch:
+        type: string
+      source_branch:
+        type: string
+      user_notes_count:
+        type: integer
+        format: int32
+      upvotes:
+        type: integer
+        format: int32
+      downvotes:
+        type: integer
+        format: int32
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      assignees:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      assignee:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      reviewers:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      source_project_id:
+        type: integer
+        format: int32
+      target_project_id:
+        type: integer
+        format: int32
+      labels:
+        type: array
+        items:
+          type: string
+      draft:
+        type: boolean
+      imported:
+        type: boolean
+      imported_from:
+        type: string
+        example: bitbucket
+      work_in_progress:
+        type: boolean
+      milestone:
+        $ref: '#/definitions/API_Entities_Milestone'
+      merge_when_pipeline_succeeds:
+        type: boolean
+      merge_status:
+        type: string
+        example: unchecked
+      detailed_merge_status:
+        type: string
+        example: mergeable
+      merge_after:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      sha:
+        type: string
+        example: 1234abcd
+      merge_commit_sha:
+        type: string
+        example: 1234abcd
+      squash_commit_sha:
+        type: string
+        example: 1234abcd
+      discussion_locked:
+        type: boolean
+      should_remove_source_branch:
+        type: boolean
+      force_remove_source_branch:
+        type: boolean
+      prepared_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      allow_collaboration:
+        type: boolean
+      allow_maintainer_to_push:
+        type: boolean
+      reference:
+        type: string
+        example: '!1'
+      references:
+        $ref: '#/definitions/API_Entities_IssuableReferences'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
+      time_stats:
+        $ref: '#/definitions/API_Entities_IssuableTimeStats'
+      squash:
+        type: boolean
+      squash_on_merge:
+        type: boolean
+      task_completion_status:
+        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
+      has_conflicts:
+        type: boolean
+      blocking_discussions_resolved:
+        type: boolean
+      approvals_before_merge:
+        type: integer
+        format: int32
+        example: 2
+    required:
+    - id
+    - iid
+    - project_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - merged_by
+    - merge_user
+    - merged_at
+    - closed_by
+    - closed_at
+    - target_branch
+    - source_branch
+    - user_notes_count
+    - upvotes
+    - downvotes
+    - author
+    - assignees
+    - assignee
+    - reviewers
+    - source_project_id
+    - target_project_id
+    - labels
+    - draft
+    - imported
+    - imported_from
+    - work_in_progress
+    - milestone
+    - merge_when_pipeline_succeeds
+    - merge_status
+    - detailed_merge_status
+    - merge_after
+    - sha
+    - merge_commit_sha
+    - squash_commit_sha
+    - discussion_locked
+    - should_remove_source_branch
+    - force_remove_source_branch
+    - prepared_at
+    - reference
+    - references
+    - web_url
+    - time_stats
+    - squash
+    - squash_on_merge
+    - task_completion_status
+    - has_conflicts
+    - blocking_discussions_resolved
+    - approvals_before_merge
+    description: API_Entities_MergeRequestBasic model
+  API_Entities_CommitNote:
+    type: object
+    properties:
+      note:
+        type: string
+        example: this doc is really nice
+      path:
+        type: string
+        example: README.md
+      line:
+        type: integer
+        format: int32
+        example: 11
+      line_type:
+        type: string
+        example: new
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      created_at:
+        type: string
+        format: date-time
+        example: '2016-01-19T09:44:55.600Z'
+    required:
+    - note
+    - path
+    - line
+    - line_type
+    - author
+    - created_at
+    description: API_Entities_CommitNote model
+  postApiV4ProjectsIdRepositoryCommitsShaRevert:
+    type: object
+    properties:
+      branch:
+        type: string
+        description: Target branch name
+        example: master
+      dry_run:
+        type: boolean
+        description: Does not commit any changes
+        default: false
+    required:
+    - branch
+    description: Revert a commit in a branch
+  API_Entities_BasicRef:
+    type: object
+    properties:
+      type:
+        type: string
+        example: tag
+      name:
+        type: string
+        example: v1.1.0
+    required:
+    - type
+    - name
+    description: API_Entities_BasicRef model
+  API_Entities_CommitSequence:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+    required:
+    - count
+    description: API_Entities_CommitSequence model
+  API_Entities_Diff:
+    type: object
+    properties:
+      diff:
+        type: string
+        example: '@@ -71,6 +71,8 @@\n...'
+      collapsed:
+        type: boolean
+      too_large:
+        type: boolean
+      new_path:
+        type: string
+        example: doc/update/5.4-to-6.0.md
+      old_path:
+        type: string
+        example: doc/update/5.4-to-6.0.md
+      a_mode:
+        type: string
+        example: '100755'
+      b_mode:
+        type: string
+        example: '100644'
+      new_file:
+        type: boolean
+      renamed_file:
+        type: boolean
+      deleted_file:
+        type: boolean
+      generated_file:
+        type: boolean
+    required:
+    - diff
+    - collapsed
+    - too_large
+    - new_path
+    - old_path
+    - a_mode
+    - b_mode
+    - new_file
+    - renamed_file
+    - deleted_file
+    - generated_file
+    description: API_Entities_Diff model
+  API_Entities_IssuableReferences:
+    type: object
+    properties:
+      short:
+        type: string
+        example: '&6'
+      relative:
+        type: string
+        example: '&6'
+      full:
+        type: string
+        example: test&6
+    required:
+    - short
+    - relative
+    - full
+  postApiV4ProjectsIdRepositoryCommits:
+    type: object
+    properties:
+      file:
+        type: file
+        description: The commit content to be created (generated by Multipart middleware)
+    required:
+    - file
+    description: Create a new commit
+  API_Entities_TaskCompletionStatus:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 5
+      completed_count:
+        type: integer
+        format: int32
+        example: 3
+    required:
+    - count
+    - completed_count
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

@@ -1,0 +1,249 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests alert_management API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: alert_management
+  description: Operations about alert_managements
+paths:
+  /api/v4/projects/{id}/alert_management_alerts/{alert_iid}/metric_images/authorize:
+    post:
+      description: Workhorse authorize metric image file upload
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 17
+      - in: path
+        name: alert_iid
+        description: The IID of the Alert
+        type: integer
+        format: int32
+        required: true
+        example: 23
+      responses:
+        '200':
+          description: Workhorse authorize metric image file upload
+        '403':
+          description: Forbidden
+      tags:
+      - alert_management
+      operationId: postApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImagesAuthorize
+  /api/v4/projects/{id}/alert_management_alerts/{alert_iid}/metric_images:
+    post:
+      description: Upload a metric image for an alert
+      produces:
+      - application/json
+      consumes:
+      - multipart/form-data
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 17
+      - in: path
+        name: alert_iid
+        description: The IID of the Alert
+        type: integer
+        format: int32
+        required: true
+        example: 23
+      - in: formData
+        name: file
+        description: The image file to be uploaded
+        type: file
+        required: true
+      - in: formData
+        name: url
+        description: The url to view more metric info
+        type: string
+        required: false
+        example: https://example.com/metric
+      - in: formData
+        name: url_text
+        description: A description of the image or URL
+        type: string
+        required: false
+        example: An example metric
+      responses:
+        '200':
+          description: Upload a metric image for an alert
+          schema:
+            $ref: '#/definitions/API_Entities_MetricImage'
+        '403':
+          description: Forbidden
+      tags:
+      - alert_management
+      operationId: postApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImages
+    get:
+      description: Metric Images for alert
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 17
+      - in: path
+        name: alert_iid
+        description: The IID of the Alert
+        type: integer
+        format: int32
+        required: true
+        example: 23
+      responses:
+        '200':
+          description: Metric Images for alert
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_MetricImage'
+        '404':
+          description: Not found
+      tags:
+      - alert_management
+      operationId: getApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImages
+  /api/v4/projects/{id}/alert_management_alerts/{alert_iid}/metric_images/{metric_image_id}:
+    put:
+      description: Update a metric image for an alert
+      produces:
+      - application/json
+      consumes:
+      - multipart/form-data
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 17
+      - in: path
+        name: alert_iid
+        description: The IID of the Alert
+        type: integer
+        format: int32
+        required: true
+        example: 23
+      - in: path
+        name: metric_image_id
+        description: The ID of metric image
+        type: integer
+        format: int32
+        required: true
+        example: 42
+      - in: formData
+        name: url
+        description: The url to view more metric info
+        type: string
+        required: false
+        example: https://example.com/metric
+      - in: formData
+        name: url_text
+        description: A description of the image or URL
+        type: string
+        required: false
+        example: An example metric
+      responses:
+        '200':
+          description: Update a metric image for an alert
+          schema:
+            $ref: '#/definitions/API_Entities_MetricImage'
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable entity
+      tags:
+      - alert_management
+      operationId: putApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImagesMetricImageId
+    delete:
+      description: Remove a metric image for an alert
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+        example: 17
+      - in: path
+        name: alert_iid
+        description: The IID of the Alert
+        type: integer
+        format: int32
+        required: true
+        example: 23
+      - in: path
+        name: metric_image_id
+        description: The ID of metric image
+        type: integer
+        format: int32
+        required: true
+        example: 42
+      responses:
+        '204':
+          description: Remove a metric image for an alert
+          schema:
+            $ref: '#/definitions/API_Entities_MetricImage'
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable entity
+      tags:
+      - alert_management
+      operationId: deleteApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImagesMetricImageId
+definitions:
+  API_Entities_MetricImage:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 23
+      created_at:
+        type: string
+        format: date-time
+        example: '2020-11-13T00:06:18.084Z'
+      filename:
+        type: string
+        example: file.png
+      file_path:
+        type: string
+        example: /uploads/-/system/alert_metric_image/file/23/file.png
+      url:
+        type: string
+        example: https://example.com/metric
+      url_text:
+        type: string
+        example: An example metric
+    required:
+    - id
+    - created_at
+    - filename
+    - file_path
+    - url
+    - url_text
+    description: API_Entities_MetricImage model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

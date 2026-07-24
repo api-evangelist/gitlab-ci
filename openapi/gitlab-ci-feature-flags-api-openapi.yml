@@ -1,0 +1,631 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests feature_flags API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: feature_flags
+  description: Operations related to feature flags
+paths:
+  /api/v4/projects/{id}/feature_flags:
+    get:
+      summary: List feature flags for a project
+      description: Gets all feature flags of the requested project. This feature was introduced in GitLab 12.5.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: scope
+        description: 'The scope of feature flags, one of: `enabled`, `disabled`'
+        type: string
+        enum:
+        - enabled
+        - disabled
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List feature flags for a project
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_FeatureFlag'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: getApiV4ProjectsIdFeatureFlags
+    post:
+      summary: Create a new feature flag
+      description: Creates a new feature flag. This feature was introduced in GitLab 12.5.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdFeatureFlags
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdFeatureFlags'
+      responses:
+        '201':
+          description: Create a new feature flag
+          schema:
+            $ref: '#/definitions/API_Entities_FeatureFlag'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - feature_flags
+      operationId: postApiV4ProjectsIdFeatureFlags
+  /api/v4/projects/{id}/feature_flags/{feature_flag_name}:
+    get:
+      summary: Get a single feature flag
+      description: Gets a single feature flag. This feature was introduced in GitLab 12.5.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: feature_flag_name
+        description: The name of the feature flag
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a single feature flag
+          schema:
+            $ref: '#/definitions/API_Entities_FeatureFlag'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: getApiV4ProjectsIdFeatureFlagsFeatureFlagName
+    put:
+      summary: Update a feature flag
+      description: Updates a feature flag. This feature was introduced in GitLab 13.2.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: feature_flag_name
+        description: The name of the feature flag
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdFeatureFlagsFeatureFlagName
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdFeatureFlagsFeatureFlagName'
+      responses:
+        '200':
+          description: Update a feature flag
+          schema:
+            $ref: '#/definitions/API_Entities_FeatureFlag'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - feature_flags
+      operationId: putApiV4ProjectsIdFeatureFlagsFeatureFlagName
+    delete:
+      summary: Delete a feature flag
+      description: Deletes a feature flag. This feature was introduced in GitLab 12.5.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: feature_flag_name
+        description: The name of the feature flag
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: deleteApiV4ProjectsIdFeatureFlagsFeatureFlagName
+  /api/v4/projects/{id}/feature_flags_user_lists:
+    get:
+      summary: List all feature flag user lists for a project
+      description: Gets all feature flag user lists for the requested project. This feature was introduced in GitLab 12.10.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: search
+        description: Return user lists matching the search criteria
+        type: string
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List all feature flag user lists for a project
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_FeatureFlag_UserList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: getApiV4ProjectsIdFeatureFlagsUserLists
+    post:
+      summary: Create a feature flag user list
+      description: Creates a feature flag user list. This feature was introduced in GitLab 12.10.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdFeatureFlagsUserLists
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdFeatureFlagsUserLists'
+      responses:
+        '201':
+          description: Create a feature flag user list
+          schema:
+            $ref: '#/definitions/API_Entities_FeatureFlag_UserList'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: postApiV4ProjectsIdFeatureFlagsUserLists
+  /api/v4/projects/{id}/feature_flags_user_lists/{iid}:
+    get:
+      summary: Get a feature flag user list
+      description: Gets a feature flag user list. This feature was introduced in GitLab 12.10.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: iid
+        description: The internal ID of the project's feature flag user list
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a feature flag user list
+          schema:
+            $ref: '#/definitions/API_Entities_FeatureFlag_UserList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: getApiV4ProjectsIdFeatureFlagsUserListsIid
+    put:
+      summary: Update a feature flag user list
+      description: Updates a feature flag user list. This feature was introduced in GitLab 12.10.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: iid
+        description: The internal ID of the project's feature flag user list
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdFeatureFlagsUserListsIid
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdFeatureFlagsUserListsIid'
+      responses:
+        '200':
+          description: Update a feature flag user list
+          schema:
+            $ref: '#/definitions/API_Entities_FeatureFlag_UserList'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - feature_flags
+      operationId: putApiV4ProjectsIdFeatureFlagsUserListsIid
+    delete:
+      summary: Delete feature flag user list
+      description: Deletes a feature flag user list. This feature was introduced in GitLab 12.10.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: iid
+        description: The internal ID of the project's feature flag user list
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Delete feature flag user list
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+      tags:
+      - feature_flags
+      operationId: deleteApiV4ProjectsIdFeatureFlagsUserListsIid
+definitions:
+  postApiV4ProjectsIdFeatureFlags:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the feature flag
+      description:
+        type: string
+        description: The description of the feature flag
+      active:
+        type: boolean
+        description: The active state of the flag. Defaults to `true`. Supported in GitLab 13.3 and later
+      version:
+        type: string
+        description: The version of the feature flag. Must be `new_version_flag`. Omit to create a Legacy feature flag.
+      strategies:
+        type: array
+        description: Array of feature flag strategies
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The strategy name. Can be `default`, `gradualRolloutUserId`, `userWithId`, or `gitlabUserList`. In GitLab 13.5 and later, can be `flexibleRollout`
+            parameters:
+              type: string
+              description: The strategy parameters as a JSON-formatted string e.g. `{"userIds":"user1"}`
+            user_list_id:
+              type: integer
+              format: int32
+              description: The ID of the feature flag user list. If strategy is `gitlabUserList`.
+            scopes:
+              type: array
+              description: Array of scopes for the strategy
+              items:
+                type: object
+                properties:
+                  environment_scope:
+                    type: string
+                    description: The environment scope of the scope
+                required:
+                - environment_scope
+          required:
+          - name
+    required:
+    - name
+    description: Create a new feature flag
+  API_Entities_FeatureFlag_UserList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: user_list
+      user_xids:
+        type: string
+        example: user1,user2
+      project_id:
+        type: integer
+        format: int32
+        example: 2
+      created_at:
+        type: string
+        format: date-time
+        example: '2020-02-04T08:13:10.507Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2020-02-04T08:13:10.507Z'
+      path:
+        type: string
+      edit_path:
+        type: string
+    required:
+    - id
+    - iid
+    - name
+    - user_xids
+    - project_id
+    - created_at
+    - updated_at
+    - path
+    - edit_path
+    description: API_Entities_FeatureFlag_UserList model
+  API_Entities_FeatureFlag:
+    type: object
+    properties:
+      name:
+        type: string
+        example: merge_train
+      description:
+        type: string
+        example: merge train feature flag
+      active:
+        type: boolean
+      version:
+        type: string
+        example: new_version_flag
+      created_at:
+        type: string
+        format: date-time
+        example: '2019-11-04T08:13:51.423Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2019-11-04T08:13:51.423Z'
+      scopes:
+        type: string
+      strategies:
+        $ref: '#/definitions/API_Entities_FeatureFlag_Strategy'
+    required:
+    - name
+    - description
+    - active
+    - version
+    - created_at
+    - updated_at
+    - scopes
+    - strategies
+    description: API_Entities_FeatureFlag model
+  putApiV4ProjectsIdFeatureFlagsFeatureFlagName:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The new name of the feature flag. Supported in GitLab 13.3 and later
+      description:
+        type: string
+        description: The description of the feature flag
+      active:
+        type: boolean
+        description: The active state of the flag. Supported in GitLab 13.3 and later
+      strategies:
+        type: array
+        description: Array of feature flag strategies
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int32
+              description: The feature flag strategy ID
+            name:
+              type: string
+              description: The strategy name
+            parameters:
+              type: string
+              description: The strategy parameters as a JSON-formatted string e.g. `{"userIds":"user1"}`
+            user_list_id:
+              type: integer
+              format: int32
+              description: The ID of the feature flag user list
+            _destroy:
+              type: boolean
+              description: Delete the strategy when true
+            scopes:
+              type: array
+              description: Array of scopes for the strategy
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    description: The scope id
+                  environment_scope:
+                    type: string
+                    description: The environment scope of the scope
+                  _destroy:
+                    type: boolean
+                    description: Delete the scope when true
+    description: Update a feature flag
+  API_Entities_FeatureFlag_Strategy:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: userWithId
+      parameters:
+        type: string
+        example: '{"userIds": "user1"}'
+      scopes:
+        $ref: '#/definitions/API_Entities_FeatureFlag_Scope'
+      user_list:
+        $ref: '#/definitions/API_Entities_FeatureFlag_BasicUserList'
+    required:
+    - id
+    - name
+    - parameters
+    - scopes
+    - user_list
+  API_Entities_FeatureFlag_Scope:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      environment_scope:
+        type: string
+        example: production
+    required:
+    - id
+    - environment_scope
+  putApiV4ProjectsIdFeatureFlagsUserListsIid:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the list
+      user_xids:
+        type: string
+        description: A comma separated list of external user ids
+    description: Update a feature flag user list
+  API_Entities_FeatureFlag_BasicUserList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: user_list
+      user_xids:
+        type: string
+        example: user1,user2
+    required:
+    - id
+    - iid
+    - name
+    - user_xids
+  postApiV4ProjectsIdFeatureFlagsUserLists:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the list
+      user_xids:
+        type: string
+        description: A comma separated list of external user ids
+    required:
+    - name
+    - user_xids
+    description: Create a feature flag user list
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

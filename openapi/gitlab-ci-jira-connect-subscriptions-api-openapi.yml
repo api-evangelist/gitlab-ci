@@ -1,0 +1,74 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests jira_connect_subscriptions API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: jira_connect_subscriptions
+  description: Operations related to JiraConnect subscriptions
+paths:
+  /api/v4/integrations/jira_connect/subscriptions:
+    post:
+      summary: Subscribe a namespace to a JiraConnectInstallation
+      description: Subscribes the namespace to the JiraConnectInstallation
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: postApiV4IntegrationsJiraConnectSubscriptions
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4IntegrationsJiraConnectSubscriptions'
+      responses:
+        '201':
+          description: Subscribe a namespace to a JiraConnectInstallation
+          schema:
+            $ref: '#/definitions/API_Entities_BasicSuccess'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      tags:
+      - jira_connect_subscriptions
+      operationId: postApiV4IntegrationsJiraConnectSubscriptions
+definitions:
+  postApiV4IntegrationsJiraConnectSubscriptions:
+    type: object
+    properties:
+      jwt:
+        type: string
+        description: JWT token for authorization with the Jira Connect installation
+      namespace_path:
+        type: string
+        description: Path for the namespace that should be subscribed
+    required:
+    - jwt
+    - namespace_path
+    description: Subscribe a namespace to a JiraConnectInstallation
+  API_Entities_BasicSuccess:
+    type: object
+    properties:
+      success:
+        type: object
+        properties: {}
+    required:
+    - success
+    description: API_Entities_BasicSuccess model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

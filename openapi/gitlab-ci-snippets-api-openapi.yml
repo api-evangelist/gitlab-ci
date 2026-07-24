@@ -1,0 +1,1082 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests snippets API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: snippets
+  description: Operations about snippets
+paths:
+  /api/v4/projects/{id}/snippets:
+    get:
+      description: Get all project snippets
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get all project snippets
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_ProjectSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4ProjectsIdSnippets
+    post:
+      description: Create a new project snippet
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdSnippets
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdSnippets'
+      responses:
+        '201':
+          description: Create a new project snippet
+          schema:
+            $ref: '#/definitions/API_Entities_ProjectSnippet'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - snippets
+      operationId: postApiV4ProjectsIdSnippets
+  /api/v4/projects/{id}/snippets/{snippet_id}:
+    get:
+      description: Get a single project snippet
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: snippet_id
+        description: The ID of a project snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a single project snippet
+          schema:
+            $ref: '#/definitions/API_Entities_ProjectSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4ProjectsIdSnippetsSnippetId
+    put:
+      description: Update an existing project snippet
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: snippet_id
+        description: The ID of a project snippet
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4ProjectsIdSnippetsSnippetId
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdSnippetsSnippetId'
+      responses:
+        '200':
+          description: Update an existing project snippet
+          schema:
+            $ref: '#/definitions/API_Entities_ProjectSnippet'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - snippets
+      operationId: putApiV4ProjectsIdSnippetsSnippetId
+    delete:
+      description: Delete a project snippet
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: snippet_id
+        description: The ID of a project snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Delete a project snippet
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: deleteApiV4ProjectsIdSnippetsSnippetId
+  /api/v4/projects/{id}/snippets/{snippet_id}/raw:
+    get:
+      description: Get a raw project snippet
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: snippet_id
+        description: The ID of a project snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a raw project snippet
+          schema:
+            $ref: '#/definitions/API_Entities_ProjectSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4ProjectsIdSnippetsSnippetIdRaw
+  /api/v4/projects/{id}/snippets/{snippet_id}/files/{ref}/{file_path}/raw:
+    get:
+      description: Get raw project snippet file contents from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file, like lib%2Fclass%2Erb
+        type: string
+        required: true
+      - in: path
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: true
+      - in: path
+        name: snippet_id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get raw project snippet file contents from the repository
+          schema:
+            $ref: '#/definitions/API_Entities_ProjectSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4ProjectsIdSnippetsSnippetIdFilesRefFilePathRaw
+  /api/v4/projects/{id}/snippets/{snippet_id}/user_agent_detail:
+    get:
+      description: Get the user agent details for a project snippet
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: snippet_id
+        description: The ID of a project snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get the user agent details for a project snippet
+          schema:
+            $ref: '#/definitions/API_Entities_UserAgentDetail'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4ProjectsIdSnippetsSnippetIdUserAgentDetail
+  /api/v4/snippets:
+    get:
+      summary: Get a snippets list for an authenticated user
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: created_after
+        description: Return snippets created after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: created_before
+        description: Return snippets created before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get a snippets list for an authenticated user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Snippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4Snippets
+    post:
+      summary: Create new snippet
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: postApiV4Snippets
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4Snippets'
+      responses:
+        '201':
+          description: Create new snippet
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalSnippet'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - snippets
+      operationId: postApiV4Snippets
+  /api/v4/snippets/public:
+    get:
+      summary: List all public personal snippets current_user has access to
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: created_after
+        description: Return snippets created after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: created_before
+        description: Return snippets created before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List all public personal snippets current_user has access to
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_PersonalSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4SnippetsPublic
+  /api/v4/snippets/all:
+    get:
+      summary: List all snippets current_user has access to
+      description: This feature was introduced in GitLab 16.3.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: created_after
+        description: Return snippets created after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: created_before
+        description: Return snippets created before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: repository_storage
+        description: Filter by repository storage used by the snippet
+        type: string
+        required: false
+      responses:
+        '200':
+          description: List all snippets current_user has access to
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Snippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4SnippetsAll
+  /api/v4/snippets/{id}:
+    get:
+      summary: Get a single snippet
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a single snippet
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4SnippetsId
+    put:
+      summary: Update an existing snippet
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a snippet
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4SnippetsId
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4SnippetsId'
+      responses:
+        '200':
+          description: Update an existing snippet
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalSnippet'
+        '400':
+          description: Validation error
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+      tags:
+      - snippets
+      operationId: putApiV4SnippetsId
+    delete:
+      summary: Remove snippet
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '400':
+          description: Validation error
+        '204':
+          description: Remove snippet
+          schema:
+            $ref: '#/definitions/API_Entities_PersonalSnippet'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: deleteApiV4SnippetsId
+  /api/v4/snippets/{id}/raw:
+    get:
+      summary: Get a raw snippet
+      description: This feature was introduced in GitLab 8.15.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a raw snippet
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4SnippetsIdRaw
+  /api/v4/snippets/{id}/files/{ref}/{file_path}/raw:
+    get:
+      description: Get raw snippet file contents from the repository
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: file_path
+        description: The URL-encoded path to the file, like lib%2Fclass%2Erb
+        type: string
+        required: true
+      - in: path
+        name: ref
+        description: The name of branch, tag or commit
+        type: string
+        required: true
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get raw snippet file contents from the repository
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4SnippetsIdFilesRefFilePathRaw
+  /api/v4/snippets/{id}/user_agent_detail:
+    get:
+      description: Get the user agent details for a snippet
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a snippet
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get the user agent details for a snippet
+          schema:
+            $ref: '#/definitions/API_Entities_UserAgentDetail'
+        '404':
+          description: Not found
+      tags:
+      - snippets
+      operationId: getApiV4SnippetsIdUserAgentDetail
+definitions:
+  API_Entities_UserAgentDetail:
+    type: object
+    properties:
+      user_agent:
+        type: string
+        example: AppleWebKit/537.36
+      ip_address:
+        type: string
+        example: 127.0.0.1
+      akismet_submitted:
+        type: boolean
+        example: false
+    required:
+    - user_agent
+    - ip_address
+    - akismet_submitted
+    description: API_Entities_UserAgentDetail model
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  putApiV4SnippetsId:
+    type: object
+    properties:
+      content:
+        type: string
+        description: The content of a snippet
+      description:
+        type: string
+        description: The description of a snippet
+      file_name:
+        type: string
+        description: The name of a snippet file
+      title:
+        type: string
+        description: The title of a snippet
+      visibility:
+        type: string
+        description: The visibility of the snippet
+        enum:
+        - private
+        - internal
+        - public
+      files:
+        type: array
+        description: An array of files to update
+        items:
+          type: object
+          properties:
+            action:
+              type: string
+              description: 'The type of action to perform on the file, must be one of: create, update, delete, move'
+              enum:
+              - create
+              - update
+              - delete
+              - move
+            content:
+              type: string
+              description: The content of a snippet
+            file_path:
+              type: string
+              description: The file path of a snippet file
+            previous_path:
+              type: string
+              description: The previous path of a snippet file
+          required:
+          - action
+    description: Update an existing snippet
+  postApiV4Snippets:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The title of a snippet
+      description:
+        type: string
+        description: The description of a snippet
+      visibility:
+        type: string
+        description: The visibility of the snippet
+        enum:
+        - private
+        - internal
+        - public
+        default: internal
+      files:
+        type: array
+        description: An array of files
+        items:
+          type: object
+          properties:
+            file_path:
+              type: string
+              description: The path of a snippet file
+            content:
+              type: string
+              description: The content of a snippet file
+          required:
+          - file_path
+          - content
+      content:
+        type: string
+        description: The content of a snippet
+      file_name:
+        type: string
+        description: The name of a snippet file
+    required:
+    - title
+    - file_name
+    description: Create new snippet
+  API_Entities_ProjectSnippet:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      title:
+        type: string
+        example: test
+      description:
+        type: string
+        example: Ruby test snippet
+      visibility:
+        type: string
+        example: public
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      created_at:
+        type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
+      project_id:
+        type: integer
+        format: int32
+        example: 1
+      web_url:
+        type: string
+        example: http://example.com/example/example/snippets/1
+      raw_url:
+        type: string
+        example: http://example.com/example/example/snippets/1/raw
+      ssh_url_to_repo:
+        type: string
+        example: ssh://user@gitlab.example.com/snippets/65.git
+      http_url_to_repo:
+        type: string
+        example: https://gitlab.example.com/snippets/65.git
+      file_name:
+        type: string
+        example: add.rb
+      files:
+        type: array
+        items:
+          type: object
+        example:
+        - path: file.txt
+          raw_url: https://gitlab.example.com/.../raw
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: none
+      repository_storage:
+        type: string
+        example: default
+    required:
+    - id
+    - title
+    - description
+    - visibility
+    - author
+    - created_at
+    - updated_at
+    - project_id
+    - web_url
+    - raw_url
+    - file_name
+    - files
+    - imported
+    - imported_from
+    description: API_Entities_ProjectSnippet model
+  putApiV4ProjectsIdSnippetsSnippetId:
+    type: object
+    properties:
+      content:
+        type: string
+        description: The content of the snippet
+      description:
+        type: string
+        description: The description of a snippet
+      file_name:
+        type: string
+        description: The file name of the snippet
+      title:
+        type: string
+        description: The title of the snippet
+      visibility:
+        type: string
+        description: The visibility of the snippet
+        enum:
+        - private
+        - internal
+        - public
+      files:
+        type: array
+        description: An array of files to update
+        items:
+          type: object
+          properties:
+            action:
+              type: string
+              description: 'The type of action to perform on the file, must be one of: create, update, delete, move'
+              enum:
+              - create
+              - update
+              - delete
+              - move
+            content:
+              type: string
+              description: The content of a snippet
+            file_path:
+              type: string
+              description: The file path of a snippet file
+            previous_path:
+              type: string
+              description: The previous path of a snippet file
+          required:
+          - action
+    description: Update an existing project snippet
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  API_Entities_Snippet:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      title:
+        type: string
+        example: test
+      description:
+        type: string
+        example: Ruby test snippet
+      visibility:
+        type: string
+        example: public
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      created_at:
+        type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
+      project_id:
+        type: integer
+        format: int32
+        example: 1
+      web_url:
+        type: string
+        example: http://example.com/example/example/snippets/1
+      raw_url:
+        type: string
+        example: http://example.com/example/example/snippets/1/raw
+      ssh_url_to_repo:
+        type: string
+        example: ssh://user@gitlab.example.com/snippets/65.git
+      http_url_to_repo:
+        type: string
+        example: https://gitlab.example.com/snippets/65.git
+      file_name:
+        type: string
+        example: add.rb
+      files:
+        type: array
+        items:
+          type: object
+        example:
+        - path: file.txt
+          raw_url: https://gitlab.example.com/.../raw
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: none
+      repository_storage:
+        type: string
+        example: default
+    required:
+    - id
+    - title
+    - description
+    - visibility
+    - author
+    - created_at
+    - updated_at
+    - project_id
+    - web_url
+    - raw_url
+    - file_name
+    - files
+    - imported
+    - imported_from
+    description: API_Entities_Snippet model
+  postApiV4ProjectsIdSnippets:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The title of the snippet
+      description:
+        type: string
+        description: The description of a snippet
+      visibility:
+        type: string
+        description: The visibility of the snippet
+        enum:
+        - private
+        - internal
+        - public
+      files:
+        type: array
+        description: An array of files
+        items:
+          type: object
+          properties:
+            file_path:
+              type: string
+              description: The path of a snippet file
+            content:
+              type: string
+              description: The content of a snippet file
+          required:
+          - file_path
+          - content
+      content:
+        type: string
+        description: The content of a snippet
+      file_name:
+        type: string
+        description: The name of a snippet file
+    required:
+    - title
+    - visibility
+    - file_name
+    description: Create a new project snippet
+  API_Entities_PersonalSnippet:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      title:
+        type: string
+        example: test
+      description:
+        type: string
+        example: Ruby test snippet
+      visibility:
+        type: string
+        example: public
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      created_at:
+        type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
+      project_id:
+        type: integer
+        format: int32
+        example: 1
+      web_url:
+        type: string
+        example: http://example.com/example/example/snippets/1
+      raw_url:
+        type: string
+        example: http://example.com/example/example/snippets/1/raw
+      ssh_url_to_repo:
+        type: string
+        example: ssh://user@gitlab.example.com/snippets/65.git
+      http_url_to_repo:
+        type: string
+        example: https://gitlab.example.com/snippets/65.git
+      file_name:
+        type: string
+        example: add.rb
+      files:
+        type: array
+        items:
+          type: object
+        example:
+        - path: file.txt
+          raw_url: https://gitlab.example.com/.../raw
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: none
+      repository_storage:
+        type: string
+        example: default
+    required:
+    - id
+    - title
+    - description
+    - visibility
+    - author
+    - created_at
+    - updated_at
+    - project_id
+    - web_url
+    - raw_url
+    - file_name
+    - files
+    - imported
+    - imported_from
+    description: API_Entities_PersonalSnippet model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

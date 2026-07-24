@@ -1,0 +1,37 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests web_commits API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: web_commits
+  description: Operations about web_commits
+paths:
+  /api/v4/web_commits/public_key:
+    get:
+      summary: Get the public key for web commits
+      description: This feature was introduced in GitLab 17.4.
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Get the public key for web commits
+        '503':
+          description: The git server, Gitaly, is not available at this time. Please contact your administrator.
+        '404':
+          description: Public key not found.
+      tags:
+      - web_commits
+      operationId: getApiV4WebCommitsPublicKey
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

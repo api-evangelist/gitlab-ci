@@ -1,0 +1,538 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests draft_notes API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: draft_notes
+  description: Operations about draft_notes
+paths:
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/draft_notes:
+    get:
+      description: Get a list of merge request draft notes
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a list of merge request draft notes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_DraftNote'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotes
+    post:
+      description: Create a new draft note
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project.
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request.
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotes
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotes'
+      responses:
+        '201':
+          description: Create a new draft note
+          schema:
+            $ref: '#/definitions/API_Entities_DraftNote'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotes
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/draft_notes/{draft_note_id}:
+    get:
+      description: Get a single draft note
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: draft_note_id
+        description: The ID of a draft note
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get a single draft note
+          schema:
+            $ref: '#/definitions/API_Entities_DraftNote'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId
+    put:
+      description: Modify an existing draft note
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project.
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request.
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: draft_note_id
+        description: The ID of a draft note
+        type: integer
+        format: int32
+        required: true
+      - name: putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId'
+      responses:
+        '200':
+          description: Modify an existing draft note
+          schema:
+            $ref: '#/definitions/API_Entities_DraftNote'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId
+    delete:
+      description: Delete a draft note
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: draft_note_id
+        description: The ID of a draft note
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: deleteApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/draft_notes/{draft_note_id}/publish:
+    put:
+      description: Publish a pending draft note
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: draft_note_id
+        description: The ID of a draft note
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Publish a pending draft note
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteIdPublish
+  /api/v4/projects/{id}/merge_requests/{merge_request_iid}/draft_notes/bulk_publish:
+    post:
+      description: Bulk publish all pending draft notes
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project
+        type: string
+        required: true
+      - in: path
+        name: merge_request_iid
+        description: The ID of a merge request
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '204':
+          description: Bulk publish all pending draft notes
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - draft_notes
+      operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesBulkPublish
+definitions:
+  postApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotes:
+    type: object
+    properties:
+      note:
+        type: string
+        description: The content of a note.
+      in_reply_to_discussion_id:
+        type: string
+        description: The ID of a discussion the draft note replies to.
+      commit_id:
+        type: string
+        description: The sha of a commit to associate the draft note to.
+      resolve_discussion:
+        type: boolean
+        description: The associated discussion should be resolved.
+      position:
+        type: object
+        description: Position when creating a note
+        properties:
+          base_sha:
+            type: string
+            description: Base commit SHA in the source branch
+          start_sha:
+            type: string
+            description: SHA referencing commit in target branch
+          head_sha:
+            type: string
+            description: SHA referencing HEAD of this merge request
+          position_type:
+            type: string
+            description: Type of the position reference
+            enum:
+            - text
+            - image
+            - file
+          new_path:
+            type: string
+            description: File path after change
+          new_line:
+            type: integer
+            format: int32
+            description: Line number after change
+          old_path:
+            type: string
+            description: File path before change
+          old_line:
+            type: integer
+            format: int32
+            description: Line number before change
+          width:
+            type: integer
+            format: int32
+            description: Width of the image
+          height:
+            type: integer
+            format: int32
+            description: Height of the image
+          x:
+            type: integer
+            format: int32
+            description: X coordinate in the image
+          y:
+            type: integer
+            format: int32
+            description: Y coordinate in the image
+          line_range:
+            type: object
+            description: Line range for a multi-line note
+            properties:
+              start:
+                type: object
+                description: Start line for a multi-line note
+                properties:
+                  line_code:
+                    type: string
+                    description: Start line code for multi-line note
+                  type:
+                    type: string
+                    description: Start line type for multi-line note
+                  old_line:
+                    type: integer
+                    format: int32
+                    description: Start old_line line number
+                  new_line:
+                    type: integer
+                    format: int32
+                    description: Start new_line line number
+              end:
+                type: object
+                description: End line for a multi-line note
+                properties:
+                  line_code:
+                    type: string
+                    description: End line code for multi-line note
+                  type:
+                    type: string
+                    description: End line type for multi-line note
+                  old_line:
+                    type: integer
+                    format: int32
+                    description: End old_line line number
+                  new_line:
+                    type: integer
+                    format: int32
+                    description: End new_line line number
+        required:
+        - base_sha
+        - start_sha
+        - head_sha
+        - position_type
+    required:
+    - note
+    description: Create a new draft note
+  putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId:
+    type: object
+    properties:
+      note:
+        type: string
+        description: The content of a note.
+      position:
+        type: object
+        description: Position when creating a note
+        properties:
+          base_sha:
+            type: string
+            description: Base commit SHA in the source branch
+          start_sha:
+            type: string
+            description: SHA referencing commit in target branch
+          head_sha:
+            type: string
+            description: SHA referencing HEAD of this merge request
+          position_type:
+            type: string
+            description: Type of the position reference
+            enum:
+            - text
+            - image
+            - file
+          new_path:
+            type: string
+            description: File path after change
+          new_line:
+            type: integer
+            format: int32
+            description: Line number after change
+          old_path:
+            type: string
+            description: File path before change
+          old_line:
+            type: integer
+            format: int32
+            description: Line number before change
+          width:
+            type: integer
+            format: int32
+            description: Width of the image
+          height:
+            type: integer
+            format: int32
+            description: Height of the image
+          x:
+            type: integer
+            format: int32
+            description: X coordinate in the image
+          y:
+            type: integer
+            format: int32
+            description: Y coordinate in the image
+          line_range:
+            type: object
+            description: Line range for a multi-line note
+            properties:
+              start:
+                type: object
+                description: Start line for a multi-line note
+                properties:
+                  line_code:
+                    type: string
+                    description: Start line code for multi-line note
+                  type:
+                    type: string
+                    description: Start line type for multi-line note
+                  old_line:
+                    type: integer
+                    format: int32
+                    description: Start old_line line number
+                  new_line:
+                    type: integer
+                    format: int32
+                    description: Start new_line line number
+              end:
+                type: object
+                description: End line for a multi-line note
+                properties:
+                  line_code:
+                    type: string
+                    description: End line code for multi-line note
+                  type:
+                    type: string
+                    description: End line type for multi-line note
+                  old_line:
+                    type: integer
+                    format: int32
+                    description: End old_line line number
+                  new_line:
+                    type: integer
+                    format: int32
+                    description: End new_line line number
+        required:
+        - base_sha
+        - start_sha
+        - head_sha
+        - position_type
+    description: Modify an existing draft note
+  API_Entities_DraftNote:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 2
+      author_id:
+        type: integer
+        format: int32
+        example: 4
+      merge_request_id:
+        type: integer
+        format: int32
+        example: 52
+      resolve_discussion:
+        type: boolean
+        example: true
+      discussion_id:
+        type: integer
+        format: int32
+        example: 613
+      note:
+        type: string
+        example: This is a note
+      commit_id:
+        type: integer
+        format: int32
+        example: 4
+      line_code:
+        type: string
+        example: 1c497fbb3a46b78edf0_2_4
+      position:
+        type: object
+        example:
+          base_sha: aa149113
+          start_sha: b3a0a8c4
+          head_sha: be3020c7
+          old_path: example.md
+          new_path: example.md
+          position_type: text
+          old_line: 2
+          new_line: 4
+          line_range:
+            start:
+              line_code: 1c497fbb3a46b78edf04cc2a2fa33f67e3ffbe2a_2_4
+              type: null
+              old_line: 2
+              new_line: 4
+            end:
+              line_code: 1c497fbb3a46b78edf04cc2a2fa33f67e3ffbe2a_2_4
+              type: null
+              old_line: 2
+              new_line: 4
+    required:
+    - id
+    - author_id
+    - merge_request_id
+    - resolve_discussion
+    - discussion_id
+    - note
+    - commit_id
+    - line_code
+    - position
+    description: API_Entities_DraftNote model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

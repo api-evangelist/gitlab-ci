@@ -1,0 +1,117 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests database_dictionary API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: database_dictionary
+  description: Operations about database_dictionaries
+paths:
+  /api/v4/admin/databases/{database_name}/dictionary/tables/{table_name}:
+    get:
+      description: Retrieve dictionary details
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: database_name
+        description: The database name
+        type: string
+        enum:
+        - main
+        - ci
+        required: true
+      - in: path
+        name: table_name
+        description: The table name
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Retrieve dictionary details
+          schema:
+            $ref: '#/definitions/API_Entities_Dictionary_Table'
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Not found
+      tags:
+      - database_dictionary
+      operationId: getApiV4AdminDatabasesDatabaseNameDictionaryTablesTableName
+  /api/v4/databases/{database_name}/dictionary/tables:
+    get:
+      summary: List dictionary tables
+      description: Returns database dictionary tables filtered by database and optional table size
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: database_name
+        description: The database name
+        type: string
+        enum:
+        - main
+        - ci
+        - sec
+        - embedding
+        - geo
+        required: true
+      - in: query
+        name: table_size
+        description: Filter by table size classification
+        type: string
+        enum:
+        - small
+        - medium
+        - large
+        - over_limit
+        required: false
+      responses:
+        '200':
+          description: List dictionary tables
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Dictionary_Table'
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+      tags:
+      - database_dictionary
+      operationId: getApiV4DatabasesDatabaseNameDictionaryTables
+definitions:
+  API_Entities_Dictionary_Table:
+    type: object
+    properties:
+      table_name:
+        type: string
+        example: users
+      feature_categories:
+        type: array
+        items:
+          type: string
+        example:
+        - database
+      table_size:
+        type: string
+        example: small
+    required:
+    - table_name
+    - feature_categories
+    - table_size
+    description: API_Entities_Dictionary_Table model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

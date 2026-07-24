@@ -1,0 +1,359 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests tags API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: tags
+  description: Operations about tags
+paths:
+  /api/v4/projects/{id}/repository/tags:
+    get:
+      description: Get a project repository tags
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: query
+        name: sort
+        description: Return tags sorted in updated by `asc` or `desc` order.
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      - in: query
+        name: order_by
+        description: Return tags ordered by `name`, `updated`, `version` fields.
+        type: string
+        default: updated
+        enum:
+        - name
+        - updated
+        - version
+        required: false
+      - in: query
+        name: search
+        description: Return list of tags matching the search criteria
+        type: string
+        required: false
+      - in: query
+        name: page_token
+        description: Name of tag to start the pagination from
+        type: string
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get a project repository tags
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_Tag'
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+        '422':
+          description: Unprocessable entity
+        '503':
+          description: Service unavailable
+      tags:
+      - tags
+      operationId: getApiV4ProjectsIdRepositoryTags
+    post:
+      description: Create a new repository tag
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdRepositoryTags
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdRepositoryTags'
+      responses:
+        '201':
+          description: Create a new repository tag
+          schema:
+            $ref: '#/definitions/API_Entities_Tag'
+        '400':
+          description: Bad request
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+      tags:
+      - tags
+      operationId: postApiV4ProjectsIdRepositoryTags
+  /api/v4/projects/{id}/repository/tags/{tag_name}:
+    get:
+      description: Get a single repository tag
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The name of the tag
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a single repository tag
+          schema:
+            $ref: '#/definitions/API_Entities_Tag'
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+      tags:
+      - tags
+      operationId: getApiV4ProjectsIdRepositoryTagsTagName
+    delete:
+      description: Delete a repository tag
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The name of the tag
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Delete a repository tag
+        '400':
+          description: Bad request
+        '403':
+          description: Unauthenticated
+        '404':
+          description: Not found
+        '412':
+          description: Precondition failed
+      tags:
+      - tags
+      operationId: deleteApiV4ProjectsIdRepositoryTagsTagName
+  /api/v4/projects/{id}/repository/tags/{tag_name}/signature:
+    get:
+      description: Get a tag's signature
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: tag_name
+        description: The name of the tag
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get a tag's signature
+          schema:
+            $ref: '#/definitions/API_Entities_TagSignature'
+        '404':
+          description: Not found
+      tags:
+      - tags
+      operationId: getApiV4ProjectsIdRepositoryTagsTagNameSignature
+definitions:
+  postApiV4ProjectsIdRepositoryTags:
+    type: object
+    properties:
+      tag_name:
+        type: string
+        description: The name of the tag
+        example: v.1.0.0
+      ref:
+        type: string
+        description: The commit sha or branch name
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      message:
+        type: string
+        description: Specifying a message creates an annotated tag
+        example: Release 1.0.0
+    required:
+    - tag_name
+    - ref
+    description: Create a new repository tag
+  API_Entities_Tag:
+    type: object
+    properties:
+      name:
+        type: string
+        example: v1.0.0
+      message:
+        type: string
+        example: Release v1.0.0
+      target:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      commit:
+        $ref: '#/definitions/API_Entities_Commit'
+      release:
+        $ref: '#/definitions/API_Entities_TagRelease'
+      protected:
+        type: boolean
+        example: true
+      created_at:
+        type: string
+        format: date-time
+        example: '2023-10-12T02:16:52.000Z'
+    required:
+    - name
+    - message
+    - target
+    - commit
+    - protected
+    - created_at
+    description: API_Entities_Tag model
+  API_Entities_TagRelease:
+    type: object
+    properties:
+      tag_name:
+        type: string
+        example: 1.0.0
+      description:
+        type: string
+        example: Amazing release. Wow
+    required:
+    - tag_name
+    - description
+  API_Entities_Commit:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
+      short_id:
+        type: string
+        example: 2695effb
+      created_at:
+        type: string
+        format: date-time
+        example: '2017-07-26T11:08:53.000+02:00'
+      parent_ids:
+        type: array
+        items:
+          type: string
+        example:
+        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+      title:
+        type: string
+        example: Initial commit
+      message:
+        type: string
+        example: Initial commit
+      author_name:
+        type: string
+        example: John Smith
+      author_email:
+        type: string
+        example: john@example.com
+      authored_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      committer_name:
+        type: string
+        example: Jack Smith
+      committer_email:
+        type: string
+        example: jack@example.com
+      committed_date:
+        type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
+      trailers:
+        type: object
+        example:
+          Merged-By: Jane Doe janedoe@gitlab.com
+      extended_trailers:
+        type: object
+        example:
+          Signed-off-by:
+          - John Doe <johndoe@gitlab.com>
+          - Jane Doe <janedoe@gitlab.com>
+      web_url:
+        type: string
+        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+    required:
+    - id
+    - short_id
+    - created_at
+    - parent_ids
+    - title
+    - message
+    - author_name
+    - author_email
+    - authored_date
+    - committer_name
+    - committer_email
+    - committed_date
+    - trailers
+    - extended_trailers
+    - web_url
+    description: API_Entities_Commit model
+  API_Entities_TagSignature:
+    type: object
+    properties:
+      signature_type:
+        type: string
+        example: PGP
+      signature:
+        type: object
+    required:
+    - signature_type
+    - signature
+    description: API_Entities_TagSignature model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

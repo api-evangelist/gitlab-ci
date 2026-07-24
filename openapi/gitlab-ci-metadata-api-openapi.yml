@@ -1,0 +1,90 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests metadata API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: metadata
+  description: Operations related to metadata of the GitLab instance
+paths:
+  /api/v4/metadata:
+    get:
+      summary: Retrieve metadata information for this GitLab instance
+      description: This feature was introduced in GitLab 15.2.
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Retrieve metadata information for this GitLab instance
+          schema:
+            $ref: '#/definitions/API_Entities_Metadata'
+        '401':
+          description: Unauthorized
+      tags:
+      - metadata
+      operationId: getApiV4Metadata
+  /api/v4/version:
+    get:
+      summary: Retrieves version information for the GitLab instance
+      description: This feature was introduced in GitLab 8.13 and deprecated in 15.5. We recommend you instead use the Metadata API.
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Retrieves version information for the GitLab instance
+          schema:
+            $ref: '#/definitions/API_Entities_Metadata'
+        '401':
+          description: Unauthorized
+      tags:
+      - metadata
+      operationId: getApiV4Version
+definitions:
+  API_Entities_Metadata:
+    type: object
+    properties:
+      version:
+        type: string
+        example: 15.2-pre
+      revision:
+        type: string
+        example: c401a659d0c
+      kas:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+          externalUrl:
+            type: string
+            example: grpc://gitlab.example.com:8150
+          externalK8sProxyUrl:
+            type: string
+            example: https://gitlab.example.com:8150/k8s-proxy
+          version:
+            type: string
+            example: 15.0.0
+        required:
+        - enabled
+        - externalUrl
+        - externalK8sProxyUrl
+        - version
+      enterprise:
+        type: boolean
+    required:
+    - version
+    - revision
+    - kas
+    - enterprise
+    description: API_Entities_Metadata model
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

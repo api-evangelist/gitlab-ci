@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests metrics API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: metrics
+  description: Operations about metrics
+paths:
+  /api/v4/usage_data/metric_definitions:
+    get:
+      summary: Get a list of all metric definitions
+      description: This feature was introduced in GitLab 13.11.
+      produces:
+      - application/yaml
+      parameters:
+      - in: query
+        name: include_paths
+        description: Include file paths in the metric definitions
+        type: boolean
+        default: false
+        required: false
+        example: true
+      responses:
+        '200':
+          description: Get a list of all metric definitions
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - metrics
+      operationId: getApiV4UsageDataMetricDefinitions
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

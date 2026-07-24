@@ -1,0 +1,664 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests ci_variables API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: ci_variables
+  description: Operations related to CI/CD variables
+paths:
+  /api/v4/groups/{id}/variables:
+    get:
+      description: Get a list of group-level variables
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get a list of group-level variables
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+      tags:
+      - ci_variables
+      operationId: getApiV4GroupsIdVariables
+    post:
+      description: Create a new variable in a group
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+        type: string
+        required: true
+      - name: postApiV4GroupsIdVariables
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4GroupsIdVariables'
+      responses:
+        '201':
+          description: Create a new variable in a group
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '400':
+          description: 400 Bad Request
+      tags:
+      - ci_variables
+      operationId: postApiV4GroupsIdVariables
+  /api/v4/groups/{id}/variables/{key}:
+    get:
+      description: Get the details of a group’s specific variable
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+        type: string
+        required: true
+      - in: path
+        name: key
+        description: The key of the variable
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get the details of a group’s specific variable
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '404':
+          description: Group Variable Not Found
+      tags:
+      - ci_variables
+      operationId: getApiV4GroupsIdVariablesKey
+    put:
+      description: Update an existing variable from a group
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+        type: string
+        required: true
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      - name: putApiV4GroupsIdVariablesKey
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4GroupsIdVariablesKey'
+      responses:
+        '200':
+          description: Update an existing variable from a group
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '400':
+          description: 400 Bad Request
+        '404':
+          description: Group Variable Not Found
+      tags:
+      - ci_variables
+      operationId: putApiV4GroupsIdVariablesKey
+    delete:
+      description: Delete an existing variable from a group
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+        type: string
+        required: true
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      responses:
+        '404':
+          description: Group Variable Not Found
+        '204':
+          description: Delete an existing variable from a group
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+      tags:
+      - ci_variables
+      operationId: deleteApiV4GroupsIdVariablesKey
+  /api/v4/projects/{id}/variables:
+    get:
+      description: Get project variables
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: Get project variables
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+      tags:
+      - ci_variables
+      operationId: getApiV4ProjectsIdVariables
+    post:
+      description: Create a new variable in a project
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user
+        type: string
+        required: true
+      - name: postApiV4ProjectsIdVariables
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdVariables'
+      responses:
+        '201':
+          description: Create a new variable in a project
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '400':
+          description: 400 Bad Request
+      tags:
+      - ci_variables
+      operationId: postApiV4ProjectsIdVariables
+  /api/v4/projects/{id}/variables/{key}:
+    get:
+      description: Get the details of a single variable from a project
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      - in: query
+        name: filter[environment_scope]
+        description: The environment scope of a variable
+        type: string
+        required: false
+      responses:
+        '200':
+          description: Get the details of a single variable from a project
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '404':
+          description: Variable Not Found
+      tags:
+      - ci_variables
+      operationId: getApiV4ProjectsIdVariablesKey
+    put:
+      description: Update an existing variable from a project
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      - name: putApiV4ProjectsIdVariablesKey
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4ProjectsIdVariablesKey'
+      responses:
+        '200':
+          description: Update an existing variable from a project
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '404':
+          description: Variable Not Found
+      tags:
+      - ci_variables
+      operationId: putApiV4ProjectsIdVariablesKey
+    delete:
+      description: Delete an existing variable from a project
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      - in: query
+        name: filter[environment_scope]
+        description: The environment scope of the variable
+        type: string
+        required: false
+      responses:
+        '404':
+          description: Variable Not Found
+        '204':
+          description: Delete an existing variable from a project
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+      tags:
+      - ci_variables
+      operationId: deleteApiV4ProjectsIdVariablesKey
+  /api/v4/admin/ci/variables:
+    get:
+      description: List all instance-level variables
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      responses:
+        '200':
+          description: List all instance-level variables
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+      tags:
+      - ci_variables
+      operationId: getApiV4AdminCiVariables
+    post:
+      description: Create a new instance-level variable
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: postApiV4AdminCiVariables
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4AdminCiVariables'
+      responses:
+        '201':
+          description: Create a new instance-level variable
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '400':
+          description: 400 Bad Request
+      tags:
+      - ci_variables
+      operationId: postApiV4AdminCiVariables
+  /api/v4/admin/ci/variables/{key}:
+    get:
+      description: Get the details of a specific instance-level variable
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get the details of a specific instance-level variable
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '404':
+          description: Instance Variable Not Found
+      tags:
+      - ci_variables
+      operationId: getApiV4AdminCiVariablesKey
+    put:
+      description: Update an instance-level variable
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      - name: putApiV4AdminCiVariablesKey
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/putApiV4AdminCiVariablesKey'
+      responses:
+        '200':
+          description: Update an instance-level variable
+          schema:
+            $ref: '#/definitions/API_Entities_Ci_Variable'
+        '404':
+          description: Instance Variable Not Found
+      tags:
+      - ci_variables
+      operationId: putApiV4AdminCiVariablesKey
+    delete:
+      description: Delete an existing instance-level variable
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: key
+        description: The key of a variable
+        type: string
+        required: true
+      responses:
+        '204':
+          description: Instance Variable Not Found
+      tags:
+      - ci_variables
+      operationId: deleteApiV4AdminCiVariablesKey
+definitions:
+  postApiV4AdminCiVariables:
+    type: object
+    properties:
+      key:
+        type: string
+        description: The key of the variable. Max 255 characters
+      description:
+        type: string
+        description: The description of the variable
+      value:
+        type: string
+        description: The value of a variable
+      protected:
+        type: boolean
+        description: Whether the variable is protected
+      masked:
+        type: boolean
+        description: Whether the variable is masked
+      raw:
+        type: boolean
+        description: Whether the variable will be expanded
+      variable_type:
+        type: string
+        description: 'The type of a variable. Available types are: env_var (default) and file'
+        enum:
+        - env_var
+        - file
+    required:
+    - key
+    - value
+    description: Create a new instance-level variable
+  postApiV4ProjectsIdVariables:
+    type: object
+    properties:
+      key:
+        type: string
+        description: The key of a variable
+      value:
+        type: string
+        description: The value of a variable
+      protected:
+        type: boolean
+        description: Whether the variable is protected
+      masked:
+        type: boolean
+        description: Whether the variable is masked
+      masked_and_hidden:
+        type: boolean
+        description: Whether the variable is masked and hidden
+      raw:
+        type: boolean
+        description: Whether the variable will be expanded
+      variable_type:
+        type: string
+        description: 'The type of the variable. Default: env_var'
+        enum:
+        - env_var
+        - file
+      environment_scope:
+        type: string
+        description: The environment_scope of the variable
+      description:
+        type: string
+        description: The description of the variable
+    required:
+    - key
+    - value
+    description: Create a new variable in a project
+  postApiV4GroupsIdVariables:
+    type: object
+    properties:
+      key:
+        type: string
+        description: "The ID of a group or URL-encoded path of the group owned by the\n        authenticated user"
+      value:
+        type: string
+        description: The value of a variable
+      protected:
+        type: boolean
+        description: Whether the variable is protected
+      masked_and_hidden:
+        type: boolean
+        description: Whether the variable is masked and hidden
+      masked:
+        type: boolean
+        description: Whether the variable is masked
+      raw:
+        type: boolean
+        description: Whether the variable will be expanded
+      variable_type:
+        type: string
+        description: 'The type of the variable. Default: env_var'
+        enum:
+        - env_var
+        - file
+      environment_scope:
+        type: string
+        description: The environment scope of the variable
+      description:
+        type: string
+        description: The description of the variable
+    required:
+    - key
+    - value
+    description: Create a new variable in a group
+  putApiV4GroupsIdVariablesKey:
+    type: object
+    properties:
+      value:
+        type: string
+        description: The value of a variable
+      protected:
+        type: boolean
+        description: Whether the variable is protected
+      masked:
+        type: boolean
+        description: Whether the variable is masked
+      raw:
+        type: boolean
+        description: Whether the variable will be expanded
+      variable_type:
+        type: string
+        description: 'The type of the variable. Default: env_var'
+        enum:
+        - env_var
+        - file
+      environment_scope:
+        type: string
+        description: The environment scope of the variable
+      description:
+        type: string
+        description: The description of the variable
+    description: Update an existing variable from a group
+  API_Entities_Ci_Variable:
+    type: object
+    properties:
+      variable_type:
+        type: string
+        example: env_var
+      key:
+        type: string
+        example: TEST_VARIABLE_1
+      value:
+        type: string
+        example: TEST_1
+      hidden:
+        type: boolean
+      protected:
+        type: boolean
+      masked:
+        type: boolean
+      raw:
+        type: boolean
+      environment_scope:
+        type: string
+        example: '*'
+      description:
+        type: string
+        example: This variable is being used for ...
+    required:
+    - variable_type
+    - key
+    - value
+    description: API_Entities_Ci_Variable model
+  putApiV4ProjectsIdVariablesKey:
+    type: object
+    properties:
+      value:
+        type: string
+        description: The value of a variable
+      protected:
+        type: boolean
+        description: Whether the variable is protected
+      masked:
+        type: boolean
+        description: Whether the variable is masked
+      environment_scope:
+        type: string
+        description: The environment_scope of a variable
+      raw:
+        type: boolean
+        description: Whether the variable will be expanded
+      variable_type:
+        type: string
+        description: 'The type of the variable. Default: env_var'
+        enum:
+        - env_var
+        - file
+      filter:
+        type: object
+        description: 'Available filters: [environment_scope]. Example: filter[environment_scope]=production'
+        properties:
+          environment_scope:
+            type: string
+            description: The environment scope of a variable
+      description:
+        type: string
+        description: The description of the variable
+    description: Update an existing variable from a project
+  putApiV4AdminCiVariablesKey:
+    type: object
+    properties:
+      description:
+        type: string
+        description: The description of the variable
+      value:
+        type: string
+        description: The value of a variable
+      protected:
+        type: boolean
+        description: Whether the variable is protected
+      masked:
+        type: boolean
+        description: Whether the variable is masked
+      raw:
+        type: boolean
+        description: Whether the variable will be expanded
+      variable_type:
+        type: string
+        description: 'The type of a variable. Available types are: env_var (default) and file'
+        enum:
+        - env_var
+        - file
+    description: Update an instance-level variable
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

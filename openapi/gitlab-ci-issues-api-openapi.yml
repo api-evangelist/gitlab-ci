@@ -1,0 +1,2031 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests issues API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: issues
+  description: Operations about issues
+paths:
+  /api/v4/projects/{id}/issues/{issue_iid}/links:
+    get:
+      summary: List issue relations
+      description: Get a list of a given issue’s linked issues, sorted by the relationship creation datetime (ascending).Issues are filtered according to the user authorizations.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project’s issue
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: List issue relations
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/API_Entities_RelatedIssue'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: getApiV4ProjectsIdIssuesIssueIidLinks
+    post:
+      summary: Create an issue link
+      description: Creates a two-way relation between two issues.The user must be allowed to update both issues to succeed.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project’s issue
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdIssuesIssueIidLinks
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdIssuesIssueIidLinks'
+      responses:
+        '201':
+          description: Create an issue link
+          schema:
+            $ref: '#/definitions/API_Entities_IssueLink'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      tags:
+      - issues
+      operationId: postApiV4ProjectsIdIssuesIssueIidLinks
+  /api/v4/projects/{id}/issues/{issue_iid}/links/{issue_link_id}:
+    get:
+      summary: Get an issue link
+      description: Gets details about an issue link. This feature was introduced in GitLab 15.1.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project’s issue
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: issue_link_id
+        description: ID of an issue relationship
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get an issue link
+          schema:
+            $ref: '#/definitions/API_Entities_IssueLink'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: getApiV4ProjectsIdIssuesIssueIidLinksIssueLinkId
+    delete:
+      summary: Delete an issue link
+      description: Deletes an issue link, thus removes the two-way relationship.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project owned by the authenticated user
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project’s issue
+        type: integer
+        format: int32
+        required: true
+      - in: path
+        name: issue_link_id
+        description: The ID of an issue relationship
+        type: string
+        required: true
+      responses:
+        '401':
+          description: Unauthorized
+        '204':
+          description: Delete an issue link
+          schema:
+            $ref: '#/definitions/API_Entities_IssueLink'
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: deleteApiV4ProjectsIdIssuesIssueIidLinksIssueLinkId
+  /api/v4/projects/{id}/issues/{issue_iid}/time_estimate:
+    post:
+      summary: Set a time estimate for a issue
+      description: Sets an estimated time of work for this issue.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of the issue.
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdIssuesIssueIidTimeEstimate
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdIssuesIssueIidTimeEstimate'
+      responses:
+        '201':
+          description: Set a time estimate for a issue
+          schema:
+            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: postApiV4ProjectsIdIssuesIssueIidTimeEstimate
+  /api/v4/projects/{id}/issues/{issue_iid}/reset_time_estimate:
+    post:
+      summary: Reset the time estimate for a project issue
+      description: Resets the estimated time for this issue to 0 seconds.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of the issue.
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '201':
+          description: Reset the time estimate for a project issue
+          schema:
+            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: postApiV4ProjectsIdIssuesIssueIidResetTimeEstimate
+  /api/v4/projects/{id}/issues/{issue_iid}/add_spent_time:
+    post:
+      summary: Add spent time for a issue
+      description: Adds spent time for this issue.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of the issue.
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4ProjectsIdIssuesIssueIidAddSpentTime
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/postApiV4ProjectsIdIssuesIssueIidAddSpentTime'
+      responses:
+        '201':
+          description: Add spent time for a issue
+          schema:
+            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: postApiV4ProjectsIdIssuesIssueIidAddSpentTime
+  /api/v4/projects/{id}/issues/{issue_iid}/reset_spent_time:
+    post:
+      summary: Reset spent time for a issue
+      description: Resets the total spent time for this issue to 0 seconds.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of the issue
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '201':
+          description: Reset spent time for a issue
+          schema:
+            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: postApiV4ProjectsIdIssuesIssueIidResetSpentTime
+  /api/v4/projects/{id}/issues/{issue_iid}/time_stats:
+    get:
+      summary: Get time tracking stats
+      description: Get time tracking stats
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of the issue
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get time tracking stats
+          schema:
+            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+      tags:
+      - issues
+      operationId: getApiV4ProjectsIdIssuesIssueIidTimeStats
+  /api/v4/projects/{id}/issues/{issue_iid}/related_merge_requests:
+    get:
+      description: List merge requests that are related to the issue
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project issue
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: List merge requests that are related to the issue
+          schema:
+            $ref: '#/definitions/API_Entities_MergeRequestBasic'
+      tags:
+      - issues
+      operationId: getApiV4ProjectsIdIssuesIssueIidRelatedMergeRequests
+  /api/v4/projects/{id}/issues/{issue_iid}/participants:
+    get:
+      description: List participants for an issue
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project issue
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: List participants for an issue
+          schema:
+            $ref: '#/definitions/API_Entities_UserBasic'
+      tags:
+      - issues
+      operationId: getApiV4ProjectsIdIssuesIssueIidParticipants
+  /api/v4/projects/{id}/issues/{issue_iid}/user_agent_detail:
+    get:
+      description: Get the user agent details for an issue
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID or URL-encoded path of the project
+        type: string
+        required: true
+      - in: path
+        name: issue_iid
+        description: The internal ID of a project issue
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get the user agent details for an issue
+          schema:
+            $ref: '#/definitions/API_Entities_UserAgentDetail'
+      tags:
+      - issues
+      operationId: getApiV4ProjectsIdIssuesIssueIidUserAgentDetail
+  /api/v4/issues:
+    get:
+      description: Get currently authenticated user's issues
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: with_labels_details
+        description: Return titles of labels and other details
+        type: boolean
+        default: false
+        required: false
+      - in: query
+        name: state
+        description: Return opened, closed, or all issues
+        type: string
+        default: all
+        enum:
+        - opened
+        - closed
+        - all
+        required: false
+      - in: query
+        name: closed_by_id
+        description: Return issues which were closed by the user with the given ID.
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: order_by
+        description: Return issues ordered by `created_at`, `due_date`, `label_priority`, `milestone_due`, `popularity`, `priority`, `relative_position`, `title`, or `updated_at` fields.
+        type: string
+        default: created_at
+        enum:
+        - created_at
+        - due_date
+        - label_priority
+        - milestone_due
+        - popularity
+        - priority
+        - relative_position
+        - title
+        - updated_at
+        - weight
+        required: false
+      - in: query
+        name: sort
+        description: Return issues sorted in `asc` or `desc` order.
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      - in: query
+        name: due_date
+        description: 'Return issues that have no due date (`0`), or whose due date is this week, this month, between two weeks ago and next month, or which are overdue. Accepts: `overdue`, `week`, `month`, `next_month_and_previous_two_weeks`, `0`'
+        type: string
+        enum:
+        - '0'
+        - any
+        - today
+        - tomorrow
+        - overdue
+        - week
+        - month
+        - next_month_and_previous_two_weeks
+        - ''
+        required: false
+      - in: query
+        name: issue_type
+        description: 'The type of the issue. Accepts: issue, incident, test_case, requirement, task, ticket'
+        type: string
+        enum:
+        - issue
+        - incident
+        - test_case
+        - requirement
+        - task
+        - ticket
+        required: false
+      - in: query
+        name: labels
+        description: Comma-separated list of label names
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: milestone
+        description: Milestone title
+        type: string
+        required: false
+      - in: query
+        name: milestone_id
+        description: Return issues assigned to milestones with the specified timebox value ("Any", "None", "Upcoming" or "Started")
+        type: string
+        enum:
+        - Any
+        - None
+        - Upcoming
+        - Started
+        required: false
+      - in: query
+        name: iids
+        description: The IID array of issues
+        type: array
+        items:
+          type: integer
+          format: int32
+        required: false
+      - in: query
+        name: search
+        description: Search issues for text present in the title, description, or any combination of these
+        type: string
+        required: false
+      - in: query
+        name: in
+        description: '`title`, `description`, or a string joining them with comma'
+        type: string
+        required: false
+      - in: query
+        name: author_id
+        description: Return issues which are authored by the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: author_username
+        description: Return issues which are authored by the user with the given username
+        type: string
+        required: false
+      - in: query
+        name: assignee_id
+        description: Return issues which are assigned to the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: assignee_username
+        description: Return issues which are assigned to the user with the given username
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: created_after
+        description: Return issues created after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: created_before
+        description: Return issues created before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: updated_after
+        description: Return issues updated after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: updated_before
+        description: Return issues updated before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: not[labels]
+        description: Comma-separated list of label names
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: not[milestone]
+        description: Milestone title
+        type: string
+        required: false
+      - in: query
+        name: not[milestone_id]
+        description: Return issues assigned to milestones without the specified timebox value ("Any", "None", "Upcoming" or "Started")
+        type: string
+        enum:
+        - Any
+        - None
+        - Upcoming
+        - Started
+        required: false
+      - in: query
+        name: not[iids]
+        description: The IID array of issues
+        type: array
+        items:
+          type: integer
+          format: int32
+        required: false
+      - in: query
+        name: not[author_id]
+        description: Return issues which are not authored by the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[author_username]
+        description: Return issues which are not authored by the user with the given username
+        type: string
+        required: false
+      - in: query
+        name: not[assignee_id]
+        description: Return issues which are not assigned to the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[assignee_username]
+        description: Return issues which are not assigned to the user with the given username
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: not[weight]
+        description: Return issues without the specified weight
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[iteration_id]
+        description: Return issues which are not assigned to the iteration with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[iteration_title]
+        description: Return issues which are not assigned to the iteration with the given title
+        type: string
+        required: false
+      - in: query
+        name: scope
+        description: 'Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`'
+        type: string
+        default: created_by_me
+        enum:
+        - created-by-me
+        - assigned-to-me
+        - created_by_me
+        - assigned_to_me
+        - all
+        required: false
+      - in: query
+        name: my_reaction_emoji
+        description: Return issues reacted by the authenticated user by the given emoji
+        type: string
+        required: false
+      - in: query
+        name: confidential
+        description: Filter confidential or public issues
+        type: boolean
+        required: false
+      - in: query
+        name: weight
+        description: The weight of the issue
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: epic_id
+        description: The ID of an epic associated with the issues
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: health_status
+        description: 'The health status of the issue. Must be one of: on_track, needs_attention, at_risk, none, any'
+        type: string
+        enum:
+        - on_track
+        - needs_attention
+        - at_risk
+        - none
+        - any
+        required: false
+      - in: query
+        name: iteration_id
+        description: Return issues which are assigned to the iteration with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: iteration_title
+        description: Return issues which are assigned to the iteration with the given title
+        type: string
+        required: false
+      - in: query
+        name: page
+        description: Current page number
+        type: integer
+        format: int32
+        default: 1
+        required: false
+        example: 1
+      - in: query
+        name: per_page
+        description: Number of items per page
+        type: integer
+        format: int32
+        default: 20
+        required: false
+        example: 20
+      - in: query
+        name: non_archived
+        description: Return issues from non archived projects
+        type: boolean
+        default: true
+        required: false
+      responses:
+        '200':
+          description: Get currently authenticated user's issues
+          schema:
+            $ref: '#/definitions/API_Entities_Issue'
+      tags:
+      - issues
+      operationId: getApiV4Issues
+  /api/v4/issues/{id}:
+    get:
+      description: Get specified issue (admin only)
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the Issue
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Get specified issue (admin only)
+          schema:
+            $ref: '#/definitions/API_Entities_Issue'
+      tags:
+      - issues
+      operationId: getApiV4IssuesId
+  /api/v4/issues_statistics:
+    get:
+      description: Get currently authenticated user's issues statistics
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: labels
+        description: Comma-separated list of label names
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: milestone
+        description: Milestone title
+        type: string
+        required: false
+      - in: query
+        name: milestone_id
+        description: Return issues assigned to milestones with the specified timebox value ("Any", "None", "Upcoming" or "Started")
+        type: string
+        enum:
+        - Any
+        - None
+        - Upcoming
+        - Started
+        required: false
+      - in: query
+        name: iids
+        description: The IID array of issues
+        type: array
+        items:
+          type: integer
+          format: int32
+        required: false
+      - in: query
+        name: search
+        description: Search issues for text present in the title, description, or any combination of these
+        type: string
+        required: false
+      - in: query
+        name: in
+        description: '`title`, `description`, or a string joining them with comma'
+        type: string
+        required: false
+      - in: query
+        name: author_id
+        description: Return issues which are authored by the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: author_username
+        description: Return issues which are authored by the user with the given username
+        type: string
+        required: false
+      - in: query
+        name: assignee_id
+        description: Return issues which are assigned to the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: assignee_username
+        description: Return issues which are assigned to the user with the given username
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: created_after
+        description: Return issues created after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: created_before
+        description: Return issues created before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: updated_after
+        description: Return issues updated after the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: updated_before
+        description: Return issues updated before the specified time
+        type: string
+        format: date-time
+        required: false
+      - in: query
+        name: not[labels]
+        description: Comma-separated list of label names
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: not[milestone]
+        description: Milestone title
+        type: string
+        required: false
+      - in: query
+        name: not[milestone_id]
+        description: Return issues assigned to milestones without the specified timebox value ("Any", "None", "Upcoming" or "Started")
+        type: string
+        enum:
+        - Any
+        - None
+        - Upcoming
+        - Started
+        required: false
+      - in: query
+        name: not[iids]
+        description: The IID array of issues
+        type: array
+        items:
+          type: integer
+          format: int32
+        required: false
+      - in: query
+        name: not[author_id]
+        description: Return issues which are not authored by the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[author_username]
+        description: Return issues which are not authored by the user with the given username
+        type: string
+        required: false
+      - in: query
+        name: not[assignee_id]
+        description: Return issues which are not assigned to the user with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[assignee_username]
+        description: Return issues which are not assigned to the user with the given username
+        type: array
+        items:
+          type: string
+        required: false
+      - in: query
+        name: not[weight]
+        description: Return issues without the specified weight
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[iteration_id]
+        description: Return issues which are not assigned to the iteration with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: not[iteration_title]
+        description: Return issues which are not assigned to the iteration with the given title
+        type: string
+        required: false
+      - in: query
+        name: scope
+        description: 'Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`'
+        type: string
+        default: created_by_me
+        enum:
+        - created_by_me
+        - assigned_to_me
+        - all
+        required: false
+      - in: query
+        name: my_reaction_emoji
+        description: Return issues reacted by the authenticated user by the given emoji
+        type: string
+        required: false
+      - in: query
+        name: confidential
+        description: Filter confidential or public issues
+        type: boolean
+        required: false
+      - in: query
+        name: weight
+        description: The weight of the issue
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: epic_id
+        description: The ID of an epic associated with the issues
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: health_status
+        description: 'The health status of the issue. Must be one of: on_track, needs_attention, at_risk, none, any'
+        type: string
+        enum:
+        - on_track
+        - needs_attention
+        - at_risk
+        - none
+        - any
+        required: false
+      - in: query
+        name: iteration_id
+        description: Return issues which are assigned to the iteration with the given ID
+        type: integer
+        format: int32
+        required: false
+      - in: query
+        name: iteration_title
+        description: Return issues which are assigned to the iteration with the given title
+        type: string
+        required: false
+      responses:
+        '200':
+          description: Get currently authenticated user's issues statistics
+      tags:
+      - issues
+      operationId: getApiV4IssuesStatistics
+definitions:
+  API_Entities_UserAgentDetail:
+    type: object
+    properties:
+      user_agent:
+        type: string
+        example: AppleWebKit/537.36
+      ip_address:
+        type: string
+        example: 127.0.0.1
+      akismet_submitted:
+        type: boolean
+        example: false
+    required:
+    - user_agent
+    - ip_address
+    - akismet_submitted
+    description: API_Entities_UserAgentDetail model
+  API_Entities_CustomAttribute:
+    type: object
+    properties:
+      key:
+        type: string
+        example: foo
+      value:
+        type: string
+        example: bar
+    required:
+    - key
+    - value
+    description: API_Entities_CustomAttribute model
+  API_Entities_Milestone:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      iid:
+        type: integer
+        format: int32
+      project_id:
+        type: integer
+        format: int32
+      group_id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      state:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      due_date:
+        type: string
+      start_date:
+        type: string
+      expired:
+        type: boolean
+      web_url:
+        type: string
+    required:
+    - id
+    - iid
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - due_date
+    - start_date
+    - expired
+    - web_url
+  API_Entities_Iteration:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      iid:
+        type: integer
+        format: int32
+        example: 1
+      sequence:
+        type: integer
+        format: int32
+        example: 1
+      group_id:
+        type: integer
+        format: int32
+        example: 1
+      title:
+        type: string
+        example: Iteration I
+      description:
+        type: string
+        example: Iteration description
+      state:
+        type: integer
+        format: int32
+        example: 1
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      start_date:
+        type: string
+        format: date
+        example: '2022-01-01'
+      due_date:
+        type: string
+        format: date
+        example: '2022-01-31'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/groups/gitlab-org/-/iterations/1
+    required:
+    - id
+    - iid
+    - sequence
+    - group_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - start_date
+    - due_date
+    - web_url
+  EpicBaseEntity:
+    type: object
+    properties:
+      id:
+        type: string
+      iid:
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+      group_id:
+        type: string
+      human_readable_end_date:
+        type: string
+      human_readable_timestamp:
+        type: string
+    required:
+    - id
+    - iid
+    - title
+    - url
+    - group_id
+  API_Entities_MergeRequestBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 84
+      iid:
+        type: integer
+        format: int32
+        example: 14
+      project_id:
+        type: integer
+        format: int32
+        example: 4
+      title:
+        type: string
+        example: Impedit et ut et dolores vero provident ullam est
+      description:
+        type: string
+        example: Repellendus impedit et vel velit dignissimos.
+      state:
+        type: string
+        example: closed
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-08-17T12:46:35.053Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-11-14T17:22:01.470Z'
+      merged_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      merge_user:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      merged_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      closed_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      closed_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      title_html:
+        type: string
+      description_html:
+        type: string
+      target_branch:
+        type: string
+      source_branch:
+        type: string
+      user_notes_count:
+        type: integer
+        format: int32
+      upvotes:
+        type: integer
+        format: int32
+      downvotes:
+        type: integer
+        format: int32
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      assignees:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      assignee:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      reviewers:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      source_project_id:
+        type: integer
+        format: int32
+      target_project_id:
+        type: integer
+        format: int32
+      labels:
+        type: array
+        items:
+          type: string
+      draft:
+        type: boolean
+      imported:
+        type: boolean
+      imported_from:
+        type: string
+        example: bitbucket
+      work_in_progress:
+        type: boolean
+      milestone:
+        $ref: '#/definitions/API_Entities_Milestone'
+      merge_when_pipeline_succeeds:
+        type: boolean
+      merge_status:
+        type: string
+        example: unchecked
+      detailed_merge_status:
+        type: string
+        example: mergeable
+      merge_after:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      sha:
+        type: string
+        example: 1234abcd
+      merge_commit_sha:
+        type: string
+        example: 1234abcd
+      squash_commit_sha:
+        type: string
+        example: 1234abcd
+      discussion_locked:
+        type: boolean
+      should_remove_source_branch:
+        type: boolean
+      force_remove_source_branch:
+        type: boolean
+      prepared_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
+      allow_collaboration:
+        type: boolean
+      allow_maintainer_to_push:
+        type: boolean
+      reference:
+        type: string
+        example: '!1'
+      references:
+        $ref: '#/definitions/API_Entities_IssuableReferences'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
+      time_stats:
+        $ref: '#/definitions/API_Entities_IssuableTimeStats'
+      squash:
+        type: boolean
+      squash_on_merge:
+        type: boolean
+      task_completion_status:
+        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
+      has_conflicts:
+        type: boolean
+      blocking_discussions_resolved:
+        type: boolean
+      approvals_before_merge:
+        type: integer
+        format: int32
+        example: 2
+    required:
+    - id
+    - iid
+    - project_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - merged_by
+    - merge_user
+    - merged_at
+    - closed_by
+    - closed_at
+    - target_branch
+    - source_branch
+    - user_notes_count
+    - upvotes
+    - downvotes
+    - author
+    - assignees
+    - assignee
+    - reviewers
+    - source_project_id
+    - target_project_id
+    - labels
+    - draft
+    - imported
+    - imported_from
+    - work_in_progress
+    - milestone
+    - merge_when_pipeline_succeeds
+    - merge_status
+    - detailed_merge_status
+    - merge_after
+    - sha
+    - merge_commit_sha
+    - squash_commit_sha
+    - discussion_locked
+    - should_remove_source_branch
+    - force_remove_source_branch
+    - prepared_at
+    - reference
+    - references
+    - web_url
+    - time_stats
+    - squash
+    - squash_on_merge
+    - task_completion_status
+    - has_conflicts
+    - blocking_discussions_resolved
+    - approvals_before_merge
+    description: API_Entities_MergeRequestBasic model
+  API_Entities_IssuableReferences:
+    type: object
+    properties:
+      short:
+        type: string
+        example: '&6'
+      relative:
+        type: string
+        example: '&6'
+      full:
+        type: string
+        example: test&6
+    required:
+    - short
+    - relative
+    - full
+  postApiV4ProjectsIdIssuesIssueIidAddSpentTime:
+    type: object
+    properties:
+      duration:
+        type: string
+        description: The duration in human format.
+    required:
+    - duration
+    description: Add spent time for a issue
+  API_Entities_UserBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      username:
+        type: string
+        example: admin
+      public_email:
+        type: string
+        example: john@example.com
+      name:
+        type: string
+        example: Administrator
+      state:
+        type: string
+        example: active
+      locked:
+        type: boolean
+      avatar_url:
+        type: string
+        example: https://gravatar.com/avatar/1
+      avatar_path:
+        type: string
+        example: /user/avatar/28/The-Big-Lebowski-400-400.png
+      custom_attributes:
+        type: array
+        items:
+          $ref: '#/definitions/API_Entities_CustomAttribute'
+      web_url:
+        type: string
+        example: https://gitlab.example.com/root
+    required:
+    - id
+    - username
+    - public_email
+    - name
+    - state
+    - locked
+    - avatar_url
+    - web_url
+    description: API_Entities_UserBasic model
+  postApiV4ProjectsIdIssuesIssueIidLinks:
+    type: object
+    properties:
+      target_project_id:
+        type: string
+        description: The ID or URL-encoded path of a target project
+      target_issue_iid:
+        type: string
+        description: The internal ID of a target project’s issue
+      link_type:
+        type: string
+        description: The type of the relation (“relates_to”, “blocks”, “is_blocked_by”),defaults to “relates_to”)
+        enum:
+        - relates_to
+        - blocks
+        - is_blocked_by
+    required:
+    - target_project_id
+    - target_issue_iid
+    description: Create an issue link
+  API_Entities_IssuableTimeStats:
+    type: object
+    properties:
+      time_estimate:
+        type: integer
+        format: int32
+        example: 12600
+      total_time_spent:
+        type: integer
+        format: int32
+        example: 3600
+      human_time_estimate:
+        type: string
+        example: 3h 30m
+      human_total_time_spent:
+        type: string
+        example: 1h
+    required:
+    - time_estimate
+    - total_time_spent
+    - human_time_estimate
+    - human_total_time_spent
+    description: API_Entities_IssuableTimeStats model
+  API_Entities_Issue:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 84
+      iid:
+        type: integer
+        format: int32
+        example: 14
+      project_id:
+        type: integer
+        format: int32
+        example: 4
+      title:
+        type: string
+        example: Impedit et ut et dolores vero provident ullam est
+      description:
+        type: string
+        example: Repellendus impedit et vel velit dignissimos.
+      state:
+        type: string
+        example: closed
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-08-17T12:46:35.053Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-11-14T17:22:01.470Z'
+      closed_at:
+        type: string
+        format: date-time
+        example: '2022-11-15T08:30:55.232Z'
+      closed_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      labels:
+        type: array
+        items:
+          type: string
+        example:
+        - bug
+      milestone:
+        $ref: '#/definitions/API_Entities_Milestone'
+      assignees:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      type:
+        type: string
+        example: ISSUE
+        description: One of ["ISSUE", "INCIDENT", "TEST_CASE", "REQUIREMENT", "TASK", "TICKET"]
+      assignee:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      user_notes_count:
+        type: integer
+        format: int32
+      merge_requests_count:
+        type: integer
+        format: int32
+      upvotes:
+        type: integer
+        format: int32
+      downvotes:
+        type: integer
+        format: int32
+      start_date:
+        type: string
+        format: date
+        example: '2022-11-18'
+      due_date:
+        type: string
+        format: date
+        example: '2022-11-20'
+      confidential:
+        type: boolean
+      discussion_locked:
+        type: boolean
+      issue_type:
+        type: string
+        example: issue
+      web_url:
+        type: string
+        example: http://example.com/example/example/issues/14
+      time_stats:
+        $ref: '#/definitions/API_Entities_IssuableTimeStats'
+      task_completion_status:
+        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
+      weight:
+        type: integer
+        format: int32
+        example: 5
+      blocking_issues_count:
+        type: integer
+        format: int32
+        example: 2
+      has_tasks:
+        type: boolean
+        example: true
+      task_status:
+        type: string
+        example: 2 of 4 tasks completed
+      _links:
+        type: object
+        properties:
+          self:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/2
+          notes:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/2/notes
+          award_emoji:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/2/award_emoji
+          project:
+            type: string
+            example: http://example.com/api/v4/projects/1
+          closed_as_duplicate_of:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/75
+        required:
+        - self
+        - notes
+        - award_emoji
+        - project
+        - closed_as_duplicate_of
+      references:
+        $ref: '#/definitions/API_Entities_IssuableReferences'
+      severity:
+        type: string
+        description: One of ["UNKNOWN", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+      subscribed:
+        type: boolean
+        example: false
+      moved_to_id:
+        type: integer
+        format: int32
+        example: 1
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: github
+      service_desk_reply_to:
+        type: string
+        example: user@example.com
+      epic_iid:
+        type: string
+      epic:
+        $ref: '#/definitions/EpicBaseEntity'
+      iteration:
+        $ref: '#/definitions/API_Entities_Iteration'
+      health_status:
+        type: string
+    required:
+    - id
+    - iid
+    - project_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - closed_at
+    - closed_by
+    - labels
+    - milestone
+    - assignees
+    - author
+    - type
+    - assignee
+    - user_notes_count
+    - merge_requests_count
+    - upvotes
+    - downvotes
+    - start_date
+    - due_date
+    - confidential
+    - discussion_locked
+    - issue_type
+    - web_url
+    - time_stats
+    - task_completion_status
+    - blocking_issues_count
+    - has_tasks
+    - _links
+    - references
+    - severity
+    - moved_to_id
+    - imported
+    - imported_from
+    - service_desk_reply_to
+    description: API_Entities_Issue model
+  postApiV4ProjectsIdIssuesIssueIidTimeEstimate:
+    type: object
+    properties:
+      duration:
+        type: string
+        description: The duration in human format.
+        example: 3h30m
+    required:
+    - duration
+    description: Set a time estimate for a issue
+  API_Entities_IssueBasic:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 84
+      iid:
+        type: integer
+        format: int32
+        example: 14
+      project_id:
+        type: integer
+        format: int32
+        example: 4
+      title:
+        type: string
+        example: Impedit et ut et dolores vero provident ullam est
+      description:
+        type: string
+        example: Repellendus impedit et vel velit dignissimos.
+      state:
+        type: string
+        example: closed
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-08-17T12:46:35.053Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-11-14T17:22:01.470Z'
+      closed_at:
+        type: string
+        format: date-time
+        example: '2022-11-15T08:30:55.232Z'
+      closed_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      labels:
+        type: array
+        items:
+          type: string
+        example:
+        - bug
+      milestone:
+        $ref: '#/definitions/API_Entities_Milestone'
+      assignees:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      type:
+        type: string
+        example: ISSUE
+        description: One of ["ISSUE", "INCIDENT", "TEST_CASE", "REQUIREMENT", "TASK", "TICKET"]
+      assignee:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      user_notes_count:
+        type: integer
+        format: int32
+      merge_requests_count:
+        type: integer
+        format: int32
+      upvotes:
+        type: integer
+        format: int32
+      downvotes:
+        type: integer
+        format: int32
+      start_date:
+        type: string
+        format: date
+        example: '2022-11-18'
+      due_date:
+        type: string
+        format: date
+        example: '2022-11-20'
+      confidential:
+        type: boolean
+      discussion_locked:
+        type: boolean
+      issue_type:
+        type: string
+        example: issue
+      web_url:
+        type: string
+        example: http://example.com/example/example/issues/14
+      time_stats:
+        $ref: '#/definitions/API_Entities_IssuableTimeStats'
+      task_completion_status:
+        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
+      weight:
+        type: integer
+        format: int32
+        example: 5
+      blocking_issues_count:
+        type: integer
+        format: int32
+        example: 2
+    required:
+    - id
+    - iid
+    - project_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - closed_at
+    - closed_by
+    - labels
+    - milestone
+    - assignees
+    - author
+    - type
+    - assignee
+    - user_notes_count
+    - merge_requests_count
+    - upvotes
+    - downvotes
+    - start_date
+    - due_date
+    - confidential
+    - discussion_locked
+    - issue_type
+    - web_url
+    - time_stats
+    - task_completion_status
+    - blocking_issues_count
+  API_Entities_RelatedIssue:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 84
+      iid:
+        type: integer
+        format: int32
+        example: 14
+      project_id:
+        type: integer
+        format: int32
+        example: 4
+      title:
+        type: string
+        example: Impedit et ut et dolores vero provident ullam est
+      description:
+        type: string
+        example: Repellendus impedit et vel velit dignissimos.
+      state:
+        type: string
+        example: closed
+      created_at:
+        type: string
+        format: date-time
+        example: '2022-08-17T12:46:35.053Z'
+      updated_at:
+        type: string
+        format: date-time
+        example: '2022-11-14T17:22:01.470Z'
+      closed_at:
+        type: string
+        format: date-time
+        example: '2022-11-15T08:30:55.232Z'
+      closed_by:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      labels:
+        type: array
+        items:
+          type: string
+        example:
+        - bug
+      milestone:
+        $ref: '#/definitions/API_Entities_Milestone'
+      assignees:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      author:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      type:
+        type: string
+        example: ISSUE
+        description: One of ["ISSUE", "INCIDENT", "TEST_CASE", "REQUIREMENT", "TASK", "TICKET"]
+      assignee:
+        $ref: '#/definitions/API_Entities_UserBasic'
+      user_notes_count:
+        type: integer
+        format: int32
+      merge_requests_count:
+        type: integer
+        format: int32
+      upvotes:
+        type: integer
+        format: int32
+      downvotes:
+        type: integer
+        format: int32
+      start_date:
+        type: string
+        format: date
+        example: '2022-11-18'
+      due_date:
+        type: string
+        format: date
+        example: '2022-11-20'
+      confidential:
+        type: boolean
+      discussion_locked:
+        type: boolean
+      issue_type:
+        type: string
+        example: issue
+      web_url:
+        type: string
+        example: http://example.com/example/example/issues/14
+      time_stats:
+        $ref: '#/definitions/API_Entities_IssuableTimeStats'
+      task_completion_status:
+        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
+      weight:
+        type: integer
+        format: int32
+        example: 5
+      blocking_issues_count:
+        type: integer
+        format: int32
+        example: 2
+      has_tasks:
+        type: boolean
+        example: true
+      task_status:
+        type: string
+        example: 2 of 4 tasks completed
+      _links:
+        type: object
+        properties:
+          self:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/2
+          notes:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/2/notes
+          award_emoji:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/2/award_emoji
+          project:
+            type: string
+            example: http://example.com/api/v4/projects/1
+          closed_as_duplicate_of:
+            type: string
+            example: http://example.com/api/v4/projects/1/issues/75
+        required:
+        - self
+        - notes
+        - award_emoji
+        - project
+        - closed_as_duplicate_of
+      references:
+        $ref: '#/definitions/API_Entities_IssuableReferences'
+      severity:
+        type: string
+        description: One of ["UNKNOWN", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+      subscribed:
+        type: boolean
+        example: false
+      moved_to_id:
+        type: integer
+        format: int32
+        example: 1
+      imported:
+        type: boolean
+        example: false
+      imported_from:
+        type: string
+        example: github
+      service_desk_reply_to:
+        type: string
+        example: user@example.com
+      epic_iid:
+        type: string
+      epic:
+        $ref: '#/definitions/EpicBaseEntity'
+      iteration:
+        $ref: '#/definitions/API_Entities_Iteration'
+      health_status:
+        type: string
+      issue_link_id:
+        type: integer
+        format: int32
+        example: 1
+      link_type:
+        type: string
+        example: relates_to
+      link_created_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:44.988Z'
+      link_updated_at:
+        type: string
+        format: date-time
+        example: '2022-01-31T15:10:44.988Z'
+    required:
+    - id
+    - iid
+    - project_id
+    - title
+    - description
+    - state
+    - created_at
+    - updated_at
+    - closed_at
+    - closed_by
+    - labels
+    - milestone
+    - assignees
+    - author
+    - type
+    - assignee
+    - user_notes_count
+    - merge_requests_count
+    - upvotes
+    - downvotes
+    - start_date
+    - due_date
+    - confidential
+    - discussion_locked
+    - issue_type
+    - web_url
+    - time_stats
+    - task_completion_status
+    - blocking_issues_count
+    - has_tasks
+    - _links
+    - references
+    - severity
+    - moved_to_id
+    - imported
+    - imported_from
+    - service_desk_reply_to
+    - issue_link_id
+    - link_type
+    - link_created_at
+    - link_updated_at
+    description: API_Entities_RelatedIssue model
+  API_Entities_IssueLink:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1
+      source_issue:
+        $ref: '#/definitions/API_Entities_IssueBasic'
+      target_issue:
+        $ref: '#/definitions/API_Entities_IssueBasic'
+      link_type:
+        type: string
+        example: relates_to
+    required:
+    - id
+    - source_issue
+    - target_issue
+    - link_type
+    description: API_Entities_IssueLink model
+  API_Entities_TaskCompletionStatus:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 5
+      completed_count:
+        type: integer
+        format: int32
+        example: 3
+    required:
+    - count
+    - completed_count
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query

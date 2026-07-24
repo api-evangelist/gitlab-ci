@@ -1,0 +1,40 @@
+swagger: '2.0'
+info:
+  title: GitLab access_requests ldap API
+  version: v4
+  description: Operations related to access requests
+host: gitlab.com
+produces:
+- application/json
+tags:
+- name: ldap
+  description: Operations about ldaps
+paths:
+  /api/v4/groups/{id}/ldap_sync:
+    post:
+      description: Sync a group with LDAP.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '201':
+          description: Sync a group with LDAP.
+      tags:
+      - ldap
+      operationId: postApiV4GroupsIdLdapSync
+securityDefinitions:
+  access_token_header:
+    type: apiKey
+    name: PRIVATE-TOKEN
+    in: header
+  access_token_query:
+    type: apiKey
+    name: private_token
+    in: query
