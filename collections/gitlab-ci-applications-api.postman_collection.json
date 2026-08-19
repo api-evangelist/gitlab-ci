@@ -1,0 +1,375 @@
+{
+  "item": [
+    {
+      "id": "2f54888f-d7e4-47cf-a84e-52ccb5a40013",
+      "name": "applications",
+      "description": {
+        "content": "Operations about applications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7888ead-8dd5-4caf-bca6-366f8a188efb",
+          "name": "Create a new application",
+          "request": {
+            "name": "Create a new application",
+            "description": {
+              "content": "This feature was introduced in GitLab 10.5",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"scopes\": \"<string>\",\n  \"confidential\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "900f7b35-9aa2-48ac-b078-099048235055",
+              "name": "Create a new application",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MyApplication\",\n  \"redirect_uri\": \"https://redirect.uri\",\n  \"scopes\": \"<string>\",\n  \"confidential\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"application_id\": \"5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737\",\n  \"application_name\": \"MyApplication\",\n  \"callback_url\": \"https://redirect.uri\",\n  \"confidential\": true,\n  \"scopes\": [],\n  \"secret\": \"ee1dd64b6adc89cf7e2c23099301ccc2c61b441064e9324d963c46902a85ec34\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ddfb416-d1ad-4bde-b05e-cb4d77c4bb62",
+          "name": "Get applications",
+          "request": {
+            "name": "Get applications",
+            "description": {
+              "content": "List all registered applications",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc262732-0ecc-4cf1-a91e-a683c13bf8db",
+              "name": "Get applications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"application_id\": \"5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737\",\n    \"application_name\": \"MyApplication\",\n    \"callback_url\": \"https://redirect.uri\",\n    \"confidential\": true,\n    \"scopes\": []\n  },\n  {\n    \"id\": \"string\",\n    \"application_id\": \"5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737\",\n    \"application_name\": \"MyApplication\",\n    \"callback_url\": \"https://redirect.uri\",\n    \"confidential\": true,\n    \"scopes\": []\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a32562a-876f-4beb-9073-4f80f423b71d",
+          "name": "Delete an application",
+          "request": {
+            "name": "Delete an application",
+            "description": {
+              "content": "Delete a specific application",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the application (not the application_id)"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69e53f9a-3643-45b0-bcba-1006eefb41aa",
+              "name": "Delete an application",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the application (not the application_id)"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e10dc52-9a70-4c0b-8eee-4c4fc044c77e",
+          "name": "Renew an application secret",
+          "request": {
+            "name": "Renew an application secret",
+            "description": {
+              "content": "Renew the secret of a specific application",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "applications",
+                ":id",
+                "renew-secret"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the application (not the application_id)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3eb300d3-2da3-44fe-96fd-711cc04dc4fe",
+              "name": "Renew an application secret",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "applications",
+                    ":id",
+                    "renew-secret"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the application (not the application_id)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"application_id\": \"5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737\",\n  \"application_name\": \"MyApplication\",\n  \"callback_url\": \"https://redirect.uri\",\n  \"confidential\": true,\n  \"scopes\": [],\n  \"secret\": \"ee1dd64b6adc89cf7e2c23099301ccc2c61b441064e9324d963c46902a85ec34\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5f9a2815-50f2-494a-9c48-ad1c1fbcb236",
+    "name": "GitLab access_requests applications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

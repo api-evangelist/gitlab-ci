@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests project_topics API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "project_topics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/topics",
+            "params": [
+              {
+                "name": "search",
+                "value": "search",
+                "type": "query",
+                "description": "Return list of topics matching the search criteria"
+              },
+              {
+                "name": "without_projects",
+                "value": "",
+                "type": "query",
+                "description": "Return list of topics without assigned projects"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization id for the topics"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.5."
+        },
+        {
+          "info": {
+            "name": "Create a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/topics"
+          },
+          "docs": "This feature was introduced in GitLab 14.5."
+        },
+        {
+          "info": {
+            "name": "Get topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/topics/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of project topic"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.5."
+        },
+        {
+          "info": {
+            "name": "Update a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/topics/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of project topic"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.5."
+        },
+        {
+          "info": {
+            "name": "Delete a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/topics/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of project topic"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.9."
+        },
+        {
+          "info": {
+            "name": "Merge topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/topics/merge"
+          },
+          "docs": "This feature was introduced in GitLab 15.4."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

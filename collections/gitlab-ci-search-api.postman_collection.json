@@ -1,0 +1,618 @@
+{
+  "item": [
+    {
+      "id": "13d8d123-f9d2-4723-bd2d-c64e9e19990f",
+      "name": "search",
+      "description": {
+        "content": "Operations about searches",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d80c7f5f-d8c7-4808-9b1b-2f47a63d2a04",
+          "name": "Search on GitLab within a group",
+          "request": {
+            "name": "Search on GitLab within a group",
+            "description": {
+              "content": "This feature was introduced in GitLab 10.5.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "(-",
+                ")search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) The expression it should be searched for"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) The scope of the search"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter results by state"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidential",
+                  "value": "<boolean>",
+                  "description": "Filter results by confidentiality"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>,<string>",
+                  "description": "Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident, test_case, requirement, objective, key_result, ticket."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_archived",
+                  "value": "false",
+                  "description": "Includes archived projects in the search. Introduced in GitLab 18.9."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>,<string>",
+                  "description": "Array of fields you wish to search. Available with advanced search."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_forks",
+                  "value": "<boolean>",
+                  "description": "Excludes forked projects in the search. Available with exact code search. Introduced in GitLab 18.9."
+                },
+                {
+                  "disabled": false,
+                  "key": "num_context_lines",
+                  "value": "<integer>",
+                  "description": "Number of context lines around each match. Available with advanced and exact code search. Introduced in GitLab 18.11."
+                },
+                {
+                  "disabled": false,
+                  "key": "regex",
+                  "value": "<boolean>",
+                  "description": "Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the group"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8de3eadb-7fc8-4a55-abc6-0e15bd912101",
+              "name": "Search on GitLab within a group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "(-",
+                    ")search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidential",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "include_archived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude_forks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "num_context_lines",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regex",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "028c2011-3ee4-48cd-8edb-fd077d41e193",
+          "name": "Search on GitLab within a project",
+          "request": {
+            "name": "Search on GitLab within a project",
+            "description": {
+              "content": "This feature was introduced in GitLab 10.5.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "(-",
+                ")search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) The expression it should be searched for"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) The scope of the search"
+                },
+                {
+                  "disabled": false,
+                  "key": "ref",
+                  "value": "<string>",
+                  "description": "The name of a repository branch or tag. If not given, the default branch is used"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter results by state"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidential",
+                  "value": "<boolean>",
+                  "description": "Filter results by confidentiality"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>,<string>",
+                  "description": "Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident, test_case, requirement, objective, key_result, ticket."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>,<string>",
+                  "description": "Array of fields you wish to search. Available with advanced search."
+                },
+                {
+                  "disabled": false,
+                  "key": "num_context_lines",
+                  "value": "<integer>",
+                  "description": "Number of context lines around each match. Available with advanced and exact code search. Introduced in GitLab 18.11."
+                },
+                {
+                  "disabled": false,
+                  "key": "regex",
+                  "value": "<boolean>",
+                  "description": "Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cb8fbc1-c985-4c48-b3ac-b8e6f3492d12",
+              "name": "Search on GitLab within a project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "(-",
+                    ")search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidential",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "num_context_lines",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regex",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1047c817-b294-45d7-91f6-80de84b4ed9b",
+          "name": "Search on GitLab",
+          "request": {
+            "name": "Search on GitLab",
+            "description": {
+              "content": "This feature was introduced in GitLab 10.5.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) The expression it should be searched for"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) The scope of the search"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter results by state"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidential",
+                  "value": "<boolean>",
+                  "description": "Filter results by confidentiality"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>,<string>",
+                  "description": "Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident, test_case, requirement, objective, key_result, ticket."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_archived",
+                  "value": "false",
+                  "description": "Includes archived projects in the search. Introduced in GitLab 18.9."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>,<string>",
+                  "description": "Array of fields you wish to search. Available with advanced search."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_forks",
+                  "value": "<boolean>",
+                  "description": "Excludes forked projects in the search. Available with exact code search. Introduced in GitLab 18.9."
+                },
+                {
+                  "disabled": false,
+                  "key": "num_context_lines",
+                  "value": "<integer>",
+                  "description": "Number of context lines around each match. Available with advanced and exact code search. Introduced in GitLab 18.11."
+                },
+                {
+                  "disabled": false,
+                  "key": "regex",
+                  "value": "<boolean>",
+                  "description": "Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a750c1db-901b-4050-8cba-b75cee1f09d2",
+              "name": "Search on GitLab",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidential",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "include_archived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude_forks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "num_context_lines",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regex",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "62574566-5e37-463b-8b0c-2c824e98a0b1",
+    "name": "GitLab access_requests search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,831 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests issues API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List issue relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/links",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project’s issue"
+              }
+            ]
+          },
+          "docs": "Get a list of a given issue’s linked issues, sorted by the relationship creation datetime (ascending).Issues are filtered according to the user authorizations."
+        },
+        {
+          "info": {
+            "name": "Create an issue link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/links",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project’s issue"
+              }
+            ]
+          },
+          "docs": "Creates a two-way relation between two issues.The user must be allowed to update both issues to succeed."
+        },
+        {
+          "info": {
+            "name": "Get an issue link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/links/:issue_link_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project’s issue"
+              },
+              {
+                "name": "issue_link_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of an issue relationship"
+              }
+            ]
+          },
+          "docs": "Gets details about an issue link. This feature was introduced in GitLab 15.1."
+        },
+        {
+          "info": {
+            "name": "Delete an issue link",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/links/:issue_link_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project’s issue"
+              },
+              {
+                "name": "issue_link_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an issue relationship"
+              }
+            ]
+          },
+          "docs": "Deletes an issue link, thus removes the two-way relationship."
+        },
+        {
+          "info": {
+            "name": "Set a time estimate for a issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/time_estimate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the issue."
+              }
+            ]
+          },
+          "docs": "Sets an estimated time of work for this issue."
+        },
+        {
+          "info": {
+            "name": "Reset the time estimate for a project issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/reset_time_estimate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the issue."
+              }
+            ]
+          },
+          "docs": "Resets the estimated time for this issue to 0 seconds."
+        },
+        {
+          "info": {
+            "name": "Add spent time for a issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/add_spent_time",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the issue."
+              }
+            ]
+          },
+          "docs": "Adds spent time for this issue."
+        },
+        {
+          "info": {
+            "name": "Reset spent time for a issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/reset_spent_time",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the issue"
+              }
+            ]
+          },
+          "docs": "Resets the total spent time for this issue to 0 seconds."
+        },
+        {
+          "info": {
+            "name": "Get time tracking stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/time_stats",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the issue"
+              }
+            ]
+          },
+          "docs": "Get time tracking stats"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdIssuesIssueIidRelatedMergeRequests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/related_merge_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project issue"
+              }
+            ]
+          },
+          "docs": "List merge requests that are related to the issue"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdIssuesIssueIidParticipants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/participants",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project issue"
+              }
+            ]
+          },
+          "docs": "List participants for an issue"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdIssuesIssueIidUserAgentDetail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/issues/:issue_iid/user_agent_detail",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "issue_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of a project issue"
+              }
+            ]
+          },
+          "docs": "Get the user agent details for an issue"
+        },
+        {
+          "info": {
+            "name": "getApiV4Issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/issues",
+            "params": [
+              {
+                "name": "with_labels_details",
+                "value": "",
+                "type": "query",
+                "description": "Return titles of labels and other details"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Return opened, closed, or all issues"
+              },
+              {
+                "name": "closed_by_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which were closed by the user with the given ID."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Return issues ordered by `created_at`, `due_date`, `label_priority`, `milestone_due`, `popularity`, `priority`, `relative_position`, `title`, or `updated_at` fields."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return issues sorted in `asc` or `desc` order."
+              },
+              {
+                "name": "due_date",
+                "value": "",
+                "type": "query",
+                "description": "Return issues that have no due date (`0`), or whose due date is this week, this month, between two weeks ago and next month, or which are overdue. Accepts: `overdue`, `week`, `month`, `next_month_and_previous_two_weeks`, `0`"
+              },
+              {
+                "name": "issue_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the issue. Accepts: issue, incident, test_case, requirement, task, ticket"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label names"
+              },
+              {
+                "name": "milestone",
+                "value": "",
+                "type": "query",
+                "description": "Milestone title"
+              },
+              {
+                "name": "milestone_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues assigned to milestones with the specified timebox value (\"Any\", \"None\", \"Upcoming\" or \"Started\")"
+              },
+              {
+                "name": "iids",
+                "value": "",
+                "type": "query",
+                "description": "The IID array of issues"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search issues for text present in the title, description, or any combination of these"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "`title`, `description`, or a string joining them with comma"
+              },
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are authored by the user with the given ID"
+              },
+              {
+                "name": "author_username",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are authored by the user with the given username"
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the user with the given ID"
+              },
+              {
+                "name": "assignee_username",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the user with the given username"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return issues created after the specified time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return issues created before the specified time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return issues updated after the specified time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return issues updated before the specified time"
+              },
+              {
+                "name": "not[labels]",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label names"
+              },
+              {
+                "name": "not[milestone]",
+                "value": "",
+                "type": "query",
+                "description": "Milestone title"
+              },
+              {
+                "name": "not[milestone_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues assigned to milestones without the specified timebox value (\"Any\", \"None\", \"Upcoming\" or \"Started\")"
+              },
+              {
+                "name": "not[iids]",
+                "value": "",
+                "type": "query",
+                "description": "The IID array of issues"
+              },
+              {
+                "name": "not[author_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not authored by the user with the given ID"
+              },
+              {
+                "name": "not[author_username]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not authored by the user with the given username"
+              },
+              {
+                "name": "not[assignee_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the user with the given ID"
+              },
+              {
+                "name": "not[assignee_username]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the user with the given username"
+              },
+              {
+                "name": "not[weight]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues without the specified weight"
+              },
+              {
+                "name": "not[iteration_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the iteration with the given ID"
+              },
+              {
+                "name": "not[iteration_title]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the iteration with the given title"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`"
+              },
+              {
+                "name": "my_reaction_emoji",
+                "value": "",
+                "type": "query",
+                "description": "Return issues reacted by the authenticated user by the given emoji"
+              },
+              {
+                "name": "confidential",
+                "value": "",
+                "type": "query",
+                "description": "Filter confidential or public issues"
+              },
+              {
+                "name": "weight",
+                "value": "",
+                "type": "query",
+                "description": "The weight of the issue"
+              },
+              {
+                "name": "epic_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of an epic associated with the issues"
+              },
+              {
+                "name": "health_status",
+                "value": "",
+                "type": "query",
+                "description": "The health status of the issue. Must be one of: on_track, needs_attention, at_risk, none, any"
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the iteration with the given ID"
+              },
+              {
+                "name": "iteration_title",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the iteration with the given title"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "non_archived",
+                "value": "",
+                "type": "query",
+                "description": "Return issues from non archived projects"
+              }
+            ]
+          },
+          "docs": "Get currently authenticated user's issues"
+        },
+        {
+          "info": {
+            "name": "getApiV4IssuesId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/issues/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Issue"
+              }
+            ]
+          },
+          "docs": "Get specified issue (admin only)"
+        },
+        {
+          "info": {
+            "name": "getApiV4IssuesStatistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/issues_statistics",
+            "params": [
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label names"
+              },
+              {
+                "name": "milestone",
+                "value": "",
+                "type": "query",
+                "description": "Milestone title"
+              },
+              {
+                "name": "milestone_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues assigned to milestones with the specified timebox value (\"Any\", \"None\", \"Upcoming\" or \"Started\")"
+              },
+              {
+                "name": "iids",
+                "value": "",
+                "type": "query",
+                "description": "The IID array of issues"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search issues for text present in the title, description, or any combination of these"
+              },
+              {
+                "name": "in",
+                "value": "",
+                "type": "query",
+                "description": "`title`, `description`, or a string joining them with comma"
+              },
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are authored by the user with the given ID"
+              },
+              {
+                "name": "author_username",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are authored by the user with the given username"
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the user with the given ID"
+              },
+              {
+                "name": "assignee_username",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the user with the given username"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Return issues created after the specified time"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Return issues created before the specified time"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return issues updated after the specified time"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return issues updated before the specified time"
+              },
+              {
+                "name": "not[labels]",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label names"
+              },
+              {
+                "name": "not[milestone]",
+                "value": "",
+                "type": "query",
+                "description": "Milestone title"
+              },
+              {
+                "name": "not[milestone_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues assigned to milestones without the specified timebox value (\"Any\", \"None\", \"Upcoming\" or \"Started\")"
+              },
+              {
+                "name": "not[iids]",
+                "value": "",
+                "type": "query",
+                "description": "The IID array of issues"
+              },
+              {
+                "name": "not[author_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not authored by the user with the given ID"
+              },
+              {
+                "name": "not[author_username]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not authored by the user with the given username"
+              },
+              {
+                "name": "not[assignee_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the user with the given ID"
+              },
+              {
+                "name": "not[assignee_username]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the user with the given username"
+              },
+              {
+                "name": "not[weight]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues without the specified weight"
+              },
+              {
+                "name": "not[iteration_id]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the iteration with the given ID"
+              },
+              {
+                "name": "not[iteration_title]",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are not assigned to the iteration with the given title"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`"
+              },
+              {
+                "name": "my_reaction_emoji",
+                "value": "",
+                "type": "query",
+                "description": "Return issues reacted by the authenticated user by the given emoji"
+              },
+              {
+                "name": "confidential",
+                "value": "",
+                "type": "query",
+                "description": "Filter confidential or public issues"
+              },
+              {
+                "name": "weight",
+                "value": "",
+                "type": "query",
+                "description": "The weight of the issue"
+              },
+              {
+                "name": "epic_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of an epic associated with the issues"
+              },
+              {
+                "name": "health_status",
+                "value": "",
+                "type": "query",
+                "description": "The health status of the issue. Must be one of: on_track, needs_attention, at_risk, none, any"
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the iteration with the given ID"
+              },
+              {
+                "name": "iteration_title",
+                "value": "",
+                "type": "query",
+                "description": "Return issues which are assigned to the iteration with the given title"
+              }
+            ]
+          },
+          "docs": "Get currently authenticated user's issues statistics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

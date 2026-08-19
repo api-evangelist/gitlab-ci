@@ -1,0 +1,4321 @@
+{
+  "item": [
+    {
+      "id": "f145af4c-2d3c-45d4-abef-3e0707dc52ca",
+      "name": "runners",
+      "description": {
+        "content": "Operations about runners",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e21de5d-44e0-431e-8b63-9664776bf4a8",
+          "name": "List group's runners",
+          "request": {
+            "name": "List group's runners",
+            "description": {
+              "content": "List all runners available in the group as well as its ancestor groups, including any allowed shared runners.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "runners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "paused",
+                  "value": "<boolean>",
+                  "description": "Whether to include only runners that are accepting or ignoring new jobs"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag_list",
+                  "value": "<string>,<string>",
+                  "description": "A list of runner tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "version_prefix",
+                  "value": "<string>",
+                  "description": "The version prefix of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14757b30-00c5-4459-9ccc-c71d4c2bf8e2",
+              "name": "Get runners available for group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48194598-f735-469a-9dbb-69d7d54d1b8e",
+              "name": "Scope contains invalid value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "633f4e56-b7fd-4499-910c-349e23d3d7ae",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "571f5ab6-39e2-43a8-98f6-3830f8a485f7",
+          "name": "Reset the runner registration token for a group",
+          "request": {
+            "name": "Reset the runner registration token for a group",
+            "description": {
+              "content": "Reset runner registration token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "runners",
+                "reset_registration_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f264ad83-2b3f-4cb6-863b-ecffe2bc59b7",
+              "name": "Reset runner registration token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"token_expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0381f8ca-61a3-4cde-a00c-3252745dffd8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6aad037-fd8f-4a58-8710-91301a9bb2db",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cfe2e99-16eb-43c0-9e73-8106e9bffbdc",
+              "name": "Group Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdbbcf1a-ec9c-4faa-800c-64659aff41c7",
+          "name": "List project's runners",
+          "request": {
+            "name": "List project's runners",
+            "description": {
+              "content": "List all runners available in the project, including from ancestor groups and any allowed shared runners.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "runners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Deprecated: Use `type` or `status` instead. The scope of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "paused",
+                  "value": "<boolean>",
+                  "description": "Whether to include only runners that are accepting or ignoring new jobs"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag_list",
+                  "value": "<string>,<string>",
+                  "description": "A list of runner tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "version_prefix",
+                  "value": "<string>",
+                  "description": "The version prefix of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "790402e8-9d3e-4c58-8edb-2f19e65e0d16",
+              "name": "Get runners available for project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9890596c-c840-4bfa-b18e-798f4471d477",
+              "name": "Scope contains invalid value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e313a074-19e0-4347-9bc9-9fa79404fbe0",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2094196e-cfd2-4622-9488-9222c1328c1f",
+          "name": "Assign a runner to project",
+          "request": {
+            "name": "Assign a runner to project",
+            "description": {
+              "content": "Assign an available project runner to the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "runners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"runner_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc711b2b-d718-46e2-872f-0860a63c7c4c",
+              "name": "Assign a runner to project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9008b0dc-d605-4b34-832f-a3b4fac5adbc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b3811e1-75d6-48f2-a60c-b5c323adaacd",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f86aa39-8a15-41a5-922d-ba47e817ab9f",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7868c162-bc0c-4109-a301-276cea61a740",
+          "name": "Unassign a project runner from the project",
+          "request": {
+            "name": "Unassign a project runner from the project",
+            "description": {
+              "content": "It is not possible to unassign a runner from the owner project. If so, an error is returned. Use the call to delete a runner instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "runners",
+                ":runner_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "runner_id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "756f9bdc-57ca-46b8-b3c7-c902ff3f025c",
+              "name": "Unassign a runner from project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    ":runner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "runner_id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e216e3af-c8ed-43ac-af93-934159540347",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    ":runner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "runner_id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b8d51ac-3fcb-404b-bb94-86365a08c2a0",
+              "name": "You cannot unassign a runner from the owner project. Delete the runner instead",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    ":runner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "runner_id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4ca7a77-08a2-4b49-807e-ddd2c0b9ceab",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    ":runner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "runner_id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e18ad157-4dc4-4a34-b4d1-cd38da7c4826",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    ":runner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "runner_id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f167bf28-5723-40aa-8b82-d8c080e0df05",
+          "name": "Reset the runner registration token for a project",
+          "request": {
+            "name": "Reset the runner registration token for a project",
+            "description": {
+              "content": "Reset runner registration token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "runners",
+                "reset_registration_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ff395bc-7346-4757-ae4f-6c6a7ea402d2",
+              "name": "Reset runner registration token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"token_expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9356b071-ca10-47b0-ae38-45177c43e7e3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3db50c80-8b13-4b5a-b1cf-9c59289f5ab1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1a48f59-d37f-48cb-aee0-c5a5572ae68e",
+              "name": "Project Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af4bf6de-052c-4115-8f77-fa992f0daa14",
+          "name": "List available runners",
+          "request": {
+            "name": "List available runners",
+            "description": {
+              "content": "Get runners available for user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Deprecated: Use `type` or `status` instead. The scope of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "paused",
+                  "value": "<boolean>",
+                  "description": "Whether to include only runners that are accepting or ignoring new jobs"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag_list",
+                  "value": "<string>,<string>",
+                  "description": "A list of runner tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "version_prefix",
+                  "value": "<string>",
+                  "description": "The version prefix of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ee2d713-ee69-42de-9382-dd1b9bcdbf72",
+              "name": "Get runners available for user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fa3e233-3cb2-48b0-a435-2170864320c4",
+              "name": "Scope contains invalid value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9dcfd9a3-185e-4ea5-afd6-8ded1cd3e08d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5349956-cc88-4b03-bb3b-e7861cfc51af",
+          "name": "List all runners",
+          "request": {
+            "name": "List all runners",
+            "description": {
+              "content": "Get a list of all runners in the GitLab instance (shared and project). Access is restricted to users with either administrator access or auditor access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Deprecated: Use `type` or `status` instead. The scope of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "paused",
+                  "value": "<boolean>",
+                  "description": "Whether to include only runners that are accepting or ignoring new jobs"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag_list",
+                  "value": "<string>,<string>",
+                  "description": "A list of runner tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "version_prefix",
+                  "value": "<string>",
+                  "description": "The version prefix of runners to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d128456-fd22-40e4-a1e4-1e944dba09d7",
+              "name": "Get all runners - shared and project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e3bee99-9ae2-4484-9b6d-4aa82f6f78b5",
+              "name": "Scope contains invalid value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4616a709-3e6b-4bc0-88cc-4a703ab83f4f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag_list",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "version_prefix",
+                      "value": "'15.1.' or '16.'"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0f3806a-ace6-4f0b-a2c4-07e1797e155d",
+          "name": "Get runner's details",
+          "request": {
+            "name": "Get runner's details",
+            "description": {
+              "content": "At least the Maintainer role is required to get runner details at the project and group level. Instance-level runner details via this endpoint are available to all signed in users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_projects",
+                  "value": "true",
+                  "description": "Include projects in the response. Set to false to improve performance for runners with many projects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8b47a3d-78af-4f80-930e-93fa6a0e775d",
+              "name": "Get runner's details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_projects",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"tag_list\": \"string\",\n  \"run_untagged\": \"string\",\n  \"locked\": \"string\",\n  \"maximum_timeout\": \"string\",\n  \"access_level\": \"string\",\n  \"version\": \"string\",\n  \"revision\": \"string\",\n  \"platform\": \"string\",\n  \"architecture\": \"string\",\n  \"contacted_at\": \"string\",\n  \"maintenance_note\": \"string\",\n  \"groups\": {\n    \"id\": 2477,\n    \"web_url\": \"http://gitlab.example.com/groups/diaspora\",\n    \"name\": \"Diaspora\"\n  },\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"projects\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad7f9d6f-cb69-4e12-9ac9-164aa6743e3f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_projects",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0d1b079-c777-47e9-b13d-5f7c6fb2ba7b",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_projects",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7cac0d38-8e23-4e77-b37e-7e7f84f87057",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_projects",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fe0f44a-5baf-44f3-a10f-8a37129ecee2",
+          "name": "Update details of a runner",
+          "request": {
+            "name": "Update details of a runner",
+            "description": {
+              "content": "Update runner's details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"paused\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_untagged\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"maximum_timeout\": \"<integer>\",\n  \"maintenance_note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "003e3bce-7096-43d5-84cc-d2e1169ab903",
+              "name": "Update runner's details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"paused\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_untagged\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"maximum_timeout\": \"<integer>\",\n  \"maintenance_note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"tag_list\": \"string\",\n  \"run_untagged\": \"string\",\n  \"locked\": \"string\",\n  \"maximum_timeout\": \"string\",\n  \"access_level\": \"string\",\n  \"version\": \"string\",\n  \"revision\": \"string\",\n  \"platform\": \"string\",\n  \"architecture\": \"string\",\n  \"contacted_at\": \"string\",\n  \"maintenance_note\": \"string\",\n  \"groups\": {\n    \"id\": 1958,\n    \"web_url\": \"http://gitlab.example.com/groups/diaspora\",\n    \"name\": \"Diaspora\"\n  },\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"projects\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28ecdfd2-a73e-4052-a4b5-417c30d74efa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"paused\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_untagged\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"maximum_timeout\": \"<integer>\",\n  \"maintenance_note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "763f0096-8e0a-415c-a1f4-3262f03d1bcb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"paused\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_untagged\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"maximum_timeout\": \"<integer>\",\n  \"maintenance_note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a4f6d7a-b201-4781-b65a-598288527ccb",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"paused\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_untagged\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"maximum_timeout\": \"<integer>\",\n  \"maintenance_note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d0356700-f52b-40b6-9bcd-53644d41d4d7",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"paused\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"run_untagged\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"maximum_timeout\": \"<integer>\",\n  \"maintenance_note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37c3c633-67a8-4432-9a13-131893a426e6",
+          "name": "Delete a runner",
+          "request": {
+            "name": "Delete a runner",
+            "description": {
+              "content": "Remove a runner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c753f2ca-662d-42dd-b224-4c8f7e7986e9",
+              "name": "Remove a runner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"description\": \"test-1-20150125\",\n  \"ip_address\": \"127.0.0.1\",\n  \"active\": true,\n  \"paused\": false,\n  \"is_shared\": true,\n  \"runner_type\": \"instance_type\",\n  \"name\": \"test\",\n  \"online\": true,\n  \"created_at\": \"2025-05-03T00:00:00.000Z\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\",\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50177c42-72b6-49fd-895e-ea4eeb300d36",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c269e592-a161-4985-931a-1792d66ac562",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c89f4098-9eec-4ecc-8f24-cb0cdd625438",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5adc11f2-020f-48d6-8f56-6e44d6e773fc",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "752302c8-c34b-400f-b920-db512b7aaa4e",
+          "name": "get Api V4Runners Id Managers",
+          "request": {
+            "name": "get Api V4Runners Id Managers",
+            "description": {
+              "content": "Get a list of all runner's managers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id",
+                "managers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6d3fbf9-e9c8-42a3-9de2-a9f7527856b9",
+              "name": "Get a list of all runner's managers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "managers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8,\n  \"system_id\": \"runner-1\",\n  \"version\": \"16.11.0\",\n  \"revision\": \"91a27b2a\",\n  \"platform\": \"linux\",\n  \"architecture\": \"amd64\",\n  \"created_at\": \"2023-10-24T01:27:06.549Z\",\n  \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n  \"ip_address\": \"127.0.0.1\",\n  \"status\": \"online\",\n  \"job_execution_status\": \"idle\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "976e6c34-801d-48da-901d-bbb59fde76a5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "managers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "820a3e67-1263-4757-8f50-c13c72e98283",
+          "name": "List runner's projects",
+          "request": {
+            "name": "List runner's projects",
+            "description": {
+              "content": "Get a paginated list of all projects associated with the specified runner. Access is restricted based on user permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d84b203-3ddf-482e-ac3f-0e8350567609",
+              "name": "Get projects associated with a runner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"description\": \"desc\",\n  \"name\": \"project1\",\n  \"name_with_namespace\": \"John Doe / project1\",\n  \"path\": \"project1\",\n  \"path_with_namespace\": \"namespace1/project1\",\n  \"created_at\": \"2020-05-07T04:27:17.016Z\",\n  \"tag_list\": [\n    \"tag\"\n  ],\n  \"topics\": [\n    \"topic\"\n  ],\n  \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n  \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n  \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n  \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n  \"star_count\": 1,\n  \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n  \"visibility\": \"public\",\n  \"namespace\": {\n    \"id\": 2,\n    \"name\": \"project\",\n    \"path\": \"my_project\",\n    \"kind\": \"project\",\n    \"full_path\": \"group/my_project\",\n    \"parent_id\": 1,\n    \"avatar_url\": \"https://example.com/avatar/12345\",\n    \"web_url\": \"https://example.com/group/my_project\"\n  },\n  \"default_branch\": \"main\",\n  \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n  \"forks_count\": 1,\n  \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n  \"license\": {\n    \"key\": \"gpl-3.0\",\n    \"name\": \"GNU General Public License v3.0\",\n    \"nickname\": \"GNU GPLv3\",\n    \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n    \"source_url\": \"string\"\n  },\n  \"custom_attributes\": {\n    \"key\": \"foo\",\n    \"value\": \"bar\"\n  },\n  \"repository_storage\": \"default\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc266c69-2ed9-4dc5-903e-de56580494df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3998544b-3a93-43e4-b071-5e9fe70f6ff8",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a95faf8a-cc7a-45c9-b292-323c9f629dac",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f15b93a-e30f-433d-80b4-9bfc4d10d9b0",
+          "name": "List runner's jobs",
+          "request": {
+            "name": "List runner's jobs",
+            "description": {
+              "content": "List jobs that are being processed or were processed by the specified runner. The list of jobs is limited to projects where the user has at least the Reporter role.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "system_id",
+                  "value": "<string>",
+                  "description": "System ID associated with the runner manager"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the job"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Order by `id`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "Sort by `asc` or `desc` order. Specify `order_by` as well, including for `id`"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for obtaining the next set of records"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of a runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c798289f-8c6f-488e-9fe0-9a6c48438dc5",
+              "name": "List jobs running on a runner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "system_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"status\": \"waiting_for_resource\",\n  \"stage\": \"deploy\",\n  \"name\": \"deploy_to_production\",\n  \"ref\": \"main\",\n  \"tag\": true,\n  \"coverage\": 98.29,\n  \"allow_failure\": false,\n  \"created_at\": \"2015-12-24T15:51:21.880Z\",\n  \"started_at\": \"2015-12-24T17:54:30.733Z\",\n  \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n  \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n  \"duration\": 0.465,\n  \"queued_duration\": 0.123,\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"bio\": \"string\",\n    \"location\": \"string\",\n    \"linkedin\": \"string\",\n    \"twitter\": \"string\",\n    \"discord\": \"string\",\n    \"website_url\": \"string\",\n    \"github\": \"string\",\n    \"job_title\": \"string\",\n    \"pronouns\": \"string\",\n    \"organization\": \"string\",\n    \"bot\": false,\n    \"work_information\": \"string\",\n    \"local_time\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_at\": \"string\",\n    \"followers\": \"string\",\n    \"following\": \"string\",\n    \"is_followed\": \"string\"\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"pipeline\": {\n    \"id\": 1,\n    \"iid\": 2,\n    \"project_id\": 3,\n    \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n    \"ref\": \"feature-branch\",\n    \"status\": \"success\",\n    \"source\": \"push\",\n    \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n    \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n    \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n  },\n  \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"failure_reason\": \"script_failure\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab9398d0-7762-4887-9e05-8eaf15bacf38",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "system_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78d8296e-6e63-4366-a26b-91089e4b9d46",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "system_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be0356f9-fe9f-4463-8d11-8aec4156a6aa",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "system_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of a runner"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a57bf3e9-e6f8-4f14-a28b-fc0e6a6500a2",
+          "name": "Reset runner's authentication token",
+          "request": {
+            "name": "Reset runner's authentication token",
+            "description": {
+              "content": "Reset runner authentication token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                ":id",
+                "reset_authentication_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the runner"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df78555b-cb4e-4c64-9f72-0896ed5dab36",
+              "name": "Reset runner authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "reset_authentication_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the runner"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"token_expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c839d17-fe9a-4c91-b6db-e1a1780f11f8",
+              "name": "No access granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "reset_authentication_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the runner"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27188bf7-0603-43ee-b5a2-56aa9a849a3e",
+              "name": "Runner not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "reset_authentication_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the runner"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eceeb181-6053-4fae-b6c2-902d70775c7b",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    ":id",
+                    "reset_authentication_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the runner"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4de7574-e11d-4c1f-90e1-7d8aa616b096",
+          "name": "Reset instance's runner registration token",
+          "request": {
+            "name": "Reset instance's runner registration token",
+            "description": {
+              "content": "Reset runner registration token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "runners",
+                "reset_registration_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7079c51a-77d6-4a6c-aee0-aace0eb6fb2c",
+              "name": "Reset runner registration token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"token_expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28143667-9d2c-403f-81aa-e60e839f9de3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "runners",
+                    "reset_registration_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14783d64-4ca6-4fd0-b50a-b70469002a95",
+          "name": "Create a runner owned by currently authenticated user",
+          "request": {
+            "name": "Create a runner owned by currently authenticated user",
+            "description": {
+              "content": "Create a new runner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "user",
+                "runners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": \"<integer>\",\n  \"project_id\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44150ca2-c510-4c31-9f2c-ceb648e9cf38",
+              "name": "Create a runner owned by currently authenticated user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": 1,\n  \"project_id\": 1,\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"token_expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "651d481e-8560-41b3-81fc-95826b78da39",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": 1,\n  \"project_id\": 1,\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd1b7626-9151-4298-9f98-56c897392d57",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": 1,\n  \"project_id\": 1,\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6cf25559-b0fa-4f00-90bb-aad2a786270d",
+    "name": "GitLab access_requests runners API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests error_tracking API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "error_tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List project client keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/error_tracking/client_keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "List all client keys. This feature was introduced in GitLab 14.3."
+        },
+        {
+          "info": {
+            "name": "Create a client key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/error_tracking/client_keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Creates a new client key for a project. The public key attribute is generated automatically.This feature was introduced in GitLab 14.3."
+        },
+        {
+          "info": {
+            "name": "Delete a client key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/error_tracking/client_keys/:key_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a client key from the project. This feature was introduced in GitLab 14.3."
+        },
+        {
+          "info": {
+            "name": "Get Error Tracking settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/error_tracking/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Get error tracking settings for the project. This feature was introduced in GitLab 12.7."
+        },
+        {
+          "info": {
+            "name": "Update Error Tracking project settings. Available in GitLab 15.10 and later.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/error_tracking/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Update Error Tracking settings for a project. Only for users with Maintainer role for the project."
+        },
+        {
+          "info": {
+            "name": "Enable or disable the Error Tracking project settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v4/projects/:id/error_tracking/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "The API allows you to enable or disable the Error Tracking settings for a project.Only for users with the Maintainer role for the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

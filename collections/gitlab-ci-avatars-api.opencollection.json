@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests avatars API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "avatars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the group avatar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/avatar",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.0"
+        },
+        {
+          "info": {
+            "name": "Download a project avatar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/avatar",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 16.9"
+        },
+        {
+          "info": {
+            "name": "getApiV4Avatar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/avatar",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Public email address of the user"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Single pixel dimension for Gravatar images"
+              }
+            ]
+          },
+          "docs": "Return avatar url for a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

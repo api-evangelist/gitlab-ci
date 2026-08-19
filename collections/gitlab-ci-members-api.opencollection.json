@@ -1,0 +1,761 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests members API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4GroupsIdMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A query string to search for members"
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids to look up for membership"
+              },
+              {
+                "name": "skip_users",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids to be skipped for membership"
+              },
+              {
+                "name": "show_seat_info",
+                "value": "",
+                "type": "query",
+                "description": "Show seat information for members"
+              },
+              {
+                "name": "with_saml_identity",
+                "value": "",
+                "type": "query",
+                "description": "List only members with linked SAML identity"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
+        },
+        {
+          "info": {
+            "name": "postApiV4GroupsIdMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              }
+            ]
+          },
+          "docs": "Adds a member to a group or project."
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdMembersAll",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/all",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A query string to search for members"
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids to look up for membership"
+              },
+              {
+                "name": "show_seat_info",
+                "value": "",
+                "type": "query",
+                "description": "Show seat information for members"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by member state"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Gets a member of a group or project."
+        },
+        {
+          "info": {
+            "name": "putApiV4GroupsIdMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the new member"
+              }
+            ]
+          },
+          "docs": "Updates a member of a group or project."
+        },
+        {
+          "info": {
+            "name": "deleteApiV4GroupsIdMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              },
+              {
+                "name": "skip_subresources",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects should be skipped"
+              },
+              {
+                "name": "unassign_issuables",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating if the removed member should be unassigned from any issues or merge requests within given group or project"
+              }
+            ]
+          },
+          "docs": "Removes a user from a group or project."
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdMembersAllUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/all/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Gets a member of a group or project, including those who gained membership through ancestor group"
+        },
+        {
+          "info": {
+            "name": "postApiV4GroupsIdMembersUserIdOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:user_id/override",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Overrides the access level of an LDAP group member."
+        },
+        {
+          "info": {
+            "name": "deleteApiV4GroupsIdMembersUserIdOverride",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:user_id/override",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Remove an LDAP group member access level override."
+        },
+        {
+          "info": {
+            "name": "putApiV4GroupsIdMembersMemberIdApprove",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:member_id/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member requiring approval"
+              }
+            ]
+          },
+          "docs": "Approves a pending member"
+        },
+        {
+          "info": {
+            "name": "postApiV4GroupsIdMembersApproveAll",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/approve_all",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              }
+            ]
+          },
+          "docs": "Approves all pending members"
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdPendingMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/pending_members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Lists all pending members for a group including invited users"
+        },
+        {
+          "info": {
+            "name": "putApiV4GroupsIdMembersUserIdState",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/groups/:id/members/:user_id/state",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the user"
+              }
+            ]
+          },
+          "docs": "Changes the state of the memberships of a user in the group"
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdBillableMembersUserIdMemberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/billable_members/:user_id/memberships",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get the direct memberships of a billable user of a top-level group."
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdBillableMembersUserIdIndirect",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/billable_members/:user_id/indirect",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get the indirect memberships of a billable user of a top-level group."
+        },
+        {
+          "info": {
+            "name": "deleteApiV4GroupsIdBillableMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/billable_members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Removes a billable member from a group or project."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A query string to search for members"
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids to look up for membership"
+              },
+              {
+                "name": "skip_users",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids to be skipped for membership"
+              },
+              {
+                "name": "show_seat_info",
+                "value": "",
+                "type": "query",
+                "description": "Show seat information for members"
+              },
+              {
+                "name": "with_saml_identity",
+                "value": "",
+                "type": "query",
+                "description": "List only members with linked SAML identity"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              }
+            ]
+          },
+          "docs": "Adds a member to a group or project."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdMembersAll",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members/all",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A query string to search for members"
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Array of user ids to look up for membership"
+              },
+              {
+                "name": "show_seat_info",
+                "value": "",
+                "type": "query",
+                "description": "Show seat information for members"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by member state"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Gets a member of a group or project."
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the new member"
+              }
+            ]
+          },
+          "docs": "Updates a member of a group or project."
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdMembersUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              },
+              {
+                "name": "skip_subresources",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects should be skipped"
+              },
+              {
+                "name": "unassign_issuables",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating if the removed member should be unassigned from any issues or merge requests within given group or project"
+              }
+            ]
+          },
+          "docs": "Removes a user from a group or project."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdMembersAllUserId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/members/all/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the member"
+              }
+            ]
+          },
+          "docs": "Gets a member of a group or project, including those who gained membership through ancestor group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

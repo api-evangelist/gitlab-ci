@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests database_dictionary API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "database_dictionary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4AdminDatabasesDatabaseNameDictionaryTablesTableName",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/databases/:database_name/dictionary/tables/:table_name",
+            "params": [
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "The database name"
+              },
+              {
+                "name": "table_name",
+                "value": "",
+                "type": "path",
+                "description": "The table name"
+              }
+            ]
+          },
+          "docs": "Retrieve dictionary details"
+        },
+        {
+          "info": {
+            "name": "List dictionary tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/databases/:database_name/dictionary/tables",
+            "params": [
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "The database name"
+              },
+              {
+                "name": "table_size",
+                "value": "",
+                "type": "query",
+                "description": "Filter by table size classification"
+              }
+            ]
+          },
+          "docs": "Returns database dictionary tables filtered by database and optional table size"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

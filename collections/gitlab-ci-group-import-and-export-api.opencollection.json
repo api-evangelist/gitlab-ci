@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests group_import_and_export API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "group_import_and_export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/export/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.5."
+        },
+        {
+          "info": {
+            "name": "Start export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/export",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.5."
+        },
+        {
+          "info": {
+            "name": "Start relations export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/export_relations",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.12"
+        },
+        {
+          "info": {
+            "name": "Download relations export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/export_relations/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "relation",
+                "value": "",
+                "type": "query",
+                "description": "Group relation name"
+              },
+              {
+                "name": "batched",
+                "value": "",
+                "type": "query",
+                "description": "Whether to download in batches"
+              },
+              {
+                "name": "batch_number",
+                "value": "",
+                "type": "query",
+                "description": "Batch number to download"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.12"
+        },
+        {
+          "info": {
+            "name": "Relations export status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/export_relations/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "relation",
+                "value": "",
+                "type": "query",
+                "description": "Group relation name"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.12"
+        },
+        {
+          "info": {
+            "name": "Workhorse authorize the group import upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/import/authorize"
+          },
+          "docs": "This feature was introduced in GitLab 12.8"
+        },
+        {
+          "info": {
+            "name": "Create a new group import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/import"
+          },
+          "docs": "This feature was introduced in GitLab 12.8"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

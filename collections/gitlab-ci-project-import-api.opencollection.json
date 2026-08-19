@@ -1,0 +1,323 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests project_import API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "project_import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get export status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/export",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Start export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/export",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Download export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/export/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Start relations export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/export_relations",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.4"
+        },
+        {
+          "info": {
+            "name": "Download relations export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/export_relations/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "relation",
+                "value": "",
+                "type": "query",
+                "description": "Project relation name"
+              },
+              {
+                "name": "batched",
+                "value": "",
+                "type": "query",
+                "description": "Whether to download in batches"
+              },
+              {
+                "name": "batch_number",
+                "value": "",
+                "type": "query",
+                "description": "Batch number to download"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.4"
+        },
+        {
+          "info": {
+            "name": "Relations export status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/export_relations/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "relation",
+                "value": "",
+                "type": "query",
+                "description": "Project relation name"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.4"
+        },
+        {
+          "info": {
+            "name": "Workhorse authorize the project import upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/import/authorize"
+          },
+          "docs": "This feature was introduced in GitLab 12.9"
+        },
+        {
+          "info": {
+            "name": "Create a new project import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/import"
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Get a project import status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/import",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Import a project from a Git URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/import/git",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 18.10."
+        },
+        {
+          "info": {
+            "name": "Create a new project import using a remote object storage path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/remote-import"
+          },
+          "docs": "This feature was introduced in GitLab 13.2."
+        },
+        {
+          "info": {
+            "name": "Workhorse authorize the project relation import upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/import-relation/authorize"
+          },
+          "docs": "This feature was introduced in GitLab 16.11"
+        },
+        {
+          "info": {
+            "name": "Re-import a relation into a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/import-relation"
+          },
+          "docs": "This feature was introduced in GitLab 16.11."
+        },
+        {
+          "info": {
+            "name": "Get the statuses of relation imports for specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/relation-imports",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 16.11."
+        },
+        {
+          "info": {
+            "name": "Create a new project import using a file from AWS S3",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/remote-import-s3"
+          },
+          "docs": "This feature was introduced in GitLab 14.9."
+        },
+        {
+          "info": {
+            "name": "Import a BitBucket Cloud repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/import/bitbucket"
+          },
+          "docs": "This feature was introduced in GitLab 17.0."
+        },
+        {
+          "info": {
+            "name": "Import a BitBucket Server repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/import/bitbucket_server"
+          },
+          "docs": "This feature was introduced in GitLab 13.2."
+        },
+        {
+          "info": {
+            "name": "Import a GitHub project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/import/github"
+          },
+          "docs": "This feature was introduced in GitLab 11.3.4."
+        },
+        {
+          "info": {
+            "name": "Cancel GitHub project import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/import/github/cancel"
+          },
+          "docs": "This feature was introduced in GitLab 15.5"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

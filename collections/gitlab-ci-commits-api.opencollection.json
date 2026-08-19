@@ -1,0 +1,462 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests commits API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "commits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "ref_name",
+                "value": "v1.1.0",
+                "type": "query",
+                "description": "The name of a repository branch or tag, if not given the default branch is used"
+              },
+              {
+                "name": "since",
+                "value": "2021-09-20T11:50:22.001",
+                "type": "query",
+                "description": "Only commits after or on this date will be returned"
+              },
+              {
+                "name": "until",
+                "value": "2021-09-20T11:50:22.001",
+                "type": "query",
+                "description": "Only commits before or on this date will be returned"
+              },
+              {
+                "name": "path",
+                "value": "README.md",
+                "type": "query",
+                "description": "The file path"
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query",
+                "description": "Follow file renames when filtering by path"
+              },
+              {
+                "name": "author",
+                "value": "John Smith",
+                "type": "query",
+                "description": "Search commits by commit author"
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Every commit will be returned"
+              },
+              {
+                "name": "with_stats",
+                "value": "",
+                "type": "query",
+                "description": "Stats about each commit will be added to the response"
+              },
+              {
+                "name": "first_parent",
+                "value": "",
+                "type": "query",
+                "description": "Only include the first parent of merges"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "List commits in order"
+              },
+              {
+                "name": "trailers",
+                "value": "",
+                "type": "query",
+                "description": "Parse and include Git trailers for every commit"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a project repository commits"
+        },
+        {
+          "info": {
+            "name": "Create a new commit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.13"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsSha",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag"
+              },
+              {
+                "name": "stats",
+                "value": "",
+                "type": "query",
+                "description": "Include commit stats"
+              }
+            ]
+          },
+          "docs": "Get a specific commit of a project"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsShaDiff",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/diff",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "unidiff",
+                "value": "",
+                "type": "query",
+                "description": "A diff in a Unified diff format"
+              }
+            ]
+          },
+          "docs": "Get the diff for a specific commit of a project"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsShaComments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag"
+              }
+            ]
+          },
+          "docs": "Get a commit's comments"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdRepositoryCommitsShaComments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag on which to post a comment"
+              }
+            ]
+          },
+          "docs": "Post comment to commit"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsShaSequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/sequence",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit SHA"
+              },
+              {
+                "name": "first_parent",
+                "value": "",
+                "type": "query",
+                "description": "Only include the first parent of merges"
+              }
+            ]
+          },
+          "docs": "Get the sequence count of a commit SHA"
+        },
+        {
+          "info": {
+            "name": "Cherry pick commit into a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/cherry_pick",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag to be cherry-picked"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.15"
+        },
+        {
+          "info": {
+            "name": "Revert a commit in a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/revert",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "Commit SHA to revert"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.5"
+        },
+        {
+          "info": {
+            "name": "Get all references a commit is pushed to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/refs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Scope"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsShaMergeRequests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/merge_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag on which to find Merge Requests"
+              },
+              {
+                "name": "state",
+                "value": "merged",
+                "type": "query",
+                "description": "Filter merge-requests by state"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get Merge Requests associated with a commit"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsShaSignature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/signature",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "path",
+                "description": "A commit sha, or the name of a branch or tag"
+              }
+            ]
+          },
+          "docs": "Get a commit's signature"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

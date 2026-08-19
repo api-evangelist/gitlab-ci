@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests secure_files API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "secure_files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdSecureFiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/secure_files",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the\n        authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get list of secure files in a project"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdSecureFiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/secure_files",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the\n        authenticated user"
+              }
+            ]
+          },
+          "docs": "Create a secure file"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdSecureFilesSecureFileId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/secure_files/:secure_file_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the\n        authenticated user"
+              },
+              {
+                "name": "secure_file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a secure file"
+              }
+            ]
+          },
+          "docs": "Get the details of a specific secure file in a project"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdSecureFilesSecureFileId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/secure_files/:secure_file_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the\n        authenticated user"
+              },
+              {
+                "name": "secure_file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a secure file"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdSecureFilesSecureFileIdDownload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/secure_files/:secure_file_id/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the\n        authenticated user"
+              },
+              {
+                "name": "secure_file_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a secure file"
+              }
+            ]
+          },
+          "docs": "Download secure file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

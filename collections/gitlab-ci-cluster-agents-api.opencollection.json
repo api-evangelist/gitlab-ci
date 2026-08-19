@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests cluster_agents API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cluster_agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tokens for an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents/:agent_id/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an agent"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 15.0. Returns a list of tokens for an agent."
+        },
+        {
+          "info": {
+            "name": "Create an agent token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents/:agent_id/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an agent"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 15.0. Creates a new token for an agent."
+        },
+        {
+          "info": {
+            "name": "Get a single agent token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents/:agent_id/tokens/:token_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an agent"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the agent token"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 15.0. Gets a single agent token."
+        },
+        {
+          "info": {
+            "name": "Revoke an agent token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents/:agent_id/tokens/:token_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an agent"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the agent token"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 15.0. Revokes an agent token."
+        },
+        {
+          "info": {
+            "name": "List the agents for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.10. Returns the list of agents registered for the project."
+        },
+        {
+          "info": {
+            "name": "Register an agent with a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.10. Registers an agent to the project."
+        },
+        {
+          "info": {
+            "name": "Get details about an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents/:agent_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an agent"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.10. Gets a single agent details."
+        },
+        {
+          "info": {
+            "name": "Delete a registered agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/cluster_agents/:agent_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an agent"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.10. Deletes an existing agent registration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

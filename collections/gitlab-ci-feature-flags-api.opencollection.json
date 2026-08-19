@@ -1,0 +1,280 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests feature_flags API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "feature_flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List feature flags for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The scope of feature flags, one of: `enabled`, `disabled`"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Gets all feature flags of the requested project. This feature was introduced in GitLab 12.5."
+        },
+        {
+          "info": {
+            "name": "Create a new feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Creates a new feature flag. This feature was introduced in GitLab 12.5."
+        },
+        {
+          "info": {
+            "name": "Get a single feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags/:feature_flag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "feature_flag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              }
+            ]
+          },
+          "docs": "Gets a single feature flag. This feature was introduced in GitLab 12.5."
+        },
+        {
+          "info": {
+            "name": "Update a feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags/:feature_flag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "feature_flag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              }
+            ]
+          },
+          "docs": "Updates a feature flag. This feature was introduced in GitLab 13.2."
+        },
+        {
+          "info": {
+            "name": "Delete a feature flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags/:feature_flag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "feature_flag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the feature flag"
+              }
+            ]
+          },
+          "docs": "Deletes a feature flag. This feature was introduced in GitLab 12.5."
+        },
+        {
+          "info": {
+            "name": "List all feature flag user lists for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags_user_lists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Return user lists matching the search criteria"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Gets all feature flag user lists for the requested project. This feature was introduced in GitLab 12.10."
+        },
+        {
+          "info": {
+            "name": "Create a feature flag user list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags_user_lists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Creates a feature flag user list. This feature was introduced in GitLab 12.10."
+        },
+        {
+          "info": {
+            "name": "Get a feature flag user list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags_user_lists/:iid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the project's feature flag user list"
+              }
+            ]
+          },
+          "docs": "Gets a feature flag user list. This feature was introduced in GitLab 12.10."
+        },
+        {
+          "info": {
+            "name": "Update a feature flag user list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags_user_lists/:iid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the project's feature flag user list"
+              }
+            ]
+          },
+          "docs": "Updates a feature flag user list. This feature was introduced in GitLab 12.10."
+        },
+        {
+          "info": {
+            "name": "Delete feature flag user list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/feature_flags_user_lists/:iid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the project's feature flag user list"
+              }
+            ]
+          },
+          "docs": "Deletes a feature flag user list. This feature was introduced in GitLab 12.10."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

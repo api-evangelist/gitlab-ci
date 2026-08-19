@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ci_resource_groups API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ci_resource_groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdResourceGroups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/resource_groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get all resource groups for a project"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdResourceGroupsKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/resource_groups/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the resource group"
+              }
+            ]
+          },
+          "docs": "Get a specific resource group"
+        },
+        {
+          "info": {
+            "name": "Edit an existing resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/resource_groups/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the resource group"
+              }
+            ]
+          },
+          "docs": "Updates an existing resource group's properties."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdResourceGroupsKeyCurrentJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/resource_groups/:key/current_job",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the resource group"
+              }
+            ]
+          },
+          "docs": "Show current job for a specific resource group"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdResourceGroupsKeyUpcomingJobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/resource_groups/:key/upcoming_jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the resource group"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "List upcoming jobs for a specific resource group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

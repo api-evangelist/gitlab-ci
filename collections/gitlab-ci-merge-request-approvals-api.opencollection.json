@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests merge_request_approvals API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "merge_request_approvals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/approvals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List approvals for merge request"
+        },
+        {
+          "info": {
+            "name": "Change approval-related configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/approvals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The IID of a merge request"
+              }
+            ]
+          },
+          "docs": "Deprecated in 16.0. Use the merge request approvals API instead."
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a merge request"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdMergeRequestsMergeRequestIidUnapprove",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/unapprove",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove an approval from a merge request"
+        },
+        {
+          "info": {
+            "name": "Remove all merge request approvals",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/reset_approvals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear all approvals of merge request. This feature was added in GitLab 15.4"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovalState",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/approval_state",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The IID of a merge request"
+              }
+            ]
+          },
+          "docs": "Get approval state of merge request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,396 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests pipeline_schedules API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pipeline_schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPipelineSchedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "scope",
+                "value": "active",
+                "type": "query",
+                "description": "The scope of pipeline schedules"
+              }
+            ]
+          },
+          "docs": "Get all pipeline schedules"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdPipelineSchedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Create a new pipeline schedule"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPipelineSchedulesPipelineScheduleId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              }
+            ]
+          },
+          "docs": "Get a single pipeline schedule"
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdPipelineSchedulesPipelineScheduleId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              }
+            ]
+          },
+          "docs": "Edit a pipeline schedule"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdPipelineSchedulesPipelineScheduleId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              }
+            ]
+          },
+          "docs": "Delete a pipeline schedule"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdPipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/pipelines",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule ID"
+              },
+              {
+                "name": "scope",
+                "value": "pending",
+                "type": "query",
+                "description": "The scope of pipelines"
+              },
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The status of pipelines"
+              },
+              {
+                "name": "updated_before",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "updated_after",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "created_before",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines created before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "created_after",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines created after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "sort",
+                "value": "desc",
+                "type": "query",
+                "description": "Sort pipelines"
+              }
+            ]
+          },
+          "docs": "Get all pipelines triggered from a pipeline schedule"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdTakeOwnership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/take_ownership",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              }
+            ]
+          },
+          "docs": "Take ownership of a pipeline schedule"
+        },
+        {
+          "info": {
+            "name": "Play a scheduled pipeline immediately",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/play",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              }
+            ]
+          },
+          "docs": "This feature was added in GitLab 12.8"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/variables",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              }
+            ]
+          },
+          "docs": "Create a new pipeline schedule variable"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              },
+              {
+                "name": "key",
+                "value": "NEW_VARIABLE",
+                "type": "path",
+                "description": "The key of the variable"
+              }
+            ]
+          },
+          "docs": "Get a single pipeline schedule variable"
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              },
+              {
+                "name": "key",
+                "value": "NEW_VARIABLE",
+                "type": "path",
+                "description": "The key of the variable"
+              }
+            ]
+          },
+          "docs": "Edit a pipeline schedule variable"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline_schedules/:pipeline_schedule_id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "pipeline_schedule_id",
+                "value": "13",
+                "type": "path",
+                "description": "The pipeline schedule id"
+              },
+              {
+                "name": "key",
+                "value": "NEW_VARIABLE",
+                "type": "path",
+                "description": "The key of the variable"
+              }
+            ]
+          },
+          "docs": "Delete a pipeline schedule variable"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

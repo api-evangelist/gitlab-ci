@@ -1,0 +1,340 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests badges API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "badges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of group badges viewable by the authenticated user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/badges",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the badge"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Adds a badge to a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/badges",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Preview a badge from a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/badges/render",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              },
+              {
+                "name": "link_url",
+                "value": "",
+                "type": "query",
+                "description": "URL of the badge link"
+              },
+              {
+                "name": "image_url",
+                "value": "",
+                "type": "query",
+                "description": "URL of the badge image"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Gets a badge of a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/badges/:badge_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              },
+              {
+                "name": "badge_id",
+                "value": "",
+                "type": "path",
+                "description": "The badge ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Updates a badge of a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/groups/:id/badges/:badge_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              },
+              {
+                "name": "badge_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Removes a badge from the group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/badges/:badge_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              },
+              {
+                "name": "badge_id",
+                "value": "",
+                "type": "path",
+                "description": "The badge ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Gets a list of project badges viewable by the authenticated user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/badges",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the badge"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Adds a badge to a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/badges",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Preview a badge from a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/badges/render",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user."
+              },
+              {
+                "name": "link_url",
+                "value": "",
+                "type": "query",
+                "description": "URL of the badge link"
+              },
+              {
+                "name": "image_url",
+                "value": "",
+                "type": "query",
+                "description": "URL of the badge image"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Gets a badge of a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/badges/:badge_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user."
+              },
+              {
+                "name": "badge_id",
+                "value": "",
+                "type": "path",
+                "description": "The badge ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Updates a badge of a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/badges/:badge_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user."
+              },
+              {
+                "name": "badge_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        },
+        {
+          "info": {
+            "name": "Removes a badge from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/badges/:badge_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user."
+              },
+              {
+                "name": "badge_id",
+                "value": "",
+                "type": "path",
+                "description": "The badge ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.6."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

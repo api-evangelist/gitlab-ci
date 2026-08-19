@@ -1,0 +1,939 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests deploy_resources API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "deploy_resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List group deploy tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/deploy_tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Limit by active status"
+              }
+            ]
+          },
+          "docs": "Get a list of a group's deploy tokens. This feature was introduced in GitLab 12.9."
+        },
+        {
+          "info": {
+            "name": "Create a group deploy token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/deploy_tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Creates a new deploy token for a group. This feature was introduced in GitLab 12.9."
+        },
+        {
+          "info": {
+            "name": "Get a group deploy token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/deploy_tokens/:token_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy token"
+              }
+            ]
+          },
+          "docs": "Get a single group's deploy token by ID. This feature was introduced in GitLab 14.9. "
+        },
+        {
+          "info": {
+            "name": "Delete a group deploy token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/deploy_tokens/:token_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy token"
+              }
+            ]
+          },
+          "docs": "Removes a deploy token from the group. This feature was introduced in GitLab 12.9."
+        },
+        {
+          "info": {
+            "name": "List deploy keys for project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of a project's deploy keys."
+        },
+        {
+          "info": {
+            "name": "Add deploy key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Creates a new deploy key for a project. If the deploy key already exists in another project, it's joined to the current project only if the original one is accessible by the same user."
+        },
+        {
+          "info": {
+            "name": "Get a single deploy key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_keys/:key_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy key"
+              }
+            ]
+          },
+          "docs": "Get a single key."
+        },
+        {
+          "info": {
+            "name": "Update deploy key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_keys/:key_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy key"
+              }
+            ]
+          },
+          "docs": "Updates a deploy key for a project."
+        },
+        {
+          "info": {
+            "name": "Delete deploy key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_keys/:key_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy key"
+              }
+            ]
+          },
+          "docs": "Removes a deploy key from the project. If the deploy key is used only for this project, it's deleted from the system."
+        },
+        {
+          "info": {
+            "name": "Enable a deploy key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_keys/:key_id/enable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy key"
+              }
+            ]
+          },
+          "docs": "Enables a deploy key for a project so this can be used. Returns the enabled key, with a status code 201 when successful. This feature was added in GitLab 8.11."
+        },
+        {
+          "info": {
+            "name": "List project deploy tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Limit by active status"
+              }
+            ]
+          },
+          "docs": "Get a list of a project's deploy tokens. This feature was introduced in GitLab 12.9."
+        },
+        {
+          "info": {
+            "name": "Create a project deploy token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Creates a new deploy token for a project. This feature was introduced in GitLab 12.9."
+        },
+        {
+          "info": {
+            "name": "Get a project deploy token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_tokens/:token_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy token"
+              }
+            ]
+          },
+          "docs": "Get a single project's deploy token by ID. This feature was introduced in GitLab 14.9."
+        },
+        {
+          "info": {
+            "name": "Delete a project deploy token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deploy_tokens/:token_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deploy token"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.9."
+        },
+        {
+          "info": {
+            "name": "List project deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Return deployments ordered by either one of `id`, `iid`, `created_at`, `updated_at` or `ref` fields. Default is `id`"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return deployments sorted in `asc` or `desc` order. Default is `asc`"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Return deployments updated after the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Return deployments updated before the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)"
+              },
+              {
+                "name": "finished_after",
+                "value": "",
+                "type": "query",
+                "description": "Return deployments finished after the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)"
+              },
+              {
+                "name": "finished_before",
+                "value": "",
+                "type": "query",
+                "description": "Return deployments finished before the specified date. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)"
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "The name of the environment to filter deployments by"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status to filter deployments by. One of `created`, `running`, `success`, `failed`, `canceled`, or `blocked`"
+              }
+            ]
+          },
+          "docs": "Get a list of deployments in a project. This feature was introduced in GitLab 8.11."
+        },
+        {
+          "info": {
+            "name": "Create a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.4."
+        },
+        {
+          "info": {
+            "name": "Get a specific deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments/:deployment_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "deployment_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deployment"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.11."
+        },
+        {
+          "info": {
+            "name": "Update a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments/:deployment_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "deployment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.4."
+        },
+        {
+          "info": {
+            "name": "Delete a specific deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments/:deployment_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "deployment_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deployment"
+              }
+            ]
+          },
+          "docs": "Delete a specific deployment that is not currently the last deployment for an environment or in a running state. This feature was introduced in GitLab 15.3."
+        },
+        {
+          "info": {
+            "name": "List of merge requests associated with a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments/:deployment_id/merge_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "deployment_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deployment"
+              },
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "author_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "assignee_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "reviewer_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "milestone",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "my_reaction_emoji",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "reviewer_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests sorted in `asc` or `desc` order."
+              },
+              {
+                "name": "with_labels_details",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`"
+              },
+              {
+                "name": "with_merge_status_recheck",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0."
+              },
+              {
+                "name": "created_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "created_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "If simple, returns the `iid`, URL, title, description, and basic state of merge request"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`"
+              },
+              {
+                "name": "source_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source branch"
+              },
+              {
+                "name": "source_project_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source project id"
+              },
+              {
+                "name": "target_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given target branch"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search merge requests against their `title` and `description`."
+              },
+              {
+                "name": "in",
+                "value": "title,description",
+                "type": "query",
+                "description": "Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma."
+              },
+              {
+                "name": "wip",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests."
+              },
+              {
+                "name": "draft",
+                "value": "",
+                "type": "query",
+                "description": "Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests."
+              },
+              {
+                "name": "not[author_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "not[author_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[assignee_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "not[assignee_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[reviewer_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "not[labels]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "not[milestone]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "not[my_reaction_emoji]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "not[reviewer_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "deployed_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed before the given date/time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "deployed_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed after the given date/time. Expected in ISO 8601 format"
+              },
+              {
+                "name": "environment",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed to the given environment"
+              },
+              {
+                "name": "approved",
+                "value": "",
+                "type": "query",
+                "description": "Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests."
+              },
+              {
+                "name": "merge_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`."
+              },
+              {
+                "name": "merge_user_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of merge requests shipped with a given deployment. This feature was introduced in GitLab 12.7."
+        },
+        {
+          "info": {
+            "name": "Approve or reject a blocked deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/deployments/:deployment_id/approval",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "deployment_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the deployment"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.8."
+        },
+        {
+          "info": {
+            "name": "List all deploy keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/deploy_keys",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "public",
+                "value": "",
+                "type": "query",
+                "description": "Only return deploy keys that are public"
+              }
+            ]
+          },
+          "docs": "Get a list of all deploy keys across all projects of the GitLab instance. This endpoint requires administrator access and is not available on GitLab.com."
+        },
+        {
+          "info": {
+            "name": "Create a deploy key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/deploy_keys"
+          },
+          "docs": "Create a deploy key for the GitLab instance. This endpoint requires administrator access."
+        },
+        {
+          "info": {
+            "name": "List all deploy tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/deploy_tokens",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Limit by active status"
+              }
+            ]
+          },
+          "docs": "Get a list of all deploy tokens across the GitLab instance. This endpoint requires administrator access. This feature was introduced in GitLab 12.9."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

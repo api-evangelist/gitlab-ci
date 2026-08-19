@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests jobs API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List runner's jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/:id/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              },
+              {
+                "name": "system_id",
+                "value": "",
+                "type": "query",
+                "description": "System ID associated with the runner manager"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the job"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Order by `id`"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort by `asc` or `desc` order. Specify `order_by` as well, including for `id`"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for obtaining the next set of records"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "List jobs that are being processed or were processed by the specified runner. The list of jobs is limited to projects where the user has at least the Reporter role."
+        },
+        {
+          "info": {
+            "name": "postApiV4JobsRequest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/jobs/request"
+          },
+          "docs": "Request a job"
+        },
+        {
+          "info": {
+            "name": "putApiV4JobsId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job's ID"
+              }
+            ]
+          },
+          "docs": "Update a job"
+        },
+        {
+          "info": {
+            "name": "patchApiV4JobsIdTrace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v4/jobs/:id/trace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job's ID"
+              }
+            ]
+          },
+          "docs": "Append a patch to the job trace"
+        },
+        {
+          "info": {
+            "name": "postApiV4JobsIdArtifactsAuthorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/jobs/:id/artifacts/authorize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job's ID"
+              }
+            ]
+          },
+          "docs": "Authorize uploading job artifact"
+        },
+        {
+          "info": {
+            "name": "getApiV4JobsIdArtifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/jobs/:id/artifacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job's ID"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Job's authentication token"
+              },
+              {
+                "name": "direct_download",
+                "value": "",
+                "type": "query",
+                "description": "Perform direct download from remote storage instead of proxying artifacts"
+              }
+            ]
+          },
+          "docs": "Download the artifacts file for job"
+        },
+        {
+          "info": {
+            "name": "postApiV4JobsIdArtifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/jobs/:id/artifacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job's ID"
+              }
+            ]
+          },
+          "docs": "Upload a job artifact"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

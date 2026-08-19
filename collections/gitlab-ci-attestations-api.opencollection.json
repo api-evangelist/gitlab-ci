@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests attestations API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "attestations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch the list of all attestations for a specific project and artifact hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/attestations/:subject_digest",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "subject_digest",
+                "value": "",
+                "type": "path",
+                "description": "The SHA-256 hash of the artifact"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 18.7"
+        },
+        {
+          "info": {
+            "name": "Fetch a specific bundle by iid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/attestations/:attestation_iid/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "attestation_iid",
+                "value": "",
+                "type": "path",
+                "description": "The iid of the attestation"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 18.7"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

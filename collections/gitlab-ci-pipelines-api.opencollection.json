@@ -1,0 +1,469 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests pipelines API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Pipelines of the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "scope",
+                "value": "pending",
+                "type": "query",
+                "description": "The scope of pipelines"
+              },
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The status of pipelines"
+              },
+              {
+                "name": "ref",
+                "value": "develop",
+                "type": "query",
+                "description": "The ref of pipelines"
+              },
+              {
+                "name": "sha",
+                "value": "a91957a858320c0e17f3a0eca7cfacbff50ea29a",
+                "type": "query",
+                "description": "The sha of pipelines"
+              },
+              {
+                "name": "yaml_errors",
+                "value": "",
+                "type": "query",
+                "description": "Returns pipelines with invalid configurations"
+              },
+              {
+                "name": "username",
+                "value": "root",
+                "type": "query",
+                "description": "The username of the user who triggered pipelines"
+              },
+              {
+                "name": "updated_before",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "updated_after",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "created_before",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines created before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "created_after",
+                "value": "2015-12-24T15:51:21.880Z",
+                "type": "query",
+                "description": "Return pipelines created after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+              },
+              {
+                "name": "order_by",
+                "value": "status",
+                "type": "query",
+                "description": "Order pipelines"
+              },
+              {
+                "name": "sort",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort pipelines"
+              },
+              {
+                "name": "source",
+                "value": "push",
+                "type": "query",
+                "description": "The source of pipelines"
+              },
+              {
+                "name": "name",
+                "value": "Build pipeline",
+                "type": "query",
+                "description": "Filter pipelines by name"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.11."
+        },
+        {
+          "info": {
+            "name": "Create a new pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipeline",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.14"
+        },
+        {
+          "info": {
+            "name": "Gets the latest pipeline for the project branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/latest",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "ref",
+                "value": "develop",
+                "type": "query",
+                "description": "Branch ref of pipeline. Uses project default branch if not specified."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.3"
+        },
+        {
+          "info": {
+            "name": "Gets a specific pipeline for the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.11"
+        },
+        {
+          "info": {
+            "name": "Deletes a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.6"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPipelinesPipelineIdJobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              },
+              {
+                "name": "include_retried",
+                "value": "",
+                "type": "query",
+                "description": "Includes retried jobs"
+              },
+              {
+                "name": "scope",
+                "value": "pending,running",
+                "type": "query",
+                "description": "The scope of builds to show"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get pipeline jobs"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPipelinesPipelineIdBridges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/bridges",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              },
+              {
+                "name": "scope",
+                "value": "pending,running",
+                "type": "query",
+                "description": "The scope of builds to show"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get pipeline bridge jobs"
+        },
+        {
+          "info": {
+            "name": "Gets the variables for a given pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/variables",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.11"
+        },
+        {
+          "info": {
+            "name": "Gets the test report for a given pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/test_report",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.0."
+        },
+        {
+          "info": {
+            "name": "Gets the test report summary for a given pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/test_report_summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.2"
+        },
+        {
+          "info": {
+            "name": "Updates pipeline metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/metadata",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 16.6"
+        },
+        {
+          "info": {
+            "name": "Retry builds in the pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/retry",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.11."
+        },
+        {
+          "info": {
+            "name": "Cancel all builds in the pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pipelines/:pipeline_id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "11",
+                "type": "path",
+                "description": "The project ID or URL-encoded path"
+              },
+              {
+                "name": "pipeline_id",
+                "value": "18",
+                "type": "path",
+                "description": "The pipeline ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.11."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

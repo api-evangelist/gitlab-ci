@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests keys API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of Groups::SshCertificate for a Group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/ssh_certificates",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a list of ssh certificates created for a group."
+        },
+        {
+          "info": {
+            "name": "Add a Groups::SshCertificate.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/ssh_certificates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a ssh certificate for a group."
+        },
+        {
+          "info": {
+            "name": "Removes an ssh certificate from a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/ssh_certificates/:ssh_certificates_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ssh_certificates_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a Groups::SshCertificate"
+        },
+        {
+          "info": {
+            "name": "Get single ssh key by id. Only available to admin users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2",
+                "type": "path",
+                "description": "The ID of an SSH key"
+              }
+            ]
+          },
+          "docs": "Get SSH key with user by ID of an SSH key. Note only administrators can lookup SSH key with user by ID\\\n        of an SSH key"
+        },
+        {
+          "info": {
+            "name": "Get user by fingerprint of SSH key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/keys",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "ba:81:59:68:d7:6c:cd:02:02:bf:6a:9b:55:4e:af:d1",
+                "type": "query",
+                "description": "The fingerprint of an SSH key"
+              }
+            ]
+          },
+          "docs": "You can search for a user that owns a specific SSH key. Note only administrators can lookup SSH key\\\n        with the fingerprint of an SSH key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

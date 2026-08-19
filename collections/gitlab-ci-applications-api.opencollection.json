@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests applications API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/applications"
+          },
+          "docs": "List all registered applications"
+        },
+        {
+          "info": {
+            "name": "Create a new application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/applications"
+          },
+          "docs": "This feature was introduced in GitLab 10.5"
+        },
+        {
+          "info": {
+            "name": "Delete an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the application (not the application_id)"
+              }
+            ]
+          },
+          "docs": "Delete a specific application"
+        },
+        {
+          "info": {
+            "name": "Renew an application secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/applications/:id/renew-secret",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the application (not the application_id)"
+              }
+            ]
+          },
+          "docs": "Renew the secret of a specific application"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

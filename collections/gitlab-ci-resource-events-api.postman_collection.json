@@ -1,0 +1,672 @@
+{
+  "item": [
+    {
+      "id": "6beda075-51d9-455f-94d9-9a31359feba5",
+      "name": "resource_events",
+      "description": {
+        "content": "Operations about resource_events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c34a5aa-3369-43b0-ae19-796b2797892a",
+          "name": "List project Issue milestone events",
+          "request": {
+            "name": "List project Issue milestone events",
+            "description": {
+              "content": "Gets a list of all milestone events for a single Issue",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "issues",
+                ":eventable_id",
+                "resource_milestone_events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "eventable_id",
+                  "description": "(Required) The ID of the eventable"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef71586e-0b65-4d97-b9d9-0a5531d07100",
+              "name": "List project Issue milestone events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "issues",
+                    ":eventable_id",
+                    "resource_milestone_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventable_id",
+                      "description": "(Required) The ID of the eventable"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 142,\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"created_at\": \"2018-08-20T13:38:20.077Z\",\n    \"resource_type\": \"Issue\",\n    \"resource_id\": 253,\n    \"milestone\": {\n      \"id\": 1754,\n      \"iid\": 1575,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": true,\n      \"web_url\": \"string\",\n      \"project_id\": 5470,\n      \"group_id\": \"string\"\n    },\n    \"action\": \"add\",\n    \"state\": \"active\"\n  },\n  {\n    \"id\": 142,\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"created_at\": \"2018-08-20T13:38:20.077Z\",\n    \"resource_type\": \"Issue\",\n    \"resource_id\": 253,\n    \"milestone\": {\n      \"id\": 3762,\n      \"iid\": 9431,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": false,\n      \"web_url\": \"string\",\n      \"project_id\": 5186,\n      \"group_id\": \"string\"\n    },\n    \"action\": \"add\",\n    \"state\": \"active\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f338930-a702-4e59-83e1-876b874fe9de",
+          "name": "Get single Issue milestone event",
+          "request": {
+            "name": "Get single Issue milestone event",
+            "description": {
+              "content": "Returns a single milestone event for a specific project Issue",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "issues",
+                ":eventable_id",
+                "resource_milestone_events",
+                ":event_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "event_id",
+                  "description": "(Required) The ID of a resource milestone event"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "eventable_id",
+                  "description": "(Required) The ID of the eventable"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89c1fc23-2d5a-4ab5-b2af-a22d9f3160e1",
+              "name": "Get single Issue milestone event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "issues",
+                    ":eventable_id",
+                    "resource_milestone_events",
+                    ":event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) The ID of a resource milestone event"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventable_id",
+                      "description": "(Required) The ID of the eventable"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 142,\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"created_at\": \"2018-08-20T13:38:20.077Z\",\n  \"resource_type\": \"Issue\",\n  \"resource_id\": 253,\n  \"milestone\": {\n    \"id\": 9832,\n    \"iid\": 4760,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"project_id\": 1460,\n    \"group_id\": \"string\"\n  },\n  \"action\": \"add\",\n  \"state\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d51f0897-93d0-41f3-9b31-c706a163e003",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "issues",
+                    ":eventable_id",
+                    "resource_milestone_events",
+                    ":event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) The ID of a resource milestone event"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventable_id",
+                      "description": "(Required) The ID of the eventable"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a08fcd45-5079-4b7b-b7af-8a981029dcc2",
+          "name": "List project Merge request milestone events",
+          "request": {
+            "name": "List project Merge request milestone events",
+            "description": {
+              "content": "Gets a list of all milestone events for a single Merge request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "merge_requests",
+                ":eventable_id",
+                "resource_milestone_events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "eventable_id",
+                  "description": "(Required) The ID of the eventable"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3c251bc-375f-4a3f-9bbc-d3d131567fed",
+              "name": "List project Merge request milestone events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "merge_requests",
+                    ":eventable_id",
+                    "resource_milestone_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventable_id",
+                      "description": "(Required) The ID of the eventable"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 142,\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"created_at\": \"2018-08-20T13:38:20.077Z\",\n    \"resource_type\": \"Issue\",\n    \"resource_id\": 253,\n    \"milestone\": {\n      \"id\": 7395,\n      \"iid\": 1062,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": false,\n      \"web_url\": \"string\",\n      \"project_id\": 4561,\n      \"group_id\": \"string\"\n    },\n    \"action\": \"add\",\n    \"state\": \"active\"\n  },\n  {\n    \"id\": 142,\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"created_at\": \"2018-08-20T13:38:20.077Z\",\n    \"resource_type\": \"Issue\",\n    \"resource_id\": 253,\n    \"milestone\": {\n      \"id\": 8757,\n      \"iid\": 9169,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": true,\n      \"web_url\": \"string\",\n      \"project_id\": 5265,\n      \"group_id\": \"string\"\n    },\n    \"action\": \"add\",\n    \"state\": \"active\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd00f87d-bc0c-45c1-9bc7-2d688e439e35",
+          "name": "Get single Merge request milestone event",
+          "request": {
+            "name": "Get single Merge request milestone event",
+            "description": {
+              "content": "Returns a single milestone event for a specific project Merge request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "merge_requests",
+                ":eventable_id",
+                "resource_milestone_events",
+                ":event_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "event_id",
+                  "description": "(Required) The ID of a resource milestone event"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "eventable_id",
+                  "description": "(Required) The ID of the eventable"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccce6e46-14c1-48d4-bd3c-c4a3b76476e8",
+              "name": "Get single Merge request milestone event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "merge_requests",
+                    ":eventable_id",
+                    "resource_milestone_events",
+                    ":event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) The ID of a resource milestone event"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventable_id",
+                      "description": "(Required) The ID of the eventable"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 142,\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"created_at\": \"2018-08-20T13:38:20.077Z\",\n  \"resource_type\": \"Issue\",\n  \"resource_id\": 253,\n  \"milestone\": {\n    \"id\": 9832,\n    \"iid\": 4760,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"project_id\": 1460,\n    \"group_id\": \"string\"\n  },\n  \"action\": \"add\",\n  \"state\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c0c3f1c-f9f4-401a-97a5-e5e847f28ffc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "merge_requests",
+                    ":eventable_id",
+                    "resource_milestone_events",
+                    ":event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) The ID of a resource milestone event"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventable_id",
+                      "description": "(Required) The ID of the eventable"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1431ba26-6788-424c-b182-0232ea7ea5bc",
+    "name": "GitLab access_requests resource_events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests job_artifacts API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "job_artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the artifacts archive from a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/artifacts/:ref_name/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "ref_name",
+                "value": "",
+                "type": "path",
+                "description": "Branch or tag name in repository. `HEAD` or `SHA` references are not supported."
+              },
+              {
+                "name": "job",
+                "value": "",
+                "type": "query",
+                "description": "The name of the job."
+              },
+              {
+                "name": "job_token",
+                "value": "",
+                "type": "query",
+                "description": "To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers."
+              },
+              {
+                "name": "search_recent_successful_pipelines",
+                "value": "",
+                "type": "query",
+                "description": "Search across recent successful pipelines instead of just the latest one."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.10"
+        },
+        {
+          "info": {
+            "name": "Download a specific file from artifacts archive from a ref",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/artifacts/:ref_name/raw/*artifact_path",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "ref_name",
+                "value": "",
+                "type": "path",
+                "description": "Branch or tag name in repository. `HEAD` or `SHA` references are not supported."
+              },
+              {
+                "name": "job",
+                "value": "",
+                "type": "query",
+                "description": "The name of the job."
+              },
+              {
+                "name": "artifact_path",
+                "value": "",
+                "type": "query",
+                "description": "Path to a file inside the artifacts archive."
+              },
+              {
+                "name": "job_token",
+                "value": "",
+                "type": "query",
+                "description": "To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers."
+              },
+              {
+                "name": "search_recent_successful_pipelines",
+                "value": "",
+                "type": "query",
+                "description": "Search across recent successful pipelines instead of just the latest one."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.5"
+        },
+        {
+          "info": {
+            "name": "Download the artifacts archive from a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/artifacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a job"
+              },
+              {
+                "name": "job_token",
+                "value": "",
+                "type": "query",
+                "description": "To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.5"
+        },
+        {
+          "info": {
+            "name": "Delete the artifacts files from a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/artifacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a job"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.9"
+        },
+        {
+          "info": {
+            "name": "List all files in the artifacts archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/artifacts/tree",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "job_id",
+                "value": "42",
+                "type": "path",
+                "description": "ID of a job"
+              },
+              {
+                "name": "path",
+                "value": "coverage/reports",
+                "type": "query",
+                "description": "Path to browse in the artifacts archive. Defaults to root directory."
+              },
+              {
+                "name": "recursive",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, return all entries recursively."
+              },
+              {
+                "name": "job_token",
+                "value": "",
+                "type": "query",
+                "description": "CI/CD job token for multi-project pipelines. Premium and Ultimate only."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Lists all files and directories in the artifacts archive without extracting them"
+        },
+        {
+          "info": {
+            "name": "Download a specific file from artifacts archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/artifacts/*artifact_path",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a job"
+              },
+              {
+                "name": "artifact_path",
+                "value": "",
+                "type": "query",
+                "description": "Path to a file inside the artifacts archive."
+              },
+              {
+                "name": "job_token",
+                "value": "",
+                "type": "query",
+                "description": "To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.0"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdJobsJobIdArtifactsKeep",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/artifacts/keep",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a job"
+              }
+            ]
+          },
+          "docs": "Keep the artifacts to prevent them from being deleted"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdArtifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/artifacts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Expire the artifacts files from a project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

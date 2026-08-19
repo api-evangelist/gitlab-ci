@@ -1,0 +1,1738 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests merge_requests API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "merge_requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List group merge requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/merge_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user."
+              },
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "author_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "assignee_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "reviewer_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "milestone",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "my_reaction_emoji",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "reviewer_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests sorted in `asc` or `desc` order."
+              },
+              {
+                "name": "with_labels_details",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`"
+              },
+              {
+                "name": "with_merge_status_recheck",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0."
+              },
+              {
+                "name": "created_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "created_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "If simple, returns the `iid`, URL, title, description, and basic state of merge request"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`"
+              },
+              {
+                "name": "source_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source branch"
+              },
+              {
+                "name": "source_project_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source project id"
+              },
+              {
+                "name": "target_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given target branch"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search merge requests against their `title` and `description`."
+              },
+              {
+                "name": "in",
+                "value": "title,description",
+                "type": "query",
+                "description": "Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma."
+              },
+              {
+                "name": "wip",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests."
+              },
+              {
+                "name": "draft",
+                "value": "",
+                "type": "query",
+                "description": "Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests."
+              },
+              {
+                "name": "not[author_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "not[author_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[assignee_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "not[assignee_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[reviewer_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "not[labels]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "not[milestone]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "not[my_reaction_emoji]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "not[reviewer_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "deployed_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed before the given date/time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "deployed_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed after the given date/time. Expected in ISO 8601 format"
+              },
+              {
+                "name": "environment",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed to the given environment"
+              },
+              {
+                "name": "approved",
+                "value": "",
+                "type": "query",
+                "description": "Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests."
+              },
+              {
+                "name": "merge_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`."
+              },
+              {
+                "name": "merge_user_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`."
+              },
+              {
+                "name": "approver_ids",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have specified the users with the given IDs as an individual approver"
+              },
+              {
+                "name": "approved_by_ids",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have been approved by the specified users with the given IDs"
+              },
+              {
+                "name": "approved_by_usernames",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have been approved by the specified users with the given\n            usernames"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "non_archived",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests from non archived projects only."
+              }
+            ]
+          },
+          "docs": "Get all merge requests for this group and its subgroups."
+        },
+        {
+          "info": {
+            "name": "Create merge request for missing ci config in project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/create_ci_config",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Creates a merge request to add missing CI configuration"
+        },
+        {
+          "info": {
+            "name": "Set a time estimate for a merge_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/time_estimate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge_request."
+              }
+            ]
+          },
+          "docs": "Sets an estimated time of work for this merge_request."
+        },
+        {
+          "info": {
+            "name": "Reset the time estimate for a project merge_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/reset_time_estimate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge_request."
+              }
+            ]
+          },
+          "docs": "Resets the estimated time for this merge_request to 0 seconds."
+        },
+        {
+          "info": {
+            "name": "Add spent time for a merge_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/add_spent_time",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge_request."
+              }
+            ]
+          },
+          "docs": "Adds spent time for this merge_request."
+        },
+        {
+          "info": {
+            "name": "Reset spent time for a merge_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/reset_spent_time",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge_request"
+              }
+            ]
+          },
+          "docs": "Resets the total spent time for this merge_request to 0 seconds."
+        },
+        {
+          "info": {
+            "name": "Get time tracking stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/time_stats",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge_request"
+              }
+            ]
+          },
+          "docs": "Get time tracking stats"
+        },
+        {
+          "info": {
+            "name": "List project merge requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "author_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "assignee_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "reviewer_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "milestone",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "my_reaction_emoji",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "reviewer_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests sorted in `asc` or `desc` order."
+              },
+              {
+                "name": "with_labels_details",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`"
+              },
+              {
+                "name": "with_merge_status_recheck",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0."
+              },
+              {
+                "name": "created_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "created_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "If simple, returns the `iid`, URL, title, description, and basic state of merge request"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`"
+              },
+              {
+                "name": "source_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source branch"
+              },
+              {
+                "name": "source_project_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source project id"
+              },
+              {
+                "name": "target_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given target branch"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search merge requests against their `title` and `description`."
+              },
+              {
+                "name": "in",
+                "value": "title,description",
+                "type": "query",
+                "description": "Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma."
+              },
+              {
+                "name": "wip",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests."
+              },
+              {
+                "name": "draft",
+                "value": "",
+                "type": "query",
+                "description": "Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests."
+              },
+              {
+                "name": "not[author_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "not[author_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[assignee_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "not[assignee_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[reviewer_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "not[labels]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "not[milestone]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "not[my_reaction_emoji]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "not[reviewer_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "deployed_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed before the given date/time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "deployed_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed after the given date/time. Expected in ISO 8601 format"
+              },
+              {
+                "name": "environment",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed to the given environment"
+              },
+              {
+                "name": "approved",
+                "value": "",
+                "type": "query",
+                "description": "Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests."
+              },
+              {
+                "name": "merge_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`."
+              },
+              {
+                "name": "merge_user_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`."
+              },
+              {
+                "name": "approver_ids",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have specified the users with the given IDs as an individual approver"
+              },
+              {
+                "name": "approved_by_ids",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have been approved by the specified users with the given IDs"
+              },
+              {
+                "name": "approved_by_usernames",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have been approved by the specified users with the given\n            usernames"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "iids",
+                "value": "",
+                "type": "query",
+                "description": "Returns the request having the given `iid`."
+              }
+            ]
+          },
+          "docs": "Get all merge requests for this project."
+        },
+        {
+          "info": {
+            "name": "Create merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              }
+            ]
+          },
+          "docs": "Create a new merge request."
+        },
+        {
+          "info": {
+            "name": "Get single merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request."
+              },
+              {
+                "name": "render_html",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response includes rendered HTML for title and description."
+              },
+              {
+                "name": "include_diverged_commits_count",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response includes the commits behind the target branch."
+              },
+              {
+                "name": "include_rebase_in_progress",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response includes whether a rebase operation is in progress."
+              }
+            ]
+          },
+          "docs": "Shows information about a single merge request. Note: the `changes_count` value in the response is a string, not an integer. This is because when an merge request has too many changes to display and store, it is capped at 1,000. In that case, the API returns the string `\"1000+\"` for the changes count."
+        },
+        {
+          "info": {
+            "name": "Update merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates an existing merge request. You can change the target branch, title, or even close the merge request."
+        },
+        {
+          "info": {
+            "name": "Delete a merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request."
+              }
+            ]
+          },
+          "docs": "Only for administrators and project owners. Deletes the merge request in question. "
+        },
+        {
+          "info": {
+            "name": "Get single merge request participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/participants",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a list of merge request participants."
+        },
+        {
+          "info": {
+            "name": "Get single merge request reviewers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/reviewers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a list of merge request reviewers."
+        },
+        {
+          "info": {
+            "name": "Get single merge request commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/commits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of merge request commits."
+        },
+        {
+          "info": {
+            "name": "List merge request context commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/context_commits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a list of merge request context commits."
+        },
+        {
+          "info": {
+            "name": "Create merge request context commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/context_commits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a list of merge request context commits."
+        },
+        {
+          "info": {
+            "name": "Delete merge request context commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/context_commits",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "commits",
+                "value": "",
+                "type": "query",
+                "description": "The context commits’ SHA."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a list of merge request context commits."
+        },
+        {
+          "info": {
+            "name": "Get single merge request changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/changes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "unidiff",
+                "value": "",
+                "type": "query",
+                "description": "A diff in a Unified diff format"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Shows information about the merge request including its files and changes."
+        },
+        {
+          "info": {
+            "name": "Get the merge request diffs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/diffs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "unidiff",
+                "value": "",
+                "type": "query",
+                "description": "A diff in a Unified diff format"
+              }
+            ]
+          },
+          "docs": "Get a list of merge request diffs."
+        },
+        {
+          "info": {
+            "name": "Get the merge request raw diffs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/raw_diffs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the raw diffs of a merge request that can used programmatically."
+        },
+        {
+          "info": {
+            "name": "Get single merge request pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/pipelines",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request."
+              }
+            ]
+          },
+          "docs": "Get a list of merge request pipelines."
+        },
+        {
+          "info": {
+            "name": "Create merge request pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/pipelines",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a new pipeline for a merge request. A pipeline created via this endpoint doesn’t run a regular branch/tag pipeline. It requires `.gitlab-ci.yml` to be configured with `only: [merge_requests]` to create jobs."
+        },
+        {
+          "info": {
+            "name": "Merge a merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/merge",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accept and merge changes submitted with the merge request using this API."
+        },
+        {
+          "info": {
+            "name": "Returns the up to date merge-ref HEAD commit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/merge_ref",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the up to date merge-ref HEAD commit"
+        },
+        {
+          "info": {
+            "name": "Cancel Merge When Pipeline Succeeds",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/cancel_merge_when_pipeline_succeeds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel merge if \"Merge When Pipeline Succeeds\" is enabled"
+        },
+        {
+          "info": {
+            "name": "Rebase a merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/rebase",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Automatically rebase the `source_branch` of the merge request against its `target_branch`. This feature was added in GitLab 11.6"
+        },
+        {
+          "info": {
+            "name": "List issues that close on merge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/closes_issues",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get all the issues that would be closed by merging the provided merge request."
+        },
+        {
+          "info": {
+            "name": "List issues related to merge request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/related_issues",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get all the related issues from title, description, commits, comments and discussions of the merge request."
+        },
+        {
+          "info": {
+            "name": "Get a list of merge request diff versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/versions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.12."
+        },
+        {
+          "info": {
+            "name": "Get a single merge request diff version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/merge_requests/:merge_request_iid/versions/:version_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "merge_request_iid",
+                "value": "",
+                "type": "path",
+                "description": "The internal ID of the merge request"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the merge request diff version"
+              },
+              {
+                "name": "unidiff",
+                "value": "",
+                "type": "query",
+                "description": "A diff in a Unified diff format"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 8.12."
+        },
+        {
+          "info": {
+            "name": "List merge requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/merge_requests",
+            "params": [
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "author_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "assignee_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "assignee_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "reviewer_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "milestone",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "my_reaction_emoji",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "reviewer_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests sorted in `asc` or `desc` order."
+              },
+              {
+                "name": "with_labels_details",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`"
+              },
+              {
+                "name": "with_merge_status_recheck",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0."
+              },
+              {
+                "name": "created_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "created_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests created on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or after the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "updated_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests updated on or before the given time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "If simple, returns the `iid`, URL, title, description, and basic state of merge request"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`"
+              },
+              {
+                "name": "source_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source branch"
+              },
+              {
+                "name": "source_project_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given source project id"
+              },
+              {
+                "name": "target_branch",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests with the given target branch"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search merge requests against their `title` and `description`."
+              },
+              {
+                "name": "in",
+                "value": "title,description",
+                "type": "query",
+                "description": "Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma."
+              },
+              {
+                "name": "wip",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests."
+              },
+              {
+                "name": "draft",
+                "value": "",
+                "type": "query",
+                "description": "Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests."
+              },
+              {
+                "name": "not[author_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`."
+              },
+              {
+                "name": "not[author_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[assignee_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee."
+              },
+              {
+                "name": "not[assignee_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`."
+              },
+              {
+                "name": "not[reviewer_username]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8."
+              },
+              {
+                "name": "not[labels]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive."
+              },
+              {
+                "name": "not[milestone]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone."
+              },
+              {
+                "name": "not[my_reaction_emoji]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction."
+              },
+              {
+                "name": "not[reviewer_id]",
+                "value": "",
+                "type": "query",
+                "description": "`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`."
+              },
+              {
+                "name": "deployed_before",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed before the given date/time. Expected in ISO 8601 format."
+              },
+              {
+                "name": "deployed_after",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed after the given date/time. Expected in ISO 8601 format"
+              },
+              {
+                "name": "environment",
+                "value": "2019-03-15T08:00:00Z",
+                "type": "query",
+                "description": "Returns merge requests deployed to the given environment"
+              },
+              {
+                "name": "approved",
+                "value": "",
+                "type": "query",
+                "description": "Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests."
+              },
+              {
+                "name": "merge_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`."
+              },
+              {
+                "name": "merge_user_username",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`."
+              },
+              {
+                "name": "approver_ids",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have specified the users with the given IDs as an individual approver"
+              },
+              {
+                "name": "approved_by_ids",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have been approved by the specified users with the given IDs"
+              },
+              {
+                "name": "approved_by_usernames",
+                "value": "",
+                "type": "query",
+                "description": "Return merge requests which have been approved by the specified users with the given\n            usernames"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "non_archived",
+                "value": "",
+                "type": "query",
+                "description": "Returns merge requests from non archived projects only."
+              }
+            ]
+          },
+          "docs": "Get all merge requests the authenticated user has access to. By default it returns only merge requests created by the current user. To get all merge requests, use parameter `scope=all`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

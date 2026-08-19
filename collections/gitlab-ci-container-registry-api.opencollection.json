@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests container_registry API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "container_registry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registry repositories within a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/registry/repositories",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group accessible by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of registry repositories in a group. This feature was introduced in GitLab 12.2."
+        },
+        {
+          "info": {
+            "name": "List container repositories within a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/registry/repositories",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Determines if tags should be included"
+              },
+              {
+                "name": "tags_count",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the tags count should be included"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.8."
+        },
+        {
+          "info": {
+            "name": "Delete repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/registry/repositories/:repository_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.8."
+        },
+        {
+          "info": {
+            "name": "List tags of a repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/registry/repositories/:repository_id/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.8."
+        },
+        {
+          "info": {
+            "name": "Delete repository tags (in bulk)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/registry/repositories/:repository_id/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository"
+              },
+              {
+                "name": "name_regex_delete",
+                "value": "",
+                "type": "query",
+                "description": "The tag name regexp to delete, specify .* to delete all"
+              },
+              {
+                "name": "name_regex",
+                "value": "",
+                "type": "query",
+                "description": "The tag name regexp to delete, specify .* to delete all"
+              },
+              {
+                "name": "name_regex_keep",
+                "value": "",
+                "type": "query",
+                "description": "The tag name regexp to retain"
+              },
+              {
+                "name": "keep_n",
+                "value": "",
+                "type": "query",
+                "description": "Keep n of latest tags with matching name"
+              },
+              {
+                "name": "older_than",
+                "value": "",
+                "type": "query",
+                "description": "Delete older than: 1h, 1d, 1month"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.8."
+        },
+        {
+          "info": {
+            "name": "Get details about a repository tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/registry/repositories/:repository_id/tags/:tag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository"
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.8."
+        },
+        {
+          "info": {
+            "name": "Delete repository tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/registry/repositories/:repository_id/tags/:tag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository"
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.8."
+        },
+        {
+          "info": {
+            "name": "Receives notifications from the container registry when an operation occurs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/container_registry_event/events"
+          },
+          "docs": "This feature was introduced in GitLab 12.10"
+        },
+        {
+          "info": {
+            "name": "Get a container repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/registry/repositories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the repository"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Determines if tags should be included"
+              },
+              {
+                "name": "tags_count",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the tags count should be included"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the size should be included"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.6."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

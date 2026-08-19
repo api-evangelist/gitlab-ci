@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests freeze_periods API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "freeze_periods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List freeze periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/freeze_periods",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Paginated list of Freeze Periods, sorted by created_at in ascending order. This feature was introduced in GitLab 13.0."
+        },
+        {
+          "info": {
+            "name": "Create a freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/freeze_periods",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Creates a freeze period. This feature was introduced in GitLab 13.0."
+        },
+        {
+          "info": {
+            "name": "Get a freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/freeze_periods/:freeze_period_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "freeze_period_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the freeze period"
+              }
+            ]
+          },
+          "docs": "Get a freeze period for the given `freeze_period_id`. This feature was introduced in GitLab 13.0."
+        },
+        {
+          "info": {
+            "name": "Update a freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/freeze_periods/:freeze_period_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "freeze_period_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates a freeze period for the given `freeze_period_id`. This feature was introduced in GitLab 13.0."
+        },
+        {
+          "info": {
+            "name": "Delete a freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/freeze_periods/:freeze_period_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "freeze_period_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the freeze period"
+              }
+            ]
+          },
+          "docs": "Deletes a freeze period for the given `freeze_period_id`. This feature was introduced in GitLab 13.0."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

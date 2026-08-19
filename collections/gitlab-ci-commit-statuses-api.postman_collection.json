@@ -1,0 +1,918 @@
+{
+  "item": [
+    {
+      "id": "0267b73d-5845-48d8-af30-6b2da458fa33",
+      "name": "commit_statuses",
+      "description": {
+        "content": "Operations about commit_statuses",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be5c9c8e-7a31-4a1e-b06e-1fea053984ab",
+          "name": "get Api V4Projects Id Repository Commits Sha Statuses",
+          "request": {
+            "name": "get Api V4Projects Id Repository Commits Sha Statuses",
+            "description": {
+              "content": "Get a commit's statuses",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "repository",
+                "commits",
+                ":sha",
+                "statuses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ref",
+                  "value": "<string>",
+                  "description": "Name of the branch or tag. Default is the default branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "stage",
+                  "value": "<string>",
+                  "description": "Filter statuses by build stage."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter statuses by job name."
+                },
+                {
+                  "disabled": false,
+                  "key": "pipeline_id",
+                  "value": "<integer>",
+                  "description": "Filter statuses by pipeline ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "false",
+                  "description": "Include all statuses instead of latest only. Default is `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "id",
+                  "description": "Values for sorting statuses. Valid values are `id` and `pipeline_id`. Default is `id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "asc",
+                  "description": "Sort statuses in ascending or descending order. Valid values are `asc` and `desc`. Default is `asc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID or URL-encoded path of the project."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sha",
+                  "description": "(Required) Hash of the commit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2aaac030-1e61-4755-afa0-444197821c23",
+              "name": "Get a commit's statuses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "repository",
+                    "commits",
+                    ":sha",
+                    "statuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "develop"
+                    },
+                    {
+                      "key": "stage",
+                      "value": "test"
+                    },
+                    {
+                      "key": "name",
+                      "value": "bundler:audit"
+                    },
+                    {
+                      "key": "pipeline_id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) Hash of the commit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 93,\n    \"sha\": \"18f3e63d05582537db6d183d9d557be09e1f90c8\",\n    \"ref\": \"develop\",\n    \"status\": \"success\",\n    \"name\": \"default\",\n    \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n    \"description\": \"string\",\n    \"created_at\": \"2016-01-19T09:05:50.355Z\",\n    \"started_at\": \"2016-01-20T08:40:25.832Z\",\n    \"finished_at\": \"2016-01-21T08:40:25.832Z\",\n    \"allow_failure\": false,\n    \"coverage\": 98.29,\n    \"pipeline_id\": 101,\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    }\n  },\n  {\n    \"id\": 93,\n    \"sha\": \"18f3e63d05582537db6d183d9d557be09e1f90c8\",\n    \"ref\": \"develop\",\n    \"status\": \"success\",\n    \"name\": \"default\",\n    \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n    \"description\": \"string\",\n    \"created_at\": \"2016-01-19T09:05:50.355Z\",\n    \"started_at\": \"2016-01-20T08:40:25.832Z\",\n    \"finished_at\": \"2016-01-21T08:40:25.832Z\",\n    \"allow_failure\": false,\n    \"coverage\": 98.29,\n    \"pipeline_id\": 101,\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc0c695b-5db2-4e44-84d9-f6f6759a83c4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "repository",
+                    "commits",
+                    ":sha",
+                    "statuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "develop"
+                    },
+                    {
+                      "key": "stage",
+                      "value": "test"
+                    },
+                    {
+                      "key": "name",
+                      "value": "bundler:audit"
+                    },
+                    {
+                      "key": "pipeline_id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) Hash of the commit."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f6c5128-da99-4438-b68b-0b0e940182fc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "repository",
+                    "commits",
+                    ":sha",
+                    "statuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "develop"
+                    },
+                    {
+                      "key": "stage",
+                      "value": "test"
+                    },
+                    {
+                      "key": "name",
+                      "value": "bundler:audit"
+                    },
+                    {
+                      "key": "pipeline_id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) Hash of the commit."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8e12a5d-8d86-4628-84e9-48d0192baadc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "repository",
+                    "commits",
+                    ":sha",
+                    "statuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "develop"
+                    },
+                    {
+                      "key": "stage",
+                      "value": "test"
+                    },
+                    {
+                      "key": "name",
+                      "value": "bundler:audit"
+                    },
+                    {
+                      "key": "pipeline_id",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) Hash of the commit."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad8bcef5-6b38-48e0-a2f3-54fcf0ea4cbe",
+          "name": "post Api V4Projects Id Statuses Sha",
+          "request": {
+            "name": "post Api V4Projects Id Statuses Sha",
+            "description": {
+              "content": "Post status to a commit",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "statuses",
+                ":sha"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID or URL-encoded path of the project."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sha",
+                  "description": "(Required) The commit hash"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"target_url\": \"<string>\",\n  \"description\": \"<string>\",\n  \"name\": \"default\",\n  \"context\": \"default\",\n  \"coverage\": \"<float>\",\n  \"pipeline_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "801de5f7-799c-4fb6-9298-c0e8e57c8d95",
+              "name": "Post status to a commit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "statuses",
+                    ":sha"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) The commit hash"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"pending\",\n  \"ref\": \"develop\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"<string>\",\n  \"name\": \"coverage\",\n  \"context\": \"coverage\",\n  \"coverage\": 100,\n  \"pipeline_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 93,\n  \"sha\": \"18f3e63d05582537db6d183d9d557be09e1f90c8\",\n  \"ref\": \"develop\",\n  \"status\": \"success\",\n  \"name\": \"default\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"string\",\n  \"created_at\": \"2016-01-19T09:05:50.355Z\",\n  \"started_at\": \"2016-01-20T08:40:25.832Z\",\n  \"finished_at\": \"2016-01-21T08:40:25.832Z\",\n  \"allow_failure\": false,\n  \"coverage\": 98.29,\n  \"pipeline_id\": 101,\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6e71a58-5d2a-432a-bf03-1d6f35cefd78",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "statuses",
+                    ":sha"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) The commit hash"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"pending\",\n  \"ref\": \"develop\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"<string>\",\n  \"name\": \"coverage\",\n  \"context\": \"coverage\",\n  \"coverage\": 100,\n  \"pipeline_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35af9f96-b760-4a46-9b6b-add7dd2345c2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "statuses",
+                    ":sha"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) The commit hash"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"pending\",\n  \"ref\": \"develop\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"<string>\",\n  \"name\": \"coverage\",\n  \"context\": \"coverage\",\n  \"coverage\": 100,\n  \"pipeline_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c63ce939-b75d-4c63-80ed-30db558ad523",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "statuses",
+                    ":sha"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) The commit hash"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"pending\",\n  \"ref\": \"develop\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"<string>\",\n  \"name\": \"coverage\",\n  \"context\": \"coverage\",\n  \"coverage\": 100,\n  \"pipeline_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b685fb7-4e52-49bd-b27a-d47d46c87485",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "statuses",
+                    ":sha"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) The commit hash"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"pending\",\n  \"ref\": \"develop\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"<string>\",\n  \"name\": \"coverage\",\n  \"context\": \"coverage\",\n  \"coverage\": 100,\n  \"pipeline_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9e0ff6b-6334-4f6b-91a5-b18d1cfb3821",
+              "name": "Another update to this commit status is in progress",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "statuses",
+                    ":sha"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID or URL-encoded path of the project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sha",
+                      "description": "(Required) The commit hash"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"pending\",\n  \"ref\": \"develop\",\n  \"target_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/builds/91\",\n  \"description\": \"<string>\",\n  \"name\": \"coverage\",\n  \"context\": \"coverage\",\n  \"coverage\": 100,\n  \"pipeline_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "daeeb43a-58d9-4c12-8d14-1863156c7ffe",
+    "name": "GitLab access_requests commit_statuses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2857 @@
+{
+  "item": [
+    {
+      "id": "83d58419-ecac-48a0-86b7-7e9b60212474",
+      "name": "members",
+      "description": {
+        "content": "Operations about members",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d93c53e9-94de-4cc4-a50a-b269c7b970cb",
+          "name": "get Api V4Groups Id Members",
+          "request": {
+            "name": "get Api V4Groups Id Members",
+            "description": {
+              "content": "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "A query string to search for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<integer>,<integer>",
+                  "description": "Array of user ids to look up for membership"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip_users",
+                  "value": "<integer>,<integer>",
+                  "description": "Array of user ids to be skipped for membership"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_seat_info",
+                  "value": "<boolean>",
+                  "description": "Show seat information for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_saml_identity",
+                  "value": "<boolean>",
+                  "description": "List only members with linked SAML identity"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b92cf54b-be16-4e30-a998-160e4acec2c3",
+              "name": "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "skip_users",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "show_seat_info",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with_saml_identity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": false,\n      \"admin_merge_request\": false,\n      \"archive_project\": false,\n      \"remove_project\": false,\n      \"remove_group\": false,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": true,\n      \"manage_deploy_tokens\": true,\n      \"manage_group_access_tokens\": false,\n      \"admin_group_member\": true,\n      \"admin_integrations\": false,\n      \"manage_merge_request_settings\": true,\n      \"manage_project_access_tokens\": true,\n      \"admin_protected_branch\": false,\n      \"admin_protected_environments\": false,\n      \"manage_protected_tags\": true,\n      \"admin_push_rules\": false,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": true,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": true,\n      \"admin_web_hook\": true,\n      \"read_compliance_dashboard\": false,\n      \"read_security_scan_profiles\": true,\n      \"read_virtual_registry\": false,\n      \"read_admin_cicd\": true,\n      \"read_crm_contact\": true,\n      \"read_dependency\": true,\n      \"read_admin_groups\": false,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": false,\n      \"read_security_attribute\": false,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": true,\n      \"read_admin_users\": true,\n      \"read_vulnerability\": true\n    }\n  },\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": false,\n      \"admin_merge_request\": false,\n      \"archive_project\": true,\n      \"remove_project\": true,\n      \"remove_group\": false,\n      \"manage_security_policy_link\": true,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": false,\n      \"manage_deploy_tokens\": true,\n      \"manage_group_access_tokens\": false,\n      \"admin_group_member\": false,\n      \"admin_integrations\": false,\n      \"manage_merge_request_settings\": true,\n      \"manage_project_access_tokens\": false,\n      \"admin_protected_branch\": true,\n      \"admin_protected_environments\": false,\n      \"manage_protected_tags\": true,\n      \"admin_push_rules\": false,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": false,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": true,\n      \"admin_web_hook\": true,\n      \"read_compliance_dashboard\": false,\n      \"read_security_scan_profiles\": true,\n      \"read_virtual_registry\": false,\n      \"read_admin_cicd\": true,\n      \"read_crm_contact\": true,\n      \"read_dependency\": false,\n      \"read_admin_groups\": false,\n      \"read_admin_projects\": false,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": false,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": true,\n      \"read_admin_users\": false,\n      \"read_vulnerability\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3db18d0-fb16-4603-917f-90874cc8a3a8",
+          "name": "post Api V4Groups Id Members",
+          "request": {
+            "name": "post Api V4Groups Id Members",
+            "description": {
+              "content": "Adds a member to a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"invite_source\": \"members-api\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8629a78f-07d9-47a6-95dd-4eb3582a287d",
+              "name": "Adds a member to a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"invite_source\": \"members-api\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a961eeef-9297-4bca-8ccc-c21e22b3692c",
+          "name": "get Api V4Groups Id Members All",
+          "request": {
+            "name": "get Api V4Groups Id Members All",
+            "description": {
+              "content": "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "A query string to search for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<integer>,<integer>",
+                  "description": "Array of user ids to look up for membership"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_seat_info",
+                  "value": "<boolean>",
+                  "description": "Show seat information for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter results by member state"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed07e3c9-e731-4fd5-ad82-27a2bfe88c09",
+              "name": "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "show_seat_info",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": false,\n      \"admin_merge_request\": true,\n      \"archive_project\": false,\n      \"remove_project\": false,\n      \"remove_group\": false,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": false,\n      \"manage_deploy_tokens\": true,\n      \"manage_group_access_tokens\": true,\n      \"admin_group_member\": false,\n      \"admin_integrations\": false,\n      \"manage_merge_request_settings\": false,\n      \"manage_project_access_tokens\": true,\n      \"admin_protected_branch\": true,\n      \"admin_protected_environments\": false,\n      \"manage_protected_tags\": false,\n      \"admin_push_rules\": true,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": false,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": true,\n      \"admin_web_hook\": false,\n      \"read_compliance_dashboard\": true,\n      \"read_security_scan_profiles\": false,\n      \"read_virtual_registry\": true,\n      \"read_admin_cicd\": false,\n      \"read_crm_contact\": false,\n      \"read_dependency\": false,\n      \"read_admin_groups\": true,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": true,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": true,\n      \"read_admin_users\": false,\n      \"read_vulnerability\": true\n    }\n  },\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": true,\n      \"admin_merge_request\": false,\n      \"archive_project\": false,\n      \"remove_project\": true,\n      \"remove_group\": true,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": true,\n      \"manage_deploy_tokens\": false,\n      \"manage_group_access_tokens\": true,\n      \"admin_group_member\": false,\n      \"admin_integrations\": true,\n      \"manage_merge_request_settings\": true,\n      \"manage_project_access_tokens\": false,\n      \"admin_protected_branch\": false,\n      \"admin_protected_environments\": true,\n      \"manage_protected_tags\": false,\n      \"admin_push_rules\": true,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": true,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": false,\n      \"admin_web_hook\": false,\n      \"read_compliance_dashboard\": true,\n      \"read_security_scan_profiles\": true,\n      \"read_virtual_registry\": false,\n      \"read_admin_cicd\": true,\n      \"read_crm_contact\": false,\n      \"read_dependency\": false,\n      \"read_admin_groups\": true,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": false,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": false,\n      \"read_admin_users\": true,\n      \"read_vulnerability\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c91097cd-52e9-40b0-a5d9-13d240e020ce",
+          "name": "get Api V4Groups Id Members User Id",
+          "request": {
+            "name": "get Api V4Groups Id Members User Id",
+            "description": {
+              "content": "Gets a member of a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea6fe021-6fb3-46e0-882b-5df8693e0aa0",
+              "name": "Gets a member of a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f4b9a42-c7be-43da-bb7f-9519edf22492",
+          "name": "put Api V4Groups Id Members User Id",
+          "request": {
+            "name": "put Api V4Groups Id Members User Id",
+            "description": {
+              "content": "Updates a member of a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the new member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level\": \"<integer>\",\n  \"expires_at\": \"<dateTime>\",\n  \"member_role_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4569fa8-5c9e-407a-92d5-269022f375f5",
+              "name": "Updates a member of a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the new member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level\": \"<integer>\",\n  \"expires_at\": \"<dateTime>\",\n  \"member_role_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e81c93e-ca5c-4035-9da6-fa7648379920",
+          "name": "delete Api V4Groups Id Members User Id",
+          "request": {
+            "name": "delete Api V4Groups Id Members User Id",
+            "description": {
+              "content": "Removes a user from a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip_subresources",
+                  "value": "false",
+                  "description": "Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "unassign_issuables",
+                  "value": "false",
+                  "description": "Flag indicating if the removed member should be unassigned from any issues or merge requests within given group or project"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fd30500-81e2-4742-8054-c471d003fd03",
+              "name": "Removes a user from a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip_subresources",
+                      "value": "false"
+                    },
+                    {
+                      "key": "unassign_issuables",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4450fdc4-85ca-4caa-ab92-87577ba095f4",
+          "name": "get Api V4Groups Id Members All User Id",
+          "request": {
+            "name": "get Api V4Groups Id Members All User Id",
+            "description": {
+              "content": "Gets a member of a group or project, including those who gained membership through ancestor group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                "all",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The group ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2e90224-3007-42e7-aed3-f8a3fef5e94a",
+              "name": "Gets a member of a group or project, including those who gained membership through ancestor group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    "all",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The group ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a02a6386-ad15-425d-9728-b06b90920bb8",
+          "name": "post Api V4Groups Id Members User Id Override",
+          "request": {
+            "name": "post Api V4Groups Id Members User Id Override",
+            "description": {
+              "content": "Overrides the access level of an LDAP group member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":user_id",
+                "override"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af5aea12-b3f2-4bef-bd87-0b06c4a46956",
+              "name": "Overrides the access level of an LDAP group member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":user_id",
+                    "override"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbad33db-4146-42b5-a8a7-b9dd9adb327b",
+          "name": "delete Api V4Groups Id Members User Id Override",
+          "request": {
+            "name": "delete Api V4Groups Id Members User Id Override",
+            "description": {
+              "content": "Remove an LDAP group member access level override.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":user_id",
+                "override"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fd73d09-19cd-4370-97ba-f7858f708c70",
+              "name": "Remove an LDAP group member access level override.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":user_id",
+                    "override"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8183ab01-d0a5-4576-9d12-2a3334952469",
+          "name": "put Api V4Groups Id Members Member Id Approve",
+          "request": {
+            "name": "put Api V4Groups Id Members Member Id Approve",
+            "description": {
+              "content": "Approves a pending member",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":member_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "member_id",
+                  "description": "(Required) The ID of the member requiring approval"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9a8c168-3be1-4798-ad65-472ce4d244fa",
+              "name": "Approves a pending member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":member_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "member_id",
+                      "description": "(Required) The ID of the member requiring approval"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab440283-dbfa-4470-94f1-827c0d9f0b7d",
+          "name": "post Api V4Groups Id Members Approve All",
+          "request": {
+            "name": "post Api V4Groups Id Members Approve All",
+            "description": {
+              "content": "Approves all pending members",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                "approve_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4026d47d-40c5-4a4e-b2ee-ff1a55c8f59a",
+              "name": "Approves all pending members",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    "approve_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f29d921-30dc-4294-9930-677ae3a5dd3a",
+          "name": "get Api V4Groups Id Pending Members",
+          "request": {
+            "name": "get Api V4Groups Id Pending Members",
+            "description": {
+              "content": "Lists all pending members for a group including invited users",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "pending_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d05e75b9-a078-44f6-a670-4f4088809660",
+              "name": "Lists all pending members for a group including invited users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "pending_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "830a787e-98eb-40ef-9063-b3a67094a03c",
+          "name": "put Api V4Groups Id Members User Id State",
+          "request": {
+            "name": "put Api V4Groups Id Members User Id State",
+            "description": {
+              "content": "Changes the state of the memberships of a user in the group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "members",
+                ":user_id",
+                "state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5dda0f43-799f-43d3-8be6-2fe6bf5ad684",
+              "name": "Changes the state of the memberships of a user in the group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "members",
+                    ":user_id",
+                    "state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the user"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ed4d2b5-1245-4816-911f-f7cb567f2cad",
+          "name": "get Api V4Groups Id Billable Members User Id Memberships",
+          "request": {
+            "name": "get Api V4Groups Id Billable Members User Id Memberships",
+            "description": {
+              "content": "Get the direct memberships of a billable user of a top-level group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "billable_members",
+                ":user_id",
+                "memberships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "451e2baf-f9a9-406d-809e-ed8d646724ad",
+              "name": "Get the direct memberships of a billable user of a top-level group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "billable_members",
+                    ":user_id",
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source_id\": \"string\",\n  \"source_full_name\": \"string\",\n  \"source_members_url\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"access_level\": {\n    \"string_value\": \"string\",\n    \"integer_value\": \"string\",\n    \"custom_role\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4e39f43-49be-494c-8418-6234aa8e6ff3",
+          "name": "get Api V4Groups Id Billable Members User Id Indirect",
+          "request": {
+            "name": "get Api V4Groups Id Billable Members User Id Indirect",
+            "description": {
+              "content": "Get the indirect memberships of a billable user of a top-level group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "billable_members",
+                ":user_id",
+                "indirect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7e78339-52fe-497c-99c1-1658d8a65c17",
+              "name": "Get the indirect memberships of a billable user of a top-level group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "billable_members",
+                    ":user_id",
+                    "indirect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source_id\": \"string\",\n  \"source_full_name\": \"string\",\n  \"source_members_url\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"access_level\": {\n    \"string_value\": \"string\",\n    \"integer_value\": \"string\",\n    \"custom_role\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcb9e8d0-7143-4c58-b6c9-904da525a501",
+          "name": "delete Api V4Groups Id Billable Members User Id",
+          "request": {
+            "name": "delete Api V4Groups Id Billable Members User Id",
+            "description": {
+              "content": "Removes a billable member from a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "billable_members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of a group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8b95083-1d8d-4337-95fe-ffd787e5b202",
+              "name": "Removes a billable member from a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "billable_members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of a group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79897dba-0d87-4fa4-86f4-81f1b4de8e6a",
+          "name": "get Api V4Projects Id Members",
+          "request": {
+            "name": "get Api V4Projects Id Members",
+            "description": {
+              "content": "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "A query string to search for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<integer>,<integer>",
+                  "description": "Array of user ids to look up for membership"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip_users",
+                  "value": "<integer>,<integer>",
+                  "description": "Array of user ids to be skipped for membership"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_seat_info",
+                  "value": "<boolean>",
+                  "description": "Show seat information for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_saml_identity",
+                  "value": "<boolean>",
+                  "description": "List only members with linked SAML identity"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0054af04-ff4f-48e9-b12e-8f9acac82518",
+              "name": "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "skip_users",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "show_seat_info",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with_saml_identity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": false,\n      \"admin_merge_request\": true,\n      \"archive_project\": false,\n      \"remove_project\": false,\n      \"remove_group\": false,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": false,\n      \"manage_deploy_tokens\": true,\n      \"manage_group_access_tokens\": true,\n      \"admin_group_member\": false,\n      \"admin_integrations\": false,\n      \"manage_merge_request_settings\": false,\n      \"manage_project_access_tokens\": true,\n      \"admin_protected_branch\": true,\n      \"admin_protected_environments\": false,\n      \"manage_protected_tags\": false,\n      \"admin_push_rules\": true,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": false,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": true,\n      \"admin_web_hook\": false,\n      \"read_compliance_dashboard\": true,\n      \"read_security_scan_profiles\": false,\n      \"read_virtual_registry\": true,\n      \"read_admin_cicd\": false,\n      \"read_crm_contact\": false,\n      \"read_dependency\": false,\n      \"read_admin_groups\": true,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": true,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": true,\n      \"read_admin_users\": false,\n      \"read_vulnerability\": true\n    }\n  },\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": true,\n      \"admin_merge_request\": false,\n      \"archive_project\": false,\n      \"remove_project\": true,\n      \"remove_group\": true,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": true,\n      \"manage_deploy_tokens\": false,\n      \"manage_group_access_tokens\": true,\n      \"admin_group_member\": false,\n      \"admin_integrations\": true,\n      \"manage_merge_request_settings\": true,\n      \"manage_project_access_tokens\": false,\n      \"admin_protected_branch\": false,\n      \"admin_protected_environments\": true,\n      \"manage_protected_tags\": false,\n      \"admin_push_rules\": true,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": true,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": false,\n      \"admin_web_hook\": false,\n      \"read_compliance_dashboard\": true,\n      \"read_security_scan_profiles\": true,\n      \"read_virtual_registry\": false,\n      \"read_admin_cicd\": true,\n      \"read_crm_contact\": false,\n      \"read_dependency\": false,\n      \"read_admin_groups\": true,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": false,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": false,\n      \"read_admin_users\": true,\n      \"read_vulnerability\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13230307-b503-45a3-baf9-ab335fef0b6a",
+          "name": "post Api V4Projects Id Members",
+          "request": {
+            "name": "post Api V4Projects Id Members",
+            "description": {
+              "content": "Adds a member to a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"invite_source\": \"members-api\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a2f63d50-3400-4ff9-9abb-2878a87b924a",
+              "name": "Adds a member to a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level\": \"<integer>\",\n  \"user_id\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"invite_source\": \"members-api\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d2af339-2420-45fc-8563-e6f570920eca",
+          "name": "get Api V4Projects Id Members All",
+          "request": {
+            "name": "get Api V4Projects Id Members All",
+            "description": {
+              "content": "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "A query string to search for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<integer>,<integer>",
+                  "description": "Array of user ids to look up for membership"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_seat_info",
+                  "value": "<boolean>",
+                  "description": "Show seat information for members"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter results by member state"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68cc6153-678f-4df9-9d6f-902fa09c5a2b",
+              "name": "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "show_seat_info",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": false,\n      \"admin_merge_request\": true,\n      \"archive_project\": false,\n      \"remove_project\": false,\n      \"remove_group\": false,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": false,\n      \"manage_deploy_tokens\": true,\n      \"manage_group_access_tokens\": true,\n      \"admin_group_member\": false,\n      \"admin_integrations\": false,\n      \"manage_merge_request_settings\": false,\n      \"manage_project_access_tokens\": true,\n      \"admin_protected_branch\": true,\n      \"admin_protected_environments\": false,\n      \"manage_protected_tags\": false,\n      \"admin_push_rules\": true,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": false,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": true,\n      \"admin_web_hook\": false,\n      \"read_compliance_dashboard\": true,\n      \"read_security_scan_profiles\": false,\n      \"read_virtual_registry\": true,\n      \"read_admin_cicd\": false,\n      \"read_crm_contact\": false,\n      \"read_dependency\": false,\n      \"read_admin_groups\": true,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": true,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": true,\n      \"read_admin_users\": false,\n      \"read_vulnerability\": true\n    }\n  },\n  {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"access_level\": \"string\",\n    \"created_at\": \"string\",\n    \"expires_at\": \"string\",\n    \"membership_state\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"group_saml_identity\": {\n      \"provider\": \"string\",\n      \"extern_uid\": \"string\",\n      \"saml_provider_id\": \"string\"\n    },\n    \"group_scim_identity\": {\n      \"extern_uid\": \"string\",\n      \"group_id\": \"string\",\n      \"active\": \"string\"\n    },\n    \"email\": \"string\",\n    \"is_using_seat\": \"string\",\n    \"override\": \"string\",\n    \"member_role\": {\n      \"id\": 2,\n      \"group_id\": 2,\n      \"name\": \"Custom guest\",\n      \"description\": \"Guest user who can also read_code\",\n      \"base_access_level\": 40,\n      \"apply_security_scan_profiles\": true,\n      \"admin_merge_request\": false,\n      \"archive_project\": false,\n      \"remove_project\": true,\n      \"remove_group\": true,\n      \"manage_security_policy_link\": false,\n      \"admin_compliance_framework\": false,\n      \"admin_cicd_variables\": true,\n      \"manage_deploy_tokens\": false,\n      \"manage_group_access_tokens\": true,\n      \"admin_group_member\": false,\n      \"admin_integrations\": true,\n      \"manage_merge_request_settings\": true,\n      \"manage_project_access_tokens\": false,\n      \"admin_protected_branch\": false,\n      \"admin_protected_environments\": true,\n      \"manage_protected_tags\": false,\n      \"admin_push_rules\": true,\n      \"admin_runners\": false,\n      \"admin_security_attributes\": true,\n      \"admin_terraform_state\": false,\n      \"admin_vulnerability\": false,\n      \"admin_web_hook\": false,\n      \"read_compliance_dashboard\": true,\n      \"read_security_scan_profiles\": true,\n      \"read_virtual_registry\": false,\n      \"read_admin_cicd\": true,\n      \"read_crm_contact\": false,\n      \"read_dependency\": false,\n      \"read_admin_groups\": true,\n      \"read_admin_projects\": true,\n      \"read_code\": true,\n      \"read_runners\": true,\n      \"read_security_attribute\": false,\n      \"read_admin_subscription\": false,\n      \"read_admin_monitoring\": false,\n      \"read_admin_users\": true,\n      \"read_vulnerability\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d10540d8-27eb-4e4b-aea3-782a51bd22fa",
+          "name": "get Api V4Projects Id Members User Id",
+          "request": {
+            "name": "get Api V4Projects Id Members User Id",
+            "description": {
+              "content": "Gets a member of a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d7957f1-82a1-415b-bfa6-ed34f8953abd",
+              "name": "Gets a member of a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c645d2ba-4faf-4ccc-975e-a4912030671b",
+          "name": "put Api V4Projects Id Members User Id",
+          "request": {
+            "name": "put Api V4Projects Id Members User Id",
+            "description": {
+              "content": "Updates a member of a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the new member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level\": \"<integer>\",\n  \"expires_at\": \"<dateTime>\",\n  \"member_role_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ad637e4-4356-4d21-8050-233205d60ef1",
+              "name": "Updates a member of a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the new member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level\": \"<integer>\",\n  \"expires_at\": \"<dateTime>\",\n  \"member_role_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1662962f-a028-48f8-94ec-9f28112732af",
+          "name": "delete Api V4Projects Id Members User Id",
+          "request": {
+            "name": "delete Api V4Projects Id Members User Id",
+            "description": {
+              "content": "Removes a user from a group or project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip_subresources",
+                  "value": "false",
+                  "description": "Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "unassign_issuables",
+                  "value": "false",
+                  "description": "Flag indicating if the removed member should be unassigned from any issues or merge requests within given group or project"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89d586b2-e803-4382-a57f-3903fbf6e007",
+              "name": "Removes a user from a group or project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip_subresources",
+                      "value": "false"
+                    },
+                    {
+                      "key": "unassign_issuables",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e7c7c1f-aef9-4d42-8597-52bcacf270c0",
+          "name": "get Api V4Projects Id Members All User Id",
+          "request": {
+            "name": "get Api V4Projects Id Members All User Id",
+            "description": {
+              "content": "Gets a member of a group or project, including those who gained membership through ancestor group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "members",
+                "all",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the member"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c963f4f-0a0c-46de-934b-572e7a0ee5e6",
+              "name": "Gets a member of a group or project, including those who gained membership through ancestor group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "members",
+                    "all",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the member"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": true,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": true,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": true,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": true,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": false,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": false,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": false,\n    \"read_admin_users\": true,\n    \"read_vulnerability\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "68744fe7-10da-45d8-b00e-bf1666d66144",
+    "name": "GitLab access_requests members API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

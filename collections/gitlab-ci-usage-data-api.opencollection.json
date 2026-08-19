@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests usage_data API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "usage_data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track usage data event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/usage_data/increment_counter"
+          },
+          "docs": "This feature was introduced in GitLab 13.4."
+        },
+        {
+          "info": {
+            "name": "postApiV4UsageDataIncrementUniqueUsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/usage_data/increment_unique_users"
+          },
+          "docs": "Track usage data event for the current user"
+        },
+        {
+          "info": {
+            "name": "Track multiple gitlab internal events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/usage_data/track_events"
+          },
+          "docs": "This feature was introduced in GitLab 17.3."
+        },
+        {
+          "info": {
+            "name": "Get the latest ServicePing payload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/usage_data/service_ping"
+          },
+          "docs": "Introduces in Gitlab 16.9. Requires personal access token with read_service_ping scope."
+        },
+        {
+          "info": {
+            "name": "Track gitlab internal events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/usage_data/track_event"
+          },
+          "docs": "This feature was introduced in GitLab 16.2."
+        },
+        {
+          "info": {
+            "name": "Get Non SQL usage ping metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/usage_data/non_sql_metrics"
+          },
+          "docs": "This feature was introduced in GitLab 13.11."
+        },
+        {
+          "info": {
+            "name": "Get raw SQL queries for usage data SQL metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/usage_data/queries"
+          },
+          "docs": "This feature was introduced in GitLab 13.11."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests tags API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryTags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return tags sorted in updated by `asc` or `desc` order."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Return tags ordered by `name`, `updated`, `version` fields."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Return list of tags matching the search criteria"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Name of tag to start the pagination from"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a project repository tags"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdRepositoryTags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Create a new repository tag"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryTagsTagName",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/tags/:tag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag"
+              }
+            ]
+          },
+          "docs": "Get a single repository tag"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdRepositoryTagsTagName",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/tags/:tag_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag"
+              }
+            ]
+          },
+          "docs": "Delete a repository tag"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryTagsTagNameSignature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/tags/:tag_name/signature",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag"
+              }
+            ]
+          },
+          "docs": "Get a tag's signature"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

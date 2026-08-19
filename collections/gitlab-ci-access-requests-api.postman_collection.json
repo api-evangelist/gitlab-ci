@@ -1,0 +1,914 @@
+{
+  "item": [
+    {
+      "id": "c7edff21-c8a7-4b76-a72b-e51b0bdae0be",
+      "name": "access_requests",
+      "description": {
+        "content": "Operations related to access requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2e7358c-92e5-4d54-8e0c-f7c200d52d63",
+          "name": "Gets a list of access requests for a group.",
+          "request": {
+            "name": "Gets a list of access requests for a group.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "access_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fa3cfff-bcc8-4212-9338-78829c457133",
+              "name": "Gets a list of access requests for a group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "access_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": true,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"requested_at\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c3c9373-2a12-4c44-a823-47a1465b98a9",
+          "name": "Requests access for the authenticated user to a group.",
+          "request": {
+            "name": "Requests access for the authenticated user to a group.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "access_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cf9b630-64c1-417c-a015-1e8dddc381d0",
+              "name": "Requests access for the authenticated user to a group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "access_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"requested_at\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1c2cfb7-9bcc-40fc-9d40-6397fa3a3a93",
+          "name": "Approves an access request for the given user.",
+          "request": {
+            "name": "Approves an access request for the given user.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "access_requests",
+                ":user_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the access requester"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9912715e-2bfc-4398-8cbe-79ce0a04430b",
+              "name": "Approves an access request for the given user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "access_requests",
+                    ":user_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the access requester"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level\": 30\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": false,\n    \"admin_merge_request\": false,\n    \"archive_project\": true,\n    \"remove_project\": false,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": true,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": false,\n    \"admin_group_member\": false,\n    \"admin_integrations\": false,\n    \"manage_merge_request_settings\": true,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": true,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": false,\n    \"admin_push_rules\": true,\n    \"admin_runners\": false,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": false,\n    \"admin_vulnerability\": false,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": true,\n    \"read_security_scan_profiles\": true,\n    \"read_virtual_registry\": true,\n    \"read_admin_cicd\": false,\n    \"read_crm_contact\": true,\n    \"read_dependency\": true,\n    \"read_admin_groups\": false,\n    \"read_admin_projects\": true,\n    \"read_code\": true,\n    \"read_runners\": false,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": true,\n    \"read_admin_users\": false,\n    \"read_vulnerability\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98c6e79b-1534-46bf-9c9a-2fb6d699ead4",
+          "name": "Denies an access request for the given user.",
+          "request": {
+            "name": "Denies an access request for the given user.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "access_requests",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the access requester"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3aa9c0b8-e648-4a11-b2da-6fb1442f8a35",
+              "name": "Denies an access request for the given user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "access_requests",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the access requester"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56c7431f-2f99-4846-b05b-aa395f621243",
+          "name": "Gets a list of access requests for a project.",
+          "request": {
+            "name": "Gets a list of access requests for a project.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "access_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9250d7b-7e94-4705-ba09-aca41855dd8d",
+              "name": "Gets a list of access requests for a project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "access_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"requested_at\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fa1078a-f820-49cb-a881-25af53589cd7",
+          "name": "Requests access for the authenticated user to a project.",
+          "request": {
+            "name": "Requests access for the authenticated user to a project.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "access_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "abd501ba-bba3-4322-b3fd-4103abee3edb",
+              "name": "Requests access for the authenticated user to a project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "access_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": false,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"requested_at\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92932c53-348b-428e-a27a-376385836884",
+          "name": "Approves an access request for the given user.",
+          "request": {
+            "name": "Approves an access request for the given user.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "access_requests",
+                ":user_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the access requester"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60501308-637c-4bb5-8181-02e7fe28f41a",
+              "name": "Approves an access request for the given user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "access_requests",
+                    ":user_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the access requester"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level\": 30\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"username\": \"admin\",\n  \"public_email\": \"john@example.com\",\n  \"name\": \"Administrator\",\n  \"state\": \"active\",\n  \"locked\": true,\n  \"avatar_url\": \"https://gravatar.com/avatar/1\",\n  \"web_url\": \"https://gitlab.example.com/root\",\n  \"access_level\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"membership_state\": \"string\",\n  \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n  \"custom_attributes\": [\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    }\n  ],\n  \"created_by\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"group_saml_identity\": {\n    \"provider\": \"string\",\n    \"extern_uid\": \"string\",\n    \"saml_provider_id\": \"string\"\n  },\n  \"group_scim_identity\": {\n    \"extern_uid\": \"string\",\n    \"group_id\": \"string\",\n    \"active\": \"string\"\n  },\n  \"email\": \"string\",\n  \"is_using_seat\": \"string\",\n  \"override\": \"string\",\n  \"member_role\": {\n    \"id\": 2,\n    \"group_id\": 2,\n    \"name\": \"Custom guest\",\n    \"description\": \"Guest user who can also read_code\",\n    \"base_access_level\": 40,\n    \"apply_security_scan_profiles\": true,\n    \"admin_merge_request\": false,\n    \"archive_project\": false,\n    \"remove_project\": false,\n    \"remove_group\": false,\n    \"manage_security_policy_link\": true,\n    \"admin_compliance_framework\": false,\n    \"admin_cicd_variables\": true,\n    \"manage_deploy_tokens\": true,\n    \"manage_group_access_tokens\": false,\n    \"admin_group_member\": false,\n    \"admin_integrations\": true,\n    \"manage_merge_request_settings\": false,\n    \"manage_project_access_tokens\": false,\n    \"admin_protected_branch\": false,\n    \"admin_protected_environments\": false,\n    \"manage_protected_tags\": false,\n    \"admin_push_rules\": false,\n    \"admin_runners\": true,\n    \"admin_security_attributes\": true,\n    \"admin_terraform_state\": false,\n    \"admin_vulnerability\": true,\n    \"admin_web_hook\": false,\n    \"read_compliance_dashboard\": false,\n    \"read_security_scan_profiles\": false,\n    \"read_virtual_registry\": true,\n    \"read_admin_cicd\": true,\n    \"read_crm_contact\": false,\n    \"read_dependency\": true,\n    \"read_admin_groups\": true,\n    \"read_admin_projects\": true,\n    \"read_code\": true,\n    \"read_runners\": true,\n    \"read_security_attribute\": false,\n    \"read_admin_subscription\": false,\n    \"read_admin_monitoring\": true,\n    \"read_admin_users\": false,\n    \"read_vulnerability\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae31d1a8-0f8d-470f-9f61-30e1cf862faf",
+          "name": "Denies an access request for the given user.",
+          "request": {
+            "name": "Denies an access request for the given user.",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "access_requests",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id",
+                  "description": "(Required) The user ID of the access requester"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9195d7c5-be80-4f9b-8b9c-fbc22150f3e8",
+              "name": "Denies an access request for the given user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "access_requests",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id",
+                      "description": "(Required) The user ID of the access requester"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4f5aa8e3-fe72-4446-bb14-a66f0d43c37a",
+    "name": "GitLab access_requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

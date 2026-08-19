@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests metrics API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all metric definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/usage_data/metric_definitions",
+            "params": [
+              {
+                "name": "include_paths",
+                "value": "true",
+                "type": "query",
+                "description": "Include file paths in the metric definitions"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.11."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

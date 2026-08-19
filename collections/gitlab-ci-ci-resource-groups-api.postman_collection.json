@@ -1,0 +1,1222 @@
+{
+  "item": [
+    {
+      "id": "27f83c14-ce69-4094-bee8-f590218f0153",
+      "name": "ci_resource_groups",
+      "description": {
+        "content": "Operations to manage job concurrency with resource groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f95ab2e6-7deb-4802-8911-021f8c061b00",
+          "name": "get Api V4Projects Id Resource Groups",
+          "request": {
+            "name": "get Api V4Projects Id Resource Groups",
+            "description": {
+              "content": "Get all resource groups for a project",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "resource_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f743f9fb-0ecf-45c6-af21-26d688fa55dd",
+              "name": "Get all resource groups for a project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"key\": \"production\",\n    \"process_mode\": \"unordered\",\n    \"created_at\": \"2021-09-01T08:04:59.650Z\",\n    \"updated_at\": \"2021-09-01T08:04:59.650Z\"\n  },\n  {\n    \"id\": 1,\n    \"key\": \"production\",\n    \"process_mode\": \"unordered\",\n    \"created_at\": \"2021-09-01T08:04:59.650Z\",\n    \"updated_at\": \"2021-09-01T08:04:59.650Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3e18a78-8b73-4c17-ae20-c875fd5b8c24",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd848d85-8bab-4fde-8277-8179627f6356",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ed2130a-2d19-4f2c-9342-ef95608d723e",
+          "name": "get Api V4Projects Id Resource Groups Key",
+          "request": {
+            "name": "get Api V4Projects Id Resource Groups Key",
+            "description": {
+              "content": "Get a specific resource group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "resource_groups",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) The key of the resource group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c2335c7-ad5a-480c-96f2-3da34eb6a0b5",
+              "name": "Get a specific resource group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"production\",\n  \"process_mode\": \"unordered\",\n  \"created_at\": \"2021-09-01T08:04:59.650Z\",\n  \"updated_at\": \"2021-09-01T08:04:59.650Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bacb8377-3deb-46d8-ac07-d80e8182e189",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7d21024-588d-4b44-876e-48e74569e3bb",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7c2523f-354b-4b0c-94a2-5ca1bf9d1bce",
+          "name": "Edit an existing resource group",
+          "request": {
+            "name": "Edit an existing resource group",
+            "description": {
+              "content": "Updates an existing resource group's properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "resource_groups",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) The key of the resource group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"process_mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c135bd49-28d7-4f77-97b0-b2f894f93d17",
+              "name": "Edit an existing resource group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"production\",\n  \"process_mode\": \"unordered\",\n  \"created_at\": \"2021-09-01T08:04:59.650Z\",\n  \"updated_at\": \"2021-09-01T08:04:59.650Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daf5d8f4-3b50-4c2c-8141-5050a8a9591b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ddce995-7a67-484c-ab15-cc6823a8b047",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e56d3fc5-035c-4945-ac46-b46c56c12e5a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b0bad6e-c62e-423f-af17-d2d4560bbe3c",
+          "name": "get Api V4Projects Id Resource Groups Key Current Job",
+          "request": {
+            "name": "get Api V4Projects Id Resource Groups Key Current Job",
+            "description": {
+              "content": "Show current job for a specific resource group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "resource_groups",
+                ":key",
+                "current_job"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) The key of the resource group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7d8d6ff-02b3-4454-ab0f-e8dbeed06fb7",
+              "name": "Show current job for a specific resource group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key",
+                    "current_job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"status\": \"waiting_for_resource\",\n  \"stage\": \"deploy\",\n  \"name\": \"deploy_to_production\",\n  \"ref\": \"main\",\n  \"tag\": false,\n  \"coverage\": 98.29,\n  \"allow_failure\": false,\n  \"created_at\": \"2015-12-24T15:51:21.880Z\",\n  \"started_at\": \"2015-12-24T17:54:30.733Z\",\n  \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n  \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n  \"duration\": 0.465,\n  \"queued_duration\": 0.123,\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"bio\": \"string\",\n    \"location\": \"string\",\n    \"linkedin\": \"string\",\n    \"twitter\": \"string\",\n    \"discord\": \"string\",\n    \"website_url\": \"string\",\n    \"github\": \"string\",\n    \"job_title\": \"string\",\n    \"pronouns\": \"string\",\n    \"organization\": \"string\",\n    \"bot\": false,\n    \"work_information\": \"string\",\n    \"local_time\": \"string\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ],\n    \"created_at\": \"string\",\n    \"followers\": \"string\",\n    \"following\": \"string\",\n    \"is_followed\": \"string\"\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"pipeline\": {\n    \"id\": 1,\n    \"iid\": 2,\n    \"project_id\": 3,\n    \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n    \"ref\": \"feature-branch\",\n    \"status\": \"success\",\n    \"source\": \"push\",\n    \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n    \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n    \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n  },\n  \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n  \"project\": {\n    \"ci_job_token_scope_enabled\": \"string\"\n  },\n  \"failure_reason\": \"script_failure\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0c2b4b7-5a4e-4019-b3e1-99afc9591cd2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key",
+                    "current_job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5464c59a-6cb1-4828-b97f-a2d83fb12347",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key",
+                    "current_job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34bc805c-94a0-431d-a7b7-87641862491f",
+          "name": "get Api V4Projects Id Resource Groups Key Upcoming Jobs",
+          "request": {
+            "name": "get Api V4Projects Id Resource Groups Key Upcoming Jobs",
+            "description": {
+              "content": "List upcoming jobs for a specific resource group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "resource_groups",
+                ":key",
+                "upcoming_jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) The key of the resource group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "248f288b-cc9a-4655-963f-cc52ad8d166c",
+              "name": "List upcoming jobs for a specific resource group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key",
+                    "upcoming_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"status\": \"waiting_for_resource\",\n    \"stage\": \"deploy\",\n    \"name\": \"deploy_to_production\",\n    \"ref\": \"main\",\n    \"tag\": false,\n    \"coverage\": 98.29,\n    \"allow_failure\": false,\n    \"created_at\": \"2015-12-24T15:51:21.880Z\",\n    \"started_at\": \"2015-12-24T17:54:30.733Z\",\n    \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n    \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n    \"duration\": 0.465,\n    \"queued_duration\": 0.123,\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"bio\": \"string\",\n      \"location\": \"string\",\n      \"linkedin\": \"string\",\n      \"twitter\": \"string\",\n      \"discord\": \"string\",\n      \"website_url\": \"string\",\n      \"github\": \"string\",\n      \"job_title\": \"string\",\n      \"pronouns\": \"string\",\n      \"organization\": \"string\",\n      \"bot\": true,\n      \"work_information\": \"string\",\n      \"local_time\": \"string\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ],\n      \"created_at\": \"string\",\n      \"followers\": \"string\",\n      \"following\": \"string\",\n      \"is_followed\": \"string\"\n    },\n    \"commit\": {\n      \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n      \"short_id\": \"2695effb\",\n      \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n      \"parent_ids\": [\n        \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n      ],\n      \"title\": \"Initial commit\",\n      \"message\": \"Initial commit\",\n      \"author_name\": \"John Smith\",\n      \"author_email\": \"john@example.com\",\n      \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n      \"committer_name\": \"Jack Smith\",\n      \"committer_email\": \"jack@example.com\",\n      \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n      \"trailers\": {\n        \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n      },\n      \"extended_trailers\": {\n        \"Signed-off-by\": [\n          \"John Doe <johndoe@gitlab.com>\",\n          \"Jane Doe <janedoe@gitlab.com>\"\n        ]\n      },\n      \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n    },\n    \"pipeline\": {\n      \"id\": 1,\n      \"iid\": 2,\n      \"project_id\": 3,\n      \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n      \"ref\": \"feature-branch\",\n      \"status\": \"success\",\n      \"source\": \"push\",\n      \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n      \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n      \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n    },\n    \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n    \"project\": {\n      \"ci_job_token_scope_enabled\": \"string\"\n    },\n    \"failure_reason\": \"script_failure\"\n  },\n  {\n    \"id\": 1,\n    \"status\": \"waiting_for_resource\",\n    \"stage\": \"deploy\",\n    \"name\": \"deploy_to_production\",\n    \"ref\": \"main\",\n    \"tag\": false,\n    \"coverage\": 98.29,\n    \"allow_failure\": false,\n    \"created_at\": \"2015-12-24T15:51:21.880Z\",\n    \"started_at\": \"2015-12-24T17:54:30.733Z\",\n    \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n    \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n    \"duration\": 0.465,\n    \"queued_duration\": 0.123,\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"bio\": \"string\",\n      \"location\": \"string\",\n      \"linkedin\": \"string\",\n      \"twitter\": \"string\",\n      \"discord\": \"string\",\n      \"website_url\": \"string\",\n      \"github\": \"string\",\n      \"job_title\": \"string\",\n      \"pronouns\": \"string\",\n      \"organization\": \"string\",\n      \"bot\": true,\n      \"work_information\": \"string\",\n      \"local_time\": \"string\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ],\n      \"created_at\": \"string\",\n      \"followers\": \"string\",\n      \"following\": \"string\",\n      \"is_followed\": \"string\"\n    },\n    \"commit\": {\n      \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n      \"short_id\": \"2695effb\",\n      \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n      \"parent_ids\": [\n        \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n      ],\n      \"title\": \"Initial commit\",\n      \"message\": \"Initial commit\",\n      \"author_name\": \"John Smith\",\n      \"author_email\": \"john@example.com\",\n      \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n      \"committer_name\": \"Jack Smith\",\n      \"committer_email\": \"jack@example.com\",\n      \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n      \"trailers\": {\n        \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n      },\n      \"extended_trailers\": {\n        \"Signed-off-by\": [\n          \"John Doe <johndoe@gitlab.com>\",\n          \"Jane Doe <janedoe@gitlab.com>\"\n        ]\n      },\n      \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n    },\n    \"pipeline\": {\n      \"id\": 1,\n      \"iid\": 2,\n      \"project_id\": 3,\n      \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n      \"ref\": \"feature-branch\",\n      \"status\": \"success\",\n      \"source\": \"push\",\n      \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n      \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n      \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n    },\n    \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n    \"project\": {\n      \"ci_job_token_scope_enabled\": \"string\"\n    },\n    \"failure_reason\": \"script_failure\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ee9a9e7-855b-4cc3-920a-45851e8d894e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key",
+                    "upcoming_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d348568-b979-457b-8b98-50880dd7dbb1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "resource_groups",
+                    ":key",
+                    "upcoming_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) The key of the resource group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3109aec8-821e-4d6e-acd6-c6254110a63a",
+    "name": "GitLab access_requests ci_resource_groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

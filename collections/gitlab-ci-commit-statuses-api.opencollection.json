@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests commit_statuses API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "commit_statuses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCommitsShaStatuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/commits/:sha/statuses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID or URL-encoded path of the project."
+              },
+              {
+                "name": "sha",
+                "value": "18f3e63d05582537db6d183d9d557be09e1f90c8",
+                "type": "path",
+                "description": "Hash of the commit."
+              },
+              {
+                "name": "ref",
+                "value": "develop",
+                "type": "query",
+                "description": "Name of the branch or tag. Default is the default branch."
+              },
+              {
+                "name": "stage",
+                "value": "test",
+                "type": "query",
+                "description": "Filter statuses by build stage."
+              },
+              {
+                "name": "name",
+                "value": "bundler:audit",
+                "type": "query",
+                "description": "Filter statuses by job name."
+              },
+              {
+                "name": "pipeline_id",
+                "value": "1234",
+                "type": "query",
+                "description": "Filter statuses by pipeline ID."
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Include all statuses instead of latest only. Default is `false`."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Values for sorting statuses. Valid values are `id` and `pipeline_id`. Default is `id`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort statuses in ascending or descending order. Valid values are `asc` and `desc`. Default is `asc`."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a commit's statuses"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdStatusesSha",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/statuses/:sha",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID or URL-encoded path of the project."
+              },
+              {
+                "name": "sha",
+                "value": "18f3e63d05582537db6d183d9d557be09e1f90c8",
+                "type": "path",
+                "description": "The commit hash"
+              }
+            ]
+          },
+          "docs": "Post status to a commit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

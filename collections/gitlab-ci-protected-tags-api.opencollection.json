@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests protected_tags API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "protected_tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a project's protected tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.3."
+        },
+        {
+          "info": {
+            "name": "Protect a single tag or wildcard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.3."
+        },
+        {
+          "info": {
+            "name": "Get a single protected tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_tags/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "release*",
+                "type": "path",
+                "description": "The name of the tag or wildcard"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.3."
+        },
+        {
+          "info": {
+            "name": "Unprotect a single tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_tags/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "release-1-0",
+                "type": "path",
+                "description": "The name of the protected tag"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.3."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

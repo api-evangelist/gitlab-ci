@@ -1,0 +1,3667 @@
+{
+  "item": [
+    {
+      "id": "e2397e00-eee1-49ee-86d8-ad44ea267c01",
+      "name": "releases",
+      "description": {
+        "content": "Operations related to releases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed6d28fa-932c-4d80-8de7-02027bb193ec",
+          "name": "List group releases",
+          "request": {
+            "name": "List group releases",
+            "description": {
+              "content": "Returns a list of group releases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "The direction of the order. Either `desc` (default) for descending order or `asc` for ascending order"
+                },
+                {
+                  "disabled": false,
+                  "key": "simple",
+                  "value": "false",
+                  "description": "Return only limited fields for each release"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bee6c4ca-7aee-4128-831e-15ceb1a98431",
+              "name": "List group releases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "simple",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Release v1.0\",\n    \"tag_name\": \"v1.0\",\n    \"description\": \"Finally released v1.0\",\n    \"created_at\": \"2019-01-03T01:56:19.539Z\",\n    \"released_at\": \"2019-01-03T01:56:19.539Z\",\n    \"upcoming_release\": true,\n    \"assets\": {\n      \"count\": 2,\n      \"links\": {\n        \"id\": 1,\n        \"name\": \"app-v1.0.dmg\",\n        \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n        \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n        \"link_type\": \"other\"\n      },\n      \"sources\": {\n        \"format\": \"zip\",\n        \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n      }\n    },\n    \"_links\": {\n      \"closed_issues_url\": \"string\",\n      \"closed_merge_requests_url\": \"string\",\n      \"edit_url\": \"string\",\n      \"merged_merge_requests_url\": \"string\",\n      \"opened_issues_url\": \"string\",\n      \"opened_merge_requests_url\": \"string\",\n      \"self\": \"string\"\n    },\n    \"description_html\": \"string\",\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"commit\": {\n      \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n      \"short_id\": \"2695effb\",\n      \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n      \"parent_ids\": [\n        \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n      ],\n      \"title\": \"Initial commit\",\n      \"message\": \"Initial commit\",\n      \"author_name\": \"John Smith\",\n      \"author_email\": \"john@example.com\",\n      \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n      \"committer_name\": \"Jack Smith\",\n      \"committer_email\": \"jack@example.com\",\n      \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n      \"trailers\": {\n        \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n      },\n      \"extended_trailers\": {\n        \"Signed-off-by\": [\n          \"John Doe <johndoe@gitlab.com>\",\n          \"Jane Doe <janedoe@gitlab.com>\"\n        ]\n      },\n      \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n    },\n    \"milestones\": {\n      \"id\": 6102,\n      \"iid\": 3357,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": false,\n      \"web_url\": \"string\",\n      \"issue_stats\": {\n        \"total\": 10,\n        \"closed\": 5\n      },\n      \"project_id\": 1230,\n      \"group_id\": \"string\"\n    },\n    \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n    \"tag_path\": \"/root/app/-/tags/v1.0\",\n    \"evidences\": {\n      \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n      \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n      \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n    }\n  },\n  {\n    \"name\": \"Release v1.0\",\n    \"tag_name\": \"v1.0\",\n    \"description\": \"Finally released v1.0\",\n    \"created_at\": \"2019-01-03T01:56:19.539Z\",\n    \"released_at\": \"2019-01-03T01:56:19.539Z\",\n    \"upcoming_release\": false,\n    \"assets\": {\n      \"count\": 2,\n      \"links\": {\n        \"id\": 1,\n        \"name\": \"app-v1.0.dmg\",\n        \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n        \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n        \"link_type\": \"other\"\n      },\n      \"sources\": {\n        \"format\": \"zip\",\n        \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n      }\n    },\n    \"_links\": {\n      \"closed_issues_url\": \"string\",\n      \"closed_merge_requests_url\": \"string\",\n      \"edit_url\": \"string\",\n      \"merged_merge_requests_url\": \"string\",\n      \"opened_issues_url\": \"string\",\n      \"opened_merge_requests_url\": \"string\",\n      \"self\": \"string\"\n    },\n    \"description_html\": \"string\",\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"commit\": {\n      \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n      \"short_id\": \"2695effb\",\n      \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n      \"parent_ids\": [\n        \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n      ],\n      \"title\": \"Initial commit\",\n      \"message\": \"Initial commit\",\n      \"author_name\": \"John Smith\",\n      \"author_email\": \"john@example.com\",\n      \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n      \"committer_name\": \"Jack Smith\",\n      \"committer_email\": \"jack@example.com\",\n      \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n      \"trailers\": {\n        \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n      },\n      \"extended_trailers\": {\n        \"Signed-off-by\": [\n          \"John Doe <johndoe@gitlab.com>\",\n          \"Jane Doe <janedoe@gitlab.com>\"\n        ]\n      },\n      \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n    },\n    \"milestones\": {\n      \"id\": 5958,\n      \"iid\": 3287,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": true,\n      \"web_url\": \"string\",\n      \"issue_stats\": {\n        \"total\": 10,\n        \"closed\": 5\n      },\n      \"project_id\": 697,\n      \"group_id\": \"string\"\n    },\n    \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n    \"tag_path\": \"/root/app/-/tags/v1.0\",\n    \"evidences\": {\n      \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n      \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n      \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6abc71b-e7dd-4bbf-90d0-81e6f906f6d5",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "simple",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0e15893-dff0-4319-a6cf-00a6899839af",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "simple",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82afb444-0c2f-4268-aaf0-22700d85c89b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "simple",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the group owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "368f725b-424e-4da9-bb9f-ce9dd75b420f",
+          "name": "List Releases",
+          "request": {
+            "name": "List Releases",
+            "description": {
+              "content": "Returns a paginated list of releases. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "released_at",
+                  "description": "The field to use as order. Either `released_at` (default) or `created_at`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "The direction of the order. Either `desc` (default) for descending order or `asc` for ascending order"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_html_description",
+                  "value": "<boolean>",
+                  "description": "If `true`, a response includes HTML rendered markdown of the release description"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "Return releases updated before the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "Return releases updated after the specified datetime. Format: ISO 8601 YYYY-MM-DDTHH:MM:SSZ"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2729d7a-433c-440d-a0c0-b79164632f3c",
+              "name": "List Releases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "released_at"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "include_html_description",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Release v1.0\",\n    \"tag_name\": \"v1.0\",\n    \"description\": \"Finally released v1.0\",\n    \"created_at\": \"2019-01-03T01:56:19.539Z\",\n    \"released_at\": \"2019-01-03T01:56:19.539Z\",\n    \"upcoming_release\": false,\n    \"assets\": {\n      \"count\": 2,\n      \"links\": {\n        \"id\": 1,\n        \"name\": \"app-v1.0.dmg\",\n        \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n        \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n        \"link_type\": \"other\"\n      },\n      \"sources\": {\n        \"format\": \"zip\",\n        \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n      }\n    },\n    \"_links\": {\n      \"closed_issues_url\": \"string\",\n      \"closed_merge_requests_url\": \"string\",\n      \"edit_url\": \"string\",\n      \"merged_merge_requests_url\": \"string\",\n      \"opened_issues_url\": \"string\",\n      \"opened_merge_requests_url\": \"string\",\n      \"self\": \"string\"\n    },\n    \"description_html\": \"string\",\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"commit\": {\n      \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n      \"short_id\": \"2695effb\",\n      \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n      \"parent_ids\": [\n        \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n      ],\n      \"title\": \"Initial commit\",\n      \"message\": \"Initial commit\",\n      \"author_name\": \"John Smith\",\n      \"author_email\": \"john@example.com\",\n      \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n      \"committer_name\": \"Jack Smith\",\n      \"committer_email\": \"jack@example.com\",\n      \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n      \"trailers\": {\n        \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n      },\n      \"extended_trailers\": {\n        \"Signed-off-by\": [\n          \"John Doe <johndoe@gitlab.com>\",\n          \"Jane Doe <janedoe@gitlab.com>\"\n        ]\n      },\n      \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n    },\n    \"milestones\": {\n      \"id\": 8582,\n      \"iid\": 1863,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": false,\n      \"web_url\": \"string\",\n      \"issue_stats\": {\n        \"total\": 10,\n        \"closed\": 5\n      },\n      \"project_id\": 3849,\n      \"group_id\": \"string\"\n    },\n    \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n    \"tag_path\": \"/root/app/-/tags/v1.0\",\n    \"evidences\": {\n      \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n      \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n      \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n    }\n  },\n  {\n    \"name\": \"Release v1.0\",\n    \"tag_name\": \"v1.0\",\n    \"description\": \"Finally released v1.0\",\n    \"created_at\": \"2019-01-03T01:56:19.539Z\",\n    \"released_at\": \"2019-01-03T01:56:19.539Z\",\n    \"upcoming_release\": true,\n    \"assets\": {\n      \"count\": 2,\n      \"links\": {\n        \"id\": 1,\n        \"name\": \"app-v1.0.dmg\",\n        \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n        \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n        \"link_type\": \"other\"\n      },\n      \"sources\": {\n        \"format\": \"zip\",\n        \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n      }\n    },\n    \"_links\": {\n      \"closed_issues_url\": \"string\",\n      \"closed_merge_requests_url\": \"string\",\n      \"edit_url\": \"string\",\n      \"merged_merge_requests_url\": \"string\",\n      \"opened_issues_url\": \"string\",\n      \"opened_merge_requests_url\": \"string\",\n      \"self\": \"string\"\n    },\n    \"description_html\": \"string\",\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"commit\": {\n      \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n      \"short_id\": \"2695effb\",\n      \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n      \"parent_ids\": [\n        \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n      ],\n      \"title\": \"Initial commit\",\n      \"message\": \"Initial commit\",\n      \"author_name\": \"John Smith\",\n      \"author_email\": \"john@example.com\",\n      \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n      \"committer_name\": \"Jack Smith\",\n      \"committer_email\": \"jack@example.com\",\n      \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n      \"trailers\": {\n        \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n      },\n      \"extended_trailers\": {\n        \"Signed-off-by\": [\n          \"John Doe <johndoe@gitlab.com>\",\n          \"Jane Doe <janedoe@gitlab.com>\"\n        ]\n      },\n      \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n    },\n    \"milestones\": {\n      \"id\": 2146,\n      \"iid\": 8516,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"state\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"expired\": true,\n      \"web_url\": \"string\",\n      \"issue_stats\": {\n        \"total\": 10,\n        \"closed\": 5\n      },\n      \"project_id\": 5063,\n      \"group_id\": \"string\"\n    },\n    \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n    \"tag_path\": \"/root/app/-/tags/v1.0\",\n    \"evidences\": {\n      \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n      \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n      \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a40b3c57-c76a-418a-959b-0bd952ffc7c3",
+          "name": "Create a release",
+          "request": {
+            "name": "Create a release",
+            "description": {
+              "content": "Creates a release. Developer level access to the project is required to create a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f690afc0-7985-4d45-abf2-6c3de194aef6",
+              "name": "Create a release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Release v1.0\",\n  \"tag_name\": \"v1.0\",\n  \"description\": \"Finally released v1.0\",\n  \"created_at\": \"2019-01-03T01:56:19.539Z\",\n  \"released_at\": \"2019-01-03T01:56:19.539Z\",\n  \"upcoming_release\": false,\n  \"assets\": {\n    \"count\": 2,\n    \"links\": {\n      \"id\": 1,\n      \"name\": \"app-v1.0.dmg\",\n      \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n      \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n      \"link_type\": \"other\"\n    },\n    \"sources\": {\n      \"format\": \"zip\",\n      \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n    }\n  },\n  \"_links\": {\n    \"closed_issues_url\": \"string\",\n    \"closed_merge_requests_url\": \"string\",\n    \"edit_url\": \"string\",\n    \"merged_merge_requests_url\": \"string\",\n    \"opened_issues_url\": \"string\",\n    \"opened_merge_requests_url\": \"string\",\n    \"self\": \"string\"\n  },\n  \"description_html\": \"string\",\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"milestones\": {\n    \"id\": 4743,\n    \"iid\": 9527,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"issue_stats\": {\n      \"total\": 10,\n      \"closed\": 5\n    },\n    \"project_id\": 846,\n    \"group_id\": \"string\"\n  },\n  \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n  \"tag_path\": \"/root/app/-/tags/v1.0\",\n  \"evidences\": {\n    \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n    \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n    \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87ecaaae-fb19-4b0d-916d-b287dc3dd82d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c32066a1-57b5-40f2-89cc-75f530d7d100",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67d05431-605f-4e4f-a1c9-3e57c1eacd96",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b6e2f07-eafb-452d-a851-2f31c896a0b0",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6fa99b4-da73-41d6-bc7e-3ca629217c6a",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2f7039d4-ba53-459c-b1e1-583b4fbed233",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_name\": \"<string>\",\n  \"tag_message\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"ref\": \"<string>\",\n  \"assets\": {\n    \"links\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\",\n        \"direct_asset_path\": \"<string>\",\n        \"filepath\": \"<string>\",\n        \"link_type\": \"<string>\"\n      }\n    ]\n  },\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"legacy_catalog_publish\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33f9062b-7ea6-4efd-8880-82cb6903222b",
+          "name": "Get a release by a tag name",
+          "request": {
+            "name": "Get a release by a tag name",
+            "description": {
+              "content": "Gets a release for the given tag. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_html_description",
+                  "value": "<boolean>",
+                  "description": "If `true`, a response includes HTML rendered markdown of the release description"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The Git tag the release is associated with"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84442d85-4a39-418a-930a-53f10aa43943",
+              "name": "Get a release by a tag name",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_html_description",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Release v1.0\",\n  \"tag_name\": \"v1.0\",\n  \"description\": \"Finally released v1.0\",\n  \"created_at\": \"2019-01-03T01:56:19.539Z\",\n  \"released_at\": \"2019-01-03T01:56:19.539Z\",\n  \"upcoming_release\": false,\n  \"assets\": {\n    \"count\": 2,\n    \"links\": {\n      \"id\": 1,\n      \"name\": \"app-v1.0.dmg\",\n      \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n      \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n      \"link_type\": \"other\"\n    },\n    \"sources\": {\n      \"format\": \"zip\",\n      \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n    }\n  },\n  \"_links\": {\n    \"closed_issues_url\": \"string\",\n    \"closed_merge_requests_url\": \"string\",\n    \"edit_url\": \"string\",\n    \"merged_merge_requests_url\": \"string\",\n    \"opened_issues_url\": \"string\",\n    \"opened_merge_requests_url\": \"string\",\n    \"self\": \"string\"\n  },\n  \"description_html\": \"string\",\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"milestones\": {\n    \"id\": 4743,\n    \"iid\": 9527,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"issue_stats\": {\n      \"total\": 10,\n      \"closed\": 5\n    },\n    \"project_id\": 846,\n    \"group_id\": \"string\"\n  },\n  \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n  \"tag_path\": \"/root/app/-/tags/v1.0\",\n  \"evidences\": {\n    \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n    \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n    \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3080f6db-1b57-407b-ae48-50c859d4b0ab",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_html_description",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce25fe3d-acbc-4360-aa62-e3f94cbb44c2",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_html_description",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36687c54-2289-4b69-b5fd-61fc39f4575a",
+          "name": "Update a release",
+          "request": {
+            "name": "Update a release",
+            "description": {
+              "content": "Updates a release. Developer level access to the project is required to update a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The Git tag the release is associated with"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "853b2828-2477-4039-9731-bfa43abd23c4",
+              "name": "Update a release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Release v1.0\",\n  \"tag_name\": \"v1.0\",\n  \"description\": \"Finally released v1.0\",\n  \"created_at\": \"2019-01-03T01:56:19.539Z\",\n  \"released_at\": \"2019-01-03T01:56:19.539Z\",\n  \"upcoming_release\": false,\n  \"assets\": {\n    \"count\": 2,\n    \"links\": {\n      \"id\": 1,\n      \"name\": \"app-v1.0.dmg\",\n      \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n      \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n      \"link_type\": \"other\"\n    },\n    \"sources\": {\n      \"format\": \"zip\",\n      \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n    }\n  },\n  \"_links\": {\n    \"closed_issues_url\": \"string\",\n    \"closed_merge_requests_url\": \"string\",\n    \"edit_url\": \"string\",\n    \"merged_merge_requests_url\": \"string\",\n    \"opened_issues_url\": \"string\",\n    \"opened_merge_requests_url\": \"string\",\n    \"self\": \"string\"\n  },\n  \"description_html\": \"string\",\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"milestones\": {\n    \"id\": 4743,\n    \"iid\": 9527,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"issue_stats\": {\n      \"total\": 10,\n      \"closed\": 5\n    },\n    \"project_id\": 846,\n    \"group_id\": \"string\"\n  },\n  \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n  \"tag_path\": \"/root/app/-/tags/v1.0\",\n  \"evidences\": {\n    \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n    \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n    \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8db53d9-cd39-4c11-976b-36a421684001",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11268ada-7585-47e0-b804-0c3f8e8ffec8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc0f1faa-d6bc-4d17-addd-9dadbc1552c3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20ac8f1a-7fb6-4bb4-a364-d4ed509f44e2",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"released_at\": \"<dateTime>\",\n  \"milestones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"milestone_ids\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6052345c-d2e6-4340-a71b-7a823792f751",
+          "name": "Delete a release",
+          "request": {
+            "name": "Delete a release",
+            "description": {
+              "content": "Delete a release. Deleting a release doesn't delete the associated tag. Maintainer level access to the project is required to delete a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The Git tag the release is associated with"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48664066-7a73-41c0-bba7-6bbe56e07543",
+              "name": "Delete a release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Release v1.0\",\n  \"tag_name\": \"v1.0\",\n  \"description\": \"Finally released v1.0\",\n  \"created_at\": \"2019-01-03T01:56:19.539Z\",\n  \"released_at\": \"2019-01-03T01:56:19.539Z\",\n  \"upcoming_release\": false,\n  \"assets\": {\n    \"count\": 2,\n    \"links\": {\n      \"id\": 1,\n      \"name\": \"app-v1.0.dmg\",\n      \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n      \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n      \"link_type\": \"other\"\n    },\n    \"sources\": {\n      \"format\": \"zip\",\n      \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n    }\n  },\n  \"_links\": {\n    \"closed_issues_url\": \"string\",\n    \"closed_merge_requests_url\": \"string\",\n    \"edit_url\": \"string\",\n    \"merged_merge_requests_url\": \"string\",\n    \"opened_issues_url\": \"string\",\n    \"opened_merge_requests_url\": \"string\",\n    \"self\": \"string\"\n  },\n  \"description_html\": \"string\",\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"milestones\": {\n    \"id\": 4743,\n    \"iid\": 9527,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"issue_stats\": {\n      \"total\": 10,\n      \"closed\": 5\n    },\n    \"project_id\": 846,\n    \"group_id\": \"string\"\n  },\n  \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n  \"tag_path\": \"/root/app/-/tags/v1.0\",\n  \"evidences\": {\n    \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n    \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n    \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9579b4cc-b744-4b06-92fb-98df4d199754",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dcc49ccc-f076-4ea3-9ddf-a92a275b3f28",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a08363d-6d18-4285-9325-4758f4235d54",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c40fb4f2-aa6f-4b0e-92f4-f3dc19502ce8",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "205b7265-9992-45f8-98a5-1ea0685571ea",
+          "name": "Download a project release asset file",
+          "request": {
+            "name": "Download a project release asset file",
+            "description": {
+              "content": "This feature was introduced in GitLab 15.4.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "downloads",
+                "*direct_asset_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "direct_asset_path",
+                  "value": "<string>",
+                  "description": "(Required) The path to the file to download, as specified when creating the release asset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The Git tag the release is associated with"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd3ff68c-067f-49af-9ae4-0945edcd65ed",
+              "name": "Download a project release asset file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "downloads",
+                    "*direct_asset_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direct_asset_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c2ada08-950e-4f34-9c27-c09194dbb71c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "downloads",
+                    "*direct_asset_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direct_asset_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10ec3fb7-25f1-4652-9a1d-1c351f058956",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "downloads",
+                    "*direct_asset_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direct_asset_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0069fb53-e3b2-420e-a9b5-56aa5e29c049",
+          "name": "Get the latest project release",
+          "request": {
+            "name": "Get the latest project release",
+            "description": {
+              "content": "This feature was introduced in GitLab 15.4.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                "permalink",
+                "latest(",
+                ")(*suffix_path)"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "suffix_path",
+                  "value": "<string>",
+                  "description": "(Required) The path to be suffixed to the latest release"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e453ed8b-7b0b-41b3-9b7b-b2165f93f9e3",
+              "name": "Get the latest project release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    "permalink",
+                    "latest(",
+                    ")(*suffix_path)"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "suffix_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "92492ab4-c275-4563-9392-9daa9206af78",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    "permalink",
+                    "latest(",
+                    ")(*suffix_path)"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "suffix_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9de8baa-95e2-408d-8cb9-934af5e9607b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    "permalink",
+                    "latest(",
+                    ")(*suffix_path)"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "suffix_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96054691-1365-4d8b-987b-0c552d85f57b",
+          "name": "Collect release evidence",
+          "request": {
+            "name": "Collect release evidence",
+            "description": {
+              "content": "Creates an evidence for an existing Release. This feature was introduced in GitLab 12.10.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "evidence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The Git tag the release is associated with"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77ee0a3d-24bd-49fa-9254-4666405a5061",
+              "name": "Collect release evidence",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "evidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Release v1.0\",\n  \"tag_name\": \"v1.0\",\n  \"description\": \"Finally released v1.0\",\n  \"created_at\": \"2019-01-03T01:56:19.539Z\",\n  \"released_at\": \"2019-01-03T01:56:19.539Z\",\n  \"upcoming_release\": false,\n  \"assets\": {\n    \"count\": 2,\n    \"links\": {\n      \"id\": 1,\n      \"name\": \"app-v1.0.dmg\",\n      \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n      \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n      \"link_type\": \"other\"\n    },\n    \"sources\": {\n      \"format\": \"zip\",\n      \"url\": \"https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip\"\n    }\n  },\n  \"_links\": {\n    \"closed_issues_url\": \"string\",\n    \"closed_merge_requests_url\": \"string\",\n    \"edit_url\": \"string\",\n    \"merged_merge_requests_url\": \"string\",\n    \"opened_issues_url\": \"string\",\n    \"opened_merge_requests_url\": \"string\",\n    \"self\": \"string\"\n  },\n  \"description_html\": \"string\",\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"commit\": {\n    \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n    \"short_id\": \"2695effb\",\n    \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n    \"parent_ids\": [\n      \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n    ],\n    \"title\": \"Initial commit\",\n    \"message\": \"Initial commit\",\n    \"author_name\": \"John Smith\",\n    \"author_email\": \"john@example.com\",\n    \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n    \"committer_name\": \"Jack Smith\",\n    \"committer_email\": \"jack@example.com\",\n    \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n    \"trailers\": {\n      \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n    },\n    \"extended_trailers\": {\n      \"Signed-off-by\": [\n        \"John Doe <johndoe@gitlab.com>\",\n        \"Jane Doe <janedoe@gitlab.com>\"\n      ]\n    },\n    \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n  },\n  \"milestones\": {\n    \"id\": 4743,\n    \"iid\": 9527,\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"state\": \"string\",\n    \"created_at\": \"string\",\n    \"updated_at\": \"string\",\n    \"due_date\": \"string\",\n    \"start_date\": \"string\",\n    \"expired\": false,\n    \"web_url\": \"string\",\n    \"issue_stats\": {\n      \"total\": 10,\n      \"closed\": 5\n    },\n    \"project_id\": 846,\n    \"group_id\": \"string\"\n  },\n  \"commit_path\": \"/root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a\",\n  \"tag_path\": \"/root/app/-/tags/v1.0\",\n  \"evidences\": {\n    \"sha\": \"760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d\",\n    \"filepath\": \"https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json\",\n    \"collected_at\": \"2019-01-03T01:56:19.539Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8042ca7-05d3-4045-881c-c1d69c77a67e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "evidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41b83f17-b56f-4b81-9f4f-2a15be649974",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "evidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The Git tag the release is associated with"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11a3f493-d2ff-4a0a-9577-d416f6b93d90",
+          "name": "List links of a release",
+          "request": {
+            "name": "List links of a release",
+            "description": {
+              "content": "Get assets as links from a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "assets",
+                "links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The tag associated with the release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7e47942-eeae-448e-adb7-9a3f18b76bda",
+              "name": "List links of a release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"app-v1.0.dmg\",\n    \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n    \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n    \"link_type\": \"other\"\n  },\n  {\n    \"id\": 1,\n    \"name\": \"app-v1.0.dmg\",\n    \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n    \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n    \"link_type\": \"other\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64012ad4-9564-4ea4-82d1-00284e686c9c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40a3111b-4f21-4435-81a4-dcff2f370854",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4917cd6b-f616-4fd6-a549-d5987b3c61d0",
+          "name": "Create a release link",
+          "request": {
+            "name": "Create a release link",
+            "description": {
+              "content": "Create an asset as a link from a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "assets",
+                "links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The tag associated with the release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba82561b-30b4-48c4-a0f7-b298202d8191",
+              "name": "Create a release link",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"app-v1.0.dmg\",\n  \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n  \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n  \"link_type\": \"other\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "922399b1-a85c-44c2-9ce3-02f5b4aa77fb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9bf1bd1-2ac0-404a-9457-1af492655401",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3caeb995-cba5-4d43-af80-aa267e5e0b20",
+          "name": "Get a release link",
+          "request": {
+            "name": "Get a release link",
+            "description": {
+              "content": "Get an asset as a link from a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "assets",
+                "links",
+                ":link_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The tag associated with the release"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "link_id",
+                  "description": "(Required) The ID of the link"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77f18dc4-9f65-40db-afef-9357e4b459a0",
+              "name": "Get a release link",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"app-v1.0.dmg\",\n  \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n  \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n  \"link_type\": \"other\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26087d48-574f-45d5-a159-edb5a649abb3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b6d036f-2611-47eb-b9b0-60dd37aa78da",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cc62b42-6d42-4dbf-9206-17ff0100df94",
+          "name": "Update a release link",
+          "request": {
+            "name": "Update a release link",
+            "description": {
+              "content": "Update an asset as a link from a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "assets",
+                "links",
+                ":link_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The tag associated with the release"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "link_id",
+                  "description": "(Required) The ID of the link"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2ed7e29f-ccdc-44dd-84ce-1bdf7ee08cfe",
+              "name": "Update a release link",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"app-v1.0.dmg\",\n  \"url\": \"https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg\",\n  \"direct_asset_url\": \"https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg\",\n  \"link_type\": \"other\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "712efb77-37d8-41d4-8a62-94de2fec6a4b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d43819b-b0ca-4ef3-a91d-8bf91eb13ee9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"direct_asset_path\": \"<string>\",\n  \"filepath\": \"<string>\",\n  \"link_type\": \"other\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6d1f14d-3ffc-46e4-afc4-62122e4ec6da",
+          "name": "Delete a release link",
+          "request": {
+            "name": "Delete a release link",
+            "description": {
+              "content": "Deletes an asset as a link from a release. This feature was introduced in GitLab 11.7.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "releases",
+                ":tag_name",
+                "assets",
+                "links",
+                ":link_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The tag associated with the release"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "link_id",
+                  "description": "(Required) The ID of the link"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73069bde-a36e-4d6e-a271-bc1c34faef97",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c129eac-96e2-4815-b6e2-d6bf650e59e2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "releases",
+                    ":tag_name",
+                    "assets",
+                    "links",
+                    ":link_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The tag associated with the release"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "link_id",
+                      "description": "(Required) The ID of the link"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4a97e1ee-0347-4457-a883-626c6baec87d",
+    "name": "GitLab access_requests releases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

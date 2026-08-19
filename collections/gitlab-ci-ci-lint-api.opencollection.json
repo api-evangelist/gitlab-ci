@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ci_lint API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ci_lint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validates a CI YAML configuration with a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/ci/lint",
+            "params": [
+              {
+                "name": "sha",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated: Use content_ref instead"
+              },
+              {
+                "name": "content_ref",
+                "value": "",
+                "type": "query",
+                "description": "The CI/CD configuration content is taken from this commit SHA, branch or tag. Defaults to the HEAD of the project's default branch"
+              },
+              {
+                "name": "dry_run",
+                "value": "",
+                "type": "query",
+                "description": "Run pipeline creation simulation, or only do static check. This is false by default"
+              },
+              {
+                "name": "include_jobs",
+                "value": "",
+                "type": "query",
+                "description": "If the list of jobs that would exist in a static check or pipeline\n        simulation should be included in the response. This is false by default"
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated: Use dry_run_ref instead"
+              },
+              {
+                "name": "dry_run_ref",
+                "value": "",
+                "type": "query",
+                "description": "Branch or tag used as context when executing a dry run. Defaults to the default branch of the project. Only used when dry_run is true"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Checks if a project’s .gitlab-ci.yml configuration in a given commit (by default HEAD of the\n        project’s default branch) is valid"
+        },
+        {
+          "info": {
+            "name": "Validate a CI YAML configuration with a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/ci/lint",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Checks if CI/CD YAML configuration is valid. This endpoint has namespace specific context"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

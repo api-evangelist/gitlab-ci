@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "a5e3eff1-9002-4217-aabc-ba2ad12ab4e1",
+      "name": "users",
+      "description": {
+        "content": "Operations about users",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "425f299e-3dfe-4bd4-8bdb-e530c9560369",
+          "name": "Return the user specific counts",
+          "request": {
+            "name": "Return the user specific counts",
+            "description": {
+              "content": "Assigned open issues, assigned MRs and pending todos count",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "user_counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e20fda2e-3e99-464b-af9f-038b1156fbca",
+              "name": "Return the user specific counts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user_counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merge_requests\": 10,\n  \"assigned_issues\": 10,\n  \"assigned_merge_requests\": 10,\n  \"review_requested_merge_requests\": 10,\n  \"todos\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce01597d-78b7-4910-b7f7-a8093b226224",
+          "name": "Create a runner owned by currently authenticated user",
+          "request": {
+            "name": "Create a runner owned by currently authenticated user",
+            "description": {
+              "content": "Create a new runner",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "user",
+                "runners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": \"<integer>\",\n  \"project_id\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0d4da30-d3b3-4d45-aaa9-722ebabe1c59",
+              "name": "Create a runner owned by currently authenticated user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": 1,\n  \"project_id\": 1,\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"token_expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b276e65-6668-4399-b660-342c6362931a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": 1,\n  \"project_id\": 1,\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76477876-6deb-4b92-b7da-d9daccb407e6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "user",
+                    "runners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"runner_type\": \"<string>\",\n  \"group_id\": 1,\n  \"project_id\": 1,\n  \"description\": \"<string>\",\n  \"maintenance_note\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"locked\": \"<boolean>\",\n  \"access_level\": \"<string>\",\n  \"run_untagged\": \"<boolean>\",\n  \"tag_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximum_timeout\": \"<integer>\",\n  \"token_expires_at\": \"<dateTime>\",\n  \"token_rotation_deadline\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "48427bd6-4659-453c-a6de-fb6223944a70",
+    "name": "GitLab access_requests users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

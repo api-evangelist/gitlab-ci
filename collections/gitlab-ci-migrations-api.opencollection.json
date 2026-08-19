@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests migrations API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "migrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4AdminMigrationsPending",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/migrations/pending",
+            "params": [
+              {
+                "name": "database",
+                "value": "",
+                "type": "query",
+                "description": "The name of the database"
+              }
+            ]
+          },
+          "docs": "List pending database migrations"
+        },
+        {
+          "info": {
+            "name": "postApiV4AdminMigrationsTimestampMark",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/admin/migrations/:timestamp/mark",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "path",
+                "description": "The migration version timestamp"
+              }
+            ]
+          },
+          "docs": "Mark the migration as successfully executed"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

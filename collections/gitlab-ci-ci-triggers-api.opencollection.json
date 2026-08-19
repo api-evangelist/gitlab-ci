@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ci_triggers API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ci_triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "postApiV4ProjectsId(refRef)triggerPipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/(ref/:ref/)trigger/pipeline",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "ref",
+                "value": "develop",
+                "type": "path",
+                "description": "The commit sha or name of a branch or tag"
+              }
+            ]
+          },
+          "docs": "Trigger a GitLab project pipeline"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdTriggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/triggers",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get trigger tokens list"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdTriggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/triggers",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Create a trigger token"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdTriggersTriggerId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/triggers/:trigger_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "trigger_id",
+                "value": "10",
+                "type": "path",
+                "description": "The trigger token ID"
+              }
+            ]
+          },
+          "docs": "Get specific trigger token of a project"
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdTriggersTriggerId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/triggers/:trigger_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "trigger_id",
+                "value": "",
+                "type": "path",
+                "description": "The trigger token ID"
+              }
+            ]
+          },
+          "docs": "Update a trigger token"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdTriggersTriggerId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/triggers/:trigger_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "18",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "trigger_id",
+                "value": "10",
+                "type": "path",
+                "description": "The trigger token ID"
+              }
+            ]
+          },
+          "docs": "Delete a trigger token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

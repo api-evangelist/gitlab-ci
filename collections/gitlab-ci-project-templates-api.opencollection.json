@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests project_templates API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "project_templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of templates available to this project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/templates/:type",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The type (dockerfiles|gitignores|gitlab_ci_ymls|licenses|issues|merge_requests) of the template"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This endpoint was introduced in GitLab 11.4"
+        },
+        {
+          "info": {
+            "name": "Download a template available to this project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/templates/:type/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The type (dockerfiles|gitignores|gitlab_ci_ymls|licenses|issues|merge_requests) of the template"
+              },
+              {
+                "name": "name",
+                "value": "MIT",
+                "type": "path",
+                "description": "The key of the template, as obtained from the collection endpoint."
+              },
+              {
+                "name": "source_template_project_id",
+                "value": "1",
+                "type": "query",
+                "description": "The project id where a given template is being stored. This is useful when multiple templates from different projects have the same name"
+              },
+              {
+                "name": "project",
+                "value": "GitLab",
+                "type": "query",
+                "description": "The project name to use when expanding placeholders in the template. Only affects licenses"
+              },
+              {
+                "name": "fullname",
+                "value": "GitLab B.V.",
+                "type": "query",
+                "description": "The full name of the copyright holder to use when expanding placeholders in the template. Only affects licenses"
+              }
+            ]
+          },
+          "docs": "This endpoint was introduced in GitLab 11.4"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

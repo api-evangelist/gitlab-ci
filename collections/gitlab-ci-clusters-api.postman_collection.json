@@ -1,0 +1,3400 @@
+{
+  "item": [
+    {
+      "id": "30f77c5b-c9c7-4364-aeac-4dfe875e6535",
+      "name": "clusters",
+      "description": {
+        "content": "Operations related to clusters",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d66bcf2b-bf4c-4f67-b9b2-b543766288d1",
+          "name": "List group clusters",
+          "request": {
+            "name": "List group clusters",
+            "description": {
+              "content": "This feature was introduced in GitLab 12.1. Returns a list of group clusters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c5ab179-52b2-45c1-9ca0-60e89d4388b9",
+              "name": "List group clusters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"domain\": \"string\",\n    \"enabled\": \"string\",\n    \"managed\": \"string\",\n    \"provider_type\": \"string\",\n    \"platform_type\": \"string\",\n    \"environment_scope\": \"string\",\n    \"cluster_type\": \"string\",\n    \"namespace_per_environment\": \"string\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"platform_kubernetes\": {\n      \"api_url\": \"string\",\n      \"namespace\": \"string\",\n      \"authorization_type\": \"string\",\n      \"ca_cert\": \"string\"\n    },\n    \"provider_gcp\": {\n      \"cluster_id\": \"string\",\n      \"status_name\": \"string\",\n      \"gcp_project_id\": \"string\",\n      \"zone\": \"string\",\n      \"machine_type\": \"string\",\n      \"num_nodes\": \"string\",\n      \"endpoint\": \"string\"\n    },\n    \"management_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"domain\": \"string\",\n    \"enabled\": \"string\",\n    \"managed\": \"string\",\n    \"provider_type\": \"string\",\n    \"platform_type\": \"string\",\n    \"environment_scope\": \"string\",\n    \"cluster_type\": \"string\",\n    \"namespace_per_environment\": \"string\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"platform_kubernetes\": {\n      \"api_url\": \"string\",\n      \"namespace\": \"string\",\n      \"authorization_type\": \"string\",\n      \"ca_cert\": \"string\"\n    },\n    \"provider_gcp\": {\n      \"cluster_id\": \"string\",\n      \"status_name\": \"string\",\n      \"gcp_project_id\": \"string\",\n      \"zone\": \"string\",\n      \"machine_type\": \"string\",\n      \"num_nodes\": \"string\",\n      \"endpoint\": \"string\"\n    },\n    \"management_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48ed5214-846c-48b6-b197-3d777fe814dc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43688432-739d-4abf-bb86-765525cc7c48",
+          "name": "Get a single group cluster",
+          "request": {
+            "name": "Get a single group cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 12.1. Gets a single group cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ace65ff-20b1-467e-8dd1-3ba716adef66",
+              "name": "Get a single group cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"group\": {\n    \"id\": 8583,\n    \"web_url\": \"http://gitlab.example.com/groups/diaspora\",\n    \"name\": \"Diaspora\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baa564e1-d9d3-43e6-b47f-8fc3854f50a1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f543afbf-4858-4ea4-a1f0-8f81b244dae9",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cab1603-4af3-472a-84ef-82c5dc3f4e3b",
+          "name": "Edit group cluster",
+          "request": {
+            "name": "Edit group cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 12.1. Updates an existing group cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5878355f-f6af-4a82-b372-497a3ccd536f",
+              "name": "Edit group cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"group\": {\n    \"id\": 8583,\n    \"web_url\": \"http://gitlab.example.com/groups/diaspora\",\n    \"name\": \"Diaspora\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91275619-71ab-4004-9478-96aed320cb86",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d0768c4-3c1e-473e-b836-ea06e81d55c2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c032b928-7a59-4317-8f97-3a15c2f1d3ad",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "241ce280-a2ee-40bf-9a1f-e3d7d2620e89",
+          "name": "Delete group cluster",
+          "request": {
+            "name": "Delete group cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 12.1. Deletes an existing group cluster. Does not remove existing resources within the connected Kubernetes cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The Cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60110399-044a-4504-8bc5-beefb453b085",
+              "name": "Delete group cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The Cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"group\": {\n    \"id\": 8583,\n    \"web_url\": \"http://gitlab.example.com/groups/diaspora\",\n    \"name\": \"Diaspora\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50b84500-e6fc-40d3-abff-c0dcbc5475da",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The Cluster ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9475c0b9-6514-41b0-8eb5-f4a94dc1e35b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The Cluster ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13268835-2028-45e8-8e65-4f5def7fe0c0",
+          "name": "Add existing cluster to group",
+          "request": {
+            "name": "Add existing cluster to group",
+            "description": {
+              "content": "This feature was introduced in GitLab 12.1. Adds an existing Kubernetes cluster to the group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "groups",
+                ":id",
+                "clusters",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "822cf993-e8db-460a-b0a2-52abe5a2913a",
+              "name": "Add existing cluster to group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"group\": {\n    \"id\": 8583,\n    \"web_url\": \"http://gitlab.example.com/groups/diaspora\",\n    \"name\": \"Diaspora\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2115665b-510b-47b5-991a-d7c5bd9ce8e7",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e08f660-ecca-474c-b961-bdb5091ffb30",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94051f53-2a09-45b9-a7a8-d3aae8e7ebb2",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "groups",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the group"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "980c644e-06e0-456b-87a6-2c96a5067624",
+          "name": "List project clusters",
+          "request": {
+            "name": "List project clusters",
+            "description": {
+              "content": "This feature was introduced in GitLab 11.7. Returns a list of project clusters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cad4204-feda-4884-8178-45f116e4239d",
+              "name": "List project clusters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"domain\": \"string\",\n    \"enabled\": \"string\",\n    \"managed\": \"string\",\n    \"provider_type\": \"string\",\n    \"platform_type\": \"string\",\n    \"environment_scope\": \"string\",\n    \"cluster_type\": \"string\",\n    \"namespace_per_environment\": \"string\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"platform_kubernetes\": {\n      \"api_url\": \"string\",\n      \"namespace\": \"string\",\n      \"authorization_type\": \"string\",\n      \"ca_cert\": \"string\"\n    },\n    \"provider_gcp\": {\n      \"cluster_id\": \"string\",\n      \"status_name\": \"string\",\n      \"gcp_project_id\": \"string\",\n      \"zone\": \"string\",\n      \"machine_type\": \"string\",\n      \"num_nodes\": \"string\",\n      \"endpoint\": \"string\"\n    },\n    \"management_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"domain\": \"string\",\n    \"enabled\": \"string\",\n    \"managed\": \"string\",\n    \"provider_type\": \"string\",\n    \"platform_type\": \"string\",\n    \"environment_scope\": \"string\",\n    \"cluster_type\": \"string\",\n    \"namespace_per_environment\": \"string\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"platform_kubernetes\": {\n      \"api_url\": \"string\",\n      \"namespace\": \"string\",\n      \"authorization_type\": \"string\",\n      \"ca_cert\": \"string\"\n    },\n    \"provider_gcp\": {\n      \"cluster_id\": \"string\",\n      \"status_name\": \"string\",\n      \"gcp_project_id\": \"string\",\n      \"zone\": \"string\",\n      \"machine_type\": \"string\",\n      \"num_nodes\": \"string\",\n      \"endpoint\": \"string\"\n    },\n    \"management_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c0f94b5-90d5-499b-a81f-3644dec0e0ae",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de3a4d87-515e-49c2-bcf4-240a8bf9a000",
+          "name": "Get a single project cluster",
+          "request": {
+            "name": "Get a single project cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 11.7. Gets a single project cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc9d97b1-a950-495d-b289-8f37b58a9e9a",
+              "name": "Get a single project cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2100e85-5d88-4e65-9100-2e39bad78e23",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c46493fe-6c3f-4cb2-b88c-9805d6cd4f12",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "559cdffc-1760-4b34-9c9c-dff0d2af6909",
+          "name": "Edit project cluster",
+          "request": {
+            "name": "Edit project cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 11.7. Updates an existing project cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ec9770e-c2b0-4ee6-b094-75c44bc16faa",
+              "name": "Edit project cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f48c94f-1b81-4988-9a22-0190c8a8326a",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2482e49f-27bb-4d25-bc2a-356cc67b1b22",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8069379-da9f-43ef-98a3-b44bfd4a3af7",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"enabled\": \"<boolean>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "668e9dda-2bf0-4640-aef4-4e20ea5fdd03",
+          "name": "Delete project cluster",
+          "request": {
+            "name": "Delete project cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 11.7. Deletes an existing project cluster. Does not remove existing resources within the connected Kubernetes cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The Cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80088c95-c766-44c0-b5ca-d2e3084eb8cd",
+              "name": "Delete project cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The Cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ad62252-24f0-4718-9eb2-01e140b95839",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The Cluster ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d16354b-bd6d-46fa-8fd0-78de319d67b1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The Cluster ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6557f6ad-b5f6-4205-b4d7-17c9142153f3",
+          "name": "Add existing cluster to project",
+          "request": {
+            "name": "Add existing cluster to project",
+            "description": {
+              "content": "This feature was introduced in GitLab 11.7. Adds an existing Kubernetes cluster to the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "clusters",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7c3cd43-de73-4d09-b878-7926a0dfb867",
+              "name": "Add existing cluster to project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  },\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b07dae1d-0ea0-4ad0-978e-74121b12c88b",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20dbb416-523d-4020-aeda-f3cc999a6499",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98c461c4-b871-43aa-b38f-f23347a00ff1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "clusters",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"domain\": \"<string>\",\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bcee5e0-e5c1-424c-a3e8-df18288e5095",
+          "name": "List instance clusters",
+          "request": {
+            "name": "List instance clusters",
+            "description": {
+              "content": "This feature was introduced in GitLab 13.2. Returns a list of instance clusters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "admin",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d98190d-c5a8-48cb-945d-4d428ab35a0b",
+              "name": "List instance clusters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"domain\": \"string\",\n    \"enabled\": \"string\",\n    \"managed\": \"string\",\n    \"provider_type\": \"string\",\n    \"platform_type\": \"string\",\n    \"environment_scope\": \"string\",\n    \"cluster_type\": \"string\",\n    \"namespace_per_environment\": \"string\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"platform_kubernetes\": {\n      \"api_url\": \"string\",\n      \"namespace\": \"string\",\n      \"authorization_type\": \"string\",\n      \"ca_cert\": \"string\"\n    },\n    \"provider_gcp\": {\n      \"cluster_id\": \"string\",\n      \"status_name\": \"string\",\n      \"gcp_project_id\": \"string\",\n      \"zone\": \"string\",\n      \"machine_type\": \"string\",\n      \"num_nodes\": \"string\",\n      \"endpoint\": \"string\"\n    },\n    \"management_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"domain\": \"string\",\n    \"enabled\": \"string\",\n    \"managed\": \"string\",\n    \"provider_type\": \"string\",\n    \"platform_type\": \"string\",\n    \"environment_scope\": \"string\",\n    \"cluster_type\": \"string\",\n    \"namespace_per_environment\": \"string\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"platform_kubernetes\": {\n      \"api_url\": \"string\",\n      \"namespace\": \"string\",\n      \"authorization_type\": \"string\",\n      \"ca_cert\": \"string\"\n    },\n    \"provider_gcp\": {\n      \"cluster_id\": \"string\",\n      \"status_name\": \"string\",\n      \"gcp_project_id\": \"string\",\n      \"zone\": \"string\",\n      \"machine_type\": \"string\",\n      \"num_nodes\": \"string\",\n      \"endpoint\": \"string\"\n    },\n    \"management_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "795e9317-b91f-4947-9236-50ccdf4d01ac",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29880f03-265a-476b-bf5f-1276ecead183",
+          "name": "Get a single instance cluster",
+          "request": {
+            "name": "Get a single instance cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 13.2. Returns a single instance cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "admin",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16d39a5b-4b52-45e5-95f6-1d2fcfcf8542",
+              "name": "Get a single instance cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b9ca4e4-f1fe-4fe6-8ff8-52447859c81a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a134985-cd7c-48ff-9f3f-374b21e5327b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd6b56eb-967a-4de6-aa92-a6b89f4e1f4b",
+          "name": "Edit instance cluster",
+          "request": {
+            "name": "Edit instance cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 13.2. Updates an existing instance cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "admin",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b50729be-e512-4fc5-becf-3bc3f4145f90",
+              "name": "Edit instance cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5458bad1-138b-4654-9cee-e88b799e8b81",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f20f31c7-96d0-4417-9e19-da4b2b8a31f2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "90366de5-50d9-44a3-908b-3f10a9c8b5bf",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"environment_scope\": \"<string>\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": \"<boolean>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5452402-76d1-43cf-bf3c-b92d25501332",
+          "name": "Delete instance cluster",
+          "request": {
+            "name": "Delete instance cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 13.2. Deletes an existing instance cluster. Does not remove existing resources within the connected Kubernetes cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "admin",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cluster_id",
+                  "description": "(Required) The cluster ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b87de7f8-e6b2-4646-82df-3c14c6fd7d06",
+              "name": "Delete instance cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05e96b91-b643-4e08-8c2d-ab162c55da89",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d384e30-897a-4275-9b3b-a6737736358a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cluster_id",
+                      "description": "(Required) The cluster ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb21ea00-5d78-4a68-93cd-e5994f662a57",
+          "name": "Add existing instance cluster",
+          "request": {
+            "name": "Add existing instance cluster",
+            "description": {
+              "content": "This feature was introduced in GitLab 13.2. Adds an existing Kubernetes instance cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "admin",
+                "clusters",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be9f1655-a64e-4c25-8d35-3e9b0deace5b",
+              "name": "Add existing instance cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\",\n  \"domain\": \"string\",\n  \"enabled\": \"string\",\n  \"managed\": \"string\",\n  \"provider_type\": \"string\",\n  \"platform_type\": \"string\",\n  \"environment_scope\": \"string\",\n  \"cluster_type\": \"string\",\n  \"namespace_per_environment\": \"string\",\n  \"user\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": false,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"platform_kubernetes\": {\n    \"api_url\": \"string\",\n    \"namespace\": \"string\",\n    \"authorization_type\": \"string\",\n    \"ca_cert\": \"string\"\n  },\n  \"provider_gcp\": {\n    \"cluster_id\": \"string\",\n    \"status_name\": \"string\",\n    \"gcp_project_id\": \"string\",\n    \"zone\": \"string\",\n    \"machine_type\": \"string\",\n    \"num_nodes\": \"string\",\n    \"endpoint\": \"string\"\n  },\n  \"management_project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71902015-67ee-4d9e-9aa9-76e880d6a96e",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f336483e-c0b2-46aa-b535-0a00f9a3c0a6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39a6bd64-25a3-4ca3-8e9f-e4b2edd08afa",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "admin",
+                    "clusters",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform_kubernetes_attributes\": {\n    \"api_url\": \"<string>\",\n    \"token\": \"<string>\",\n    \"ca_cert\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"authorization_type\": \"rbac\"\n  },\n  \"enabled\": true,\n  \"environment_scope\": \"*\",\n  \"namespace_per_environment\": true,\n  \"domain\": \"<string>\",\n  \"management_project_id\": \"<integer>\",\n  \"managed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65c1af1a-8a3e-48eb-bbcc-387b2a43719f",
+          "name": "Discover all descendant certificate-based clusters in a group",
+          "request": {
+            "name": "Discover all descendant certificate-based clusters in a group",
+            "description": {
+              "content": "This feature was introduced in GitLab 17.9. It will be removed in 18.0.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "discover-cert-based-clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<integer>",
+                  "description": "(Required) The group ID to find all certificate-based clusters in the hierarchy"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c7af9bc-8443-4528-9eb7-73341973bb68",
+              "name": "Discover all descendant certificate-based clusters in a group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "discover-cert-based-clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"groups\": \"string\",\n  \"projects\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba41ad42-c39b-4183-9577-7e2a6d03cd1e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "discover-cert-based-clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3f33d100-7617-4e08-8c27-97cf738e350f",
+    "name": "GitLab access_requests clusters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

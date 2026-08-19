@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests plan_limits API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "plan_limits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current plan limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/application/plan_limits",
+            "params": [
+              {
+                "name": "plan_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the plan to get the limits from. Default: default."
+              }
+            ]
+          },
+          "docs": "List the current limits of a plan on the GitLab instance."
+        },
+        {
+          "info": {
+            "name": "Change plan limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/application/plan_limits"
+          },
+          "docs": "Modify the limits of a plan on the GitLab instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

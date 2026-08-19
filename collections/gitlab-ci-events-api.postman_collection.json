@@ -1,0 +1,654 @@
+{
+  "item": [
+    {
+      "id": "31c0b123-7feb-4a00-a50c-a9bd7cab2239",
+      "name": "events",
+      "description": {
+        "content": "Operations about events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "afe71ee6-fc9d-48c3-b13b-b49f1ff08e9b",
+          "name": "get Api V4Projects Id Events",
+          "request": {
+            "name": "get Api V4Projects Id Events",
+            "description": {
+              "content": "List a project's visible events",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Event action to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_type",
+                  "value": "<string>",
+                  "description": "Event target type to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<date>",
+                  "description": "Include only events created before this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<date>",
+                  "description": "Include only events created after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "Return events sorted in ascending and descending order"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6000e265-166e-4253-8f99-62381ddef1b4",
+              "name": "List a project's visible events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"project_id\": 2,\n  \"action_name\": \"closed\",\n  \"target_id\": 160,\n  \"target_iid\": 157,\n  \"target_type\": \"Issue\",\n  \"author_id\": 25,\n  \"target_title\": \"Public project search field\",\n  \"created_at\": \"2017-02-09T10:43:19.667Z\",\n  \"imported\": false,\n  \"imported_from\": \"none\",\n  \"author_username\": \"root\",\n  \"note\": {\n    \"id\": 1,\n    \"type\": \"DiscussionNote\",\n    \"body\": \"Note body.\",\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"created_at\": \"2022-01-31T15:10:44.988Z\",\n    \"updated_at\": \"2022-01-31T15:10:44.988Z\",\n    \"system\": false,\n    \"noteable_id\": 1,\n    \"noteable_type\": \"Issue\",\n    \"project_id\": 1,\n    \"resolvable\": false,\n    \"confidential\": false,\n    \"internal\": false,\n    \"imported\": false,\n    \"imported_from\": \"github\",\n    \"noteable_iid\": 1,\n    \"commands_changes\": {},\n    \"commit_id\": \"7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d\",\n    \"position\": {},\n    \"resolved\": false,\n    \"resolved_by\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"resolved_at\": \"2022-01-31T15:10:44.988Z\",\n    \"suggestions\": {\n      \"id\": 1,\n      \"from_line\": 1,\n      \"to_line\": 1,\n      \"appliable\": true,\n      \"applied\": false,\n      \"from_content\": \"Original content\\n\",\n      \"to_content\": \"New content\\n\"\n    }\n  },\n  \"author\": {\n    \"id\": 1,\n    \"username\": \"admin\",\n    \"public_email\": \"john@example.com\",\n    \"name\": \"Administrator\",\n    \"state\": \"active\",\n    \"locked\": true,\n    \"avatar_url\": \"https://gravatar.com/avatar/1\",\n    \"web_url\": \"https://gitlab.example.com/root\",\n    \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n    \"custom_attributes\": [\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      }\n    ]\n  },\n  \"wiki_page\": {\n    \"format\": \"markdown\",\n    \"slug\": \"deploy\",\n    \"title\": \"deploy\",\n    \"wiki_page_meta_id\": 123\n  },\n  \"push_data\": {\n    \"commit_count\": 1,\n    \"action\": \"pushed\",\n    \"ref_type\": \"branch\",\n    \"commit_from\": \"50d4420237a9de7be1304607147aec22e4a14af7\",\n    \"commit_to\": \"c5feabde2d8cd023215af4d2ceeb7a64839fc428\",\n    \"ref\": \"master\",\n    \"commit_title\": \"Add simple search to projects in public area\",\n    \"ref_count\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f26e921-b49d-4c23-bfda-50de4e5993d5",
+          "name": "List currently authenticated user's events",
+          "request": {
+            "name": "List currently authenticated user's events",
+            "description": {
+              "content": "This feature was introduced in GitLab 9.3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Include all events across a user’s projects"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Event action to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_type",
+                  "value": "<string>",
+                  "description": "Event target type to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<date>",
+                  "description": "Include only events created before this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<date>",
+                  "description": "Include only events created after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "Return events sorted in ascending and descending order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b9e4014-a652-409d-bb36-10faf289b27f",
+              "name": "List currently authenticated user's events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"project_id\": 2,\n    \"action_name\": \"closed\",\n    \"target_id\": 160,\n    \"target_iid\": 157,\n    \"target_type\": \"Issue\",\n    \"author_id\": 25,\n    \"target_title\": \"Public project search field\",\n    \"created_at\": \"2017-02-09T10:43:19.667Z\",\n    \"imported\": false,\n    \"imported_from\": \"none\",\n    \"author_username\": \"root\",\n    \"note\": {\n      \"id\": 1,\n      \"type\": \"DiscussionNote\",\n      \"body\": \"Note body.\",\n      \"author\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": false,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"created_at\": \"2022-01-31T15:10:44.988Z\",\n      \"updated_at\": \"2022-01-31T15:10:44.988Z\",\n      \"system\": false,\n      \"noteable_id\": 1,\n      \"noteable_type\": \"Issue\",\n      \"project_id\": 1,\n      \"resolvable\": false,\n      \"confidential\": false,\n      \"internal\": false,\n      \"imported\": false,\n      \"imported_from\": \"github\",\n      \"noteable_iid\": 1,\n      \"commands_changes\": {},\n      \"commit_id\": \"7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d\",\n      \"position\": {},\n      \"resolved\": false,\n      \"resolved_by\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"resolved_at\": \"2022-01-31T15:10:44.988Z\",\n      \"suggestions\": {\n        \"id\": 1,\n        \"from_line\": 1,\n        \"to_line\": 1,\n        \"appliable\": true,\n        \"applied\": false,\n        \"from_content\": \"Original content\\n\",\n        \"to_content\": \"New content\\n\"\n      }\n    },\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"wiki_page\": {\n      \"format\": \"markdown\",\n      \"slug\": \"deploy\",\n      \"title\": \"deploy\",\n      \"wiki_page_meta_id\": 123\n    },\n    \"push_data\": {\n      \"commit_count\": 1,\n      \"action\": \"pushed\",\n      \"ref_type\": \"branch\",\n      \"commit_from\": \"50d4420237a9de7be1304607147aec22e4a14af7\",\n      \"commit_to\": \"c5feabde2d8cd023215af4d2ceeb7a64839fc428\",\n      \"ref\": \"master\",\n      \"commit_title\": \"Add simple search to projects in public area\",\n      \"ref_count\": 1\n    }\n  },\n  {\n    \"id\": 1,\n    \"project_id\": 2,\n    \"action_name\": \"closed\",\n    \"target_id\": 160,\n    \"target_iid\": 157,\n    \"target_type\": \"Issue\",\n    \"author_id\": 25,\n    \"target_title\": \"Public project search field\",\n    \"created_at\": \"2017-02-09T10:43:19.667Z\",\n    \"imported\": false,\n    \"imported_from\": \"none\",\n    \"author_username\": \"root\",\n    \"note\": {\n      \"id\": 1,\n      \"type\": \"DiscussionNote\",\n      \"body\": \"Note body.\",\n      \"author\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"created_at\": \"2022-01-31T15:10:44.988Z\",\n      \"updated_at\": \"2022-01-31T15:10:44.988Z\",\n      \"system\": false,\n      \"noteable_id\": 1,\n      \"noteable_type\": \"Issue\",\n      \"project_id\": 1,\n      \"resolvable\": false,\n      \"confidential\": false,\n      \"internal\": false,\n      \"imported\": false,\n      \"imported_from\": \"github\",\n      \"noteable_iid\": 1,\n      \"commands_changes\": {},\n      \"commit_id\": \"7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d\",\n      \"position\": {},\n      \"resolved\": false,\n      \"resolved_by\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": false,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"resolved_at\": \"2022-01-31T15:10:44.988Z\",\n      \"suggestions\": {\n        \"id\": 1,\n        \"from_line\": 1,\n        \"to_line\": 1,\n        \"appliable\": true,\n        \"applied\": false,\n        \"from_content\": \"Original content\\n\",\n        \"to_content\": \"New content\\n\"\n      }\n    },\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"wiki_page\": {\n      \"format\": \"markdown\",\n      \"slug\": \"deploy\",\n      \"title\": \"deploy\",\n      \"wiki_page_meta_id\": 123\n    },\n    \"push_data\": {\n      \"commit_count\": 1,\n      \"action\": \"pushed\",\n      \"ref_type\": \"branch\",\n      \"commit_from\": \"50d4420237a9de7be1304607147aec22e4a14af7\",\n      \"commit_to\": \"c5feabde2d8cd023215af4d2ceeb7a64839fc428\",\n      \"ref\": \"master\",\n      \"commit_title\": \"Add simple search to projects in public area\",\n      \"ref_count\": 1\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b474972-78fc-4529-adec-5035bca19729",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "scope",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff507394-4141-41be-85fb-3208614111b1",
+          "name": "Get the contribution events of a specified user",
+          "request": {
+            "name": "Get the contribution events of a specified user",
+            "description": {
+              "content": "This feature was introduced in GitLab 8.13.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "users",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Event action to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_type",
+                  "value": "<string>",
+                  "description": "Event target type to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<date>",
+                  "description": "Include only events created before this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<date>",
+                  "description": "Include only events created after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "Return events sorted in ascending and descending order"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or username of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8d54021-cad1-4a6b-ab5c-37343f4e880b",
+              "name": "Get the contribution events of a specified user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "users",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or username of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"project_id\": 2,\n    \"action_name\": \"closed\",\n    \"target_id\": 160,\n    \"target_iid\": 157,\n    \"target_type\": \"Issue\",\n    \"author_id\": 25,\n    \"target_title\": \"Public project search field\",\n    \"created_at\": \"2017-02-09T10:43:19.667Z\",\n    \"imported\": false,\n    \"imported_from\": \"none\",\n    \"author_username\": \"root\",\n    \"note\": {\n      \"id\": 1,\n      \"type\": \"DiscussionNote\",\n      \"body\": \"Note body.\",\n      \"author\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": false,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"created_at\": \"2022-01-31T15:10:44.988Z\",\n      \"updated_at\": \"2022-01-31T15:10:44.988Z\",\n      \"system\": false,\n      \"noteable_id\": 1,\n      \"noteable_type\": \"Issue\",\n      \"project_id\": 1,\n      \"resolvable\": false,\n      \"confidential\": false,\n      \"internal\": false,\n      \"imported\": false,\n      \"imported_from\": \"github\",\n      \"noteable_iid\": 1,\n      \"commands_changes\": {},\n      \"commit_id\": \"7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d\",\n      \"position\": {},\n      \"resolved\": false,\n      \"resolved_by\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"resolved_at\": \"2022-01-31T15:10:44.988Z\",\n      \"suggestions\": {\n        \"id\": 1,\n        \"from_line\": 1,\n        \"to_line\": 1,\n        \"appliable\": true,\n        \"applied\": false,\n        \"from_content\": \"Original content\\n\",\n        \"to_content\": \"New content\\n\"\n      }\n    },\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": false,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"wiki_page\": {\n      \"format\": \"markdown\",\n      \"slug\": \"deploy\",\n      \"title\": \"deploy\",\n      \"wiki_page_meta_id\": 123\n    },\n    \"push_data\": {\n      \"commit_count\": 1,\n      \"action\": \"pushed\",\n      \"ref_type\": \"branch\",\n      \"commit_from\": \"50d4420237a9de7be1304607147aec22e4a14af7\",\n      \"commit_to\": \"c5feabde2d8cd023215af4d2ceeb7a64839fc428\",\n      \"ref\": \"master\",\n      \"commit_title\": \"Add simple search to projects in public area\",\n      \"ref_count\": 1\n    }\n  },\n  {\n    \"id\": 1,\n    \"project_id\": 2,\n    \"action_name\": \"closed\",\n    \"target_id\": 160,\n    \"target_iid\": 157,\n    \"target_type\": \"Issue\",\n    \"author_id\": 25,\n    \"target_title\": \"Public project search field\",\n    \"created_at\": \"2017-02-09T10:43:19.667Z\",\n    \"imported\": false,\n    \"imported_from\": \"none\",\n    \"author_username\": \"root\",\n    \"note\": {\n      \"id\": 1,\n      \"type\": \"DiscussionNote\",\n      \"body\": \"Note body.\",\n      \"author\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"created_at\": \"2022-01-31T15:10:44.988Z\",\n      \"updated_at\": \"2022-01-31T15:10:44.988Z\",\n      \"system\": false,\n      \"noteable_id\": 1,\n      \"noteable_type\": \"Issue\",\n      \"project_id\": 1,\n      \"resolvable\": false,\n      \"confidential\": false,\n      \"internal\": false,\n      \"imported\": false,\n      \"imported_from\": \"github\",\n      \"noteable_iid\": 1,\n      \"commands_changes\": {},\n      \"commit_id\": \"7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d\",\n      \"position\": {},\n      \"resolved\": false,\n      \"resolved_by\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": false,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"resolved_at\": \"2022-01-31T15:10:44.988Z\",\n      \"suggestions\": {\n        \"id\": 1,\n        \"from_line\": 1,\n        \"to_line\": 1,\n        \"appliable\": true,\n        \"applied\": false,\n        \"from_content\": \"Original content\\n\",\n        \"to_content\": \"New content\\n\"\n      }\n    },\n    \"author\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"wiki_page\": {\n      \"format\": \"markdown\",\n      \"slug\": \"deploy\",\n      \"title\": \"deploy\",\n      \"wiki_page_meta_id\": 123\n    },\n    \"push_data\": {\n      \"commit_count\": 1,\n      \"action\": \"pushed\",\n      \"ref_type\": \"branch\",\n      \"commit_from\": \"50d4420237a9de7be1304607147aec22e4a14af7\",\n      \"commit_to\": \"c5feabde2d8cd023215af4d2ceeb7a64839fc428\",\n      \"ref\": \"master\",\n      \"commit_title\": \"Add simple search to projects in public area\",\n      \"ref_count\": 1\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "399032cc-3b8f-442d-9936-8efbf361f78f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "users",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or username of the user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ee702d44-2451-4c95-8e6c-5bdf27078630",
+    "name": "GitLab access_requests events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests search API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search on GitLab within a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/(-/)search",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The expression it should be searched for"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The scope of the search"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by state"
+              },
+              {
+                "name": "confidential",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by confidentiality"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident, test_case, requirement, objective, key_result, ticket."
+              },
+              {
+                "name": "include_archived",
+                "value": "",
+                "type": "query",
+                "description": "Includes archived projects in the search. Introduced in GitLab 18.9."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Array of fields you wish to search. Available with advanced search."
+              },
+              {
+                "name": "exclude_forks",
+                "value": "",
+                "type": "query",
+                "description": "Excludes forked projects in the search. Available with exact code search. Introduced in GitLab 18.9."
+              },
+              {
+                "name": "num_context_lines",
+                "value": "",
+                "type": "query",
+                "description": "Number of context lines around each match. Available with advanced and exact code search. Introduced in GitLab 18.11."
+              },
+              {
+                "name": "regex",
+                "value": "",
+                "type": "query",
+                "description": "Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.5."
+        },
+        {
+          "info": {
+            "name": "Search on GitLab within a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/(-/)search",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The expression it should be searched for"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The scope of the search"
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The name of a repository branch or tag. If not given, the default branch is used"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by state"
+              },
+              {
+                "name": "confidential",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by confidentiality"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident, test_case, requirement, objective, key_result, ticket."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Array of fields you wish to search. Available with advanced search."
+              },
+              {
+                "name": "num_context_lines",
+                "value": "",
+                "type": "query",
+                "description": "Number of context lines around each match. Available with advanced and exact code search. Introduced in GitLab 18.11."
+              },
+              {
+                "name": "regex",
+                "value": "",
+                "type": "query",
+                "description": "Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.5."
+        },
+        {
+          "info": {
+            "name": "Search on GitLab",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/search",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The expression it should be searched for"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The scope of the search"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by state"
+              },
+              {
+                "name": "confidential",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by confidentiality"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter work items by type. Only applies to work_items scope. Available types: issue, task, epic, incident, test_case, requirement, objective, key_result, ticket."
+              },
+              {
+                "name": "include_archived",
+                "value": "",
+                "type": "query",
+                "description": "Includes archived projects in the search. Introduced in GitLab 18.9."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Array of fields you wish to search. Available with advanced search."
+              },
+              {
+                "name": "exclude_forks",
+                "value": "",
+                "type": "query",
+                "description": "Excludes forked projects in the search. Available with exact code search. Introduced in GitLab 18.9."
+              },
+              {
+                "name": "num_context_lines",
+                "value": "",
+                "type": "query",
+                "description": "Number of context lines around each match. Available with advanced and exact code search. Introduced in GitLab 18.11."
+              },
+              {
+                "name": "regex",
+                "value": "",
+                "type": "query",
+                "description": "Performs a regex code search. Available with exact code search. Introduced in GitLab 18.9"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 10.5."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

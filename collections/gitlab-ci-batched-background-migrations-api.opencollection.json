@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests batched_background_migrations API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "batched_background_migrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4AdminBatchedBackgroundMigrationsId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/batched_background_migrations/:id",
+            "params": [
+              {
+                "name": "database",
+                "value": "",
+                "type": "query",
+                "description": "The name of the database"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The batched background migration id"
+              }
+            ]
+          },
+          "docs": "Retrieve a batched background migration"
+        },
+        {
+          "info": {
+            "name": "putApiV4AdminBatchedBackgroundMigrationsIdResume",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/admin/batched_background_migrations/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The batched background migration id"
+              }
+            ]
+          },
+          "docs": "Resume a batched background migration"
+        },
+        {
+          "info": {
+            "name": "putApiV4AdminBatchedBackgroundMigrationsIdPause",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/admin/batched_background_migrations/:id/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The batched background migration id"
+              }
+            ]
+          },
+          "docs": "Pause a batched background migration"
+        },
+        {
+          "info": {
+            "name": "getApiV4AdminBatchedBackgroundMigrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/batched_background_migrations",
+            "params": [
+              {
+                "name": "database",
+                "value": "",
+                "type": "query",
+                "description": "The name of the database, the default `main`"
+              },
+              {
+                "name": "job_class_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter migrations by job class name."
+              }
+            ]
+          },
+          "docs": "Get the list of batched background migrations"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

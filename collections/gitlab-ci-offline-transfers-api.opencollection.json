@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests offline_transfers API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "offline_transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all offline transfer exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/offline_exports",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return offline transfer exports sorted in created by `asc` or `desc` order."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Return offline transfer exports with specified status"
+              }
+            ]
+          },
+          "docs": "Lists all offline transfer exports"
+        },
+        {
+          "info": {
+            "name": "Start a new offline transfer export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/offline_exports"
+          },
+          "docs": "Initiates a new offline transfer export"
+        },
+        {
+          "info": {
+            "name": "Get offline transfer export details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/offline_exports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of user's offline transfer export"
+              }
+            ]
+          },
+          "docs": "Retrieves details of an offline transfer export"
+        },
+        {
+          "info": {
+            "name": "Start a new offline transfer import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/offline_imports"
+          },
+          "docs": "Initiates a new offline transfer import from object storage"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ci_runners API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ci_runners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a new runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/runners"
+          },
+          "docs": "Register a new runner for the instance"
+        },
+        {
+          "info": {
+            "name": "Delete a runner by authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/runners",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "The runner's authentication token"
+              }
+            ]
+          },
+          "docs": "Delete a registered runner"
+        },
+        {
+          "info": {
+            "name": "Internal endpoint that deletes a runner manager by authentication token and system ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/runners/managers",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "The runner's authentication token"
+              },
+              {
+                "name": "system_id",
+                "value": "",
+                "type": "query",
+                "description": "The runner's system identifier."
+              }
+            ]
+          },
+          "docs": "Delete a registered runner manager"
+        },
+        {
+          "info": {
+            "name": "Verify authentication for a registered runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/runners/verify"
+          },
+          "docs": "Validate authentication credentials"
+        },
+        {
+          "info": {
+            "name": "postApiV4RunnersResetAuthenticationToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/runners/reset_authentication_token"
+          },
+          "docs": "Reset runner authentication token with current token"
+        },
+        {
+          "info": {
+            "name": "Discover Job Router information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/router/discovery"
+          },
+          "docs": "This endpoint can be used by the runner to retrieve information about the Job Router."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ci_jobs API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ci_jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdJobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "scope",
+                "value": "pending,running",
+                "type": "query",
+                "description": "The scope of builds to show"
+              },
+              {
+                "name": "ref",
+                "value": "feature-branch",
+                "type": "query",
+                "description": "The branch name (ref) to filter jobs by"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a projects jobs"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdJobsJobId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "88",
+                "type": "path",
+                "description": "The ID of a job"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a specific job of a project"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdJobsJobIdTrace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/trace",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "88",
+                "type": "path",
+                "description": "The ID of a job"
+              },
+              {
+                "name": "byte_offset",
+                "value": "0",
+                "type": "query",
+                "description": "Byte offset to start reading from"
+              },
+              {
+                "name": "byte_limit",
+                "value": "51200",
+                "type": "query",
+                "description": "Maximum number of bytes to return"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a trace of a specific job of a project"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdJobsJobIdCancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/cancel",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "88",
+                "type": "path",
+                "description": "The ID of a job"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a specific job of a project"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdJobsJobIdRetry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/retry",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "88",
+                "type": "path",
+                "description": "The ID of a job"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retry a specific job of a project"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdJobsJobIdErase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/erase",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "88",
+                "type": "path",
+                "description": "The ID of a build"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Erase job (remove artifacts and the trace)"
+        },
+        {
+          "info": {
+            "name": "Trigger an actionable job (manual, delayed, etc)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/jobs/:job_id/play",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "88",
+                "type": "path",
+                "description": "The ID of a Job"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This feature was added in GitLab 8.11"
+        },
+        {
+          "info": {
+            "name": "getApiV4Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/job"
+          },
+          "docs": "Get current job using job token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

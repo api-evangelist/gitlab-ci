@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests projects_job_token_scope API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects_job_token_scope",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdJobTokenScope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch CI_JOB_TOKEN access settings."
+        },
+        {
+          "info": {
+            "name": "patchApiV4ProjectsIdJobTokenScope",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Patch CI_JOB_TOKEN access settings."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdJobTokenScopeAllowlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope/allowlist",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch project inbound allowlist for CI_JOB_TOKEN access settings."
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdJobTokenScopeAllowlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope/allowlist",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "ID of user project"
+              }
+            ]
+          },
+          "docs": "Add target project to allowlist."
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdJobTokenScopeGroupsAllowlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope/groups_allowlist",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch project groups allowlist for CI_JOB_TOKEN access settings."
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdJobTokenScopeGroupsAllowlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope/groups_allowlist",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "ID of user project"
+              }
+            ]
+          },
+          "docs": "Add target group to allowlist."
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdJobTokenScopeGroupsAllowlistTargetGroupId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope/groups_allowlist/:target_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "ID of user project"
+              },
+              {
+                "name": "target_group_id",
+                "value": "2",
+                "type": "path",
+                "description": "ID of the group to be removed from the allowlist"
+              }
+            ]
+          },
+          "docs": "Delete target group from allowlist."
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdJobTokenScopeAllowlistTargetProjectId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/job_token_scope/allowlist/:target_project_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "ID of user project"
+              },
+              {
+                "name": "target_project_id",
+                "value": "2",
+                "type": "path",
+                "description": "ID of the project to be removed from the allowlist"
+              }
+            ]
+          },
+          "docs": "Delete project from allowlist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

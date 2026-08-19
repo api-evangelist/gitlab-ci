@@ -1,0 +1,2118 @@
+{
+  "item": [
+    {
+      "id": "dcd6eb7b-a411-4004-9e9d-f4984f1577ab",
+      "name": "environments",
+      "description": {
+        "content": "Operations related to environments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d890cf8-e90a-4f09-8115-e427e49e99bd",
+          "name": "List environments",
+          "request": {
+            "name": "List environments",
+            "description": {
+              "content": "Get all environments for a given project. This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Return the environment with this name. Mutually exclusive with search"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Return list of environments matching the search criteria. Mutually exclusive with name. Must be at least 3 characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "List all environments that match a specific state. Accepted values: `available`, `stopping`, or `stopped`. If no state value given, returns all environments"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24230c88-9fde-4665-a61e-d9616d8d4360",
+              "name": "List environments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"deploy\",\n    \"slug\": \"deploy\",\n    \"external_url\": \"https://deploy.gitlab.example.com\",\n    \"created_at\": \"2019-05-25T18:55:13.252Z\",\n    \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n    \"tier\": \"development\",\n    \"project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\",\n      \"tag_list\": [\n        \"tag\"\n      ],\n      \"topics\": [\n        \"topic\"\n      ],\n      \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n      \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n      \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n      \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n      \"star_count\": 1,\n      \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n      \"visibility\": \"public\",\n      \"namespace\": {\n        \"id\": 2,\n        \"name\": \"project\",\n        \"path\": \"my_project\",\n        \"kind\": \"project\",\n        \"full_path\": \"group/my_project\",\n        \"parent_id\": 1,\n        \"avatar_url\": \"https://example.com/avatar/12345\",\n        \"web_url\": \"https://example.com/group/my_project\"\n      },\n      \"default_branch\": \"main\",\n      \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n      \"forks_count\": 1,\n      \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n      \"license\": {\n        \"key\": \"gpl-3.0\",\n        \"name\": \"GNU General Public License v3.0\",\n        \"nickname\": \"GNU GPLv3\",\n        \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n        \"source_url\": \"string\"\n      },\n      \"custom_attributes\": {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      \"repository_storage\": \"default\"\n    },\n    \"state\": \"available\",\n    \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n    \"description\": \"description\",\n    \"auto_stop_setting\": \"always\",\n    \"last_deployment\": {\n      \"id\": 41,\n      \"iid\": 1,\n      \"ref\": \"main\",\n      \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n      \"created_at\": \"2016-08-11T11:32:35.444Z\",\n      \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"environment\": {\n        \"id\": 1,\n        \"name\": \"deploy\",\n        \"slug\": \"deploy\",\n        \"external_url\": \"https://deploy.gitlab.example.com\",\n        \"created_at\": \"2019-05-25T18:55:13.252Z\",\n        \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n      },\n      \"deployable\": {\n        \"id\": 1,\n        \"status\": \"waiting_for_resource\",\n        \"stage\": \"deploy\",\n        \"name\": \"deploy_to_production\",\n        \"ref\": \"main\",\n        \"tag\": true,\n        \"coverage\": 98.29,\n        \"allow_failure\": true,\n        \"created_at\": \"2015-12-24T15:51:21.880Z\",\n        \"started_at\": \"2015-12-24T17:54:30.733Z\",\n        \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n        \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n        \"duration\": 0.465,\n        \"queued_duration\": 0.123,\n        \"user\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": true,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"bio\": \"string\",\n          \"location\": \"string\",\n          \"linkedin\": \"string\",\n          \"twitter\": \"string\",\n          \"discord\": \"string\",\n          \"website_url\": \"string\",\n          \"github\": \"string\",\n          \"job_title\": \"string\",\n          \"pronouns\": \"string\",\n          \"organization\": \"string\",\n          \"bot\": true,\n          \"work_information\": \"string\",\n          \"local_time\": \"string\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"created_at\": \"string\",\n          \"followers\": \"string\",\n          \"following\": \"string\",\n          \"is_followed\": \"string\"\n        },\n        \"commit\": {\n          \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n          \"short_id\": \"2695effb\",\n          \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n          \"parent_ids\": [\n            \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n          ],\n          \"title\": \"Initial commit\",\n          \"message\": \"Initial commit\",\n          \"author_name\": \"John Smith\",\n          \"author_email\": \"john@example.com\",\n          \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n          \"committer_name\": \"Jack Smith\",\n          \"committer_email\": \"jack@example.com\",\n          \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n          \"trailers\": {\n            \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n          },\n          \"extended_trailers\": {\n            \"Signed-off-by\": [\n              \"John Doe <johndoe@gitlab.com>\",\n              \"Jane Doe <janedoe@gitlab.com>\"\n            ]\n          },\n          \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n        },\n        \"pipeline\": {\n          \"id\": 1,\n          \"iid\": 2,\n          \"project_id\": 3,\n          \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n          \"ref\": \"feature-branch\",\n          \"status\": \"success\",\n          \"source\": \"push\",\n          \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n          \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n          \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n        },\n        \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n        \"project\": {\n          \"ci_job_token_scope_enabled\": \"string\"\n        },\n        \"artifacts\": [\n          {\n            \"file_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"file_format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"file_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"file_format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"runner\": {\n          \"id\": 8,\n          \"description\": \"test-1-20150125\",\n          \"ip_address\": \"127.0.0.1\",\n          \"active\": true,\n          \"paused\": false,\n          \"is_shared\": true,\n          \"runner_type\": \"instance_type\",\n          \"name\": \"test\",\n          \"online\": true,\n          \"created_at\": \"2025-05-03T00:00:00.000Z\",\n          \"status\": \"online\",\n          \"job_execution_status\": \"idle\",\n          \"created_by\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n        \"archived\": false,\n        \"tag_list\": [\n          \"ubuntu18\",\n          \"docker runner\"\n        ],\n        \"failure_reason\": \"script_failure\",\n        \"artifacts_file\": {\n          \"filename\": \"artifacts.zip\",\n          \"size\": 1000\n        },\n        \"runner_manager\": {\n          \"id\": 8,\n          \"system_id\": \"runner-1\",\n          \"version\": \"16.11.0\",\n          \"revision\": \"91a27b2a\",\n          \"platform\": \"linux\",\n          \"architecture\": \"amd64\",\n          \"created_at\": \"2023-10-24T01:27:06.549Z\",\n          \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n          \"ip_address\": \"127.0.0.1\",\n          \"status\": \"online\",\n          \"job_execution_status\": \"idle\"\n        }\n      },\n      \"status\": \"created\"\n    },\n    \"cluster_agent\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"config_project\": {\n        \"id\": 1,\n        \"description\": \"desc\",\n        \"name\": \"project1\",\n        \"name_with_namespace\": \"John Doe / project1\",\n        \"path\": \"project1\",\n        \"path_with_namespace\": \"namespace1/project1\",\n        \"created_at\": \"2020-05-07T04:27:17.016Z\"\n      },\n      \"created_at\": \"string\",\n      \"created_by_user_id\": \"string\",\n      \"is_receptive\": \"string\"\n    },\n    \"kubernetes_namespace\": \"string\",\n    \"flux_resource_path\": \"string\"\n  },\n  {\n    \"id\": 1,\n    \"name\": \"deploy\",\n    \"slug\": \"deploy\",\n    \"external_url\": \"https://deploy.gitlab.example.com\",\n    \"created_at\": \"2019-05-25T18:55:13.252Z\",\n    \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n    \"tier\": \"development\",\n    \"project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\",\n      \"tag_list\": [\n        \"tag\"\n      ],\n      \"topics\": [\n        \"topic\"\n      ],\n      \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n      \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n      \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n      \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n      \"star_count\": 1,\n      \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n      \"visibility\": \"public\",\n      \"namespace\": {\n        \"id\": 2,\n        \"name\": \"project\",\n        \"path\": \"my_project\",\n        \"kind\": \"project\",\n        \"full_path\": \"group/my_project\",\n        \"parent_id\": 1,\n        \"avatar_url\": \"https://example.com/avatar/12345\",\n        \"web_url\": \"https://example.com/group/my_project\"\n      },\n      \"default_branch\": \"main\",\n      \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n      \"forks_count\": 1,\n      \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n      \"license\": {\n        \"key\": \"gpl-3.0\",\n        \"name\": \"GNU General Public License v3.0\",\n        \"nickname\": \"GNU GPLv3\",\n        \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n        \"source_url\": \"string\"\n      },\n      \"custom_attributes\": {\n        \"key\": \"foo\",\n        \"value\": \"bar\"\n      },\n      \"repository_storage\": \"default\"\n    },\n    \"state\": \"available\",\n    \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n    \"description\": \"description\",\n    \"auto_stop_setting\": \"always\",\n    \"last_deployment\": {\n      \"id\": 41,\n      \"iid\": 1,\n      \"ref\": \"main\",\n      \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n      \"created_at\": \"2016-08-11T11:32:35.444Z\",\n      \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": false,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"environment\": {\n        \"id\": 1,\n        \"name\": \"deploy\",\n        \"slug\": \"deploy\",\n        \"external_url\": \"https://deploy.gitlab.example.com\",\n        \"created_at\": \"2019-05-25T18:55:13.252Z\",\n        \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n      },\n      \"deployable\": {\n        \"id\": 1,\n        \"status\": \"waiting_for_resource\",\n        \"stage\": \"deploy\",\n        \"name\": \"deploy_to_production\",\n        \"ref\": \"main\",\n        \"tag\": false,\n        \"coverage\": 98.29,\n        \"allow_failure\": true,\n        \"created_at\": \"2015-12-24T15:51:21.880Z\",\n        \"started_at\": \"2015-12-24T17:54:30.733Z\",\n        \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n        \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n        \"duration\": 0.465,\n        \"queued_duration\": 0.123,\n        \"user\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": false,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"bio\": \"string\",\n          \"location\": \"string\",\n          \"linkedin\": \"string\",\n          \"twitter\": \"string\",\n          \"discord\": \"string\",\n          \"website_url\": \"string\",\n          \"github\": \"string\",\n          \"job_title\": \"string\",\n          \"pronouns\": \"string\",\n          \"organization\": \"string\",\n          \"bot\": true,\n          \"work_information\": \"string\",\n          \"local_time\": \"string\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"created_at\": \"string\",\n          \"followers\": \"string\",\n          \"following\": \"string\",\n          \"is_followed\": \"string\"\n        },\n        \"commit\": {\n          \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n          \"short_id\": \"2695effb\",\n          \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n          \"parent_ids\": [\n            \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n          ],\n          \"title\": \"Initial commit\",\n          \"message\": \"Initial commit\",\n          \"author_name\": \"John Smith\",\n          \"author_email\": \"john@example.com\",\n          \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n          \"committer_name\": \"Jack Smith\",\n          \"committer_email\": \"jack@example.com\",\n          \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n          \"trailers\": {\n            \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n          },\n          \"extended_trailers\": {\n            \"Signed-off-by\": [\n              \"John Doe <johndoe@gitlab.com>\",\n              \"Jane Doe <janedoe@gitlab.com>\"\n            ]\n          },\n          \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n        },\n        \"pipeline\": {\n          \"id\": 1,\n          \"iid\": 2,\n          \"project_id\": 3,\n          \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n          \"ref\": \"feature-branch\",\n          \"status\": \"success\",\n          \"source\": \"push\",\n          \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n          \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n          \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n        },\n        \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n        \"project\": {\n          \"ci_job_token_scope_enabled\": \"string\"\n        },\n        \"artifacts\": [\n          {\n            \"file_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"file_format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"file_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"file_format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"runner\": {\n          \"id\": 8,\n          \"description\": \"test-1-20150125\",\n          \"ip_address\": \"127.0.0.1\",\n          \"active\": true,\n          \"paused\": false,\n          \"is_shared\": true,\n          \"runner_type\": \"instance_type\",\n          \"name\": \"test\",\n          \"online\": true,\n          \"created_at\": \"2025-05-03T00:00:00.000Z\",\n          \"status\": \"online\",\n          \"job_execution_status\": \"idle\",\n          \"created_by\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n        \"archived\": false,\n        \"tag_list\": [\n          \"ubuntu18\",\n          \"docker runner\"\n        ],\n        \"failure_reason\": \"script_failure\",\n        \"artifacts_file\": {\n          \"filename\": \"artifacts.zip\",\n          \"size\": 1000\n        },\n        \"runner_manager\": {\n          \"id\": 8,\n          \"system_id\": \"runner-1\",\n          \"version\": \"16.11.0\",\n          \"revision\": \"91a27b2a\",\n          \"platform\": \"linux\",\n          \"architecture\": \"amd64\",\n          \"created_at\": \"2023-10-24T01:27:06.549Z\",\n          \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n          \"ip_address\": \"127.0.0.1\",\n          \"status\": \"online\",\n          \"job_execution_status\": \"idle\"\n        }\n      },\n      \"status\": \"created\"\n    },\n    \"cluster_agent\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"config_project\": {\n        \"id\": 1,\n        \"description\": \"desc\",\n        \"name\": \"project1\",\n        \"name_with_namespace\": \"John Doe / project1\",\n        \"path\": \"project1\",\n        \"path_with_namespace\": \"namespace1/project1\",\n        \"created_at\": \"2020-05-07T04:27:17.016Z\"\n      },\n      \"created_at\": \"string\",\n      \"created_by_user_id\": \"string\",\n      \"is_receptive\": \"string\"\n    },\n    \"kubernetes_namespace\": \"string\",\n    \"flux_resource_path\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ddbacb3-77a7-4c76-b550-bc8254912763",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2479b5b1-341d-4cff-a3a4-e4fd0a2f6856",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c27bffa-3038-4a89-b83a-87dfb3df29a5",
+          "name": "Create a new environment",
+          "request": {
+            "name": "Create a new environment",
+            "description": {
+              "content": "Creates a new environment with the given name and `external_url`. It returns `201` if the environment was successfully created, `400` for wrong parameters. This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b5d2ca9-8d23-450c-98c4-7f6edacd85eb",
+              "name": "Create a new environment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"deploy\",\n  \"slug\": \"deploy\",\n  \"external_url\": \"https://deploy.gitlab.example.com\",\n  \"created_at\": \"2019-05-25T18:55:13.252Z\",\n  \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n  \"tier\": \"development\",\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  },\n  \"state\": \"available\",\n  \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n  \"description\": \"description\",\n  \"auto_stop_setting\": \"always\",\n  \"last_deployment\": {\n    \"id\": 41,\n    \"iid\": 1,\n    \"ref\": \"main\",\n    \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n    \"created_at\": \"2016-08-11T11:32:35.444Z\",\n    \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"environment\": {\n      \"id\": 1,\n      \"name\": \"deploy\",\n      \"slug\": \"deploy\",\n      \"external_url\": \"https://deploy.gitlab.example.com\",\n      \"created_at\": \"2019-05-25T18:55:13.252Z\",\n      \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n    },\n    \"deployable\": {\n      \"id\": 1,\n      \"status\": \"waiting_for_resource\",\n      \"stage\": \"deploy\",\n      \"name\": \"deploy_to_production\",\n      \"ref\": \"main\",\n      \"tag\": true,\n      \"coverage\": 98.29,\n      \"allow_failure\": false,\n      \"created_at\": \"2015-12-24T15:51:21.880Z\",\n      \"started_at\": \"2015-12-24T17:54:30.733Z\",\n      \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n      \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n      \"duration\": 0.465,\n      \"queued_duration\": 0.123,\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"bio\": \"string\",\n        \"location\": \"string\",\n        \"linkedin\": \"string\",\n        \"twitter\": \"string\",\n        \"discord\": \"string\",\n        \"website_url\": \"string\",\n        \"github\": \"string\",\n        \"job_title\": \"string\",\n        \"pronouns\": \"string\",\n        \"organization\": \"string\",\n        \"bot\": false,\n        \"work_information\": \"string\",\n        \"local_time\": \"string\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"created_at\": \"string\",\n        \"followers\": \"string\",\n        \"following\": \"string\",\n        \"is_followed\": \"string\"\n      },\n      \"commit\": {\n        \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n        \"short_id\": \"2695effb\",\n        \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n        \"parent_ids\": [\n          \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n        ],\n        \"title\": \"Initial commit\",\n        \"message\": \"Initial commit\",\n        \"author_name\": \"John Smith\",\n        \"author_email\": \"john@example.com\",\n        \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n        \"committer_name\": \"Jack Smith\",\n        \"committer_email\": \"jack@example.com\",\n        \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n        \"trailers\": {\n          \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n        },\n        \"extended_trailers\": {\n          \"Signed-off-by\": [\n            \"John Doe <johndoe@gitlab.com>\",\n            \"Jane Doe <janedoe@gitlab.com>\"\n          ]\n        },\n        \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n      },\n      \"pipeline\": {\n        \"id\": 1,\n        \"iid\": 2,\n        \"project_id\": 3,\n        \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n        \"ref\": \"feature-branch\",\n        \"status\": \"success\",\n        \"source\": \"push\",\n        \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n      },\n      \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n      \"project\": {\n        \"ci_job_token_scope_enabled\": \"string\"\n      },\n      \"artifacts\": [\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        },\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        }\n      ],\n      \"runner\": {\n        \"id\": 8,\n        \"description\": \"test-1-20150125\",\n        \"ip_address\": \"127.0.0.1\",\n        \"active\": true,\n        \"paused\": false,\n        \"is_shared\": true,\n        \"runner_type\": \"instance_type\",\n        \"name\": \"test\",\n        \"online\": true,\n        \"created_at\": \"2025-05-03T00:00:00.000Z\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\",\n        \"created_by\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": false,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n      \"archived\": false,\n      \"tag_list\": [\n        \"ubuntu18\",\n        \"docker runner\"\n      ],\n      \"failure_reason\": \"script_failure\",\n      \"artifacts_file\": {\n        \"filename\": \"artifacts.zip\",\n        \"size\": 1000\n      },\n      \"runner_manager\": {\n        \"id\": 8,\n        \"system_id\": \"runner-1\",\n        \"version\": \"16.11.0\",\n        \"revision\": \"91a27b2a\",\n        \"platform\": \"linux\",\n        \"architecture\": \"amd64\",\n        \"created_at\": \"2023-10-24T01:27:06.549Z\",\n        \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n        \"ip_address\": \"127.0.0.1\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\"\n      }\n    },\n    \"status\": \"created\"\n  },\n  \"cluster_agent\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"config_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    },\n    \"created_at\": \"string\",\n    \"created_by_user_id\": \"string\",\n    \"is_receptive\": \"string\"\n  },\n  \"kubernetes_namespace\": \"string\",\n  \"flux_resource_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd569bfe-3958-42d1-b3c1-c1bef34f4a28",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3293758c-1744-4dfb-8fb8-418d01834ab1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3973ea81-053a-4e90-8e1e-e1f69c151be2",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db77aec0-1a72-45ef-941c-14b32d1fa21f",
+          "name": "Update an existing environment",
+          "request": {
+            "name": "Update an existing environment",
+            "description": {
+              "content": "Updates an existing environment name and/or `external_url`. It returns `200` if the environment was successfully updated. In case of an error, a status code `400` is returned. This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments",
+                ":environment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "environment_id",
+                  "description": "(Required) The ID of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32efba0d-7510-418e-83b6-9584bafb7e7d",
+              "name": "Update an existing environment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"deploy\",\n  \"slug\": \"deploy\",\n  \"external_url\": \"https://deploy.gitlab.example.com\",\n  \"created_at\": \"2019-05-25T18:55:13.252Z\",\n  \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n  \"tier\": \"development\",\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  },\n  \"state\": \"available\",\n  \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n  \"description\": \"description\",\n  \"auto_stop_setting\": \"always\",\n  \"last_deployment\": {\n    \"id\": 41,\n    \"iid\": 1,\n    \"ref\": \"main\",\n    \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n    \"created_at\": \"2016-08-11T11:32:35.444Z\",\n    \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"environment\": {\n      \"id\": 1,\n      \"name\": \"deploy\",\n      \"slug\": \"deploy\",\n      \"external_url\": \"https://deploy.gitlab.example.com\",\n      \"created_at\": \"2019-05-25T18:55:13.252Z\",\n      \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n    },\n    \"deployable\": {\n      \"id\": 1,\n      \"status\": \"waiting_for_resource\",\n      \"stage\": \"deploy\",\n      \"name\": \"deploy_to_production\",\n      \"ref\": \"main\",\n      \"tag\": true,\n      \"coverage\": 98.29,\n      \"allow_failure\": false,\n      \"created_at\": \"2015-12-24T15:51:21.880Z\",\n      \"started_at\": \"2015-12-24T17:54:30.733Z\",\n      \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n      \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n      \"duration\": 0.465,\n      \"queued_duration\": 0.123,\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"bio\": \"string\",\n        \"location\": \"string\",\n        \"linkedin\": \"string\",\n        \"twitter\": \"string\",\n        \"discord\": \"string\",\n        \"website_url\": \"string\",\n        \"github\": \"string\",\n        \"job_title\": \"string\",\n        \"pronouns\": \"string\",\n        \"organization\": \"string\",\n        \"bot\": false,\n        \"work_information\": \"string\",\n        \"local_time\": \"string\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"created_at\": \"string\",\n        \"followers\": \"string\",\n        \"following\": \"string\",\n        \"is_followed\": \"string\"\n      },\n      \"commit\": {\n        \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n        \"short_id\": \"2695effb\",\n        \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n        \"parent_ids\": [\n          \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n        ],\n        \"title\": \"Initial commit\",\n        \"message\": \"Initial commit\",\n        \"author_name\": \"John Smith\",\n        \"author_email\": \"john@example.com\",\n        \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n        \"committer_name\": \"Jack Smith\",\n        \"committer_email\": \"jack@example.com\",\n        \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n        \"trailers\": {\n          \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n        },\n        \"extended_trailers\": {\n          \"Signed-off-by\": [\n            \"John Doe <johndoe@gitlab.com>\",\n            \"Jane Doe <janedoe@gitlab.com>\"\n          ]\n        },\n        \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n      },\n      \"pipeline\": {\n        \"id\": 1,\n        \"iid\": 2,\n        \"project_id\": 3,\n        \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n        \"ref\": \"feature-branch\",\n        \"status\": \"success\",\n        \"source\": \"push\",\n        \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n      },\n      \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n      \"project\": {\n        \"ci_job_token_scope_enabled\": \"string\"\n      },\n      \"artifacts\": [\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        },\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        }\n      ],\n      \"runner\": {\n        \"id\": 8,\n        \"description\": \"test-1-20150125\",\n        \"ip_address\": \"127.0.0.1\",\n        \"active\": true,\n        \"paused\": false,\n        \"is_shared\": true,\n        \"runner_type\": \"instance_type\",\n        \"name\": \"test\",\n        \"online\": true,\n        \"created_at\": \"2025-05-03T00:00:00.000Z\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\",\n        \"created_by\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": false,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n      \"archived\": false,\n      \"tag_list\": [\n        \"ubuntu18\",\n        \"docker runner\"\n      ],\n      \"failure_reason\": \"script_failure\",\n      \"artifacts_file\": {\n        \"filename\": \"artifacts.zip\",\n        \"size\": 1000\n      },\n      \"runner_manager\": {\n        \"id\": 8,\n        \"system_id\": \"runner-1\",\n        \"version\": \"16.11.0\",\n        \"revision\": \"91a27b2a\",\n        \"platform\": \"linux\",\n        \"architecture\": \"amd64\",\n        \"created_at\": \"2023-10-24T01:27:06.549Z\",\n        \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n        \"ip_address\": \"127.0.0.1\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\"\n      }\n    },\n    \"status\": \"created\"\n  },\n  \"cluster_agent\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"config_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    },\n    \"created_at\": \"string\",\n    \"created_by_user_id\": \"string\",\n    \"is_receptive\": \"string\"\n  },\n  \"kubernetes_namespace\": \"string\",\n  \"flux_resource_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd0e7b3a-f109-46ab-82a0-293f6836f341",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e17caeb5-b623-47bf-b805-8aa9de9cb645",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3ff8e01-99cc-4a34-a89f-b2cf3653ba92",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_url\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"cluster_agent_id\": \"<integer>\",\n  \"kubernetes_namespace\": \"<string>\",\n  \"flux_resource_path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"auto_stop_setting\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfe69f11-48ec-4f16-9a36-4821c407654b",
+          "name": "Delete an environment",
+          "request": {
+            "name": "Delete an environment",
+            "description": {
+              "content": "It returns 204 if the environment was successfully deleted, and 404 if the environment does not exist. This feature was introduced in GitLab 8.11.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments",
+                ":environment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "environment_id",
+                  "description": "(Required) The ID of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3844e59-6717-4a0b-8c02-971229a7fc0f",
+              "name": "Delete an environment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"deploy\",\n  \"slug\": \"deploy\",\n  \"external_url\": \"https://deploy.gitlab.example.com\",\n  \"created_at\": \"2019-05-25T18:55:13.252Z\",\n  \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n  \"tier\": \"development\",\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  },\n  \"state\": \"available\",\n  \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n  \"description\": \"description\",\n  \"auto_stop_setting\": \"always\",\n  \"last_deployment\": {\n    \"id\": 41,\n    \"iid\": 1,\n    \"ref\": \"main\",\n    \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n    \"created_at\": \"2016-08-11T11:32:35.444Z\",\n    \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"environment\": {\n      \"id\": 1,\n      \"name\": \"deploy\",\n      \"slug\": \"deploy\",\n      \"external_url\": \"https://deploy.gitlab.example.com\",\n      \"created_at\": \"2019-05-25T18:55:13.252Z\",\n      \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n    },\n    \"deployable\": {\n      \"id\": 1,\n      \"status\": \"waiting_for_resource\",\n      \"stage\": \"deploy\",\n      \"name\": \"deploy_to_production\",\n      \"ref\": \"main\",\n      \"tag\": true,\n      \"coverage\": 98.29,\n      \"allow_failure\": false,\n      \"created_at\": \"2015-12-24T15:51:21.880Z\",\n      \"started_at\": \"2015-12-24T17:54:30.733Z\",\n      \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n      \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n      \"duration\": 0.465,\n      \"queued_duration\": 0.123,\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"bio\": \"string\",\n        \"location\": \"string\",\n        \"linkedin\": \"string\",\n        \"twitter\": \"string\",\n        \"discord\": \"string\",\n        \"website_url\": \"string\",\n        \"github\": \"string\",\n        \"job_title\": \"string\",\n        \"pronouns\": \"string\",\n        \"organization\": \"string\",\n        \"bot\": false,\n        \"work_information\": \"string\",\n        \"local_time\": \"string\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"created_at\": \"string\",\n        \"followers\": \"string\",\n        \"following\": \"string\",\n        \"is_followed\": \"string\"\n      },\n      \"commit\": {\n        \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n        \"short_id\": \"2695effb\",\n        \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n        \"parent_ids\": [\n          \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n        ],\n        \"title\": \"Initial commit\",\n        \"message\": \"Initial commit\",\n        \"author_name\": \"John Smith\",\n        \"author_email\": \"john@example.com\",\n        \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n        \"committer_name\": \"Jack Smith\",\n        \"committer_email\": \"jack@example.com\",\n        \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n        \"trailers\": {\n          \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n        },\n        \"extended_trailers\": {\n          \"Signed-off-by\": [\n            \"John Doe <johndoe@gitlab.com>\",\n            \"Jane Doe <janedoe@gitlab.com>\"\n          ]\n        },\n        \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n      },\n      \"pipeline\": {\n        \"id\": 1,\n        \"iid\": 2,\n        \"project_id\": 3,\n        \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n        \"ref\": \"feature-branch\",\n        \"status\": \"success\",\n        \"source\": \"push\",\n        \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n      },\n      \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n      \"project\": {\n        \"ci_job_token_scope_enabled\": \"string\"\n      },\n      \"artifacts\": [\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        },\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        }\n      ],\n      \"runner\": {\n        \"id\": 8,\n        \"description\": \"test-1-20150125\",\n        \"ip_address\": \"127.0.0.1\",\n        \"active\": true,\n        \"paused\": false,\n        \"is_shared\": true,\n        \"runner_type\": \"instance_type\",\n        \"name\": \"test\",\n        \"online\": true,\n        \"created_at\": \"2025-05-03T00:00:00.000Z\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\",\n        \"created_by\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": false,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n      \"archived\": false,\n      \"tag_list\": [\n        \"ubuntu18\",\n        \"docker runner\"\n      ],\n      \"failure_reason\": \"script_failure\",\n      \"artifacts_file\": {\n        \"filename\": \"artifacts.zip\",\n        \"size\": 1000\n      },\n      \"runner_manager\": {\n        \"id\": 8,\n        \"system_id\": \"runner-1\",\n        \"version\": \"16.11.0\",\n        \"revision\": \"91a27b2a\",\n        \"platform\": \"linux\",\n        \"architecture\": \"amd64\",\n        \"created_at\": \"2023-10-24T01:27:06.549Z\",\n        \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n        \"ip_address\": \"127.0.0.1\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\"\n      }\n    },\n    \"status\": \"created\"\n  },\n  \"cluster_agent\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"config_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    },\n    \"created_at\": \"string\",\n    \"created_by_user_id\": \"string\",\n    \"is_receptive\": \"string\"\n  },\n  \"kubernetes_namespace\": \"string\",\n  \"flux_resource_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3011b13d-1753-45ef-a14c-b42398f8f048",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c89166a2-3b5c-44dd-856d-62a63f3dc8c1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cbe0ad5-d8ea-4bd9-929c-3bd2421fc4ab",
+          "name": "get Api V4Projects Id Environments Environment Id",
+          "request": {
+            "name": "get Api V4Projects Id Environments Environment Id",
+            "description": {
+              "content": "Get a specific environment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments",
+                ":environment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "environment_id",
+                  "description": "(Required) The ID of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2375bad-e1cf-47cf-b40e-20a1d117c970",
+              "name": "Get a specific environment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"deploy\",\n  \"slug\": \"deploy\",\n  \"external_url\": \"https://deploy.gitlab.example.com\",\n  \"created_at\": \"2019-05-25T18:55:13.252Z\",\n  \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n  \"tier\": \"development\",\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  },\n  \"state\": \"available\",\n  \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n  \"description\": \"description\",\n  \"auto_stop_setting\": \"always\",\n  \"last_deployment\": {\n    \"id\": 41,\n    \"iid\": 1,\n    \"ref\": \"main\",\n    \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n    \"created_at\": \"2016-08-11T11:32:35.444Z\",\n    \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"environment\": {\n      \"id\": 1,\n      \"name\": \"deploy\",\n      \"slug\": \"deploy\",\n      \"external_url\": \"https://deploy.gitlab.example.com\",\n      \"created_at\": \"2019-05-25T18:55:13.252Z\",\n      \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n    },\n    \"deployable\": {\n      \"id\": 1,\n      \"status\": \"waiting_for_resource\",\n      \"stage\": \"deploy\",\n      \"name\": \"deploy_to_production\",\n      \"ref\": \"main\",\n      \"tag\": true,\n      \"coverage\": 98.29,\n      \"allow_failure\": false,\n      \"created_at\": \"2015-12-24T15:51:21.880Z\",\n      \"started_at\": \"2015-12-24T17:54:30.733Z\",\n      \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n      \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n      \"duration\": 0.465,\n      \"queued_duration\": 0.123,\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"bio\": \"string\",\n        \"location\": \"string\",\n        \"linkedin\": \"string\",\n        \"twitter\": \"string\",\n        \"discord\": \"string\",\n        \"website_url\": \"string\",\n        \"github\": \"string\",\n        \"job_title\": \"string\",\n        \"pronouns\": \"string\",\n        \"organization\": \"string\",\n        \"bot\": false,\n        \"work_information\": \"string\",\n        \"local_time\": \"string\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"created_at\": \"string\",\n        \"followers\": \"string\",\n        \"following\": \"string\",\n        \"is_followed\": \"string\"\n      },\n      \"commit\": {\n        \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n        \"short_id\": \"2695effb\",\n        \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n        \"parent_ids\": [\n          \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n        ],\n        \"title\": \"Initial commit\",\n        \"message\": \"Initial commit\",\n        \"author_name\": \"John Smith\",\n        \"author_email\": \"john@example.com\",\n        \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n        \"committer_name\": \"Jack Smith\",\n        \"committer_email\": \"jack@example.com\",\n        \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n        \"trailers\": {\n          \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n        },\n        \"extended_trailers\": {\n          \"Signed-off-by\": [\n            \"John Doe <johndoe@gitlab.com>\",\n            \"Jane Doe <janedoe@gitlab.com>\"\n          ]\n        },\n        \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n      },\n      \"pipeline\": {\n        \"id\": 1,\n        \"iid\": 2,\n        \"project_id\": 3,\n        \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n        \"ref\": \"feature-branch\",\n        \"status\": \"success\",\n        \"source\": \"push\",\n        \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n      },\n      \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n      \"project\": {\n        \"ci_job_token_scope_enabled\": \"string\"\n      },\n      \"artifacts\": [\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        },\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        }\n      ],\n      \"runner\": {\n        \"id\": 8,\n        \"description\": \"test-1-20150125\",\n        \"ip_address\": \"127.0.0.1\",\n        \"active\": true,\n        \"paused\": false,\n        \"is_shared\": true,\n        \"runner_type\": \"instance_type\",\n        \"name\": \"test\",\n        \"online\": true,\n        \"created_at\": \"2025-05-03T00:00:00.000Z\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\",\n        \"created_by\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": false,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n      \"archived\": false,\n      \"tag_list\": [\n        \"ubuntu18\",\n        \"docker runner\"\n      ],\n      \"failure_reason\": \"script_failure\",\n      \"artifacts_file\": {\n        \"filename\": \"artifacts.zip\",\n        \"size\": 1000\n      },\n      \"runner_manager\": {\n        \"id\": 8,\n        \"system_id\": \"runner-1\",\n        \"version\": \"16.11.0\",\n        \"revision\": \"91a27b2a\",\n        \"platform\": \"linux\",\n        \"architecture\": \"amd64\",\n        \"created_at\": \"2023-10-24T01:27:06.549Z\",\n        \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n        \"ip_address\": \"127.0.0.1\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\"\n      }\n    },\n    \"status\": \"created\"\n  },\n  \"cluster_agent\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"config_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    },\n    \"created_at\": \"string\",\n    \"created_by_user_id\": \"string\",\n    \"is_receptive\": \"string\"\n  },\n  \"kubernetes_namespace\": \"string\",\n  \"flux_resource_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92746fb5-6414-4c9c-9137-5473cb0921a4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "773cd301-a970-4182-9bd5-413a2304c823",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87338ba9-2541-483d-962b-dafd0cdcbbdb",
+          "name": "Delete multiple stopped review apps",
+          "request": {
+            "name": "Delete multiple stopped review apps",
+            "description": {
+              "content": "It schedules for deletion multiple environments that have already been stopped and are in the review app folder. The actual deletion is performed after 1 week from the time of execution. By default, it only deletes environments 30 days or older. You can change this default using the `before` parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments",
+                "review_apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of environments to delete. Defaults to 100"
+                },
+                {
+                  "disabled": false,
+                  "key": "dry_run",
+                  "value": "true",
+                  "description": "Defaults to true for safety reasons. It performs a dry run where no actual deletion will be performed. Set to false to actually delete the environment"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4cb2e9d6-b22c-4910-af53-d148bd56c6ef",
+              "name": "Delete multiple stopped review apps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "review_apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"deploy\",\n  \"slug\": \"deploy\",\n  \"external_url\": \"https://deploy.gitlab.example.com\",\n  \"created_at\": \"2019-05-25T18:55:13.252Z\",\n  \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdddbbaa-65ea-4ef9-8394-1f38da0febc0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "review_apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17732489-9691-45ba-9021-20787f8155ab",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "review_apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a975732-40a0-4b5c-b255-06dadb9e26d6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "review_apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76d7e1c4-153d-495d-a4ff-6036f0c4da0b",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "review_apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bafc58a0-29c0-4c58-aa96-641587e29848",
+          "name": "Stop an environment",
+          "request": {
+            "name": "Stop an environment",
+            "description": {
+              "content": "It returns 200 if the environment was successfully stopped.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments",
+                ":environment_id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "environment_id",
+                  "description": "(Required) The ID of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"force\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5abcf39e-f333-4daa-981b-afda9ca5d1f1",
+              "name": "Stop an environment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"deploy\",\n  \"slug\": \"deploy\",\n  \"external_url\": \"https://deploy.gitlab.example.com\",\n  \"created_at\": \"2019-05-25T18:55:13.252Z\",\n  \"updated_at\": \"2019-05-25T18:55:13.252Z\",\n  \"tier\": \"development\",\n  \"project\": {\n    \"id\": 1,\n    \"description\": \"desc\",\n    \"name\": \"project1\",\n    \"name_with_namespace\": \"John Doe / project1\",\n    \"path\": \"project1\",\n    \"path_with_namespace\": \"namespace1/project1\",\n    \"created_at\": \"2020-05-07T04:27:17.016Z\",\n    \"tag_list\": [\n      \"tag\"\n    ],\n    \"topics\": [\n      \"topic\"\n    ],\n    \"ssh_url_to_repo\": \"git@gitlab.example.com:gitlab/gitlab.git\",\n    \"http_url_to_repo\": \"https://gitlab.example.com/gitlab/gitlab.git\",\n    \"web_url\": \"https://gitlab.example.com/gitlab/gitlab\",\n    \"avatar_url\": \"http://example.com/uploads/project/avatar/3/uploads/avatar.png\",\n    \"star_count\": 1,\n    \"last_activity_at\": \"2013-09-30T13:46:02Z\",\n    \"visibility\": \"public\",\n    \"namespace\": {\n      \"id\": 2,\n      \"name\": \"project\",\n      \"path\": \"my_project\",\n      \"kind\": \"project\",\n      \"full_path\": \"group/my_project\",\n      \"parent_id\": 1,\n      \"avatar_url\": \"https://example.com/avatar/12345\",\n      \"web_url\": \"https://example.com/group/my_project\"\n    },\n    \"default_branch\": \"main\",\n    \"readme_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/README.md\",\n    \"forks_count\": 1,\n    \"license_url\": \"https://gitlab.example.com/gitlab/gitlab/blob/master/LICENCE\",\n    \"license\": {\n      \"key\": \"gpl-3.0\",\n      \"name\": \"GNU General Public License v3.0\",\n      \"nickname\": \"GNU GPLv3\",\n      \"html_url\": \"http://choosealicense.com/licenses/gpl-3.0\",\n      \"source_url\": \"string\"\n    },\n    \"custom_attributes\": {\n      \"key\": \"foo\",\n      \"value\": \"bar\"\n    },\n    \"repository_storage\": \"default\"\n  },\n  \"state\": \"available\",\n  \"auto_stop_at\": \"2019-05-25T18:55:13.252Z\",\n  \"description\": \"description\",\n  \"auto_stop_setting\": \"always\",\n  \"last_deployment\": {\n    \"id\": 41,\n    \"iid\": 1,\n    \"ref\": \"main\",\n    \"sha\": \"99d03678b90d914dbb1b109132516d71a4a03ea8\",\n    \"created_at\": \"2016-08-11T11:32:35.444Z\",\n    \"updated_at\": \"2016-08-11T11:32:35.444Z\",\n    \"user\": {\n      \"id\": 1,\n      \"username\": \"admin\",\n      \"public_email\": \"john@example.com\",\n      \"name\": \"Administrator\",\n      \"state\": \"active\",\n      \"locked\": true,\n      \"avatar_url\": \"https://gravatar.com/avatar/1\",\n      \"web_url\": \"https://gitlab.example.com/root\",\n      \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n      \"custom_attributes\": [\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        },\n        {\n          \"key\": \"foo\",\n          \"value\": \"bar\"\n        }\n      ]\n    },\n    \"environment\": {\n      \"id\": 1,\n      \"name\": \"deploy\",\n      \"slug\": \"deploy\",\n      \"external_url\": \"https://deploy.gitlab.example.com\",\n      \"created_at\": \"2019-05-25T18:55:13.252Z\",\n      \"updated_at\": \"2019-05-25T18:55:13.252Z\"\n    },\n    \"deployable\": {\n      \"id\": 1,\n      \"status\": \"waiting_for_resource\",\n      \"stage\": \"deploy\",\n      \"name\": \"deploy_to_production\",\n      \"ref\": \"main\",\n      \"tag\": true,\n      \"coverage\": 98.29,\n      \"allow_failure\": false,\n      \"created_at\": \"2015-12-24T15:51:21.880Z\",\n      \"started_at\": \"2015-12-24T17:54:30.733Z\",\n      \"finished_at\": \"2015-12-24T17:54:31.198Z\",\n      \"erased_at\": \"2015-12-24T18:00:29.728Z\",\n      \"duration\": 0.465,\n      \"queued_duration\": 0.123,\n      \"user\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"public_email\": \"john@example.com\",\n        \"name\": \"Administrator\",\n        \"state\": \"active\",\n        \"locked\": true,\n        \"avatar_url\": \"https://gravatar.com/avatar/1\",\n        \"web_url\": \"https://gitlab.example.com/root\",\n        \"bio\": \"string\",\n        \"location\": \"string\",\n        \"linkedin\": \"string\",\n        \"twitter\": \"string\",\n        \"discord\": \"string\",\n        \"website_url\": \"string\",\n        \"github\": \"string\",\n        \"job_title\": \"string\",\n        \"pronouns\": \"string\",\n        \"organization\": \"string\",\n        \"bot\": false,\n        \"work_information\": \"string\",\n        \"local_time\": \"string\",\n        \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n        \"custom_attributes\": [\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"created_at\": \"string\",\n        \"followers\": \"string\",\n        \"following\": \"string\",\n        \"is_followed\": \"string\"\n      },\n      \"commit\": {\n        \"id\": \"2695effb5807a22ff3d138d593fd856244e155e7\",\n        \"short_id\": \"2695effb\",\n        \"created_at\": \"2017-07-26T11:08:53.000+02:00\",\n        \"parent_ids\": [\n          \"2a4b78934375d7f53875269ffd4f45fd83a84ebe\"\n        ],\n        \"title\": \"Initial commit\",\n        \"message\": \"Initial commit\",\n        \"author_name\": \"John Smith\",\n        \"author_email\": \"john@example.com\",\n        \"authored_date\": \"2012-05-28T04:42:42-07:00\",\n        \"committer_name\": \"Jack Smith\",\n        \"committer_email\": \"jack@example.com\",\n        \"committed_date\": \"2012-05-28T04:42:42-07:00\",\n        \"trailers\": {\n          \"Merged-By\": \"Jane Doe janedoe@gitlab.com\"\n        },\n        \"extended_trailers\": {\n          \"Signed-off-by\": [\n            \"John Doe <johndoe@gitlab.com>\",\n            \"Jane Doe <janedoe@gitlab.com>\"\n          ]\n        },\n        \"web_url\": \"https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746\"\n      },\n      \"pipeline\": {\n        \"id\": 1,\n        \"iid\": 2,\n        \"project_id\": 3,\n        \"sha\": \"0ec9e58fdfca6cdd6652c083c9edb53abc0bad52\",\n        \"ref\": \"feature-branch\",\n        \"status\": \"success\",\n        \"source\": \"push\",\n        \"created_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"updated_at\": \"2022-10-21T16:49:48.000+02:00\",\n        \"web_url\": \"https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61\"\n      },\n      \"web_url\": \"https://example.com/foo/bar/-/jobs/1\",\n      \"project\": {\n        \"ci_job_token_scope_enabled\": \"string\"\n      },\n      \"artifacts\": [\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        },\n        {\n          \"file_type\": \"archive\",\n          \"size\": 1000,\n          \"filename\": \"artifacts.zip\",\n          \"file_format\": \"zip\"\n        }\n      ],\n      \"runner\": {\n        \"id\": 8,\n        \"description\": \"test-1-20150125\",\n        \"ip_address\": \"127.0.0.1\",\n        \"active\": true,\n        \"paused\": false,\n        \"is_shared\": true,\n        \"runner_type\": \"instance_type\",\n        \"name\": \"test\",\n        \"online\": true,\n        \"created_at\": \"2025-05-03T00:00:00.000Z\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\",\n        \"created_by\": {\n          \"id\": 1,\n          \"username\": \"admin\",\n          \"public_email\": \"john@example.com\",\n          \"name\": \"Administrator\",\n          \"state\": \"active\",\n          \"locked\": false,\n          \"avatar_url\": \"https://gravatar.com/avatar/1\",\n          \"web_url\": \"https://gitlab.example.com/root\",\n          \"avatar_path\": \"/user/avatar/28/The-Big-Lebowski-400-400.png\",\n          \"custom_attributes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"artifacts_expire_at\": \"2016-01-19T09:05:50.355Z\",\n      \"archived\": false,\n      \"tag_list\": [\n        \"ubuntu18\",\n        \"docker runner\"\n      ],\n      \"failure_reason\": \"script_failure\",\n      \"artifacts_file\": {\n        \"filename\": \"artifacts.zip\",\n        \"size\": 1000\n      },\n      \"runner_manager\": {\n        \"id\": 8,\n        \"system_id\": \"runner-1\",\n        \"version\": \"16.11.0\",\n        \"revision\": \"91a27b2a\",\n        \"platform\": \"linux\",\n        \"architecture\": \"amd64\",\n        \"created_at\": \"2023-10-24T01:27:06.549Z\",\n        \"contacted_at\": \"2023-10-24T01:27:06.549Z\",\n        \"ip_address\": \"127.0.0.1\",\n        \"status\": \"online\",\n        \"job_execution_status\": \"idle\"\n      }\n    },\n    \"status\": \"created\"\n  },\n  \"cluster_agent\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"config_project\": {\n      \"id\": 1,\n      \"description\": \"desc\",\n      \"name\": \"project1\",\n      \"name_with_namespace\": \"John Doe / project1\",\n      \"path\": \"project1\",\n      \"path_with_namespace\": \"namespace1/project1\",\n      \"created_at\": \"2020-05-07T04:27:17.016Z\"\n    },\n    \"created_at\": \"string\",\n    \"created_by_user_id\": \"string\",\n    \"is_receptive\": \"string\"\n  },\n  \"kubernetes_namespace\": \"string\",\n  \"flux_resource_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0de85805-ab97-4d83-80ae-32d8b08251ac",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b56c252e-a247-4a61-bcc8-e32a7af29b41",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7be690b3-639c-42e2-95b3-60061b957ffe",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    ":environment_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "environment_id",
+                      "description": "(Required) The ID of the environment"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01c09c9f-f98e-4146-860c-7185182646dd",
+          "name": "Stop stale environments",
+          "request": {
+            "name": "Stop stale environments",
+            "description": {
+              "content": "It returns `200` if stale environment check was scheduled successfully",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "environments",
+                "stop_stale"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"before\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c02a10cf-15ca-4a6f-8f2f-c73c9e392d38",
+              "name": "Stop stale environments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "stop_stale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"before\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b370f90-2e28-4ab4-8599-b10feea56647",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "stop_stale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"before\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89987f40-3a7b-4eb5-9328-dba0c03f9d0a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "environments",
+                    "stop_stale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID or URL-encoded path of the project owned by the authenticated user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"before\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b72b02d7-1ff6-4fe3-b21a-56d5596d8237",
+    "name": "GitLab access_requests environments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests clusters API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List group clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/clusters",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.1. Returns a list of group clusters."
+        },
+        {
+          "info": {
+            "name": "Get a single group cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              },
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.1. Gets a single group cluster."
+        },
+        {
+          "info": {
+            "name": "Edit group cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/groups/:id/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              },
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.1. Updates an existing group cluster."
+        },
+        {
+          "info": {
+            "name": "Delete group cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              },
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The Cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.1. Deletes an existing group cluster. Does not remove existing resources within the connected Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Add existing cluster to group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/clusters/user",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 12.1. Adds an existing Kubernetes cluster to the group."
+        },
+        {
+          "info": {
+            "name": "List project clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/clusters",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.7. Returns a list of project clusters."
+        },
+        {
+          "info": {
+            "name": "Get a single project cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.7. Gets a single project cluster."
+        },
+        {
+          "info": {
+            "name": "Edit project cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.7. Updates an existing project cluster."
+        },
+        {
+          "info": {
+            "name": "Delete project cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The Cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.7. Deletes an existing project cluster. Does not remove existing resources within the connected Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Add existing cluster to project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/clusters/user",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 11.7. Adds an existing Kubernetes cluster to the project."
+        },
+        {
+          "info": {
+            "name": "List instance clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/clusters"
+          },
+          "docs": "This feature was introduced in GitLab 13.2. Returns a list of instance clusters."
+        },
+        {
+          "info": {
+            "name": "Get a single instance cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.2. Returns a single instance cluster."
+        },
+        {
+          "info": {
+            "name": "Edit instance cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/admin/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.2. Updates an existing instance cluster."
+        },
+        {
+          "info": {
+            "name": "Delete instance cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/admin/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "",
+                "type": "path",
+                "description": "The cluster ID"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.2. Deletes an existing instance cluster. Does not remove existing resources within the connected Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Add existing instance cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/admin/clusters/add"
+          },
+          "docs": "This feature was introduced in GitLab 13.2. Adds an existing Kubernetes instance cluster."
+        },
+        {
+          "info": {
+            "name": "Discover all descendant certificate-based clusters in a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/discover-cert-based-clusters",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The group ID to find all certificate-based clusters in the hierarchy"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 17.9. It will be removed in 18.0."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

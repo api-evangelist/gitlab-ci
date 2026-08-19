@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ml_model_registry API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ml_model_registry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workhorse authorize model package file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/ml_models/:model_version_id/files/(*path/):file_name/authorize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "file_name",
+                "value": "",
+                "type": "path",
+                "description": "File name"
+              },
+              {
+                "name": "model_version_id",
+                "value": "",
+                "type": "path",
+                "description": "Model version id"
+              }
+            ]
+          },
+          "docs": "Introduced in GitLab 16.8"
+        },
+        {
+          "info": {
+            "name": "Download an ml_model package file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/ml_models/:model_version_id/files/(*path/):file_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "file_name",
+                "value": "",
+                "type": "path",
+                "description": "File name"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "File directory path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Package status"
+              },
+              {
+                "name": "model_version_id",
+                "value": "",
+                "type": "path",
+                "description": "Model version id"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 16.8"
+        },
+        {
+          "info": {
+            "name": "Workhorse upload model package file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/ml_models/:model_version_id/files/(*path/):file_name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "file_name",
+                "value": "",
+                "type": "path",
+                "description": "File name"
+              },
+              {
+                "name": "model_version_id",
+                "value": "",
+                "type": "path",
+                "description": "Model version id"
+              }
+            ]
+          },
+          "docs": "Introduced in GitLab 16.8"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

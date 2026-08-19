@@ -1,0 +1,411 @@
+{
+  "item": [
+    {
+      "id": "72a3b5e6-f5b5-4a7b-a45e-be6959eadf8c",
+      "name": "plan_limits",
+      "description": {
+        "content": "Operations related to plan limits",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "625ccb3d-c106-4c8c-8d7a-82fe05825d44",
+          "name": "Get current plan limits",
+          "request": {
+            "name": "Get current plan limits",
+            "description": {
+              "content": "List the current limits of a plan on the GitLab instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "application",
+                "plan_limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "plan_name",
+                  "value": "default",
+                  "description": "Name of the plan to get the limits from. Default: default."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab4ad670-d7f2-4ac5-a4bd-9abe03aa85a6",
+              "name": "Get current plan limits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_name",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ci_instance_level_variables\": 25,\n  \"ci_pipeline_size\": 0,\n  \"ci_active_jobs\": 0,\n  \"ci_project_subscriptions\": 2,\n  \"ci_pipeline_schedules\": 10,\n  \"ci_needs_size_limit\": 50,\n  \"ci_registered_group_runners\": 1000,\n  \"ci_registered_project_runners\": 1000,\n  \"conan_max_file_size\": 3221225472,\n  \"dotenv_variables\": 20,\n  \"dotenv_size\": 5120,\n  \"enforcement_limit\": 15000,\n  \"generic_packages_max_file_size\": 5368709120,\n  \"helm_max_file_size\": 5242880,\n  \"limits_history\": {\n    \"enforcement_limit\": [\n      {\n        \"timestamp\": 1686909124,\n        \"user_id\": 1,\n        \"username\": \"x\",\n        \"value\": 5\n      }\n    ],\n    \"notification_limit\": [\n      {\n        \"timestamp\": 1686909124,\n        \"user_id\": 2,\n        \"username\": \"y\",\n        \"value\": 7\n      }\n    ]\n  },\n  \"maven_max_file_size\": 3221225472,\n  \"notification_limit\": 15000,\n  \"npm_max_file_size\": 524288000,\n  \"nuget_max_file_size\": 524288000,\n  \"pipeline_hierarchy_size\": 1000,\n  \"pypi_max_file_size\": 3221225472,\n  \"terraform_module_max_file_size\": 1073741824,\n  \"storage_size_limit\": 15000,\n  \"web_hook_calls\": 500,\n  \"web_hook_calls_low\": 500,\n  \"web_hook_calls_mid\": 500,\n  \"max_pipelines_per_merge_train\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7d81ff5-d5e3-4235-96b9-d1134d01e5a5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_name",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bf04f41-e60c-4e8a-bc52-fb43547c605a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_name",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "182466a0-fb8a-4d86-b61a-f62fa1a16269",
+          "name": "Change plan limits",
+          "request": {
+            "name": "Change plan limits",
+            "description": {
+              "content": "Modify the limits of a plan on the GitLab instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "application",
+                "plan_limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_name\": \"<string>\",\n  \"ci_instance_level_variables\": \"<integer>\",\n  \"ci_pipeline_size\": \"<integer>\",\n  \"ci_active_jobs\": \"<integer>\",\n  \"ci_project_subscriptions\": \"<integer>\",\n  \"ci_pipeline_schedules\": \"<integer>\",\n  \"ci_needs_size_limit\": \"<integer>\",\n  \"ci_registered_group_runners\": \"<integer>\",\n  \"ci_registered_project_runners\": \"<integer>\",\n  \"conan_max_file_size\": \"<integer>\",\n  \"dotenv_size\": \"<integer>\",\n  \"dotenv_variables\": \"<integer>\",\n  \"enforcement_limit\": \"<integer>\",\n  \"generic_packages_max_file_size\": \"<integer>\",\n  \"helm_max_file_size\": \"<integer>\",\n  \"maven_max_file_size\": \"<integer>\",\n  \"notification_limit\": \"<integer>\",\n  \"npm_max_file_size\": \"<integer>\",\n  \"nuget_max_file_size\": \"<integer>\",\n  \"pypi_max_file_size\": \"<integer>\",\n  \"terraform_module_max_file_size\": \"<integer>\",\n  \"storage_size_limit\": \"<integer>\",\n  \"pipeline_hierarchy_size\": \"<integer>\",\n  \"web_hook_calls\": \"<integer>\",\n  \"web_hook_calls_low\": \"<integer>\",\n  \"web_hook_calls_mid\": \"<integer>\",\n  \"max_pipelines_per_merge_train\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5e048c7-52f9-4ef9-90ec-6ba245389f22",
+              "name": "Change plan limits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plan_name\": \"<string>\",\n  \"ci_instance_level_variables\": \"<integer>\",\n  \"ci_pipeline_size\": \"<integer>\",\n  \"ci_active_jobs\": \"<integer>\",\n  \"ci_project_subscriptions\": \"<integer>\",\n  \"ci_pipeline_schedules\": \"<integer>\",\n  \"ci_needs_size_limit\": \"<integer>\",\n  \"ci_registered_group_runners\": \"<integer>\",\n  \"ci_registered_project_runners\": \"<integer>\",\n  \"conan_max_file_size\": \"<integer>\",\n  \"dotenv_size\": \"<integer>\",\n  \"dotenv_variables\": \"<integer>\",\n  \"enforcement_limit\": \"<integer>\",\n  \"generic_packages_max_file_size\": \"<integer>\",\n  \"helm_max_file_size\": \"<integer>\",\n  \"maven_max_file_size\": \"<integer>\",\n  \"notification_limit\": \"<integer>\",\n  \"npm_max_file_size\": \"<integer>\",\n  \"nuget_max_file_size\": \"<integer>\",\n  \"pypi_max_file_size\": \"<integer>\",\n  \"terraform_module_max_file_size\": \"<integer>\",\n  \"storage_size_limit\": \"<integer>\",\n  \"pipeline_hierarchy_size\": \"<integer>\",\n  \"web_hook_calls\": \"<integer>\",\n  \"web_hook_calls_low\": \"<integer>\",\n  \"web_hook_calls_mid\": \"<integer>\",\n  \"max_pipelines_per_merge_train\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ci_instance_level_variables\": 25,\n  \"ci_pipeline_size\": 0,\n  \"ci_active_jobs\": 0,\n  \"ci_project_subscriptions\": 2,\n  \"ci_pipeline_schedules\": 10,\n  \"ci_needs_size_limit\": 50,\n  \"ci_registered_group_runners\": 1000,\n  \"ci_registered_project_runners\": 1000,\n  \"conan_max_file_size\": 3221225472,\n  \"dotenv_variables\": 20,\n  \"dotenv_size\": 5120,\n  \"enforcement_limit\": 15000,\n  \"generic_packages_max_file_size\": 5368709120,\n  \"helm_max_file_size\": 5242880,\n  \"limits_history\": {\n    \"enforcement_limit\": [\n      {\n        \"timestamp\": 1686909124,\n        \"user_id\": 1,\n        \"username\": \"x\",\n        \"value\": 5\n      }\n    ],\n    \"notification_limit\": [\n      {\n        \"timestamp\": 1686909124,\n        \"user_id\": 2,\n        \"username\": \"y\",\n        \"value\": 7\n      }\n    ]\n  },\n  \"maven_max_file_size\": 3221225472,\n  \"notification_limit\": 15000,\n  \"npm_max_file_size\": 524288000,\n  \"nuget_max_file_size\": 524288000,\n  \"pipeline_hierarchy_size\": 1000,\n  \"pypi_max_file_size\": 3221225472,\n  \"terraform_module_max_file_size\": 1073741824,\n  \"storage_size_limit\": 15000,\n  \"web_hook_calls\": 500,\n  \"web_hook_calls_low\": 500,\n  \"web_hook_calls_mid\": 500,\n  \"max_pipelines_per_merge_train\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5f6c8ce-a3a4-48b9-85d8-9f303bc4ca6f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plan_name\": \"<string>\",\n  \"ci_instance_level_variables\": \"<integer>\",\n  \"ci_pipeline_size\": \"<integer>\",\n  \"ci_active_jobs\": \"<integer>\",\n  \"ci_project_subscriptions\": \"<integer>\",\n  \"ci_pipeline_schedules\": \"<integer>\",\n  \"ci_needs_size_limit\": \"<integer>\",\n  \"ci_registered_group_runners\": \"<integer>\",\n  \"ci_registered_project_runners\": \"<integer>\",\n  \"conan_max_file_size\": \"<integer>\",\n  \"dotenv_size\": \"<integer>\",\n  \"dotenv_variables\": \"<integer>\",\n  \"enforcement_limit\": \"<integer>\",\n  \"generic_packages_max_file_size\": \"<integer>\",\n  \"helm_max_file_size\": \"<integer>\",\n  \"maven_max_file_size\": \"<integer>\",\n  \"notification_limit\": \"<integer>\",\n  \"npm_max_file_size\": \"<integer>\",\n  \"nuget_max_file_size\": \"<integer>\",\n  \"pypi_max_file_size\": \"<integer>\",\n  \"terraform_module_max_file_size\": \"<integer>\",\n  \"storage_size_limit\": \"<integer>\",\n  \"pipeline_hierarchy_size\": \"<integer>\",\n  \"web_hook_calls\": \"<integer>\",\n  \"web_hook_calls_low\": \"<integer>\",\n  \"web_hook_calls_mid\": \"<integer>\",\n  \"max_pipelines_per_merge_train\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8153a0cc-c0e1-4718-a0b7-647961bf38bf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plan_name\": \"<string>\",\n  \"ci_instance_level_variables\": \"<integer>\",\n  \"ci_pipeline_size\": \"<integer>\",\n  \"ci_active_jobs\": \"<integer>\",\n  \"ci_project_subscriptions\": \"<integer>\",\n  \"ci_pipeline_schedules\": \"<integer>\",\n  \"ci_needs_size_limit\": \"<integer>\",\n  \"ci_registered_group_runners\": \"<integer>\",\n  \"ci_registered_project_runners\": \"<integer>\",\n  \"conan_max_file_size\": \"<integer>\",\n  \"dotenv_size\": \"<integer>\",\n  \"dotenv_variables\": \"<integer>\",\n  \"enforcement_limit\": \"<integer>\",\n  \"generic_packages_max_file_size\": \"<integer>\",\n  \"helm_max_file_size\": \"<integer>\",\n  \"maven_max_file_size\": \"<integer>\",\n  \"notification_limit\": \"<integer>\",\n  \"npm_max_file_size\": \"<integer>\",\n  \"nuget_max_file_size\": \"<integer>\",\n  \"pypi_max_file_size\": \"<integer>\",\n  \"terraform_module_max_file_size\": \"<integer>\",\n  \"storage_size_limit\": \"<integer>\",\n  \"pipeline_hierarchy_size\": \"<integer>\",\n  \"web_hook_calls\": \"<integer>\",\n  \"web_hook_calls_low\": \"<integer>\",\n  \"web_hook_calls_mid\": \"<integer>\",\n  \"max_pipelines_per_merge_train\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b4f630e-e887-46de-9cff-440ffdbfd514",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "application",
+                    "plan_limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plan_name\": \"<string>\",\n  \"ci_instance_level_variables\": \"<integer>\",\n  \"ci_pipeline_size\": \"<integer>\",\n  \"ci_active_jobs\": \"<integer>\",\n  \"ci_project_subscriptions\": \"<integer>\",\n  \"ci_pipeline_schedules\": \"<integer>\",\n  \"ci_needs_size_limit\": \"<integer>\",\n  \"ci_registered_group_runners\": \"<integer>\",\n  \"ci_registered_project_runners\": \"<integer>\",\n  \"conan_max_file_size\": \"<integer>\",\n  \"dotenv_size\": \"<integer>\",\n  \"dotenv_variables\": \"<integer>\",\n  \"enforcement_limit\": \"<integer>\",\n  \"generic_packages_max_file_size\": \"<integer>\",\n  \"helm_max_file_size\": \"<integer>\",\n  \"maven_max_file_size\": \"<integer>\",\n  \"notification_limit\": \"<integer>\",\n  \"npm_max_file_size\": \"<integer>\",\n  \"nuget_max_file_size\": \"<integer>\",\n  \"pypi_max_file_size\": \"<integer>\",\n  \"terraform_module_max_file_size\": \"<integer>\",\n  \"storage_size_limit\": \"<integer>\",\n  \"pipeline_hierarchy_size\": \"<integer>\",\n  \"web_hook_calls\": \"<integer>\",\n  \"web_hook_calls_low\": \"<integer>\",\n  \"web_hook_calls_mid\": \"<integer>\",\n  \"max_pipelines_per_merge_train\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0a33440c-45af-45cc-b61b-e4f8546d715a",
+    "name": "GitLab access_requests plan_limits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

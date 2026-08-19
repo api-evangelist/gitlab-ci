@@ -1,0 +1,565 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests runners API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "runners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List group's runners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/runners",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of runners to return"
+              },
+              {
+                "name": "paused",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include only runners that are accepting or ignoring new jobs"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of runners to return"
+              },
+              {
+                "name": "tag_list",
+                "value": "['macos', 'shell']",
+                "type": "query",
+                "description": "A list of runner tags"
+              },
+              {
+                "name": "version_prefix",
+                "value": "'15.1.' or '16.'",
+                "type": "query",
+                "description": "The version prefix of runners to return"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "List all runners available in the group as well as its ancestor groups, including any allowed shared runners."
+        },
+        {
+          "info": {
+            "name": "Reset the runner registration token for a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/runners/reset_registration_token",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group"
+              }
+            ]
+          },
+          "docs": "Reset runner registration token"
+        },
+        {
+          "info": {
+            "name": "List project's runners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/runners",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated: Use `type` or `status` instead. The scope of runners to return"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of runners to return"
+              },
+              {
+                "name": "paused",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include only runners that are accepting or ignoring new jobs"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of runners to return"
+              },
+              {
+                "name": "tag_list",
+                "value": "['macos', 'shell']",
+                "type": "query",
+                "description": "A list of runner tags"
+              },
+              {
+                "name": "version_prefix",
+                "value": "'15.1.' or '16.'",
+                "type": "query",
+                "description": "The version prefix of runners to return"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "List all runners available in the project, including from ancestor groups and any allowed shared runners."
+        },
+        {
+          "info": {
+            "name": "Assign a runner to project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/runners",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Assign an available project runner to the project."
+        },
+        {
+          "info": {
+            "name": "Unassign a project runner from the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/runners/:runner_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              }
+            ]
+          },
+          "docs": "It is not possible to unassign a runner from the owner project. If so, an error is returned. Use the call to delete a runner instead."
+        },
+        {
+          "info": {
+            "name": "Reset the runner registration token for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/runners/reset_registration_token",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project"
+              }
+            ]
+          },
+          "docs": "Reset runner registration token"
+        },
+        {
+          "info": {
+            "name": "List available runners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated: Use `type` or `status` instead. The scope of runners to return"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of runners to return"
+              },
+              {
+                "name": "paused",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include only runners that are accepting or ignoring new jobs"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of runners to return"
+              },
+              {
+                "name": "tag_list",
+                "value": "['macos', 'shell']",
+                "type": "query",
+                "description": "A list of runner tags"
+              },
+              {
+                "name": "version_prefix",
+                "value": "'15.1.' or '16.'",
+                "type": "query",
+                "description": "The version prefix of runners to return"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get runners available for user"
+        },
+        {
+          "info": {
+            "name": "List all runners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/all",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated: Use `type` or `status` instead. The scope of runners to return"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of runners to return"
+              },
+              {
+                "name": "paused",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include only runners that are accepting or ignoring new jobs"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of runners to return"
+              },
+              {
+                "name": "tag_list",
+                "value": "['macos', 'shell']",
+                "type": "query",
+                "description": "A list of runner tags"
+              },
+              {
+                "name": "version_prefix",
+                "value": "'15.1.' or '16.'",
+                "type": "query",
+                "description": "The version prefix of runners to return"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of all runners in the GitLab instance (shared and project). Access is restricted to users with either administrator access or auditor access."
+        },
+        {
+          "info": {
+            "name": "Get runner's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              },
+              {
+                "name": "include_projects",
+                "value": "",
+                "type": "query",
+                "description": "Include projects in the response. Set to false to improve performance for runners with many projects."
+              }
+            ]
+          },
+          "docs": "At least the Maintainer role is required to get runner details at the project and group level. Instance-level runner details via this endpoint are available to all signed in users."
+        },
+        {
+          "info": {
+            "name": "Update details of a runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/runners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              }
+            ]
+          },
+          "docs": "Update runner's details"
+        },
+        {
+          "info": {
+            "name": "Delete a runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/runners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              }
+            ]
+          },
+          "docs": "Remove a runner"
+        },
+        {
+          "info": {
+            "name": "getApiV4RunnersIdManagers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/:id/managers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              }
+            ]
+          },
+          "docs": "Get a list of all runner's managers"
+        },
+        {
+          "info": {
+            "name": "List runner's projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/:id/projects",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of all projects associated with the specified runner. Access is restricted based on user permissions."
+        },
+        {
+          "info": {
+            "name": "List runner's jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/runners/:id/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a runner"
+              },
+              {
+                "name": "system_id",
+                "value": "",
+                "type": "query",
+                "description": "System ID associated with the runner manager"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the job"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Order by `id`"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort by `asc` or `desc` order. Specify `order_by` as well, including for `id`"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for obtaining the next set of records"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "List jobs that are being processed or were processed by the specified runner. The list of jobs is limited to projects where the user has at least the Reporter role."
+        },
+        {
+          "info": {
+            "name": "Reset runner's authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/runners/:id/reset_authentication_token",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the runner"
+              }
+            ]
+          },
+          "docs": "Reset runner authentication token"
+        },
+        {
+          "info": {
+            "name": "Reset instance's runner registration token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/runners/reset_registration_token"
+          },
+          "docs": "Reset runner registration token"
+        },
+        {
+          "info": {
+            "name": "Create a runner owned by currently authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/user/runners"
+          },
+          "docs": "Create a new runner"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

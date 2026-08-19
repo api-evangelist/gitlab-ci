@@ -1,0 +1,591 @@
+{
+  "item": [
+    {
+      "id": "98ebe8c0-eb06-47a9-b16a-9556a2214504",
+      "name": "offline_transfers",
+      "description": {
+        "content": "Operations about offline_transfers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a730d5d2-86b4-4833-a9f3-f713585d688e",
+          "name": "Start a new offline transfer export",
+          "request": {
+            "name": "Start a new offline transfer export",
+            "description": {
+              "content": "Initiates a new offline transfer export",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "offline_exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bucket\": \"<string>\",\n  \"entities\": [\n    {\n      \"full_path\": \"<string>\"\n    },\n    {\n      \"full_path\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "270af8dc-ea9f-4ace-9b55-f3c1541a014c",
+              "name": "Start a new offline transfer export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"entities\": [\n    {\n      \"full_path\": \"'source/full/path' not 'https://example.com/source/full/path'\"\n    },\n    {\n      \"full_path\": \"'source/full/path' not 'https://example.com/source/full/path'\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae97958c-9c66-4a81-b6c5-07f67336347b",
+          "name": "List all offline transfer exports",
+          "request": {
+            "name": "List all offline transfer exports",
+            "description": {
+              "content": "Lists all offline transfer exports",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "offline_exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Current page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "Return offline transfer exports sorted in created by `asc` or `desc` order."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Return offline transfer exports with specified status"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5493ee3a-5227-481b-afb8-689f76ef0744",
+              "name": "List all offline transfer exports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbfaa610-378f-41ed-8e57-3a4dc788986e",
+          "name": "Get offline transfer export details",
+          "request": {
+            "name": "Get offline transfer export details",
+            "description": {
+              "content": "Retrieves details of an offline transfer export",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "offline_exports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of user's offline transfer export"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bebd8a8-6e18-4181-b5a8-9dda2dd8fbb1",
+              "name": "Get offline transfer export details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of user's offline transfer export"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27f0ad76-3600-4183-a83e-f51c3bfbb45b",
+          "name": "Start a new offline transfer import",
+          "request": {
+            "name": "Start a new offline transfer import",
+            "description": {
+              "content": "Initiates a new offline transfer import from object storage",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "offline_imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47815e19-21fe-48f7-996a-ba9860ae13ab",
+              "name": "Start a new offline transfer import",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"status\": \"finished\",\n  \"source_type\": \"gitlab\",\n  \"source_url\": \"https://source.gitlab.com/\",\n  \"created_at\": \"2012-05-28T04:42:42-07:00\",\n  \"updated_at\": \"2012-05-28T04:42:42-07:00\",\n  \"has_failures\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfdd273e-6bf2-403c-9e59-261dc983dacc",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b1b9dac-9aea-4584-a34c-212952c4f78a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e80f2fd-4bd9-4d35-aae2-83c27564b5f1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4ac3157-688b-4a04-90a6-e8b6a537ce1c",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7bc9941-c9db-4130-9c55-ae9460ebc2c9",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "offline_imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": \"<string>\",\n  \"export_prefix\": \"<string>\",\n  \"entities\": [\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    },\n    {\n      \"source_type\": \"<string>\",\n      \"source_full_path\": \"<string>\",\n      \"destination_namespace\": \"<string>\",\n      \"destination_slug\": \"<string>\"\n    }\n  ],\n  \"aws_s3_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"path_style\": false\n  },\n  \"s3_compatible_configuration\": {\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"path_style\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8ea50bcb-74df-496f-ab20-edd24d5d550e",
+    "name": "GitLab access_requests offline_transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

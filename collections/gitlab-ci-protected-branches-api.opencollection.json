@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests protected_branches API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "protected_branches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdProtectedBranches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_branches",
+            "params": [
+              {
+                "name": "id",
+                "value": "gitlab-org/gitlab",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "search",
+                "value": "mai",
+                "type": "query",
+                "description": "Search for a protected branch by name"
+              }
+            ]
+          },
+          "docs": "Get a project's protected branches"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdProtectedBranches",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_branches",
+            "params": [
+              {
+                "name": "id",
+                "value": "gitlab-org/gitlab",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Protect a single branch"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdProtectedBranchesName",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_branches/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "gitlab-org/gitlab",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "main",
+                "type": "path",
+                "description": "The name of the branch or wildcard"
+              }
+            ]
+          },
+          "docs": "Get a single protected branch"
+        },
+        {
+          "info": {
+            "name": "patchApiV4ProjectsIdProtectedBranchesName",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_branches/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "gitlab-org/gitlab",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "main",
+                "type": "path",
+                "description": "The name of the branch"
+              }
+            ]
+          },
+          "docs": "Update a protected branch"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdProtectedBranchesName",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/protected_branches/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "gitlab-org/gitlab",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "main",
+                "type": "path",
+                "description": "The name of the protected branch"
+              }
+            ]
+          },
+          "docs": "Unprotect a single branch"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,265 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests access_tokens API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "access_tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rotate a resource access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/access_tokens/self/rotate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              }
+            ]
+          },
+          "docs": "Rotates a resource access token by passing it to the API in a header"
+        },
+        {
+          "info": {
+            "name": "Rotate a resource access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/access_tokens/self/rotate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID"
+              }
+            ]
+          },
+          "docs": "Rotates a resource access token by passing it to the API in a header"
+        },
+        {
+          "info": {
+            "name": "Get single personal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/self"
+          },
+          "docs": "Get the details of a personal access token by passing it to the API in a header"
+        },
+        {
+          "info": {
+            "name": "Revoke a personal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/self"
+          },
+          "docs": "Revoke a personal access token by passing it to the API in a header"
+        },
+        {
+          "info": {
+            "name": "Return personal access token associations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/self/associations",
+            "params": [
+              {
+                "name": "min_access_level",
+                "value": "",
+                "type": "query",
+                "description": "Limit by minimum access level of authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get groups and projects this personal access token can access by passing it to the API in a header"
+        },
+        {
+          "info": {
+            "name": "Rotate a personal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/self/rotate"
+          },
+          "docs": "Rotates a personal access token by passing it to the API in a header"
+        },
+        {
+          "info": {
+            "name": "List personal access tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "2",
+                "type": "query",
+                "description": "Filter PATs by User ID"
+              },
+              {
+                "name": "revoked",
+                "value": "",
+                "type": "query",
+                "description": "Filter tokens where revoked state matches parameter"
+              },
+              {
+                "name": "state",
+                "value": "active",
+                "type": "query",
+                "description": "Filter tokens which are either active or not"
+              },
+              {
+                "name": "created_before",
+                "value": "2022-01-01",
+                "type": "query",
+                "description": "Filter tokens which were created before given datetime"
+              },
+              {
+                "name": "created_after",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filter tokens which were created after given datetime"
+              },
+              {
+                "name": "last_used_before",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filter tokens which were used before given datetime"
+              },
+              {
+                "name": "last_used_after",
+                "value": "2022-01-01",
+                "type": "query",
+                "description": "Filter tokens which were used after given datetime"
+              },
+              {
+                "name": "expires_before",
+                "value": "2022-01-01",
+                "type": "query",
+                "description": "Filter tokens which expire before given datetime"
+              },
+              {
+                "name": "expires_after",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filter tokens which expire after given datetime"
+              },
+              {
+                "name": "search",
+                "value": "token",
+                "type": "query",
+                "description": "Filters tokens by name"
+              },
+              {
+                "name": "sort",
+                "value": "created_at_desc",
+                "type": "query",
+                "description": "Sort tokens"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get all personal access tokens the authenticated user has access to."
+        },
+        {
+          "info": {
+            "name": "Get single personal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a personal access token by using the ID of the personal access token."
+        },
+        {
+          "info": {
+            "name": "Revoke a personal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revoke a personal access token by using the ID of the personal access token."
+        },
+        {
+          "info": {
+            "name": "Rotate personal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/personal_access_tokens/:id/rotate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rotates a personal access token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,574 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests hooks API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "hooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set a url variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/url_variables/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the variable"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sets a URL variable for a webhook"
+        },
+        {
+          "info": {
+            "name": "Un-Set a url variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/url_variables/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the variable"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a URL variable from a webhook"
+        },
+        {
+          "info": {
+            "name": "Set a custom header",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/custom_headers/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The name of the custom header"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sets a custom header for a webhook"
+        },
+        {
+          "info": {
+            "name": "Un-Set a custom header",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/custom_headers/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The name of the custom header"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a custom header from a webhook"
+        },
+        {
+          "info": {
+            "name": "List project hooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of project hooks"
+        },
+        {
+          "info": {
+            "name": "Add project hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "Adds a hook to a specified project"
+        },
+        {
+          "info": {
+            "name": "Get project hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project hook"
+              }
+            ]
+          },
+          "docs": "Get a specific hook for a project"
+        },
+        {
+          "info": {
+            "name": "Edit project hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project hook"
+              }
+            ]
+          },
+          "docs": "Edits a hook for a specified project."
+        },
+        {
+          "info": {
+            "name": "Delete a project hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the project hook"
+              }
+            ]
+          },
+          "docs": "Removes a hook from a project. This is an idempotent method and can be called multiple times. Either the hook is available or not."
+        },
+        {
+          "info": {
+            "name": "Get events for a given hook id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/events",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "HTTP status code of the event"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List web hook logs by hook id"
+        },
+        {
+          "info": {
+            "name": "Triggers a hook test",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/test/:trigger",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "trigger",
+                "value": "",
+                "type": "path",
+                "description": "The type of trigger hook"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Triggers a hook test"
+        },
+        {
+          "info": {
+            "name": "Resend a webhook event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/hooks/:hook_id/events/:hook_log_id/resend",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hook_log_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resend a webhook event"
+        },
+        {
+          "info": {
+            "name": "Set a url variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id/url_variables/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the variable"
+              }
+            ]
+          },
+          "docs": "Sets a URL variable for a webhook"
+        },
+        {
+          "info": {
+            "name": "Un-Set a url variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id/url_variables/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the variable"
+              }
+            ]
+          },
+          "docs": "Removes a URL variable from a webhook"
+        },
+        {
+          "info": {
+            "name": "Set a custom header",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id/custom_headers/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The name of the custom header"
+              }
+            ]
+          },
+          "docs": "Sets a custom header for a webhook"
+        },
+        {
+          "info": {
+            "name": "Un-Set a custom header",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id/custom_headers/:key",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The name of the custom header"
+              }
+            ]
+          },
+          "docs": "Removes a custom header from a webhook"
+        },
+        {
+          "info": {
+            "name": "List system hooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/hooks",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of all system hooks"
+        },
+        {
+          "info": {
+            "name": "Add new system hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/hooks"
+          },
+          "docs": "Add a new system hook"
+        },
+        {
+          "info": {
+            "name": "Get system hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the system hook"
+              }
+            ]
+          },
+          "docs": "Get a system hook by its ID. Introduced in GitLab 14.9."
+        },
+        {
+          "info": {
+            "name": "Test a hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the hook"
+              }
+            ]
+          },
+          "docs": "Tests a webhook by triggering a test event"
+        },
+        {
+          "info": {
+            "name": "Edit system hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the system hook"
+              }
+            ]
+          },
+          "docs": "Edits a system hook"
+        },
+        {
+          "info": {
+            "name": "Delete system hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/hooks/:hook_id",
+            "params": [
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the system hook"
+              }
+            ]
+          },
+          "docs": "Deletes a system hook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

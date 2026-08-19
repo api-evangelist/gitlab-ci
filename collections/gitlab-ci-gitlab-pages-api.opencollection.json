@@ -1,0 +1,256 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests gitlab_pages API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "gitlab_pages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get pages settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Get pages URL and other settings. This feature was introduced in Gitlab 16.8"
+        },
+        {
+          "info": {
+            "name": "Update pages settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Update page settings for a project. User must have administrative access."
+        },
+        {
+          "info": {
+            "name": "Unpublish pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Remove pages. The user must have administrator access. This feature was introduced in GitLab 12.6"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPagesDomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages/domains",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get all pages domains"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdPagesDomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages/domains",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Create a new pages domain"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdPagesDomainsDomain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages/domains/:domain",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "The domain"
+              }
+            ]
+          },
+          "docs": "Get a single pages domain"
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdPagesDomainsDomain",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages/domains/:domain",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "The domain"
+              }
+            ]
+          },
+          "docs": "Updates a pages domain"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdPagesDomainsDomain",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages/domains/:domain",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "The domain"
+              }
+            ]
+          },
+          "docs": "Delete a pages domain"
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdPagesDomainsDomainVerify",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/pages/domains/:domain/verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project owned by the authenticated user"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "The domain to verify"
+              }
+            ]
+          },
+          "docs": "Verify a pages domain"
+        },
+        {
+          "info": {
+            "name": "getApiV4PagesDomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/pages/domains",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "The domain of the GitLab Pages site to filter on."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get all pages domains"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

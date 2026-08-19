@@ -1,0 +1,586 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests terraform API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "terraform",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the latest version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/terraform/modules/:module_name/:module_system",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or full path of a project"
+              },
+              {
+                "name": "module_name",
+                "value": "infra-registry",
+                "type": "path",
+                "description": "Module name"
+              },
+              {
+                "name": "module_system",
+                "value": "aws",
+                "type": "path",
+                "description": "Module system"
+              },
+              {
+                "name": "terraform-get",
+                "value": "",
+                "type": "query",
+                "description": "Terraform get redirection flag"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 16.7"
+        },
+        {
+          "info": {
+            "name": "Download a specific version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/terraform/modules/:module_name/:module_system/*module_version",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or full path of a project"
+              },
+              {
+                "name": "module_name",
+                "value": "infra-registry",
+                "type": "path",
+                "description": "Module name"
+              },
+              {
+                "name": "module_system",
+                "value": "aws",
+                "type": "path",
+                "description": "Module system"
+              },
+              {
+                "name": "module_version",
+                "value": "",
+                "type": "query",
+                "description": "Module version"
+              },
+              {
+                "name": "terraform-get",
+                "value": "",
+                "type": "query",
+                "description": "Terraform get redirection flag"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 16.7"
+        },
+        {
+          "info": {
+            "name": "Workhorse authorize Terraform Module package file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/terraform/modules/:module_name/:module_system/*module_version/file/authorize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or full path of a project"
+              },
+              {
+                "name": "module_name",
+                "value": "infra-registry",
+                "type": "path",
+                "description": "Module name"
+              },
+              {
+                "name": "module_system",
+                "value": "aws",
+                "type": "path",
+                "description": "Module system"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.11"
+        },
+        {
+          "info": {
+            "name": "Upload Terraform Module package file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/packages/terraform/modules/:module_name/:module_system/*module_version/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or full path of a project"
+              },
+              {
+                "name": "module_name",
+                "value": "infra-registry",
+                "type": "path",
+                "description": "Module name"
+              },
+              {
+                "name": "module_system",
+                "value": "aws",
+                "type": "path",
+                "description": "Module system"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.11"
+        },
+        {
+          "info": {
+            "name": "Get a Terraform state by its name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              },
+              {
+                "name": "ID",
+                "value": "",
+                "type": "query",
+                "description": "Terraform state lock ID"
+              }
+            ]
+          },
+          "docs": "Get a Terraform state by its name"
+        },
+        {
+          "info": {
+            "name": "Add a new Terraform state or update an existing one",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              }
+            ]
+          },
+          "docs": "Add a new Terraform state or update an existing one"
+        },
+        {
+          "info": {
+            "name": "Delete a Terraform state of a certain name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              }
+            ]
+          },
+          "docs": "Delete a Terraform state of a certain name"
+        },
+        {
+          "info": {
+            "name": "Authorize Terraform state upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name/authorize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 18.5"
+        },
+        {
+          "info": {
+            "name": "Lock a Terraform state of a certain name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name/lock",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              }
+            ]
+          },
+          "docs": "Lock a Terraform state of a certain name"
+        },
+        {
+          "info": {
+            "name": "Unlock a Terraform state of a certain name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name/lock",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              },
+              {
+                "name": "ID",
+                "value": "",
+                "type": "query",
+                "description": "Terraform state lock ID"
+              }
+            ]
+          },
+          "docs": "Unlock a Terraform state of a certain name"
+        },
+        {
+          "info": {
+            "name": "Get a Terraform state version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name/versions/:serial",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of a Terraform state"
+              },
+              {
+                "name": "serial",
+                "value": "",
+                "type": "path",
+                "description": "The version number of the state"
+              }
+            ]
+          },
+          "docs": "Get a Terraform state version"
+        },
+        {
+          "info": {
+            "name": "Delete a Terraform state version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/terraform/state/:name/versions/:serial",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serial",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Terraform state version"
+        },
+        {
+          "info": {
+            "name": "List versions for a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/packages/terraform/modules/v1/:module_namespace/:module_name/:module_system/versions",
+            "params": [
+              {
+                "name": "module_namespace",
+                "value": "",
+                "type": "path",
+                "description": "Group's ID or slug"
+              },
+              {
+                "name": "module_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the module"
+              },
+              {
+                "name": "module_system",
+                "value": "",
+                "type": "path",
+                "description": "System of the module"
+              }
+            ]
+          },
+          "docs": "List versions for a module"
+        },
+        {
+          "info": {
+            "name": "Get download location for the latest version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/packages/terraform/modules/v1/:module_namespace/:module_name/:module_system/download",
+            "params": [
+              {
+                "name": "module_namespace",
+                "value": "",
+                "type": "path",
+                "description": "Group's ID or slug"
+              },
+              {
+                "name": "module_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the module"
+              },
+              {
+                "name": "module_system",
+                "value": "",
+                "type": "path",
+                "description": "System of the module"
+              }
+            ]
+          },
+          "docs": "Download the latest version of a module"
+        },
+        {
+          "info": {
+            "name": "Get details about the latest version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/packages/terraform/modules/v1/:module_namespace/:module_name/:module_system",
+            "params": [
+              {
+                "name": "module_namespace",
+                "value": "",
+                "type": "path",
+                "description": "Group's ID or slug"
+              },
+              {
+                "name": "module_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the module"
+              },
+              {
+                "name": "module_system",
+                "value": "",
+                "type": "path",
+                "description": "System of the module"
+              }
+            ]
+          },
+          "docs": "Get details about the latest version of a module"
+        },
+        {
+          "info": {
+            "name": "Get download location for specific version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/packages/terraform/modules/v1/:module_namespace/:module_name/:module_system/*module_version/download",
+            "params": [
+              {
+                "name": "module_namespace",
+                "value": "",
+                "type": "path",
+                "description": "Group's ID or slug"
+              },
+              {
+                "name": "module_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the module"
+              },
+              {
+                "name": "module_system",
+                "value": "",
+                "type": "path",
+                "description": "System of the module"
+              },
+              {
+                "name": "module_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of the module"
+              }
+            ]
+          },
+          "docs": "Download specific version of a module"
+        },
+        {
+          "info": {
+            "name": "Download specific version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/packages/terraform/modules/v1/:module_namespace/:module_name/:module_system/*module_version/file",
+            "params": [
+              {
+                "name": "module_namespace",
+                "value": "",
+                "type": "path",
+                "description": "Group's ID or slug"
+              },
+              {
+                "name": "module_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the module"
+              },
+              {
+                "name": "module_system",
+                "value": "",
+                "type": "path",
+                "description": "System of the module"
+              },
+              {
+                "name": "module_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of the module"
+              }
+            ]
+          },
+          "docs": "Download specific version of a module"
+        },
+        {
+          "info": {
+            "name": "Get details about specific version of a module",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/packages/terraform/modules/v1/:module_namespace/:module_name/:module_system/*module_version",
+            "params": [
+              {
+                "name": "module_namespace",
+                "value": "",
+                "type": "path",
+                "description": "Group's ID or slug"
+              },
+              {
+                "name": "module_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the module"
+              },
+              {
+                "name": "module_system",
+                "value": "",
+                "type": "path",
+                "description": "System of the module"
+              },
+              {
+                "name": "module_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of the module"
+              }
+            ]
+          },
+          "docs": "Get details about specific version of a module"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

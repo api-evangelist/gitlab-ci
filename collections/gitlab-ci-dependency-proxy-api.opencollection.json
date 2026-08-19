@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests dependency_proxy API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dependency_proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Purge the dependency proxy for a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/dependency_proxy/cache",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the group owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Schedules for deletion the cached manifests and blobs for a group.This endpoint requires the Owner role for the group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

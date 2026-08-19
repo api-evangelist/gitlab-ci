@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests pypi_packages API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pypi_packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a package file from a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/-/packages/pypi/files/:sha256/*file_identifier",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or full path of the group."
+              },
+              {
+                "name": "file_identifier",
+                "value": "my.pypi.package-0.0.1.tar.gz",
+                "type": "query",
+                "description": "The PyPi package file identifier"
+              },
+              {
+                "name": "sha256",
+                "value": "5y57017232013c8ac80647f4ca153k3726f6cba62d055cd747844ed95b3c65ff",
+                "type": "path",
+                "description": "The PyPi package sha256 check sum"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.12"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

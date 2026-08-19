@@ -1,0 +1,373 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests ci_variables API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ci_variables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4GroupsIdVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/variables",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get a list of group-level variables"
+        },
+        {
+          "info": {
+            "name": "postApiV4GroupsIdVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/groups/:id/variables",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+              }
+            ]
+          },
+          "docs": "Create a new variable in a group"
+        },
+        {
+          "info": {
+            "name": "getApiV4GroupsIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/groups/:id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of the variable"
+              }
+            ]
+          },
+          "docs": "Get the details of a group’s specific variable"
+        },
+        {
+          "info": {
+            "name": "putApiV4GroupsIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/groups/:id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              }
+            ]
+          },
+          "docs": "Update an existing variable from a group"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4GroupsIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/groups/:id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a group or URL-encoded path of the group owned by the authenticated\n      user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              }
+            ]
+          },
+          "docs": "Delete an existing variable from a group"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/variables",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Get project variables"
+        },
+        {
+          "info": {
+            "name": "postApiV4ProjectsIdVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/variables",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user"
+              }
+            ]
+          },
+          "docs": "Create a new variable in a project"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              },
+              {
+                "name": "filter[environment_scope]",
+                "value": "",
+                "type": "query",
+                "description": "The environment scope of a variable"
+              }
+            ]
+          },
+          "docs": "Get the details of a single variable from a project"
+        },
+        {
+          "info": {
+            "name": "putApiV4ProjectsIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/projects/:id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              }
+            ]
+          },
+          "docs": "Update an existing variable from a project"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4ProjectsIdVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/projects/:id/variables/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a project or URL-encoded NAMESPACE/PROJECT_NAME of the project owned by the authenticated user"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              },
+              {
+                "name": "filter[environment_scope]",
+                "value": "",
+                "type": "query",
+                "description": "The environment scope of the variable"
+              }
+            ]
+          },
+          "docs": "Delete an existing variable from a project"
+        },
+        {
+          "info": {
+            "name": "getApiV4AdminCiVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/ci/variables",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "List all instance-level variables"
+        },
+        {
+          "info": {
+            "name": "postApiV4AdminCiVariables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/admin/ci/variables"
+          },
+          "docs": "Create a new instance-level variable"
+        },
+        {
+          "info": {
+            "name": "getApiV4AdminCiVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/admin/ci/variables/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              }
+            ]
+          },
+          "docs": "Get the details of a specific instance-level variable"
+        },
+        {
+          "info": {
+            "name": "putApiV4AdminCiVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v4/admin/ci/variables/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              }
+            ]
+          },
+          "docs": "Update an instance-level variable"
+        },
+        {
+          "info": {
+            "name": "deleteApiV4AdminCiVariablesKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v4/admin/ci/variables/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The key of a variable"
+              }
+            ]
+          },
+          "docs": "Delete an existing instance-level variable"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

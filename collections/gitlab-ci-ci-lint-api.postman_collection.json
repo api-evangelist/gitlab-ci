@@ -1,0 +1,374 @@
+{
+  "item": [
+    {
+      "id": "b9ba4213-cf6d-47ef-9009-4c8ec0572372",
+      "name": "ci_lint",
+      "description": {
+        "content": "Operations related to linting a CI config file",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "070d565b-f44c-4169-9a12-9a7ab855e96c",
+          "name": "Validates a CI YAML configuration with a namespace",
+          "request": {
+            "name": "Validates a CI YAML configuration with a namespace",
+            "description": {
+              "content": "Checks if a project’s .gitlab-ci.yml configuration in a given commit (by default HEAD of the\n        project’s default branch) is valid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "ci",
+                "lint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sha",
+                  "value": "<string>",
+                  "description": "Deprecated: Use content_ref instead"
+                },
+                {
+                  "disabled": false,
+                  "key": "content_ref",
+                  "value": "<string>",
+                  "description": "The CI/CD configuration content is taken from this commit SHA, branch or tag. Defaults to the HEAD of the project's default branch"
+                },
+                {
+                  "disabled": false,
+                  "key": "dry_run",
+                  "value": "false",
+                  "description": "Run pipeline creation simulation, or only do static check. This is false by default"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_jobs",
+                  "value": "<boolean>",
+                  "description": "If the list of jobs that would exist in a static check or pipeline\n        simulation should be included in the response. This is false by default"
+                },
+                {
+                  "disabled": false,
+                  "key": "ref",
+                  "value": "<string>",
+                  "description": "Deprecated: Use dry_run_ref instead"
+                },
+                {
+                  "disabled": false,
+                  "key": "dry_run_ref",
+                  "value": "<string>",
+                  "description": "Branch or tag used as context when executing a dry run. Defaults to the default branch of the project. Only used when dry_run is true"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a544d34-c878-4d04-b5e6-d8b47b778d88",
+              "name": "Validates a CI YAML configuration with a namespace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "ci",
+                    "lint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sha",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content_ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_jobs",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dry_run_ref",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid\": true,\n  \"errors\": [\n    \"variables config should be a hash of key value pairs\"\n  ],\n  \"warnings\": [\n    \"jobs:job may allow multiple pipelines ...\"\n  ],\n  \"merged_yaml\": \"---\\\\n:another_test:\\\\n  :stage: test\\\\n\\n          :script: echo 2\\\\n:test:\\\\n  :stage: test\\\\n  :script: echo 1\\\\n\",\n  \"includes\": [\n    {\n      \"type\": \"local\",\n      \"location\": \".gitlab/ci/build-images.gitlab-ci.yml\",\n      \"blob\": \"https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"raw\": \"https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"extra\": {\n        \"job_name\": \"test\",\n        \"project\": \"gitlab-org/gitlab\",\n        \"ref\": \"master\"\n      },\n      \"context_project\": \"gitlab-org/gitlab\",\n      \"context_sha\": \"e52d6d0246d7375291850e61f0abc101fbda9dc2\"\n    },\n    {\n      \"type\": \"local\",\n      \"location\": \".gitlab/ci/build-images.gitlab-ci.yml\",\n      \"blob\": \"https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"raw\": \"https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"extra\": {\n        \"job_name\": \"test\",\n        \"project\": \"gitlab-org/gitlab\",\n        \"ref\": \"master\"\n      },\n      \"context_project\": \"gitlab-org/gitlab\",\n      \"context_sha\": \"e52d6d0246d7375291850e61f0abc101fbda9dc2\"\n    }\n  ],\n  \"jobs\": [\n    {\n      \"name\": \"test\",\n      \"script\": [\n        \"ls\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e482964-351e-4423-96fa-9fef6bec2a28",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "ci",
+                    "lint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sha",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content_ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dry_run",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_jobs",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dry_run_ref",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3224375b-4d75-476f-8f37-168f88d22b9b",
+          "name": "Validate a CI YAML configuration with a namespace",
+          "request": {
+            "name": "Validate a CI YAML configuration with a namespace",
+            "description": {
+              "content": "Checks if CI/CD YAML configuration is valid. This endpoint has namespace specific context",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "projects",
+                ":id",
+                "ci",
+                "lint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"dry_run\": false,\n  \"include_jobs\": \"<boolean>\",\n  \"ref\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e79e791-3555-43e5-90ab-61e62dba55ce",
+              "name": "Validate a CI YAML configuration with a namespace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "projects",
+                    ":id",
+                    "ci",
+                    "lint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"dry_run\": false,\n  \"include_jobs\": \"<boolean>\",\n  \"ref\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid\": false,\n  \"errors\": [\n    \"variables config should be a hash of key value pairs\"\n  ],\n  \"warnings\": [\n    \"jobs:job may allow multiple pipelines ...\"\n  ],\n  \"merged_yaml\": \"---\\\\n:another_test:\\\\n  :stage: test\\\\n\\n          :script: echo 2\\\\n:test:\\\\n  :stage: test\\\\n  :script: echo 1\\\\n\",\n  \"includes\": [\n    {\n      \"type\": \"local\",\n      \"location\": \".gitlab/ci/build-images.gitlab-ci.yml\",\n      \"blob\": \"https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"raw\": \"https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"extra\": {\n        \"job_name\": \"test\",\n        \"project\": \"gitlab-org/gitlab\",\n        \"ref\": \"master\"\n      },\n      \"context_project\": \"gitlab-org/gitlab\",\n      \"context_sha\": \"e52d6d0246d7375291850e61f0abc101fbda9dc2\"\n    },\n    {\n      \"type\": \"local\",\n      \"location\": \".gitlab/ci/build-images.gitlab-ci.yml\",\n      \"blob\": \"https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"raw\": \"https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml\",\n      \"extra\": {\n        \"job_name\": \"test\",\n        \"project\": \"gitlab-org/gitlab\",\n        \"ref\": \"master\"\n      },\n      \"context_project\": \"gitlab-org/gitlab\",\n      \"context_sha\": \"e52d6d0246d7375291850e61f0abc101fbda9dc2\"\n    }\n  ],\n  \"jobs\": [\n    {\n      \"name\": \"test\",\n      \"script\": [\n        \"ls\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//gitlab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "692c0044-3a00-42e0-8487-9d21b616e61b",
+    "name": "GitLab access_requests ci_lint API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations related to access requests",
+      "type": "text/plain"
+    }
+  }
+}

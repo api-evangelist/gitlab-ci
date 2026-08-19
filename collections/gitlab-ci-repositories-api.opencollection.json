@@ -1,0 +1,406 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitLab access_requests repositories API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "repositories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryTree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/tree",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "ref",
+                "value": "main",
+                "type": "query",
+                "description": "The name of a repository branch or tag, if not given the default branch is used"
+              },
+              {
+                "name": "path",
+                "value": "files/html",
+                "type": "query",
+                "description": "The path of the tree"
+              },
+              {
+                "name": "recursive",
+                "value": "",
+                "type": "query",
+                "description": "Used to get a recursive tree"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "pagination",
+                "value": "",
+                "type": "query",
+                "description": "Specify the pagination method (\"none\" is only valid if \"recursive\" is true)"
+              },
+              {
+                "name": "page_token",
+                "value": "a1e8f8d745cc87e3a9248358d9352bb7f9a0aeba",
+                "type": "query",
+                "description": "Record from which to start the keyset pagination"
+              }
+            ]
+          },
+          "docs": "Get a project repository tree"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryBlobsShaRaw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/blobs/:sha/raw",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "7d70e02340bac451f281cecf0a980907974bd8be",
+                "type": "path",
+                "description": "The commit hash"
+              }
+            ]
+          },
+          "docs": "Get raw blob contents from the repository"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryBlobsSha",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/blobs/:sha",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "7d70e02340bac451f281cecf0a980907974bd8be",
+                "type": "path",
+                "description": "The commit hash"
+              }
+            ]
+          },
+          "docs": "Get a blob from the repository"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryArchive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "sha",
+                "value": "7d70e02340bac451f281cecf0a980907974bd8be",
+                "type": "query",
+                "description": "The commit sha of the archive to be downloaded"
+              },
+              {
+                "name": "format",
+                "value": "tar.gz",
+                "type": "query",
+                "description": "The archive format"
+              },
+              {
+                "name": "path",
+                "value": "files/archives",
+                "type": "query",
+                "description": "Subfolder of the repository to be downloaded"
+              },
+              {
+                "name": "include_lfs_blobs",
+                "value": "",
+                "type": "query",
+                "description": "Used to exclude LFS objects from archive"
+              },
+              {
+                "name": "exclude_paths",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of paths to exclude from the archive"
+              }
+            ]
+          },
+          "docs": "Get an archive of the repository"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryCompare",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/compare",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "from",
+                "value": "main",
+                "type": "query",
+                "description": "The commit, branch name, or tag name to start comparison"
+              },
+              {
+                "name": "to",
+                "value": "feature",
+                "type": "query",
+                "description": "The commit, branch name, or tag name to stop comparison"
+              },
+              {
+                "name": "from_project_id",
+                "value": "1",
+                "type": "query",
+                "description": "The project to compare from"
+              },
+              {
+                "name": "straight",
+                "value": "",
+                "type": "query",
+                "description": "Comparison method, `true` for direct comparison between `from` and `to` (`from`..`to`), `false` to compare using merge base (`from`...`to`)"
+              },
+              {
+                "name": "unidiff",
+                "value": "",
+                "type": "query",
+                "description": "A diff in a Unified diff format"
+              }
+            ]
+          },
+          "docs": "Compare two branches, tags, or commits"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryHealth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/health",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "generate",
+                "value": "",
+                "type": "query",
+                "description": "Triggers a new health report to be generated"
+              }
+            ]
+          },
+          "docs": "Get repository health"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryContributors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/contributors",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Current page number"
+              },
+              {
+                "name": "per_page",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "ref",
+                "value": "main",
+                "type": "query",
+                "description": "The name of a repository branch or tag, if not given the default branch is used"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Return contributors ordered by `name` or `email` or `commits`"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort by asc (ascending) or desc (descending)"
+              }
+            ]
+          },
+          "docs": "Get repository contributors"
+        },
+        {
+          "info": {
+            "name": "getApiV4ProjectsIdRepositoryMergeBase",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/merge_base",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "refs",
+                "value": "main",
+                "type": "query",
+                "description": "The refs to find the common ancestor of, multiple refs can be passed"
+              }
+            ]
+          },
+          "docs": "Get the common ancestor between commits"
+        },
+        {
+          "info": {
+            "name": "Generates a changelog section for a release and returns it",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/changelog",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              },
+              {
+                "name": "version",
+                "value": "1.0.0",
+                "type": "query",
+                "description": "The version of the release, using the semantic versioning format"
+              },
+              {
+                "name": "from",
+                "value": "ed899a2f4b50b4370feeea94676502b42383c746",
+                "type": "query",
+                "description": "The first commit in the range of commits to use for the changelog"
+              },
+              {
+                "name": "to",
+                "value": "6104942438c14ec7bd21c6cd5bd995272b3faff6",
+                "type": "query",
+                "description": "The last commit in the range of commits to use for the changelog"
+              },
+              {
+                "name": "date",
+                "value": "2021-09-20T11:50:22.001+00:00",
+                "type": "query",
+                "description": "The date and time of the release"
+              },
+              {
+                "name": "trailer",
+                "value": "Changelog",
+                "type": "query",
+                "description": "The Git trailer to use for determining if commits are to be included in the changelog"
+              },
+              {
+                "name": "config_file",
+                "value": ".gitlab/changelog_config.yml",
+                "type": "query",
+                "description": "The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'"
+              },
+              {
+                "name": "config_file_ref",
+                "value": "main",
+                "type": "query",
+                "description": "The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch."
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 14.6"
+        },
+        {
+          "info": {
+            "name": "Generates a changelog section for a release and commits it in a changelog file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v4/projects/:id/repository/changelog",
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "description": "The ID or URL-encoded path of the project"
+              }
+            ]
+          },
+          "docs": "This feature was introduced in GitLab 13.9"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
