@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests project_snapshots API
+  title: GitLab access_requests Project Snapshots API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: project_snapshots
   description: Operations about project_snapshots
@@ -14,35 +13,39 @@ paths:
     get:
       summary: Download a (possibly inconsistent) snapshot of a repository
       description: This feature was introduced in GitLab 10.7
-      produces:
-      - application/x-tar
       parameters:
       - in: query
         name: wiki
         description: Set to true to receive the wiki repository
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Download a (possibly inconsistent) snapshot of a repository
-          schema:
-            type: file
+          content:
+            application/x-tar:
+              schema:
+                type: string
+                format: binary
         '401':
           description: Unauthorized
       tags:
       - project_snapshots
       operationId: getApiV4ProjectsIdSnapshot
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

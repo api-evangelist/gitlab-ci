@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests glql API
+  title: GitLab access_requests Glql API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: glql
   description: Operations about glqls
@@ -14,21 +13,13 @@ paths:
     post:
       summary: Execute GLQL query
       description: Execute a GLQL (GitLab Query Language) query
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4Glql
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4Glql'
       responses:
         '200':
           description: Execute GLQL query
-          schema:
-            $ref: '#/definitions/API_Entities_Glql_Result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Glql_Result'
         '400':
           description: Bad request
         '401':
@@ -42,114 +33,121 @@ paths:
       tags:
       - glql
       operationId: postApiV4Glql
-definitions:
-  postApiV4Glql:
-    type: object
-    properties:
-      glql_yaml:
-        type: string
-        description: The full GLQL code block containing YAML configuration and query
-      after:
-        type: string
-        description: Cursor for forward pagination. Use the `endCursor` from previous response to fetch the next page
-    required:
-    - glql_yaml
-    description: Execute GLQL query
-  API_Entities_Glql_PageInfo:
-    type: object
-    properties:
-      endCursor:
-        type: string
-        example: eyJpZCI6IjE3In0
-        description: Cursor for the last item
-      hasNextPage:
-        type: boolean
-        example: true
-        description: Whether there are more items
-      hasPreviousPage:
-        type: boolean
-        example: false
-        description: Whether there are previous items
-      startCursor:
-        type: string
-        example: eyJpZCI6IjE3In0
-        description: Cursor for the first item
-    required:
-    - endCursor
-    - hasNextPage
-    - hasPreviousPage
-    - startCursor
-  API_Entities_Glql_Result:
-    type: object
-    properties:
-      data:
-        allOf:
-        - $ref: '#/definitions/API_Entities_Glql_Data'
-        description: Query result data containing count, nodes, and pagination info
-      error:
-        type: string
-        description: Error message if query failed
-      fields:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_Glql_Field'
-        description: Field definitions for the query results
-      success:
-        type: boolean
-        example: true
-    required:
-    - data
-    - error
-    - fields
-    - success
-    description: API_Entities_Glql_Result model
-  API_Entities_Glql_Field:
-    type: object
-    properties:
-      key:
-        type: string
-        example: title
-        description: Unique field key
-      label:
-        type: string
-        example: Title
-        description: Human-readable field label
-      name:
-        type: string
-        example: title
-        description: Underlying name of field, often the same as `key`, but it may be different if one type of field has multiple possible keys. Example `created` and `createdAt`
-    required:
-    - key
-    - label
-    - name
-  API_Entities_Glql_Data:
-    type: object
-    properties:
-      count:
-        type: integer
-        format: int32
-        example: 42
-        description: Number of found items
-      nodes:
-        type: array
-        items:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4Glql'
+        required: true
+components:
+  schemas:
+    API_Entities_Glql_Data:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 42
+          description: Number of found items
+        nodes:
           type: array
-        example: []
-        description: The list of found items
-      pageInfo:
-        allOf:
-        - $ref: '#/definitions/API_Entities_Glql_PageInfo'
-        description: Pagination information
-    required:
-    - count
-    - nodes
-    - pageInfo
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+          items:
+            type: array
+          example: []
+          description: The list of found items
+        pageInfo:
+          allOf:
+          - $ref: '#/components/schemas/API_Entities_Glql_PageInfo'
+          description: Pagination information
+      required:
+      - count
+      - nodes
+      - pageInfo
+    API_Entities_Glql_Result:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/API_Entities_Glql_Data'
+          description: Query result data containing count, nodes, and pagination info
+        error:
+          type: string
+          description: Error message if query failed
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Glql_Field'
+          description: Field definitions for the query results
+        success:
+          type: boolean
+          example: true
+      required:
+      - data
+      - error
+      - fields
+      - success
+      description: API_Entities_Glql_Result model
+    API_Entities_Glql_Field:
+      type: object
+      properties:
+        key:
+          type: string
+          example: title
+          description: Unique field key
+        label:
+          type: string
+          example: Title
+          description: Human-readable field label
+        name:
+          type: string
+          example: title
+          description: Underlying name of field, often the same as `key`, but it may be different if one type of field has multiple possible keys. Example `created` and `createdAt`
+      required:
+      - key
+      - label
+      - name
+    API_Entities_Glql_PageInfo:
+      type: object
+      properties:
+        endCursor:
+          type: string
+          example: eyJpZCI6IjE3In0
+          description: Cursor for the last item
+        hasNextPage:
+          type: boolean
+          example: true
+          description: Whether there are more items
+        hasPreviousPage:
+          type: boolean
+          example: false
+          description: Whether there are previous items
+        startCursor:
+          type: string
+          example: eyJpZCI6IjE3In0
+          description: Cursor for the first item
+      required:
+      - endCursor
+      - hasNextPage
+      - hasPreviousPage
+      - startCursor
+    postApiV4Glql:
+      type: object
+      properties:
+        glql_yaml:
+          type: string
+          description: The full GLQL code block containing YAML configuration and query
+        after:
+          type: string
+          description: Cursor for forward pagination. Use the `endCursor` from previous response to fetch the next page
+      required:
+      - glql_yaml
+      description: Execute GLQL query
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

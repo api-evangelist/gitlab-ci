@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests merge_requests API
+  title: GitLab access_requests Merge Requests API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: merge_requests
   description: Operations related to merge requests
@@ -14,334 +13,383 @@ paths:
     get:
       summary: List group merge requests
       description: Get all merge requests for this group and its subgroups.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the group owned by the authenticated user.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: author_id
         description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: author_username
         description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: assignee_id
         description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: assignee_username
         description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: reviewer_username
         description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: labels
         description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive.
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: milestone
         description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: my_reaction_emoji
         description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: reviewer_id
         description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: state
         description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
-        type: string
-        default: all
-        enum:
-        - opened
-        - closed
-        - locked
-        - merged
-        - all
         required: false
+        schema:
+          type: string
+          enum:
+          - opened
+          - closed
+          - locked
+          - merged
+          - all
+          default: all
       - in: query
         name: order_by
         description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8.
-        type: string
-        default: created_at
-        enum:
-        - created_at
-        - label_priority
-        - milestone_due
-        - popularity
-        - priority
-        - title
-        - updated_at
-        - merged_at
         required: false
+        schema:
+          type: string
+          enum:
+          - created_at
+          - label_priority
+          - milestone_due
+          - popularity
+          - priority
+          - title
+          - updated_at
+          - merged_at
+          default: created_at
       - in: query
         name: sort
         description: Returns merge requests sorted in `asc` or `desc` order.
-        type: string
-        default: desc
-        enum:
-        - asc
-        - desc
         required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
       - in: query
         name: with_labels_details
         description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`'
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: with_merge_status_recheck
         description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: created_after
         description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: created_before
         description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: updated_after
         description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: updated_before
         description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: view
         description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
-        type: string
-        enum:
-        - simple
         required: false
+        schema:
+          type: string
+          enum:
+          - simple
       - in: query
         name: scope
         description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`'
-        type: string
-        enum:
-        - created-by-me
-        - assigned-to-me
-        - created_by_me
-        - assigned_to_me
-        - reviews_for_me
-        - all
         required: false
+        schema:
+          type: string
+          enum:
+          - created-by-me
+          - assigned-to-me
+          - created_by_me
+          - assigned_to_me
+          - reviews_for_me
+          - all
       - in: query
         name: source_branch
         description: Returns merge requests with the given source branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: source_project_id
         description: Returns merge requests with the given source project id
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: target_branch
         description: Returns merge requests with the given target branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: search
         description: Search merge requests against their `title` and `description`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: in
         description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
-        type: string
         required: false
         example: title,description
+        schema:
+          type: string
       - in: query
         name: wip
         description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests.
-        type: string
-        enum:
-        - 'yes'
-        - 'no'
         required: false
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
       - in: query
         name: draft
         description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests.
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: not[author_id]
         description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: not[author_username]
         description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[assignee_id]
         description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: not[assignee_username]
         description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: not[reviewer_username]
         description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[labels]
         description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive.'
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: not[milestone]
         description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[my_reaction_emoji]
         description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[reviewer_id]
         description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: deployed_before
         description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: deployed_after
         description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: environment
         description: Returns merge requests deployed to the given environment
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: approved
         description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests.
-        type: string
-        enum:
-        - 'yes'
-        - 'no'
         required: false
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
       - in: query
         name: merge_user_id
         description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: merge_user_username
         description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approver_ids
         description: Return merge requests which have specified the users with the given IDs as an individual approver
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approved_by_ids
         description: Return merge requests which have been approved by the specified users with the given IDs
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approved_by_usernames
         description: "Return merge requests which have been approved by the specified users with the given\n            usernames"
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: non_archived
         description: Returns merge requests from non archived projects only.
-        type: boolean
-        default: true
         required: false
+        schema:
+          type: boolean
+          default: true
       responses:
         '200':
           description: List group merge requests
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_MergeRequestBasic'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_MergeRequestBasic'
         '401':
           description: Unauthorized
         '404':
@@ -355,16 +403,13 @@ paths:
     post:
       summary: Create merge request for missing ci config in project
       description: Creates a merge request to add missing CI configuration
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Create merge request for missing ci config in project
@@ -375,32 +420,27 @@ paths:
     post:
       summary: Set a time estimate for a merge_request
       description: Sets an estimated time of work for this merge_request.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge_request.
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate'
+          type: integer
+          format: int32
       responses:
         '201':
           description: Set a time estimate for a merge_request
-          schema:
-            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
         '401':
           description: Unauthorized
         '400':
@@ -410,31 +450,37 @@ paths:
       tags:
       - merge_requests
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_time_estimate:
     post:
       summary: Reset the time estimate for a project merge_request
       description: Resets the estimated time for this merge_request to 0 seconds.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge_request.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Reset the time estimate for a project merge_request
-          schema:
-            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
         '401':
           description: Unauthorized
         '404':
@@ -446,32 +492,27 @@ paths:
     post:
       summary: Add spent time for a merge_request
       description: Adds spent time for this merge_request.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge_request.
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime'
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add spent time for a merge_request
-          schema:
-            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
         '401':
           description: Unauthorized
         '404':
@@ -479,31 +520,37 @@ paths:
       tags:
       - merge_requests
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_spent_time:
     post:
       summary: Reset spent time for a merge_request
       description: Resets the total spent time for this merge_request to 0 seconds.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge_request
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Reset spent time for a merge_request
-          schema:
-            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
         '401':
           description: Unauthorized
         '404':
@@ -515,25 +562,27 @@ paths:
     get:
       summary: Get time tracking stats
       description: Get time tracking stats
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge_request
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get time tracking stats
-          schema:
-            $ref: '#/definitions/API_Entities_IssuableTimeStats'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
         '401':
           description: Unauthorized
         '404':
@@ -545,336 +594,385 @@ paths:
     get:
       summary: List project merge requests
       description: Get all merge requests for this project.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: author_id
         description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: author_username
         description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: assignee_id
         description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: assignee_username
         description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: reviewer_username
         description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: labels
         description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive.
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: milestone
         description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: my_reaction_emoji
         description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: reviewer_id
         description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: state
         description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
-        type: string
-        default: all
-        enum:
-        - opened
-        - closed
-        - locked
-        - merged
-        - all
         required: false
+        schema:
+          type: string
+          enum:
+          - opened
+          - closed
+          - locked
+          - merged
+          - all
+          default: all
       - in: query
         name: order_by
         description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8.
-        type: string
-        default: created_at
-        enum:
-        - created_at
-        - label_priority
-        - milestone_due
-        - popularity
-        - priority
-        - title
-        - updated_at
-        - merged_at
         required: false
+        schema:
+          type: string
+          enum:
+          - created_at
+          - label_priority
+          - milestone_due
+          - popularity
+          - priority
+          - title
+          - updated_at
+          - merged_at
+          default: created_at
       - in: query
         name: sort
         description: Returns merge requests sorted in `asc` or `desc` order.
-        type: string
-        default: desc
-        enum:
-        - asc
-        - desc
         required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
       - in: query
         name: with_labels_details
         description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`'
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: with_merge_status_recheck
         description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: created_after
         description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: created_before
         description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: updated_after
         description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: updated_before
         description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: view
         description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
-        type: string
-        enum:
-        - simple
         required: false
+        schema:
+          type: string
+          enum:
+          - simple
       - in: query
         name: scope
         description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`'
-        type: string
-        enum:
-        - created-by-me
-        - assigned-to-me
-        - created_by_me
-        - assigned_to_me
-        - reviews_for_me
-        - all
         required: false
+        schema:
+          type: string
+          enum:
+          - created-by-me
+          - assigned-to-me
+          - created_by_me
+          - assigned_to_me
+          - reviews_for_me
+          - all
       - in: query
         name: source_branch
         description: Returns merge requests with the given source branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: source_project_id
         description: Returns merge requests with the given source project id
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: target_branch
         description: Returns merge requests with the given target branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: search
         description: Search merge requests against their `title` and `description`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: in
         description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
-        type: string
         required: false
         example: title,description
+        schema:
+          type: string
       - in: query
         name: wip
         description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests.
-        type: string
-        enum:
-        - 'yes'
-        - 'no'
         required: false
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
       - in: query
         name: draft
         description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests.
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: not[author_id]
         description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: not[author_username]
         description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[assignee_id]
         description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: not[assignee_username]
         description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: not[reviewer_username]
         description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[labels]
         description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive.'
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: not[milestone]
         description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[my_reaction_emoji]
         description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[reviewer_id]
         description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: deployed_before
         description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: deployed_after
         description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: environment
         description: Returns merge requests deployed to the given environment
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: approved
         description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests.
-        type: string
-        enum:
-        - 'yes'
-        - 'no'
         required: false
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
       - in: query
         name: merge_user_id
         description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: merge_user_username
         description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approver_ids
         description: Return merge requests which have specified the users with the given IDs as an individual approver
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approved_by_ids
         description: Return merge requests which have been approved by the specified users with the given IDs
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approved_by_usernames
         description: "Return merge requests which have been approved by the specified users with the given\n            usernames"
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: iids
         description: Returns the request having the given `iid`.
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       responses:
         '200':
           description: List project merge requests
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_MergeRequestBasic'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_MergeRequestBasic'
         '401':
           description: Unauthorized
         '404':
@@ -887,26 +985,20 @@ paths:
     post:
       summary: Create merge request
       description: Create a new merge request.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
-        required: true
-      - name: postApiV4ProjectsIdMergeRequests
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequests'
+          type: string
       responses:
         '201':
           description: Create merge request
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequest'
         '400':
           description: Bad request
         '401':
@@ -920,24 +1012,30 @@ paths:
       tags:
       - merge_requests
       operationId: postApiV4ProjectsIdMergeRequests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequests'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}:
     delete:
       summary: Delete a merge request
       description: 'Only for administrators and project owners. Deletes the merge request in question. '
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete a merge request
@@ -953,40 +1051,45 @@ paths:
     get:
       summary: Get single merge request
       description: 'Shows information about a single merge request. Note: the `changes_count` value in the response is a string, not an integer. This is because when an merge request has too many changes to display and store, it is capped at 1,000. In that case, the API returns the string `"1000+"` for the changes count.'
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: render_html
         description: If `true`, response includes rendered HTML for title and description.
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: include_diverged_commits_count
         description: If `true`, response includes the commits behind the target branch.
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: include_rebase_in_progress
         description: If `true`, response includes whether a rebase operation is in progress.
-        type: boolean
         required: false
+        schema:
+          type: boolean
       responses:
         '200':
           description: Get single merge request
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequest'
         '404':
           description: Not found
       tags:
@@ -995,31 +1098,26 @@ paths:
     put:
       summary: Update merge request
       description: Updates an existing merge request. You can change the target branch, title, or even close the merge request.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdMergeRequestsMergeRequestIid
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdMergeRequestsMergeRequestIid'
+          type: string
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Update merge request
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequest'
         '400':
           description: Bad request
         '404':
@@ -1031,28 +1129,36 @@ paths:
       tags:
       - merge_requests
       operationId: putApiV4ProjectsIdMergeRequestsMergeRequestIid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdMergeRequestsMergeRequestIid'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/participants:
     get:
       summary: Get single merge request participants
       description: Get a list of merge request participants.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get single merge request participants
-          schema:
-            $ref: '#/definitions/API_Entities_UserBasic'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_UserBasic'
         '404':
           description: Not found
       tags:
@@ -1062,24 +1168,26 @@ paths:
     get:
       summary: Get single merge request reviewers
       description: Get a list of merge request reviewers.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get single merge request reviewers
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequestReviewer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequestReviewer'
         '404':
           description: Not found
       tags:
@@ -1089,41 +1197,45 @@ paths:
     get:
       summary: Get single merge request commits
       description: Get a list of merge request commits.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: Get single merge request commits
-          schema:
-            $ref: '#/definitions/API_Entities_Commit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Commit'
         '404':
           description: Not found
       tags:
@@ -1133,24 +1245,26 @@ paths:
     get:
       summary: List merge request context commits
       description: Get a list of merge request context commits.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List merge request context commits
-          schema:
-            $ref: '#/definitions/API_Entities_Commit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Commit'
         '404':
           description: Not found
       tags:
@@ -1159,31 +1273,26 @@ paths:
     post:
       summary: Create merge request context commits
       description: Create a list of merge request context commits.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits'
+          type: string
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Create merge request context commits
-          schema:
-            $ref: '#/definitions/API_Entities_Commit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Commit'
         '401':
           description: Unauthorized
         '404':
@@ -1191,29 +1300,36 @@ paths:
       tags:
       - merge_requests
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits'
+        required: true
     delete:
       summary: Delete merge request context commits
       description: Delete a list of merge request context commits.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: commits
         description: The context commits’ SHA.
-        type: array
-        items:
-          type: string
         required: true
+        schema:
+          type: array
+          items:
+            type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete merge request context commits
@@ -1230,30 +1346,33 @@ paths:
     get:
       summary: Get single merge request changes
       description: Shows information about the merge request including its files and changes.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: unidiff
         description: A diff in a Unified diff format
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get single merge request changes
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequestChanges'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequestChanges'
         '404':
           description: Not found
       tags:
@@ -1263,47 +1382,52 @@ paths:
     get:
       summary: Get the merge request diffs
       description: Get a list of merge request diffs.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: unidiff
         description: A diff in a Unified diff format
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Get the merge request diffs
-          schema:
-            $ref: '#/definitions/API_Entities_Diff'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Diff'
         '403':
           description: Forbidden
         '404':
@@ -1315,19 +1439,19 @@ paths:
     get:
       summary: Get the merge request raw diffs
       description: Get the raw diffs of a merge request that can used programmatically.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get the merge request raw diffs
@@ -1342,25 +1466,27 @@ paths:
     get:
       summary: Get single merge request pipelines
       description: Get a list of merge request pipelines.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get single merge request pipelines
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
         '404':
           description: Not found
       tags:
@@ -1369,31 +1495,26 @@ paths:
     post:
       summary: Create merge request pipeline
       description: 'Create a new pipeline for a merge request. A pipeline created via this endpoint doesn’t run a regular branch/tag pipeline. It requires `.gitlab-ci.yml` to be configured with `only: [merge_requests]` to create jobs.'
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines'
+          type: string
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Create merge request pipeline
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_Pipeline'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_Pipeline'
         '400':
           description: Bad request
         '404':
@@ -1403,35 +1524,36 @@ paths:
       tags:
       - merge_requests
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/merge:
     put:
       summary: Merge a merge request
       description: Accept and merge changes submitted with the merge request using this API.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge'
+          type: string
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Merge a merge request
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequest'
         '400':
           description: Bad request
         '401':
@@ -1447,23 +1569,29 @@ paths:
       tags:
       - merge_requests
       operationId: putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/merge_ref:
     get:
       summary: Returns the up to date merge-ref HEAD commit
       description: Returns the up to date merge-ref HEAD commit
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Returns the up to date merge-ref HEAD commit
@@ -1476,26 +1604,26 @@ paths:
     post:
       summary: Cancel Merge When Pipeline Succeeds
       description: Cancel merge if "Merge When Pipeline Succeeds" is enabled
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Cancel Merge When Pipeline Succeeds
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequest'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequest'
         '401':
           description: Unauthorized
         '404':
@@ -1511,26 +1639,19 @@ paths:
     put:
       summary: Rebase a merge request
       description: Automatically rebase the `source_branch` of the merge request against its `target_branch`. This feature was added in GitLab 11.6
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase'
+          type: string
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Rebase a merge request
@@ -1543,44 +1664,54 @@ paths:
       tags:
       - merge_requests
       operationId: putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/closes_issues:
     get:
       summary: List issues that close on merge
       description: Get all the issues that would be closed by merging the provided merge request.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List issues that close on merge
-          schema:
-            $ref: '#/definitions/API_Entities_MRNote'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MRNote'
         '403':
           description: Forbidden
         '404':
@@ -1592,35 +1723,37 @@ paths:
     get:
       summary: List issues related to merge request
       description: Get all the related issues from title, description, commits, comments and discussions of the merge request.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List issues related to merge request
@@ -1635,43 +1768,47 @@ paths:
     get:
       summary: Get a list of merge request diff versions
       description: This feature was introduced in GitLab 8.12.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: Get a list of merge request diff versions
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_MergeRequestDiff'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_MergeRequestDiff'
       tags:
       - merge_requests
       operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidVersions
@@ -1679,37 +1816,41 @@ paths:
     get:
       summary: Get a single merge request diff version
       description: This feature was introduced in GitLab 8.12.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: The internal ID of the merge request
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: version_id
         description: The ID of the merge request diff version
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: unidiff
         description: A diff in a Unified diff format
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Get a single merge request diff version
-          schema:
-            $ref: '#/definitions/API_Entities_MergeRequestDiffFull'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_MergeRequestDiffFull'
       tags:
       - merge_requests
       operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidVersionsVersionId
@@ -1717,330 +1858,378 @@ paths:
     get:
       summary: List merge requests
       description: Get all merge requests the authenticated user has access to. By default it returns only merge requests created by the current user. To get all merge requests, use parameter `scope=all`.
-      produces:
-      - application/json
       parameters:
       - in: query
         name: author_id
         description: Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: author_username
         description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: assignee_id
         description: Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: assignee_username
         description: Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: reviewer_username
         description: Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: labels
         description: Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive.
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: milestone
         description: Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: my_reaction_emoji
         description: Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: reviewer_id
         description: Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: state
         description: Returns `all` merge requests or just those that are `opened`, `closed`, `locked`, or `merged`.
-        type: string
-        default: all
-        enum:
-        - opened
-        - closed
-        - locked
-        - merged
-        - all
         required: false
+        schema:
+          type: string
+          enum:
+          - opened
+          - closed
+          - locked
+          - merged
+          - all
+          default: all
       - in: query
         name: order_by
         description: Returns merge requests ordered by `created_at`, `label_priority`, `milestone_due`, `popularity`, `priority`, `title`, `updated_at` or `merged_at` fields. Introduced in GitLab 14.8.
-        type: string
-        default: created_at
-        enum:
-        - created_at
-        - label_priority
-        - milestone_due
-        - popularity
-        - priority
-        - title
-        - updated_at
-        - merged_at
         required: false
+        schema:
+          type: string
+          enum:
+          - created_at
+          - label_priority
+          - milestone_due
+          - popularity
+          - priority
+          - title
+          - updated_at
+          - merged_at
+          default: created_at
       - in: query
         name: sort
         description: Returns merge requests sorted in `asc` or `desc` order.
-        type: string
-        default: desc
-        enum:
-        - asc
-        - desc
         required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
       - in: query
         name: with_labels_details
         description: 'If `true`, response returns more details for each label in labels field: `:name`,`:color`, `:description`, `:description_html`, `:text_color`'
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: with_merge_status_recheck
         description: If `true`, this projection requests (but does not guarantee) that the `merge_status` field be recalculated asynchronously. Introduced in GitLab 13.0.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: created_after
         description: Returns merge requests created on or after the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: created_before
         description: Returns merge requests created on or before the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: updated_after
         description: Returns merge requests updated on or after the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: updated_before
         description: Returns merge requests updated on or before the given time. Expected in ISO 8601 format.
-        type: string
-        format: date-time
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
+          format: date-time
       - in: query
         name: view
         description: If simple, returns the `iid`, URL, title, description, and basic state of merge request
-        type: string
-        enum:
-        - simple
         required: false
+        schema:
+          type: string
+          enum:
+          - simple
       - in: query
         name: scope
         description: 'Returns merge requests for the given scope: `created_by_me`, `assigned_to_me`, `reviews_for_me` or `all`'
-        type: string
-        default: created_by_me
-        enum:
-        - created-by-me
-        - assigned-to-me
-        - created_by_me
-        - assigned_to_me
-        - reviews_for_me
-        - all
         required: false
+        schema:
+          type: string
+          enum:
+          - created-by-me
+          - assigned-to-me
+          - created_by_me
+          - assigned_to_me
+          - reviews_for_me
+          - all
+          default: created_by_me
       - in: query
         name: source_branch
         description: Returns merge requests with the given source branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: source_project_id
         description: Returns merge requests with the given source project id
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: target_branch
         description: Returns merge requests with the given target branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: search
         description: Search merge requests against their `title` and `description`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: in
         description: Modify the scope of the search attribute. `title`, `description`, or a string joining them with comma.
-        type: string
         required: false
         example: title,description
+        schema:
+          type: string
       - in: query
         name: wip
         description: Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests.
-        type: string
-        enum:
-        - 'yes'
-        - 'no'
         required: false
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
       - in: query
         name: draft
         description: Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests.
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: not[author_id]
         description: '`<Negated>` Returns merge requests created by the given user `id`. Mutually exclusive with `author_username`. Combine with `scope=all` or `scope=assigned_to_me`.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: not[author_username]
         description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[assignee_id]
         description: '`<Negated>` Returns merge requests assigned to the given user `id`. `None` returns unassigned merge requests. `Any` returns merge requests with an assignee.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: not[assignee_username]
         description: '`<Negated>` Returns merge requests created by the given `username`. Mutually exclusive with `author_id`.'
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: not[reviewer_username]
         description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given `username`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_id`. Introduced in GitLab 13.8.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[labels]
         description: '`<Negated>` Returns merge requests matching a comma-separated list of labels. `None` lists all merge requests with no labels. `Any` lists all merge requests with at least one label. Predefined names are case-insensitive.'
-        type: array
-        items:
-          type: string
         required: false
+        schema:
+          type: array
+          items:
+            type: string
       - in: query
         name: not[milestone]
         description: '`<Negated>` Returns merge requests for a specific milestone. `None` returns merge requests with no milestone. `Any` returns merge requests that have an assigned milestone.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[my_reaction_emoji]
         description: '`<Negated>` Returns merge requests reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction.'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: not[reviewer_id]
         description: '`<Negated>` Returns merge requests which have the user as a reviewer with the given user `id`. `None` returns merge requests with no reviewers. `Any` returns merge requests with any reviewer. Mutually exclusive with `reviewer_username`.'
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: deployed_before
         description: Returns merge requests deployed before the given date/time. Expected in ISO 8601 format.
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: deployed_after
         description: Returns merge requests deployed after the given date/time. Expected in ISO 8601 format
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: environment
         description: Returns merge requests deployed to the given environment
-        type: string
         required: false
         example: '2019-03-15T08:00:00Z'
+        schema:
+          type: string
       - in: query
         name: approved
         description: Filters merge requests by their `approved` status. `yes` returns only approved merge requests. `no` returns only non-approved merge requests.
-        type: string
-        enum:
-        - 'yes'
-        - 'no'
         required: false
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
       - in: query
         name: merge_user_id
         description: Returns merge requests which have been merged by the user with the given user `id`. Mutually exclusive with `merge_user_username`.
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: merge_user_username
         description: Returns merge requests which have been merged by the user with the given `username`. Mutually exclusive with `merge_user_id`.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approver_ids
         description: Return merge requests which have specified the users with the given IDs as an individual approver
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approved_by_ids
         description: Return merge requests which have been approved by the specified users with the given IDs
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: approved_by_usernames
         description: "Return merge requests which have been approved by the specified users with the given\n            usernames"
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: non_archived
         description: Returns merge requests from non archived projects only.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: List merge requests
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_MergeRequestBasic'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_MergeRequestBasic'
         '401':
           description: Unauthorized
         '422':
@@ -2048,1591 +2237,1592 @@ paths:
       tags:
       - merge_requests
       operationId: getApiV4MergeRequests
-definitions:
-  API_Entities_CustomAttribute:
-    type: object
-    properties:
-      key:
-        type: string
-        example: foo
-      value:
-        type: string
-        example: bar
-    required:
-    - key
-    - value
-    description: API_Entities_CustomAttribute model
-  API_Entities_MergeRequestReviewer:
-    type: object
-    properties:
-      user:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      state:
-        type: string
-        example: unreviewed
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-    required:
-    - user
-    - state
-    - created_at
-    description: API_Entities_MergeRequestReviewer model
-  API_Entities_MRNote:
-    type: object
-    properties:
-      note:
-        type: string
-        example: LGTM!
-      author:
-        $ref: '#/definitions/API_Entities_UserBasic'
-    required:
-    - note
-    - author
-    description: API_Entities_MRNote model
-  API_Entities_UserBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    description: API_Entities_UserBasic model
-  API_Entities_IssuableTimeStats:
-    type: object
-    properties:
-      time_estimate:
-        type: integer
-        format: int32
-        example: 12600
-      total_time_spent:
-        type: integer
-        format: int32
-        example: 3600
-      human_time_estimate:
-        type: string
-        example: 3h 30m
-      human_total_time_spent:
-        type: string
-        example: 1h
-    required:
-    - time_estimate
-    - total_time_spent
-    - human_time_estimate
-    - human_total_time_spent
-    description: API_Entities_IssuableTimeStats model
-  API_Entities_DiffRefs:
-    type: object
-    properties:
-      base_sha:
-        type: string
-        example: b83d6e391c22777fca1ed3012fce84f633d7fed0
-      head_sha:
-        type: string
-        example: b83d6e391c22777fca1ed3012fce84f633d7fed0
-      start_sha:
-        type: string
-        example: b83d6e391c22777fca1ed3012fce84f633d7fed0
-    required:
-    - base_sha
-    - head_sha
-    - start_sha
-  API_Entities_MergeRequestDiffFull:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      head_commit_sha:
-        type: string
-        example: 1234abcd
-      base_commit_sha:
-        type: string
-        example: 1234abcd
-      start_commit_sha:
-        type: string
-        example: 1234abcd
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      merge_request_id:
-        type: integer
-        format: int32
-        example: 1
-      state:
-        type: string
-        example: collected
-      real_size:
-        type: string
-        example: '1'
-      patch_id_sha:
-        type: string
-        example: 1234abcd
-      commits:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_Commit'
-      diffs:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_Diff'
-    required:
-    - id
-    - head_commit_sha
-    - base_commit_sha
-    - start_commit_sha
-    - created_at
-    - merge_request_id
-    - state
-    - real_size
-    - patch_id_sha
-    - commits
-    - diffs
-    description: API_Entities_MergeRequestDiffFull model
-  API_Entities_Milestone:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-      iid:
-        type: integer
-        format: int32
-      project_id:
-        type: integer
-        format: int32
-      group_id:
-        type: string
-      title:
-        type: string
-      description:
-        type: string
-      state:
-        type: string
-      created_at:
-        type: string
-      updated_at:
-        type: string
-      due_date:
-        type: string
-      start_date:
-        type: string
-      expired:
-        type: boolean
-      web_url:
-        type: string
-    required:
-    - id
-    - iid
-    - title
-    - description
-    - state
-    - created_at
-    - updated_at
-    - due_date
-    - start_date
-    - expired
-    - web_url
-  API_Entities_Ci_PipelineBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      iid:
-        type: integer
-        format: int32
-        example: 2
-      project_id:
-        type: integer
-        format: int32
-        example: 3
-      sha:
-        type: string
-        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-      ref:
-        type: string
-        example: feature-branch
-      status:
-        type: string
-        example: success
-      source:
-        type: string
-        example: push
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-10-21T16:49:48.000+02:00'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2022-10-21T16:49:48.000+02:00'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-    required:
-    - id
-    - iid
-    - project_id
-    - sha
-    - ref
-    - status
-    - source
-    - created_at
-    - updated_at
-    - web_url
-    description: API_Entities_Ci_PipelineBasic model
-  postApiV4ProjectsIdMergeRequests:
-    type: object
-    properties:
-      title:
-        type: string
-        description: The title of the merge request.
-      source_branch:
-        type: string
-        description: The source branch.
-      target_branch:
-        type: string
-        description: The target branch.
-      target_project_id:
-        type: integer
-        format: int32
-        description: The target project of the merge request defaults to the :id of the project.
-      assignee_id:
-        type: integer
-        format: int32
-        description: Assignee user ID.
-      assignee_ids:
-        type: array
-        description: The IDs of the users to assign the merge request to, as a comma-separated list. Set to 0 or provide an empty value to unassign all assignees.
-        items:
+components:
+  schemas:
+    API_Entities_Ci_Pipeline:
+      type: object
+      properties:
+        id:
           type: integer
           format: int32
-      reviewer_ids:
-        type: array
-        description: The IDs of the users to review the merge request, as a comma-separated list. Set to 0 or provide an empty value to unassign all reviewers.
-        items:
+          example: 1
+        iid:
           type: integer
           format: int32
-      description:
-        type: string
-        description: Description of the merge request. Limited to 1,048,576 characters.
-      labels:
-        type: array
-        description: Comma-separated label names for a merge request. Set to an empty string to unassign all labels.
-        items:
-          type: string
-      add_labels:
-        type: array
-        description: Comma-separated label names to add to a merge request.
-        items:
-          type: string
-      remove_labels:
-        type: array
-        description: Comma-separated label names to remove from a merge request.
-        items:
-          type: string
-      milestone_id:
-        type: integer
-        format: int32
-        description: The global ID of a milestone to assign the merge request to.
-      remove_source_branch:
-        type: boolean
-        description: Flag indicating if a merge request should remove the source branch when merging.
-      allow_collaboration:
-        type: boolean
-        description: Allow commits from members who can merge to the target branch.
-      allow_maintainer_to_push:
-        type: boolean
-        description: '[deprecated] See allow_collaboration'
-      squash:
-        type: boolean
-        description: Squash commits into a single commit when merging.
-      merge_after:
-        type: string
-        description: Date after which the merge request can be merged.
-      approvals_before_merge:
-        type: integer
-        format: int32
-        description: Number of approvals required before this can be merged
-    required:
-    - title
-    - source_branch
-    - target_branch
-    description: Create merge request
-  API_Entities_MergeRequestDiff:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      head_commit_sha:
-        type: string
-        example: 1234abcd
-      base_commit_sha:
-        type: string
-        example: 1234abcd
-      start_commit_sha:
-        type: string
-        example: 1234abcd
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      merge_request_id:
-        type: integer
-        format: int32
-        example: 1
-      state:
-        type: string
-        example: collected
-      real_size:
-        type: string
-        example: '1'
-      patch_id_sha:
-        type: string
-        example: 1234abcd
-    required:
-    - id
-    - head_commit_sha
-    - base_commit_sha
-    - start_commit_sha
-    - created_at
-    - merge_request_id
-    - state
-    - real_size
-    - patch_id_sha
-    description: API_Entities_MergeRequestDiff model
-  postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime:
-    type: object
-    properties:
-      duration:
-        type: string
-        description: The duration in human format.
-    required:
-    - duration
-    description: Add spent time for a merge_request
-  API_Entities_Commit:
-    type: object
-    properties:
-      id:
-        type: string
-        example: 2695effb5807a22ff3d138d593fd856244e155e7
-      short_id:
-        type: string
-        example: 2695effb
-      created_at:
-        type: string
-        format: date-time
-        example: '2017-07-26T11:08:53.000+02:00'
-      parent_ids:
-        type: array
-        items:
-          type: string
-        example:
-        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-      title:
-        type: string
-        example: Initial commit
-      message:
-        type: string
-        example: Initial commit
-      author_name:
-        type: string
-        example: John Smith
-      author_email:
-        type: string
-        example: john@example.com
-      authored_date:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      committer_name:
-        type: string
-        example: Jack Smith
-      committer_email:
-        type: string
-        example: jack@example.com
-      committed_date:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      trailers:
-        type: object
-        example:
-          Merged-By: Jane Doe janedoe@gitlab.com
-      extended_trailers:
-        type: object
-        example:
-          Signed-off-by:
-          - John Doe <johndoe@gitlab.com>
-          - Jane Doe <janedoe@gitlab.com>
-      web_url:
-        type: string
-        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
-    required:
-    - id
-    - short_id
-    - created_at
-    - parent_ids
-    - title
-    - message
-    - author_name
-    - author_email
-    - authored_date
-    - committer_name
-    - committer_email
-    - committed_date
-    - trailers
-    - extended_trailers
-    - web_url
-    description: API_Entities_Commit model
-  API_Entities_MergeRequestChanges:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 84
-      iid:
-        type: integer
-        format: int32
-        example: 14
-      project_id:
-        type: integer
-        format: int32
-        example: 4
-      title:
-        type: string
-        example: Impedit et ut et dolores vero provident ullam est
-      description:
-        type: string
-        example: Repellendus impedit et vel velit dignissimos.
-      state:
-        type: string
-        example: closed
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-08-17T12:46:35.053Z'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2022-11-14T17:22:01.470Z'
-      merged_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      merge_user:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      merged_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      closed_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      closed_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      title_html:
-        type: string
-      description_html:
-        type: string
-      target_branch:
-        type: string
-      source_branch:
-        type: string
-      user_notes_count:
-        type: integer
-        format: int32
-      upvotes:
-        type: integer
-        format: int32
-      downvotes:
-        type: integer
-        format: int32
-      author:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      assignees:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      assignee:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      reviewers:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      source_project_id:
-        type: integer
-        format: int32
-      target_project_id:
-        type: integer
-        format: int32
-      labels:
-        type: array
-        items:
-          type: string
-      draft:
-        type: boolean
-      imported:
-        type: boolean
-      imported_from:
-        type: string
-        example: bitbucket
-      work_in_progress:
-        type: boolean
-      milestone:
-        $ref: '#/definitions/API_Entities_Milestone'
-      merge_when_pipeline_succeeds:
-        type: boolean
-      merge_status:
-        type: string
-        example: unchecked
-      detailed_merge_status:
-        type: string
-        example: mergeable
-      merge_after:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      sha:
-        type: string
-        example: 1234abcd
-      merge_commit_sha:
-        type: string
-        example: 1234abcd
-      squash_commit_sha:
-        type: string
-        example: 1234abcd
-      discussion_locked:
-        type: boolean
-      should_remove_source_branch:
-        type: boolean
-      force_remove_source_branch:
-        type: boolean
-      prepared_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      allow_collaboration:
-        type: boolean
-      allow_maintainer_to_push:
-        type: boolean
-      reference:
-        type: string
-        example: '!1'
-      references:
-        $ref: '#/definitions/API_Entities_IssuableReferences'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
-      time_stats:
-        $ref: '#/definitions/API_Entities_IssuableTimeStats'
-      squash:
-        type: boolean
-      squash_on_merge:
-        type: boolean
-      task_completion_status:
-        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
-      has_conflicts:
-        type: boolean
-      blocking_discussions_resolved:
-        type: boolean
-      approvals_before_merge:
-        type: integer
-        format: int32
-        example: 2
-      subscribed:
-        type: boolean
-      changes_count:
-        type: string
-        example: '1'
-      latest_build_started_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      latest_build_finished_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      first_deployed_to_production_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      pipeline:
-        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
-      head_pipeline:
-        $ref: '#/definitions/API_Entities_Ci_Pipeline'
-      diff_refs:
-        $ref: '#/definitions/API_Entities_DiffRefs'
-      merge_error:
-        type: string
-        example: Merge error
-      rebase_in_progress:
-        type: boolean
-      diverged_commits_count:
-        type: integer
-        format: int32
-        example: 0
-      first_contribution:
-        type: boolean
-      user:
-        type: object
-        properties:
-          can_merge:
-            type: boolean
-        required:
-        - can_merge
-      changes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_Diff'
-      overflow:
-        type: boolean
-    required:
-    - id
-    - iid
-    - project_id
-    - title
-    - description
-    - state
-    - created_at
-    - updated_at
-    - merged_by
-    - merge_user
-    - merged_at
-    - closed_by
-    - closed_at
-    - target_branch
-    - source_branch
-    - user_notes_count
-    - upvotes
-    - downvotes
-    - author
-    - assignees
-    - assignee
-    - reviewers
-    - source_project_id
-    - target_project_id
-    - labels
-    - draft
-    - imported
-    - imported_from
-    - work_in_progress
-    - milestone
-    - merge_when_pipeline_succeeds
-    - merge_status
-    - detailed_merge_status
-    - merge_after
-    - sha
-    - merge_commit_sha
-    - squash_commit_sha
-    - discussion_locked
-    - should_remove_source_branch
-    - force_remove_source_branch
-    - prepared_at
-    - reference
-    - references
-    - web_url
-    - time_stats
-    - squash
-    - squash_on_merge
-    - task_completion_status
-    - has_conflicts
-    - blocking_discussions_resolved
-    - approvals_before_merge
-    - changes_count
-    - diff_refs
-    - merge_error
-    - user
-    - changes
-    - overflow
-    description: API_Entities_MergeRequestChanges model
-  putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge:
-    type: object
-    properties:
-      merge_commit_message:
-        type: string
-        description: Custom merge commit message.
-      squash_commit_message:
-        type: string
-        description: Custom squash commit message.
-      should_remove_source_branch:
-        type: boolean
-        description: If `true`, removes the source branch.
-      merge_when_pipeline_succeeds:
-        type: boolean
-        description: 'Deprecated: Use auto_merge instead.'
-      auto_merge:
-        type: boolean
-        description: If `true`, the merge request is set to auto merge.
-      sha:
-        type: string
-        description: If present, then this SHA must match the HEAD of the source branch, otherwise the merge fails.
-      squash:
-        type: boolean
-        description: If `true`, the commits are squashed into a single commit on merge.
-      skip_merge_train:
-        type: boolean
-        description: If `true` skips train restart when merging immediately in a merge train configured project.
-    description: Merge a merge request
-  API_Entities_MergeRequest:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 84
-      iid:
-        type: integer
-        format: int32
-        example: 14
-      project_id:
-        type: integer
-        format: int32
-        example: 4
-      title:
-        type: string
-        example: Impedit et ut et dolores vero provident ullam est
-      description:
-        type: string
-        example: Repellendus impedit et vel velit dignissimos.
-      state:
-        type: string
-        example: closed
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-08-17T12:46:35.053Z'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2022-11-14T17:22:01.470Z'
-      merged_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      merge_user:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      merged_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      closed_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      closed_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      title_html:
-        type: string
-      description_html:
-        type: string
-      target_branch:
-        type: string
-      source_branch:
-        type: string
-      user_notes_count:
-        type: integer
-        format: int32
-      upvotes:
-        type: integer
-        format: int32
-      downvotes:
-        type: integer
-        format: int32
-      author:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      assignees:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      assignee:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      reviewers:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      source_project_id:
-        type: integer
-        format: int32
-      target_project_id:
-        type: integer
-        format: int32
-      labels:
-        type: array
-        items:
-          type: string
-      draft:
-        type: boolean
-      imported:
-        type: boolean
-      imported_from:
-        type: string
-        example: bitbucket
-      work_in_progress:
-        type: boolean
-      milestone:
-        $ref: '#/definitions/API_Entities_Milestone'
-      merge_when_pipeline_succeeds:
-        type: boolean
-      merge_status:
-        type: string
-        example: unchecked
-      detailed_merge_status:
-        type: string
-        example: mergeable
-      merge_after:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      sha:
-        type: string
-        example: 1234abcd
-      merge_commit_sha:
-        type: string
-        example: 1234abcd
-      squash_commit_sha:
-        type: string
-        example: 1234abcd
-      discussion_locked:
-        type: boolean
-      should_remove_source_branch:
-        type: boolean
-      force_remove_source_branch:
-        type: boolean
-      prepared_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      allow_collaboration:
-        type: boolean
-      allow_maintainer_to_push:
-        type: boolean
-      reference:
-        type: string
-        example: '!1'
-      references:
-        $ref: '#/definitions/API_Entities_IssuableReferences'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
-      time_stats:
-        $ref: '#/definitions/API_Entities_IssuableTimeStats'
-      squash:
-        type: boolean
-      squash_on_merge:
-        type: boolean
-      task_completion_status:
-        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
-      has_conflicts:
-        type: boolean
-      blocking_discussions_resolved:
-        type: boolean
-      approvals_before_merge:
-        type: integer
-        format: int32
-        example: 2
-      subscribed:
-        type: boolean
-      changes_count:
-        type: string
-        example: '1'
-      latest_build_started_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      latest_build_finished_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      first_deployed_to_production_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      pipeline:
-        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
-      head_pipeline:
-        $ref: '#/definitions/API_Entities_Ci_Pipeline'
-      diff_refs:
-        $ref: '#/definitions/API_Entities_DiffRefs'
-      merge_error:
-        type: string
-        example: Merge error
-      rebase_in_progress:
-        type: boolean
-      diverged_commits_count:
-        type: integer
-        format: int32
-        example: 0
-      first_contribution:
-        type: boolean
-      user:
-        type: object
-        properties:
-          can_merge:
-            type: boolean
-        required:
-        - can_merge
-    required:
-    - id
-    - iid
-    - project_id
-    - title
-    - description
-    - state
-    - created_at
-    - updated_at
-    - merged_by
-    - merge_user
-    - merged_at
-    - closed_by
-    - closed_at
-    - target_branch
-    - source_branch
-    - user_notes_count
-    - upvotes
-    - downvotes
-    - author
-    - assignees
-    - assignee
-    - reviewers
-    - source_project_id
-    - target_project_id
-    - labels
-    - draft
-    - imported
-    - imported_from
-    - work_in_progress
-    - milestone
-    - merge_when_pipeline_succeeds
-    - merge_status
-    - detailed_merge_status
-    - merge_after
-    - sha
-    - merge_commit_sha
-    - squash_commit_sha
-    - discussion_locked
-    - should_remove_source_branch
-    - force_remove_source_branch
-    - prepared_at
-    - reference
-    - references
-    - web_url
-    - time_stats
-    - squash
-    - squash_on_merge
-    - task_completion_status
-    - has_conflicts
-    - blocking_discussions_resolved
-    - approvals_before_merge
-    - changes_count
-    - diff_refs
-    - merge_error
-    - user
-    description: API_Entities_MergeRequest model
-  API_Entities_MergeRequestBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 84
-      iid:
-        type: integer
-        format: int32
-        example: 14
-      project_id:
-        type: integer
-        format: int32
-        example: 4
-      title:
-        type: string
-        example: Impedit et ut et dolores vero provident ullam est
-      description:
-        type: string
-        example: Repellendus impedit et vel velit dignissimos.
-      state:
-        type: string
-        example: closed
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-08-17T12:46:35.053Z'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2022-11-14T17:22:01.470Z'
-      merged_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      merge_user:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      merged_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      closed_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      closed_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      title_html:
-        type: string
-      description_html:
-        type: string
-      target_branch:
-        type: string
-      source_branch:
-        type: string
-      user_notes_count:
-        type: integer
-        format: int32
-      upvotes:
-        type: integer
-        format: int32
-      downvotes:
-        type: integer
-        format: int32
-      author:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      assignees:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      assignee:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      reviewers:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      source_project_id:
-        type: integer
-        format: int32
-      target_project_id:
-        type: integer
-        format: int32
-      labels:
-        type: array
-        items:
-          type: string
-      draft:
-        type: boolean
-      imported:
-        type: boolean
-      imported_from:
-        type: string
-        example: bitbucket
-      work_in_progress:
-        type: boolean
-      milestone:
-        $ref: '#/definitions/API_Entities_Milestone'
-      merge_when_pipeline_succeeds:
-        type: boolean
-      merge_status:
-        type: string
-        example: unchecked
-      detailed_merge_status:
-        type: string
-        example: mergeable
-      merge_after:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      sha:
-        type: string
-        example: 1234abcd
-      merge_commit_sha:
-        type: string
-        example: 1234abcd
-      squash_commit_sha:
-        type: string
-        example: 1234abcd
-      discussion_locked:
-        type: boolean
-      should_remove_source_branch:
-        type: boolean
-      force_remove_source_branch:
-        type: boolean
-      prepared_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-      allow_collaboration:
-        type: boolean
-      allow_maintainer_to_push:
-        type: boolean
-      reference:
-        type: string
-        example: '!1'
-      references:
-        $ref: '#/definitions/API_Entities_IssuableReferences'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
-      time_stats:
-        $ref: '#/definitions/API_Entities_IssuableTimeStats'
-      squash:
-        type: boolean
-      squash_on_merge:
-        type: boolean
-      task_completion_status:
-        $ref: '#/definitions/API_Entities_TaskCompletionStatus'
-      has_conflicts:
-        type: boolean
-      blocking_discussions_resolved:
-        type: boolean
-      approvals_before_merge:
-        type: integer
-        format: int32
-        example: 2
-    required:
-    - id
-    - iid
-    - project_id
-    - title
-    - description
-    - state
-    - created_at
-    - updated_at
-    - merged_by
-    - merge_user
-    - merged_at
-    - closed_by
-    - closed_at
-    - target_branch
-    - source_branch
-    - user_notes_count
-    - upvotes
-    - downvotes
-    - author
-    - assignees
-    - assignee
-    - reviewers
-    - source_project_id
-    - target_project_id
-    - labels
-    - draft
-    - imported
-    - imported_from
-    - work_in_progress
-    - milestone
-    - merge_when_pipeline_succeeds
-    - merge_status
-    - detailed_merge_status
-    - merge_after
-    - sha
-    - merge_commit_sha
-    - squash_commit_sha
-    - discussion_locked
-    - should_remove_source_branch
-    - force_remove_source_branch
-    - prepared_at
-    - reference
-    - references
-    - web_url
-    - time_stats
-    - squash
-    - squash_on_merge
-    - task_completion_status
-    - has_conflicts
-    - blocking_discussions_resolved
-    - approvals_before_merge
-    description: API_Entities_MergeRequestBasic model
-  putApiV4ProjectsIdMergeRequestsMergeRequestIid:
-    type: object
-    properties:
-      title:
-        type: string
-        description: The title of the merge request.
-      target_branch:
-        type: string
-        description: The target branch.
-      state_event:
-        type: string
-        description: New state (close/reopen).
-        enum:
-        - close
-        - reopen
-      discussion_locked:
-        type: boolean
-        description: Flag indicating if the merge request’s discussion is locked. If the discussion is locked only project members can add, edit or resolve comments.
-      assignee_id:
-        type: integer
-        format: int32
-        description: Assignee user ID.
-      assignee_ids:
-        type: array
-        description: The IDs of the users to assign the merge request to, as a comma-separated list. Set to 0 or provide an empty value to unassign all assignees.
-        items:
+          example: 2
+        project_id:
           type: integer
           format: int32
-      reviewer_ids:
-        type: array
-        description: The IDs of the users to review the merge request, as a comma-separated list. Set to 0 or provide an empty value to unassign all reviewers.
-        items:
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+        before_sha:
+          type: string
+          example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
+        tag:
+          type: boolean
+          example: false
+        yaml_errors:
+          type: string
+          example: 'widgets:build: needs ''widgets:test'''
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        started_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        committed_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        duration:
           type: integer
           format: int32
-      description:
-        type: string
-        description: Description of the merge request. Limited to 1,048,576 characters.
-      labels:
-        type: array
-        description: Comma-separated label names for a merge request. Set to an empty string to unassign all labels.
-        items:
+          example: 127
+          description: Time spent running in seconds
+        queued_duration:
+          type: integer
+          format: int32
+          example: 63
+          description: Time spent enqueued in seconds
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        detailed_status:
+          $ref: '#/components/schemas/DetailedStatusEntity'
+        archived:
+          type: boolean
+          example: false
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      - before_sha
+      - tag
+      - yaml_errors
+      - user
+      - started_at
+      - finished_at
+      - committed_at
+      - duration
+      - queued_duration
+      - coverage
+      - detailed_status
+      - archived
+      description: API_Entities_Ci_Pipeline model
+    API_Entities_MergeRequestReviewer:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        state:
           type: string
-      add_labels:
-        type: array
-        description: Comma-separated label names to add to a merge request.
-        items:
+          example: unreviewed
+        created_at:
           type: string
-      remove_labels:
-        type: array
-        description: Comma-separated label names to remove from a merge request.
-        items:
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+      required:
+      - user
+      - state
+      - created_at
+      description: API_Entities_MergeRequestReviewer model
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
           type: string
-      milestone_id:
-        type: integer
-        format: int32
-        description: The global ID of a milestone to assign the merge request to.
-      remove_source_branch:
-        type: boolean
-        description: Flag indicating if a merge request should remove the source branch when merging.
-      allow_collaboration:
-        type: boolean
-        description: Allow commits from members who can merge to the target branch.
-      allow_maintainer_to_push:
-        type: boolean
-        description: '[deprecated] See allow_collaboration'
-      squash:
-        type: boolean
-        description: Squash commits into a single commit when merging.
-      merge_after:
-        type: string
-        description: Date after which the merge request can be merged.
-      approvals_before_merge:
-        type: integer
-        format: int32
-        description: Number of approvals required before this can be merged
-    description: Update merge request
-  API_Entities_Ci_Pipeline:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      iid:
-        type: integer
-        format: int32
-        example: 2
-      project_id:
-        type: integer
-        format: int32
-        example: 3
-      sha:
-        type: string
-        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-      ref:
-        type: string
-        example: feature-branch
-      status:
-        type: string
-        example: success
-      source:
-        type: string
-        example: push
-      created_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T15:51:21.880Z'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T17:54:31.198Z'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      before_sha:
-        type: string
-        example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
-      tag:
-        type: boolean
-        example: false
-      yaml_errors:
-        type: string
-        example: 'widgets:build: needs ''widgets:test'''
-      user:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      started_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T17:54:30.733Z'
-      finished_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T17:54:31.198Z'
-      committed_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T15:51:21.880Z'
-      duration:
-        type: integer
-        format: int32
-        example: 127
-        description: Time spent running in seconds
-      queued_duration:
-        type: integer
-        format: int32
-        example: 63
-        description: Time spent enqueued in seconds
-      coverage:
-        type: number
-        format: float
-        example: 98.29
-      detailed_status:
-        $ref: '#/definitions/DetailedStatusEntity'
-      archived:
-        type: boolean
-        example: false
-    required:
-    - id
-    - iid
-    - project_id
-    - sha
-    - ref
-    - status
-    - source
-    - created_at
-    - updated_at
-    - web_url
-    - before_sha
-    - tag
-    - yaml_errors
-    - user
-    - started_at
-    - finished_at
-    - committed_at
-    - duration
-    - queued_duration
-    - coverage
-    - detailed_status
-    - archived
-    description: API_Entities_Ci_Pipeline model
-  postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines:
-    type: object
-    properties:
-      async:
-        type: boolean
-        description: Indicates if the merge request pipeline creation should be performed asynchronously. If set to `true`, the pipeline will be created outside of the API request and the endpoint will return an empty response with a `202` status code. When the response is `202`, the creation can still fail outside of this request.
-        default: false
-    description: Create merge request pipeline
-  DetailedStatusEntity:
-    type: object
-    properties:
-      icon:
-        type: string
-        example: status_success
-      text:
-        type: string
-        example: passed
-      label:
-        type: string
-        example: passed
-      group:
-        type: string
-        example: success
-      tooltip:
-        type: string
-        example: passed
-      has_details:
-        type: boolean
-        example: true
-      details_path:
-        type: string
-        example: /test-group/test-project/-/pipelines/287
-      illustration:
-        type: object
-        example:
-          image: illustrations/empty-state/empty-job-not-triggered-md.svg
-          size: ''
-          title: This job has not been triggered yet
-          content: This job depends on upstream jobs that need to succeed in order for this job to be triggered
-      favicon:
-        type: string
-        example: /assets/ci_favicons/favicon_status_success.png
-      action:
-        type: object
-        properties:
-          icon:
-            type: string
-            example: cancel
-          title:
-            type: string
-            example: Cancel
-          path:
-            type: string
-            example: /namespace1/project1/-/jobs/2/cancel
-          method:
-            type: string
-            example: post
-          button_title:
-            type: string
-            example: Cancel this job
-          confirmation_message:
-            type: string
-            example: Are you sure?
-        required:
-        - icon
-        - title
-        - path
-        - method
-        - button_title
-        - confirmation_message
-    required:
-    - icon
-    - text
-    - label
-    - group
-    - tooltip
-    - has_details
-    - details_path
-    - illustration
-    - favicon
-  API_Entities_Diff:
-    type: object
-    properties:
-      diff:
-        type: string
-        example: '@@ -71,6 +71,8 @@\n...'
-      collapsed:
-        type: boolean
-      too_large:
-        type: boolean
-      new_path:
-        type: string
-        example: doc/update/5.4-to-6.0.md
-      old_path:
-        type: string
-        example: doc/update/5.4-to-6.0.md
-      a_mode:
-        type: string
-        example: '100755'
-      b_mode:
-        type: string
-        example: '100644'
-      new_file:
-        type: boolean
-      renamed_file:
-        type: boolean
-      deleted_file:
-        type: boolean
-      generated_file:
-        type: boolean
-    required:
-    - diff
-    - collapsed
-    - too_large
-    - new_path
-    - old_path
-    - a_mode
-    - b_mode
-    - new_file
-    - renamed_file
-    - deleted_file
-    - generated_file
-    description: API_Entities_Diff model
-  API_Entities_IssuableReferences:
-    type: object
-    properties:
-      short:
-        type: string
-        example: '&6'
-      relative:
-        type: string
-        example: '&6'
-      full:
-        type: string
-        example: test&6
-    required:
-    - short
-    - relative
-    - full
-  putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase:
-    type: object
-    properties:
-      skip_ci:
-        type: boolean
-        description: Set to true to skip creating a CI pipeline.
-    description: Rebase a merge request
-  postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits:
-    type: object
-    properties:
-      commits:
-        type: array
-        description: The context commits’ SHA.
-        items:
+          example: admin
+        public_email:
           type: string
-    required:
-    - commits
-    description: Create merge request context commits
-  postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate:
-    type: object
-    properties:
-      duration:
-        type: string
-        description: The duration in human format.
-        example: 3h30m
-    required:
-    - duration
-    description: Set a time estimate for a merge_request
-  API_Entities_TaskCompletionStatus:
-    type: object
-    properties:
-      count:
-        type: integer
-        format: int32
-        example: 5
-      completed_count:
-        type: integer
-        format: int32
-        example: 3
-    required:
-    - count
-    - completed_count
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    DetailedStatusEntity:
+      type: object
+      properties:
+        icon:
+          type: string
+          example: status_success
+        text:
+          type: string
+          example: passed
+        label:
+          type: string
+          example: passed
+        group:
+          type: string
+          example: success
+        tooltip:
+          type: string
+          example: passed
+        has_details:
+          type: boolean
+          example: true
+        details_path:
+          type: string
+          example: /test-group/test-project/-/pipelines/287
+        illustration:
+          type: object
+          example:
+            image: illustrations/empty-state/empty-job-not-triggered-md.svg
+            size: ''
+            title: This job has not been triggered yet
+            content: This job depends on upstream jobs that need to succeed in order for this job to be triggered
+        favicon:
+          type: string
+          example: /assets/ci_favicons/favicon_status_success.png
+        action:
+          type: object
+          properties:
+            icon:
+              type: string
+              example: cancel
+            title:
+              type: string
+              example: Cancel
+            path:
+              type: string
+              example: /namespace1/project1/-/jobs/2/cancel
+            method:
+              type: string
+              example: post
+            button_title:
+              type: string
+              example: Cancel this job
+            confirmation_message:
+              type: string
+              example: Are you sure?
+          required:
+          - icon
+          - title
+          - path
+          - method
+          - button_title
+          - confirmation_message
+      required:
+      - icon
+      - text
+      - label
+      - group
+      - tooltip
+      - has_details
+      - details_path
+      - illustration
+      - favicon
+    API_Entities_TaskCompletionStatus:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 5
+        completed_count:
+          type: integer
+          format: int32
+          example: 3
+      required:
+      - count
+      - completed_count
+    putApiV4ProjectsIdMergeRequestsMergeRequestIidRebase:
+      type: object
+      properties:
+        skip_ci:
+          type: boolean
+          description: Set to true to skip creating a CI pipeline.
+      description: Rebase a merge request
+    API_Entities_MergeRequestDiff:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        head_commit_sha:
+          type: string
+          example: 1234abcd
+        base_commit_sha:
+          type: string
+          example: 1234abcd
+        start_commit_sha:
+          type: string
+          example: 1234abcd
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        merge_request_id:
+          type: integer
+          format: int32
+          example: 1
+        state:
+          type: string
+          example: collected
+        real_size:
+          type: string
+          example: '1'
+        patch_id_sha:
+          type: string
+          example: 1234abcd
+      required:
+      - id
+      - head_commit_sha
+      - base_commit_sha
+      - start_commit_sha
+      - created_at
+      - merge_request_id
+      - state
+      - real_size
+      - patch_id_sha
+      description: API_Entities_MergeRequestDiff model
+    API_Entities_MergeRequestChanges:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 84
+        iid:
+          type: integer
+          format: int32
+          example: 14
+        project_id:
+          type: integer
+          format: int32
+          example: 4
+        title:
+          type: string
+          example: Impedit et ut et dolores vero provident ullam est
+        description:
+          type: string
+          example: Repellendus impedit et vel velit dignissimos.
+        state:
+          type: string
+          example: closed
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-08-17T12:46:35.053Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-11-14T17:22:01.470Z'
+        merged_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merge_user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merged_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        closed_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        closed_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        title_html:
+          type: string
+        description_html:
+          type: string
+        target_branch:
+          type: string
+        source_branch:
+          type: string
+        user_notes_count:
+          type: integer
+          format: int32
+        upvotes:
+          type: integer
+          format: int32
+        downvotes:
+          type: integer
+          format: int32
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignees:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignee:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        reviewers:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        source_project_id:
+          type: integer
+          format: int32
+        target_project_id:
+          type: integer
+          format: int32
+        labels:
+          type: array
+          items:
+            type: string
+        draft:
+          type: boolean
+        imported:
+          type: boolean
+        imported_from:
+          type: string
+          example: bitbucket
+        work_in_progress:
+          type: boolean
+        milestone:
+          $ref: '#/components/schemas/API_Entities_Milestone'
+        merge_when_pipeline_succeeds:
+          type: boolean
+        merge_status:
+          type: string
+          example: unchecked
+        detailed_merge_status:
+          type: string
+          example: mergeable
+        merge_after:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        sha:
+          type: string
+          example: 1234abcd
+        merge_commit_sha:
+          type: string
+          example: 1234abcd
+        squash_commit_sha:
+          type: string
+          example: 1234abcd
+        discussion_locked:
+          type: boolean
+        should_remove_source_branch:
+          type: boolean
+        force_remove_source_branch:
+          type: boolean
+        prepared_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        allow_collaboration:
+          type: boolean
+        allow_maintainer_to_push:
+          type: boolean
+        reference:
+          type: string
+          example: '!1'
+        references:
+          $ref: '#/components/schemas/API_Entities_IssuableReferences'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
+        time_stats:
+          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
+        squash:
+          type: boolean
+        squash_on_merge:
+          type: boolean
+        task_completion_status:
+          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
+        has_conflicts:
+          type: boolean
+        blocking_discussions_resolved:
+          type: boolean
+        approvals_before_merge:
+          type: integer
+          format: int32
+          example: 2
+        subscribed:
+          type: boolean
+        changes_count:
+          type: string
+          example: '1'
+        latest_build_started_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        latest_build_finished_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        first_deployed_to_production_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        head_pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_Pipeline'
+        diff_refs:
+          $ref: '#/components/schemas/API_Entities_DiffRefs'
+        merge_error:
+          type: string
+          example: Merge error
+        rebase_in_progress:
+          type: boolean
+        diverged_commits_count:
+          type: integer
+          format: int32
+          example: 0
+        first_contribution:
+          type: boolean
+        user:
+          type: object
+          properties:
+            can_merge:
+              type: boolean
+          required:
+          - can_merge
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Diff'
+        overflow:
+          type: boolean
+      required:
+      - id
+      - iid
+      - project_id
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - merged_by
+      - merge_user
+      - merged_at
+      - closed_by
+      - closed_at
+      - target_branch
+      - source_branch
+      - user_notes_count
+      - upvotes
+      - downvotes
+      - author
+      - assignees
+      - assignee
+      - reviewers
+      - source_project_id
+      - target_project_id
+      - labels
+      - draft
+      - imported
+      - imported_from
+      - work_in_progress
+      - milestone
+      - merge_when_pipeline_succeeds
+      - merge_status
+      - detailed_merge_status
+      - merge_after
+      - sha
+      - merge_commit_sha
+      - squash_commit_sha
+      - discussion_locked
+      - should_remove_source_branch
+      - force_remove_source_branch
+      - prepared_at
+      - reference
+      - references
+      - web_url
+      - time_stats
+      - squash
+      - squash_on_merge
+      - task_completion_status
+      - has_conflicts
+      - blocking_discussions_resolved
+      - approvals_before_merge
+      - changes_count
+      - diff_refs
+      - merge_error
+      - user
+      - changes
+      - overflow
+      description: API_Entities_MergeRequestChanges model
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+    postApiV4ProjectsIdMergeRequests:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the merge request.
+        source_branch:
+          type: string
+          description: The source branch.
+        target_branch:
+          type: string
+          description: The target branch.
+        target_project_id:
+          type: integer
+          format: int32
+          description: The target project of the merge request defaults to the :id of the project.
+        assignee_id:
+          type: integer
+          format: int32
+          description: Assignee user ID.
+        assignee_ids:
+          type: array
+          description: The IDs of the users to assign the merge request to, as a comma-separated list. Set to 0 or provide an empty value to unassign all assignees.
+          items:
+            type: integer
+            format: int32
+        reviewer_ids:
+          type: array
+          description: The IDs of the users to review the merge request, as a comma-separated list. Set to 0 or provide an empty value to unassign all reviewers.
+          items:
+            type: integer
+            format: int32
+        description:
+          type: string
+          description: Description of the merge request. Limited to 1,048,576 characters.
+        labels:
+          type: array
+          description: Comma-separated label names for a merge request. Set to an empty string to unassign all labels.
+          items:
+            type: string
+        add_labels:
+          type: array
+          description: Comma-separated label names to add to a merge request.
+          items:
+            type: string
+        remove_labels:
+          type: array
+          description: Comma-separated label names to remove from a merge request.
+          items:
+            type: string
+        milestone_id:
+          type: integer
+          format: int32
+          description: The global ID of a milestone to assign the merge request to.
+        remove_source_branch:
+          type: boolean
+          description: Flag indicating if a merge request should remove the source branch when merging.
+        allow_collaboration:
+          type: boolean
+          description: Allow commits from members who can merge to the target branch.
+        allow_maintainer_to_push:
+          type: boolean
+          description: '[deprecated] See allow_collaboration'
+        squash:
+          type: boolean
+          description: Squash commits into a single commit when merging.
+        merge_after:
+          type: string
+          description: Date after which the merge request can be merged.
+        approvals_before_merge:
+          type: integer
+          format: int32
+          description: Number of approvals required before this can be merged
+      required:
+      - title
+      - source_branch
+      - target_branch
+      description: Create merge request
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidTimeEstimate:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: The duration in human format.
+          example: 3h30m
+      required:
+      - duration
+      description: Set a time estimate for a merge_request
+    API_Entities_IssuableReferences:
+      type: object
+      properties:
+        short:
+          type: string
+          example: '&6'
+        relative:
+          type: string
+          example: '&6'
+        full:
+          type: string
+          example: test&6
+      required:
+      - short
+      - relative
+      - full
+    API_Entities_Diff:
+      type: object
+      properties:
+        diff:
+          type: string
+          example: '@@ -71,6 +71,8 @@\n...'
+        collapsed:
+          type: boolean
+        too_large:
+          type: boolean
+        new_path:
+          type: string
+          example: doc/update/5.4-to-6.0.md
+        old_path:
+          type: string
+          example: doc/update/5.4-to-6.0.md
+        a_mode:
+          type: string
+          example: '100755'
+        b_mode:
+          type: string
+          example: '100644'
+        new_file:
+          type: boolean
+        renamed_file:
+          type: boolean
+        deleted_file:
+          type: boolean
+        generated_file:
+          type: boolean
+      required:
+      - diff
+      - collapsed
+      - too_large
+      - new_path
+      - old_path
+      - a_mode
+      - b_mode
+      - new_file
+      - renamed_file
+      - deleted_file
+      - generated_file
+      description: API_Entities_Diff model
+    API_Entities_MRNote:
+      type: object
+      properties:
+        note:
+          type: string
+          example: LGTM!
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+      required:
+      - note
+      - author
+      description: API_Entities_MRNote model
+    API_Entities_DiffRefs:
+      type: object
+      properties:
+        base_sha:
+          type: string
+          example: b83d6e391c22777fca1ed3012fce84f633d7fed0
+        head_sha:
+          type: string
+          example: b83d6e391c22777fca1ed3012fce84f633d7fed0
+        start_sha:
+          type: string
+          example: b83d6e391c22777fca1ed3012fce84f633d7fed0
+      required:
+      - base_sha
+      - head_sha
+      - start_sha
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidAddSpentTime:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: The duration in human format.
+      required:
+      - duration
+      description: Add spent time for a merge_request
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidContextCommits:
+      type: object
+      properties:
+        commits:
+          type: array
+          description: The context commits’ SHA.
+          items:
+            type: string
+      required:
+      - commits
+      description: Create merge request context commits
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidPipelines:
+      type: object
+      properties:
+        async:
+          type: boolean
+          description: Indicates if the merge request pipeline creation should be performed asynchronously. If set to `true`, the pipeline will be created outside of the API request and the endpoint will return an empty response with a `202` status code. When the response is `202`, the creation can still fail outside of this request.
+          default: false
+      description: Create merge request pipeline
+    API_Entities_MergeRequestDiffFull:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        head_commit_sha:
+          type: string
+          example: 1234abcd
+        base_commit_sha:
+          type: string
+          example: 1234abcd
+        start_commit_sha:
+          type: string
+          example: 1234abcd
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        merge_request_id:
+          type: integer
+          format: int32
+          example: 1
+        state:
+          type: string
+          example: collected
+        real_size:
+          type: string
+          example: '1'
+        patch_id_sha:
+          type: string
+          example: 1234abcd
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Commit'
+        diffs:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Diff'
+      required:
+      - id
+      - head_commit_sha
+      - base_commit_sha
+      - start_commit_sha
+      - created_at
+      - merge_request_id
+      - state
+      - real_size
+      - patch_id_sha
+      - commits
+      - diffs
+      description: API_Entities_MergeRequestDiffFull model
+    API_Entities_MergeRequestBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 84
+        iid:
+          type: integer
+          format: int32
+          example: 14
+        project_id:
+          type: integer
+          format: int32
+          example: 4
+        title:
+          type: string
+          example: Impedit et ut et dolores vero provident ullam est
+        description:
+          type: string
+          example: Repellendus impedit et vel velit dignissimos.
+        state:
+          type: string
+          example: closed
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-08-17T12:46:35.053Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-11-14T17:22:01.470Z'
+        merged_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merge_user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merged_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        closed_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        closed_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        title_html:
+          type: string
+        description_html:
+          type: string
+        target_branch:
+          type: string
+        source_branch:
+          type: string
+        user_notes_count:
+          type: integer
+          format: int32
+        upvotes:
+          type: integer
+          format: int32
+        downvotes:
+          type: integer
+          format: int32
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignees:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignee:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        reviewers:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        source_project_id:
+          type: integer
+          format: int32
+        target_project_id:
+          type: integer
+          format: int32
+        labels:
+          type: array
+          items:
+            type: string
+        draft:
+          type: boolean
+        imported:
+          type: boolean
+        imported_from:
+          type: string
+          example: bitbucket
+        work_in_progress:
+          type: boolean
+        milestone:
+          $ref: '#/components/schemas/API_Entities_Milestone'
+        merge_when_pipeline_succeeds:
+          type: boolean
+        merge_status:
+          type: string
+          example: unchecked
+        detailed_merge_status:
+          type: string
+          example: mergeable
+        merge_after:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        sha:
+          type: string
+          example: 1234abcd
+        merge_commit_sha:
+          type: string
+          example: 1234abcd
+        squash_commit_sha:
+          type: string
+          example: 1234abcd
+        discussion_locked:
+          type: boolean
+        should_remove_source_branch:
+          type: boolean
+        force_remove_source_branch:
+          type: boolean
+        prepared_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        allow_collaboration:
+          type: boolean
+        allow_maintainer_to_push:
+          type: boolean
+        reference:
+          type: string
+          example: '!1'
+        references:
+          $ref: '#/components/schemas/API_Entities_IssuableReferences'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
+        time_stats:
+          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
+        squash:
+          type: boolean
+        squash_on_merge:
+          type: boolean
+        task_completion_status:
+          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
+        has_conflicts:
+          type: boolean
+        blocking_discussions_resolved:
+          type: boolean
+        approvals_before_merge:
+          type: integer
+          format: int32
+          example: 2
+      required:
+      - id
+      - iid
+      - project_id
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - merged_by
+      - merge_user
+      - merged_at
+      - closed_by
+      - closed_at
+      - target_branch
+      - source_branch
+      - user_notes_count
+      - upvotes
+      - downvotes
+      - author
+      - assignees
+      - assignee
+      - reviewers
+      - source_project_id
+      - target_project_id
+      - labels
+      - draft
+      - imported
+      - imported_from
+      - work_in_progress
+      - milestone
+      - merge_when_pipeline_succeeds
+      - merge_status
+      - detailed_merge_status
+      - merge_after
+      - sha
+      - merge_commit_sha
+      - squash_commit_sha
+      - discussion_locked
+      - should_remove_source_branch
+      - force_remove_source_branch
+      - prepared_at
+      - reference
+      - references
+      - web_url
+      - time_stats
+      - squash
+      - squash_on_merge
+      - task_completion_status
+      - has_conflicts
+      - blocking_discussions_resolved
+      - approvals_before_merge
+      description: API_Entities_MergeRequestBasic model
+    putApiV4ProjectsIdMergeRequestsMergeRequestIid:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the merge request.
+        target_branch:
+          type: string
+          description: The target branch.
+        state_event:
+          type: string
+          description: New state (close/reopen).
+          enum:
+          - close
+          - reopen
+        discussion_locked:
+          type: boolean
+          description: Flag indicating if the merge request’s discussion is locked. If the discussion is locked only project members can add, edit or resolve comments.
+        assignee_id:
+          type: integer
+          format: int32
+          description: Assignee user ID.
+        assignee_ids:
+          type: array
+          description: The IDs of the users to assign the merge request to, as a comma-separated list. Set to 0 or provide an empty value to unassign all assignees.
+          items:
+            type: integer
+            format: int32
+        reviewer_ids:
+          type: array
+          description: The IDs of the users to review the merge request, as a comma-separated list. Set to 0 or provide an empty value to unassign all reviewers.
+          items:
+            type: integer
+            format: int32
+        description:
+          type: string
+          description: Description of the merge request. Limited to 1,048,576 characters.
+        labels:
+          type: array
+          description: Comma-separated label names for a merge request. Set to an empty string to unassign all labels.
+          items:
+            type: string
+        add_labels:
+          type: array
+          description: Comma-separated label names to add to a merge request.
+          items:
+            type: string
+        remove_labels:
+          type: array
+          description: Comma-separated label names to remove from a merge request.
+          items:
+            type: string
+        milestone_id:
+          type: integer
+          format: int32
+          description: The global ID of a milestone to assign the merge request to.
+        remove_source_branch:
+          type: boolean
+          description: Flag indicating if a merge request should remove the source branch when merging.
+        allow_collaboration:
+          type: boolean
+          description: Allow commits from members who can merge to the target branch.
+        allow_maintainer_to_push:
+          type: boolean
+          description: '[deprecated] See allow_collaboration'
+        squash:
+          type: boolean
+          description: Squash commits into a single commit when merging.
+        merge_after:
+          type: string
+          description: Date after which the merge request can be merged.
+        approvals_before_merge:
+          type: integer
+          format: int32
+          description: Number of approvals required before this can be merged
+      description: Update merge request
+    API_Entities_MergeRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 84
+        iid:
+          type: integer
+          format: int32
+          example: 14
+        project_id:
+          type: integer
+          format: int32
+          example: 4
+        title:
+          type: string
+          example: Impedit et ut et dolores vero provident ullam est
+        description:
+          type: string
+          example: Repellendus impedit et vel velit dignissimos.
+        state:
+          type: string
+          example: closed
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-08-17T12:46:35.053Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-11-14T17:22:01.470Z'
+        merged_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merge_user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merged_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        closed_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        closed_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        title_html:
+          type: string
+        description_html:
+          type: string
+        target_branch:
+          type: string
+        source_branch:
+          type: string
+        user_notes_count:
+          type: integer
+          format: int32
+        upvotes:
+          type: integer
+          format: int32
+        downvotes:
+          type: integer
+          format: int32
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignees:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignee:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        reviewers:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        source_project_id:
+          type: integer
+          format: int32
+        target_project_id:
+          type: integer
+          format: int32
+        labels:
+          type: array
+          items:
+            type: string
+        draft:
+          type: boolean
+        imported:
+          type: boolean
+        imported_from:
+          type: string
+          example: bitbucket
+        work_in_progress:
+          type: boolean
+        milestone:
+          $ref: '#/components/schemas/API_Entities_Milestone'
+        merge_when_pipeline_succeeds:
+          type: boolean
+        merge_status:
+          type: string
+          example: unchecked
+        detailed_merge_status:
+          type: string
+          example: mergeable
+        merge_after:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        sha:
+          type: string
+          example: 1234abcd
+        merge_commit_sha:
+          type: string
+          example: 1234abcd
+        squash_commit_sha:
+          type: string
+          example: 1234abcd
+        discussion_locked:
+          type: boolean
+        should_remove_source_branch:
+          type: boolean
+        force_remove_source_branch:
+          type: boolean
+        prepared_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        allow_collaboration:
+          type: boolean
+        allow_maintainer_to_push:
+          type: boolean
+        reference:
+          type: string
+          example: '!1'
+        references:
+          $ref: '#/components/schemas/API_Entities_IssuableReferences'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
+        time_stats:
+          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
+        squash:
+          type: boolean
+        squash_on_merge:
+          type: boolean
+        task_completion_status:
+          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
+        has_conflicts:
+          type: boolean
+        blocking_discussions_resolved:
+          type: boolean
+        approvals_before_merge:
+          type: integer
+          format: int32
+          example: 2
+        subscribed:
+          type: boolean
+        changes_count:
+          type: string
+          example: '1'
+        latest_build_started_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        latest_build_finished_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        first_deployed_to_production_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        head_pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_Pipeline'
+        diff_refs:
+          $ref: '#/components/schemas/API_Entities_DiffRefs'
+        merge_error:
+          type: string
+          example: Merge error
+        rebase_in_progress:
+          type: boolean
+        diverged_commits_count:
+          type: integer
+          format: int32
+          example: 0
+        first_contribution:
+          type: boolean
+        user:
+          type: object
+          properties:
+            can_merge:
+              type: boolean
+          required:
+          - can_merge
+      required:
+      - id
+      - iid
+      - project_id
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - merged_by
+      - merge_user
+      - merged_at
+      - closed_by
+      - closed_at
+      - target_branch
+      - source_branch
+      - user_notes_count
+      - upvotes
+      - downvotes
+      - author
+      - assignees
+      - assignee
+      - reviewers
+      - source_project_id
+      - target_project_id
+      - labels
+      - draft
+      - imported
+      - imported_from
+      - work_in_progress
+      - milestone
+      - merge_when_pipeline_succeeds
+      - merge_status
+      - detailed_merge_status
+      - merge_after
+      - sha
+      - merge_commit_sha
+      - squash_commit_sha
+      - discussion_locked
+      - should_remove_source_branch
+      - force_remove_source_branch
+      - prepared_at
+      - reference
+      - references
+      - web_url
+      - time_stats
+      - squash
+      - squash_on_merge
+      - task_completion_status
+      - has_conflicts
+      - blocking_discussions_resolved
+      - approvals_before_merge
+      - changes_count
+      - diff_refs
+      - merge_error
+      - user
+      description: API_Entities_MergeRequest model
+    putApiV4ProjectsIdMergeRequestsMergeRequestIidMerge:
+      type: object
+      properties:
+        merge_commit_message:
+          type: string
+          description: Custom merge commit message.
+        squash_commit_message:
+          type: string
+          description: Custom squash commit message.
+        should_remove_source_branch:
+          type: boolean
+          description: If `true`, removes the source branch.
+        merge_when_pipeline_succeeds:
+          type: boolean
+          description: 'Deprecated: Use auto_merge instead.'
+        auto_merge:
+          type: boolean
+          description: If `true`, the merge request is set to auto merge.
+        sha:
+          type: string
+          description: If present, then this SHA must match the HEAD of the source branch, otherwise the merge fails.
+        squash:
+          type: boolean
+          description: If `true`, the commits are squashed into a single commit on merge.
+        skip_merge_train:
+          type: boolean
+          description: If `true` skips train restart when merging immediately in a merge train configured project.
+      description: Merge a merge request
+    API_Entities_IssuableTimeStats:
+      type: object
+      properties:
+        time_estimate:
+          type: integer
+          format: int32
+          example: 12600
+        total_time_spent:
+          type: integer
+          format: int32
+          example: 3600
+        human_time_estimate:
+          type: string
+          example: 3h 30m
+        human_total_time_spent:
+          type: string
+          example: 1h
+      required:
+      - time_estimate
+      - total_time_spent
+      - human_time_estimate
+      - human_total_time_spent
+      description: API_Entities_IssuableTimeStats model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_Commit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
+          type: string
+          example: 2695effb
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
+          type: string
+          example: Initial commit
+        message:
+          type: string
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+      required:
+      - id
+      - short_id
+      - created_at
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
+      - web_url
+      description: API_Entities_Commit model
+    API_Entities_Milestone:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        iid:
+          type: integer
+          format: int32
+        project_id:
+          type: integer
+          format: int32
+        group_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        state:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        due_date:
+          type: string
+        start_date:
+          type: string
+        expired:
+          type: boolean
+        web_url:
+          type: string
+      required:
+      - id
+      - iid
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - due_date
+      - start_date
+      - expired
+      - web_url
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

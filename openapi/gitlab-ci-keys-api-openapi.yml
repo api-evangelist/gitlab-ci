@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests keys API
+  title: GitLab access_requests Keys API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: keys
   description: Operations about keys
@@ -14,37 +13,40 @@ paths:
     get:
       summary: Get a list of Groups::SshCertificate for a Group.
       description: Get a list of ssh certificates created for a group.
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a list of ssh certificates created for a group.
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_SshCertificate'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_SshCertificate'
         '401':
           description: Unauthorized
         '403':
@@ -57,26 +59,20 @@ paths:
     post:
       summary: Add a Groups::SshCertificate.
       description: Create a ssh certificate for a group.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4GroupsIdSshCertificates
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4GroupsIdSshCertificates'
+          type: integer
+          format: int32
       responses:
         '201':
           description: Create a ssh certificate for a group.
-          schema:
-            $ref: '#/definitions/API_Entities_SshCertificate'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_SshCertificate'
         '400':
           description: Bad request
         '401':
@@ -88,23 +84,29 @@ paths:
       tags:
       - keys
       operationId: postApiV4GroupsIdSshCertificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4GroupsIdSshCertificates'
+        required: true
   /api/v4/groups/{id}/ssh_certificates/{ssh_certificates_id}:
     delete:
       summary: Removes an ssh certificate from a group.
       description: Removes a Groups::SshCertificate
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: ssh_certificates_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Removes an ssh certificate from a group.
@@ -123,20 +125,21 @@ paths:
     get:
       summary: Get single ssh key by id. Only available to admin users
       description: "Get SSH key with user by ID of an SSH key. Note only administrators can lookup SSH key with user by ID\\\n        of an SSH key"
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of an SSH key
-        type: string
         required: true
         example: '2'
+        schema:
+          type: string
       responses:
         '200':
           description: Get single ssh key by id. Only available to admin users
-          schema:
-            $ref: '#/definitions/API_Entities_SSHKeyWithUser'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_SSHKeyWithUser'
       tags:
       - keys
       operationId: getApiV4KeysId
@@ -144,547 +147,549 @@ paths:
     get:
       summary: Get user by fingerprint of SSH key
       description: "You can search for a user that owns a specific SSH key. Note only administrators can lookup SSH key\\\n        with the fingerprint of an SSH key"
-      produces:
-      - application/json
       parameters:
       - in: query
         name: fingerprint
         description: The fingerprint of an SSH key
-        type: string
         required: true
         example: ba:81:59:68:d7:6c:cd:02:02:bf:6a:9b:55:4e:af:d1
+        schema:
+          type: string
       responses:
         '200':
           description: Get user by fingerprint of SSH key
-          schema:
-            $ref: '#/definitions/API_Entities_UserWithAdmin'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_UserWithAdmin'
       tags:
       - keys
       operationId: getApiV4Keys
-definitions:
-  API_Entities_CustomAttribute:
-    type: object
-    properties:
-      key:
-        type: string
-        example: foo
-      value:
-        type: string
-        example: bar
-    required:
-    - key
-    - value
-    description: API_Entities_CustomAttribute model
-  API_Entities_SSHKeyWithUser:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      title:
-        type: string
-        example: Sample key 25
-      created_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:44.627Z'
-      expires_at:
-        type: string
-        format: date-time
-        example: '2020-09-03T07:24:44.627Z'
-      last_used_at:
-        type: string
-        format: date-time
-        example: '2020-09-03T07:24:44.627Z'
-      key:
-        type: string
-        example: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt1256k6Yjz\\\n      GGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCdd\\\n      NaP0L+hM7zhFNzjFvpaMgJw0="
-      usage_type:
-        type: string
-        example: auth
-      user:
-        $ref: '#/definitions/API_Entities_UserPublic'
-    required:
-    - id
-    - title
-    - created_at
-    - expires_at
-    - last_used_at
-    - key
-    - usage_type
-    - user
-    description: API_Entities_SSHKeyWithUser model
-  API_Entities_UserWithAdmin:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-      created_at:
-        type: string
-      bio:
-        type: string
-      location:
-        type: string
-      linkedin:
-        type: string
-      twitter:
-        type: string
-      discord:
-        type: string
-      website_url:
-        type: string
-      github:
-        type: string
-      job_title:
-        type: string
-      pronouns:
-        type: string
-      organization:
-        type: string
-      bot:
-        type: boolean
-      work_information:
-        type: string
-      followers:
-        type: string
-      following:
-        type: string
-      is_followed:
-        type: string
-      local_time:
-        type: string
-      last_sign_in_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      confirmed_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      last_activity_on:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      email:
-        type: string
-        example: john@example.com
-      theme_id:
-        type: integer
-        format: int32
-        example: 2
-      color_scheme_id:
-        type: integer
-        format: int32
-        example: 1
-      projects_limit:
-        type: integer
-        format: int32
-        example: 10
-      current_sign_in_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      identities:
-        $ref: '#/definitions/API_Entities_Identity'
-      can_create_group:
-        type: boolean
-        example: true
-      can_create_project:
-        type: boolean
-        example: true
-      two_factor_enabled:
-        type: boolean
-        example: true
-      external:
-        type: boolean
-      private_profile:
-        type: boolean
-        example: false
-      commit_email:
-        type: string
-      preferred_language:
-        type: string
-        example: en
-      shared_runners_minutes_limit:
-        type: string
-      extra_shared_runners_minutes_limit:
-        type: string
-      scim_identities:
-        $ref: '#/definitions/API_Entities_ScimIdentity'
-      is_admin:
-        type: string
-      note:
-        type: string
-      namespace_id:
-        type: string
-      created_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      using_license_seat:
-        type: string
-      is_auditor:
-        type: string
-      provisioned_by_group_id:
-        type: string
-      enterprise_group_id:
-        type: string
-      enterprise_group_associated_at:
-        type: string
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    - bio
-    - location
-    - linkedin
-    - twitter
-    - discord
-    - website_url
-    - github
-    - job_title
-    - pronouns
-    - organization
-    - bot
-    - work_information
-    - local_time
-    - last_sign_in_at
-    - confirmed_at
-    - last_activity_on
-    - email
-    - theme_id
-    - color_scheme_id
-    - projects_limit
-    - current_sign_in_at
-    - identities
-    - can_create_group
-    - can_create_project
-    - two_factor_enabled
-    - external
-    - private_profile
-    - commit_email
-    - preferred_language
-    - shared_runners_minutes_limit
-    - extra_shared_runners_minutes_limit
-    - scim_identities
-    - is_admin
-    - note
-    - namespace_id
-    - created_by
-    - using_license_seat
-    description: API_Entities_UserWithAdmin model
-  API_Entities_SshCertificate:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 142
-      title:
-        type: string
-        example: new ssh cert
-      key:
-        type: string
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-01-31T15:10:45.080Z'
-    required:
-    - id
-    - title
-    - key
-    - created_at
-    description: API_Entities_SshCertificate model
-  postApiV4GroupsIdSshCertificates:
-    type: object
-    properties:
-      title:
-        type: string
-        description: The title of the ssh certificate
-      key:
-        type: string
-        description: The key of the ssh certificate
-    required:
-    - title
-    - key
-    description: Create a ssh certificate for a group.
-  API_Entities_UserBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    description: API_Entities_UserBasic model
-  API_Entities_Identity:
-    type: object
-    properties:
-      provider:
-        type: string
-      extern_uid:
-        type: string
-      saml_provider_id:
-        type: string
-    required:
-    - provider
-    - extern_uid
-    - saml_provider_id
-  API_Entities_UserPublic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-      created_at:
-        type: string
-      bio:
-        type: string
-      location:
-        type: string
-      linkedin:
-        type: string
-      twitter:
-        type: string
-      discord:
-        type: string
-      website_url:
-        type: string
-      github:
-        type: string
-      job_title:
-        type: string
-      pronouns:
-        type: string
-      organization:
-        type: string
-      bot:
-        type: boolean
-      work_information:
-        type: string
-      followers:
-        type: string
-      following:
-        type: string
-      is_followed:
-        type: string
-      local_time:
-        type: string
-      last_sign_in_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      confirmed_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      last_activity_on:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      email:
-        type: string
-        example: john@example.com
-      theme_id:
-        type: integer
-        format: int32
-        example: 2
-      color_scheme_id:
-        type: integer
-        format: int32
-        example: 1
-      projects_limit:
-        type: integer
-        format: int32
-        example: 10
-      current_sign_in_at:
-        type: string
-        format: date-time
-        example: '2015-09-03T07:24:01.670Z'
-      identities:
-        $ref: '#/definitions/API_Entities_Identity'
-      can_create_group:
-        type: boolean
-        example: true
-      can_create_project:
-        type: boolean
-        example: true
-      two_factor_enabled:
-        type: boolean
-        example: true
-      external:
-        type: boolean
-      private_profile:
-        type: boolean
-        example: false
-      commit_email:
-        type: string
-      preferred_language:
-        type: string
-        example: en
-      shared_runners_minutes_limit:
-        type: string
-      extra_shared_runners_minutes_limit:
-        type: string
-      scim_identities:
-        $ref: '#/definitions/API_Entities_ScimIdentity'
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    - bio
-    - location
-    - linkedin
-    - twitter
-    - discord
-    - website_url
-    - github
-    - job_title
-    - pronouns
-    - organization
-    - bot
-    - work_information
-    - local_time
-    - last_sign_in_at
-    - confirmed_at
-    - last_activity_on
-    - email
-    - theme_id
-    - color_scheme_id
-    - projects_limit
-    - current_sign_in_at
-    - identities
-    - can_create_group
-    - can_create_project
-    - two_factor_enabled
-    - external
-    - private_profile
-    - commit_email
-    - preferred_language
-    - shared_runners_minutes_limit
-    - extra_shared_runners_minutes_limit
-    - scim_identities
-    description: API_Entities_UserPublic model
-  API_Entities_ScimIdentity:
-    type: object
-    properties:
-      extern_uid:
-        type: string
-      group_id:
-        type: string
-      active:
-        type: string
-    required:
-    - extern_uid
-    - group_id
-    - active
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    API_Entities_SshCertificate:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 142
+        title:
+          type: string
+          example: new ssh cert
+        key:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+      required:
+      - id
+      - title
+      - key
+      - created_at
+      description: API_Entities_SshCertificate model
+    API_Entities_UserPublic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        created_at:
+          type: string
+        bio:
+          type: string
+        location:
+          type: string
+        linkedin:
+          type: string
+        twitter:
+          type: string
+        discord:
+          type: string
+        website_url:
+          type: string
+        github:
+          type: string
+        job_title:
+          type: string
+        pronouns:
+          type: string
+        organization:
+          type: string
+        bot:
+          type: boolean
+        work_information:
+          type: string
+        followers:
+          type: string
+        following:
+          type: string
+        is_followed:
+          type: string
+        local_time:
+          type: string
+        last_sign_in_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        confirmed_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        last_activity_on:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        email:
+          type: string
+          example: john@example.com
+        theme_id:
+          type: integer
+          format: int32
+          example: 2
+        color_scheme_id:
+          type: integer
+          format: int32
+          example: 1
+        projects_limit:
+          type: integer
+          format: int32
+          example: 10
+        current_sign_in_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        identities:
+          $ref: '#/components/schemas/API_Entities_Identity'
+        can_create_group:
+          type: boolean
+          example: true
+        can_create_project:
+          type: boolean
+          example: true
+        two_factor_enabled:
+          type: boolean
+          example: true
+        external:
+          type: boolean
+        private_profile:
+          type: boolean
+          example: false
+        commit_email:
+          type: string
+        preferred_language:
+          type: string
+          example: en
+        shared_runners_minutes_limit:
+          type: string
+        extra_shared_runners_minutes_limit:
+          type: string
+        scim_identities:
+          $ref: '#/components/schemas/API_Entities_ScimIdentity'
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - bio
+      - location
+      - linkedin
+      - twitter
+      - discord
+      - website_url
+      - github
+      - job_title
+      - pronouns
+      - organization
+      - bot
+      - work_information
+      - local_time
+      - last_sign_in_at
+      - confirmed_at
+      - last_activity_on
+      - email
+      - theme_id
+      - color_scheme_id
+      - projects_limit
+      - current_sign_in_at
+      - identities
+      - can_create_group
+      - can_create_project
+      - two_factor_enabled
+      - external
+      - private_profile
+      - commit_email
+      - preferred_language
+      - shared_runners_minutes_limit
+      - extra_shared_runners_minutes_limit
+      - scim_identities
+      description: API_Entities_UserPublic model
+    postApiV4GroupsIdSshCertificates:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the ssh certificate
+        key:
+          type: string
+          description: The key of the ssh certificate
+      required:
+      - title
+      - key
+      description: Create a ssh certificate for a group.
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_UserWithAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        created_at:
+          type: string
+        bio:
+          type: string
+        location:
+          type: string
+        linkedin:
+          type: string
+        twitter:
+          type: string
+        discord:
+          type: string
+        website_url:
+          type: string
+        github:
+          type: string
+        job_title:
+          type: string
+        pronouns:
+          type: string
+        organization:
+          type: string
+        bot:
+          type: boolean
+        work_information:
+          type: string
+        followers:
+          type: string
+        following:
+          type: string
+        is_followed:
+          type: string
+        local_time:
+          type: string
+        last_sign_in_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        confirmed_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        last_activity_on:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        email:
+          type: string
+          example: john@example.com
+        theme_id:
+          type: integer
+          format: int32
+          example: 2
+        color_scheme_id:
+          type: integer
+          format: int32
+          example: 1
+        projects_limit:
+          type: integer
+          format: int32
+          example: 10
+        current_sign_in_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:01.670Z'
+        identities:
+          $ref: '#/components/schemas/API_Entities_Identity'
+        can_create_group:
+          type: boolean
+          example: true
+        can_create_project:
+          type: boolean
+          example: true
+        two_factor_enabled:
+          type: boolean
+          example: true
+        external:
+          type: boolean
+        private_profile:
+          type: boolean
+          example: false
+        commit_email:
+          type: string
+        preferred_language:
+          type: string
+          example: en
+        shared_runners_minutes_limit:
+          type: string
+        extra_shared_runners_minutes_limit:
+          type: string
+        scim_identities:
+          $ref: '#/components/schemas/API_Entities_ScimIdentity'
+        is_admin:
+          type: string
+        note:
+          type: string
+        namespace_id:
+          type: string
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        using_license_seat:
+          type: string
+        is_auditor:
+          type: string
+        provisioned_by_group_id:
+          type: string
+        enterprise_group_id:
+          type: string
+        enterprise_group_associated_at:
+          type: string
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - bio
+      - location
+      - linkedin
+      - twitter
+      - discord
+      - website_url
+      - github
+      - job_title
+      - pronouns
+      - organization
+      - bot
+      - work_information
+      - local_time
+      - last_sign_in_at
+      - confirmed_at
+      - last_activity_on
+      - email
+      - theme_id
+      - color_scheme_id
+      - projects_limit
+      - current_sign_in_at
+      - identities
+      - can_create_group
+      - can_create_project
+      - two_factor_enabled
+      - external
+      - private_profile
+      - commit_email
+      - preferred_language
+      - shared_runners_minutes_limit
+      - extra_shared_runners_minutes_limit
+      - scim_identities
+      - is_admin
+      - note
+      - namespace_id
+      - created_by
+      - using_license_seat
+      description: API_Entities_UserWithAdmin model
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_Identity:
+      type: object
+      properties:
+        provider:
+          type: string
+        extern_uid:
+          type: string
+        saml_provider_id:
+          type: string
+      required:
+      - provider
+      - extern_uid
+      - saml_provider_id
+    API_Entities_ScimIdentity:
+      type: object
+      properties:
+        extern_uid:
+          type: string
+        group_id:
+          type: string
+        active:
+          type: string
+      required:
+      - extern_uid
+      - group_id
+      - active
+    API_Entities_SSHKeyWithUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: Sample key 25
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:44.627Z'
+        expires_at:
+          type: string
+          format: date-time
+          example: '2020-09-03T07:24:44.627Z'
+        last_used_at:
+          type: string
+          format: date-time
+          example: '2020-09-03T07:24:44.627Z'
+        key:
+          type: string
+          example: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt1256k6Yjz\\\n      GGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCdd\\\n      NaP0L+hM7zhFNzjFvpaMgJw0="
+        usage_type:
+          type: string
+          example: auth
+        user:
+          $ref: '#/components/schemas/API_Entities_UserPublic'
+      required:
+      - id
+      - title
+      - created_at
+      - expires_at
+      - last_used_at
+      - key
+      - usage_type
+      - user
+      description: API_Entities_SSHKeyWithUser model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

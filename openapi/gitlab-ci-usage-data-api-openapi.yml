@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests usage_data API
+  title: GitLab access_requests Usage Data API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: usage_data
   description: Operations about usage_data
@@ -14,16 +13,6 @@ paths:
     post:
       summary: Track usage data event
       description: This feature was introduced in GitLab 13.4.
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4UsageDataIncrementCounter
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4UsageDataIncrementCounter'
       responses:
         '200':
           description: Track usage data event
@@ -34,19 +23,15 @@ paths:
       tags:
       - usage_data
       operationId: postApiV4UsageDataIncrementCounter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4UsageDataIncrementCounter'
+        required: true
   /api/v4/usage_data/increment_unique_users:
     post:
       description: Track usage data event for the current user
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4UsageDataIncrementUniqueUsers
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4UsageDataIncrementUniqueUsers'
       responses:
         '200':
           description: Track usage data event for the current user
@@ -57,20 +42,16 @@ paths:
       tags:
       - usage_data
       operationId: postApiV4UsageDataIncrementUniqueUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4UsageDataIncrementUniqueUsers'
+        required: true
   /api/v4/usage_data/track_events:
     post:
       summary: Track multiple gitlab internal events
       description: This feature was introduced in GitLab 17.3.
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4UsageDataTrackEvents
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4UsageDataTrackEvents'
       responses:
         '200':
           description: Track multiple gitlab internal events
@@ -81,12 +62,16 @@ paths:
       tags:
       - usage_data
       operationId: postApiV4UsageDataTrackEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4UsageDataTrackEvents'
+        required: true
   /api/v4/usage_data/service_ping:
     get:
       summary: Get the latest ServicePing payload
       description: Introduces in Gitlab 16.9. Requires personal access token with read_service_ping scope.
-      produces:
-      - application/json
       responses:
         '200':
           description: Get the latest ServicePing payload
@@ -103,16 +88,6 @@ paths:
     post:
       summary: Track gitlab internal events
       description: This feature was introduced in GitLab 16.2.
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4UsageDataTrackEvent
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4UsageDataTrackEvent'
       responses:
         '200':
           description: Track gitlab internal events
@@ -123,12 +98,16 @@ paths:
       tags:
       - usage_data
       operationId: postApiV4UsageDataTrackEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4UsageDataTrackEvent'
+        required: true
   /api/v4/usage_data/non_sql_metrics:
     get:
       summary: Get Non SQL usage ping metrics
       description: This feature was introduced in GitLab 13.11.
-      produces:
-      - application/json
       responses:
         '200':
           description: Get Non SQL usage ping metrics
@@ -145,8 +124,6 @@ paths:
     get:
       summary: Get raw SQL queries for usage data SQL metrics
       description: This feature was introduced in GitLab 13.11.
-      produces:
-      - application/json
       responses:
         '200':
           description: Get raw SQL queries for usage data SQL metrics
@@ -159,111 +136,112 @@ paths:
       tags:
       - usage_data
       operationId: getApiV4UsageDataQueries
-definitions:
-  postApiV4UsageDataTrackEvent:
-    type: object
-    properties:
-      event:
-        type: string
-        description: The event name that should be tracked
-        example: i_quickactions_page
-      namespace_id:
-        type: integer
-        format: int32
-        description: Namespace ID
-        example: 1234
-      project_id:
-        type: integer
-        format: int32
-        description: Project ID
-        example: 1234
-      project_path:
-        type: string
-        description: Project path (used to resolve project_id if not provided)
-        example: namespace/project
-      additional_properties:
-        type: object
-        description: Additional properties to be tracked
-        example:
-          label: login_button
-          value: 1
-      send_to_snowplow:
-        type: boolean
-        description: Send the tracked event to Snowplow
-        default: false
-        example: true
-    required:
-    - event
-    description: Track gitlab internal events
-  postApiV4UsageDataTrackEvents:
-    type: object
-    properties:
-      events:
-        type: array
-        description: An array of internal events. Maximum 50 events allowed.
-        items:
+components:
+  schemas:
+    postApiV4UsageDataIncrementCounter:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+      required:
+      - event
+      description: Track usage data event
+    postApiV4UsageDataTrackEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          description: An array of internal events. Maximum 50 events allowed.
+          items:
+            type: object
+            properties:
+              event:
+                type: string
+                description: The event name that should be tracked
+                example: i_quickactions_page
+              namespace_id:
+                type: integer
+                format: int32
+                description: Namespace ID
+                example: 1234
+              project_id:
+                type: integer
+                format: int32
+                description: Project ID
+                example: 1234
+              project_path:
+                type: string
+                description: Project path (used to resolve project_id if not provided)
+                example: namespace/project
+              additional_properties:
+                type: object
+                description: Additional properties to be tracked
+                example:
+                  label: login_button
+                  value: 1
+              send_to_snowplow:
+                type: boolean
+                description: Send the tracked event to Snowplow
+                default: false
+                example: true
+            required:
+            - event
+      required:
+      - events
+      description: Track multiple gitlab internal events
+    postApiV4UsageDataIncrementUniqueUsers:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+      required:
+      - event
+      description: Track usage data event for the current user
+    postApiV4UsageDataTrackEvent:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+        namespace_id:
+          type: integer
+          format: int32
+          description: Namespace ID
+          example: 1234
+        project_id:
+          type: integer
+          format: int32
+          description: Project ID
+          example: 1234
+        project_path:
+          type: string
+          description: Project path (used to resolve project_id if not provided)
+          example: namespace/project
+        additional_properties:
           type: object
-          properties:
-            event:
-              type: string
-              description: The event name that should be tracked
-              example: i_quickactions_page
-            namespace_id:
-              type: integer
-              format: int32
-              description: Namespace ID
-              example: 1234
-            project_id:
-              type: integer
-              format: int32
-              description: Project ID
-              example: 1234
-            project_path:
-              type: string
-              description: Project path (used to resolve project_id if not provided)
-              example: namespace/project
-            additional_properties:
-              type: object
-              description: Additional properties to be tracked
-              example:
-                label: login_button
-                value: 1
-            send_to_snowplow:
-              type: boolean
-              description: Send the tracked event to Snowplow
-              default: false
-              example: true
-          required:
-          - event
-    required:
-    - events
-    description: Track multiple gitlab internal events
-  postApiV4UsageDataIncrementCounter:
-    type: object
-    properties:
-      event:
-        type: string
-        description: The event name that should be tracked
-        example: i_quickactions_page
-    required:
-    - event
-    description: Track usage data event
-  postApiV4UsageDataIncrementUniqueUsers:
-    type: object
-    properties:
-      event:
-        type: string
-        description: The event name that should be tracked
-        example: i_quickactions_page
-    required:
-    - event
-    description: Track usage data event for the current user
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+          description: Additional properties to be tracked
+          example:
+            label: login_button
+            value: 1
+        send_to_snowplow:
+          type: boolean
+          description: Send the tracked event to Snowplow
+          default: false
+          example: true
+      required:
+      - event
+      description: Track gitlab internal events
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

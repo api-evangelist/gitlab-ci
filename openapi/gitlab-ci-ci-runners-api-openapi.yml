@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests ci_runners API
+  title: GitLab access_requests Ci Runners API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: ci_runners
   description: Operations about ci_runners
@@ -14,21 +13,13 @@ paths:
     post:
       summary: Register a new runner
       description: Register a new runner for the instance
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4Runners
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4Runners'
       responses:
         '201':
           description: Register a new runner
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_RunnerRegistrationDetails'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_RunnerRegistrationDetails'
         '400':
           description: Bad Request
         '403':
@@ -38,17 +29,22 @@ paths:
       tags:
       - ci_runners
       operationId: postApiV4Runners
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4Runners'
+        required: true
     delete:
       summary: Delete a runner by authentication token
       description: Delete a registered runner
-      produces:
-      - application/json
       parameters:
       - in: query
         name: token
         description: The runner's authentication token
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Delete a registered runner
@@ -61,19 +57,19 @@ paths:
     delete:
       summary: Internal endpoint that deletes a runner manager by authentication token and system ID.
       description: Delete a registered runner manager
-      produces:
-      - application/json
       parameters:
       - in: query
         name: token
         description: The runner's authentication token
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: system_id
         description: The runner's system identifier.
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Runner manager was deleted
@@ -90,16 +86,6 @@ paths:
     post:
       summary: Verify authentication for a registered runner
       description: Validate authentication credentials
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4RunnersVerify
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4RunnersVerify'
       responses:
         '200':
           description: Credentials are valid
@@ -110,24 +96,22 @@ paths:
       tags:
       - ci_runners
       operationId: postApiV4RunnersVerify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4RunnersVerify'
+        required: true
   /api/v4/runners/reset_authentication_token:
     post:
       description: Reset runner authentication token with current token
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4RunnersResetAuthenticationToken
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4RunnersResetAuthenticationToken'
       responses:
         '201':
           description: Reset runner authentication token with current token
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_ResetTokenResult'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_ResetTokenResult'
         '403':
           description: Forbidden
         '422':
@@ -135,17 +119,23 @@ paths:
       tags:
       - ci_runners
       operationId: postApiV4RunnersResetAuthenticationToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4RunnersResetAuthenticationToken'
+        required: true
   /api/v4/runners/router/discovery:
     get:
       summary: Discover Job Router information
       description: This endpoint can be used by the runner to retrieve information about the Job Router.
-      produces:
-      - application/json
       responses:
         '200':
           description: Discover Job Router information
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_JobRouter_DiscoveryInformation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_JobRouter_DiscoveryInformation'
         '403':
           description: 403 Forbidden
         '501':
@@ -153,131 +143,132 @@ paths:
       tags:
       - ci_runners
       operationId: getApiV4RunnersRouterDiscovery
-definitions:
-  API_Entities_Ci_JobRouter_DiscoveryInformation:
-    type: object
-    properties:
-      server_url:
-        type: string
-        example: wss://kas.example.com
-    required:
-    - server_url
-    description: API_Entities_Ci_JobRouter_DiscoveryInformation model
-  postApiV4RunnersVerify:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The runner's authentication token
-      system_id:
-        type: string
-        description: The runner's system identifier
-    required:
-    - token
-    description: Validate authentication credentials
-  postApiV4RunnersResetAuthenticationToken:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The current authentication token of the runner
-    required:
-    - token
-    description: Reset runner authentication token with current token
-  API_Entities_Ci_RunnerRegistrationDetails:
-    type: object
-    properties:
-      id:
-        type: string
-      token:
-        type: string
-      token_expires_at:
-        type: string
-    required:
-    - id
-    - token
-    - token_expires_at
-    description: API_Entities_Ci_RunnerRegistrationDetails model
-  API_Entities_Ci_ResetTokenResult:
-    type: object
-    properties:
-      token:
-        type: string
-      token_expires_at:
-        type: string
-    required:
-    - token
-    description: API_Entities_Ci_ResetTokenResult model
-  postApiV4Runners:
-    type: object
-    properties:
-      token:
-        type: string
-        description: Registration token
-      description:
-        type: string
-        description: Description of the runner
-      maintainer_note:
-        type: string
-        description: 'Deprecated: see `maintenance_note`'
-      maintenance_note:
-        type: string
-        description: Free-form maintenance notes for the runner (1024 characters)
-      info:
-        type: object
-        description: Runner's metadata
-        properties:
-          name:
-            type: string
-            description: Runner's name
-          version:
-            type: string
-            description: Runner's version
-          revision:
-            type: string
-            description: Runner's revision
-          platform:
-            type: string
-            description: Runner's platform
-          architecture:
-            type: string
-            description: Runner's architecture
-      active:
-        type: boolean
-        description: 'Deprecated: Use `paused` instead. Specifies if the runner is allowed to receive new jobs'
-      paused:
-        type: boolean
-        description: Specifies if the runner should ignore new jobs
-      locked:
-        type: boolean
-        description: Specifies if the runner should be locked for the current project
-      access_level:
-        type: string
-        description: The access level of the runner
-        enum:
-        - not_protected
-        - ref_protected
-      run_untagged:
-        type: boolean
-        description: Specifies if the runner should handle untagged jobs
-      tag_list:
-        type: array
-        description: A list of runner tags
-        items:
+components:
+  schemas:
+    API_Entities_Ci_RunnerRegistrationDetails:
+      type: object
+      properties:
+        id:
           type: string
-      maximum_timeout:
-        type: integer
-        format: int32
-        description: Maximum timeout that limits the amount of time (in seconds) that runners can run jobs
-    required:
-    - token
-    description: Register a new runner
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+        token:
+          type: string
+        token_expires_at:
+          type: string
+      required:
+      - id
+      - token
+      - token_expires_at
+      description: API_Entities_Ci_RunnerRegistrationDetails model
+    postApiV4Runners:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Registration token
+        description:
+          type: string
+          description: Description of the runner
+        maintainer_note:
+          type: string
+          description: 'Deprecated: see `maintenance_note`'
+        maintenance_note:
+          type: string
+          description: Free-form maintenance notes for the runner (1024 characters)
+        info:
+          type: object
+          description: Runner's metadata
+          properties:
+            name:
+              type: string
+              description: Runner's name
+            version:
+              type: string
+              description: Runner's version
+            revision:
+              type: string
+              description: Runner's revision
+            platform:
+              type: string
+              description: Runner's platform
+            architecture:
+              type: string
+              description: Runner's architecture
+        active:
+          type: boolean
+          description: 'Deprecated: Use `paused` instead. Specifies if the runner is allowed to receive new jobs'
+        paused:
+          type: boolean
+          description: Specifies if the runner should ignore new jobs
+        locked:
+          type: boolean
+          description: Specifies if the runner should be locked for the current project
+        access_level:
+          type: string
+          description: The access level of the runner
+          enum:
+          - not_protected
+          - ref_protected
+        run_untagged:
+          type: boolean
+          description: Specifies if the runner should handle untagged jobs
+        tag_list:
+          type: array
+          description: A list of runner tags
+          items:
+            type: string
+        maximum_timeout:
+          type: integer
+          format: int32
+          description: Maximum timeout that limits the amount of time (in seconds) that runners can run jobs
+      required:
+      - token
+      description: Register a new runner
+    postApiV4RunnersResetAuthenticationToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The current authentication token of the runner
+      required:
+      - token
+      description: Reset runner authentication token with current token
+    API_Entities_Ci_ResetTokenResult:
+      type: object
+      properties:
+        token:
+          type: string
+        token_expires_at:
+          type: string
+      required:
+      - token
+      description: API_Entities_Ci_ResetTokenResult model
+    postApiV4RunnersVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The runner's authentication token
+        system_id:
+          type: string
+          description: The runner's system identifier
+      required:
+      - token
+      description: Validate authentication credentials
+    API_Entities_Ci_JobRouter_DiscoveryInformation:
+      type: object
+      properties:
+        server_url:
+          type: string
+          example: wss://kas.example.com
+      required:
+      - server_url
+      description: API_Entities_Ci_JobRouter_DiscoveryInformation model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests members API
+  title: GitLab access_requests Members API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: members
   description: Operations about members
@@ -13,243 +12,263 @@ paths:
   /api/v4/groups/{id}/members:
     get:
       description: "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: query
         description: A query string to search for members
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: user_ids
         description: Array of user ids to look up for membership
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       - in: query
         name: skip_users
         description: Array of user ids to be skipped for membership
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       - in: query
         name: show_seat_info
         description: Show seat information for members
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: with_saml_identity
         description: List only members with linked SAML identity
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4GroupsIdMembers
     post:
       description: Adds a member to a group or project.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
-        required: true
-      - name: postApiV4GroupsIdMembers
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4GroupsIdMembers'
+          type: string
       responses:
         '201':
           description: Adds a member to a group or project.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: postApiV4GroupsIdMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4GroupsIdMembers'
+        required: true
   /api/v4/groups/{id}/members/all:
     get:
       description: "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: query
         description: A query string to search for members
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: user_ids
         description: Array of user ids to look up for membership
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       - in: query
         name: show_seat_info
         description: Show seat information for members
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: state
         description: Filter results by member state
-        type: string
-        enum:
-        - awaiting
-        - active
         required: false
+        schema:
+          type: string
+          enum:
+          - awaiting
+          - active
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4GroupsIdMembersAll
   /api/v4/groups/{id}/members/{user_id}:
     get:
       description: Gets a member of a group or project.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Gets a member of a group or project.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4GroupsIdMembersUserId
     put:
       description: Updates a member of a group or project.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the new member
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4GroupsIdMembersUserId
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4GroupsIdMembersUserId'
+          type: integer
+          format: int32
       responses:
         '200':
           description: Updates a member of a group or project.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: putApiV4GroupsIdMembersUserId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4GroupsIdMembersUserId'
+        required: true
     delete:
       description: Removes a user from a group or project.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: skip_subresources
         description: Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects should be skipped
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: unassign_issuables
         description: Flag indicating if the removed member should be unassigned from any issues or merge requests within given group or project
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '204':
           description: Removes a user from a group or project.
@@ -259,98 +278,100 @@ paths:
   /api/v4/groups/{id}/members/all/{user_id}:
     get:
       description: Gets a member of a group or project, including those who gained membership through ancestor group
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The group ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Gets a member of a group or project, including those who gained membership through ancestor group
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4GroupsIdMembersAllUserId
   /api/v4/groups/{id}/members/{user_id}/override:
     post:
       description: Overrides the access level of an LDAP group member.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Overrides the access level of an LDAP group member.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: postApiV4GroupsIdMembersUserIdOverride
     delete:
       description: Remove an LDAP group member access level override.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Remove an LDAP group member access level override.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: deleteApiV4GroupsIdMembersUserIdOverride
   /api/v4/groups/{id}/members/{member_id}/approve:
     put:
       description: Approves a pending member
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: member_id
         description: The ID of the member requiring approval
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Approves a pending member
@@ -360,16 +381,13 @@ paths:
   /api/v4/groups/{id}/members/approve_all:
     post:
       description: Approves all pending members
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '201':
           description: Approves all pending members
@@ -379,30 +397,31 @@ paths:
   /api/v4/groups/{id}/pending_members:
     get:
       description: Lists all pending members for a group including invited users
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: Lists all pending members for a group including invited users
@@ -412,132 +431,139 @@ paths:
   /api/v4/groups/{id}/members/{user_id}/state:
     put:
       description: Changes the state of the memberships of a user in the group
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the user
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4GroupsIdMembersUserIdState
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4GroupsIdMembersUserIdState'
+          type: integer
+          format: int32
       responses:
         '200':
           description: Changes the state of the memberships of a user in the group
       tags:
       - members
       operationId: putApiV4GroupsIdMembersUserIdState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4GroupsIdMembersUserIdState'
+        required: true
   /api/v4/groups/{id}/billable_members/{user_id}/memberships:
     get:
       description: Get the direct memberships of a billable user of a top-level group.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: Get the direct memberships of a billable user of a top-level group.
-          schema:
-            $ref: '#/definitions/API_Entities_BillableMembership'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BillableMembership'
       tags:
       - members
       operationId: getApiV4GroupsIdBillableMembersUserIdMemberships
   /api/v4/groups/{id}/billable_members/{user_id}/indirect:
     get:
       description: Get the indirect memberships of a billable user of a top-level group.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: Get the indirect memberships of a billable user of a top-level group.
-          schema:
-            $ref: '#/definitions/API_Entities_BillableMembership'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BillableMembership'
       tags:
       - members
       operationId: getApiV4GroupsIdBillableMembersUserIdIndirect
   /api/v4/groups/{id}/billable_members/{user_id}:
     delete:
       description: Removes a billable member from a group or project.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of a group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Removes a billable member from a group or project.
@@ -547,243 +573,263 @@ paths:
   /api/v4/projects/{id}/members:
     get:
       description: "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: query
         description: A query string to search for members
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: user_ids
         description: Array of user ids to look up for membership
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       - in: query
         name: skip_users
         description: Array of user ids to be skipped for membership
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       - in: query
         name: show_seat_info
         description: Show seat information for members
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: with_saml_identity
         description: List only members with linked SAML identity
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4ProjectsIdMembers
     post:
       description: Adds a member to a group or project.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
-        required: true
-      - name: postApiV4ProjectsIdMembers
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMembers'
+          type: string
       responses:
         '201':
           description: Adds a member to a group or project.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: postApiV4ProjectsIdMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMembers'
+        required: true
   /api/v4/projects/{id}/members/all:
     get:
       description: "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: query
         description: A query string to search for members
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: user_ids
         description: Array of user ids to look up for membership
-        type: array
-        items:
-          type: integer
-          format: int32
         required: false
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
       - in: query
         name: show_seat_info
         description: Show seat information for members
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: state
         description: Filter results by member state
-        type: string
-        enum:
-        - awaiting
-        - active
         required: false
+        schema:
+          type: string
+          enum:
+          - awaiting
+          - active
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4ProjectsIdMembersAll
   /api/v4/projects/{id}/members/{user_id}:
     get:
       description: Gets a member of a group or project.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Gets a member of a group or project.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4ProjectsIdMembersUserId
     put:
       description: Updates a member of a group or project.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the new member
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdMembersUserId
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdMembersUserId'
+          type: integer
+          format: int32
       responses:
         '200':
           description: Updates a member of a group or project.
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: putApiV4ProjectsIdMembersUserId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdMembersUserId'
+        required: true
     delete:
       description: Removes a user from a group or project.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: skip_subresources
         description: Flag indicating if the deletion of direct memberships of the removed member in subgroups and projects should be skipped
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: unassign_issuables
         description: Flag indicating if the removed member should be unassigned from any issues or merge requests within given group or project
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '204':
           description: Removes a user from a group or project.
@@ -793,471 +839,474 @@ paths:
   /api/v4/projects/{id}/members/all/{user_id}:
     get:
       description: Gets a member of a group or project, including those who gained membership through ancestor group
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The project ID
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: user_id
         description: The user ID of the member
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Gets a member of a group or project, including those who gained membership through ancestor group
-          schema:
-            $ref: '#/definitions/API_Entities_Member'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Member'
       tags:
       - members
       operationId: getApiV4ProjectsIdMembersAllUserId
-definitions:
-  putApiV4GroupsIdMembersUserIdState:
-    type: object
-    properties:
-      state:
-        type: string
-        description: The new state for the memberships of the user
-        enum:
-        - awaiting
-        - active
-    required:
-    - state
-    description: Changes the state of the memberships of a user in the group
-  API_Entities_CustomAttribute:
-    type: object
-    properties:
-      key:
-        type: string
-        example: foo
-      value:
-        type: string
-        example: bar
-    required:
-    - key
-    - value
-    description: API_Entities_CustomAttribute model
-  API_Entities_MemberRole:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 2
-      group_id:
-        type: integer
-        format: int32
-        example: 2
-      name:
-        type: text
-        example: Custom guest
-      description:
-        type: text
-        example: Guest user who can also read_code
-      base_access_level:
-        type: integer
-        format: int32
-        enum:
-        - 5
-        - 10
-        - 15
-        - 20
-        - 30
-        - 40
-        example: 40
-      apply_security_scan_profiles:
-        type: boolean
-      admin_merge_request:
-        type: boolean
-      archive_project:
-        type: boolean
-      remove_project:
-        type: boolean
-      remove_group:
-        type: boolean
-      manage_security_policy_link:
-        type: boolean
-      admin_compliance_framework:
-        type: boolean
-      admin_cicd_variables:
-        type: boolean
-      manage_deploy_tokens:
-        type: boolean
-      manage_group_access_tokens:
-        type: boolean
-      admin_group_member:
-        type: boolean
-      admin_integrations:
-        type: boolean
-      manage_merge_request_settings:
-        type: boolean
-      manage_project_access_tokens:
-        type: boolean
-      admin_protected_branch:
-        type: boolean
-      admin_protected_environments:
-        type: boolean
-      manage_protected_tags:
-        type: boolean
-      admin_push_rules:
-        type: boolean
-      admin_runners:
-        type: boolean
-      admin_security_attributes:
-        type: boolean
-      admin_terraform_state:
-        type: boolean
-      admin_vulnerability:
-        type: boolean
-      admin_web_hook:
-        type: boolean
-      read_compliance_dashboard:
-        type: boolean
-      read_security_scan_profiles:
-        type: boolean
-      read_virtual_registry:
-        type: boolean
-      read_admin_cicd:
-        type: boolean
-      read_crm_contact:
-        type: boolean
-      read_dependency:
-        type: boolean
-      read_admin_groups:
-        type: boolean
-      read_admin_projects:
-        type: boolean
-      read_code:
-        type: boolean
-      read_runners:
-        type: boolean
-      read_security_attribute:
-        type: boolean
-      read_admin_subscription:
-        type: boolean
-      read_admin_monitoring:
-        type: boolean
-      read_admin_users:
-        type: boolean
-      read_vulnerability:
-        type: boolean
-    required:
-    - id
-    - group_id
-    - name
-    - description
-    - base_access_level
-    - apply_security_scan_profiles
-    - admin_merge_request
-    - archive_project
-    - remove_project
-    - remove_group
-    - manage_security_policy_link
-    - admin_compliance_framework
-    - admin_cicd_variables
-    - manage_deploy_tokens
-    - manage_group_access_tokens
-    - admin_group_member
-    - admin_integrations
-    - manage_merge_request_settings
-    - manage_project_access_tokens
-    - admin_protected_branch
-    - admin_protected_environments
-    - manage_protected_tags
-    - admin_push_rules
-    - admin_runners
-    - admin_security_attributes
-    - admin_terraform_state
-    - admin_vulnerability
-    - admin_web_hook
-    - read_compliance_dashboard
-    - read_security_scan_profiles
-    - read_virtual_registry
-    - read_admin_cicd
-    - read_crm_contact
-    - read_dependency
-    - read_admin_groups
-    - read_admin_projects
-    - read_code
-    - read_runners
-    - read_security_attribute
-    - read_admin_subscription
-    - read_admin_monitoring
-    - read_admin_users
-    - read_vulnerability
-  API_Entities_BillableMembership:
-    type: object
-    properties:
-      id:
-        type: string
-      source_id:
-        type: string
-      source_full_name:
-        type: string
-      source_members_url:
-        type: string
-      created_at:
-        type: string
-      expires_at:
-        type: string
-      access_level:
-        type: object
-        properties:
-          string_value:
-            type: string
-          integer_value:
-            type: string
-          custom_role:
-            type: string
-        required:
-        - string_value
-        - integer_value
-        - custom_role
-    required:
-    - id
-    - source_id
-    - source_full_name
-    - source_members_url
-    - created_at
-    - expires_at
-    - access_level
-    description: API_Entities_BillableMembership model
-  postApiV4ProjectsIdMembers:
-    type: object
-    properties:
-      access_level:
-        type: integer
-        format: int32
-        description: A valid access level.
-      user_id:
-        type: integer
-        format: int32
-        description: The user ID of the new member or multiple IDs separated by commas.
-      username:
-        type: string
-        description: The username of the new member or multiple usernames separated by commas.
-      expires_at:
-        type: string
-        format: date-time
-        description: Date string in the format YEAR-MONTH-DAY
-      invite_source:
-        type: string
-        description: Source that triggered the member creation process
-        default: members-api
-    required:
-    - access_level
-    description: Adds a member to a group or project.
-  putApiV4GroupsIdMembersUserId:
-    type: object
-    properties:
-      access_level:
-        type: integer
-        format: int32
-        description: A valid access level
-      expires_at:
-        type: string
-        format: date-time
-        description: Date string in the format YEAR-MONTH-DAY
-      member_role_id:
-        type: integer
-        format: int32
-        description: The ID of the Member Role to be updated
-    required:
-    - access_level
-    description: Updates a member of a group or project.
-  API_Entities_UserBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    description: API_Entities_UserBasic model
-  API_Entities_Identity:
-    type: object
-    properties:
-      provider:
-        type: string
-      extern_uid:
-        type: string
-      saml_provider_id:
-        type: string
-    required:
-    - provider
-    - extern_uid
-    - saml_provider_id
-  postApiV4GroupsIdMembers:
-    type: object
-    properties:
-      access_level:
-        type: integer
-        format: int32
-        description: A valid access level.
-      user_id:
-        type: integer
-        format: int32
-        description: The user ID of the new member or multiple IDs separated by commas.
-      username:
-        type: string
-        description: The username of the new member or multiple usernames separated by commas.
-      expires_at:
-        type: string
-        format: date-time
-        description: Date string in the format YEAR-MONTH-DAY
-      invite_source:
-        type: string
-        description: Source that triggered the member creation process
-        default: members-api
-    required:
-    - access_level
-    description: Adds a member to a group or project.
-  putApiV4ProjectsIdMembersUserId:
-    type: object
-    properties:
-      access_level:
-        type: integer
-        format: int32
-        description: A valid access level
-      expires_at:
-        type: string
-        format: date-time
-        description: Date string in the format YEAR-MONTH-DAY
-      member_role_id:
-        type: integer
-        format: int32
-        description: The ID of the Member Role to be updated
-    required:
-    - access_level
-    description: Updates a member of a group or project.
-  API_Entities_Member:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-      access_level:
-        type: string
-      created_at:
-        type: string
-      created_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      expires_at:
-        type: string
-      group_saml_identity:
-        $ref: '#/definitions/API_Entities_Identity'
-      group_scim_identity:
-        $ref: '#/definitions/API_Entities_ScimIdentity'
-      email:
-        type: string
-      is_using_seat:
-        type: string
-      override:
-        type: string
-      membership_state:
-        type: string
-      member_role:
-        $ref: '#/definitions/API_Entities_MemberRole'
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    - access_level
-    - created_at
-    - expires_at
-    - membership_state
-    description: API_Entities_Member model
-  API_Entities_ScimIdentity:
-    type: object
-    properties:
-      extern_uid:
-        type: string
-      group_id:
-        type: string
-      active:
-        type: string
-    required:
-    - extern_uid
-    - group_id
-    - active
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    putApiV4ProjectsIdMembersUserId:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        member_role_id:
+          type: integer
+          format: int32
+          description: The ID of the Member Role to be updated
+      required:
+      - access_level
+      description: Updates a member of a group or project.
+    postApiV4GroupsIdMembers:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level.
+        user_id:
+          type: integer
+          format: int32
+          description: The user ID of the new member or multiple IDs separated by commas.
+        username:
+          type: string
+          description: The username of the new member or multiple usernames separated by commas.
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        invite_source:
+          type: string
+          description: Source that triggered the member creation process
+          default: members-api
+      required:
+      - access_level
+      description: Adds a member to a group or project.
+    API_Entities_Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        access_level:
+          type: string
+        created_at:
+          type: string
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        expires_at:
+          type: string
+        group_saml_identity:
+          $ref: '#/components/schemas/API_Entities_Identity'
+        group_scim_identity:
+          $ref: '#/components/schemas/API_Entities_ScimIdentity'
+        email:
+          type: string
+        is_using_seat:
+          type: string
+        override:
+          type: string
+        membership_state:
+          type: string
+        member_role:
+          $ref: '#/components/schemas/API_Entities_MemberRole'
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - access_level
+      - created_at
+      - expires_at
+      - membership_state
+      description: API_Entities_Member model
+    API_Entities_BillableMembership:
+      type: object
+      properties:
+        id:
+          type: string
+        source_id:
+          type: string
+        source_full_name:
+          type: string
+        source_members_url:
+          type: string
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        access_level:
+          type: object
+          properties:
+            string_value:
+              type: string
+            integer_value:
+              type: string
+            custom_role:
+              type: string
+          required:
+          - string_value
+          - integer_value
+          - custom_role
+      required:
+      - id
+      - source_id
+      - source_full_name
+      - source_members_url
+      - created_at
+      - expires_at
+      - access_level
+      description: API_Entities_BillableMembership model
+    putApiV4GroupsIdMembersUserId:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        member_role_id:
+          type: integer
+          format: int32
+          description: The ID of the Member Role to be updated
+      required:
+      - access_level
+      description: Updates a member of a group or project.
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    putApiV4GroupsIdMembersUserIdState:
+      type: object
+      properties:
+        state:
+          type: string
+          description: The new state for the memberships of the user
+          enum:
+          - awaiting
+          - active
+      required:
+      - state
+      description: Changes the state of the memberships of a user in the group
+    API_Entities_MemberRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 2
+        group_id:
+          type: integer
+          format: int32
+          example: 2
+        name:
+          type: text
+          example: Custom guest
+        description:
+          type: text
+          example: Guest user who can also read_code
+        base_access_level:
+          type: integer
+          format: int32
+          enum:
+          - 5
+          - 10
+          - 15
+          - 20
+          - 30
+          - 40
+          example: 40
+        apply_security_scan_profiles:
+          type: boolean
+        admin_merge_request:
+          type: boolean
+        archive_project:
+          type: boolean
+        remove_project:
+          type: boolean
+        remove_group:
+          type: boolean
+        manage_security_policy_link:
+          type: boolean
+        admin_compliance_framework:
+          type: boolean
+        admin_cicd_variables:
+          type: boolean
+        manage_deploy_tokens:
+          type: boolean
+        manage_group_access_tokens:
+          type: boolean
+        admin_group_member:
+          type: boolean
+        admin_integrations:
+          type: boolean
+        manage_merge_request_settings:
+          type: boolean
+        manage_project_access_tokens:
+          type: boolean
+        admin_protected_branch:
+          type: boolean
+        admin_protected_environments:
+          type: boolean
+        manage_protected_tags:
+          type: boolean
+        admin_push_rules:
+          type: boolean
+        admin_runners:
+          type: boolean
+        admin_security_attributes:
+          type: boolean
+        admin_terraform_state:
+          type: boolean
+        admin_vulnerability:
+          type: boolean
+        admin_web_hook:
+          type: boolean
+        read_compliance_dashboard:
+          type: boolean
+        read_security_scan_profiles:
+          type: boolean
+        read_virtual_registry:
+          type: boolean
+        read_admin_cicd:
+          type: boolean
+        read_crm_contact:
+          type: boolean
+        read_dependency:
+          type: boolean
+        read_admin_groups:
+          type: boolean
+        read_admin_projects:
+          type: boolean
+        read_code:
+          type: boolean
+        read_runners:
+          type: boolean
+        read_security_attribute:
+          type: boolean
+        read_admin_subscription:
+          type: boolean
+        read_admin_monitoring:
+          type: boolean
+        read_admin_users:
+          type: boolean
+        read_vulnerability:
+          type: boolean
+      required:
+      - id
+      - group_id
+      - name
+      - description
+      - base_access_level
+      - apply_security_scan_profiles
+      - admin_merge_request
+      - archive_project
+      - remove_project
+      - remove_group
+      - manage_security_policy_link
+      - admin_compliance_framework
+      - admin_cicd_variables
+      - manage_deploy_tokens
+      - manage_group_access_tokens
+      - admin_group_member
+      - admin_integrations
+      - manage_merge_request_settings
+      - manage_project_access_tokens
+      - admin_protected_branch
+      - admin_protected_environments
+      - manage_protected_tags
+      - admin_push_rules
+      - admin_runners
+      - admin_security_attributes
+      - admin_terraform_state
+      - admin_vulnerability
+      - admin_web_hook
+      - read_compliance_dashboard
+      - read_security_scan_profiles
+      - read_virtual_registry
+      - read_admin_cicd
+      - read_crm_contact
+      - read_dependency
+      - read_admin_groups
+      - read_admin_projects
+      - read_code
+      - read_runners
+      - read_security_attribute
+      - read_admin_subscription
+      - read_admin_monitoring
+      - read_admin_users
+      - read_vulnerability
+    API_Entities_Identity:
+      type: object
+      properties:
+        provider:
+          type: string
+        extern_uid:
+          type: string
+        saml_provider_id:
+          type: string
+      required:
+      - provider
+      - extern_uid
+      - saml_provider_id
+    API_Entities_ScimIdentity:
+      type: object
+      properties:
+        extern_uid:
+          type: string
+        group_id:
+          type: string
+        active:
+          type: string
+      required:
+      - extern_uid
+      - group_id
+      - active
+    postApiV4ProjectsIdMembers:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level.
+        user_id:
+          type: integer
+          format: int32
+          description: The user ID of the new member or multiple IDs separated by commas.
+        username:
+          type: string
+          description: The username of the new member or multiple usernames separated by commas.
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        invite_source:
+          type: string
+          description: Source that triggered the member creation process
+          default: members-api
+      required:
+      - access_level
+      description: Adds a member to a group or project.
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

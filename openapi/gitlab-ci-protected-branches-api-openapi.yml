@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests protected_branches API
+  title: GitLab access_requests Protected Branches API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: protected_branches
   description: Operations about protected_branches
@@ -13,44 +12,48 @@ paths:
   /api/v4/projects/{id}/protected_branches:
     get:
       description: Get a project's protected branches
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
         example: gitlab-org/gitlab
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: search
         description: Search for a protected branch by name
-        type: string
         required: false
         example: mai
+        schema:
+          type: string
       responses:
         '200':
           description: Get a project's protected branches
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_ProtectedBranch'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_ProtectedBranch'
         '404':
           description: 404 Project Not Found
         '401':
@@ -60,27 +63,21 @@ paths:
       operationId: getApiV4ProjectsIdProtectedBranches
     post:
       description: Protect a single branch
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
         example: gitlab-org/gitlab
-      - name: postApiV4ProjectsIdProtectedBranches
-        in: body
-        required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdProtectedBranches'
+          type: string
       responses:
         '201':
           description: Protect a single branch
-          schema:
-            $ref: '#/definitions/API_Entities_ProtectedBranch'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ProtectedBranch'
         '422':
           description: name is missing
         '409':
@@ -92,29 +89,37 @@ paths:
       tags:
       - protected_branches
       operationId: postApiV4ProjectsIdProtectedBranches
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdProtectedBranches'
+        required: true
   /api/v4/projects/{id}/protected_branches/{name}:
     get:
       description: Get a single protected branch
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
         example: gitlab-org/gitlab
+        schema:
+          type: string
       - in: path
         name: name
         description: The name of the branch or wildcard
-        type: string
         required: true
         example: main
+        schema:
+          type: string
       responses:
         '200':
           description: Get a single protected branch
-          schema:
-            $ref: '#/definitions/API_Entities_ProtectedBranch'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ProtectedBranch'
         '404':
           description: 404 Project Not Found
         '401':
@@ -124,33 +129,28 @@ paths:
       operationId: getApiV4ProjectsIdProtectedBranchesName
     patch:
       description: Update a protected branch
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
         example: gitlab-org/gitlab
+        schema:
+          type: string
       - in: path
         name: name
         description: The name of the branch
-        type: string
         required: true
         example: main
-      - name: patchApiV4ProjectsIdProtectedBranchesName
-        in: body
-        required: true
         schema:
-          $ref: '#/definitions/patchApiV4ProjectsIdProtectedBranchesName'
+          type: string
       responses:
         '200':
           description: Update a protected branch
-          schema:
-            $ref: '#/definitions/API_Entities_ProtectedBranch'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ProtectedBranch'
         '422':
           description: Push access levels access level has already been taken
         '404':
@@ -162,23 +162,29 @@ paths:
       tags:
       - protected_branches
       operationId: patchApiV4ProjectsIdProtectedBranchesName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patchApiV4ProjectsIdProtectedBranchesName'
+        required: true
     delete:
       description: Unprotect a single branch
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
         example: gitlab-org/gitlab
+        schema:
+          type: string
       - in: path
         name: name
         description: The name of the protected branch
-        type: string
         required: true
         example: main
+        schema:
+          type: string
       responses:
         '204':
           description: Unprotect a single branch
@@ -189,350 +195,351 @@ paths:
       tags:
       - protected_branches
       operationId: deleteApiV4ProjectsIdProtectedBranchesName
-definitions:
-  API_Entities_ProtectedRefAccess:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      access_level:
-        type: integer
-        format: int32
-        example: 40
-      access_level_description:
-        type: string
-        example: Maintainers
-      deploy_key_id:
-        type: integer
-        format: int32
-        example: 1
-      user_id:
-        type: integer
-        format: int32
-        example: 1
-      group_id:
-        type: integer
-        format: int32
-        example: 1
-    required:
-    - id
-    - access_level
-    - access_level_description
-    - user_id
-    - group_id
-  patchApiV4ProjectsIdProtectedBranchesName:
-    type: object
-    properties:
-      allow_force_push:
-        type: boolean
-        description: Allow force push for all users with push access.
-      allowed_to_push:
-        type: array
-        description: Array of users, groups, deploy keys, or access levels allowed to push to protected branches
-        items:
-          type: object
-          properties:
-            deploy_key_id:
-              type: integer
-              format: int32
-              description: Deploy key allowed to push
-              example: 1
-            access_level:
-              type: integer
-              format: int32
-              description: Access level allowed to push
-              enum:
-              - 30
-              - 40
-              - 60
-              - 0
-            user_id:
-              type: integer
-              format: int32
-              description: ID of a user
-              example: 1
-            group_id:
-              type: integer
-              format: int32
-              description: ID of a group
-              example: 1
-            id:
-              type: integer
-              format: int32
-              description: ID of a project
-              example: 40
-            _destroy:
-              type: boolean
-              description: Delete the object when true
-      unprotect_access_level:
-        type: integer
-        format: int32
-        description: 'Access levels allowed to unprotect (defaults: `40`, maintainer access level)'
-        enum:
-        - 30
-        - 40
-        - 60
-      allowed_to_merge:
-        type: array
-        description: Array of users, groups, or access levels allowed to merge protected branches
-        items:
-          type: object
-          properties:
-            access_level:
-              type: integer
-              format: int32
-              description: Access level allowed to merge
-              enum:
-              - 30
-              - 40
-              - 60
-              - 0
-            user_id:
-              type: integer
-              format: int32
-              description: ID of a user
-              example: 1
-            group_id:
-              type: integer
-              format: int32
-              description: ID of a group
-              example: 1
-            id:
-              type: integer
-              format: int32
-              description: ID of a project
-              example: 40
-            _destroy:
-              type: boolean
-              description: Delete the object when true
-      allowed_to_unprotect:
-        type: array
-        description: Array of users, groups, or access levels allowed to unprotect protected branches
-        items:
-          type: object
-          properties:
-            access_level:
-              type: integer
-              format: int32
-              description: Access level allowed to unprotect
-              enum:
-              - 30
-              - 40
-              - 60
-            user_id:
-              type: integer
-              format: int32
-              description: ID of a user
-              example: 1
-            group_id:
-              type: integer
-              format: int32
-              description: ID of a group
-              example: 1
-            id:
-              type: integer
-              format: int32
-              description: ID of a project
-              example: 40
-            _destroy:
-              type: boolean
-              description: Delete the object when true
-      code_owner_approval_required:
-        type: boolean
-        description: Prevent pushes to this branch if it matches an item in CODEOWNERS
-    description: Update a protected branch
-  postApiV4ProjectsIdProtectedBranches:
-    type: object
-    properties:
-      name:
-        type: string
-        description: The name of the protected branch
-        example: main
-      push_access_level:
-        type: integer
-        format: int32
-        description: 'Access levels allowed to push (defaults: `40`, maintainer access level)'
-        enum:
-        - 30
-        - 40
-        - 60
-        - 0
-      merge_access_level:
-        type: integer
-        format: int32
-        description: 'Access levels allowed to merge (defaults: `40`, maintainer access level)'
-        enum:
-        - 30
-        - 40
-        - 60
-        - 0
-      allow_force_push:
-        type: boolean
-        description: Allow force push for all users with push access.
-        default: false
-      allowed_to_push:
-        type: array
-        description: Array of users, groups, deploy keys, or access levels allowed to push to protected branches
-        items:
-          type: object
-          properties:
-            deploy_key_id:
-              type: integer
-              format: int32
-              description: Deploy key allowed to push
-              example: 1
-            access_level:
-              type: integer
-              format: int32
-              description: Access level allowed to push
-              enum:
-              - 30
-              - 40
-              - 60
-              - 0
-            user_id:
-              type: integer
-              format: int32
-              description: ID of a user
-              example: 1
-            group_id:
-              type: integer
-              format: int32
-              description: ID of a group
-              example: 1
-            id:
-              type: integer
-              format: int32
-              description: ID of a project
-              example: 40
-            _destroy:
-              type: boolean
-              description: Delete the object when true
-      unprotect_access_level:
-        type: integer
-        format: int32
-        description: 'Access levels allowed to unprotect (defaults: `40`, maintainer access level)'
-        enum:
-        - 30
-        - 40
-        - 60
-      allowed_to_merge:
-        type: array
-        description: Array of users, groups, or access levels allowed to merge protected branches
-        items:
-          type: object
-          properties:
-            access_level:
-              type: integer
-              format: int32
-              description: Access level allowed to merge
-              enum:
-              - 30
-              - 40
-              - 60
-              - 0
-            user_id:
-              type: integer
-              format: int32
-              description: ID of a user
-              example: 1
-            group_id:
-              type: integer
-              format: int32
-              description: ID of a group
-              example: 1
-            id:
-              type: integer
-              format: int32
-              description: ID of a project
-              example: 40
-            _destroy:
-              type: boolean
-              description: Delete the object when true
-      allowed_to_unprotect:
-        type: array
-        description: Array of users, groups, or access levels allowed to unprotect protected branches
-        items:
-          type: object
-          properties:
-            access_level:
-              type: integer
-              format: int32
-              description: Access level allowed to unprotect
-              enum:
-              - 30
-              - 40
-              - 60
-            user_id:
-              type: integer
-              format: int32
-              description: ID of a user
-              example: 1
-            group_id:
-              type: integer
-              format: int32
-              description: ID of a group
-              example: 1
-            id:
-              type: integer
-              format: int32
-              description: ID of a project
-              example: 40
-            _destroy:
-              type: boolean
-              description: Delete the object when true
-      code_owner_approval_required:
-        type: boolean
-        description: Prevent pushes to this branch if it matches an item in CODEOWNERS
-    required:
-    - name
-    description: Protect a single branch
-  API_Entities_ProtectedBranch:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      name:
-        type: string
-        example: main
-      push_access_levels:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_ProtectedRefAccess'
-      merge_access_levels:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_ProtectedRefAccess'
-      allow_force_push:
-        type: boolean
-      unprotect_access_levels:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_ProtectedRefAccess'
-      code_owner_approval_required:
-        type: boolean
-      inherited:
-        type: boolean
-    required:
-    - id
-    - name
-    - push_access_levels
-    - merge_access_levels
-    - allow_force_push
-    - unprotect_access_levels
-    - code_owner_approval_required
-    - inherited
-    description: API_Entities_ProtectedBranch model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    API_Entities_ProtectedBranch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: main
+        push_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+        merge_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+        allow_force_push:
+          type: boolean
+        unprotect_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+        code_owner_approval_required:
+          type: boolean
+        inherited:
+          type: boolean
+      required:
+      - id
+      - name
+      - push_access_levels
+      - merge_access_levels
+      - allow_force_push
+      - unprotect_access_levels
+      - code_owner_approval_required
+      - inherited
+      description: API_Entities_ProtectedBranch model
+    patchApiV4ProjectsIdProtectedBranchesName:
+      type: object
+      properties:
+        allow_force_push:
+          type: boolean
+          description: Allow force push for all users with push access.
+        allowed_to_push:
+          type: array
+          description: Array of users, groups, deploy keys, or access levels allowed to push to protected branches
+          items:
+            type: object
+            properties:
+              deploy_key_id:
+                type: integer
+                format: int32
+                description: Deploy key allowed to push
+                example: 1
+              access_level:
+                type: integer
+                format: int32
+                description: Access level allowed to push
+                enum:
+                - 30
+                - 40
+                - 60
+                - 0
+              user_id:
+                type: integer
+                format: int32
+                description: ID of a user
+                example: 1
+              group_id:
+                type: integer
+                format: int32
+                description: ID of a group
+                example: 1
+              id:
+                type: integer
+                format: int32
+                description: ID of a project
+                example: 40
+              _destroy:
+                type: boolean
+                description: Delete the object when true
+        unprotect_access_level:
+          type: integer
+          format: int32
+          description: 'Access levels allowed to unprotect (defaults: `40`, maintainer access level)'
+          enum:
+          - 30
+          - 40
+          - 60
+        allowed_to_merge:
+          type: array
+          description: Array of users, groups, or access levels allowed to merge protected branches
+          items:
+            type: object
+            properties:
+              access_level:
+                type: integer
+                format: int32
+                description: Access level allowed to merge
+                enum:
+                - 30
+                - 40
+                - 60
+                - 0
+              user_id:
+                type: integer
+                format: int32
+                description: ID of a user
+                example: 1
+              group_id:
+                type: integer
+                format: int32
+                description: ID of a group
+                example: 1
+              id:
+                type: integer
+                format: int32
+                description: ID of a project
+                example: 40
+              _destroy:
+                type: boolean
+                description: Delete the object when true
+        allowed_to_unprotect:
+          type: array
+          description: Array of users, groups, or access levels allowed to unprotect protected branches
+          items:
+            type: object
+            properties:
+              access_level:
+                type: integer
+                format: int32
+                description: Access level allowed to unprotect
+                enum:
+                - 30
+                - 40
+                - 60
+              user_id:
+                type: integer
+                format: int32
+                description: ID of a user
+                example: 1
+              group_id:
+                type: integer
+                format: int32
+                description: ID of a group
+                example: 1
+              id:
+                type: integer
+                format: int32
+                description: ID of a project
+                example: 40
+              _destroy:
+                type: boolean
+                description: Delete the object when true
+        code_owner_approval_required:
+          type: boolean
+          description: Prevent pushes to this branch if it matches an item in CODEOWNERS
+      description: Update a protected branch
+    API_Entities_ProtectedRefAccess:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        access_level:
+          type: integer
+          format: int32
+          example: 40
+        access_level_description:
+          type: string
+          example: Maintainers
+        deploy_key_id:
+          type: integer
+          format: int32
+          example: 1
+        user_id:
+          type: integer
+          format: int32
+          example: 1
+        group_id:
+          type: integer
+          format: int32
+          example: 1
+      required:
+      - id
+      - access_level
+      - access_level_description
+      - user_id
+      - group_id
+    postApiV4ProjectsIdProtectedBranches:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the protected branch
+          example: main
+        push_access_level:
+          type: integer
+          format: int32
+          description: 'Access levels allowed to push (defaults: `40`, maintainer access level)'
+          enum:
+          - 30
+          - 40
+          - 60
+          - 0
+        merge_access_level:
+          type: integer
+          format: int32
+          description: 'Access levels allowed to merge (defaults: `40`, maintainer access level)'
+          enum:
+          - 30
+          - 40
+          - 60
+          - 0
+        allow_force_push:
+          type: boolean
+          description: Allow force push for all users with push access.
+          default: false
+        allowed_to_push:
+          type: array
+          description: Array of users, groups, deploy keys, or access levels allowed to push to protected branches
+          items:
+            type: object
+            properties:
+              deploy_key_id:
+                type: integer
+                format: int32
+                description: Deploy key allowed to push
+                example: 1
+              access_level:
+                type: integer
+                format: int32
+                description: Access level allowed to push
+                enum:
+                - 30
+                - 40
+                - 60
+                - 0
+              user_id:
+                type: integer
+                format: int32
+                description: ID of a user
+                example: 1
+              group_id:
+                type: integer
+                format: int32
+                description: ID of a group
+                example: 1
+              id:
+                type: integer
+                format: int32
+                description: ID of a project
+                example: 40
+              _destroy:
+                type: boolean
+                description: Delete the object when true
+        unprotect_access_level:
+          type: integer
+          format: int32
+          description: 'Access levels allowed to unprotect (defaults: `40`, maintainer access level)'
+          enum:
+          - 30
+          - 40
+          - 60
+        allowed_to_merge:
+          type: array
+          description: Array of users, groups, or access levels allowed to merge protected branches
+          items:
+            type: object
+            properties:
+              access_level:
+                type: integer
+                format: int32
+                description: Access level allowed to merge
+                enum:
+                - 30
+                - 40
+                - 60
+                - 0
+              user_id:
+                type: integer
+                format: int32
+                description: ID of a user
+                example: 1
+              group_id:
+                type: integer
+                format: int32
+                description: ID of a group
+                example: 1
+              id:
+                type: integer
+                format: int32
+                description: ID of a project
+                example: 40
+              _destroy:
+                type: boolean
+                description: Delete the object when true
+        allowed_to_unprotect:
+          type: array
+          description: Array of users, groups, or access levels allowed to unprotect protected branches
+          items:
+            type: object
+            properties:
+              access_level:
+                type: integer
+                format: int32
+                description: Access level allowed to unprotect
+                enum:
+                - 30
+                - 40
+                - 60
+              user_id:
+                type: integer
+                format: int32
+                description: ID of a user
+                example: 1
+              group_id:
+                type: integer
+                format: int32
+                description: ID of a group
+                example: 1
+              id:
+                type: integer
+                format: int32
+                description: ID of a project
+                example: 40
+              _destroy:
+                type: boolean
+                description: Delete the object when true
+        code_owner_approval_required:
+          type: boolean
+          description: Prevent pushes to this branch if it matches an item in CODEOWNERS
+      required:
+      - name
+      description: Protect a single branch
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

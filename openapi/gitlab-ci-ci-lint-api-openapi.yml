@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests ci_lint API
+  title: GitLab access_requests Ci Lint API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: ci_lint
   description: Operations related to linting a CI config file
@@ -14,50 +13,57 @@ paths:
     get:
       summary: Validates a CI YAML configuration with a namespace
       description: "Checks if a project’s .gitlab-ci.yml configuration in a given commit (by default HEAD of the\n        project’s default branch) is valid"
-      produces:
-      - application/json
       parameters:
       - in: query
         name: sha
         description: 'Deprecated: Use content_ref instead'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: content_ref
         description: The CI/CD configuration content is taken from this commit SHA, branch or tag. Defaults to the HEAD of the project's default branch
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: dry_run
         description: Run pipeline creation simulation, or only do static check. This is false by default
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: include_jobs
         description: "If the list of jobs that would exist in a static check or pipeline\n        simulation should be included in the response. This is false by default"
-        type: boolean
         required: false
+        schema:
+          type: boolean
       - in: query
         name: ref
         description: 'Deprecated: Use dry_run_ref instead'
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: dry_run_ref
         description: Branch or tag used as context when executing a dry run. Defaults to the default branch of the project. Only used when dry_run is true
-        type: string
         required: false
+        schema:
+          type: string
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Validates a CI YAML configuration with a namespace
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_Lint_Result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_Lint_Result'
         '404':
           description: Not found
       tags:
@@ -66,131 +72,132 @@ paths:
     post:
       summary: Validate a CI YAML configuration with a namespace
       description: Checks if CI/CD YAML configuration is valid. This endpoint has namespace specific context
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdCiLint
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdCiLint'
+          type: integer
+          format: int32
       responses:
         '200':
           description: Validate a CI YAML configuration with a namespace
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_Lint_Result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_Lint_Result'
       tags:
       - ci_lint
       operationId: postApiV4ProjectsIdCiLint
-definitions:
-  postApiV4ProjectsIdCiLint:
-    type: object
-    properties:
-      content:
-        type: string
-        description: Content of .gitlab-ci.yml
-      dry_run:
-        type: boolean
-        description: Run pipeline creation simulation, or only do static check. This is false by default
-        default: false
-      include_jobs:
-        type: boolean
-        description: "If the list of jobs that would exist in a static check or pipeline\n        simulation should be included in the response. This is false by default"
-      ref:
-        type: string
-        description: When dry_run is true, sets the branch or tag to use. Defaults to the project’s default branch when not set
-    required:
-    - content
-    description: Validate a CI YAML configuration with a namespace
-  API_Entities_Ci_Lint_Result:
-    type: object
-    properties:
-      valid:
-        type: boolean
-      errors:
-        type: array
-        items:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdCiLint'
+        required: true
+components:
+  schemas:
+    postApiV4ProjectsIdCiLint:
+      type: object
+      properties:
+        content:
           type: string
-        example:
-        - variables config should be a hash of key value pairs
-      warnings:
-        type: array
-        items:
+          description: Content of .gitlab-ci.yml
+        dry_run:
+          type: boolean
+          description: Run pipeline creation simulation, or only do static check. This is false by default
+          default: false
+        include_jobs:
+          type: boolean
+          description: "If the list of jobs that would exist in a static check or pipeline\n        simulation should be included in the response. This is false by default"
+        ref:
           type: string
-        example:
-        - jobs:job may allow multiple pipelines ...
-      merged_yaml:
-        type: string
-        example: "---\\n:another_test:\\n  :stage: test\\n\n          :script: echo 2\\n:test:\\n  :stage: test\\n  :script: echo 1\\n"
-      includes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_Ci_Lint_Result_Include'
-        example:
-        - blob: https://gitlab.com/root/example-project/-/blob/...
-      jobs:
-        type: array
-        items:
+          description: When dry_run is true, sets the branch or tag to use. Defaults to the project’s default branch when not set
+      required:
+      - content
+      description: Validate a CI YAML configuration with a namespace
+    API_Entities_Ci_Lint_Result:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: string
+          example:
+          - variables config should be a hash of key value pairs
+        warnings:
+          type: array
+          items:
+            type: string
+          example:
+          - jobs:job may allow multiple pipelines ...
+        merged_yaml:
+          type: string
+          example: "---\\n:another_test:\\n  :stage: test\\n\n          :script: echo 2\\n:test:\\n  :stage: test\\n  :script: echo 1\\n"
+        includes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Ci_Lint_Result_Include'
+          example:
+          - blob: https://gitlab.com/root/example-project/-/blob/...
+        jobs:
+          type: array
+          items:
+            type: object
+          example:
+          - name: test
+            script:
+            - ls
+      required:
+      - valid
+      - errors
+      - warnings
+      - merged_yaml
+      - includes
+      description: API_Entities_Ci_Lint_Result model
+    API_Entities_Ci_Lint_Result_Include:
+      type: object
+      properties:
+        type:
+          type: string
+          example: local
+        location:
+          type: string
+          example: .gitlab/ci/build-images.gitlab-ci.yml
+        blob:
+          type: string
+          example: https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
+        raw:
+          type: string
+          example: https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
+        extra:
           type: object
-        example:
-        - name: test
-          script:
-          - ls
-    required:
-    - valid
-    - errors
-    - warnings
-    - merged_yaml
-    - includes
-    description: API_Entities_Ci_Lint_Result model
-  API_Entities_Ci_Lint_Result_Include:
-    type: object
-    properties:
-      type:
-        type: string
-        example: local
-      location:
-        type: string
-        example: .gitlab/ci/build-images.gitlab-ci.yml
-      blob:
-        type: string
-        example: https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
-      raw:
-        type: string
-        example: https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
-      extra:
-        type: object
-        example:
-          job_name: test
-          project: gitlab-org/gitlab
-          ref: master
-      context_project:
-        type: string
-        example: gitlab-org/gitlab
-      context_sha:
-        type: string
-        example: e52d6d0246d7375291850e61f0abc101fbda9dc2
-    required:
-    - type
-    - location
-    - blob
-    - raw
-    - extra
-    - context_project
-    - context_sha
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+          example:
+            job_name: test
+            project: gitlab-org/gitlab
+            ref: master
+        context_project:
+          type: string
+          example: gitlab-org/gitlab
+        context_sha:
+          type: string
+          example: e52d6d0246d7375291850e61f0abc101fbda9dc2
+      required:
+      - type
+      - location
+      - blob
+      - raw
+      - extra
+      - context_project
+      - context_sha
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

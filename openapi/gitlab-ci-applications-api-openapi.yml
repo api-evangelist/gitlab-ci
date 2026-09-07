@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests applications API
+  title: GitLab access_requests Applications API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: applications
   description: Operations about applications
@@ -14,36 +13,34 @@ paths:
     post:
       summary: Create a new application
       description: This feature was introduced in GitLab 10.5
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4Applications
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4Applications'
       responses:
         '200':
           description: Create a new application
-          schema:
-            $ref: '#/definitions/API_Entities_ApplicationWithSecret'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ApplicationWithSecret'
       tags:
       - applications
       operationId: postApiV4Applications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4Applications'
+        required: true
     get:
       summary: Get applications
       description: List all registered applications
-      produces:
-      - application/json
       responses:
         '200':
           description: Get applications
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_Application'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_Application'
       tags:
       - applications
       operationId: getApiV4Applications
@@ -51,15 +48,14 @@ paths:
     delete:
       summary: Delete an application
       description: Delete a specific application
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of the application (not the application_id)
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an application
@@ -70,119 +66,119 @@ paths:
     post:
       summary: Renew an application secret
       description: Renew the secret of a specific application
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of the application (not the application_id)
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Renew an application secret
-          schema:
-            $ref: '#/definitions/API_Entities_ApplicationWithSecret'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ApplicationWithSecret'
       tags:
       - applications
       operationId: postApiV4ApplicationsIdRenewSecret
-definitions:
-  API_Entities_ApplicationWithSecret:
-    type: object
-    properties:
-      id:
-        type: string
-      application_id:
-        type: string
-        example: 5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737
-      application_name:
-        type: string
-        example: MyApplication
-      callback_url:
-        type: string
-        example: https://redirect.uri
-      confidential:
-        type: boolean
-        example: true
-      scopes:
-        type: array
-        example:
-        - api
-        - read_user
-      secret:
-        type: string
-        example: ee1dd64b6adc89cf7e2c23099301ccc2c61b441064e9324d963c46902a85ec34
-    required:
-    - id
-    - application_id
-    - application_name
-    - callback_url
-    - confidential
-    - scopes
-    - secret
-    description: API_Entities_ApplicationWithSecret model
-  postApiV4Applications:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the application.
-        example: MyApplication
-      redirect_uri:
-        type: string
-        description: Redirect URI of the application.
-        example: https://redirect.uri
-      scopes:
-        type: string
-        description: "Scopes of the application. You can specify multiple scopes by separating\\\n                                 each scope using a space"
-      confidential:
-        type: boolean
-        description: "The application is used where the client secret can be kept confidential. Native mobile apps \\\n                        and Single Page Apps are considered non-confidential. Defaults to true if not supplied"
-        default: true
-    required:
-    - name
-    - redirect_uri
-    - scopes
-    description: Create a new application
-  API_Entities_Application:
-    type: object
-    properties:
-      id:
-        type: string
-      application_id:
-        type: string
-        example: 5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737
-      application_name:
-        type: string
-        example: MyApplication
-      callback_url:
-        type: string
-        example: https://redirect.uri
-      confidential:
-        type: boolean
-        example: true
-      scopes:
-        type: array
-        example:
-        - api
-        - read_user
-    required:
-    - id
-    - application_id
-    - application_name
-    - callback_url
-    - confidential
-    - scopes
-    description: API_Entities_Application model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    postApiV4Applications:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the application.
+          example: MyApplication
+        redirect_uri:
+          type: string
+          description: Redirect URI of the application.
+          example: https://redirect.uri
+        scopes:
+          type: string
+          description: "Scopes of the application. You can specify multiple scopes by separating\\\n                                 each scope using a space"
+        confidential:
+          type: boolean
+          description: "The application is used where the client secret can be kept confidential. Native mobile apps \\\n                        and Single Page Apps are considered non-confidential. Defaults to true if not supplied"
+          default: true
+      required:
+      - name
+      - redirect_uri
+      - scopes
+      description: Create a new application
+    API_Entities_Application:
+      type: object
+      properties:
+        id:
+          type: string
+        application_id:
+          type: string
+          example: 5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737
+        application_name:
+          type: string
+          example: MyApplication
+        callback_url:
+          type: string
+          example: https://redirect.uri
+        confidential:
+          type: boolean
+          example: true
+        scopes:
+          type: array
+          example:
+          - api
+          - read_user
+      required:
+      - id
+      - application_id
+      - application_name
+      - callback_url
+      - confidential
+      - scopes
+      description: API_Entities_Application model
+    API_Entities_ApplicationWithSecret:
+      type: object
+      properties:
+        id:
+          type: string
+        application_id:
+          type: string
+          example: 5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737
+        application_name:
+          type: string
+          example: MyApplication
+        callback_url:
+          type: string
+          example: https://redirect.uri
+        confidential:
+          type: boolean
+          example: true
+        scopes:
+          type: array
+          example:
+          - api
+          - read_user
+        secret:
+          type: string
+          example: ee1dd64b6adc89cf7e2c23099301ccc2c61b441064e9324d963c46902a85ec34
+      required:
+      - id
+      - application_id
+      - application_name
+      - callback_url
+      - confidential
+      - scopes
+      - secret
+      description: API_Entities_ApplicationWithSecret model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

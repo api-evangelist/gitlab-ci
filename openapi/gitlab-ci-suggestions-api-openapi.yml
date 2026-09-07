@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests suggestions API
+  title: GitLab access_requests Suggestions API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: suggestions
   description: Operations related to suggestions
@@ -13,120 +12,119 @@ paths:
   /api/v4/suggestions/{id}/apply:
     put:
       description: Apply suggestion patch in the Merge Request it was created
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of the suggestion
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4SuggestionsIdApply
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4SuggestionsIdApply'
+          type: integer
+          format: int32
       responses:
         '200':
           description: Apply suggestion patch in the Merge Request it was created
-          schema:
-            $ref: '#/definitions/API_Entities_Suggestion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Suggestion'
       tags:
       - suggestions
       operationId: putApiV4SuggestionsIdApply
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4SuggestionsIdApply'
+        required: true
   /api/v4/suggestions/batch_apply:
     put:
       description: Apply multiple suggestion patches in the Merge Request where they were created
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: putApiV4SuggestionsBatchApply
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/putApiV4SuggestionsBatchApply'
       responses:
         '200':
           description: Apply multiple suggestion patches in the Merge Request where they were created
-          schema:
-            $ref: '#/definitions/API_Entities_Suggestion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Suggestion'
       tags:
       - suggestions
       operationId: putApiV4SuggestionsBatchApply
-definitions:
-  putApiV4SuggestionsIdApply:
-    type: object
-    properties:
-      commit_message:
-        type: string
-        description: A custom commit message to use instead of the default generated message or the project's default message
-    description: Apply suggestion patch in the Merge Request it was created
-  putApiV4SuggestionsBatchApply:
-    type: object
-    properties:
-      ids:
-        type: array
-        description: An array of the suggestion IDs
-        items:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4SuggestionsBatchApply'
+        required: true
+components:
+  schemas:
+    putApiV4SuggestionsIdApply:
+      type: object
+      properties:
+        commit_message:
+          type: string
+          description: A custom commit message to use instead of the default generated message or the project's default message
+      description: Apply suggestion patch in the Merge Request it was created
+    API_Entities_Suggestion:
+      type: object
+      properties:
+        id:
           type: integer
           format: int32
-      commit_message:
-        type: string
-        description: A custom commit message to use instead of the default generated message or the project's default message
-    required:
-    - ids
-    description: Apply multiple suggestion patches in the Merge Request where they were created
-  API_Entities_Suggestion:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      from_line:
-        type: integer
-        format: int32
-        example: 1
-      to_line:
-        type: integer
-        format: int32
-        example: 1
-      appliable:
-        type: boolean
-        example: true
-      applied:
-        type: boolean
-        example: false
-      from_content:
-        type: string
-        example: 'Original content
+          example: 1
+        from_line:
+          type: integer
+          format: int32
+          example: 1
+        to_line:
+          type: integer
+          format: int32
+          example: 1
+        appliable:
+          type: boolean
+          example: true
+        applied:
+          type: boolean
+          example: false
+        from_content:
+          type: string
+          example: 'Original content
 
-          '
-      to_content:
-        type: string
-        example: 'New content
+            '
+        to_content:
+          type: string
+          example: 'New content
 
-          '
-    required:
-    - id
-    - from_line
-    - to_line
-    - appliable
-    - applied
-    - from_content
-    - to_content
-    description: API_Entities_Suggestion model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+            '
+      required:
+      - id
+      - from_line
+      - to_line
+      - appliable
+      - applied
+      - from_content
+      - to_content
+      description: API_Entities_Suggestion model
+    putApiV4SuggestionsBatchApply:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: An array of the suggestion IDs
+          items:
+            type: integer
+            format: int32
+        commit_message:
+          type: string
+          description: A custom commit message to use instead of the default generated message or the project's default message
+      required:
+      - ids
+      description: Apply multiple suggestion patches in the Merge Request where they were created
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

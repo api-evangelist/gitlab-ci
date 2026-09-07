@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests ml_model_registry API
+  title: GitLab access_requests Ml Model Registry API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: ml_model_registry
   description: Operations related to Model registry
@@ -14,31 +13,25 @@ paths:
     put:
       summary: Workhorse authorize model package file
       description: Introduced in GitLab 16.8
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: file_name
         description: File name
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: model_version_id
         description: Model version id
-        type: string
-        required: true
-      - name: putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileNameAuthorize
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileNameAuthorize'
+          type: string
       responses:
         '200':
           description: Workhorse authorize model package file
@@ -51,35 +44,35 @@ paths:
       tags:
       - ml_model_registry
       operationId: putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileNameAuthorize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileNameAuthorize'
+        required: true
   /api/v4/projects/{id}/packages/ml_models/{model_version_id}/files/(*path/){file_name}:
     put:
       summary: Workhorse upload model package file
       description: Introduced in GitLab 16.8
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: file_name
         description: File name
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: model_version_id
         description: Model version id
-        type: string
-        required: true
-      - name: putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileName
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileName'
+          type: string
       responses:
         '201':
           description: Workhorse upload model package file
@@ -92,40 +85,49 @@ paths:
       tags:
       - ml_model_registry
       operationId: putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileName'
+        required: true
     get:
       summary: Download an ml_model package file
       description: This feature was introduced in GitLab 16.8
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: file_name
         description: File name
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: path
         description: File directory path
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: status
         description: Package status
-        type: string
-        enum:
-        - default
-        - hidden
         required: false
+        schema:
+          type: string
+          enum:
+          - default
+          - hidden
       - in: path
         name: model_version_id
         description: Model version id
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Download an ml_model package file
@@ -138,44 +140,46 @@ paths:
       tags:
       - ml_model_registry
       operationId: getApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileName
-definitions:
-  putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileName:
-    type: object
-    properties:
-      path:
-        type: string
-        description: File directory path
-      status:
-        type: string
-        description: Package status
-        enum:
-        - default
-        - hidden
-      file:
-        type: file
-        description: The package file to be published (generated by Multipart middleware)
-    required:
-    - file
-    description: Workhorse upload model package file
-  putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileNameAuthorize:
-    type: object
-    properties:
-      path:
-        type: string
-        description: File directory path
-      status:
-        type: string
-        description: Package status
-        enum:
-        - default
-        - hidden
-    description: Workhorse authorize model package file
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileName:
+      type: object
+      properties:
+        path:
+          type: string
+          description: File directory path
+        status:
+          type: string
+          description: Package status
+          enum:
+          - default
+          - hidden
+        file:
+          type: string
+          description: The package file to be published (generated by Multipart middleware)
+          format: binary
+      required:
+      - file
+      description: Workhorse upload model package file
+    putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileNameAuthorize:
+      type: object
+      properties:
+        path:
+          type: string
+          description: File directory path
+        status:
+          type: string
+          description: Package status
+          enum:
+          - default
+          - hidden
+      description: Workhorse authorize model package file
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

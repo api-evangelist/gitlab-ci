@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests container_registry API
+  title: GitLab access_requests Container Registry API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: container_registry
   description: Operations related to container registry
@@ -14,37 +13,40 @@ paths:
     get:
       summary: List registry repositories within a group
       description: Get a list of registry repositories in a group. This feature was introduced in GitLab 12.2.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the group accessible by the authenticated user
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List registry repositories within a group
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_ContainerRegistry_Repository'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_ContainerRegistry_Repository'
         '401':
           description: Unauthorized
         '404':
@@ -56,49 +58,54 @@ paths:
     get:
       summary: List container repositories within a project
       description: This feature was introduced in GitLab 11.8.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: tags
         description: Determines if tags should be included
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: tags_count
         description: Determines if the tags count should be included
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: List container repositories within a project
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_ContainerRegistry_Repository'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_ContainerRegistry_Repository'
         '401':
           description: Unauthorized
         '404':
@@ -110,20 +117,20 @@ paths:
     delete:
       summary: Delete repository
       description: This feature was introduced in GitLab 11.8.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: repository_id
         description: The ID of the repository
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Success
@@ -138,43 +145,47 @@ paths:
     get:
       summary: List tags of a repository
       description: This feature was introduced in GitLab 11.8.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: repository_id
         description: The ID of the repository
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List tags of a repository
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_ContainerRegistry_Tag'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_ContainerRegistry_Tag'
         '401':
           description: Unauthorized
         '404':
@@ -187,46 +198,51 @@ paths:
     delete:
       summary: Delete repository tags (in bulk)
       description: This feature was introduced in GitLab 11.8.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: repository_id
         description: The ID of the repository
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: name_regex_delete
         description: The tag name regexp to delete, specify .* to delete all
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: name_regex
         description: The tag name regexp to delete, specify .* to delete all
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: name_regex_keep
         description: The tag name regexp to retain
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: keep_n
         description: Keep n of latest tags with matching name
-        type: integer
-        format: int32
         required: false
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: older_than
         description: 'Delete older than: 1h, 1d, 1month'
-        type: string
         required: false
+        schema:
+          type: string
       responses:
         '204':
           description: Success
@@ -243,30 +259,33 @@ paths:
     get:
       summary: Get details about a repository tag
       description: This feature was introduced in GitLab 11.8.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: repository_id
         description: The ID of the repository
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: tag_name
         description: The name of the tag
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Get details about a repository tag
-          schema:
-            $ref: '#/definitions/API_Entities_ContainerRegistry_TagDetails'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ContainerRegistry_TagDetails'
         '400':
           description: Bad Request
         '401':
@@ -279,25 +298,26 @@ paths:
     delete:
       summary: Delete repository tag
       description: This feature was introduced in GitLab 11.8.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: repository_id
         description: The ID of the repository
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: tag_name
         description: The name of the tag
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Success
@@ -316,11 +336,6 @@ paths:
     post:
       summary: Receives notifications from the container registry when an operation occurs
       description: This feature was introduced in GitLab 12.10
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      - application/vnd.docker.distribution.events.v1+json
       responses:
         '200':
           description: Success
@@ -333,37 +348,41 @@ paths:
     get:
       summary: Get a container repository
       description: This feature was introduced in GitLab 13.6.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID of the repository
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: tags
         description: Determines if tags should be included
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: tags_count
         description: Determines if the tags count should be included
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: size
         description: Determines if the size should be included
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Get a container repository
-          schema:
-            $ref: '#/definitions/API_Entities_ContainerRegistry_Repository'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ContainerRegistry_Repository'
         '401':
           description: Unauthorized
         '404':
@@ -371,123 +390,124 @@ paths:
       tags:
       - container_registry
       operationId: getApiV4RegistryRepositoriesId
-definitions:
-  API_Entities_ContainerRegistry_TagDetails:
-    type: object
-    properties:
-      name:
-        type: string
-        example: latest
-      path:
-        type: string
-        example: namespace1/project1/test_image_1:latest
-      location:
-        type: string
-        example: registry.dev/namespace1/project1/test_image_1:latest
-      revision:
-        type: string
-        example: tagrevision
-      short_revision:
-        type: string
-        example: shortrevison
-      digest:
-        type: string
-        example: shadigest
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-01-10T13:39:08.229Z'
-      total_size:
-        type: integer
-        format: int32
-        example: 3
-    required:
-    - name
-    - path
-    - location
-    - revision
-    - short_revision
-    - digest
-    - created_at
-    - total_size
-    description: API_Entities_ContainerRegistry_TagDetails model
-  API_Entities_ContainerRegistry_Repository:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      name:
-        type: string
-        example: releases
-      path:
-        type: string
-        example: group/project/releases
-      project_id:
-        type: integer
-        format: int32
-        example: 9
-      location:
-        type: string
-        example: gitlab.example.com/group/project/releases
-      created_at:
-        type: string
-        format: date-time
-        example: '2019-01-10T13:39:08.229Z'
-      cleanup_policy_started_at:
-        type: string
-        format: date-time
-        example: '2020-08-17T03:12:35.489Z'
-      tags_count:
-        type: integer
-        format: int32
-        example: 3
-      tags:
-        $ref: '#/definitions/API_Entities_ContainerRegistry_Tag'
-      delete_api_path:
-        type: string
-        example: delete/api/path
-      size:
-        type: integer
-        format: int32
-        example: 12345
-      status:
-        type: string
-        example: delete_scheduled
-    required:
-    - id
-    - name
-    - path
-    - project_id
-    - location
-    - created_at
-    - cleanup_policy_started_at
-    - status
-    description: API_Entities_ContainerRegistry_Repository model
-  API_Entities_ContainerRegistry_Tag:
-    type: object
-    properties:
-      name:
-        type: string
-        example: latest
-      path:
-        type: string
-        example: namespace1/project1/test_image_1:latest
-      location:
-        type: string
-        example: registry.dev/namespace1/project1/test_image_1:latest
-    required:
-    - name
-    - path
-    - location
-    description: API_Entities_ContainerRegistry_Tag model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    API_Entities_ContainerRegistry_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: latest
+        path:
+          type: string
+          example: namespace1/project1/test_image_1:latest
+        location:
+          type: string
+          example: registry.dev/namespace1/project1/test_image_1:latest
+      required:
+      - name
+      - path
+      - location
+      description: API_Entities_ContainerRegistry_Tag model
+    API_Entities_ContainerRegistry_TagDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          example: latest
+        path:
+          type: string
+          example: namespace1/project1/test_image_1:latest
+        location:
+          type: string
+          example: registry.dev/namespace1/project1/test_image_1:latest
+        revision:
+          type: string
+          example: tagrevision
+        short_revision:
+          type: string
+          example: shortrevison
+        digest:
+          type: string
+          example: shadigest
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-10T13:39:08.229Z'
+        total_size:
+          type: integer
+          format: int32
+          example: 3
+      required:
+      - name
+      - path
+      - location
+      - revision
+      - short_revision
+      - digest
+      - created_at
+      - total_size
+      description: API_Entities_ContainerRegistry_TagDetails model
+    API_Entities_ContainerRegistry_Repository:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: releases
+        path:
+          type: string
+          example: group/project/releases
+        project_id:
+          type: integer
+          format: int32
+          example: 9
+        location:
+          type: string
+          example: gitlab.example.com/group/project/releases
+        created_at:
+          type: string
+          format: date-time
+          example: '2019-01-10T13:39:08.229Z'
+        cleanup_policy_started_at:
+          type: string
+          format: date-time
+          example: '2020-08-17T03:12:35.489Z'
+        tags_count:
+          type: integer
+          format: int32
+          example: 3
+        tags:
+          $ref: '#/components/schemas/API_Entities_ContainerRegistry_Tag'
+        delete_api_path:
+          type: string
+          example: delete/api/path
+        size:
+          type: integer
+          format: int32
+          example: 12345
+        status:
+          type: string
+          example: delete_scheduled
+      required:
+      - id
+      - name
+      - path
+      - project_id
+      - location
+      - created_at
+      - cleanup_policy_started_at
+      - status
+      description: API_Entities_ContainerRegistry_Repository model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

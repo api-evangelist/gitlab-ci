@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests instance API
+  title: GitLab access_requests Instance API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: instance
   description: Operations about instances
@@ -13,271 +12,243 @@ paths:
   /api/v4/application/appearance:
     get:
       description: Get the current appearance
-      produces:
-      - application/json
       responses:
         '200':
           description: Get the current appearance
-          schema:
-            $ref: '#/definitions/API_Entities_Appearance'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Appearance'
       tags:
       - instance
       operationId: getApiV4ApplicationAppearance
     put:
       description: Modify appearance
-      produces:
-      - application/json
-      consumes:
-      - multipart/form-data
-      parameters:
-      - in: formData
-        name: title
-        description: Instance title on the sign in / sign up page
-        type: string
-        required: false
-      - in: formData
-        name: description
-        description: Markdown text shown on the sign in / sign up page
-        type: string
-        required: false
-      - in: formData
-        name: pwa_name
-        description: Name of the Progressive Web App
-        type: string
-        required: false
-      - in: formData
-        name: pwa_short_name
-        description: Optional, short name for Progressive Web App
-        type: string
-        required: false
-      - in: formData
-        name: pwa_description
-        description: An explanation of what the Progressive Web App does
-        type: string
-        required: false
-      - in: formData
-        name: logo
-        description: Instance image used on the sign in / sign up page
-        type: file
-        required: false
-      - in: formData
-        name: pwa_icon
-        description: Icon used for Progressive Web App
-        type: file
-        required: false
-      - in: formData
-        name: header_logo
-        description: Instance image used for the main navigation bar
-        type: file
-        required: false
-      - in: formData
-        name: favicon
-        description: Instance favicon in .ico/.png format
-        type: file
-        required: false
-      - in: formData
-        name: member_guidelines
-        description: Markdown text shown on the members page of a group or project
-        type: string
-        required: false
-      - in: formData
-        name: new_project_guidelines
-        description: Markdown text shown on the new project page
-        type: string
-        required: false
-      - in: formData
-        name: profile_image_guidelines
-        description: Markdown text shown on the profile page below Public Avatar
-        type: string
-        required: false
-      - in: formData
-        name: header_message
-        description: Message within the system header bar
-        type: string
-        required: false
-      - in: formData
-        name: footer_message
-        description: Message within the system footer bar
-        type: string
-        required: false
-      - in: formData
-        name: message_background_color
-        description: Background color for the system header / footer bar
-        type: string
-        required: false
-      - in: formData
-        name: message_font_color
-        description: Font color for the system header / footer bar
-        type: string
-        required: false
-      - in: formData
-        name: email_header_and_footer_enabled
-        description: Add header and footer to all outgoing emails if enabled
-        type: boolean
-        required: false
-      - in: formData
-        name: site_name
-        description: Last part of the webpage title. Defaults to empty.
-        type: string
-        required: false
       responses:
         '200':
           description: Modify appearance
-          schema:
-            $ref: '#/definitions/API_Entities_Appearance'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Appearance'
       tags:
       - instance
       operationId: putApiV4ApplicationAppearance
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Instance title on the sign in / sign up page
+                description:
+                  type: string
+                  description: Markdown text shown on the sign in / sign up page
+                pwa_name:
+                  type: string
+                  description: Name of the Progressive Web App
+                pwa_short_name:
+                  type: string
+                  description: Optional, short name for Progressive Web App
+                pwa_description:
+                  type: string
+                  description: An explanation of what the Progressive Web App does
+                logo:
+                  type: string
+                  description: Instance image used on the sign in / sign up page
+                  format: binary
+                pwa_icon:
+                  type: string
+                  description: Icon used for Progressive Web App
+                  format: binary
+                header_logo:
+                  type: string
+                  description: Instance image used for the main navigation bar
+                  format: binary
+                favicon:
+                  type: string
+                  description: Instance favicon in .ico/.png format
+                  format: binary
+                member_guidelines:
+                  type: string
+                  description: Markdown text shown on the members page of a group or project
+                new_project_guidelines:
+                  type: string
+                  description: Markdown text shown on the new project page
+                profile_image_guidelines:
+                  type: string
+                  description: Markdown text shown on the profile page below Public Avatar
+                header_message:
+                  type: string
+                  description: Message within the system header bar
+                footer_message:
+                  type: string
+                  description: Message within the system footer bar
+                message_background_color:
+                  type: string
+                  description: Background color for the system header / footer bar
+                message_font_color:
+                  type: string
+                  description: Font color for the system header / footer bar
+                email_header_and_footer_enabled:
+                  type: boolean
+                  description: Add header and footer to all outgoing emails if enabled
+                site_name:
+                  type: string
+                  description: Last part of the webpage title. Defaults to empty.
   /api/v4/application/statistics:
     get:
       description: Get the current application statistics
-      produces:
-      - application/json
       responses:
         '200':
           description: Get the current application statistics
-          schema:
-            $ref: '#/definitions/API_Entities_ApplicationStatistics'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_ApplicationStatistics'
       tags:
       - instance
       operationId: getApiV4ApplicationStatistics
-definitions:
-  API_Entities_ApplicationStatistics:
-    type: object
-    properties:
-      forks:
-        type: integer
-        format: int32
-        example: 6
-        description: Approximate number of repo forks
-      issues:
-        type: integer
-        format: int32
-        example: 121
-        description: Approximate number of issues
-      merge_requests:
-        type: integer
-        format: int32
-        example: 49
-        description: Approximate number of merge requests
-      notes:
-        type: integer
-        format: int32
-        example: 6
-        description: Approximate number of notes
-      snippets:
-        type: integer
-        format: int32
-        example: 4
-        description: Approximate number of snippets
-      ssh_keys:
-        type: integer
-        format: int32
-        example: 11
-        description: Approximate number of SSH keys
-      milestones:
-        type: integer
-        format: int32
-        example: 3
-        description: Approximate number of milestones
-      users:
-        type: integer
-        format: int32
-        example: 22
-        description: Approximate number of users
-      projects:
-        type: integer
-        format: int32
-        example: 4
-        description: Approximate number of projects
-      groups:
-        type: integer
-        format: int32
-        example: 1
-        description: Approximate number of projects
-      active_users:
-        type: integer
-        format: int32
-        example: 21
-        description: Number of active users
-    required:
-    - forks
-    - issues
-    - merge_requests
-    - notes
-    - snippets
-    - ssh_keys
-    - milestones
-    - users
-    - projects
-    - groups
-    - active_users
-    description: API_Entities_ApplicationStatistics model
-  API_Entities_Appearance:
-    type: object
-    properties:
-      title:
-        type: string
-      description:
-        type: string
-      pwa_name:
-        type: string
-      pwa_short_name:
-        type: string
-      pwa_description:
-        type: string
-      logo:
-        type: string
-      pwa_icon:
-        type: string
-      header_logo:
-        type: string
-      favicon:
-        type: string
-      new_project_guidelines:
-        type: string
-      member_guidelines:
-        type: string
-      profile_image_guidelines:
-        type: string
-      header_message:
-        type: string
-      footer_message:
-        type: string
-      message_background_color:
-        type: string
-      message_font_color:
-        type: string
-      email_header_and_footer_enabled:
-        type: string
-      site_name:
-        type: string
-    required:
-    - title
-    - description
-    - pwa_name
-    - pwa_short_name
-    - pwa_description
-    - logo
-    - pwa_icon
-    - header_logo
-    - favicon
-    - new_project_guidelines
-    - member_guidelines
-    - profile_image_guidelines
-    - header_message
-    - footer_message
-    - message_background_color
-    - message_font_color
-    - email_header_and_footer_enabled
-    - site_name
-    description: API_Entities_Appearance model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    API_Entities_ApplicationStatistics:
+      type: object
+      properties:
+        forks:
+          type: integer
+          format: int32
+          example: 6
+          description: Approximate number of repo forks
+        issues:
+          type: integer
+          format: int32
+          example: 121
+          description: Approximate number of issues
+        merge_requests:
+          type: integer
+          format: int32
+          example: 49
+          description: Approximate number of merge requests
+        notes:
+          type: integer
+          format: int32
+          example: 6
+          description: Approximate number of notes
+        snippets:
+          type: integer
+          format: int32
+          example: 4
+          description: Approximate number of snippets
+        ssh_keys:
+          type: integer
+          format: int32
+          example: 11
+          description: Approximate number of SSH keys
+        milestones:
+          type: integer
+          format: int32
+          example: 3
+          description: Approximate number of milestones
+        users:
+          type: integer
+          format: int32
+          example: 22
+          description: Approximate number of users
+        projects:
+          type: integer
+          format: int32
+          example: 4
+          description: Approximate number of projects
+        groups:
+          type: integer
+          format: int32
+          example: 1
+          description: Approximate number of projects
+        active_users:
+          type: integer
+          format: int32
+          example: 21
+          description: Number of active users
+      required:
+      - forks
+      - issues
+      - merge_requests
+      - notes
+      - snippets
+      - ssh_keys
+      - milestones
+      - users
+      - projects
+      - groups
+      - active_users
+      description: API_Entities_ApplicationStatistics model
+    API_Entities_Appearance:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        pwa_name:
+          type: string
+        pwa_short_name:
+          type: string
+        pwa_description:
+          type: string
+        logo:
+          type: string
+        pwa_icon:
+          type: string
+        header_logo:
+          type: string
+        favicon:
+          type: string
+        new_project_guidelines:
+          type: string
+        member_guidelines:
+          type: string
+        profile_image_guidelines:
+          type: string
+        header_message:
+          type: string
+        footer_message:
+          type: string
+        message_background_color:
+          type: string
+        message_font_color:
+          type: string
+        email_header_and_footer_enabled:
+          type: string
+        site_name:
+          type: string
+      required:
+      - title
+      - description
+      - pwa_name
+      - pwa_short_name
+      - pwa_description
+      - logo
+      - pwa_icon
+      - header_logo
+      - favicon
+      - new_project_guidelines
+      - member_guidelines
+      - profile_image_guidelines
+      - header_message
+      - footer_message
+      - message_background_color
+      - message_font_color
+      - email_header_and_footer_enabled
+      - site_name
+      description: API_Entities_Appearance model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

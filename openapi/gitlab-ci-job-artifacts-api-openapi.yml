@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests job_artifacts API
+  title: GitLab access_requests Job Artifacts API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: job_artifacts
   description: Operations about job_artifacts
@@ -14,35 +13,38 @@ paths:
     get:
       summary: Download the artifacts archive from a job
       description: This feature was introduced in GitLab 8.10
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: ref_name
         description: Branch or tag name in repository. `HEAD` or `SHA` references are not supported.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: job
         description: The name of the job.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: job_token
         description: To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: search_recent_successful_pipelines
         description: Search across recent successful pipelines instead of just the latest one.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Download the artifacts archive from a job
@@ -59,40 +61,44 @@ paths:
     get:
       summary: Download a specific file from artifacts archive from a ref
       description: This feature was introduced in GitLab 11.5
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: ref_name
         description: Branch or tag name in repository. `HEAD` or `SHA` references are not supported.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: job
         description: The name of the job.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: artifact_path
         description: Path to a file inside the artifacts archive.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: job_token
         description: To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: search_recent_successful_pipelines
         description: Search across recent successful pipelines instead of just the latest one.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Download a specific file from artifacts archive from a ref
@@ -111,25 +117,26 @@ paths:
     get:
       summary: Download the artifacts archive from a job
       description: This feature was introduced in GitLab 8.5
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: job_id
         description: The ID of a job
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: job_token
         description: To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers.
-        type: string
         required: false
+        schema:
+          type: string
       responses:
         '200':
           description: Download the artifacts archive from a job
@@ -145,20 +152,20 @@ paths:
     delete:
       summary: Delete the artifacts files from a job
       description: This feature was introduced in GitLab 11.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: job_id
         description: The ID of a job
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete the artifacts files from a job
@@ -175,62 +182,69 @@ paths:
     get:
       summary: List all files in the artifacts archive
       description: Lists all files and directories in the artifacts archive without extracting them
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: job_id
         description: ID of a job
-        type: integer
-        format: int32
         required: true
         example: 42
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: path
         description: Path to browse in the artifacts archive. Defaults to root directory.
-        type: string
-        default: ''
         required: false
         example: coverage/reports
+        schema:
+          type: string
+          default: ''
       - in: query
         name: recursive
         description: If `true`, return all entries recursively.
-        type: boolean
-        default: false
         required: false
+        schema:
+          type: boolean
+          default: false
       - in: query
         name: job_token
         description: CI/CD job token for multi-project pipelines. Premium and Ultimate only.
-        type: string
         required: false
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List all files in the artifacts archive
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_Ci_JobArtifactEntry'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_Ci_JobArtifactEntry'
         '401':
           description: Unauthorized
         '403':
@@ -244,30 +258,32 @@ paths:
     get:
       summary: Download a specific file from artifacts archive
       description: This feature was introduced in GitLab 10.0
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: job_id
         description: The ID of a job
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: artifact_path
         description: Path to a file inside the artifacts archive.
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: job_token
         description: To be used with triggers for multi-project pipelines, available only on Premium and Ultimate tiers.
-        type: string
         required: false
+        schema:
+          type: string
       responses:
         '200':
           description: Download a specific file from artifacts archive
@@ -285,27 +301,27 @@ paths:
   /api/v4/projects/{id}/jobs/{job_id}/artifacts/keep:
     post:
       description: Keep the artifacts to prevent them from being deleted
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: job_id
         description: The ID of a job
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Keep the artifacts to prevent them from being deleted
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_Job'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_Job'
         '401':
           description: Unauthorized
         '403':
@@ -318,14 +334,13 @@ paths:
   /api/v4/projects/{id}/artifacts:
     delete:
       description: Expire the artifacts files from a project
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       responses:
         '202':
           description: Expire the artifacts files from a project
@@ -338,627 +353,628 @@ paths:
       tags:
       - job_artifacts
       operationId: deleteApiV4ProjectsIdArtifacts
-definitions:
-  API_Entities_CustomAttribute:
-    type: object
-    properties:
-      key:
-        type: string
-        example: foo
-      value:
-        type: string
-        example: bar
-    required:
-    - key
-    - value
-    description: API_Entities_CustomAttribute model
-  API_Entities_Ci_Runner:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 8
-      description:
-        type: string
-        example: test-1-20150125
-      ip_address:
-        type: string
-        example: 127.0.0.1
-      active:
-        type: boolean
-        example: true
-      paused:
-        type: boolean
-        example: false
-      is_shared:
-        type: boolean
-        example: true
-      runner_type:
-        type: string
-        enum:
-        - instance_type
-        - group_type
-        - project_type
-        example: instance_type
-      name:
-        type: string
-        example: test
-      online:
-        type: boolean
-        example: true
-      created_by:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      created_at:
-        type: string
-        format: date-time
-        example: '2025-05-03T00:00:00.000Z'
-      status:
-        type: string
-        example: online
-      job_execution_status:
-        type: string
-        enum:
-        - active
-        - idle
-        example: idle
-    required:
-    - id
-    - description
-    - ip_address
-    - active
-    - paused
-    - is_shared
-    - runner_type
-    - name
-    - online
-    - created_at
-    - status
-    - job_execution_status
-    description: API_Entities_Ci_Runner model
-  API_Entities_Ci_PipelineBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      iid:
-        type: integer
-        format: int32
-        example: 2
-      project_id:
-        type: integer
-        format: int32
-        example: 3
-      sha:
-        type: string
-        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-      ref:
-        type: string
-        example: feature-branch
-      status:
-        type: string
-        example: success
-      source:
-        type: string
-        example: push
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-10-21T16:49:48.000+02:00'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2022-10-21T16:49:48.000+02:00'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-    required:
-    - id
-    - iid
-    - project_id
-    - sha
-    - ref
-    - status
-    - source
-    - created_at
-    - updated_at
-    - web_url
-    description: API_Entities_Ci_PipelineBasic model
-  API_Entities_Ci_JobArtifact:
-    type: object
-    properties:
-      file_type:
-        type: string
-        enum:
-        - archive
-        - metadata
-        - trace
-        - junit
-        - sast
-        - dependency_scanning
-        - container_scanning
-        - dast
-        - codequality
-        - license_scanning
-        - performance
-        - metrics
-        - metrics_referee
-        - network_referee
-        - lsif
-        - dotenv
-        - cobertura
-        - terraform
-        - accessibility
-        - cluster_applications
-        - secret_detection
-        - requirements
-        - coverage_fuzzing
-        - browser_performance
-        - load_performance
-        - api_fuzzing
-        - cluster_image_scanning
-        - cyclonedx
-        - requirements_v2
-        - annotations
-        - repository_xray
-        - jacoco
-        - scip
-        - sarif
-        - environment_key
-        example: archive
-      size:
-        type: integer
-        format: int32
-        example: 1000
-      filename:
-        type: string
-        example: artifacts.zip
-      file_format:
-        type: string
-        enum:
-        - raw
-        - zip
-        - gzip
-        example: zip
-    required:
-    - file_type
-    - size
-    - filename
-    - file_format
-  API_Entities_Ci_Job:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      status:
-        type: string
-        example: waiting_for_resource
-      stage:
-        type: string
-        example: deploy
-      name:
-        type: string
-        example: deploy_to_production
-      ref:
-        type: string
-        example: main
-      tag:
-        type: boolean
-      coverage:
-        type: number
-        format: float
-        example: 98.29
-      allow_failure:
-        type: boolean
-      created_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T15:51:21.880Z'
-      started_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T17:54:30.733Z'
-      finished_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T17:54:31.198Z'
-      erased_at:
-        type: string
-        format: date-time
-        example: '2015-12-24T18:00:29.728Z'
-      duration:
-        type: number
-        format: float
-        example: 0.465
-        description: Time spent running
-      queued_duration:
-        type: number
-        format: float
-        example: 0.123
-        description: Time spent enqueued
-      user:
-        $ref: '#/definitions/API_Entities_User'
-      commit:
-        $ref: '#/definitions/API_Entities_Commit'
-      pipeline:
-        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
-      failure_reason:
-        type: string
-        example: script_failure
-      web_url:
-        type: string
-        example: https://example.com/foo/bar/-/jobs/1
-      project:
-        type: object
-        properties:
-          ci_job_token_scope_enabled:
+components:
+  schemas:
+    API_Entities_Ci_JobArtifactFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: artifacts.zip
+        size:
+          type: integer
+          format: int32
+          example: 1000
+      required:
+      - filename
+      - size
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_Ci_RunnerManager:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 8
+        system_id:
+          type: string
+          example: runner-1
+        version:
+          type: string
+          example: 16.11.0
+        revision:
+          type: string
+          example: 91a27b2a
+        platform:
+          type: string
+          example: linux
+        architecture:
+          type: string
+          example: amd64
+        created_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        contacted_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        ip_address:
+          type: string
+          example: 127.0.0.1
+        status:
+          type: string
+          example: online
+        job_execution_status:
+          type: string
+          enum:
+          - active
+          - idle
+          example: idle
+      required:
+      - id
+      - system_id
+      - version
+      - revision
+      - platform
+      - architecture
+      - created_at
+      - contacted_at
+      - ip_address
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_RunnerManager model
+    API_Entities_Ci_JobArtifactEntry:
+      type: object
+      properties:
+        name:
+          type: string
+          example: index.html
+        path:
+          type: string
+          example: coverage/index.html
+        type:
+          type: string
+          enum:
+          - file
+          - directory
+          example: file
+        size:
+          type: integer
+          format: int32
+          example: 12345
+        mode:
+          type: string
+          example: '100644'
+      required:
+      - name
+      - path
+      - type
+      - mode
+      description: API_Entities_Ci_JobArtifactEntry model
+    API_Entities_Ci_Job:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          example: waiting_for_resource
+        stage:
+          type: string
+          example: deploy
+        name:
+          type: string
+          example: deploy_to_production
+        ref:
+          type: string
+          example: main
+        tag:
+          type: boolean
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        allow_failure:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        started_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        erased_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T18:00:29.728Z'
+        duration:
+          type: number
+          format: float
+          example: 0.465
+          description: Time spent running
+        queued_duration:
+          type: number
+          format: float
+          example: 0.123
+          description: Time spent enqueued
+        user:
+          $ref: '#/components/schemas/API_Entities_User'
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        failure_reason:
+          type: string
+          example: script_failure
+        web_url:
+          type: string
+          example: https://example.com/foo/bar/-/jobs/1
+        project:
+          type: object
+          properties:
+            ci_job_token_scope_enabled:
+              type: string
+              example: false
+          required:
+          - ci_job_token_scope_enabled
+        artifacts_file:
+          $ref: '#/components/schemas/API_Entities_Ci_JobArtifactFile'
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Ci_JobArtifact'
+        runner:
+          $ref: '#/components/schemas/API_Entities_Ci_Runner'
+        runner_manager:
+          $ref: '#/components/schemas/API_Entities_Ci_RunnerManager'
+        artifacts_expire_at:
+          type: string
+          format: date-time
+          example: '2016-01-19T09:05:50.355Z'
+        archived:
+          type: boolean
+          example: false
+        tag_list:
+          type: array
+          items:
             type: string
-            example: false
-        required:
-        - ci_job_token_scope_enabled
-      artifacts_file:
-        $ref: '#/definitions/API_Entities_Ci_JobArtifactFile'
-      artifacts:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_Ci_JobArtifact'
-      runner:
-        $ref: '#/definitions/API_Entities_Ci_Runner'
-      runner_manager:
-        $ref: '#/definitions/API_Entities_Ci_RunnerManager'
-      artifacts_expire_at:
-        type: string
-        format: date-time
-        example: '2016-01-19T09:05:50.355Z'
-      archived:
-        type: boolean
-        example: false
-      tag_list:
-        type: array
-        items:
+          example:
+          - ubuntu18
+          - docker runner
+      required:
+      - id
+      - status
+      - stage
+      - name
+      - ref
+      - tag
+      - coverage
+      - allow_failure
+      - created_at
+      - started_at
+      - finished_at
+      - erased_at
+      - duration
+      - queued_duration
+      - user
+      - commit
+      - pipeline
+      - web_url
+      - project
+      - artifacts
+      - runner
+      - artifacts_expire_at
+      - archived
+      - tag_list
+      description: API_Entities_Ci_Job model
+    API_Entities_User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
           type: string
-        example:
-        - ubuntu18
-        - docker runner
-    required:
-    - id
-    - status
-    - stage
-    - name
-    - ref
-    - tag
-    - coverage
-    - allow_failure
-    - created_at
-    - started_at
-    - finished_at
-    - erased_at
-    - duration
-    - queued_duration
-    - user
-    - commit
-    - pipeline
-    - web_url
-    - project
-    - artifacts
-    - runner
-    - artifacts_expire_at
-    - archived
-    - tag_list
-    description: API_Entities_Ci_Job model
-  API_Entities_Ci_RunnerManager:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 8
-      system_id:
-        type: string
-        example: runner-1
-      version:
-        type: string
-        example: 16.11.0
-      revision:
-        type: string
-        example: 91a27b2a
-      platform:
-        type: string
-        example: linux
-      architecture:
-        type: string
-        example: amd64
-      created_at:
-        type: string
-        example: '2023-10-24T01:27:06.549Z'
-      contacted_at:
-        type: string
-        example: '2023-10-24T01:27:06.549Z'
-      ip_address:
-        type: string
-        example: 127.0.0.1
-      status:
-        type: string
-        example: online
-      job_execution_status:
-        type: string
-        enum:
-        - active
-        - idle
-        example: idle
-    required:
-    - id
-    - system_id
-    - version
-    - revision
-    - platform
-    - architecture
-    - created_at
-    - contacted_at
-    - ip_address
-    - status
-    - job_execution_status
-    description: API_Entities_Ci_RunnerManager model
-  API_Entities_UserBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    description: API_Entities_UserBasic model
-  API_Entities_Ci_JobArtifactFile:
-    type: object
-    properties:
-      filename:
-        type: string
-        example: artifacts.zip
-      size:
-        type: integer
-        format: int32
-        example: 1000
-    required:
-    - filename
-    - size
-  API_Entities_Commit:
-    type: object
-    properties:
-      id:
-        type: string
-        example: 2695effb5807a22ff3d138d593fd856244e155e7
-      short_id:
-        type: string
-        example: 2695effb
-      created_at:
-        type: string
-        format: date-time
-        example: '2017-07-26T11:08:53.000+02:00'
-      parent_ids:
-        type: array
-        items:
+          example: admin
+        public_email:
           type: string
-        example:
-        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-      title:
-        type: string
-        example: Initial commit
-      message:
-        type: string
-        example: Initial commit
-      author_name:
-        type: string
-        example: John Smith
-      author_email:
-        type: string
-        example: john@example.com
-      authored_date:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      committer_name:
-        type: string
-        example: Jack Smith
-      committer_email:
-        type: string
-        example: jack@example.com
-      committed_date:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      trailers:
-        type: object
-        example:
-          Merged-By: Jane Doe janedoe@gitlab.com
-      extended_trailers:
-        type: object
-        example:
-          Signed-off-by:
-          - John Doe <johndoe@gitlab.com>
-          - Jane Doe <janedoe@gitlab.com>
-      web_url:
-        type: string
-        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
-    required:
-    - id
-    - short_id
-    - created_at
-    - parent_ids
-    - title
-    - message
-    - author_name
-    - author_email
-    - authored_date
-    - committer_name
-    - committer_email
-    - committed_date
-    - trailers
-    - extended_trailers
-    - web_url
-    description: API_Entities_Commit model
-  API_Entities_User:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-      created_at:
-        type: string
-      bio:
-        type: string
-      location:
-        type: string
-      linkedin:
-        type: string
-      twitter:
-        type: string
-      discord:
-        type: string
-      website_url:
-        type: string
-      github:
-        type: string
-      job_title:
-        type: string
-      pronouns:
-        type: string
-      organization:
-        type: string
-      bot:
-        type: boolean
-      work_information:
-        type: string
-      followers:
-        type: string
-      following:
-        type: string
-      is_followed:
-        type: string
-      local_time:
-        type: string
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    - bio
-    - location
-    - linkedin
-    - twitter
-    - discord
-    - website_url
-    - github
-    - job_title
-    - pronouns
-    - organization
-    - bot
-    - work_information
-    - local_time
-  API_Entities_Ci_JobArtifactEntry:
-    type: object
-    properties:
-      name:
-        type: string
-        example: index.html
-      path:
-        type: string
-        example: coverage/index.html
-      type:
-        type: string
-        enum:
-        - file
-        - directory
-        example: file
-      size:
-        type: integer
-        format: int32
-        example: 12345
-      mode:
-        type: string
-        example: '100644'
-    required:
-    - name
-    - path
-    - type
-    - mode
-    description: API_Entities_Ci_JobArtifactEntry model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        created_at:
+          type: string
+        bio:
+          type: string
+        location:
+          type: string
+        linkedin:
+          type: string
+        twitter:
+          type: string
+        discord:
+          type: string
+        website_url:
+          type: string
+        github:
+          type: string
+        job_title:
+          type: string
+        pronouns:
+          type: string
+        organization:
+          type: string
+        bot:
+          type: boolean
+        work_information:
+          type: string
+        followers:
+          type: string
+        following:
+          type: string
+        is_followed:
+          type: string
+        local_time:
+          type: string
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - bio
+      - location
+      - linkedin
+      - twitter
+      - discord
+      - website_url
+      - github
+      - job_title
+      - pronouns
+      - organization
+      - bot
+      - work_information
+      - local_time
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_Ci_Runner:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 8
+        description:
+          type: string
+          example: test-1-20150125
+        ip_address:
+          type: string
+          example: 127.0.0.1
+        active:
+          type: boolean
+          example: true
+        paused:
+          type: boolean
+          example: false
+        is_shared:
+          type: boolean
+          example: true
+        runner_type:
+          type: string
+          enum:
+          - instance_type
+          - group_type
+          - project_type
+          example: instance_type
+        name:
+          type: string
+          example: test
+        online:
+          type: boolean
+          example: true
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-05-03T00:00:00.000Z'
+        status:
+          type: string
+          example: online
+        job_execution_status:
+          type: string
+          enum:
+          - active
+          - idle
+          example: idle
+      required:
+      - id
+      - description
+      - ip_address
+      - active
+      - paused
+      - is_shared
+      - runner_type
+      - name
+      - online
+      - created_at
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_Runner model
+    API_Entities_Commit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
+          type: string
+          example: 2695effb
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
+          type: string
+          example: Initial commit
+        message:
+          type: string
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+      required:
+      - id
+      - short_id
+      - created_at
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
+      - web_url
+      description: API_Entities_Commit model
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+    API_Entities_Ci_JobArtifact:
+      type: object
+      properties:
+        file_type:
+          type: string
+          enum:
+          - archive
+          - metadata
+          - trace
+          - junit
+          - sast
+          - dependency_scanning
+          - container_scanning
+          - dast
+          - codequality
+          - license_scanning
+          - performance
+          - metrics
+          - metrics_referee
+          - network_referee
+          - lsif
+          - dotenv
+          - cobertura
+          - terraform
+          - accessibility
+          - cluster_applications
+          - secret_detection
+          - requirements
+          - coverage_fuzzing
+          - browser_performance
+          - load_performance
+          - api_fuzzing
+          - cluster_image_scanning
+          - cyclonedx
+          - requirements_v2
+          - annotations
+          - repository_xray
+          - jacoco
+          - scip
+          - sarif
+          - environment_key
+          example: archive
+        size:
+          type: integer
+          format: int32
+          example: 1000
+        filename:
+          type: string
+          example: artifacts.zip
+        file_format:
+          type: string
+          enum:
+          - raw
+          - zip
+          - gzip
+          example: zip
+      required:
+      - file_type
+      - size
+      - filename
+      - file_format
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

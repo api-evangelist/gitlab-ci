@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests submodules API
+  title: GitLab access_requests Submodules API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: submodules
   description: Operations about submodules
@@ -13,33 +12,28 @@ paths:
   /api/v4/projects/{id}/repository/submodules/{submodule}:
     put:
       description: Update existing submodule reference in repository
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of a project
-        type: string
         required: true
         example: gitlab-org/gitlab
+        schema:
+          type: string
       - in: path
         name: submodule
         description: URL-encoded full path to submodule.
-        type: string
         required: true
         example: gitlab-org/gitlab-shell
-      - name: putApiV4ProjectsIdRepositorySubmodulesSubmodule
-        in: body
-        required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdRepositorySubmodulesSubmodule'
+          type: string
       responses:
         '200':
           description: Update existing submodule reference in repository
-          schema:
-            $ref: '#/definitions/API_Entities_CommitDetail'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CommitDetail'
         '404':
           description: 404 Project Not Found
         '401':
@@ -49,190 +43,197 @@ paths:
       tags:
       - submodules
       operationId: putApiV4ProjectsIdRepositorySubmodulesSubmodule
-definitions:
-  putApiV4ProjectsIdRepositorySubmodulesSubmodule:
-    type: object
-    properties:
-      commit_sha:
-        type: string
-        description: Commit sha to update the submodule to.
-        example: ed899a2f4b50b4370feeea94676502b42383c746
-      branch:
-        type: string
-        description: Name of the branch to commit into.
-        example: main
-      commit_message:
-        type: string
-        description: Commit message. If no message is provided a default one will be set.
-        example: Commit message
-    required:
-    - commit_sha
-    - branch
-    description: Update existing submodule reference in repository
-  API_Entities_CommitStats:
-    type: object
-    properties:
-      additions:
-        type: integer
-        format: int32
-        example: 1
-      deletions:
-        type: integer
-        format: int32
-        example: 0
-      total:
-        type: integer
-        format: int32
-        example: 1
-    required:
-    - additions
-    - deletions
-    - total
-  API_Entities_CommitDetail:
-    type: object
-    properties:
-      id:
-        type: string
-        example: 2695effb5807a22ff3d138d593fd856244e155e7
-      short_id:
-        type: string
-        example: 2695effb
-      created_at:
-        type: string
-        format: date-time
-        example: '2017-07-26T11:08:53.000+02:00'
-      parent_ids:
-        type: array
-        items:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdRepositorySubmodulesSubmodule'
+        required: true
+components:
+  schemas:
+    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
+      type: object
+      properties:
+        commit_sha:
           type: string
-        example:
-        - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-      title:
-        type: string
-        example: Initial commit
-      message:
-        type: string
-        example: Initial commit
-      author_name:
-        type: string
-        example: John Smith
-      author_email:
-        type: string
-        example: john@example.com
-      authored_date:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      committer_name:
-        type: string
-        example: Jack Smith
-      committer_email:
-        type: string
-        example: jack@example.com
-      committed_date:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      trailers:
-        type: object
-        example:
-          Merged-By: Jane Doe janedoe@gitlab.com
-      extended_trailers:
-        type: object
-        example:
-          Signed-off-by:
-          - John Doe <johndoe@gitlab.com>
-          - Jane Doe <janedoe@gitlab.com>
-      web_url:
-        type: string
-        example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
-      stats:
-        $ref: '#/definitions/API_Entities_CommitStats'
-      status:
-        type: string
-        example: success
-      project_id:
-        type: integer
-        format: int32
-        example: 1
-      last_pipeline:
-        $ref: '#/definitions/API_Entities_Ci_PipelineBasic'
-    required:
-    - id
-    - short_id
-    - created_at
-    - parent_ids
-    - title
-    - message
-    - author_name
-    - author_email
-    - authored_date
-    - committer_name
-    - committer_email
-    - committed_date
-    - trailers
-    - extended_trailers
-    - web_url
-    - status
-    - project_id
-    - last_pipeline
-    description: API_Entities_CommitDetail model
-  API_Entities_Ci_PipelineBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      iid:
-        type: integer
-        format: int32
-        example: 2
-      project_id:
-        type: integer
-        format: int32
-        example: 3
-      sha:
-        type: string
-        example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-      ref:
-        type: string
-        example: feature-branch
-      status:
-        type: string
-        example: success
-      source:
-        type: string
-        example: push
-      created_at:
-        type: string
-        format: date-time
-        example: '2022-10-21T16:49:48.000+02:00'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2022-10-21T16:49:48.000+02:00'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-    required:
-    - id
-    - iid
-    - project_id
-    - sha
-    - ref
-    - status
-    - source
-    - created_at
-    - updated_at
-    - web_url
-    description: API_Entities_Ci_PipelineBasic model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+          description: Commit sha to update the submodule to.
+          example: ed899a2f4b50b4370feeea94676502b42383c746
+        branch:
+          type: string
+          description: Name of the branch to commit into.
+          example: main
+        commit_message:
+          type: string
+          description: Commit message. If no message is provided a default one will be set.
+          example: Commit message
+      required:
+      - commit_sha
+      - branch
+      description: Update existing submodule reference in repository
+    API_Entities_CommitStats:
+      type: object
+      properties:
+        additions:
+          type: integer
+          format: int32
+          example: 1
+        deletions:
+          type: integer
+          format: int32
+          example: 0
+        total:
+          type: integer
+          format: int32
+          example: 1
+      required:
+      - additions
+      - deletions
+      - total
+    API_Entities_CommitDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
+          type: string
+          example: 2695effb
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
+          type: string
+          example: Initial commit
+        message:
+          type: string
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+        stats:
+          $ref: '#/components/schemas/API_Entities_CommitStats'
+        status:
+          type: string
+          example: success
+        project_id:
+          type: integer
+          format: int32
+          example: 1
+        last_pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+      required:
+      - id
+      - short_id
+      - created_at
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
+      - web_url
+      - status
+      - project_id
+      - last_pipeline
+      description: API_Entities_CommitDetail model
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests chaos API
+  title: GitLab access_requests Chaos API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: chaos
   description: Operations about chaos
@@ -20,8 +19,6 @@ paths:
         a 300ms delay. Returns 200 OK otherwise.
 
         '
-      produces:
-      - application/json
       responses:
         '200':
           description: OK
@@ -34,12 +31,13 @@ paths:
       tags:
       - chaos
       operationId: getApiV4ChaosTest
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

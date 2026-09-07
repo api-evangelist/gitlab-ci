@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests award_emoji API
+  title: GitLab access_requests Award Emoji API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: award_emoji
   description: Operations about award_emoji
@@ -14,43 +13,47 @@ paths:
     get:
       summary: List an awardable's emoji reactions for groups
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the group
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: epic_iid
         description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List an awardable's emoji reactions for groups
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -59,31 +62,26 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: epic_iid
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4GroupsIdEpicsEpicIidAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4GroupsIdEpicsEpicIidAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: epic_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -91,34 +89,43 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4GroupsIdEpicsEpicIidAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4GroupsIdEpicsEpicIidAwardEmoji'
+        required: true
   /api/v4/groups/{id}/epics/{epic_iid}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: epic_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -127,25 +134,26 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: epic_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -160,47 +168,52 @@ paths:
     get:
       summary: List an awardable's emoji reactions for groups
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: epic_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List an awardable's emoji reactions for groups
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -209,36 +222,32 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: epic_iid
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: note_id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: epic_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -246,39 +255,49 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji'
+        required: true
   /api/v4/groups/{id}/epics/{epic_iid}/notes/{note_id}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: epic_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -287,30 +306,32 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: epic_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -325,43 +346,47 @@ paths:
     get:
       summary: List an awardable's emoji reactions for projects
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: issue_iid
         description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List an awardable's emoji reactions for projects
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -370,31 +395,26 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: issue_iid
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdIssuesIssueIidAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdIssuesIssueIidAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: issue_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -402,34 +422,43 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4ProjectsIdIssuesIssueIidAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdIssuesIssueIidAwardEmoji'
+        required: true
   /api/v4/projects/{id}/issues/{issue_iid}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: issue_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -438,25 +467,26 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: issue_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -471,47 +501,52 @@ paths:
     get:
       summary: List an awardable's emoji reactions for projects
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: issue_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List an awardable's emoji reactions for projects
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -520,36 +555,32 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: issue_iid
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: note_id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: issue_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -557,39 +588,49 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji'
+        required: true
   /api/v4/projects/{id}/issues/{issue_iid}/notes/{note_id}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: issue_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -598,30 +639,32 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: issue_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -636,43 +679,47 @@ paths:
     get:
       summary: List an awardable's emoji reactions for projects
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: merge_request_iid
         description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List an awardable's emoji reactions for projects
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -681,31 +728,26 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -713,34 +755,43 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -749,25 +800,26 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -782,47 +834,52 @@ paths:
     get:
       summary: List an awardable's emoji reactions for projects
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List an awardable's emoji reactions for projects
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -831,36 +888,32 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: merge_request_iid
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: note_id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: merge_request_iid
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -868,39 +921,49 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji'
+        required: true
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/notes/{note_id}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -909,30 +972,32 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: merge_request_iid
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -947,43 +1012,47 @@ paths:
     get:
       summary: List an awardable's emoji reactions for projects
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: snippet_id
         description: ID (`iid` for merge requests/issues/epics, `id` for snippets) of an awardable.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List an awardable's emoji reactions for projects
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -992,31 +1061,26 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: snippet_id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: snippet_id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -1024,34 +1088,43 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji'
+        required: true
   /api/v4/projects/{id}/snippets/{snippet_id}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: snippet_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -1060,25 +1133,26 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: snippet_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -1093,47 +1167,52 @@ paths:
     get:
       summary: List an awardable's emoji reactions for projects
       description: Get a list of all emoji reactions for a specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: snippet_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: List an awardable's emoji reactions for projects
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -1142,36 +1221,32 @@ paths:
     post:
       summary: Add a new emoji reaction
       description: Add an emoji reaction on the specified awardable. This feature was introduced in 8.9
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: snippet_id
-        type: integer
-        format: int32
-        required: true
-      - in: path
-        name: note_id
-        type: integer
-        format: int32
-        required: true
-      - name: postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji'
+          type: integer
+          format: int32
+      - in: path
+        name: snippet_id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '201':
           description: Add a new emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '400':
           description: Bad Request
         '404':
@@ -1179,39 +1254,49 @@ paths:
       tags:
       - award_emoji
       operationId: postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji'
+        required: true
   /api/v4/projects/{id}/snippets/{snippet_id}/notes/{note_id}/award_emoji/{award_id}:
     get:
       summary: Get a single emoji reaction
       description: Get a single emoji reaction from an issue, snippet, or merge request. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of the emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: snippet_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a single emoji reaction
-          schema:
-            $ref: '#/definitions/API_Entities_AwardEmoji'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_AwardEmoji'
         '404':
           description: Not Found
       tags:
@@ -1220,30 +1305,32 @@ paths:
     delete:
       summary: Delete an emoji reaction
       description: Only an administrator or the author of the reaction can delete an emoji reaction. This feature was introduced in 8.9
-      produces:
-      - application/json
       parameters:
       - in: path
         name: award_id
         description: ID of an emoji reaction.
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: snippet_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: note_id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete an emoji reaction
@@ -1254,182 +1341,183 @@ paths:
       tags:
       - award_emoji
       operationId: deleteApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmojiAwardId
-definitions:
-  API_Entities_AwardEmoji:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      name:
-        type: string
-        example: lizard
-      user:
-        $ref: '#/definitions/API_Entities_UserBasic'
-      created_at:
-        type: string
-        format: date-time
-        example: '2019-01-10T13:39:08Z'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2020-06-28T10:52:04Z'
-      awardable_id:
-        type: integer
-        format: int32
-        example: 42
-      awardable_type:
-        type: string
-        example: Issue
-      url:
-        type: string
-        example: https://example.com/emojis/example.gif
-    required:
-    - id
-    - name
-    - user
-    - created_at
-    - updated_at
-    - awardable_id
-    - awardable_type
-    - url
-    description: API_Entities_AwardEmoji model
-  API_Entities_CustomAttribute:
-    type: object
-    properties:
-      key:
-        type: string
-        example: foo
-      value:
-        type: string
-        example: bar
-    required:
-    - key
-    - value
-    description: API_Entities_CustomAttribute model
-  postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  API_Entities_UserBasic:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      username:
-        type: string
-        example: admin
-      public_email:
-        type: string
-        example: john@example.com
-      name:
-        type: string
-        example: Administrator
-      state:
-        type: string
-        example: active
-      locked:
-        type: boolean
-      avatar_url:
-        type: string
-        example: https://gravatar.com/avatar/1
-      avatar_path:
-        type: string
-        example: /user/avatar/28/The-Big-Lebowski-400-400.png
-      custom_attributes:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_CustomAttribute'
-      web_url:
-        type: string
-        example: https://gitlab.example.com/root
-    required:
-    - id
-    - username
-    - public_email
-    - name
-    - state
-    - locked
-    - avatar_url
-    - web_url
-    description: API_Entities_UserBasic model
-  postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  postApiV4ProjectsIdIssuesIssueIidAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-  postApiV4GroupsIdEpicsEpicIidAwardEmoji:
-    type: object
-    properties:
-      name:
-        type: string
-        description: Name of the emoji without colons.
-    required:
-    - name
-    description: Add a new emoji reaction
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    API_Entities_AwardEmoji:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: lizard
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
+          type: string
+          format: date-time
+          example: '2019-01-10T13:39:08Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2020-06-28T10:52:04Z'
+        awardable_id:
+          type: integer
+          format: int32
+          example: 42
+        awardable_type:
+          type: string
+          example: Issue
+        url:
+          type: string
+          example: https://example.com/emojis/example.gif
+      required:
+      - id
+      - name
+      - user
+      - created_at
+      - updated_at
+      - awardable_id
+      - awardable_type
+      - url
+      description: API_Entities_AwardEmoji model
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    postApiV4GroupsIdEpicsEpicIidAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdIssuesIssueIidAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests imports API
+  title: GitLab access_requests Imports API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: imports
   description: Operations about imports
@@ -14,84 +13,13 @@ paths:
     post:
       summary: Start a new GitLab Migration
       description: This feature was introduced in GitLab 14.2.
-      produces:
-      - application/json
-      consumes:
-      - application/x-www-form-urlencoded
-      parameters:
-      - in: formData
-        name: configuration[url]
-        description: Source GitLab instance URL
-        type: string
-        required: true
-      - in: formData
-        name: configuration[access_token]
-        description: Access token to the source GitLab instance
-        type: string
-        required: true
-      - in: formData
-        name: entities[source_type]
-        description: Source entity type
-        type: array
-        required: true
-        items:
-          type: string
-          enum:
-          - group_entity
-          - project_entity
-      - in: formData
-        name: entities[source_full_path]
-        description: Relative path of the source entity to import
-        type: array
-        required: true
-        example: '''source/full/path'' not ''https://example.com/source/full/path'''
-        items:
-          type: string
-      - in: formData
-        name: entities[destination_namespace]
-        description: Destination namespace for the entity
-        type: array
-        required: true
-        example: '''destination_namespace'' or ''destination/namespace'''
-        items:
-          type: string
-      - in: formData
-        name: entities[destination_slug]
-        description: Destination slug for the entity
-        type: array
-        required: false
-        example: '''destination_slug'' not ''destination/slug'''
-        items:
-          type: string
-      - in: formData
-        name: entities[destination_name]
-        description: 'Deprecated: Use :destination_slug instead. Destination slug for the entity'
-        type: array
-        required: false
-        example: '''destination_slug'' not ''destination/slug'''
-        items:
-          type: string
-      - in: formData
-        name: entities[migrate_projects]
-        description: Indicates group migration should include nested projects
-        type: array
-        default: true
-        required: false
-        items:
-          type: boolean
-      - in: formData
-        name: entities[migrate_memberships]
-        description: The option to migrate memberships or not
-        type: array
-        default: true
-        required: false
-        items:
-          type: boolean
       responses:
         '201':
           description: Start a new GitLab Migration
-          schema:
-            $ref: '#/definitions/API_Entities_BulkImport'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BulkImport'
         '401':
           description: Unauthorized
         '400':
@@ -105,56 +33,118 @@ paths:
       tags:
       - imports
       operationId: postApiV4BulkImports
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                configuration[url]:
+                  type: string
+                  description: Source GitLab instance URL
+                configuration[access_token]:
+                  type: string
+                  description: Access token to the source GitLab instance
+                entities[source_type]:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - group_entity
+                    - project_entity
+                  description: Source entity type
+                entities[source_full_path]:
+                  type: array
+                  items:
+                    type: string
+                  description: Relative path of the source entity to import
+                entities[destination_namespace]:
+                  type: array
+                  items:
+                    type: string
+                  description: Destination namespace for the entity
+                entities[destination_slug]:
+                  type: array
+                  items:
+                    type: string
+                  description: Destination slug for the entity
+                entities[destination_name]:
+                  type: array
+                  items:
+                    type: string
+                  description: 'Deprecated: Use :destination_slug instead. Destination slug for the entity'
+                entities[migrate_projects]:
+                  type: array
+                  items:
+                    type: boolean
+                  default: true
+                  description: Indicates group migration should include nested projects
+                entities[migrate_memberships]:
+                  type: array
+                  items:
+                    type: boolean
+                  default: true
+                  description: The option to migrate memberships or not
+              required:
+              - configuration[url]
+              - configuration[access_token]
+              - entities[source_type]
+              - entities[source_full_path]
+              - entities[destination_namespace]
     get:
       summary: List all GitLab Migrations
       description: This feature was introduced in GitLab 14.1.
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: sort
         description: Return GitLab Migrations sorted in created by `asc` or `desc` order.
-        type: string
-        default: desc
-        enum:
-        - asc
-        - desc
         required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
       - in: query
         name: status
         description: Return GitLab Migrations with specified status
-        type: string
-        enum:
-        - created
-        - started
-        - finished
-        - timeout
-        - failed
-        - canceled
         required: false
+        schema:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          - canceled
       responses:
         '200':
           description: List all GitLab Migrations
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_BulkImport'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_BulkImport'
         '401':
           description: Unauthorized
         '404':
@@ -168,53 +158,57 @@ paths:
     get:
       summary: List all GitLab Migrations' entities
       description: This feature was introduced in GitLab 14.1.
-      produces:
-      - application/json
       parameters:
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       - in: query
         name: sort
         description: Return GitLab Migrations sorted in created by `asc` or `desc` order.
-        type: string
-        default: desc
-        enum:
-        - asc
-        - desc
         required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
       - in: query
         name: status
         description: Return all GitLab Migrations' entities with specified status
-        type: string
-        enum:
-        - created
-        - started
-        - finished
-        - timeout
-        - failed
-        - canceled
         required: false
+        schema:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          - canceled
       responses:
         '200':
           description: List all GitLab Migrations' entities
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_BulkImports'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_BulkImports'
         '401':
           description: Unauthorized
         '404':
@@ -228,20 +222,21 @@ paths:
     get:
       summary: Get GitLab Migration details
       description: This feature was introduced in GitLab 14.1.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: import_id
         description: The ID of user's GitLab Migration
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get GitLab Migration details
-          schema:
-            $ref: '#/definitions/API_Entities_BulkImport'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BulkImport'
         '401':
           description: Unauthorized
         '404':
@@ -255,50 +250,54 @@ paths:
     get:
       summary: List GitLab Migration entities
       description: This feature was introduced in GitLab 14.1.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: import_id
         description: The ID of user's GitLab Migration
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: query
         name: status
         description: Return import entities with specified status
-        type: string
-        enum:
-        - created
-        - started
-        - finished
-        - timeout
-        - failed
-        - canceled
         required: false
+        schema:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          - canceled
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List GitLab Migration entities
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_BulkImports'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_BulkImports'
         '401':
           description: Unauthorized
         '404':
@@ -312,26 +311,28 @@ paths:
     get:
       summary: Get GitLab Migration entity details
       description: This feature was introduced in GitLab 14.1.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: import_id
         description: The ID of user's GitLab Migration
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: entity_id
         description: The ID of GitLab Migration entity
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get GitLab Migration entity details
-          schema:
-            $ref: '#/definitions/API_Entities_BulkImports'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BulkImports'
         '401':
           description: Unauthorized
         '404':
@@ -345,26 +346,28 @@ paths:
     get:
       summary: Get GitLab Migration entity failures
       description: This feature was introduced in GitLab 16.6
-      produces:
-      - application/json
       parameters:
       - in: path
         name: import_id
         description: The ID of user's GitLab Migration
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       - in: path
         name: entity_id
         description: The ID of GitLab Migration entity
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get GitLab Migration entity failures
-          schema:
-            $ref: '#/definitions/API_Entities_BulkImports_EntityFailure'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BulkImports_EntityFailure'
         '401':
           description: Unauthorized
         '404':
@@ -378,22 +381,21 @@ paths:
     post:
       summary: Cancel GitLab Migration
       description: This feature was introduced in GitLab 17.1
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: import_id
         description: The ID of user's GitLab Migration
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Cancel GitLab Migration
-          schema:
-            $ref: '#/definitions/API_Entities_BulkImport'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_BulkImport'
         '401':
           description: Unauthorized
         '403':
@@ -409,16 +411,6 @@ paths:
     post:
       summary: Import User Gists
       description: This feature was introduced in GitLab 15.8
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - name: postApiV4ImportGithubGists
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/postApiV4ImportGithubGists'
       responses:
         '202':
           description: Import User Gists
@@ -431,189 +423,196 @@ paths:
       tags:
       - imports
       operationId: postApiV4ImportGithubGists
-definitions:
-  API_Entities_BulkImport:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      status:
-        type: string
-        enum:
-        - created
-        - started
-        - finished
-        - timeout
-        - failed
-        example: finished
-      source_type:
-        type: string
-        example: gitlab
-      source_url:
-        type: string
-        example: https://source.gitlab.com/
-      created_at:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      has_failures:
-        type: boolean
-        example: false
-    required:
-    - id
-    - status
-    - source_type
-    - source_url
-    - created_at
-    - updated_at
-    - has_failures
-    description: API_Entities_BulkImport model
-  postApiV4ImportGithubGists:
-    type: object
-    properties:
-      personal_access_token:
-        type: string
-        description: GitHub personal access token
-    required:
-    - personal_access_token
-    description: Import User Gists
-  API_Entities_BulkImports:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      bulk_import_id:
-        type: integer
-        format: int32
-        example: 1
-      status:
-        type: string
-        enum:
-        - created
-        - started
-        - finished
-        - timeout
-        - failed
-        example: created
-      entity_type:
-        type: string
-        enum:
-        - group
-        - project
-      source_full_path:
-        type: string
-        example: source_group
-      destination_full_path:
-        type: string
-        example: some_group/source_project
-      destination_name:
-        type: string
-        example: destination_slug
-      destination_slug:
-        type: string
-        example: destination_slug
-      destination_namespace:
-        type: string
-        example: destination_path
-      parent_id:
-        type: integer
-        format: int32
-        example: 1
-      namespace_id:
-        type: integer
-        format: int32
-        example: 1
-      project_id:
-        type: integer
-        format: int32
-        example: 1
-      created_at:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2012-05-28T04:42:42-07:00'
-      failures:
-        type: array
-        items:
-          $ref: '#/definitions/API_Entities_BulkImports_EntityFailure'
-      migrate_projects:
-        type: boolean
-        example: true
-      migrate_memberships:
-        type: boolean
-        example: true
-      has_failures:
-        type: boolean
-        example: false
-      stats:
-        type: object
-    required:
-    - id
-    - bulk_import_id
-    - status
-    - entity_type
-    - source_full_path
-    - destination_full_path
-    - destination_name
-    - destination_slug
-    - destination_namespace
-    - parent_id
-    - namespace_id
-    - project_id
-    - created_at
-    - updated_at
-    - failures
-    - migrate_projects
-    - migrate_memberships
-    - has_failures
-    - stats
-    description: API_Entities_BulkImports model
-  API_Entities_BulkImports_EntityFailure:
-    type: object
-    properties:
-      relation:
-        type: string
-        example: label
-      exception_message:
-        type: string
-        example: error message
-      exception_class:
-        type: string
-        example: Exception
-      correlation_id_value:
-        type: string
-        example: dfcf583058ed4508e4c7c617bd7f0edd
-      source_url:
-        type: string
-        example: https://source.gitlab.com/group/-/epics/1
-      source_title:
-        type: string
-        example: title
-    required:
-    - relation
-    - exception_message
-    - exception_class
-    - correlation_id_value
-    - source_url
-    - source_title
-    description: API_Entities_BulkImports_EntityFailure model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ImportGithubGists'
+        required: true
+components:
+  schemas:
+    API_Entities_BulkImports:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        bulk_import_id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          example: created
+        entity_type:
+          type: string
+          enum:
+          - group
+          - project
+        source_full_path:
+          type: string
+          example: source_group
+        destination_full_path:
+          type: string
+          example: some_group/source_project
+        destination_name:
+          type: string
+          example: destination_slug
+        destination_slug:
+          type: string
+          example: destination_slug
+        destination_namespace:
+          type: string
+          example: destination_path
+        parent_id:
+          type: integer
+          format: int32
+          example: 1
+        namespace_id:
+          type: integer
+          format: int32
+          example: 1
+        project_id:
+          type: integer
+          format: int32
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_BulkImports_EntityFailure'
+        migrate_projects:
+          type: boolean
+          example: true
+        migrate_memberships:
+          type: boolean
+          example: true
+        has_failures:
+          type: boolean
+          example: false
+        stats:
+          type: object
+      required:
+      - id
+      - bulk_import_id
+      - status
+      - entity_type
+      - source_full_path
+      - destination_full_path
+      - destination_name
+      - destination_slug
+      - destination_namespace
+      - parent_id
+      - namespace_id
+      - project_id
+      - created_at
+      - updated_at
+      - failures
+      - migrate_projects
+      - migrate_memberships
+      - has_failures
+      - stats
+      description: API_Entities_BulkImports model
+    API_Entities_BulkImports_EntityFailure:
+      type: object
+      properties:
+        relation:
+          type: string
+          example: label
+        exception_message:
+          type: string
+          example: error message
+        exception_class:
+          type: string
+          example: Exception
+        correlation_id_value:
+          type: string
+          example: dfcf583058ed4508e4c7c617bd7f0edd
+        source_url:
+          type: string
+          example: https://source.gitlab.com/group/-/epics/1
+        source_title:
+          type: string
+          example: title
+      required:
+      - relation
+      - exception_message
+      - exception_class
+      - correlation_id_value
+      - source_url
+      - source_title
+      description: API_Entities_BulkImports_EntityFailure model
+    API_Entities_BulkImport:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          example: finished
+        source_type:
+          type: string
+          example: gitlab
+        source_url:
+          type: string
+          example: https://source.gitlab.com/
+        created_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        has_failures:
+          type: boolean
+          example: false
+      required:
+      - id
+      - status
+      - source_type
+      - source_url
+      - created_at
+      - updated_at
+      - has_failures
+      description: API_Entities_BulkImport model
+    postApiV4ImportGithubGists:
+      type: object
+      properties:
+        personal_access_token:
+          type: string
+          description: GitHub personal access token
+      required:
+      - personal_access_token
+      description: Import User Gists
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

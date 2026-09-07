@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests ci_catalog API
+  title: GitLab access_requests Ci Catalog API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: ci_catalog
   description: Operations about ci_catalogs
@@ -14,26 +13,20 @@ paths:
     post:
       summary: Publish a new component project release as version to the CI/CD catalog
       description: Publishes a release of a catalog resource as version to the CI/CD catalog.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
-        required: true
-      - name: postApiV4ProjectsIdCatalogPublish
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdCatalogPublish'
+          type: string
       responses:
         '201':
           description: Publish a new component project release as version to the CI/CD catalog
-          schema:
-            $ref: '#/definitions/API_Entities_Ci_Catalog_Resources_Version'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_Ci_Catalog_Resources_Version'
         '401':
           description: Unauthorized
         '403':
@@ -45,35 +38,42 @@ paths:
       tags:
       - ci_catalog
       operationId: postApiV4ProjectsIdCatalogPublish
-definitions:
-  postApiV4ProjectsIdCatalogPublish:
-    type: object
-    properties:
-      version:
-        type: string
-        description: The version of the catalog resource / tag of the release to publish
-      metadata:
-        type: object
-        description: The metadata for the release
-    required:
-    - version
-    - metadata
-    description: Publish a new component project release as version to the CI/CD catalog
-  API_Entities_Ci_Catalog_Resources_Version:
-    type: object
-    properties:
-      catalog_url:
-        type: string
-        example: https://gitlab.example.com/explore/catalog/my-namespace/my-component-project
-    required:
-    - catalog_url
-    description: API_Entities_Ci_Catalog_Resources_Version model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdCatalogPublish'
+        required: true
+components:
+  schemas:
+    postApiV4ProjectsIdCatalogPublish:
+      type: object
+      properties:
+        version:
+          type: string
+          description: The version of the catalog resource / tag of the release to publish
+        metadata:
+          type: object
+          description: The metadata for the release
+      required:
+      - version
+      - metadata
+      description: Publish a new component project release as version to the CI/CD catalog
+    API_Entities_Ci_Catalog_Resources_Version:
+      type: object
+      properties:
+        catalog_url:
+          type: string
+          example: https://gitlab.example.com/explore/catalog/my-namespace/my-component-project
+      required:
+      - catalog_url
+      description: API_Entities_Ci_Catalog_Resources_Version model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

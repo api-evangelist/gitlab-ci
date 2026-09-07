@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests freeze_periods API
+  title: GitLab access_requests Freeze Periods API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: freeze_periods
   description: Operations related to deploy freeze periods
@@ -14,37 +13,40 @@ paths:
     get:
       summary: List freeze periods
       description: Paginated list of Freeze Periods, sorted by created_at in ascending order. This feature was introduced in GitLab 13.0.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: query
         name: page
         description: Current page number
-        type: integer
-        format: int32
-        default: 1
         required: false
         example: 1
+        schema:
+          type: integer
+          format: int32
+          default: 1
       - in: query
         name: per_page
         description: Number of items per page
-        type: integer
-        format: int32
-        default: 20
         required: false
         example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
       responses:
         '200':
           description: List freeze periods
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/API_Entities_FreezePeriod'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/API_Entities_FreezePeriod'
         '401':
           description: Unauthorized
         '404':
@@ -55,26 +57,20 @@ paths:
     post:
       summary: Create a freeze period
       description: Creates a freeze period. This feature was introduced in GitLab 13.0.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
-        required: true
-      - name: postApiV4ProjectsIdFreezePeriods
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/postApiV4ProjectsIdFreezePeriods'
+          type: string
       responses:
         '201':
           description: Create a freeze period
-          schema:
-            $ref: '#/definitions/API_Entities_FreezePeriod'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_FreezePeriod'
         '400':
           description: Bad request
         '401':
@@ -82,29 +78,37 @@ paths:
       tags:
       - freeze_periods
       operationId: postApiV4ProjectsIdFreezePeriods
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiV4ProjectsIdFreezePeriods'
+        required: true
   /api/v4/projects/{id}/freeze_periods/{freeze_period_id}:
     get:
       summary: Get a freeze period
       description: Get a freeze period for the given `freeze_period_id`. This feature was introduced in GitLab 13.0.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: freeze_period_id
         description: The ID of the freeze period
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a freeze period
-          schema:
-            $ref: '#/definitions/API_Entities_FreezePeriod'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_FreezePeriod'
         '401':
           description: Unauthorized
         '404':
@@ -115,31 +119,26 @@ paths:
     put:
       summary: Update a freeze period
       description: Updates a freeze period for the given `freeze_period_id`. This feature was introduced in GitLab 13.0.
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
-        required: true
-      - in: path
-        name: freeze_period_id
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdFreezePeriodsFreezePeriodId
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdFreezePeriodsFreezePeriodId'
+          type: string
+      - in: path
+        name: freeze_period_id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Update a freeze period
-          schema:
-            $ref: '#/definitions/API_Entities_FreezePeriod'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_FreezePeriod'
         '400':
           description: Bad request
         '401':
@@ -147,101 +146,110 @@ paths:
       tags:
       - freeze_periods
       operationId: putApiV4ProjectsIdFreezePeriodsFreezePeriodId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdFreezePeriodsFreezePeriodId'
+        required: true
     delete:
       summary: Delete a freeze period
       description: Deletes a freeze period for the given `freeze_period_id`. This feature was introduced in GitLab 13.0.
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
         description: The ID or URL-encoded path of the project
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: freeze_period_id
         description: The ID of the freeze period
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '401':
           description: Unauthorized
         '204':
           description: Delete a freeze period
-          schema:
-            $ref: '#/definitions/API_Entities_FreezePeriod'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_FreezePeriod'
       tags:
       - freeze_periods
       operationId: deleteApiV4ProjectsIdFreezePeriodsFreezePeriodId
-definitions:
-  putApiV4ProjectsIdFreezePeriodsFreezePeriodId:
-    type: object
-    properties:
-      freeze_start:
-        type: string
-        description: Start of the freeze period in cron format
-      freeze_end:
-        type: string
-        description: End of the freeze period in cron format
-      cron_timezone:
-        type: string
-        description: The time zone for the cron fields
-    description: Update a freeze period
-  postApiV4ProjectsIdFreezePeriods:
-    type: object
-    properties:
-      freeze_start:
-        type: string
-        description: Start of the freeze period in cron format.
-      freeze_end:
-        type: string
-        description: End of the freeze period in cron format
-      cron_timezone:
-        type: string
-        description: The time zone for the cron fields, defaults to UTC if not provided
-    required:
-    - freeze_start
-    - freeze_end
-    description: Create a freeze period
-  API_Entities_FreezePeriod:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-        example: 1
-      freeze_start:
-        type: string
-        example: 0 23 * * 5
-      freeze_end:
-        type: string
-        example: 0 8 * * 1
-      cron_timezone:
-        type: string
-        example: UTC
-      created_at:
-        type: string
-        format: date-time
-        example: '2020-05-15T17:03:35.702Z'
-      updated_at:
-        type: string
-        format: date-time
-        example: '2020-05-15T17:03:35.702Z'
-    required:
-    - id
-    - freeze_start
-    - freeze_end
-    - cron_timezone
-    - created_at
-    - updated_at
-    description: API_Entities_FreezePeriod model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    putApiV4ProjectsIdFreezePeriodsFreezePeriodId:
+      type: object
+      properties:
+        freeze_start:
+          type: string
+          description: Start of the freeze period in cron format
+        freeze_end:
+          type: string
+          description: End of the freeze period in cron format
+        cron_timezone:
+          type: string
+          description: The time zone for the cron fields
+      description: Update a freeze period
+    API_Entities_FreezePeriod:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        freeze_start:
+          type: string
+          example: 0 23 * * 5
+        freeze_end:
+          type: string
+          example: 0 8 * * 1
+        cron_timezone:
+          type: string
+          example: UTC
+        created_at:
+          type: string
+          format: date-time
+          example: '2020-05-15T17:03:35.702Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2020-05-15T17:03:35.702Z'
+      required:
+      - id
+      - freeze_start
+      - freeze_end
+      - cron_timezone
+      - created_at
+      - updated_at
+      description: API_Entities_FreezePeriod model
+    postApiV4ProjectsIdFreezePeriods:
+      type: object
+      properties:
+        freeze_start:
+          type: string
+          description: Start of the freeze period in cron format.
+        freeze_end:
+          type: string
+          description: End of the freeze period in cron format
+        cron_timezone:
+          type: string
+          description: The time zone for the cron fields, defaults to UTC if not provided
+      required:
+      - freeze_start
+      - freeze_end
+      description: Create a freeze period
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query

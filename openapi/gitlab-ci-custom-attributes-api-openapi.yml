@@ -1,11 +1,10 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: GitLab access_requests custom_attributes API
+  title: GitLab access_requests Custom Attributes API
   version: v4
   description: Operations related to access requests
-host: gitlab.com
-produces:
-- application/json
+servers:
+- url: https://gitlab.com
 tags:
 - name: custom_attributes
   description: Operations about custom_attributes
@@ -13,91 +12,95 @@ paths:
   /api/v4/groups/{id}/custom_attributes:
     get:
       description: Get all custom attributes on a group
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get all custom attributes on a group
-          schema:
-            $ref: '#/definitions/API_Entities_CustomAttribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
       - custom_attributes
       operationId: getApiV4GroupsIdCustomAttributes
   /api/v4/groups/{id}/custom_attributes/{key}:
     get:
       description: Get a custom attribute on a group
-      produces:
-      - application/json
       parameters:
       - in: path
         name: key
         description: The key of the custom attribute
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a custom attribute on a group
-          schema:
-            $ref: '#/definitions/API_Entities_CustomAttribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
       - custom_attributes
       operationId: getApiV4GroupsIdCustomAttributesKey
     put:
       description: Set a custom attribute on a group
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: key
         description: The key of the custom attribute
-        type: string
-        required: true
-      - in: path
-        name: id
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4GroupsIdCustomAttributesKey
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4GroupsIdCustomAttributesKey'
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Set a custom attribute on a group
-          schema:
-            $ref: '#/definitions/API_Entities_CustomAttribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
       - custom_attributes
       operationId: putApiV4GroupsIdCustomAttributesKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4GroupsIdCustomAttributesKey'
+        required: true
     delete:
       description: Delete a custom attribute on a group
-      produces:
-      - application/json
       parameters:
       - in: path
         name: key
         description: The key of the custom attribute
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete a custom attribute on a group
@@ -107,135 +110,140 @@ paths:
   /api/v4/projects/{id}/custom_attributes:
     get:
       description: Get all custom attributes on a project
-      produces:
-      - application/json
       parameters:
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get all custom attributes on a project
-          schema:
-            $ref: '#/definitions/API_Entities_CustomAttribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
       - custom_attributes
       operationId: getApiV4ProjectsIdCustomAttributes
   /api/v4/projects/{id}/custom_attributes/{key}:
     get:
       description: Get a custom attribute on a project
-      produces:
-      - application/json
       parameters:
       - in: path
         name: key
         description: The key of the custom attribute
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Get a custom attribute on a project
-          schema:
-            $ref: '#/definitions/API_Entities_CustomAttribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
       - custom_attributes
       operationId: getApiV4ProjectsIdCustomAttributesKey
     put:
       description: Set a custom attribute on a project
-      produces:
-      - application/json
-      consumes:
-      - application/json
       parameters:
       - in: path
         name: key
         description: The key of the custom attribute
-        type: string
-        required: true
-      - in: path
-        name: id
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdCustomAttributesKey
-        in: body
         required: true
         schema:
-          $ref: '#/definitions/putApiV4ProjectsIdCustomAttributesKey'
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Set a custom attribute on a project
-          schema:
-            $ref: '#/definitions/API_Entities_CustomAttribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
       - custom_attributes
       operationId: putApiV4ProjectsIdCustomAttributesKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putApiV4ProjectsIdCustomAttributesKey'
+        required: true
     delete:
       description: Delete a custom attribute on a project
-      produces:
-      - application/json
       parameters:
       - in: path
         name: key
         description: The key of the custom attribute
-        type: string
         required: true
+        schema:
+          type: string
       - in: path
         name: id
-        type: integer
-        format: int32
         required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '204':
           description: Delete a custom attribute on a project
       tags:
       - custom_attributes
       operationId: deleteApiV4ProjectsIdCustomAttributesKey
-definitions:
-  putApiV4ProjectsIdCustomAttributesKey:
-    type: object
-    properties:
-      value:
-        type: string
-        description: The value of the custom attribute
-    required:
-    - value
-    description: Set a custom attribute on a project
-  putApiV4GroupsIdCustomAttributesKey:
-    type: object
-    properties:
-      value:
-        type: string
-        description: The value of the custom attribute
-    required:
-    - value
-    description: Set a custom attribute on a group
-  API_Entities_CustomAttribute:
-    type: object
-    properties:
-      key:
-        type: string
-        example: foo
-      value:
-        type: string
-        example: bar
-    required:
-    - key
-    - value
-    description: API_Entities_CustomAttribute model
-securityDefinitions:
-  access_token_header:
-    type: apiKey
-    name: PRIVATE-TOKEN
-    in: header
-  access_token_query:
-    type: apiKey
-    name: private_token
-    in: query
+components:
+  schemas:
+    putApiV4GroupsIdCustomAttributesKey:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the custom attribute
+      required:
+      - value
+      description: Set a custom attribute on a group
+    putApiV4ProjectsIdCustomAttributesKey:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the custom attribute
+      required:
+      - value
+      description: Set a custom attribute on a project
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+  securitySchemes:
+    access_token_header:
+      type: apiKey
+      name: PRIVATE-TOKEN
+      in: header
+    access_token_query:
+      type: apiKey
+      name: private_token
+      in: query
