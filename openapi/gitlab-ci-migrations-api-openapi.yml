@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Migrations API
+  title: GitLab Migrations API
   version: v4
-  description: Operations related to access requests
+  description: Operations about migrations
 servers:
 - url: https://gitlab.com
 tags:
-- name: migrations
+- name: Migrations
   description: Operations about migrations
 paths:
   /api/v4/admin/migrations/pending:
@@ -34,8 +34,10 @@ paths:
         '403':
           description: 403 Forbidden
       tags:
-      - migrations
+      - Migrations
       operationId: getApiV4AdminMigrationsPending
+      summary: Get api V4 admin migrations pending
+      x-summary-source: derived
   /api/v4/admin/migrations/{timestamp}/mark:
     post:
       description: Mark the migration as successfully executed
@@ -59,7 +61,7 @@ paths:
         '422':
           description: You can mark only pending migrations
       tags:
-      - migrations
+      - Migrations
       operationId: postApiV4AdminMigrationsTimestampMark
       requestBody:
         content:
@@ -67,6 +69,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4AdminMigrationsTimestampMark'
         required: true
+      summary: Post api V4 admin migrations timestamp mark
+      x-summary-source: derived
 components:
   schemas:
     postApiV4AdminMigrationsTimestampMark:

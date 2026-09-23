@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Batched Background Migrations API
+  title: GitLab Batched Background Migrations API
   version: v4
-  description: Operations related to access requests
+  description: Operations about batched_background_migrations
 servers:
 - url: https://gitlab.com
 tags:
@@ -49,6 +49,8 @@ paths:
       tags:
       - batched_background_migrations
       operationId: getApiV4AdminBatchedBackgroundMigrationsId
+      summary: Get api V4 admin batched background migrations id
+      x-summary-source: derived
   /api/v4/admin/batched_background_migrations/{id}/resume:
     put:
       description: Resume a batched background migration
@@ -84,6 +86,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4AdminBatchedBackgroundMigrationsIdResume'
         required: true
+      summary: Put api V4 admin batched background migrations id resume
+      x-summary-source: derived
   /api/v4/admin/batched_background_migrations/{id}/pause:
     put:
       description: Pause a batched background migration
@@ -119,6 +123,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4AdminBatchedBackgroundMigrationsIdPause'
         required: true
+      summary: Put api V4 admin batched background migrations id pause
+      x-summary-source: derived
   /api/v4/admin/batched_background_migrations:
     get:
       description: Get the list of batched background migrations
@@ -158,36 +164,10 @@ paths:
       tags:
       - batched_background_migrations
       operationId: getApiV4AdminBatchedBackgroundMigrations
+      summary: Get api V4 admin batched background migrations
+      x-summary-source: derived
 components:
   schemas:
-    putApiV4AdminBatchedBackgroundMigrationsIdResume:
-      type: object
-      properties:
-        database:
-          type: string
-          description: The name of the database
-          enum:
-          - main
-          - ci
-          - sec
-          - embedding
-          - geo
-          default: main
-      description: Resume a batched background migration
-    putApiV4AdminBatchedBackgroundMigrationsIdPause:
-      type: object
-      properties:
-        database:
-          type: string
-          description: The name of the database
-          enum:
-          - main
-          - ci
-          - sec
-          - embedding
-          - geo
-          default: main
-      description: Pause a batched background migration
     API_Entities_BatchedBackgroundMigration:
       type: object
       properties:
@@ -227,6 +207,34 @@ components:
       - created_at
       - estimated_time_remaining
       description: API_Entities_BatchedBackgroundMigration model
+    putApiV4AdminBatchedBackgroundMigrationsIdResume:
+      type: object
+      properties:
+        database:
+          type: string
+          description: The name of the database
+          enum:
+          - main
+          - ci
+          - sec
+          - embedding
+          - geo
+          default: main
+      description: Resume a batched background migration
+    putApiV4AdminBatchedBackgroundMigrationsIdPause:
+      type: object
+      properties:
+        database:
+          type: string
+          description: The name of the database
+          enum:
+          - main
+          - ci
+          - sec
+          - embedding
+          - geo
+          default: main
+      description: Pause a batched background migration
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Pipelines API
+  title: GitLab Pipelines API
   version: v4
-  description: Operations related to access requests
+  description: Operations about pipelines
 servers:
 - url: https://gitlab.com
 tags:
-- name: pipelines
+- name: Pipelines
   description: Operations about pipelines
 paths:
   /api/v4/projects/{id}/pipelines:
@@ -206,7 +206,7 @@ paths:
         '403':
           description: Forbidden
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelines
   /api/v4/projects/{id}/pipeline:
     post:
@@ -236,7 +236,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: postApiV4ProjectsIdPipeline
       requestBody:
         content:
@@ -277,7 +277,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesLatest
   /api/v4/projects/{id}/pipelines/{pipeline_id}:
     get:
@@ -313,7 +313,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesPipelineId
     delete:
       summary: Deletes a pipeline
@@ -340,7 +340,7 @@ paths:
         '403':
           description: Forbidden
       tags:
-      - pipelines
+      - Pipelines
       operationId: deleteApiV4ProjectsIdPipelinesPipelineId
   /api/v4/projects/{id}/pipelines/{pipeline_id}/jobs:
     get:
@@ -425,8 +425,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesPipelineIdJobs
+      summary: Get api V4 projects id pipelines pipeline id jobs
+      x-summary-source: derived
   /api/v4/projects/{id}/pipelines/{pipeline_id}/bridges:
     get:
       description: Get pipeline bridge jobs
@@ -503,8 +505,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesPipelineIdBridges
+      summary: Get api V4 projects id pipelines pipeline id bridges
+      x-summary-source: derived
   /api/v4/projects/{id}/pipelines/{pipeline_id}/variables:
     get:
       summary: Gets the variables for a given pipeline
@@ -541,7 +545,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesPipelineIdVariables
   /api/v4/projects/{id}/pipelines/{pipeline_id}/test_report:
     get:
@@ -577,7 +581,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesPipelineIdTestReport
   /api/v4/projects/{id}/pipelines/{pipeline_id}/test_report_summary:
     get:
@@ -613,7 +617,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: getApiV4ProjectsIdPipelinesPipelineIdTestReportSummary
   /api/v4/projects/{id}/pipelines/{pipeline_id}/metadata:
     put:
@@ -651,7 +655,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: putApiV4ProjectsIdPipelinesPipelineIdMetadata
       requestBody:
         content:
@@ -693,7 +697,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: postApiV4ProjectsIdPipelinesPipelineIdRetry
   /api/v4/projects/{id}/pipelines/{pipeline_id}/cancel:
     post:
@@ -729,261 +733,29 @@ paths:
         '404':
           description: Not found
       tags:
-      - pipelines
+      - Pipelines
       operationId: postApiV4ProjectsIdPipelinesPipelineIdCancel
 components:
   schemas:
-    API_Entities_Ci_Pipeline:
+    TestReportSummaryEntity:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-        before_sha:
-          type: string
-          example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
-        tag:
-          type: boolean
-          example: false
-        yaml_errors:
-          type: string
-          example: 'widgets:build: needs ''widgets:test'''
-        user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        started_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:30.733Z'
-        finished_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        committed_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        duration:
-          type: integer
-          format: int32
-          example: 127
-          description: Time spent running in seconds
-        queued_duration:
-          type: integer
-          format: int32
-          example: 63
-          description: Time spent enqueued in seconds
-        coverage:
-          type: number
-          format: float
-          example: 98.29
-        detailed_status:
-          $ref: '#/components/schemas/DetailedStatusEntity'
-        archived:
-          type: boolean
-          example: false
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      - before_sha
-      - tag
-      - yaml_errors
-      - user
-      - started_at
-      - finished_at
-      - committed_at
-      - duration
-      - queued_duration
-      - coverage
-      - detailed_status
-      - archived
-      description: API_Entities_Ci_Pipeline model
-    API_Entities_Ci_Bridge:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        status:
-          type: string
-          example: waiting_for_resource
-        stage:
-          type: string
-          example: deploy
-        name:
-          type: string
-          example: deploy_to_production
-        ref:
-          type: string
-          example: main
-        tag:
-          type: boolean
-        coverage:
-          type: number
-          format: float
-          example: 98.29
-        allow_failure:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        started_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:30.733Z'
-        finished_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        erased_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T18:00:29.728Z'
-        duration:
-          type: number
-          format: float
-          example: 0.465
-          description: Time spent running
-        queued_duration:
-          type: number
-          format: float
-          example: 0.123
-          description: Time spent enqueued
-        user:
-          $ref: '#/components/schemas/API_Entities_User'
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        pipeline:
-          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
-        failure_reason:
-          type: string
-          example: script_failure
-        web_url:
-          type: string
-          example: https://example.com/foo/bar/-/jobs/1
-        project:
+        total:
           type: object
-          properties:
-            ci_job_token_scope_enabled:
-              type: string
-              example: false
-          required:
-          - ci_job_token_scope_enabled
-        downstream_pipeline:
-          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
-      required:
-      - id
-      - status
-      - stage
-      - name
-      - ref
-      - tag
-      - coverage
-      - allow_failure
-      - created_at
-      - started_at
-      - finished_at
-      - erased_at
-      - duration
-      - queued_duration
-      - user
-      - commit
-      - pipeline
-      - web_url
-      - project
-      - downstream_pipeline
-      description: API_Entities_Ci_Bridge model
-    putApiV4ProjectsIdPipelinesPipelineIdMetadata:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the pipeline
-          example: Deployment to production
-      required:
-      - name
-      description: Updates pipeline metadata
-    TestReportEntity:
-      type: object
-      properties:
-        total_time:
-          type: integer
-          format: int32
-          example: 180
-        total_count:
-          type: integer
-          format: int32
-          example: 1
-        success_count:
-          type: integer
-          format: int32
-          example: 1
-        failed_count:
-          type: integer
-          format: int32
-          example: 0
-        skipped_count:
-          type: integer
-          format: int32
-          example: 0
-        error_count:
-          type: integer
-          format: int32
-          example: 0
+          example:
+            time: 0.42
+            count: 2
+            success: 2
+            failed: 0
+            skipped: 0
+            error: 0
+            suite_error: null
         test_suites:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestSuiteEntity'
+          $ref: '#/components/schemas/TestSuiteSummaryEntity'
       required:
-      - total_time
-      - total_count
-      - success_count
-      - failed_count
-      - skipped_count
-      - error_count
+      - total
       - test_suites
-      description: TestReportEntity model
+      description: TestReportSummaryEntity model
     API_Entities_Ci_Job:
       type: object
       properties:
@@ -1107,50 +879,270 @@ components:
       - archived
       - tag_list
       description: API_Entities_Ci_Job model
-    API_Entities_UserBasic:
+    API_Entities_Ci_Runner:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          example: 1
-        username:
+          example: 8
+        description:
           type: string
-          example: admin
-        public_email:
+          example: test-1-20150125
+        ip_address:
           type: string
-          example: john@example.com
+          example: 127.0.0.1
+        active:
+          type: boolean
+          example: true
+        paused:
+          type: boolean
+          example: false
+        is_shared:
+          type: boolean
+          example: true
+        runner_type:
+          type: string
+          enum:
+          - instance_type
+          - group_type
+          - project_type
+          example: instance_type
         name:
           type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
+          example: test
+        online:
           type: boolean
-        avatar_url:
+          example: true
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
           type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
+          format: date-time
+          example: '2025-05-03T00:00:00.000Z'
+        status:
           type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
+          example: online
+        job_execution_status:
           type: string
-          example: https://gitlab.example.com/root
+          enum:
+          - active
+          - idle
+          example: idle
       required:
       - id
-      - username
-      - public_email
+      - description
+      - ip_address
+      - active
+      - paused
+      - is_shared
+      - runner_type
       - name
-      - state
-      - locked
-      - avatar_url
+      - online
+      - created_at
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_Runner model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_Commit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
+          type: string
+          example: 2695effb
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
+          type: string
+          example: Initial commit
+        message:
+          type: string
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+      required:
+      - id
+      - short_id
+      - created_at
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
       - web_url
-      description: API_Entities_UserBasic model
+      description: API_Entities_Commit model
+    TestSuiteEntity:
+      type: object
+      properties:
+        name:
+          type: string
+          example: test
+        total_time:
+          type: integer
+          format: int32
+          example: 1904
+        total_count:
+          type: integer
+          format: int32
+          example: 3363
+        success_count:
+          type: integer
+          format: int32
+          example: 3351
+        failed_count:
+          type: integer
+          format: int32
+          example: 0
+        skipped_count:
+          type: integer
+          format: int32
+          example: 12
+        error_count:
+          type: integer
+          format: int32
+          example: 0
+        suite_error:
+          type: string
+          example: 'JUnit XML parsing failed: 1:1: FATAL: Document is empty'
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestCaseEntity'
+      required:
+      - name
+      - total_time
+      - total_count
+      - success_count
+      - failed_count
+      - skipped_count
+      - error_count
+    TestSuiteSummaryEntity:
+      type: object
+      properties:
+        name:
+          type: string
+          example: test
+        total_time:
+          type: integer
+          format: int32
+          example: 1904
+        total_count:
+          type: integer
+          format: int32
+          example: 3363
+        success_count:
+          type: integer
+          format: int32
+          example: 3351
+        failed_count:
+          type: integer
+          format: int32
+          example: 0
+        skipped_count:
+          type: integer
+          format: int32
+          example: 12
+        error_count:
+          type: integer
+          format: int32
+          example: 0
+        suite_error:
+          type: string
+          example: 'JUnit XML parsing failed: 1:1: FATAL: Document is empty'
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestCaseEntity'
+        build_ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+          example:
+          - 66004
+      required:
+      - name
+      - total_time
+      - total_count
+      - success_count
+      - failed_count
+      - skipped_count
+      - error_count
+      - suite_error
+      - build_ids
+    API_Entities_Ci_JobArtifactFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: artifacts.zip
+        size:
+          type: integer
+          format: int32
+          example: 1000
+      required:
+      - filename
+      - size
     DetailedStatusEntity:
       type: object
       properties:
@@ -1223,77 +1215,82 @@ components:
       - details_path
       - illustration
       - favicon
-    API_Entities_Ci_RunnerManager:
+    API_Entities_Ci_JobArtifact:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          example: 8
-        system_id:
-          type: string
-          example: runner-1
-        version:
-          type: string
-          example: 16.11.0
-        revision:
-          type: string
-          example: 91a27b2a
-        platform:
-          type: string
-          example: linux
-        architecture:
-          type: string
-          example: amd64
-        created_at:
-          type: string
-          example: '2023-10-24T01:27:06.549Z'
-        contacted_at:
-          type: string
-          example: '2023-10-24T01:27:06.549Z'
-        ip_address:
-          type: string
-          example: 127.0.0.1
-        status:
-          type: string
-          example: online
-        job_execution_status:
+        file_type:
           type: string
           enum:
-          - active
-          - idle
-          example: idle
+          - archive
+          - metadata
+          - trace
+          - junit
+          - sast
+          - dependency_scanning
+          - container_scanning
+          - dast
+          - codequality
+          - license_scanning
+          - performance
+          - metrics
+          - metrics_referee
+          - network_referee
+          - lsif
+          - dotenv
+          - cobertura
+          - terraform
+          - accessibility
+          - cluster_applications
+          - secret_detection
+          - requirements
+          - coverage_fuzzing
+          - browser_performance
+          - load_performance
+          - api_fuzzing
+          - cluster_image_scanning
+          - cyclonedx
+          - requirements_v2
+          - annotations
+          - repository_xray
+          - jacoco
+          - scip
+          - sarif
+          - environment_key
+          example: archive
+        size:
+          type: integer
+          format: int32
+          example: 1000
+        filename:
+          type: string
+          example: artifacts.zip
+        file_format:
+          type: string
+          enum:
+          - raw
+          - zip
+          - gzip
+          example: zip
       required:
-      - id
-      - system_id
-      - version
-      - revision
-      - platform
-      - architecture
-      - created_at
-      - contacted_at
-      - ip_address
-      - status
-      - job_execution_status
-      description: API_Entities_Ci_RunnerManager model
-    TestSuiteSummaryEntity:
+      - file_type
+      - size
+      - filename
+      - file_format
+    TestReportEntity:
       type: object
       properties:
-        name:
-          type: string
-          example: test
         total_time:
           type: integer
           format: int32
-          example: 1904
+          example: 180
         total_count:
           type: integer
           format: int32
-          example: 3363
+          example: 1
         success_count:
           type: integer
           format: int32
-          example: 3351
+          example: 1
         failed_count:
           type: integer
           format: int32
@@ -1301,35 +1298,138 @@ components:
         skipped_count:
           type: integer
           format: int32
-          example: 12
+          example: 0
         error_count:
           type: integer
           format: int32
           example: 0
-        suite_error:
-          type: string
-          example: 'JUnit XML parsing failed: 1:1: FATAL: Document is empty'
-        test_cases:
+        test_suites:
           type: array
           items:
-            $ref: '#/components/schemas/TestCaseEntity'
-        build_ids:
-          type: array
-          items:
-            type: integer
-            format: int32
-          example:
-          - 66004
+            $ref: '#/components/schemas/TestSuiteEntity'
       required:
-      - name
       - total_time
       - total_count
       - success_count
       - failed_count
       - skipped_count
       - error_count
-      - suite_error
-      - build_ids
+      - test_suites
+      description: TestReportEntity model
+    API_Entities_Ci_Pipeline:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+        before_sha:
+          type: string
+          example: a91957a858320c0e17f3a0eca7cfacbff50ea29a
+        tag:
+          type: boolean
+          example: false
+        yaml_errors:
+          type: string
+          example: 'widgets:build: needs ''widgets:test'''
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        started_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        committed_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        duration:
+          type: integer
+          format: int32
+          example: 127
+          description: Time spent running in seconds
+        queued_duration:
+          type: integer
+          format: int32
+          example: 63
+          description: Time spent enqueued in seconds
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        detailed_status:
+          $ref: '#/components/schemas/DetailedStatusEntity'
+        archived:
+          type: boolean
+          example: false
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      - before_sha
+      - tag
+      - yaml_errors
+      - user
+      - started_at
+      - finished_at
+      - committed_at
+      - duration
+      - queued_duration
+      - coverage
+      - detailed_status
+      - archived
+      description: API_Entities_Ci_Pipeline model
+    putApiV4ProjectsIdPipelinesPipelineIdMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the pipeline
+          example: Deployment to production
+      required:
+      - name
+      description: Updates pipeline metadata
     API_Entities_Ci_PipelineWithMetadata:
       type: object
       properties:
@@ -1438,67 +1538,92 @@ components:
       - archived
       - name
       description: API_Entities_Ci_PipelineWithMetadata model
-    API_Entities_Ci_JobArtifact:
+    TestCaseEntity:
       type: object
       properties:
-        file_type:
+        status:
           type: string
-          enum:
-          - archive
-          - metadata
-          - trace
-          - junit
-          - sast
-          - dependency_scanning
-          - container_scanning
-          - dast
-          - codequality
-          - license_scanning
-          - performance
-          - metrics
-          - metrics_referee
-          - network_referee
-          - lsif
-          - dotenv
-          - cobertura
-          - terraform
-          - accessibility
-          - cluster_applications
-          - secret_detection
-          - requirements
-          - coverage_fuzzing
-          - browser_performance
-          - load_performance
-          - api_fuzzing
-          - cluster_image_scanning
-          - cyclonedx
-          - requirements_v2
-          - annotations
-          - repository_xray
-          - jacoco
-          - scip
-          - sarif
-          - environment_key
-          example: archive
-        size:
+          example: success
+        name:
+          type: string
+          example: Security Reports can create an auto-remediation MR
+        classname:
+          type: string
+          example: vulnerability_management_spec
+        file:
+          type: string
+          example: ./spec/test_spec.rb
+        execution_time:
           type: integer
           format: int32
-          example: 1000
-        filename:
+          example: 180
+        system_output:
           type: string
-          example: artifacts.zip
-        file_format:
+          example: 'Failure/Error: is_expected.to eq(3)'
+        stack_trace:
           type: string
-          enum:
-          - raw
-          - zip
-          - gzip
-          example: zip
+          example: 'Failure/Error: is_expected.to eq(3)'
+        recent_failures:
+          type: object
+          example:
+            count: 3
+            base_branch: develop
+        attachment_url:
+          type: string
+          example: http://localhost/namespace1/project1/-/jobs/1/artifacts/file/some/path.png
       required:
-      - file_type
-      - size
-      - filename
-      - file_format
+      - status
+      - name
+      - classname
+      - file
+      - execution_time
+      - system_output
+      - stack_trace
+      - recent_failures
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
     API_Entities_Ci_PipelineBasic:
       type: object
       properties:
@@ -1549,100 +1674,37 @@ components:
       - updated_at
       - web_url
       description: API_Entities_Ci_PipelineBasic model
-    TestReportSummaryEntity:
-      type: object
-      properties:
-        total:
-          type: object
-          example:
-            time: 0.42
-            count: 2
-            success: 2
-            failed: 0
-            skipped: 0
-            error: 0
-            suite_error: null
-        test_suites:
-          $ref: '#/components/schemas/TestSuiteSummaryEntity'
-      required:
-      - total
-      - test_suites
-      description: TestReportSummaryEntity model
-    postApiV4ProjectsIdPipeline:
-      type: object
-      properties:
-        ref:
-          type: string
-          description: Reference
-          example: develop
-        variables:
-          type: array
-          description: Array of variables available in the pipeline
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-                description: The key of the variable
-                example: UPLOAD_TO_S3
-              value:
-                type: string
-                description: The value of the variable
-                example: 'true'
-              variable_type:
-                type: string
-                description: The type of variable, must be one of env_var or file. Defaults to env_var
-                enum:
-                - env_var
-                - file
-                default: env_var
-        inputs:
-          type: object
-          description: The list of inputs to be used to create the pipeline.
-      required:
-      - ref
-      description: Create a new pipeline
-    API_Entities_Ci_Runner:
+    API_Entities_Ci_RunnerManager:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 8
-        description:
+        system_id:
           type: string
-          example: test-1-20150125
+          example: runner-1
+        version:
+          type: string
+          example: 16.11.0
+        revision:
+          type: string
+          example: 91a27b2a
+        platform:
+          type: string
+          example: linux
+        architecture:
+          type: string
+          example: amd64
+        created_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        contacted_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
         ip_address:
           type: string
           example: 127.0.0.1
-        active:
-          type: boolean
-          example: true
-        paused:
-          type: boolean
-          example: false
-        is_shared:
-          type: boolean
-          example: true
-        runner_type:
-          type: string
-          enum:
-          - instance_type
-          - group_type
-          - project_type
-          example: instance_type
-        name:
-          type: string
-          example: test
-        online:
-          type: boolean
-          example: true
-        created_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-05-03T00:00:00.000Z'
         status:
           type: string
           example: online
@@ -1654,18 +1716,114 @@ components:
           example: idle
       required:
       - id
-      - description
-      - ip_address
-      - active
-      - paused
-      - is_shared
-      - runner_type
-      - name
-      - online
+      - system_id
+      - version
+      - revision
+      - platform
+      - architecture
       - created_at
+      - contacted_at
+      - ip_address
       - status
       - job_execution_status
-      description: API_Entities_Ci_Runner model
+      description: API_Entities_Ci_RunnerManager model
+    API_Entities_Ci_Bridge:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          example: waiting_for_resource
+        stage:
+          type: string
+          example: deploy
+        name:
+          type: string
+          example: deploy_to_production
+        ref:
+          type: string
+          example: main
+        tag:
+          type: boolean
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        allow_failure:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        started_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        erased_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T18:00:29.728Z'
+        duration:
+          type: number
+          format: float
+          example: 0.465
+          description: Time spent running
+        queued_duration:
+          type: number
+          format: float
+          example: 0.123
+          description: Time spent enqueued
+        user:
+          $ref: '#/components/schemas/API_Entities_User'
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        failure_reason:
+          type: string
+          example: script_failure
+        web_url:
+          type: string
+          example: https://example.com/foo/bar/-/jobs/1
+        project:
+          type: object
+          properties:
+            ci_job_token_scope_enabled:
+              type: string
+              example: false
+          required:
+          - ci_job_token_scope_enabled
+        downstream_pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+      required:
+      - id
+      - status
+      - stage
+      - name
+      - ref
+      - tag
+      - coverage
+      - allow_failure
+      - created_at
+      - started_at
+      - finished_at
+      - erased_at
+      - duration
+      - queued_duration
+      - user
+      - commit
+      - pipeline
+      - web_url
+      - project
+      - downstream_pipeline
+      description: API_Entities_Ci_Bridge model
     API_Entities_Ci_Variable:
       type: object
       properties:
@@ -1697,74 +1855,6 @@ components:
       - key
       - value
       description: API_Entities_Ci_Variable model
-    API_Entities_Ci_JobArtifactFile:
-      type: object
-      properties:
-        filename:
-          type: string
-          example: artifacts.zip
-        size:
-          type: integer
-          format: int32
-          example: 1000
-      required:
-      - filename
-      - size
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    TestCaseEntity:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        name:
-          type: string
-          example: Security Reports can create an auto-remediation MR
-        classname:
-          type: string
-          example: vulnerability_management_spec
-        file:
-          type: string
-          example: ./spec/test_spec.rb
-        execution_time:
-          type: integer
-          format: int32
-          example: 180
-        system_output:
-          type: string
-          example: 'Failure/Error: is_expected.to eq(3)'
-        stack_trace:
-          type: string
-          example: 'Failure/Error: is_expected.to eq(3)'
-        recent_failures:
-          type: object
-          example:
-            count: 3
-            base_branch: develop
-        attachment_url:
-          type: string
-          example: http://localhost/namespace1/project1/-/jobs/1/artifacts/file/some/path.png
-      required:
-      - status
-      - name
-      - classname
-      - file
-      - execution_time
-      - system_output
-      - stack_trace
-      - recent_failures
     API_Entities_User:
       type: object
       properties:
@@ -1855,126 +1945,40 @@ components:
       - bot
       - work_information
       - local_time
-    TestSuiteEntity:
+    postApiV4ProjectsIdPipeline:
       type: object
       properties:
-        name:
+        ref:
           type: string
-          example: test
-        total_time:
-          type: integer
-          format: int32
-          example: 1904
-        total_count:
-          type: integer
-          format: int32
-          example: 3363
-        success_count:
-          type: integer
-          format: int32
-          example: 3351
-        failed_count:
-          type: integer
-          format: int32
-          example: 0
-        skipped_count:
-          type: integer
-          format: int32
-          example: 12
-        error_count:
-          type: integer
-          format: int32
-          example: 0
-        suite_error:
-          type: string
-          example: 'JUnit XML parsing failed: 1:1: FATAL: Document is empty'
-        test_cases:
+          description: Reference
+          example: develop
+        variables:
           type: array
+          description: Array of variables available in the pipeline
           items:
-            $ref: '#/components/schemas/TestCaseEntity'
-      required:
-      - name
-      - total_time
-      - total_count
-      - success_count
-      - failed_count
-      - skipped_count
-      - error_count
-    API_Entities_Commit:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        short_id:
-          type: string
-          example: 2695effb
-        created_at:
-          type: string
-          format: date-time
-          example: '2017-07-26T11:08:53.000+02:00'
-        parent_ids:
-          type: array
-          items:
-            type: string
-          example:
-          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-        title:
-          type: string
-          example: Initial commit
-        message:
-          type: string
-          example: Initial commit
-        author_name:
-          type: string
-          example: John Smith
-        author_email:
-          type: string
-          example: john@example.com
-        authored_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        committer_name:
-          type: string
-          example: Jack Smith
-        committer_email:
-          type: string
-          example: jack@example.com
-        committed_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        trailers:
+            type: object
+            properties:
+              key:
+                type: string
+                description: The key of the variable
+                example: UPLOAD_TO_S3
+              value:
+                type: string
+                description: The value of the variable
+                example: 'true'
+              variable_type:
+                type: string
+                description: The type of variable, must be one of env_var or file. Defaults to env_var
+                enum:
+                - env_var
+                - file
+                default: env_var
+        inputs:
           type: object
-          example:
-            Merged-By: Jane Doe janedoe@gitlab.com
-        extended_trailers:
-          type: object
-          example:
-            Signed-off-by:
-            - John Doe <johndoe@gitlab.com>
-            - Jane Doe <janedoe@gitlab.com>
-        web_url:
-          type: string
-          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+          description: The list of inputs to be used to create the pipeline.
       required:
-      - id
-      - short_id
-      - created_at
-      - parent_ids
-      - title
-      - message
-      - author_name
-      - author_email
-      - authored_date
-      - committer_name
-      - committer_email
-      - committed_date
-      - trailers
-      - extended_trailers
-      - web_url
-      description: API_Entities_Commit model
+      - ref
+      description: Create a new pipeline
   securitySchemes:
     access_token_header:
       type: apiKey

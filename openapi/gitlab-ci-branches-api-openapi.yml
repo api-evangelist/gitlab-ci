@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Branches API
+  title: GitLab Branches API
   version: v4
-  description: Operations related to access requests
+  description: Operations about branches
 servers:
 - url: https://gitlab.com
 tags:
-- name: branches
+- name: Branches
   description: Operations about branches
 paths:
   /api/v4/projects/{id}/repository/branches:
@@ -77,8 +77,10 @@ paths:
         '404':
           description: 404 Project Not Found
       tags:
-      - branches
+      - Branches
       operationId: getApiV4ProjectsIdRepositoryBranches
+      summary: Get api V4 projects id repository branches
+      x-summary-source: derived
     post:
       description: Create branch
       parameters:
@@ -98,7 +100,7 @@ paths:
         '400':
           description: Failed to create branch
       tags:
-      - branches
+      - Branches
       operationId: postApiV4ProjectsIdRepositoryBranches
       requestBody:
         content:
@@ -106,6 +108,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdRepositoryBranches'
         required: true
+      summary: Post api V4 projects id repository branches
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/branches/{branch}:
     head:
       description: Check if a branch exists
@@ -128,8 +132,10 @@ paths:
         '404':
           description: Not Found
       tags:
-      - branches
+      - Branches
       operationId: headApiV4ProjectsIdRepositoryBranchesBranch
+      summary: Head api V4 projects id repository branches branch
+      x-summary-source: derived
     get:
       description: Get a single repository branch
       parameters:
@@ -155,8 +161,10 @@ paths:
         '404':
           description: Branch Not Found
       tags:
-      - branches
+      - Branches
       operationId: getApiV4ProjectsIdRepositoryBranchesBranch
+      summary: Get api V4 projects id repository branches branch
+      x-summary-source: derived
     delete:
       description: Delete a branch
       parameters:
@@ -178,8 +186,10 @@ paths:
         '404':
           description: Branch Not Found
       tags:
-      - branches
+      - Branches
       operationId: deleteApiV4ProjectsIdRepositoryBranchesBranch
+      summary: Delete api V4 projects id repository branches branch
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/branches/{branch}/protect:
     put:
       description: Protect a single branch
@@ -206,7 +216,7 @@ paths:
         '404':
           description: 404 Branch Not Found
       tags:
-      - branches
+      - Branches
       operationId: putApiV4ProjectsIdRepositoryBranchesBranchProtect
       requestBody:
         content:
@@ -214,6 +224,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdRepositoryBranchesBranchProtect'
         required: true
+      summary: Put api V4 projects id repository branches branch protect
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/branches/{branch}/unprotect:
     put:
       description: Unprotect a single branch
@@ -240,8 +252,10 @@ paths:
         '404':
           description: 404 Project Not Found
       tags:
-      - branches
+      - Branches
       operationId: putApiV4ProjectsIdRepositoryBranchesBranchUnprotect
+      summary: Put api V4 projects id repository branches branch unprotect
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/merged_branches:
     delete:
       description: Delete all merged branches
@@ -258,8 +272,10 @@ paths:
         '404':
           description: 404 Project Not Found
       tags:
-      - branches
+      - Branches
       operationId: deleteApiV4ProjectsIdRepositoryMergedBranches
+      summary: Delete api V4 projects id repository merged branches
+      x-summary-source: derived
 components:
   schemas:
     postApiV4ProjectsIdRepositoryBranches:
@@ -275,16 +291,46 @@ components:
       - branch
       - ref
       description: Create branch
-    putApiV4ProjectsIdRepositoryBranchesBranchProtect:
+    API_Entities_Branch:
       type: object
       properties:
+        name:
+          type: string
+          example: master
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        merged:
+          type: boolean
+          example: true
+        protected:
+          type: boolean
+          example: true
         developers_can_push:
           type: boolean
-          description: Flag if developers can push to that branch
+          example: true
         developers_can_merge:
           type: boolean
-          description: Flag if developers can merge to that branch
-      description: Protect a single branch
+          example: true
+        can_push:
+          type: boolean
+          example: true
+        default:
+          type: boolean
+          example: true
+        web_url:
+          type: string
+          example: https://gitlab.example.com/Commit921/the-dude/-/tree/master
+      required:
+      - name
+      - commit
+      - merged
+      - protected
+      - developers_can_push
+      - developers_can_merge
+      - can_push
+      - default
+      - web_url
+      description: API_Entities_Branch model
     API_Entities_Commit:
       type: object
       properties:
@@ -360,46 +406,16 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_Branch:
+    putApiV4ProjectsIdRepositoryBranchesBranchProtect:
       type: object
       properties:
-        name:
-          type: string
-          example: master
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        merged:
-          type: boolean
-          example: true
-        protected:
-          type: boolean
-          example: true
         developers_can_push:
           type: boolean
-          example: true
+          description: Flag if developers can push to that branch
         developers_can_merge:
           type: boolean
-          example: true
-        can_push:
-          type: boolean
-          example: true
-        default:
-          type: boolean
-          example: true
-        web_url:
-          type: string
-          example: https://gitlab.example.com/Commit921/the-dude/-/tree/master
-      required:
-      - name
-      - commit
-      - merged
-      - protected
-      - developers_can_push
-      - developers_can_merge
-      - can_push
-      - default
-      - web_url
-      description: API_Entities_Branch model
+          description: Flag if developers can merge to that branch
+      description: Protect a single branch
   securitySchemes:
     access_token_header:
       type: apiKey

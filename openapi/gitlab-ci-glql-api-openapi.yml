@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Glql API
+  title: GitLab Glql API
   version: v4
-  description: Operations related to access requests
+  description: Operations about glqls
 servers:
 - url: https://gitlab.com
 tags:
@@ -41,28 +41,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_Glql_Data:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 42
-          description: Number of found items
-        nodes:
-          type: array
-          items:
-            type: array
-          example: []
-          description: The list of found items
-        pageInfo:
-          allOf:
-          - $ref: '#/components/schemas/API_Entities_Glql_PageInfo'
-          description: Pagination information
-      required:
-      - count
-      - nodes
-      - pageInfo
     API_Entities_Glql_Result:
       type: object
       properties:
@@ -87,6 +65,28 @@ components:
       - fields
       - success
       description: API_Entities_Glql_Result model
+    API_Entities_Glql_Data:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 42
+          description: Number of found items
+        nodes:
+          type: array
+          items:
+            type: array
+          example: []
+          description: The list of found items
+        pageInfo:
+          allOf:
+          - $ref: '#/components/schemas/API_Entities_Glql_PageInfo'
+          description: Pagination information
+      required:
+      - count
+      - nodes
+      - pageInfo
     API_Entities_Glql_Field:
       type: object
       properties:

@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Repositories API
+  title: GitLab Repositories API
   version: v4
-  description: Operations related to access requests
+  description: Operations about repositories
 servers:
 - url: https://gitlab.com
 tags:
-- name: repositories
+- name: Repositories
   description: Operations about repositories
 paths:
   /api/v4/projects/{id}/repository/tree:
@@ -85,8 +85,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_TreeObject'
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryTree
+      summary: Get api V4 projects id repository tree
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/blobs/{sha}/raw:
     get:
       description: Get raw blob contents from the repository
@@ -109,8 +111,10 @@ paths:
         '200':
           description: Get raw blob contents from the repository
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryBlobsShaRaw
+      summary: Get api V4 projects id repository blobs sha raw
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/blobs/{sha}:
     get:
       description: Get a blob from the repository
@@ -133,8 +137,10 @@ paths:
         '200':
           description: Get a blob from the repository
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryBlobsSha
+      summary: Get api V4 projects id repository blobs sha
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/archive:
     get:
       description: Get an archive of the repository
@@ -186,8 +192,10 @@ paths:
         '200':
           description: Get an archive of the repository
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryArchive
+      summary: Get api V4 projects id repository archive
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/compare:
     get:
       description: Compare two branches, tags, or commits
@@ -243,8 +251,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Compare'
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryCompare
+      summary: Get api V4 projects id repository compare
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/health:
     get:
       description: Get repository health
@@ -271,8 +281,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_RepositoryHealth'
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryHealth
+      summary: Get api V4 projects id repository health
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/contributors:
     get:
       description: Get repository contributors
@@ -338,8 +350,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Contributor'
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryContributors
+      summary: Get api V4 projects id repository contributors
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/merge_base:
     get:
       description: Get the common ancestor between commits
@@ -368,8 +382,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Commit'
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryMergeBase
+      summary: Get api V4 projects id repository merge base
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/changelog:
     get:
       summary: Generates a changelog section for a release and returns it
@@ -441,7 +457,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Changelog'
       tags:
-      - repositories
+      - Repositories
       operationId: getApiV4ProjectsIdRepositoryChangelog
     post:
       summary: Generates a changelog section for a release and commits it in a changelog file
@@ -458,7 +474,7 @@ paths:
         '200':
           description: Generates a changelog section for a release and commits it in a changelog file
       tags:
-      - repositories
+      - Repositories
       operationId: postApiV4ProjectsIdRepositoryChangelog
       requestBody:
         content:
@@ -468,56 +484,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_RepositoryHealth:
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        references:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_References'
-        objects:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Objects'
-        commit_graph:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_CommitGraph'
-        bitmap:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
-        multi_pack_index:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_MultiPackIndex'
-        multi_pack_index_bitmap:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
-        alternates:
-          type: object
-        is_object_pool:
-          type: boolean
-        last_full_repack:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_LastFullRepack'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-02-24T09:05:50.355Z'
-      required:
-      - size
-      - references
-      - objects
-      - commit_graph
-      - bitmap
-      - multi_pack_index
-      - multi_pack_index_bitmap
-      - alternates
-      - is_object_pool
-      - last_full_repack
-      - updated_at
-      description: API_Entities_RepositoryHealth model
-    API_Entities_Changelog:
-      type: object
-      properties:
-        notes:
-          type: string
-          example: '## 1.0.0 (2023-01-01)'
-      required:
-      - notes
-      description: API_Entities_Changelog model
     API_Entities_RepositoryHealth_MultiPackIndex:
       type: object
       properties:
@@ -530,228 +496,6 @@ components:
       required:
       - packfile_count
       - version
-    API_Entities_Diff:
-      type: object
-      properties:
-        diff:
-          type: string
-          example: '@@ -71,6 +71,8 @@\n...'
-        collapsed:
-          type: boolean
-        too_large:
-          type: boolean
-        new_path:
-          type: string
-          example: doc/update/5.4-to-6.0.md
-        old_path:
-          type: string
-          example: doc/update/5.4-to-6.0.md
-        a_mode:
-          type: string
-          example: '100755'
-        b_mode:
-          type: string
-          example: '100644'
-        new_file:
-          type: boolean
-        renamed_file:
-          type: boolean
-        deleted_file:
-          type: boolean
-        generated_file:
-          type: boolean
-      required:
-      - diff
-      - collapsed
-      - too_large
-      - new_path
-      - old_path
-      - a_mode
-      - b_mode
-      - new_file
-      - renamed_file
-      - deleted_file
-      - generated_file
-      description: API_Entities_Diff model
-    API_Entities_Compare:
-      type: object
-      properties:
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        commits:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_Commit'
-        diffs:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_Diff'
-        compare_timeout:
-          type: boolean
-        compare_same_ref:
-          type: boolean
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab/gitlab-foss/-/compare/main...feature
-      required:
-      - commit
-      - commits
-      - diffs
-      - compare_timeout
-      - compare_same_ref
-      - web_url
-      description: API_Entities_Compare model
-    API_Entities_RepositoryHealth_Objects:
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        recent_size:
-          type: integer
-          format: int32
-        stale_size:
-          type: integer
-          format: int32
-        keep_size:
-          type: integer
-          format: int32
-        packfile_count:
-          type: integer
-          format: int32
-        reverse_index_count:
-          type: integer
-          format: int32
-        cruft_count:
-          type: integer
-          format: int32
-        keep_count:
-          type: integer
-          format: int32
-        loose_objects_count:
-          type: integer
-          format: int32
-        stale_loose_objects_count:
-          type: integer
-          format: int32
-        loose_objects_garbage_count:
-          type: integer
-          format: int32
-      required:
-      - size
-      - recent_size
-      - stale_size
-      - keep_size
-      - packfile_count
-      - reverse_index_count
-      - cruft_count
-      - keep_count
-      - loose_objects_count
-      - stale_loose_objects_count
-      - loose_objects_garbage_count
-    API_Entities_RepositoryHealth_Bitmap:
-      type: object
-      properties:
-        has_hash_cache:
-          type: boolean
-        has_lookup_table:
-          type: boolean
-        version:
-          type: integer
-          format: int32
-      required:
-      - has_hash_cache
-      - has_lookup_table
-      - version
-    postApiV4ProjectsIdRepositoryChangelog:
-      type: object
-      properties:
-        version:
-          type: string
-          description: The version of the release, using the semantic versioning format
-          example: 1.0.0
-        from:
-          type: string
-          description: The first commit in the range of commits to use for the changelog
-          example: ed899a2f4b50b4370feeea94676502b42383c746
-        to:
-          type: string
-          description: The last commit in the range of commits to use for the changelog
-          example: 6104942438c14ec7bd21c6cd5bd995272b3faff6
-        date:
-          type: string
-          format: date-time
-          description: The date and time of the release
-          example: '2021-09-20T11:50:22.001+00:00'
-        trailer:
-          type: string
-          description: The Git trailer to use for determining if commits are to be included in the changelog
-          default: Changelog
-          example: Changelog
-        config_file:
-          type: string
-          description: The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'
-          example: .gitlab/changelog_config.yml
-        config_file_ref:
-          type: string
-          description: The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch.
-          example: main
-        branch:
-          type: string
-          description: The branch to commit the changelog changes to
-          example: main
-        file:
-          type: string
-          description: The file to commit the changelog changes to
-          default: CHANGELOG.md
-          example: CHANGELOG.md
-        message:
-          type: string
-          description: The commit message to use when committing the changelog
-          example: Initial commit
-      required:
-      - version
-      description: Generates a changelog section for a release and commits it in a changelog file
-    API_Entities_TreeObject:
-      type: object
-      properties:
-        id:
-          type: string
-          example: a1e8f8d745cc87e3a9248358d9352bb7f9a0aeba
-        name:
-          type: string
-          example: html
-        type:
-          type: string
-          example: tree
-        path:
-          type: string
-          example: files/html
-        mode:
-          type: string
-          example: '040000'
-      required:
-      - id
-      - name
-      - type
-      - path
-      - mode
-      description: API_Entities_TreeObject model
-    API_Entities_RepositoryHealth_References:
-      type: object
-      properties:
-        loose_count:
-          type: integer
-          format: int32
-        packed_size:
-          type: integer
-          format: int32
-        reference_backend:
-          type: string
-      required:
-      - loose_count
-      - packed_size
-      - reference_backend
     API_Entities_RepositoryHealth_LastFullRepack:
       type: object
       properties:
@@ -764,6 +508,15 @@ components:
       required:
       - seconds
       - nanos
+    API_Entities_Changelog:
+      type: object
+      properties:
+        notes:
+          type: string
+          example: '## 1.0.0 (2023-01-01)'
+      required:
+      - notes
+      description: API_Entities_Changelog model
     API_Entities_Commit:
       type: object
       properties:
@@ -839,23 +592,178 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_RepositoryHealth_CommitGraph:
+    API_Entities_RepositoryHealth_References:
       type: object
       properties:
-        commit_graph_chain_length:
+        loose_count:
           type: integer
           format: int32
-        has_bloom_filters:
+        packed_size:
+          type: integer
+          format: int32
+        reference_backend:
+          type: string
+      required:
+      - loose_count
+      - packed_size
+      - reference_backend
+    API_Entities_RepositoryHealth_Objects:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        recent_size:
+          type: integer
+          format: int32
+        stale_size:
+          type: integer
+          format: int32
+        keep_size:
+          type: integer
+          format: int32
+        packfile_count:
+          type: integer
+          format: int32
+        reverse_index_count:
+          type: integer
+          format: int32
+        cruft_count:
+          type: integer
+          format: int32
+        keep_count:
+          type: integer
+          format: int32
+        loose_objects_count:
+          type: integer
+          format: int32
+        stale_loose_objects_count:
+          type: integer
+          format: int32
+        loose_objects_garbage_count:
+          type: integer
+          format: int32
+      required:
+      - size
+      - recent_size
+      - stale_size
+      - keep_size
+      - packfile_count
+      - reverse_index_count
+      - cruft_count
+      - keep_count
+      - loose_objects_count
+      - stale_loose_objects_count
+      - loose_objects_garbage_count
+    API_Entities_TreeObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1e8f8d745cc87e3a9248358d9352bb7f9a0aeba
+        name:
+          type: string
+          example: html
+        type:
+          type: string
+          example: tree
+        path:
+          type: string
+          example: files/html
+        mode:
+          type: string
+          example: '040000'
+      required:
+      - id
+      - name
+      - type
+      - path
+      - mode
+      description: API_Entities_TreeObject model
+    API_Entities_Diff:
+      type: object
+      properties:
+        diff:
+          type: string
+          example: '@@ -71,6 +71,8 @@\n...'
+        collapsed:
           type: boolean
-        has_generation_data:
+        too_large:
           type: boolean
-        has_generation_data_overflow:
+        new_path:
+          type: string
+          example: doc/update/5.4-to-6.0.md
+        old_path:
+          type: string
+          example: doc/update/5.4-to-6.0.md
+        a_mode:
+          type: string
+          example: '100755'
+        b_mode:
+          type: string
+          example: '100644'
+        new_file:
+          type: boolean
+        renamed_file:
+          type: boolean
+        deleted_file:
+          type: boolean
+        generated_file:
           type: boolean
       required:
-      - commit_graph_chain_length
-      - has_bloom_filters
-      - has_generation_data
-      - has_generation_data_overflow
+      - diff
+      - collapsed
+      - too_large
+      - new_path
+      - old_path
+      - a_mode
+      - b_mode
+      - new_file
+      - renamed_file
+      - deleted_file
+      - generated_file
+      description: API_Entities_Diff model
+    API_Entities_RepositoryHealth:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        references:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_References'
+        objects:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Objects'
+        commit_graph:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_CommitGraph'
+        bitmap:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
+        multi_pack_index:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_MultiPackIndex'
+        multi_pack_index_bitmap:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
+        alternates:
+          type: object
+        is_object_pool:
+          type: boolean
+        last_full_repack:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_LastFullRepack'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-02-24T09:05:50.355Z'
+      required:
+      - size
+      - references
+      - objects
+      - commit_graph
+      - bitmap
+      - multi_pack_index
+      - multi_pack_index_bitmap
+      - alternates
+      - is_object_pool
+      - last_full_repack
+      - updated_at
+      description: API_Entities_RepositoryHealth model
     API_Entities_Contributor:
       type: object
       properties:
@@ -884,6 +792,114 @@ components:
       - additions
       - deletions
       description: API_Entities_Contributor model
+    API_Entities_RepositoryHealth_CommitGraph:
+      type: object
+      properties:
+        commit_graph_chain_length:
+          type: integer
+          format: int32
+        has_bloom_filters:
+          type: boolean
+        has_generation_data:
+          type: boolean
+        has_generation_data_overflow:
+          type: boolean
+      required:
+      - commit_graph_chain_length
+      - has_bloom_filters
+      - has_generation_data
+      - has_generation_data_overflow
+    postApiV4ProjectsIdRepositoryChangelog:
+      type: object
+      properties:
+        version:
+          type: string
+          description: The version of the release, using the semantic versioning format
+          example: 1.0.0
+        from:
+          type: string
+          description: The first commit in the range of commits to use for the changelog
+          example: ed899a2f4b50b4370feeea94676502b42383c746
+        to:
+          type: string
+          description: The last commit in the range of commits to use for the changelog
+          example: 6104942438c14ec7bd21c6cd5bd995272b3faff6
+        date:
+          type: string
+          format: date-time
+          description: The date and time of the release
+          example: '2021-09-20T11:50:22.001+00:00'
+        trailer:
+          type: string
+          description: The Git trailer to use for determining if commits are to be included in the changelog
+          default: Changelog
+          example: Changelog
+        config_file:
+          type: string
+          description: The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'
+          example: .gitlab/changelog_config.yml
+        config_file_ref:
+          type: string
+          description: The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch.
+          example: main
+        branch:
+          type: string
+          description: The branch to commit the changelog changes to
+          example: main
+        file:
+          type: string
+          description: The file to commit the changelog changes to
+          default: CHANGELOG.md
+          example: CHANGELOG.md
+        message:
+          type: string
+          description: The commit message to use when committing the changelog
+          example: Initial commit
+      required:
+      - version
+      description: Generates a changelog section for a release and commits it in a changelog file
+    API_Entities_Compare:
+      type: object
+      properties:
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Commit'
+        diffs:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Diff'
+        compare_timeout:
+          type: boolean
+        compare_same_ref:
+          type: boolean
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab/gitlab-foss/-/compare/main...feature
+      required:
+      - commit
+      - commits
+      - diffs
+      - compare_timeout
+      - compare_same_ref
+      - web_url
+      description: API_Entities_Compare model
+    API_Entities_RepositoryHealth_Bitmap:
+      type: object
+      properties:
+        has_hash_cache:
+          type: boolean
+        has_lookup_table:
+          type: boolean
+        version:
+          type: integer
+          format: int32
+      required:
+      - has_hash_cache
+      - has_lookup_table
+      - version
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Job Artifacts API
+  title: GitLab Job Artifacts API
   version: v4
-  description: Operations related to access requests
+  description: Operations about job_artifacts
 servers:
 - url: https://gitlab.com
 tags:
@@ -331,6 +331,8 @@ paths:
       tags:
       - job_artifacts
       operationId: postApiV4ProjectsIdJobsJobIdArtifactsKeep
+      summary: Post api V4 projects id jobs job id artifacts keep
+      x-summary-source: derived
   /api/v4/projects/{id}/artifacts:
     delete:
       description: Expire the artifacts files from a project
@@ -353,34 +355,10 @@ paths:
       tags:
       - job_artifacts
       operationId: deleteApiV4ProjectsIdArtifacts
+      summary: Delete api V4 projects id artifacts
+      x-summary-source: derived
 components:
   schemas:
-    API_Entities_Ci_JobArtifactFile:
-      type: object
-      properties:
-        filename:
-          type: string
-          example: artifacts.zip
-        size:
-          type: integer
-          format: int32
-          example: 1000
-      required:
-      - filename
-      - size
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
     API_Entities_Ci_RunnerManager:
       type: object
       properties:
@@ -434,34 +412,6 @@ components:
       - status
       - job_execution_status
       description: API_Entities_Ci_RunnerManager model
-    API_Entities_Ci_JobArtifactEntry:
-      type: object
-      properties:
-        name:
-          type: string
-          example: index.html
-        path:
-          type: string
-          example: coverage/index.html
-        type:
-          type: string
-          enum:
-          - file
-          - directory
-          example: file
-        size:
-          type: integer
-          format: int32
-          example: 12345
-        mode:
-          type: string
-          example: '100644'
-      required:
-      - name
-      - path
-      - type
-      - mode
-      description: API_Entities_Ci_JobArtifactEntry model
     API_Entities_Ci_Job:
       type: object
       properties:
@@ -585,96 +535,6 @@ components:
       - archived
       - tag_list
       description: API_Entities_Ci_Job model
-    API_Entities_User:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-        created_at:
-          type: string
-        bio:
-          type: string
-        location:
-          type: string
-        linkedin:
-          type: string
-        twitter:
-          type: string
-        discord:
-          type: string
-        website_url:
-          type: string
-        github:
-          type: string
-        job_title:
-          type: string
-        pronouns:
-          type: string
-        organization:
-          type: string
-        bot:
-          type: boolean
-        work_information:
-          type: string
-        followers:
-          type: string
-        following:
-          type: string
-        is_followed:
-          type: string
-        local_time:
-          type: string
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      - bio
-      - location
-      - linkedin
-      - twitter
-      - discord
-      - website_url
-      - github
-      - job_title
-      - pronouns
-      - organization
-      - bot
-      - work_information
-      - local_time
     API_Entities_UserBasic:
       type: object
       properties:
@@ -858,56 +718,137 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_Ci_PipelineBasic:
+    API_Entities_Ci_JobArtifactEntry:
+      type: object
+      properties:
+        name:
+          type: string
+          example: index.html
+        path:
+          type: string
+          example: coverage/index.html
+        type:
+          type: string
+          enum:
+          - file
+          - directory
+          example: file
+        size:
+          type: integer
+          format: int32
+          example: 12345
+        mode:
+          type: string
+          example: '100644'
+      required:
+      - name
+      - path
+      - type
+      - mode
+      description: API_Entities_Ci_JobArtifactEntry model
+    API_Entities_Ci_JobArtifactFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: artifacts.zip
+        size:
+          type: integer
+          format: int32
+          example: 1000
+      required:
+      - filename
+      - size
+    API_Entities_User:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
+        username:
           type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
+          example: admin
+        public_email:
           type: string
-          example: feature-branch
-        status:
+          example: john@example.com
+        name:
           type: string
-          example: success
-        source:
+          example: Administrator
+        state:
           type: string
-          example: push
-        created_at:
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
           type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
+          example: https://gravatar.com/avatar/1
+        avatar_path:
           type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
         web_url:
           type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+          example: https://gitlab.example.com/root
+        created_at:
+          type: string
+        bio:
+          type: string
+        location:
+          type: string
+        linkedin:
+          type: string
+        twitter:
+          type: string
+        discord:
+          type: string
+        website_url:
+          type: string
+        github:
+          type: string
+        job_title:
+          type: string
+        pronouns:
+          type: string
+        organization:
+          type: string
+        bot:
+          type: boolean
+        work_information:
+          type: string
+        followers:
+          type: string
+        following:
+          type: string
+        is_followed:
+          type: string
+        local_time:
+          type: string
       required:
       - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
       - web_url
-      description: API_Entities_Ci_PipelineBasic model
+      - bio
+      - location
+      - linkedin
+      - twitter
+      - discord
+      - website_url
+      - github
+      - job_title
+      - pronouns
+      - organization
+      - bot
+      - work_information
+      - local_time
     API_Entities_Ci_JobArtifact:
       type: object
       properties:
@@ -969,6 +910,69 @@ components:
       - size
       - filename
       - file_format
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

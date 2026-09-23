@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Unleash API
+  title: GitLab Unleash API
   version: v4
-  description: Operations related to access requests
+  description: Operations about unleashes
 servers:
 - url: https://gitlab.com
 tags:
@@ -37,6 +37,8 @@ paths:
       tags:
       - unleash
       operationId: getApiV4FeatureFlagsUnleashProjectId
+      summary: Get api V4 feature flags unleash project id
+      x-summary-source: derived
   /api/v4/feature_flags/unleash/{project_id}/features:
     get:
       summary: Get a list of features (v2 client support)
@@ -95,6 +97,8 @@ paths:
       tags:
       - unleash
       operationId: getApiV4FeatureFlagsUnleashProjectIdClientFeatures
+      summary: Get api V4 feature flags unleash project id client features
+      x-summary-source: derived
   /api/v4/feature_flags/unleash/{project_id}/client/register:
     post:
       description: Register Unleash client
@@ -117,6 +121,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4FeatureFlagsUnleashProjectIdClientRegister'
         required: true
+      summary: Post api V4 feature flags unleash project id client register
+      x-summary-source: derived
   /api/v4/feature_flags/unleash/{project_id}/client/metrics:
     post:
       description: Report Unleash client metrics
@@ -139,18 +145,10 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4FeatureFlagsUnleashProjectIdClientMetrics'
         required: true
+      summary: Post api V4 feature flags unleash project id client metrics
+      x-summary-source: derived
 components:
   schemas:
-    postApiV4FeatureFlagsUnleashProjectIdClientMetrics:
-      type: object
-      properties:
-        instance_id:
-          type: string
-          description: The instance ID of Unleash Client
-        app_name:
-          type: string
-          description: The application name of Unleash Client
-      description: Report Unleash client metrics
     postApiV4FeatureFlagsUnleashProjectIdClientRegister:
       type: object
       properties:
@@ -161,6 +159,16 @@ components:
           type: string
           description: The application name of Unleash Client
       description: Register Unleash client
+    postApiV4FeatureFlagsUnleashProjectIdClientMetrics:
+      type: object
+      properties:
+        instance_id:
+          type: string
+          description: The instance ID of Unleash Client
+        app_name:
+          type: string
+          description: The application name of Unleash Client
+      description: Report Unleash client metrics
   securitySchemes:
     access_token_header:
       type: apiKey

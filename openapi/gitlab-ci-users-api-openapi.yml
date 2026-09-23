@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Users API
+  title: GitLab Users API
   version: v4
-  description: Operations related to access requests
+  description: Operations about users
 servers:
 - url: https://gitlab.com
 tags:
-- name: users
+- name: Users
   description: Operations about users
 paths:
   /api/v4/user_counts:
@@ -21,7 +21,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_UserCounts'
       tags:
-      - users
+      - Users
       operationId: getApiV4UserCounts
   /api/v4/user/runners:
     post:
@@ -39,7 +39,7 @@ paths:
         '403':
           description: Forbidden
       tags:
-      - users
+      - Users
       operationId: postApiV4UserRunners
       requestBody:
         content:
@@ -49,20 +49,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_Ci_RunnerRegistrationDetails:
-      type: object
-      properties:
-        id:
-          type: string
-        token:
-          type: string
-        token_expires_at:
-          type: string
-      required:
-      - id
-      - token
-      - token_expires_at
-      description: API_Entities_Ci_RunnerRegistrationDetails model
     API_Entities_UserCounts:
       type: object
       properties:
@@ -93,6 +79,20 @@ components:
       - review_requested_merge_requests
       - todos
       description: API_Entities_UserCounts model
+    API_Entities_Ci_RunnerRegistrationDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        token:
+          type: string
+        token_expires_at:
+          type: string
+      required:
+      - id
+      - token
+      - token_expires_at
+      description: API_Entities_Ci_RunnerRegistrationDetails model
     postApiV4UserRunners:
       type: object
       properties:

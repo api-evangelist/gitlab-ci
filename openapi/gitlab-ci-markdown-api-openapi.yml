@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Markdown API
+  title: GitLab Markdown API
   version: v4
-  description: Operations related to access requests
+  description: Operations about markdowns
 servers:
 - url: https://gitlab.com
 tags:
-- name: markdown
+- name: Markdown
   description: Operations about markdowns
 paths:
   /api/v4/markdown:
@@ -25,7 +25,7 @@ paths:
         '401':
           description: Unauthorized
       tags:
-      - markdown
+      - Markdown
       operationId: postApiV4Markdown
       requestBody:
         content:
@@ -35,6 +35,15 @@ paths:
         required: true
 components:
   schemas:
+    API_Entities_Markdown:
+      type: object
+      properties:
+        html:
+          type: string
+          example: <p dir=\"auto\">Hello world!</p>"
+      required:
+      - html
+      description: API_Entities_Markdown model
     postApiV4Markdown:
       type: object
       properties:
@@ -50,15 +59,6 @@ components:
       required:
       - text
       description: Render an arbitrary Markdown document
-    API_Entities_Markdown:
-      type: object
-      properties:
-        html:
-          type: string
-          example: <p dir=\"auto\">Hello world!</p>"
-      required:
-      - html
-      description: API_Entities_Markdown model
   securitySchemes:
     access_token_header:
       type: apiKey

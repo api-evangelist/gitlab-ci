@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Ldap API
+  title: GitLab Ldap API
   version: v4
-  description: Operations related to access requests
+  description: Operations about ldaps
 servers:
 - url: https://gitlab.com
 tags:
-- name: ldap
+- name: LDAP
   description: Operations about ldaps
 paths:
   /api/v4/groups/{id}/ldap_sync:
@@ -23,8 +23,10 @@ paths:
         '201':
           description: Sync a group with LDAP.
       tags:
-      - ldap
+      - LDAP
       operationId: postApiV4GroupsIdLdapSync
+      summary: Post api V4 groups id ldap sync
+      x-summary-source: derived
 components:
   securitySchemes:
     access_token_header:

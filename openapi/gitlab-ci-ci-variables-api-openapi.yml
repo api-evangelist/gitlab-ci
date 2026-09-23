@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Ci Variables API
+  title: GitLab Ci Variables API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to CI/CD variables
 servers:
 - url: https://gitlab.com
 tags:
@@ -47,6 +47,8 @@ paths:
       tags:
       - ci_variables
       operationId: getApiV4GroupsIdVariables
+      summary: Get api V4 groups id variables
+      x-summary-source: derived
     post:
       description: Create a new variable in a group
       parameters:
@@ -74,6 +76,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4GroupsIdVariables'
         required: true
+      summary: Post api V4 groups id variables
+      x-summary-source: derived
   /api/v4/groups/{id}/variables/{key}:
     get:
       description: Get the details of a group’s specific variable
@@ -102,6 +106,8 @@ paths:
       tags:
       - ci_variables
       operationId: getApiV4GroupsIdVariablesKey
+      summary: Get api V4 groups id variables key
+      x-summary-source: derived
     put:
       description: Update an existing variable from a group
       parameters:
@@ -137,6 +143,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4GroupsIdVariablesKey'
         required: true
+      summary: Put api V4 groups id variables key
+      x-summary-source: derived
     delete:
       description: Delete an existing variable from a group
       parameters:
@@ -164,6 +172,8 @@ paths:
       tags:
       - ci_variables
       operationId: deleteApiV4GroupsIdVariablesKey
+      summary: Delete api V4 groups id variables key
+      x-summary-source: derived
   /api/v4/projects/{id}/variables:
     get:
       description: Get project variables
@@ -202,6 +212,8 @@ paths:
       tags:
       - ci_variables
       operationId: getApiV4ProjectsIdVariables
+      summary: Get api V4 projects id variables
+      x-summary-source: derived
     post:
       description: Create a new variable in a project
       parameters:
@@ -229,6 +241,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdVariables'
         required: true
+      summary: Post api V4 projects id variables
+      x-summary-source: derived
   /api/v4/projects/{id}/variables/{key}:
     get:
       description: Get the details of a single variable from a project
@@ -263,6 +277,8 @@ paths:
       tags:
       - ci_variables
       operationId: getApiV4ProjectsIdVariablesKey
+      summary: Get api V4 projects id variables key
+      x-summary-source: derived
     put:
       description: Update an existing variable from a project
       parameters:
@@ -296,6 +312,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdVariablesKey'
         required: true
+      summary: Put api V4 projects id variables key
+      x-summary-source: derived
     delete:
       description: Delete an existing variable from a project
       parameters:
@@ -329,6 +347,8 @@ paths:
       tags:
       - ci_variables
       operationId: deleteApiV4ProjectsIdVariablesKey
+      summary: Delete api V4 projects id variables key
+      x-summary-source: derived
   /api/v4/admin/ci/variables:
     get:
       description: List all instance-level variables
@@ -361,6 +381,8 @@ paths:
       tags:
       - ci_variables
       operationId: getApiV4AdminCiVariables
+      summary: Get api V4 admin ci variables
+      x-summary-source: derived
     post:
       description: Create a new instance-level variable
       responses:
@@ -381,6 +403,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4AdminCiVariables'
         required: true
+      summary: Post api V4 admin ci variables
+      x-summary-source: derived
   /api/v4/admin/ci/variables/{key}:
     get:
       description: Get the details of a specific instance-level variable
@@ -403,6 +427,8 @@ paths:
       tags:
       - ci_variables
       operationId: getApiV4AdminCiVariablesKey
+      summary: Get api V4 admin ci variables key
+      x-summary-source: derived
     put:
       description: Update an instance-level variable
       parameters:
@@ -430,6 +456,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4AdminCiVariablesKey'
         required: true
+      summary: Put api V4 admin ci variables key
+      x-summary-source: derived
     delete:
       description: Delete an existing instance-level variable
       parameters:
@@ -445,8 +473,70 @@ paths:
       tags:
       - ci_variables
       operationId: deleteApiV4AdminCiVariablesKey
+      summary: Delete api V4 admin ci variables key
+      x-summary-source: derived
 components:
   schemas:
+    putApiV4AdminCiVariablesKey:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the variable
+        value:
+          type: string
+          description: The value of a variable
+        protected:
+          type: boolean
+          description: Whether the variable is protected
+        masked:
+          type: boolean
+          description: Whether the variable is masked
+        raw:
+          type: boolean
+          description: Whether the variable will be expanded
+        variable_type:
+          type: string
+          description: 'The type of a variable. Available types are: env_var (default) and file'
+          enum:
+          - env_var
+          - file
+      description: Update an instance-level variable
+    putApiV4ProjectsIdVariablesKey:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of a variable
+        protected:
+          type: boolean
+          description: Whether the variable is protected
+        masked:
+          type: boolean
+          description: Whether the variable is masked
+        environment_scope:
+          type: string
+          description: The environment_scope of a variable
+        raw:
+          type: boolean
+          description: Whether the variable will be expanded
+        variable_type:
+          type: string
+          description: 'The type of the variable. Default: env_var'
+          enum:
+          - env_var
+          - file
+        filter:
+          type: object
+          description: 'Available filters: [environment_scope]. Example: filter[environment_scope]=production'
+          properties:
+            environment_scope:
+              type: string
+              description: The environment scope of a variable
+        description:
+          type: string
+          description: The description of the variable
+      description: Update an existing variable from a project
     API_Entities_Ci_Variable:
       type: object
       properties:
@@ -478,24 +568,24 @@ components:
       - key
       - value
       description: API_Entities_Ci_Variable model
-    postApiV4ProjectsIdVariables:
+    postApiV4GroupsIdVariables:
       type: object
       properties:
         key:
           type: string
-          description: The key of a variable
+          description: "The ID of a group or URL-encoded path of the group owned by the\n        authenticated user"
         value:
           type: string
           description: The value of a variable
         protected:
           type: boolean
           description: Whether the variable is protected
-        masked:
-          type: boolean
-          description: Whether the variable is masked
         masked_and_hidden:
           type: boolean
           description: Whether the variable is masked and hidden
+        masked:
+          type: boolean
+          description: Whether the variable is masked
         raw:
           type: boolean
           description: Whether the variable will be expanded
@@ -507,14 +597,14 @@ components:
           - file
         environment_scope:
           type: string
-          description: The environment_scope of the variable
+          description: The environment scope of the variable
         description:
           type: string
           description: The description of the variable
       required:
       - key
       - value
-      description: Create a new variable in a project
+      description: Create a new variable in a group
     putApiV4GroupsIdVariablesKey:
       type: object
       properties:
@@ -574,24 +664,24 @@ components:
       - key
       - value
       description: Create a new instance-level variable
-    postApiV4GroupsIdVariables:
+    postApiV4ProjectsIdVariables:
       type: object
       properties:
         key:
           type: string
-          description: "The ID of a group or URL-encoded path of the group owned by the\n        authenticated user"
+          description: The key of a variable
         value:
           type: string
           description: The value of a variable
         protected:
           type: boolean
           description: Whether the variable is protected
-        masked_and_hidden:
-          type: boolean
-          description: Whether the variable is masked and hidden
         masked:
           type: boolean
           description: Whether the variable is masked
+        masked_and_hidden:
+          type: boolean
+          description: Whether the variable is masked and hidden
         raw:
           type: boolean
           description: Whether the variable will be expanded
@@ -603,74 +693,14 @@ components:
           - file
         environment_scope:
           type: string
-          description: The environment scope of the variable
+          description: The environment_scope of the variable
         description:
           type: string
           description: The description of the variable
       required:
       - key
       - value
-      description: Create a new variable in a group
-    putApiV4ProjectsIdVariablesKey:
-      type: object
-      properties:
-        value:
-          type: string
-          description: The value of a variable
-        protected:
-          type: boolean
-          description: Whether the variable is protected
-        masked:
-          type: boolean
-          description: Whether the variable is masked
-        environment_scope:
-          type: string
-          description: The environment_scope of a variable
-        raw:
-          type: boolean
-          description: Whether the variable will be expanded
-        variable_type:
-          type: string
-          description: 'The type of the variable. Default: env_var'
-          enum:
-          - env_var
-          - file
-        filter:
-          type: object
-          description: 'Available filters: [environment_scope]. Example: filter[environment_scope]=production'
-          properties:
-            environment_scope:
-              type: string
-              description: The environment scope of a variable
-        description:
-          type: string
-          description: The description of the variable
-      description: Update an existing variable from a project
-    putApiV4AdminCiVariablesKey:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The description of the variable
-        value:
-          type: string
-          description: The value of a variable
-        protected:
-          type: boolean
-          description: Whether the variable is protected
-        masked:
-          type: boolean
-          description: Whether the variable is masked
-        raw:
-          type: boolean
-          description: Whether the variable will be expanded
-        variable_type:
-          type: string
-          description: 'The type of a variable. Available types are: env_var (default) and file'
-          enum:
-          - env_var
-          - file
-      description: Update an instance-level variable
+      description: Create a new variable in a project
   securitySchemes:
     access_token_header:
       type: apiKey

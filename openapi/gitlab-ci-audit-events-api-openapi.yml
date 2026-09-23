@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Audit Events API
+  title: GitLab Audit Events API
   version: v4
-  description: Operations related to access requests
+  description: Operations about audit_events
 servers:
 - url: https://gitlab.com
 tags:
-- name: audit_events
+- name: Audit Events
   description: Operations about audit_events
 paths:
   /api/v4/groups/{id}/audit_events:
@@ -63,8 +63,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_AuditEvent'
       tags:
-      - audit_events
+      - Audit Events
       operationId: getApiV4GroupsIdAuditEvents
+      summary: Get api V4 groups id audit events
+      x-summary-source: derived
 components:
   schemas:
     API_Entities_AuditEvent:

@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Cluster Agents API
+  title: GitLab Cluster Agents API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to the GitLab agent for Kubernetes
 servers:
 - url: https://gitlab.com
 tags:
@@ -271,6 +271,29 @@ paths:
       operationId: deleteApiV4ProjectsIdClusterAgentsAgentId
 components:
   schemas:
+    API_Entities_Clusters_Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        config_project:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+        created_at:
+          type: string
+        created_by_user_id:
+          type: string
+        is_receptive:
+          type: string
+      required:
+      - id
+      - name
+      - config_project
+      - created_at
+      - created_by_user_id
+      - is_receptive
+      description: API_Entities_Clusters_Agent model
     API_Entities_ProjectIdentity:
       type: object
       properties:
@@ -305,35 +328,6 @@ components:
       - path
       - path_with_namespace
       - created_at
-    API_Entities_Clusters_AgentToken:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        agent_id:
-          type: string
-        status:
-          type: string
-        created_at:
-          type: string
-        created_by_user_id:
-          type: string
-        last_used_at:
-          type: string
-      required:
-      - id
-      - name
-      - description
-      - agent_id
-      - status
-      - created_at
-      - created_by_user_id
-      - last_used_at
-      description: API_Entities_Clusters_AgentToken model
     API_Entities_Clusters_AgentTokenBasic:
       type: object
       properties:
@@ -369,6 +363,47 @@ components:
       required:
       - name
       description: Register an agent with a project
+    postApiV4ProjectsIdClusterAgentsAgentIdTokens:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the token
+        description:
+          type: string
+          description: The description for the token
+      required:
+      - name
+      description: Create an agent token
+    API_Entities_Clusters_AgentToken:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        agent_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+        created_by_user_id:
+          type: string
+        last_used_at:
+          type: string
+      required:
+      - id
+      - name
+      - description
+      - agent_id
+      - status
+      - created_at
+      - created_by_user_id
+      - last_used_at
+      description: API_Entities_Clusters_AgentToken model
     API_Entities_Clusters_AgentTokenWithToken:
       type: object
       properties:
@@ -401,41 +436,6 @@ components:
       - last_used_at
       - token
       description: API_Entities_Clusters_AgentTokenWithToken model
-    API_Entities_Clusters_Agent:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        config_project:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-        created_at:
-          type: string
-        created_by_user_id:
-          type: string
-        is_receptive:
-          type: string
-      required:
-      - id
-      - name
-      - config_project
-      - created_at
-      - created_by_user_id
-      - is_receptive
-      description: API_Entities_Clusters_Agent model
-    postApiV4ProjectsIdClusterAgentsAgentIdTokens:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name for the token
-        description:
-          type: string
-          description: The description for the token
-      required:
-      - name
-      description: Create an agent token
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Chaos API
+  title: GitLab Chaos API
   version: v4
-  description: Operations related to access requests
+  description: Operations about chaos
 servers:
 - url: https://gitlab.com
 tags:
-- name: chaos
+- name: Chaos
   description: Operations about chaos
 paths:
   /api/v4/chaos/test:
@@ -16,9 +16,7 @@ paths:
 
         When enabled, introduces a 20% chance of a 500 error and a 20% chance of
 
-        a 300ms delay. Returns 200 OK otherwise.
-
-        '
+        a 300ms delay. Returns 200 OK otherwise.'
       responses:
         '200':
           description: OK
@@ -29,7 +27,7 @@ paths:
         '500':
           description: Internal Server Error (chaos-induced)
       tags:
-      - chaos
+      - Chaos
       operationId: getApiV4ChaosTest
 components:
   securitySchemes:

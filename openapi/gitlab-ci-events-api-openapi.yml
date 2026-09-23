@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Events API
+  title: GitLab Events API
   version: v4
-  description: Operations related to access requests
+  description: Operations about events
 servers:
 - url: https://gitlab.com
 tags:
-- name: events
+- name: Events
   description: Operations about events
 paths:
   /api/v4/projects/{id}/events:
@@ -91,8 +91,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Event'
       tags:
-      - events
+      - Events
       operationId: getApiV4ProjectsIdEvents
+      summary: Get api V4 projects id events
+      x-summary-source: derived
   /api/v4/events:
     get:
       summary: List currently authenticated user's events
@@ -181,7 +183,7 @@ paths:
         '401':
           description: Unauthorized
       tags:
-      - events
+      - Events
       operationId: getApiV4Events
   /api/v4/users/{id}/events:
     get:
@@ -270,63 +272,76 @@ paths:
         '404':
           description: Not found
       tags:
-      - events
+      - Events
       operationId: getApiV4UsersIdEvents
 components:
   schemas:
-    API_Entities_Suggestion:
+    API_Entities_Event:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        from_line:
+        project_id:
           type: integer
           format: int32
-          example: 1
-        to_line:
+          example: 2
+        action_name:
+          type: string
+          example: closed
+        target_id:
           type: integer
           format: int32
-          example: 1
-        appliable:
-          type: boolean
-          example: true
-        applied:
+          example: 160
+        target_iid:
+          type: integer
+          format: int32
+          example: 157
+        target_type:
+          type: string
+          example: Issue
+        author_id:
+          type: integer
+          format: int32
+          example: 25
+        target_title:
+          type: string
+          example: Public project search field
+        created_at:
+          type: string
+          example: '2017-02-09T10:43:19.667Z'
+        note:
+          $ref: '#/components/schemas/API_Entities_Note'
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        wiki_page:
+          $ref: '#/components/schemas/API_Entities_WikiPageBasic'
+        imported:
           type: boolean
           example: false
-        from_content:
+        imported_from:
           type: string
-          example: 'Original content
-
-            '
-        to_content:
+          example: none
+        push_data:
+          $ref: '#/components/schemas/API_Entities_PushEventPayload'
+        author_username:
           type: string
-          example: 'New content
-
-            '
+          example: root
       required:
       - id
-      - from_line
-      - to_line
-      - appliable
-      - applied
-      - from_content
-      - to_content
-      description: API_Entities_Suggestion model
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
+      - project_id
+      - action_name
+      - target_id
+      - target_iid
+      - target_type
+      - author_id
+      - target_title
+      - created_at
+      - imported
+      - imported_from
+      - author_username
+      description: API_Entities_Event model
     API_Entities_Note:
       type: object
       properties:
@@ -419,6 +434,28 @@ components:
       - imported_from
       - noteable_iid
       - commands_changes
+    API_Entities_WikiPageBasic:
+      type: object
+      properties:
+        format:
+          type: string
+          example: markdown
+        slug:
+          type: string
+          example: deploy
+        title:
+          type: string
+          example: deploy
+        wiki_page_meta_id:
+          type: integer
+          format: int32
+          example: 123
+      required:
+      - format
+      - slug
+      - title
+      - wiki_page_meta_id
+      description: API_Entities_WikiPageBasic model
     API_Entities_PushEventPayload:
       type: object
       properties:
@@ -501,94 +538,59 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
-    API_Entities_Event:
+    API_Entities_Suggestion:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        project_id:
+        from_line:
           type: integer
           format: int32
-          example: 2
-        action_name:
-          type: string
-          example: closed
-        target_id:
+          example: 1
+        to_line:
           type: integer
           format: int32
-          example: 160
-        target_iid:
-          type: integer
-          format: int32
-          example: 157
-        target_type:
-          type: string
-          example: Issue
-        author_id:
-          type: integer
-          format: int32
-          example: 25
-        target_title:
-          type: string
-          example: Public project search field
-        created_at:
-          type: string
-          example: '2017-02-09T10:43:19.667Z'
-        note:
-          $ref: '#/components/schemas/API_Entities_Note'
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        wiki_page:
-          $ref: '#/components/schemas/API_Entities_WikiPageBasic'
-        imported:
+          example: 1
+        appliable:
+          type: boolean
+          example: true
+        applied:
           type: boolean
           example: false
-        imported_from:
+        from_content:
           type: string
-          example: none
-        push_data:
-          $ref: '#/components/schemas/API_Entities_PushEventPayload'
-        author_username:
+          example: 'Original content
+
+            '
+        to_content:
           type: string
-          example: root
+          example: 'New content
+
+            '
       required:
       - id
-      - project_id
-      - action_name
-      - target_id
-      - target_iid
-      - target_type
-      - author_id
-      - target_title
-      - created_at
-      - imported
-      - imported_from
-      - author_username
-      description: API_Entities_Event model
-    API_Entities_WikiPageBasic:
+      - from_line
+      - to_line
+      - appliable
+      - applied
+      - from_content
+      - to_content
+      description: API_Entities_Suggestion model
+    API_Entities_CustomAttribute:
       type: object
       properties:
-        format:
+        key:
           type: string
-          example: markdown
-        slug:
+          example: foo
+        value:
           type: string
-          example: deploy
-        title:
-          type: string
-          example: deploy
-        wiki_page_meta_id:
-          type: integer
-          format: int32
-          example: 123
+          example: bar
       required:
-      - format
-      - slug
-      - title
-      - wiki_page_meta_id
-      description: API_Entities_WikiPageBasic model
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

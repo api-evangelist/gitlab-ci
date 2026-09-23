@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Invitations API
+  title: GitLab Invitations API
   version: v4
-  description: Operations related to access requests
+  description: Operations about invitations
 servers:
 - url: https://gitlab.com
 tags:
-- name: invitations
+- name: Invitations
   description: Operations about invitations
 paths:
   /api/v4/groups/{id}/invitations:
     post:
-      summary: Invite non-members by email address to a group or project.
+      summary: Invite non-members by email address to a group or project
       description: This feature was introduced in GitLab 13.6
       parameters:
       - in: path
@@ -28,7 +28,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Invitation'
       tags:
-      - invitations
+      - Invitations
       operationId: postApiV4GroupsIdInvitations
       requestBody:
         content:
@@ -80,7 +80,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Invitation'
       tags:
-      - invitations
+      - Invitations
       operationId: getApiV4GroupsIdInvitations
   /api/v4/groups/{id}/invitations/{email}:
     put:
@@ -106,7 +106,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Invitation'
       tags:
-      - invitations
+      - Invitations
       operationId: putApiV4GroupsIdInvitationsEmail
       requestBody:
         content:
@@ -114,6 +114,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4GroupsIdInvitationsEmail'
         required: true
+      summary: Put api V4 groups id invitations email
+      x-summary-source: derived
     delete:
       description: Removes an invitation from a group or project.
       parameters:
@@ -139,11 +141,13 @@ paths:
         '409':
           description: Could not delete invitation
       tags:
-      - invitations
+      - Invitations
       operationId: deleteApiV4GroupsIdInvitationsEmail
+      summary: Delete api V4 groups id invitations email
+      x-summary-source: derived
   /api/v4/projects/{id}/invitations:
     post:
-      summary: Invite non-members by email address to a group or project.
+      summary: Invite non-members by email address to a group or project
       description: This feature was introduced in GitLab 13.6
       parameters:
       - in: path
@@ -160,7 +164,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Invitation'
       tags:
-      - invitations
+      - Invitations
       operationId: postApiV4ProjectsIdInvitations
       requestBody:
         content:
@@ -212,7 +216,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Invitation'
       tags:
-      - invitations
+      - Invitations
       operationId: getApiV4ProjectsIdInvitations
   /api/v4/projects/{id}/invitations/{email}:
     put:
@@ -238,7 +242,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Invitation'
       tags:
-      - invitations
+      - Invitations
       operationId: putApiV4ProjectsIdInvitationsEmail
       requestBody:
         content:
@@ -246,6 +250,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdInvitationsEmail'
         required: true
+      summary: Put api V4 projects id invitations email
+      x-summary-source: derived
     delete:
       description: Removes an invitation from a group or project.
       parameters:
@@ -271,59 +277,13 @@ paths:
         '409':
           description: Could not delete invitation
       tags:
-      - invitations
+      - Invitations
       operationId: deleteApiV4ProjectsIdInvitationsEmail
+      summary: Delete api V4 projects id invitations email
+      x-summary-source: derived
 components:
   schemas:
     putApiV4GroupsIdInvitationsEmail:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: 'A valid access level (defaults: `30`, developer access level)'
-          enum:
-          - 10
-          - 15
-          - 20
-          - 30
-          - 40
-          - 50
-        expires_at:
-          type: string
-          format: date-time
-          description: Date string in ISO 8601 format (`YYYY-MM-DDTHH:MM:SSZ`)
-        member_role_id:
-          type: integer
-          format: int32
-          description: The ID of a member role for the invited user
-      description: Updates a group or project invitation.
-    API_Entities_Invitation:
-      type: object
-      properties:
-        access_level:
-          type: string
-        created_at:
-          type: string
-        expires_at:
-          type: string
-        invite_email:
-          type: string
-        invite_token:
-          type: string
-        user_name:
-          type: string
-        created_by_name:
-          type: string
-      required:
-      - access_level
-      - created_at
-      - expires_at
-      - invite_email
-      - invite_token
-      - created_by_name
-      description: API_Entities_Invitation model
-    putApiV4ProjectsIdInvitationsEmail:
       type: object
       properties:
         access_level:
@@ -386,6 +346,54 @@ components:
       required:
       - access_level
       description: Invite non-members by email address to a group or project.
+    putApiV4ProjectsIdInvitationsEmail:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: 'A valid access level (defaults: `30`, developer access level)'
+          enum:
+          - 10
+          - 15
+          - 20
+          - 30
+          - 40
+          - 50
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in ISO 8601 format (`YYYY-MM-DDTHH:MM:SSZ`)
+        member_role_id:
+          type: integer
+          format: int32
+          description: The ID of a member role for the invited user
+      description: Updates a group or project invitation.
+    API_Entities_Invitation:
+      type: object
+      properties:
+        access_level:
+          type: string
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        invite_email:
+          type: string
+        invite_token:
+          type: string
+        user_name:
+          type: string
+        created_by_name:
+          type: string
+      required:
+      - access_level
+      - created_at
+      - expires_at
+      - invite_email
+      - invite_token
+      - created_by_name
+      description: API_Entities_Invitation model
     postApiV4GroupsIdInvitations:
       type: object
       properties:

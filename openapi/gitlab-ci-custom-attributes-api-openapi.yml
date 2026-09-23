@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Custom Attributes API
+  title: GitLab Custom Attributes API
   version: v4
-  description: Operations related to access requests
+  description: Operations about custom_attributes
 servers:
 - url: https://gitlab.com
 tags:
-- name: custom_attributes
+- name: Custom Attributes
   description: Operations about custom_attributes
 paths:
   /api/v4/groups/{id}/custom_attributes:
@@ -27,8 +27,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: getApiV4GroupsIdCustomAttributes
+      summary: Get api V4 groups id custom attributes
+      x-summary-source: derived
   /api/v4/groups/{id}/custom_attributes/{key}:
     get:
       description: Get a custom attribute on a group
@@ -53,8 +55,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: getApiV4GroupsIdCustomAttributesKey
+      summary: Get api V4 groups id custom attributes key
+      x-summary-source: derived
     put:
       description: Set a custom attribute on a group
       parameters:
@@ -78,7 +82,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: putApiV4GroupsIdCustomAttributesKey
       requestBody:
         content:
@@ -86,6 +90,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4GroupsIdCustomAttributesKey'
         required: true
+      summary: Put api V4 groups id custom attributes key
+      x-summary-source: derived
     delete:
       description: Delete a custom attribute on a group
       parameters:
@@ -105,8 +111,10 @@ paths:
         '204':
           description: Delete a custom attribute on a group
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: deleteApiV4GroupsIdCustomAttributesKey
+      summary: Delete api V4 groups id custom attributes key
+      x-summary-source: derived
   /api/v4/projects/{id}/custom_attributes:
     get:
       description: Get all custom attributes on a project
@@ -125,8 +133,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: getApiV4ProjectsIdCustomAttributes
+      summary: Get api V4 projects id custom attributes
+      x-summary-source: derived
   /api/v4/projects/{id}/custom_attributes/{key}:
     get:
       description: Get a custom attribute on a project
@@ -151,8 +161,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: getApiV4ProjectsIdCustomAttributesKey
+      summary: Get api V4 projects id custom attributes key
+      x-summary-source: derived
     put:
       description: Set a custom attribute on a project
       parameters:
@@ -176,7 +188,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_CustomAttribute'
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: putApiV4ProjectsIdCustomAttributesKey
       requestBody:
         content:
@@ -184,6 +196,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdCustomAttributesKey'
         required: true
+      summary: Put api V4 projects id custom attributes key
+      x-summary-source: derived
     delete:
       description: Delete a custom attribute on a project
       parameters:
@@ -203,19 +217,12 @@ paths:
         '204':
           description: Delete a custom attribute on a project
       tags:
-      - custom_attributes
+      - Custom Attributes
       operationId: deleteApiV4ProjectsIdCustomAttributesKey
+      summary: Delete api V4 projects id custom attributes key
+      x-summary-source: derived
 components:
   schemas:
-    putApiV4GroupsIdCustomAttributesKey:
-      type: object
-      properties:
-        value:
-          type: string
-          description: The value of the custom attribute
-      required:
-      - value
-      description: Set a custom attribute on a group
     putApiV4ProjectsIdCustomAttributesKey:
       type: object
       properties:
@@ -225,6 +232,15 @@ components:
       required:
       - value
       description: Set a custom attribute on a project
+    putApiV4GroupsIdCustomAttributesKey:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the custom attribute
+      required:
+      - value
+      description: Set a custom attribute on a group
     API_Entities_CustomAttribute:
       type: object
       properties:

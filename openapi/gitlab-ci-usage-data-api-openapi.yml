@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Usage Data API
+  title: GitLab Usage Data API
   version: v4
-  description: Operations related to access requests
+  description: Operations about usage_data
 servers:
 - url: https://gitlab.com
 tags:
-- name: usage_data
+- name: Usage Data
   description: Operations about usage_data
 paths:
   /api/v4/usage_data/increment_counter:
@@ -21,7 +21,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - usage_data
+      - Usage Data
       operationId: postApiV4UsageDataIncrementCounter
       requestBody:
         content:
@@ -40,7 +40,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - usage_data
+      - Usage Data
       operationId: postApiV4UsageDataIncrementUniqueUsers
       requestBody:
         content:
@@ -48,6 +48,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4UsageDataIncrementUniqueUsers'
         required: true
+      summary: Post api V4 usage data increment unique users
+      x-summary-source: derived
   /api/v4/usage_data/track_events:
     post:
       summary: Track multiple gitlab internal events
@@ -60,7 +62,7 @@ paths:
         '401':
           description: Unauthorized
       tags:
-      - usage_data
+      - Usage Data
       operationId: postApiV4UsageDataTrackEvents
       requestBody:
         content:
@@ -82,7 +84,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - usage_data
+      - Usage Data
       operationId: getApiV4UsageDataServicePing
   /api/v4/usage_data/track_event:
     post:
@@ -96,7 +98,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - usage_data
+      - Usage Data
       operationId: postApiV4UsageDataTrackEvent
       requestBody:
         content:
@@ -118,7 +120,7 @@ paths:
         '404':
           description: Not Found
       tags:
-      - usage_data
+      - Usage Data
       operationId: getApiV4UsageDataNonSqlMetrics
   /api/v4/usage_data/queries:
     get:
@@ -134,10 +136,20 @@ paths:
         '404':
           description: Not Found
       tags:
-      - usage_data
+      - Usage Data
       operationId: getApiV4UsageDataQueries
 components:
   schemas:
+    postApiV4UsageDataIncrementUniqueUsers:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+      required:
+      - event
+      description: Track usage data event for the current user
     postApiV4UsageDataIncrementCounter:
       type: object
       properties:
@@ -148,6 +160,41 @@ components:
       required:
       - event
       description: Track usage data event
+    postApiV4UsageDataTrackEvent:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+        namespace_id:
+          type: integer
+          format: int32
+          description: Namespace ID
+          example: 1234
+        project_id:
+          type: integer
+          format: int32
+          description: Project ID
+          example: 1234
+        project_path:
+          type: string
+          description: Project path (used to resolve project_id if not provided)
+          example: namespace/project
+        additional_properties:
+          type: object
+          description: Additional properties to be tracked
+          example:
+            label: login_button
+            value: 1
+        send_to_snowplow:
+          type: boolean
+          description: Send the tracked event to Snowplow
+          default: false
+          example: true
+      required:
+      - event
+      description: Track gitlab internal events
     postApiV4UsageDataTrackEvents:
       type: object
       properties:
@@ -191,51 +238,6 @@ components:
       required:
       - events
       description: Track multiple gitlab internal events
-    postApiV4UsageDataIncrementUniqueUsers:
-      type: object
-      properties:
-        event:
-          type: string
-          description: The event name that should be tracked
-          example: i_quickactions_page
-      required:
-      - event
-      description: Track usage data event for the current user
-    postApiV4UsageDataTrackEvent:
-      type: object
-      properties:
-        event:
-          type: string
-          description: The event name that should be tracked
-          example: i_quickactions_page
-        namespace_id:
-          type: integer
-          format: int32
-          description: Namespace ID
-          example: 1234
-        project_id:
-          type: integer
-          format: int32
-          description: Project ID
-          example: 1234
-        project_path:
-          type: string
-          description: Project path (used to resolve project_id if not provided)
-          example: namespace/project
-        additional_properties:
-          type: object
-          description: Additional properties to be tracked
-          example:
-            label: login_button
-            value: 1
-        send_to_snowplow:
-          type: boolean
-          description: Send the tracked event to Snowplow
-          default: false
-          example: true
-      required:
-      - event
-      description: Track gitlab internal events
   securitySchemes:
     access_token_header:
       type: apiKey

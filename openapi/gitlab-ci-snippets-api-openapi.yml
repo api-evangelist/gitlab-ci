@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Snippets API
+  title: GitLab Snippets API
   version: v4
-  description: Operations related to access requests
+  description: Operations about snippets
 servers:
 - url: https://gitlab.com
 tags:
-- name: snippets
+- name: Snippets
   description: Operations about snippets
 paths:
   /api/v4/projects/{id}/snippets:
@@ -49,8 +49,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4ProjectsIdSnippets
+      summary: Get api V4 projects id snippets
+      x-summary-source: derived
     post:
       description: Create a new project snippet
       parameters:
@@ -74,7 +76,7 @@ paths:
         '422':
           description: Unprocessable entity
       tags:
-      - snippets
+      - Snippets
       operationId: postApiV4ProjectsIdSnippets
       requestBody:
         content:
@@ -82,6 +84,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdSnippets'
         required: true
+      summary: Post api V4 projects id snippets
+      x-summary-source: derived
   /api/v4/projects/{id}/snippets/{snippet_id}:
     get:
       description: Get a single project snippet
@@ -109,8 +113,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4ProjectsIdSnippetsSnippetId
+      summary: Get api V4 projects id snippets snippet id
+      x-summary-source: derived
     put:
       description: Update an existing project snippet
       parameters:
@@ -141,7 +147,7 @@ paths:
         '422':
           description: Unprocessable entity
       tags:
-      - snippets
+      - Snippets
       operationId: putApiV4ProjectsIdSnippetsSnippetId
       requestBody:
         content:
@@ -149,6 +155,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdSnippetsSnippetId'
         required: true
+      summary: Put api V4 projects id snippets snippet id
+      x-summary-source: derived
     delete:
       description: Delete a project snippet
       parameters:
@@ -173,8 +181,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: deleteApiV4ProjectsIdSnippetsSnippetId
+      summary: Delete api V4 projects id snippets snippet id
+      x-summary-source: derived
   /api/v4/projects/{id}/snippets/{snippet_id}/raw:
     get:
       description: Get a raw project snippet
@@ -202,8 +212,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4ProjectsIdSnippetsSnippetIdRaw
+      summary: Get api V4 projects id snippets snippet id raw
+      x-summary-source: derived
   /api/v4/projects/{id}/snippets/{snippet_id}/files/{ref}/{file_path}/raw:
     get:
       description: Get raw project snippet file contents from the repository
@@ -242,8 +254,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4ProjectsIdSnippetsSnippetIdFilesRefFilePathRaw
+      summary: Get api V4 projects id snippets snippet id files ref file path raw
+      x-summary-source: derived
   /api/v4/projects/{id}/snippets/{snippet_id}/user_agent_detail:
     get:
       description: Get the user agent details for a project snippet
@@ -271,8 +285,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4ProjectsIdSnippetsSnippetIdUserAgentDetail
+      summary: Get api V4 projects id snippets snippet id user agent detail
+      x-summary-source: derived
   /api/v4/snippets:
     get:
       summary: Get a snippets list for an authenticated user
@@ -322,7 +338,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4Snippets
     post:
       summary: Create new snippet
@@ -341,7 +357,7 @@ paths:
         '422':
           description: Unprocessable entity
       tags:
-      - snippets
+      - Snippets
       operationId: postApiV4Snippets
       requestBody:
         content:
@@ -398,7 +414,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4SnippetsPublic
   /api/v4/snippets/all:
     get:
@@ -455,7 +471,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4SnippetsAll
   /api/v4/snippets/{id}:
     get:
@@ -479,7 +495,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4SnippetsId
     put:
       summary: Update an existing snippet
@@ -506,7 +522,7 @@ paths:
         '422':
           description: Unprocessable entity
       tags:
-      - snippets
+      - Snippets
       operationId: putApiV4SnippetsId
       requestBody:
         content:
@@ -537,7 +553,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: deleteApiV4SnippetsId
   /api/v4/snippets/{id}/raw:
     get:
@@ -557,7 +573,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4SnippetsIdRaw
   /api/v4/snippets/{id}/files/{ref}/{file_path}/raw:
     get:
@@ -587,8 +603,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4SnippetsIdFilesRefFilePathRaw
+      summary: Get api V4 snippets id files ref file path raw
+      x-summary-source: derived
   /api/v4/snippets/{id}/user_agent_detail:
     get:
       description: Get the user agent details for a snippet
@@ -610,65 +628,12 @@ paths:
         '404':
           description: Not found
       tags:
-      - snippets
+      - Snippets
       operationId: getApiV4SnippetsIdUserAgentDetail
+      summary: Get api V4 snippets id user agent detail
+      x-summary-source: derived
 components:
   schemas:
-    postApiV4Snippets:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The title of a snippet
-        description:
-          type: string
-          description: The description of a snippet
-        visibility:
-          type: string
-          description: The visibility of the snippet
-          enum:
-          - private
-          - internal
-          - public
-          default: internal
-        files:
-          type: array
-          description: An array of files
-          items:
-            type: object
-            properties:
-              file_path:
-                type: string
-                description: The path of a snippet file
-              content:
-                type: string
-                description: The content of a snippet file
-            required:
-            - file_path
-            - content
-        content:
-          type: string
-          description: The content of a snippet
-        file_name:
-          type: string
-          description: The name of a snippet file
-      required:
-      - title
-      - file_name
-      description: Create new snippet
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
     API_Entities_PersonalSnippet:
       type: object
       properties:
@@ -746,6 +711,144 @@ components:
       - imported
       - imported_from
       description: API_Entities_PersonalSnippet model
+    putApiV4SnippetsId:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The content of a snippet
+        description:
+          type: string
+          description: The description of a snippet
+        file_name:
+          type: string
+          description: The name of a snippet file
+        title:
+          type: string
+          description: The title of a snippet
+        visibility:
+          type: string
+          description: The visibility of the snippet
+          enum:
+          - private
+          - internal
+          - public
+        files:
+          type: array
+          description: An array of files to update
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                description: 'The type of action to perform on the file, must be one of: create, update, delete, move'
+                enum:
+                - create
+                - update
+                - delete
+                - move
+              content:
+                type: string
+                description: The content of a snippet
+              file_path:
+                type: string
+                description: The file path of a snippet file
+              previous_path:
+                type: string
+                description: The previous path of a snippet file
+            required:
+            - action
+      description: Update an existing snippet
+    putApiV4ProjectsIdSnippetsSnippetId:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The content of the snippet
+        description:
+          type: string
+          description: The description of a snippet
+        file_name:
+          type: string
+          description: The file name of the snippet
+        title:
+          type: string
+          description: The title of the snippet
+        visibility:
+          type: string
+          description: The visibility of the snippet
+          enum:
+          - private
+          - internal
+          - public
+        files:
+          type: array
+          description: An array of files to update
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                description: 'The type of action to perform on the file, must be one of: create, update, delete, move'
+                enum:
+                - create
+                - update
+                - delete
+                - move
+              content:
+                type: string
+                description: The content of a snippet
+              file_path:
+                type: string
+                description: The file path of a snippet file
+              previous_path:
+                type: string
+                description: The previous path of a snippet file
+            required:
+            - action
+      description: Update an existing project snippet
+    postApiV4Snippets:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of a snippet
+        description:
+          type: string
+          description: The description of a snippet
+        visibility:
+          type: string
+          description: The visibility of the snippet
+          enum:
+          - private
+          - internal
+          - public
+          default: internal
+        files:
+          type: array
+          description: An array of files
+          items:
+            type: object
+            properties:
+              file_path:
+                type: string
+                description: The path of a snippet file
+              content:
+                type: string
+                description: The content of a snippet file
+            required:
+            - file_path
+            - content
+        content:
+          type: string
+          description: The content of a snippet
+        file_name:
+          type: string
+          description: The name of a snippet file
+      required:
+      - title
+      - file_name
+      description: Create new snippet
     postApiV4ProjectsIdSnippets:
       type: object
       properties:
@@ -865,50 +968,23 @@ components:
       - imported
       - imported_from
       description: API_Entities_ProjectSnippet model
-    API_Entities_UserBasic:
+    API_Entities_UserAgentDetail:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
+        user_agent:
           type: string
-          example: admin
-        public_email:
+          example: AppleWebKit/537.36
+        ip_address:
           type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
+          example: 127.0.0.1
+        akismet_submitted:
           type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
+          example: false
       required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
+      - user_agent
+      - ip_address
+      - akismet_submitted
+      description: API_Entities_UserAgentDetail model
     API_Entities_Snippet:
       type: object
       properties:
@@ -986,119 +1062,63 @@ components:
       - imported
       - imported_from
       description: API_Entities_Snippet model
-    API_Entities_UserAgentDetail:
+    API_Entities_UserBasic:
       type: object
       properties:
-        user_agent:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
           type: string
-          example: AppleWebKit/537.36
-        ip_address:
+          example: admin
+        public_email:
           type: string
-          example: 127.0.0.1
-        akismet_submitted:
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
           type: boolean
-          example: false
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
       required:
-      - user_agent
-      - ip_address
-      - akismet_submitted
-      description: API_Entities_UserAgentDetail model
-    putApiV4ProjectsIdSnippetsSnippetId:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_CustomAttribute:
       type: object
       properties:
-        content:
+        key:
           type: string
-          description: The content of the snippet
-        description:
+          example: foo
+        value:
           type: string
-          description: The description of a snippet
-        file_name:
-          type: string
-          description: The file name of the snippet
-        title:
-          type: string
-          description: The title of the snippet
-        visibility:
-          type: string
-          description: The visibility of the snippet
-          enum:
-          - private
-          - internal
-          - public
-        files:
-          type: array
-          description: An array of files to update
-          items:
-            type: object
-            properties:
-              action:
-                type: string
-                description: 'The type of action to perform on the file, must be one of: create, update, delete, move'
-                enum:
-                - create
-                - update
-                - delete
-                - move
-              content:
-                type: string
-                description: The content of a snippet
-              file_path:
-                type: string
-                description: The file path of a snippet file
-              previous_path:
-                type: string
-                description: The previous path of a snippet file
-            required:
-            - action
-      description: Update an existing project snippet
-    putApiV4SnippetsId:
-      type: object
-      properties:
-        content:
-          type: string
-          description: The content of a snippet
-        description:
-          type: string
-          description: The description of a snippet
-        file_name:
-          type: string
-          description: The name of a snippet file
-        title:
-          type: string
-          description: The title of a snippet
-        visibility:
-          type: string
-          description: The visibility of the snippet
-          enum:
-          - private
-          - internal
-          - public
-        files:
-          type: array
-          description: An array of files to update
-          items:
-            type: object
-            properties:
-              action:
-                type: string
-                description: 'The type of action to perform on the file, must be one of: create, update, delete, move'
-                enum:
-                - create
-                - update
-                - delete
-                - move
-              content:
-                type: string
-                description: The content of a snippet
-              file_path:
-                type: string
-                description: The file path of a snippet file
-              previous_path:
-                type: string
-                description: The previous path of a snippet file
-            required:
-            - action
-      description: Update an existing snippet
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

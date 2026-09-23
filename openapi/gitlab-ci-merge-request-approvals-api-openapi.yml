@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Merge Request Approvals API
+  title: GitLab Merge Request Approvals API
   version: v4
-  description: Operations related to access requests
+  description: Operations about merge_request_approvals
 servers:
 - url: https://gitlab.com
 tags:
@@ -37,6 +37,8 @@ paths:
       tags:
       - merge_request_approvals
       operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals
+      summary: Get api V4 projects id merge requests merge request iid approvals
+      x-summary-source: derived
     post:
       summary: Change approval-related configuration
       description: Deprecated in 16.0. Use the merge request approvals API instead.
@@ -107,6 +109,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove'
         required: true
+      summary: Post api V4 projects id merge requests merge request iid approve
+      x-summary-source: derived
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/unapprove:
     post:
       description: Remove an approval from a merge request
@@ -137,6 +141,8 @@ paths:
       tags:
       - merge_request_approvals
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidUnapprove
+      summary: Post api V4 projects id merge requests merge request iid unapprove
+      x-summary-source: derived
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_approvals:
     put:
       summary: Remove all merge request approvals
@@ -191,102 +197,10 @@ paths:
       tags:
       - merge_request_approvals
       operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovalState
+      summary: Get api V4 projects id merge requests merge request iid approval state
+      x-summary-source: derived
 components:
   schemas:
-    API_Entities_Namespace_RootStorageStatistics:
-      type: object
-      properties:
-        build_artifacts_size:
-          type: integer
-          format: int32
-          description: CI artifacts size in bytes.
-        container_registry_size:
-          type: integer
-          format: int32
-          description: container registry size in bytes.
-        container_registry_size_is_estimated:
-          type: boolean
-          description: Indicates whether the deduplicated container registry size for the namespace is an estimated value or not.
-        dependency_proxy_size:
-          type: integer
-          format: int32
-          description: Dependency Proxy sizes in bytes.
-        lfs_objects_size:
-          type: integer
-          format: int32
-          description: LFS objects size in bytes.
-        packages_size:
-          type: integer
-          format: int32
-          description: Packages size in bytes.
-        pipeline_artifacts_size:
-          type: integer
-          format: int32
-          description: CI pipeline artifacts size in bytes.
-        repository_size:
-          type: integer
-          format: int32
-          description: Git repository size in bytes.
-        snippets_size:
-          type: integer
-          format: int32
-          description: Snippets size in bytes.
-        storage_size:
-          type: integer
-          format: int32
-          description: Total storage in bytes.
-        uploads_size:
-          type: integer
-          format: int32
-          description: Uploads size in bytes.
-        wiki_size:
-          type: integer
-          format: int32
-          description: Wiki size in bytes.
-      required:
-      - build_artifacts_size
-      - container_registry_size
-      - container_registry_size_is_estimated
-      - dependency_proxy_size
-      - lfs_objects_size
-      - packages_size
-      - pipeline_artifacts_size
-      - repository_size
-      - snippets_size
-      - storage_size
-      - uploads_size
-      - wiki_size
-    postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove:
-      type: object
-      properties:
-        sha:
-          type: string
-          description: When present, must have the HEAD SHA of the source branch
-        publish_review:
-          type: boolean
-          description: When `true` submits pending review comments
-        approval_password:
-          type: string
-          description: Current user's password if project is set to require explicit auth on approval
-          example: secret
-      description: Approve a merge request
-    API_Entities_MergeRequestApprovals:
-      type: object
-      properties:
-        user_has_approved:
-          type: boolean
-        user_can_approve:
-          type: boolean
-        approved:
-          type: boolean
-        approved_by:
-          $ref: '#/components/schemas/API_Entities_Approvals'
-      required:
-      - user_has_approved
-      - user_can_approve
-      - approved
-      - approved_by
-      description: API_Entities_MergeRequestApprovals model
     API_Entities_ApprovalRuleShort:
       type: object
       properties:
@@ -304,40 +218,6 @@ components:
       - id
       - name
       - rule_type
-    API_Entities_Approvals:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        approved_at:
-          type: string
-          format: date-time
-          example: '2025-01-01T10:00:00Z'
-      required:
-      - user
-      - approved_at
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    API_Entities_MergeRequestApprovalRule_SourceRule:
-      type: object
-      properties:
-        approvals_required:
-          type: integer
-          format: int32
-          example: 2
-      required:
-      - approvals_required
     API_Entities_Group:
       type: object
       properties:
@@ -516,61 +396,18 @@ components:
       - ldap_access
       - wiki_access_level
       description: API_Entities_Group model
-    postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals:
+    API_Entities_Approvals:
       type: object
       properties:
-        approvals_required:
-          type: integer
-          format: int32
-          description: The amount of approvals required. Must be higher than the project approvals
-          example: 2
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        approved_at:
+          type: string
+          format: date-time
+          example: '2025-01-01T10:00:00Z'
       required:
-      - approvals_required
-      description: Change approval-related configuration
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
+      - user
+      - approved_at
     API_Entities_MergeRequestApprovalState:
       type: object
       properties:
@@ -608,6 +445,15 @@ components:
       - cn
       - group_access
       - provider
+    API_Entities_MergeRequestApprovalRule_SourceRule:
+      type: object
+      properties:
+        approvals_required:
+          type: integer
+          format: int32
+          example: 2
+      required:
+      - approvals_required
     API_Entities_MergeRequestApprovalStateRule:
       type: object
       properties:
@@ -672,6 +518,23 @@ components:
       - code_owner
       - approved_by
       - approved
+    API_Entities_MergeRequestApprovals:
+      type: object
+      properties:
+        user_has_approved:
+          type: boolean
+        user_can_approve:
+          type: boolean
+        approved:
+          type: boolean
+        approved_by:
+          $ref: '#/components/schemas/API_Entities_Approvals'
+      required:
+      - user_has_approved
+      - user_can_approve
+      - approved
+      - approved_by
+      description: API_Entities_MergeRequestApprovals model
     API_Entities_ApprovalState:
       type: object
       properties:
@@ -775,6 +638,138 @@ components:
       - multiple_approval_rules_available
       - invalid_approvers_rules
       description: API_Entities_ApprovalState model
+    API_Entities_Namespace_RootStorageStatistics:
+      type: object
+      properties:
+        build_artifacts_size:
+          type: integer
+          format: int32
+          description: CI artifacts size in bytes.
+        container_registry_size:
+          type: integer
+          format: int32
+          description: container registry size in bytes.
+        container_registry_size_is_estimated:
+          type: boolean
+          description: Indicates whether the deduplicated container registry size for the namespace is an estimated value or not.
+        dependency_proxy_size:
+          type: integer
+          format: int32
+          description: Dependency Proxy sizes in bytes.
+        lfs_objects_size:
+          type: integer
+          format: int32
+          description: LFS objects size in bytes.
+        packages_size:
+          type: integer
+          format: int32
+          description: Packages size in bytes.
+        pipeline_artifacts_size:
+          type: integer
+          format: int32
+          description: CI pipeline artifacts size in bytes.
+        repository_size:
+          type: integer
+          format: int32
+          description: Git repository size in bytes.
+        snippets_size:
+          type: integer
+          format: int32
+          description: Snippets size in bytes.
+        storage_size:
+          type: integer
+          format: int32
+          description: Total storage in bytes.
+        uploads_size:
+          type: integer
+          format: int32
+          description: Uploads size in bytes.
+        wiki_size:
+          type: integer
+          format: int32
+          description: Wiki size in bytes.
+      required:
+      - build_artifacts_size
+      - container_registry_size
+      - container_registry_size_is_estimated
+      - dependency_proxy_size
+      - lfs_objects_size
+      - packages_size
+      - pipeline_artifacts_size
+      - repository_size
+      - snippets_size
+      - storage_size
+      - uploads_size
+      - wiki_size
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove:
+      type: object
+      properties:
+        sha:
+          type: string
+          description: When present, must have the HEAD SHA of the source branch
+        publish_review:
+          type: boolean
+          description: When `true` submits pending review comments
+        approval_password:
+          type: string
+          description: Current user's password if project is set to require explicit auth on approval
+          example: secret
+      description: Approve a merge request
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals:
+      type: object
+      properties:
+        approvals_required:
+          type: integer
+          format: int32
+          description: The amount of approvals required. Must be higher than the project approvals
+          example: 2
+      required:
+      - approvals_required
+      description: Change approval-related configuration
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
     API_Entities_SamlGroupLink:
       type: object
       properties:
@@ -796,6 +791,19 @@ components:
       - name
       - access_level
       - provider
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

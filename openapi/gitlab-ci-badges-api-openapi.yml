@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Badges API
+  title: GitLab Badges API
   version: v4
-  description: Operations related to access requests
+  description: Operations about badges
 servers:
 - url: https://gitlab.com
 tags:
-- name: badges
+- name: Badges
   description: Operations about badges
 paths:
   /api/v4/groups/{id}/badges:
     get:
-      summary: Gets a list of group badges viewable by the authenticated user.
+      summary: Gets a list of group badges viewable by the authenticated user
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -54,10 +54,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: getApiV4GroupsIdBadges
     post:
-      summary: Adds a badge to a group.
+      summary: Adds a badge to a group
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -74,7 +74,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: postApiV4GroupsIdBadges
       requestBody:
         content:
@@ -84,7 +84,7 @@ paths:
         required: true
   /api/v4/groups/{id}/badges/render:
     get:
-      summary: Preview a badge from a group.
+      summary: Preview a badge from a group
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -113,11 +113,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_BasicBadgeDetails'
       tags:
-      - badges
+      - Badges
       operationId: getApiV4GroupsIdBadgesRender
   /api/v4/groups/{id}/badges/{badge_id}:
     get:
-      summary: Gets a badge of a group.
+      summary: Gets a badge of a group
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -141,10 +141,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: getApiV4GroupsIdBadgesBadgeId
     put:
-      summary: Updates a badge of a group.
+      summary: Updates a badge of a group
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -167,7 +167,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: putApiV4GroupsIdBadgesBadgeId
       requestBody:
         content:
@@ -176,7 +176,7 @@ paths:
               $ref: '#/components/schemas/putApiV4GroupsIdBadgesBadgeId'
         required: true
     delete:
-      summary: Removes a badge from the group.
+      summary: Removes a badge from the group
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -196,11 +196,11 @@ paths:
         '204':
           description: Removes a badge from the group.
       tags:
-      - badges
+      - Badges
       operationId: deleteApiV4GroupsIdBadgesBadgeId
   /api/v4/projects/{id}/badges:
     get:
-      summary: Gets a list of project badges viewable by the authenticated user.
+      summary: Gets a list of project badges viewable by the authenticated user
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -243,10 +243,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: getApiV4ProjectsIdBadges
     post:
-      summary: Adds a badge to a project.
+      summary: Adds a badge to a project
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -263,7 +263,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: postApiV4ProjectsIdBadges
       requestBody:
         content:
@@ -273,7 +273,7 @@ paths:
         required: true
   /api/v4/projects/{id}/badges/render:
     get:
-      summary: Preview a badge from a project.
+      summary: Preview a badge from a project
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -302,11 +302,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_BasicBadgeDetails'
       tags:
-      - badges
+      - Badges
       operationId: getApiV4ProjectsIdBadgesRender
   /api/v4/projects/{id}/badges/{badge_id}:
     get:
-      summary: Gets a badge of a project.
+      summary: Gets a badge of a project
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -330,10 +330,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: getApiV4ProjectsIdBadgesBadgeId
     put:
-      summary: Updates a badge of a project.
+      summary: Updates a badge of a project
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -356,7 +356,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Badge'
       tags:
-      - badges
+      - Badges
       operationId: putApiV4ProjectsIdBadgesBadgeId
       requestBody:
         content:
@@ -365,7 +365,7 @@ paths:
               $ref: '#/components/schemas/putApiV4ProjectsIdBadgesBadgeId'
         required: true
     delete:
-      summary: Removes a badge from the project.
+      summary: Removes a badge from the project
       description: This feature was introduced in GitLab 10.6.
       parameters:
       - in: path
@@ -385,26 +385,10 @@ paths:
         '204':
           description: Removes a badge from the project.
       tags:
-      - badges
+      - Badges
       operationId: deleteApiV4ProjectsIdBadgesBadgeId
 components:
   schemas:
-    postApiV4GroupsIdBadges:
-      type: object
-      properties:
-        link_url:
-          type: string
-          description: URL of the badge link
-        image_url:
-          type: string
-          description: URL of the badge image
-        name:
-          type: string
-          description: Name for the badge
-      required:
-      - link_url
-      - image_url
-      description: Adds a badge to a group.
     API_Entities_BasicBadgeDetails:
       type: object
       properties:
@@ -430,7 +414,7 @@ components:
       - rendered_link_url
       - rendered_image_url
       description: API_Entities_BasicBadgeDetails model
-    putApiV4GroupsIdBadgesBadgeId:
+    putApiV4ProjectsIdBadgesBadgeId:
       type: object
       properties:
         link_url:
@@ -442,7 +426,23 @@ components:
         name:
           type: string
           description: Name for the badge
-      description: Updates a badge of a group.
+      description: Updates a badge of a project.
+    postApiV4ProjectsIdBadges:
+      type: object
+      properties:
+        link_url:
+          type: string
+          description: URL of the badge link
+        image_url:
+          type: string
+          description: URL of the badge image
+        name:
+          type: string
+          description: Name for the badge
+      required:
+      - link_url
+      - image_url
+      description: Adds a badge to a project.
     API_Entities_Badge:
       type: object
       properties:
@@ -477,7 +477,7 @@ components:
       - id
       - kind
       description: API_Entities_Badge model
-    postApiV4ProjectsIdBadges:
+    postApiV4GroupsIdBadges:
       type: object
       properties:
         link_url:
@@ -492,8 +492,8 @@ components:
       required:
       - link_url
       - image_url
-      description: Adds a badge to a project.
-    putApiV4ProjectsIdBadgesBadgeId:
+      description: Adds a badge to a group.
+    putApiV4GroupsIdBadgesBadgeId:
       type: object
       properties:
         link_url:
@@ -505,7 +505,7 @@ components:
         name:
           type: string
           description: Name for the badge
-      description: Updates a badge of a project.
+      description: Updates a badge of a group.
   securitySchemes:
     access_token_header:
       type: apiKey

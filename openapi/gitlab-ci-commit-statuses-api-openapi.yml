@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Commit Statuses API
+  title: GitLab Commit Statuses API
   version: v4
-  description: Operations related to access requests
+  description: Operations about commit_statuses
 servers:
 - url: https://gitlab.com
 tags:
-- name: commit_statuses
+- name: Commit Statuses
   description: Operations about commit_statuses
 paths:
   /api/v4/projects/{id}/repository/commits/{sha}/statuses:
@@ -116,8 +116,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - commit_statuses
+      - Commit Statuses
       operationId: getApiV4ProjectsIdRepositoryCommitsShaStatuses
+      summary: Get api V4 projects id repository commits sha statuses
+      x-summary-source: derived
   /api/v4/projects/{id}/statuses/{sha}:
     post:
       description: Post status to a commit
@@ -153,7 +155,7 @@ paths:
         '409':
           description: Another update to this commit status is in progress
       tags:
-      - commit_statuses
+      - Commit Statuses
       operationId: postApiV4ProjectsIdStatusesSha
       requestBody:
         content:
@@ -161,55 +163,10 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdStatusesSha'
         required: true
+      summary: Post api V4 projects id statuses sha
+      x-summary-source: derived
 components:
   schemas:
-    postApiV4ProjectsIdStatusesSha:
-      type: object
-      properties:
-        state:
-          type: string
-          description: The state of the status
-          enum:
-          - pending
-          - running
-          - success
-          - failed
-          - canceled
-          - skipped
-          example: pending
-        ref:
-          type: string
-          description: The ref
-          example: develop
-        target_url:
-          type: string
-          description: The target URL to associate with this status
-          example: https://gitlab.example.com/janedoe/gitlab-foss/builds/91
-        description:
-          type: string
-          description: A short description of the status
-        name:
-          type: string
-          description: A string label to differentiate this status from the status of other systems
-          default: default
-          example: coverage
-        context:
-          type: string
-          description: A string label to differentiate this status from the status of other systems
-          default: default
-          example: coverage
-        coverage:
-          type: number
-          format: float
-          description: The total code coverage
-          example: 100.0
-        pipeline_id:
-          type: integer
-          format: int32
-          description: An existing pipeline ID, when multiple pipelines on the same commit SHA have been triggered
-      required:
-      - state
-      description: Post status to a commit
     API_Entities_CommitStatus:
       type: object
       properties:
@@ -275,6 +232,53 @@ components:
       - pipeline_id
       - author
       description: API_Entities_CommitStatus model
+    postApiV4ProjectsIdStatusesSha:
+      type: object
+      properties:
+        state:
+          type: string
+          description: The state of the status
+          enum:
+          - pending
+          - running
+          - success
+          - failed
+          - canceled
+          - skipped
+          example: pending
+        ref:
+          type: string
+          description: The ref
+          example: develop
+        target_url:
+          type: string
+          description: The target URL to associate with this status
+          example: https://gitlab.example.com/janedoe/gitlab-foss/builds/91
+        description:
+          type: string
+          description: A short description of the status
+        name:
+          type: string
+          description: A string label to differentiate this status from the status of other systems
+          default: default
+          example: coverage
+        context:
+          type: string
+          description: A string label to differentiate this status from the status of other systems
+          default: default
+          example: coverage
+        coverage:
+          type: number
+          format: float
+          description: The total code coverage
+          example: 100.0
+        pipeline_id:
+          type: integer
+          format: int32
+          description: An existing pipeline ID, when multiple pipelines on the same commit SHA have been triggered
+      required:
+      - state
+      description: Post status to a commit
     API_Entities_UserBasic:
       type: object
       properties:

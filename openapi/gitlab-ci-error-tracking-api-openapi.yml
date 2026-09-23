@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Error Tracking API
+  title: GitLab Error Tracking API
   version: v4
-  description: Operations related to access requests
+  description: Operations about error_trackings
 servers:
 - url: https://gitlab.com
 tags:
@@ -133,7 +133,7 @@ paths:
               $ref: '#/components/schemas/patchApiV4ProjectsIdErrorTrackingSettings'
         required: true
     put:
-      summary: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+      summary: Update Error Tracking project settings. Available in GitLab 15.10 and later
       description: Update Error Tracking settings for a project. Only for users with Maintainer role for the project.
       parameters:
       - in: path
@@ -166,52 +166,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_ErrorTracking_ClientKey:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        active:
-          type: boolean
-        public_key:
-          type: string
-          example: glet_aa77551d849c083f76d0bc545ed053a3
-        sentry_dsn:
-          type: string
-          example: https://glet_aa77551d849c083f76d0bc545ed053a3@example.com/errortracking/api/v1/projects/5
-      required:
-      - id
-      - active
-      - public_key
-      - sentry_dsn
-      description: API_Entities_ErrorTracking_ClientKey model
-    putApiV4ProjectsIdErrorTrackingSettings:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Pass true to enable the configured Error Tracking settings or false to disable it.
-        integrated:
-          type: boolean
-          description: Pass true to enable the integrated Error Tracking backend.
-      required:
-      - active
-      - integrated
-      description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
-    patchApiV4ProjectsIdErrorTrackingSettings:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Pass true to enable the already configured Error Tracking settings or false to disable it.
-        integrated:
-          type: boolean
-          description: Pass true to enable the integrated Error Tracking backend. Available in GitLab 14.2 and later.
-      required:
-      - active
-      description: Enable or disable the Error Tracking project settings
     API_Entities_ErrorTracking_ProjectSetting:
       type: object
       properties:
@@ -235,6 +189,52 @@ components:
       - api_url
       - integrated
       description: API_Entities_ErrorTracking_ProjectSetting model
+    patchApiV4ProjectsIdErrorTrackingSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Pass true to enable the already configured Error Tracking settings or false to disable it.
+        integrated:
+          type: boolean
+          description: Pass true to enable the integrated Error Tracking backend. Available in GitLab 14.2 and later.
+      required:
+      - active
+      description: Enable or disable the Error Tracking project settings
+    putApiV4ProjectsIdErrorTrackingSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Pass true to enable the configured Error Tracking settings or false to disable it.
+        integrated:
+          type: boolean
+          description: Pass true to enable the integrated Error Tracking backend.
+      required:
+      - active
+      - integrated
+      description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
+    API_Entities_ErrorTracking_ClientKey:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        active:
+          type: boolean
+        public_key:
+          type: string
+          example: glet_aa77551d849c083f76d0bc545ed053a3
+        sentry_dsn:
+          type: string
+          example: https://glet_aa77551d849c083f76d0bc545ed053a3@example.com/errortracking/api/v1/projects/5
+      required:
+      - id
+      - active
+      - public_key
+      - sentry_dsn
+      description: API_Entities_ErrorTracking_ClientKey model
   securitySchemes:
     access_token_header:
       type: apiKey

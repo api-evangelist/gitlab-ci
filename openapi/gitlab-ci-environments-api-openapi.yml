@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Environments API
+  title: GitLab Environments API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to environments
 servers:
 - url: https://gitlab.com
 tags:
-- name: environments
+- name: Environments
   description: Operations related to environments
 paths:
   /api/v4/projects/{id}/environments:
@@ -74,7 +74,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - environments
+      - Environments
       operationId: getApiV4ProjectsIdEnvironments
     post:
       summary: Create a new environment
@@ -100,7 +100,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - environments
+      - Environments
       operationId: postApiV4ProjectsIdEnvironments
       requestBody:
         content:
@@ -140,7 +140,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - environments
+      - Environments
       operationId: putApiV4ProjectsIdEnvironmentsEnvironmentId
       requestBody:
         content:
@@ -177,7 +177,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - environments
+      - Environments
       operationId: deleteApiV4ProjectsIdEnvironmentsEnvironmentId
     get:
       description: Get a specific environment
@@ -207,8 +207,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - environments
+      - Environments
       operationId: getApiV4ProjectsIdEnvironmentsEnvironmentId
+      summary: Get api V4 projects id environments environment id
+      x-summary-source: derived
   /api/v4/projects/{id}/environments/review_apps:
     delete:
       summary: Delete multiple stopped review apps
@@ -261,7 +263,7 @@ paths:
         '409':
           description: Conflict
       tags:
-      - environments
+      - Environments
       operationId: deleteApiV4ProjectsIdEnvironmentsReviewApps
   /api/v4/projects/{id}/environments/{environment_id}/stop:
     post:
@@ -295,7 +297,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - environments
+      - Environments
       operationId: postApiV4ProjectsIdEnvironmentsEnvironmentIdStop
       requestBody:
         content:
@@ -322,7 +324,7 @@ paths:
         '401':
           description: Unauthorized
       tags:
-      - environments
+      - Environments
       operationId: postApiV4ProjectsIdEnvironmentsStopStale
       requestBody:
         content:
@@ -332,52 +334,46 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_Deployment:
+    postApiV4ProjectsIdEnvironments:
       type: object
       properties:
-        id:
+        name:
+          type: string
+          description: The name of the environment
+        external_url:
+          type: string
+          description: Place to link to for this environment
+        tier:
+          type: string
+          description: The tier of the new environment. Allowed values are `production`, `staging`, `testing`, `development`, and `other`
+          enum:
+          - production
+          - staging
+          - testing
+          - development
+          - other
+        cluster_agent_id:
           type: integer
           format: int32
-          example: 41
-        iid:
-          type: integer
-          format: int32
-          example: 1
-        ref:
+          description: The ID of the Cluster Agent to associate with this environment
+        kubernetes_namespace:
           type: string
-          example: main
-        sha:
+          description: The Kubernetes namespace to associate with this environment
+        flux_resource_path:
           type: string
-          example: 99d03678b90d914dbb1b109132516d71a4a03ea8
-        created_at:
+          description: The Flux resource path to associate with this environment
+        description:
           type: string
-          format: date-time
-          example: '2016-08-11T11:32:35.444Z'
-        updated_at:
+          description: The description of the environment
+        auto_stop_setting:
           type: string
-          format: date-time
-          example: '2016-08-11T11:32:35.444Z'
-        user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        environment:
-          $ref: '#/components/schemas/API_Entities_EnvironmentBasic'
-        deployable:
-          $ref: '#/components/schemas/API_Entities_Ci_Job'
-        status:
-          type: string
-          example: created
+          description: The auto stop setting for the environment. Allowed values are `always` and `with_action`
+          enum:
+          - always
+          - with_action
       required:
-      - id
-      - iid
-      - ref
-      - sha
-      - created_at
-      - updated_at
-      - user
-      - environment
-      - deployable
-      - status
-      description: API_Entities_Deployment model
+      - name
+      description: Create a new environment
     API_Entities_Ci_Job:
       type: object
       properties:
@@ -501,93 +497,70 @@ components:
       - archived
       - tag_list
       description: API_Entities_Ci_Job model
-    postApiV4ProjectsIdEnvironmentsEnvironmentIdStop:
-      type: object
-      properties:
-        force:
-          type: boolean
-          description: Force environment to stop without executing `on_stop` actions
-          default: false
-      description: Stop an environment
-    putApiV4ProjectsIdEnvironmentsEnvironmentId:
-      type: object
-      properties:
-        external_url:
-          type: string
-          description: The new URL on which this deployment is viewable
-        tier:
-          type: string
-          description: The tier of the new environment. Allowed values are `production`, `staging`, `testing`, `development`, and `other`
-          enum:
-          - production
-          - staging
-          - testing
-          - development
-          - other
-        cluster_agent_id:
-          type: integer
-          format: int32
-          description: The ID of the Cluster Agent to associate with this environment
-        kubernetes_namespace:
-          type: string
-          description: The Kubernetes namespace to associate with this environment
-        flux_resource_path:
-          type: string
-          description: The Flux resource path to associate with this environment
-        description:
-          type: string
-          description: The description of the environment
-        auto_stop_setting:
-          type: string
-          description: The auto stop setting for the environment. Allowed values are `always` and `with_action`
-          enum:
-          - always
-          - with_action
-      description: Update an existing environment
-    API_Entities_UserBasic:
+    API_Entities_Ci_Runner:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          example: 1
-        username:
+          example: 8
+        description:
           type: string
-          example: admin
-        public_email:
+          example: test-1-20150125
+        ip_address:
           type: string
-          example: john@example.com
+          example: 127.0.0.1
+        active:
+          type: boolean
+          example: true
+        paused:
+          type: boolean
+          example: false
+        is_shared:
+          type: boolean
+          example: true
+        runner_type:
+          type: string
+          enum:
+          - instance_type
+          - group_type
+          - project_type
+          example: instance_type
         name:
           type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
+          example: test
+        online:
           type: boolean
-        avatar_url:
+          example: true
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
           type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
+          format: date-time
+          example: '2025-05-03T00:00:00.000Z'
+        status:
           type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
+          example: online
+        job_execution_status:
           type: string
-          example: https://gitlab.example.com/root
+          enum:
+          - active
+          - idle
+          example: idle
       required:
       - id
-      - username
-      - public_email
+      - description
+      - ip_address
+      - active
+      - paused
+      - is_shared
+      - runner_type
       - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
+      - online
+      - created_at
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_Runner model
     API_Entities_EnvironmentBasic:
       type: object
       properties:
@@ -620,280 +593,6 @@ components:
       - created_at
       - updated_at
       description: API_Entities_EnvironmentBasic model
-    API_Entities_LicenseBasic:
-      type: object
-      properties:
-        key:
-          type: string
-          example: gpl-3.0
-        name:
-          type: string
-          example: GNU General Public License v3.0
-        nickname:
-          type: string
-          example: GNU GPLv3
-        html_url:
-          type: string
-          example: http://choosealicense.com/licenses/gpl-3.0
-        source_url:
-          type: string
-      required:
-      - key
-      - name
-      - nickname
-      - html_url
-      - source_url
-    API_Entities_Environment:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
-          type: string
-          example: deploy
-        slug:
-          type: string
-          example: deploy
-        external_url:
-          type: string
-          example: https://deploy.gitlab.example.com
-        created_at:
-          type: string
-          format: date-time
-          example: '2019-05-25T18:55:13.252Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2019-05-25T18:55:13.252Z'
-        tier:
-          type: string
-          example: development
-        project:
-          $ref: '#/components/schemas/API_Entities_BasicProjectDetails'
-        last_deployment:
-          $ref: '#/components/schemas/API_Entities_Deployment'
-        state:
-          type: string
-          example: available
-        auto_stop_at:
-          type: string
-          format: date-time
-          example: '2019-05-25T18:55:13.252Z'
-        cluster_agent:
-          $ref: '#/components/schemas/API_Entities_Clusters_Agent'
-        kubernetes_namespace:
-          type: string
-        flux_resource_path:
-          type: string
-        description:
-          type: string
-          example: description
-        auto_stop_setting:
-          type: string
-          example: always
-      required:
-      - id
-      - name
-      - slug
-      - external_url
-      - created_at
-      - updated_at
-      - tier
-      - project
-      - state
-      - auto_stop_at
-      - description
-      - auto_stop_setting
-      description: API_Entities_Environment model
-    API_Entities_Ci_RunnerManager:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 8
-        system_id:
-          type: string
-          example: runner-1
-        version:
-          type: string
-          example: 16.11.0
-        revision:
-          type: string
-          example: 91a27b2a
-        platform:
-          type: string
-          example: linux
-        architecture:
-          type: string
-          example: amd64
-        created_at:
-          type: string
-          example: '2023-10-24T01:27:06.549Z'
-        contacted_at:
-          type: string
-          example: '2023-10-24T01:27:06.549Z'
-        ip_address:
-          type: string
-          example: 127.0.0.1
-        status:
-          type: string
-          example: online
-        job_execution_status:
-          type: string
-          enum:
-          - active
-          - idle
-          example: idle
-      required:
-      - id
-      - system_id
-      - version
-      - revision
-      - platform
-      - architecture
-      - created_at
-      - contacted_at
-      - ip_address
-      - status
-      - job_execution_status
-      description: API_Entities_Ci_RunnerManager model
-    API_Entities_Ci_JobArtifact:
-      type: object
-      properties:
-        file_type:
-          type: string
-          enum:
-          - archive
-          - metadata
-          - trace
-          - junit
-          - sast
-          - dependency_scanning
-          - container_scanning
-          - dast
-          - codequality
-          - license_scanning
-          - performance
-          - metrics
-          - metrics_referee
-          - network_referee
-          - lsif
-          - dotenv
-          - cobertura
-          - terraform
-          - accessibility
-          - cluster_applications
-          - secret_detection
-          - requirements
-          - coverage_fuzzing
-          - browser_performance
-          - load_performance
-          - api_fuzzing
-          - cluster_image_scanning
-          - cyclonedx
-          - requirements_v2
-          - annotations
-          - repository_xray
-          - jacoco
-          - scip
-          - sarif
-          - environment_key
-          example: archive
-        size:
-          type: integer
-          format: int32
-          example: 1000
-        filename:
-          type: string
-          example: artifacts.zip
-        file_format:
-          type: string
-          enum:
-          - raw
-          - zip
-          - gzip
-          example: zip
-      required:
-      - file_type
-      - size
-      - filename
-      - file_format
-    API_Entities_Ci_PipelineBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      description: API_Entities_Ci_PipelineBasic model
-    API_Entities_Clusters_Agent:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        config_project:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-        created_at:
-          type: string
-        created_by_user_id:
-          type: string
-        is_receptive:
-          type: string
-      required:
-      - id
-      - name
-      - config_project
-      - created_at
-      - created_by_user_id
-      - is_receptive
-      description: API_Entities_Clusters_Agent model
     API_Entities_BasicProjectDetails:
       type: object
       properties:
@@ -996,121 +695,94 @@ components:
       - visibility
       - namespace
       description: API_Entities_BasicProjectDetails model
-    API_Entities_NamespaceBasic:
+    API_Entities_CustomAttribute:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          example: 2
-        name:
+        key:
           type: string
-          example: project
-        path:
+          example: foo
+        value:
           type: string
-          example: my_project
-        kind:
-          type: string
-          example: project
-        full_path:
-          type: string
-          example: group/my_project
-        parent_id:
-          type: integer
-          format: int32
-          example: 1
-        avatar_url:
-          type: string
-          example: https://example.com/avatar/12345
-        web_url:
-          type: string
-          example: https://example.com/group/my_project
+          example: bar
       required:
-      - id
-      - name
-      - path
-      - kind
-      - full_path
-      - parent_id
-      - avatar_url
-      - web_url
-    API_Entities_Ci_Runner:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_Commit:
       type: object
       properties:
         id:
-          type: integer
-          format: int32
-          example: 8
-        description:
           type: string
-          example: test-1-20150125
-        ip_address:
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
           type: string
-          example: 127.0.0.1
-        active:
-          type: boolean
-          example: true
-        paused:
-          type: boolean
-          example: false
-        is_shared:
-          type: boolean
-          example: true
-        runner_type:
-          type: string
-          enum:
-          - instance_type
-          - group_type
-          - project_type
-          example: instance_type
-        name:
-          type: string
-          example: test
-        online:
-          type: boolean
-          example: true
-        created_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
+          example: 2695effb
         created_at:
           type: string
           format: date-time
-          example: '2025-05-03T00:00:00.000Z'
-        status:
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
           type: string
-          example: online
-        job_execution_status:
+          example: Initial commit
+        message:
           type: string
-          enum:
-          - active
-          - idle
-          example: idle
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
       required:
       - id
-      - description
-      - ip_address
-      - active
-      - paused
-      - is_shared
-      - runner_type
-      - name
-      - online
+      - short_id
       - created_at
-      - status
-      - job_execution_status
-      description: API_Entities_Ci_Runner model
-    API_Entities_Ci_JobArtifactFile:
-      type: object
-      properties:
-        filename:
-          type: string
-          example: artifacts.zip
-        size:
-          type: integer
-          format: int32
-          example: 1000
-      required:
-      - filename
-      - size
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
+      - web_url
+      description: API_Entities_Commit model
     API_Entities_ProjectIdentity:
       type: object
       properties:
@@ -1145,19 +817,390 @@ components:
       - path
       - path_with_namespace
       - created_at
-    API_Entities_CustomAttribute:
+    API_Entities_Ci_JobArtifactFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: artifacts.zip
+        size:
+          type: integer
+          format: int32
+          example: 1000
+      required:
+      - filename
+      - size
+    API_Entities_Ci_JobArtifact:
+      type: object
+      properties:
+        file_type:
+          type: string
+          enum:
+          - archive
+          - metadata
+          - trace
+          - junit
+          - sast
+          - dependency_scanning
+          - container_scanning
+          - dast
+          - codequality
+          - license_scanning
+          - performance
+          - metrics
+          - metrics_referee
+          - network_referee
+          - lsif
+          - dotenv
+          - cobertura
+          - terraform
+          - accessibility
+          - cluster_applications
+          - secret_detection
+          - requirements
+          - coverage_fuzzing
+          - browser_performance
+          - load_performance
+          - api_fuzzing
+          - cluster_image_scanning
+          - cyclonedx
+          - requirements_v2
+          - annotations
+          - repository_xray
+          - jacoco
+          - scip
+          - sarif
+          - environment_key
+          example: archive
+        size:
+          type: integer
+          format: int32
+          example: 1000
+        filename:
+          type: string
+          example: artifacts.zip
+        file_format:
+          type: string
+          enum:
+          - raw
+          - zip
+          - gzip
+          example: zip
+      required:
+      - file_type
+      - size
+      - filename
+      - file_format
+    API_Entities_Clusters_Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        config_project:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+        created_at:
+          type: string
+        created_by_user_id:
+          type: string
+        is_receptive:
+          type: string
+      required:
+      - id
+      - name
+      - config_project
+      - created_at
+      - created_by_user_id
+      - is_receptive
+      description: API_Entities_Clusters_Agent model
+    putApiV4ProjectsIdEnvironmentsEnvironmentId:
+      type: object
+      properties:
+        external_url:
+          type: string
+          description: The new URL on which this deployment is viewable
+        tier:
+          type: string
+          description: The tier of the new environment. Allowed values are `production`, `staging`, `testing`, `development`, and `other`
+          enum:
+          - production
+          - staging
+          - testing
+          - development
+          - other
+        cluster_agent_id:
+          type: integer
+          format: int32
+          description: The ID of the Cluster Agent to associate with this environment
+        kubernetes_namespace:
+          type: string
+          description: The Kubernetes namespace to associate with this environment
+        flux_resource_path:
+          type: string
+          description: The Flux resource path to associate with this environment
+        description:
+          type: string
+          description: The description of the environment
+        auto_stop_setting:
+          type: string
+          description: The auto stop setting for the environment. Allowed values are `always` and `with_action`
+          enum:
+          - always
+          - with_action
+      description: Update an existing environment
+    API_Entities_Environment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: deploy
+        slug:
+          type: string
+          example: deploy
+        external_url:
+          type: string
+          example: https://deploy.gitlab.example.com
+        created_at:
+          type: string
+          format: date-time
+          example: '2019-05-25T18:55:13.252Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2019-05-25T18:55:13.252Z'
+        tier:
+          type: string
+          example: development
+        project:
+          $ref: '#/components/schemas/API_Entities_BasicProjectDetails'
+        last_deployment:
+          $ref: '#/components/schemas/API_Entities_Deployment'
+        state:
+          type: string
+          example: available
+        auto_stop_at:
+          type: string
+          format: date-time
+          example: '2019-05-25T18:55:13.252Z'
+        cluster_agent:
+          $ref: '#/components/schemas/API_Entities_Clusters_Agent'
+        kubernetes_namespace:
+          type: string
+        flux_resource_path:
+          type: string
+        description:
+          type: string
+          example: description
+        auto_stop_setting:
+          type: string
+          example: always
+      required:
+      - id
+      - name
+      - slug
+      - external_url
+      - created_at
+      - updated_at
+      - tier
+      - project
+      - state
+      - auto_stop_at
+      - description
+      - auto_stop_setting
+      description: API_Entities_Environment model
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_LicenseBasic:
       type: object
       properties:
         key:
           type: string
-          example: foo
-        value:
+          example: gpl-3.0
+        name:
           type: string
-          example: bar
+          example: GNU General Public License v3.0
+        nickname:
+          type: string
+          example: GNU GPLv3
+        html_url:
+          type: string
+          example: http://choosealicense.com/licenses/gpl-3.0
+        source_url:
+          type: string
       required:
       - key
-      - value
-      description: API_Entities_CustomAttribute model
+      - name
+      - nickname
+      - html_url
+      - source_url
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+    API_Entities_Ci_RunnerManager:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 8
+        system_id:
+          type: string
+          example: runner-1
+        version:
+          type: string
+          example: 16.11.0
+        revision:
+          type: string
+          example: 91a27b2a
+        platform:
+          type: string
+          example: linux
+        architecture:
+          type: string
+          example: amd64
+        created_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        contacted_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        ip_address:
+          type: string
+          example: 127.0.0.1
+        status:
+          type: string
+          example: online
+        job_execution_status:
+          type: string
+          enum:
+          - active
+          - idle
+          example: idle
+      required:
+      - id
+      - system_id
+      - version
+      - revision
+      - platform
+      - architecture
+      - created_at
+      - contacted_at
+      - ip_address
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_RunnerManager model
+    postApiV4ProjectsIdEnvironmentsEnvironmentIdStop:
+      type: object
+      properties:
+        force:
+          type: boolean
+          description: Force environment to stop without executing `on_stop` actions
+          default: false
+      description: Stop an environment
+    postApiV4ProjectsIdEnvironmentsStopStale:
+      type: object
+      properties:
+        before:
+          type: string
+          format: date-time
+          description: Stop all environments that were last modified or deployed to before this date.
+      required:
+      - before
+      description: Stop stale environments
     API_Entities_User:
       type: object
       properties:
@@ -1248,131 +1291,90 @@ components:
       - bot
       - work_information
       - local_time
-    postApiV4ProjectsIdEnvironmentsStopStale:
-      type: object
-      properties:
-        before:
-          type: string
-          format: date-time
-          description: Stop all environments that were last modified or deployed to before this date.
-      required:
-      - before
-      description: Stop stale environments
-    API_Entities_Commit:
+    API_Entities_Deployment:
       type: object
       properties:
         id:
+          type: integer
+          format: int32
+          example: 41
+        iid:
+          type: integer
+          format: int32
+          example: 1
+        ref:
           type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        short_id:
+          example: main
+        sha:
           type: string
-          example: 2695effb
+          example: 99d03678b90d914dbb1b109132516d71a4a03ea8
         created_at:
           type: string
           format: date-time
-          example: '2017-07-26T11:08:53.000+02:00'
-        parent_ids:
-          type: array
-          items:
-            type: string
-          example:
-          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-        title:
-          type: string
-          example: Initial commit
-        message:
-          type: string
-          example: Initial commit
-        author_name:
-          type: string
-          example: John Smith
-        author_email:
-          type: string
-          example: john@example.com
-        authored_date:
+          example: '2016-08-11T11:32:35.444Z'
+        updated_at:
           type: string
           format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        committer_name:
+          example: '2016-08-11T11:32:35.444Z'
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        environment:
+          $ref: '#/components/schemas/API_Entities_EnvironmentBasic'
+        deployable:
+          $ref: '#/components/schemas/API_Entities_Ci_Job'
+        status:
           type: string
-          example: Jack Smith
-        committer_email:
-          type: string
-          example: jack@example.com
-        committed_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        trailers:
-          type: object
-          example:
-            Merged-By: Jane Doe janedoe@gitlab.com
-        extended_trailers:
-          type: object
-          example:
-            Signed-off-by:
-            - John Doe <johndoe@gitlab.com>
-            - Jane Doe <janedoe@gitlab.com>
-        web_url:
-          type: string
-          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+          example: created
       required:
       - id
-      - short_id
+      - iid
+      - ref
+      - sha
       - created_at
-      - parent_ids
-      - title
-      - message
-      - author_name
-      - author_email
-      - authored_date
-      - committer_name
-      - committer_email
-      - committed_date
-      - trailers
-      - extended_trailers
-      - web_url
-      description: API_Entities_Commit model
-    postApiV4ProjectsIdEnvironments:
+      - updated_at
+      - user
+      - environment
+      - deployable
+      - status
+      description: API_Entities_Deployment model
+    API_Entities_NamespaceBasic:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the environment
-        external_url:
-          type: string
-          description: Place to link to for this environment
-        tier:
-          type: string
-          description: The tier of the new environment. Allowed values are `production`, `staging`, `testing`, `development`, and `other`
-          enum:
-          - production
-          - staging
-          - testing
-          - development
-          - other
-        cluster_agent_id:
+        id:
           type: integer
           format: int32
-          description: The ID of the Cluster Agent to associate with this environment
-        kubernetes_namespace:
+          example: 2
+        name:
           type: string
-          description: The Kubernetes namespace to associate with this environment
-        flux_resource_path:
+          example: project
+        path:
           type: string
-          description: The Flux resource path to associate with this environment
-        description:
+          example: my_project
+        kind:
           type: string
-          description: The description of the environment
-        auto_stop_setting:
+          example: project
+        full_path:
           type: string
-          description: The auto stop setting for the environment. Allowed values are `always` and `with_action`
-          enum:
-          - always
-          - with_action
+          example: group/my_project
+        parent_id:
+          type: integer
+          format: int32
+          example: 1
+        avatar_url:
+          type: string
+          example: https://example.com/avatar/12345
+        web_url:
+          type: string
+          example: https://example.com/group/my_project
       required:
+      - id
       - name
-      description: Create a new environment
+      - path
+      - kind
+      - full_path
+      - parent_id
+      - avatar_url
+      - web_url
   securitySchemes:
     access_token_header:
       type: apiKey

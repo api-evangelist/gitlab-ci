@@ -1,17 +1,19 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Members API
+  title: GitLab Members API
   version: v4
-  description: Operations related to access requests
+  description: Operations about members
 servers:
 - url: https://gitlab.com
 tags:
-- name: members
+- name: Members
   description: Operations about members
 paths:
   /api/v4/groups/{id}/members:
     get:
-      description: "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
+      description: 'Gets a list of group or project members viewable by the authenticated user,
+
+        excluding those with inherited membership from ancestor groups.'
       parameters:
       - in: path
         name: id
@@ -83,8 +85,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdMembers
+      summary: Get api V4 groups id members
+      x-summary-source: derived
     post:
       description: Adds a member to a group or project.
       parameters:
@@ -102,7 +106,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: postApiV4GroupsIdMembers
       requestBody:
         content:
@@ -110,9 +114,13 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4GroupsIdMembers'
         required: true
+      summary: Post api V4 groups id members
+      x-summary-source: derived
   /api/v4/groups/{id}/members/all:
     get:
-      description: "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
+      description: 'Gets a list of group or project members viewable by the authenticated user,
+
+        including those with inherited membership from ancestor groups.'
       parameters:
       - in: path
         name: id
@@ -178,8 +186,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdMembersAll
+      summary: Get api V4 groups id members all
+      x-summary-source: derived
   /api/v4/groups/{id}/members/{user_id}:
     get:
       description: Gets a member of a group or project.
@@ -205,8 +215,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdMembersUserId
+      summary: Get api V4 groups id members user id
+      x-summary-source: derived
     put:
       description: Updates a member of a group or project.
       parameters:
@@ -231,7 +243,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: putApiV4GroupsIdMembersUserId
       requestBody:
         content:
@@ -239,6 +251,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4GroupsIdMembersUserId'
         required: true
+      summary: Put api V4 groups id members user id
+      x-summary-source: derived
     delete:
       description: Removes a user from a group or project.
       parameters:
@@ -273,8 +287,10 @@ paths:
         '204':
           description: Removes a user from a group or project.
       tags:
-      - members
+      - Members
       operationId: deleteApiV4GroupsIdMembersUserId
+      summary: Delete api V4 groups id members user id
+      x-summary-source: derived
   /api/v4/groups/{id}/members/all/{user_id}:
     get:
       description: Gets a member of a group or project, including those who gained membership through ancestor group
@@ -300,8 +316,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdMembersAllUserId
+      summary: Get api V4 groups id members all user id
+      x-summary-source: derived
   /api/v4/groups/{id}/members/{user_id}/override:
     post:
       description: Overrides the access level of an LDAP group member.
@@ -327,8 +345,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: postApiV4GroupsIdMembersUserIdOverride
+      summary: Post api V4 groups id members user id override
+      x-summary-source: derived
     delete:
       description: Remove an LDAP group member access level override.
       parameters:
@@ -353,8 +373,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: deleteApiV4GroupsIdMembersUserIdOverride
+      summary: Delete api V4 groups id members user id override
+      x-summary-source: derived
   /api/v4/groups/{id}/members/{member_id}/approve:
     put:
       description: Approves a pending member
@@ -376,8 +398,10 @@ paths:
         '200':
           description: Approves a pending member
       tags:
-      - members
+      - Members
       operationId: putApiV4GroupsIdMembersMemberIdApprove
+      summary: Put api V4 groups id members member id approve
+      x-summary-source: derived
   /api/v4/groups/{id}/members/approve_all:
     post:
       description: Approves all pending members
@@ -392,8 +416,10 @@ paths:
         '201':
           description: Approves all pending members
       tags:
-      - members
+      - Members
       operationId: postApiV4GroupsIdMembersApproveAll
+      summary: Post api V4 groups id members approve all
+      x-summary-source: derived
   /api/v4/groups/{id}/pending_members:
     get:
       description: Lists all pending members for a group including invited users
@@ -426,8 +452,10 @@ paths:
         '200':
           description: Lists all pending members for a group including invited users
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdPendingMembers
+      summary: Get api V4 groups id pending members
+      x-summary-source: derived
   /api/v4/groups/{id}/members/{user_id}/state:
     put:
       description: Changes the state of the memberships of a user in the group
@@ -449,7 +477,7 @@ paths:
         '200':
           description: Changes the state of the memberships of a user in the group
       tags:
-      - members
+      - Members
       operationId: putApiV4GroupsIdMembersUserIdState
       requestBody:
         content:
@@ -457,6 +485,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4GroupsIdMembersUserIdState'
         required: true
+      summary: Put api V4 groups id members user id state
+      x-summary-source: derived
   /api/v4/groups/{id}/billable_members/{user_id}/memberships:
     get:
       description: Get the direct memberships of a billable user of a top-level group.
@@ -500,8 +530,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_BillableMembership'
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdBillableMembersUserIdMemberships
+      summary: Get api V4 groups id billable members user id memberships
+      x-summary-source: derived
   /api/v4/groups/{id}/billable_members/{user_id}/indirect:
     get:
       description: Get the indirect memberships of a billable user of a top-level group.
@@ -545,8 +577,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_BillableMembership'
       tags:
-      - members
+      - Members
       operationId: getApiV4GroupsIdBillableMembersUserIdIndirect
+      summary: Get api V4 groups id billable members user id indirect
+      x-summary-source: derived
   /api/v4/groups/{id}/billable_members/{user_id}:
     delete:
       description: Removes a billable member from a group or project.
@@ -568,11 +602,15 @@ paths:
         '204':
           description: Removes a billable member from a group or project.
       tags:
-      - members
+      - Members
       operationId: deleteApiV4GroupsIdBillableMembersUserId
+      summary: Delete api V4 groups id billable members user id
+      x-summary-source: derived
   /api/v4/projects/{id}/members:
     get:
-      description: "Gets a list of group or project members viewable by the authenticated user,\n          excluding those with inherited membership from ancestor groups."
+      description: 'Gets a list of group or project members viewable by the authenticated user,
+
+        excluding those with inherited membership from ancestor groups.'
       parameters:
       - in: path
         name: id
@@ -644,8 +682,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4ProjectsIdMembers
+      summary: Get api V4 projects id members
+      x-summary-source: derived
     post:
       description: Adds a member to a group or project.
       parameters:
@@ -663,7 +703,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: postApiV4ProjectsIdMembers
       requestBody:
         content:
@@ -671,9 +711,13 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdMembers'
         required: true
+      summary: Post api V4 projects id members
+      x-summary-source: derived
   /api/v4/projects/{id}/members/all:
     get:
-      description: "Gets a list of group or project members viewable by the authenticated user,\n          including those with inherited membership from ancestor groups."
+      description: 'Gets a list of group or project members viewable by the authenticated user,
+
+        including those with inherited membership from ancestor groups.'
       parameters:
       - in: path
         name: id
@@ -739,8 +783,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4ProjectsIdMembersAll
+      summary: Get api V4 projects id members all
+      x-summary-source: derived
   /api/v4/projects/{id}/members/{user_id}:
     get:
       description: Gets a member of a group or project.
@@ -766,8 +812,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4ProjectsIdMembersUserId
+      summary: Get api V4 projects id members user id
+      x-summary-source: derived
     put:
       description: Updates a member of a group or project.
       parameters:
@@ -792,7 +840,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: putApiV4ProjectsIdMembersUserId
       requestBody:
         content:
@@ -800,6 +848,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdMembersUserId'
         required: true
+      summary: Put api V4 projects id members user id
+      x-summary-source: derived
     delete:
       description: Removes a user from a group or project.
       parameters:
@@ -834,8 +884,10 @@ paths:
         '204':
           description: Removes a user from a group or project.
       tags:
-      - members
+      - Members
       operationId: deleteApiV4ProjectsIdMembersUserId
+      summary: Delete api V4 projects id members user id
+      x-summary-source: derived
   /api/v4/projects/{id}/members/all/{user_id}:
     get:
       description: Gets a member of a group or project, including those who gained membership through ancestor group
@@ -861,247 +913,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Member'
       tags:
-      - members
+      - Members
       operationId: getApiV4ProjectsIdMembersAllUserId
+      summary: Get api V4 projects id members all user id
+      x-summary-source: derived
 components:
   schemas:
-    putApiV4ProjectsIdMembersUserId:
+    API_Entities_ScimIdentity:
       type: object
       properties:
-        access_level:
-          type: integer
-          format: int32
-          description: A valid access level
-        expires_at:
+        extern_uid:
           type: string
-          format: date-time
-          description: Date string in the format YEAR-MONTH-DAY
-        member_role_id:
-          type: integer
-          format: int32
-          description: The ID of the Member Role to be updated
+        group_id:
+          type: string
+        active:
+          type: string
       required:
-      - access_level
-      description: Updates a member of a group or project.
-    postApiV4GroupsIdMembers:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: A valid access level.
-        user_id:
-          type: integer
-          format: int32
-          description: The user ID of the new member or multiple IDs separated by commas.
-        username:
-          type: string
-          description: The username of the new member or multiple usernames separated by commas.
-        expires_at:
-          type: string
-          format: date-time
-          description: Date string in the format YEAR-MONTH-DAY
-        invite_source:
-          type: string
-          description: Source that triggered the member creation process
-          default: members-api
-      required:
-      - access_level
-      description: Adds a member to a group or project.
-    API_Entities_Member:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-        access_level:
-          type: string
-        created_at:
-          type: string
-        created_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        expires_at:
-          type: string
-        group_saml_identity:
-          $ref: '#/components/schemas/API_Entities_Identity'
-        group_scim_identity:
-          $ref: '#/components/schemas/API_Entities_ScimIdentity'
-        email:
-          type: string
-        is_using_seat:
-          type: string
-        override:
-          type: string
-        membership_state:
-          type: string
-        member_role:
-          $ref: '#/components/schemas/API_Entities_MemberRole'
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      - access_level
-      - created_at
-      - expires_at
-      - membership_state
-      description: API_Entities_Member model
-    API_Entities_BillableMembership:
-      type: object
-      properties:
-        id:
-          type: string
-        source_id:
-          type: string
-        source_full_name:
-          type: string
-        source_members_url:
-          type: string
-        created_at:
-          type: string
-        expires_at:
-          type: string
-        access_level:
-          type: object
-          properties:
-            string_value:
-              type: string
-            integer_value:
-              type: string
-            custom_role:
-              type: string
-          required:
-          - string_value
-          - integer_value
-          - custom_role
-      required:
-      - id
-      - source_id
-      - source_full_name
-      - source_members_url
-      - created_at
-      - expires_at
-      - access_level
-      description: API_Entities_BillableMembership model
-    putApiV4GroupsIdMembersUserId:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: A valid access level
-        expires_at:
-          type: string
-          format: date-time
-          description: Date string in the format YEAR-MONTH-DAY
-        member_role_id:
-          type: integer
-          format: int32
-          description: The ID of the Member Role to be updated
-      required:
-      - access_level
-      description: Updates a member of a group or project.
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    putApiV4GroupsIdMembersUserIdState:
-      type: object
-      properties:
-        state:
-          type: string
-          description: The new state for the memberships of the user
-          enum:
-          - awaiting
-          - active
-      required:
-      - state
-      description: Changes the state of the memberships of a user in the group
+      - extern_uid
+      - group_id
+      - active
     API_Entities_MemberRole:
       type: object
       properties:
@@ -1250,32 +1080,50 @@ components:
       - read_admin_monitoring
       - read_admin_users
       - read_vulnerability
-    API_Entities_Identity:
+    API_Entities_UserBasic:
       type: object
       properties:
-        provider:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
           type: string
-        extern_uid:
+          example: admin
+        public_email:
           type: string
-        saml_provider_id:
+          example: john@example.com
+        name:
           type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
       required:
-      - provider
-      - extern_uid
-      - saml_provider_id
-    API_Entities_ScimIdentity:
-      type: object
-      properties:
-        extern_uid:
-          type: string
-        group_id:
-          type: string
-        active:
-          type: string
-      required:
-      - extern_uid
-      - group_id
-      - active
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
     postApiV4ProjectsIdMembers:
       type: object
       properties:
@@ -1301,6 +1149,212 @@ components:
       required:
       - access_level
       description: Adds a member to a group or project.
+    API_Entities_Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        access_level:
+          type: string
+        created_at:
+          type: string
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        expires_at:
+          type: string
+        group_saml_identity:
+          $ref: '#/components/schemas/API_Entities_Identity'
+        group_scim_identity:
+          $ref: '#/components/schemas/API_Entities_ScimIdentity'
+        email:
+          type: string
+        is_using_seat:
+          type: string
+        override:
+          type: string
+        membership_state:
+          type: string
+        member_role:
+          $ref: '#/components/schemas/API_Entities_MemberRole'
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - access_level
+      - created_at
+      - expires_at
+      - membership_state
+      description: API_Entities_Member model
+    putApiV4ProjectsIdMembersUserId:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        member_role_id:
+          type: integer
+          format: int32
+          description: The ID of the Member Role to be updated
+      required:
+      - access_level
+      description: Updates a member of a group or project.
+    putApiV4GroupsIdMembersUserId:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        member_role_id:
+          type: integer
+          format: int32
+          description: The ID of the Member Role to be updated
+      required:
+      - access_level
+      description: Updates a member of a group or project.
+    postApiV4GroupsIdMembers:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: A valid access level.
+        user_id:
+          type: integer
+          format: int32
+          description: The user ID of the new member or multiple IDs separated by commas.
+        username:
+          type: string
+          description: The username of the new member or multiple usernames separated by commas.
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in the format YEAR-MONTH-DAY
+        invite_source:
+          type: string
+          description: Source that triggered the member creation process
+          default: members-api
+      required:
+      - access_level
+      description: Adds a member to a group or project.
+    API_Entities_Identity:
+      type: object
+      properties:
+        provider:
+          type: string
+        extern_uid:
+          type: string
+        saml_provider_id:
+          type: string
+      required:
+      - provider
+      - extern_uid
+      - saml_provider_id
+    putApiV4GroupsIdMembersUserIdState:
+      type: object
+      properties:
+        state:
+          type: string
+          description: The new state for the memberships of the user
+          enum:
+          - awaiting
+          - active
+      required:
+      - state
+      description: Changes the state of the memberships of a user in the group
+    API_Entities_BillableMembership:
+      type: object
+      properties:
+        id:
+          type: string
+        source_id:
+          type: string
+        source_full_name:
+          type: string
+        source_members_url:
+          type: string
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        access_level:
+          type: object
+          properties:
+            string_value:
+              type: string
+            integer_value:
+              type: string
+            custom_role:
+              type: string
+          required:
+          - string_value
+          - integer_value
+          - custom_role
+      required:
+      - id
+      - source_id
+      - source_full_name
+      - source_members_url
+      - created_at
+      - expires_at
+      - access_level
+      description: API_Entities_BillableMembership model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

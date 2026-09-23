@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Applications API
+  title: GitLab Applications API
   version: v4
-  description: Operations related to access requests
+  description: Operations about applications
 servers:
 - url: https://gitlab.com
 tags:
-- name: applications
+- name: Applications
   description: Operations about applications
 paths:
   /api/v4/applications:
@@ -21,7 +21,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_ApplicationWithSecret'
       tags:
-      - applications
+      - Applications
       operationId: postApiV4Applications
       requestBody:
         content:
@@ -42,7 +42,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Application'
       tags:
-      - applications
+      - Applications
       operationId: getApiV4Applications
   /api/v4/applications/{id}:
     delete:
@@ -60,7 +60,7 @@ paths:
         '204':
           description: Delete an application
       tags:
-      - applications
+      - Applications
       operationId: deleteApiV4ApplicationsId
   /api/v4/applications/{id}/renew-secret:
     post:
@@ -82,33 +82,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_ApplicationWithSecret'
       tags:
-      - applications
+      - Applications
       operationId: postApiV4ApplicationsIdRenewSecret
 components:
   schemas:
-    postApiV4Applications:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the application.
-          example: MyApplication
-        redirect_uri:
-          type: string
-          description: Redirect URI of the application.
-          example: https://redirect.uri
-        scopes:
-          type: string
-          description: "Scopes of the application. You can specify multiple scopes by separating\\\n                                 each scope using a space"
-        confidential:
-          type: boolean
-          description: "The application is used where the client secret can be kept confidential. Native mobile apps \\\n                        and Single Page Apps are considered non-confidential. Defaults to true if not supplied"
-          default: true
-      required:
-      - name
-      - redirect_uri
-      - scopes
-      description: Create a new application
     API_Entities_Application:
       type: object
       properties:
@@ -139,6 +116,29 @@ components:
       - confidential
       - scopes
       description: API_Entities_Application model
+    postApiV4Applications:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the application.
+          example: MyApplication
+        redirect_uri:
+          type: string
+          description: Redirect URI of the application.
+          example: https://redirect.uri
+        scopes:
+          type: string
+          description: "Scopes of the application. You can specify multiple scopes by separating\\\n                                 each scope using a space"
+        confidential:
+          type: boolean
+          description: "The application is used where the client secret can be kept confidential. Native mobile apps \\\n                        and Single Page Apps are considered non-confidential. Defaults to true if not supplied"
+          default: true
+      required:
+      - name
+      - redirect_uri
+      - scopes
+      description: Create a new application
     API_Entities_ApplicationWithSecret:
       type: object
       properties:

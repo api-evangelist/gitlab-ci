@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Ci Resource Groups API
+  title: GitLab Ci Resource Groups API
   version: v4
-  description: Operations related to access requests
+  description: Operations to manage job concurrency with resource groups
 servers:
 - url: https://gitlab.com
 tags:
@@ -53,6 +53,8 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroups
+      summary: Get api V4 projects id resource groups
+      x-summary-source: derived
   /api/v4/projects/{id}/resource_groups/{key}:
     get:
       description: Get a specific resource group
@@ -83,6 +85,8 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroupsKey
+      summary: Get api V4 projects id resource groups key
+      x-summary-source: derived
     put:
       summary: Edit an existing resource group
       description: Updates an existing resource group's properties.
@@ -151,6 +155,8 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroupsKeyCurrentJob
+      summary: Get api V4 projects id resource groups key current job
+      x-summary-source: derived
   /api/v4/projects/{id}/resource_groups/{key}/upcoming_jobs:
     get:
       description: List upcoming jobs for a specific resource group
@@ -201,201 +207,10 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroupsKeyUpcomingJobs
+      summary: Get api V4 projects id resource groups key upcoming jobs
+      x-summary-source: derived
 components:
   schemas:
-    API_Entities_Ci_ResourceGroup:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        key:
-          type: string
-          example: production
-        process_mode:
-          type: string
-          example: unordered
-        created_at:
-          type: string
-          format: date-time
-          example: '2021-09-01T08:04:59.650Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2021-09-01T08:04:59.650Z'
-      required:
-      - id
-      - key
-      - process_mode
-      - created_at
-      - updated_at
-      description: API_Entities_Ci_ResourceGroup model
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    putApiV4ProjectsIdResourceGroupsKey:
-      type: object
-      properties:
-        process_mode:
-          type: string
-          description: The process mode of the resource group
-          enum:
-          - unordered
-          - oldest_first
-          - newest_first
-          - newest_ready_first
-      description: Edit an existing resource group
-    API_Entities_User:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-        created_at:
-          type: string
-        bio:
-          type: string
-        location:
-          type: string
-        linkedin:
-          type: string
-        twitter:
-          type: string
-        discord:
-          type: string
-        website_url:
-          type: string
-        github:
-          type: string
-        job_title:
-          type: string
-        pronouns:
-          type: string
-        organization:
-          type: string
-        bot:
-          type: boolean
-        work_information:
-          type: string
-        followers:
-          type: string
-        following:
-          type: string
-        is_followed:
-          type: string
-        local_time:
-          type: string
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      - bio
-      - location
-      - linkedin
-      - twitter
-      - discord
-      - website_url
-      - github
-      - job_title
-      - pronouns
-      - organization
-      - bot
-      - work_information
-      - local_time
-    API_Entities_Ci_PipelineBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      description: API_Entities_Ci_PipelineBasic model
     API_Entities_Commit:
       type: object
       properties:
@@ -565,6 +380,199 @@ components:
       - web_url
       - project
       description: API_Entities_Ci_JobBasic model
+    putApiV4ProjectsIdResourceGroupsKey:
+      type: object
+      properties:
+        process_mode:
+          type: string
+          description: The process mode of the resource group
+          enum:
+          - unordered
+          - oldest_first
+          - newest_first
+          - newest_ready_first
+      description: Edit an existing resource group
+    API_Entities_User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        created_at:
+          type: string
+        bio:
+          type: string
+        location:
+          type: string
+        linkedin:
+          type: string
+        twitter:
+          type: string
+        discord:
+          type: string
+        website_url:
+          type: string
+        github:
+          type: string
+        job_title:
+          type: string
+        pronouns:
+          type: string
+        organization:
+          type: string
+        bot:
+          type: boolean
+        work_information:
+          type: string
+        followers:
+          type: string
+        following:
+          type: string
+        is_followed:
+          type: string
+        local_time:
+          type: string
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - bio
+      - location
+      - linkedin
+      - twitter
+      - discord
+      - website_url
+      - github
+      - job_title
+      - pronouns
+      - organization
+      - bot
+      - work_information
+      - local_time
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_Ci_ResourceGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        key:
+          type: string
+          example: production
+        process_mode:
+          type: string
+          example: unordered
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-09-01T08:04:59.650Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-09-01T08:04:59.650Z'
+      required:
+      - id
+      - key
+      - process_mode
+      - created_at
+      - updated_at
+      description: API_Entities_Ci_ResourceGroup model
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
   securitySchemes:
     access_token_header:
       type: apiKey

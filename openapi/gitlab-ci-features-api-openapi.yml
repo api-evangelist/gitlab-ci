@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Features API
+  title: GitLab Features API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to managing Flipper-based feature flags
 servers:
 - url: https://gitlab.com
 tags:
-- name: features
+- name: Features
   description: Operations related to managing Flipper-based feature flags
 paths:
   /api/v4/features:
@@ -23,7 +23,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Feature'
       tags:
-      - features
+      - Features
       operationId: getApiV4Features
   /api/v4/features/definitions:
     get:
@@ -39,7 +39,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/API_Entities_Feature_Definition'
       tags:
-      - features
+      - Features
       operationId: getApiV4FeaturesDefinitions
   /api/v4/features/{name}:
     post:
@@ -66,7 +66,7 @@ paths:
         '403':
           description: Forbidden
       tags:
-      - features
+      - Features
       operationId: postApiV4FeaturesName
       requestBody:
         content:
@@ -88,45 +88,10 @@ paths:
         '204':
           description: Delete a feature
       tags:
-      - features
+      - Features
       operationId: deleteApiV4FeaturesName
 components:
   schemas:
-    API_Entities_Feature_Definition:
-      type: object
-      properties:
-        name:
-          type: string
-        feature_issue_url:
-          type: string
-        introduced_by_url:
-          type: string
-        rollout_issue_url:
-          type: string
-        milestone:
-          type: string
-        log_state_changes:
-          type: string
-        type:
-          type: string
-        group:
-          type: string
-        default_enabled:
-          type: string
-        intended_to_rollout_by:
-          type: string
-      required:
-      - name
-      - feature_issue_url
-      - introduced_by_url
-      - rollout_issue_url
-      - milestone
-      - log_state_changes
-      - type
-      - group
-      - default_enabled
-      - intended_to_rollout_by
-      description: API_Entities_Feature_Definition model
     postApiV4FeaturesName:
       type: object
       properties:
@@ -166,6 +131,54 @@ components:
       required:
       - value
       description: Set or create a feature
+    API_Entities_Feature_Definition:
+      type: object
+      properties:
+        name:
+          type: string
+        feature_issue_url:
+          type: string
+        introduced_by_url:
+          type: string
+        rollout_issue_url:
+          type: string
+        milestone:
+          type: string
+        log_state_changes:
+          type: string
+        type:
+          type: string
+        group:
+          type: string
+        default_enabled:
+          type: string
+        intended_to_rollout_by:
+          type: string
+      required:
+      - name
+      - feature_issue_url
+      - introduced_by_url
+      - rollout_issue_url
+      - milestone
+      - log_state_changes
+      - type
+      - group
+      - default_enabled
+      - intended_to_rollout_by
+      description: API_Entities_Feature_Definition model
+    API_Entities_FeatureGate:
+      type: object
+      properties:
+        key:
+          type: string
+          example: percentage_of_actors
+        value:
+          type: integer
+          format: int32
+          example: 34
+      required:
+      - key
+      - value
     API_Entities_Feature:
       type: object
       properties:
@@ -185,19 +198,6 @@ components:
       - gates
       - definition
       description: API_Entities_Feature model
-    API_Entities_FeatureGate:
-      type: object
-      properties:
-        key:
-          type: string
-          example: percentage_of_actors
-        value:
-          type: integer
-          format: int32
-          example: 34
-      required:
-      - key
-      - value
   securitySchemes:
     access_token_header:
       type: apiKey

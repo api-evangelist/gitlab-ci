@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Project Import API
+  title: GitLab Project Import API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to importing projects
 servers:
 - url: https://gitlab.com
 tags:
@@ -1899,71 +1899,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_ProjectImportFailedRelation:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        created_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        exception_class:
-          type: string
-          example: StandardError
-        source:
-          type: string
-          example: ImportRepositoryWorker
-        exception_message:
-          type: string
-        relation_name:
-          type: string
-          example: issues
-        line_number:
-          type: integer
-          format: int32
-          example: 1
-      required:
-      - id
-      - created_at
-      - exception_class
-      - source
-      - exception_message
-      - relation_name
-      - line_number
-    API_Entities_BulkImports_ExportBatchStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - started
-          - finished
-          - failed
-          example: started
-        batch_number:
-          type: integer
-          format: int32
-          example: 1
-        objects_count:
-          type: integer
-          format: int32
-          example: 100
-        error:
-          type: string
-          example: Error message
-        updated_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-      required:
-      - status
-      - batch_number
-      - objects_count
-      - error
-      - updated_at
     postApiV4ImportBitbucketServer:
       type: object
       properties:
@@ -2001,117 +1936,6 @@ components:
       - bitbucket_server_project
       - bitbucket_server_repo
       description: Import a BitBucket Server repository
-    postApiV4ProjectsIdExport:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Override the project description
-        upload:
-          type: object
-          description: Object that contains information on the upload
-          properties:
-            url:
-              type: string
-              description: The URL to upload the project
-            http_method:
-              type: string
-              description: HTTP method to upload the exported project
-              enum:
-              - PUT
-              - POST
-              default: PUT
-        excluded_relations:
-          type: array
-          description: List of project relation names to exclude from the export (e.g. ["merge_requests", "issues"])
-          items:
-            type: string
-      description: Start export
-    API_Entities_RelationImportTracker:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        project_path:
-          type: string
-          example: namespace1/project1
-        relation:
-          type: string
-          example: issues
-        status:
-          type: string
-          example: pending
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:45.080Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:45.080Z'
-      required:
-      - id
-      - project_path
-      - relation
-      - status
-      - created_at
-      - updated_at
-      description: API_Entities_RelationImportTracker model
-    postApiV4ImportBitbucket:
-      type: object
-      properties:
-        bitbucket_email:
-          type: string
-          description: BitBucket email
-        bitbucket_api_token:
-          type: string
-          description: BitBucket API token
-        repo_path:
-          type: string
-          description: Repository path
-        target_namespace:
-          type: string
-          description: Target namespace
-        new_name:
-          type: string
-          description: New repository name
-      required:
-      - bitbucket_email
-      - bitbucket_api_token
-      - repo_path
-      - target_namespace
-      description: Import a BitBucket Cloud repository
-    ProjectEntity:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
-          type: string
-          example: GitLab
-        full_path:
-          type: string
-          example: gitlab-org/gitlab
-        full_name:
-          type: string
-          example: GitLab Org / GitLab
-        refs_url:
-          type: string
-        forked:
-          type: boolean
-          example: true
-      required:
-      - id
-      - name
-      - full_path
-      - full_name
-      - refs_url
-      - forked
-      description: ProjectEntity model
     API_Entities_ProjectExportStatus:
       type: object
       properties:
@@ -2168,6 +1992,268 @@ components:
       - created_at
       - export_status
       description: API_Entities_ProjectExportStatus model
+    postApiV4ImportBitbucket:
+      type: object
+      properties:
+        bitbucket_email:
+          type: string
+          description: BitBucket email
+        bitbucket_api_token:
+          type: string
+          description: BitBucket API token
+        repo_path:
+          type: string
+          description: Repository path
+        target_namespace:
+          type: string
+          description: Target namespace
+        new_name:
+          type: string
+          description: New repository name
+      required:
+      - bitbucket_email
+      - bitbucket_api_token
+      - repo_path
+      - target_namespace
+      description: Import a BitBucket Cloud repository
+    API_Entities_RelationImportTracker:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        project_path:
+          type: string
+          example: namespace1/project1
+        relation:
+          type: string
+          example: issues
+        status:
+          type: string
+          example: pending
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+      required:
+      - id
+      - project_path
+      - relation
+      - status
+      - created_at
+      - updated_at
+      description: API_Entities_RelationImportTracker model
+    postApiV4ImportGithubCancel:
+      type: object
+      properties:
+        project_id:
+          type: integer
+          format: int32
+          description: ID of importing project to be canceled
+      required:
+      - project_id
+      description: Cancel GitHub project import
+    postApiV4ProjectsIdExport:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Override the project description
+        upload:
+          type: object
+          description: Object that contains information on the upload
+          properties:
+            url:
+              type: string
+              description: The URL to upload the project
+            http_method:
+              type: string
+              description: HTTP method to upload the exported project
+              enum:
+              - PUT
+              - POST
+              default: PUT
+        excluded_relations:
+          type: array
+          description: List of project relation names to exclude from the export (e.g. ["merge_requests", "issues"])
+          items:
+            type: string
+      description: Start export
+    postApiV4ProjectsIdExportRelations:
+      type: object
+      properties:
+        batched:
+          type: boolean
+          description: Whether to export in batches
+      description: Start relations export
+    API_Entities_ProjectImportFailedRelation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        exception_class:
+          type: string
+          example: StandardError
+        source:
+          type: string
+          example: ImportRepositoryWorker
+        exception_message:
+          type: string
+        relation_name:
+          type: string
+          example: issues
+        line_number:
+          type: integer
+          format: int32
+          example: 1
+      required:
+      - id
+      - created_at
+      - exception_class
+      - source
+      - exception_message
+      - relation_name
+      - line_number
+    API_Entities_ProjectImportStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        description:
+          type: string
+          example: desc
+        name:
+          type: string
+          example: project1
+        name_with_namespace:
+          type: string
+          example: John Doe / project1
+        path:
+          type: string
+          example: project1
+        path_with_namespace:
+          type: string
+          example: namespace1/project1
+        created_at:
+          type: string
+          format: date-time
+          example: '2020-05-07T04:27:17.016Z'
+        import_status:
+          type: string
+          example: scheduled
+        import_type:
+          type: string
+          example: gitlab_project
+        correlation_id:
+          type: string
+          example: dfcf583058ed4508e4c7c617bd7f0edd
+        failed_relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProjectImportFailedRelation'
+        import_error:
+          type: string
+          example: Error message
+        stats:
+          type: object
+      required:
+      - id
+      - description
+      - name
+      - name_with_namespace
+      - path
+      - path_with_namespace
+      - created_at
+      - import_status
+      - import_type
+      - correlation_id
+      - failed_relations
+      - import_error
+      - stats
+      description: API_Entities_ProjectImportStatus model
+    postApiV4ImportGithub:
+      type: object
+      properties:
+        personal_access_token:
+          type: string
+          description: GitHub personal access token
+        repo_id:
+          type: integer
+          format: int32
+          description: GitHub repository ID
+        new_name:
+          type: string
+          description: New repo name
+        target_namespace:
+          type: string
+          description: Namespace or group to import repository into
+        github_hostname:
+          type: string
+          description: 'Custom GitHub enterprise hostname. For example: https://github.example.com. From GitLab 16.5 to GitLab 17.1, you must include the path `/api/v3`.'
+        optional_stages:
+          type: object
+          description: Optional stages of import to be performed
+        timeout_strategy:
+          type: string
+          description: Strategy for behavior on timeouts
+          enum:
+          - optimistic
+          - pessimistic
+        pagination_limit:
+          type: integer
+          format: int32
+          description: Pagination limit
+          minimum: 1
+          maximum: 100
+      required:
+      - personal_access_token
+      - repo_id
+      - target_namespace
+      description: Import a GitHub project
+    API_Entities_BulkImports_ExportBatchStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - started
+          - finished
+          - failed
+          example: started
+        batch_number:
+          type: integer
+          format: int32
+          example: 1
+        objects_count:
+          type: integer
+          format: int32
+          example: 100
+        error:
+          type: string
+          example: Error message
+        updated_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+      required:
+      - status
+      - batch_number
+      - objects_count
+      - error
+      - updated_at
     API_Entities_BulkImports_ExportStatus:
       type: object
       properties:
@@ -2269,62 +2355,35 @@ components:
       - provider_link
       - relation_type
       description: ProjectImportEntity model
-    postApiV4ImportGithubCancel:
+    ProjectEntity:
       type: object
       properties:
-        project_id:
+        id:
           type: integer
           format: int32
-          description: ID of importing project to be canceled
-      required:
-      - project_id
-      description: Cancel GitHub project import
-    postApiV4ProjectsIdExportRelations:
-      type: object
-      properties:
-        batched:
+          example: 1
+        name:
+          type: string
+          example: GitLab
+        full_path:
+          type: string
+          example: gitlab-org/gitlab
+        full_name:
+          type: string
+          example: GitLab Org / GitLab
+        refs_url:
+          type: string
+        forked:
           type: boolean
-          description: Whether to export in batches
-      description: Start relations export
-    postApiV4ImportGithub:
-      type: object
-      properties:
-        personal_access_token:
-          type: string
-          description: GitHub personal access token
-        repo_id:
-          type: integer
-          format: int32
-          description: GitHub repository ID
-        new_name:
-          type: string
-          description: New repo name
-        target_namespace:
-          type: string
-          description: Namespace or group to import repository into
-        github_hostname:
-          type: string
-          description: 'Custom GitHub enterprise hostname. For example: https://github.example.com. From GitLab 16.5 to GitLab 17.1, you must include the path `/api/v3`.'
-        optional_stages:
-          type: object
-          description: Optional stages of import to be performed
-        timeout_strategy:
-          type: string
-          description: Strategy for behavior on timeouts
-          enum:
-          - optimistic
-          - pessimistic
-        pagination_limit:
-          type: integer
-          format: int32
-          description: Pagination limit
-          minimum: 1
-          maximum: 100
+          example: true
       required:
-      - personal_access_token
-      - repo_id
-      - target_namespace
-      description: Import a GitHub project
+      - id
+      - name
+      - full_path
+      - full_name
+      - refs_url
+      - forked
+      description: ProjectEntity model
     postApiV4ProjectsIdImportGit:
       type: object
       properties:
@@ -2340,65 +2399,6 @@ components:
       required:
       - import_url
       description: Import a project from a Git URL
-    API_Entities_ProjectImportStatus:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        description:
-          type: string
-          example: desc
-        name:
-          type: string
-          example: project1
-        name_with_namespace:
-          type: string
-          example: John Doe / project1
-        path:
-          type: string
-          example: project1
-        path_with_namespace:
-          type: string
-          example: namespace1/project1
-        created_at:
-          type: string
-          format: date-time
-          example: '2020-05-07T04:27:17.016Z'
-        import_status:
-          type: string
-          example: scheduled
-        import_type:
-          type: string
-          example: gitlab_project
-        correlation_id:
-          type: string
-          example: dfcf583058ed4508e4c7c617bd7f0edd
-        failed_relations:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_ProjectImportFailedRelation'
-        import_error:
-          type: string
-          example: Error message
-        stats:
-          type: object
-      required:
-      - id
-      - description
-      - name
-      - name_with_namespace
-      - path
-      - path_with_namespace
-      - created_at
-      - import_status
-      - import_type
-      - correlation_id
-      - failed_relations
-      - import_error
-      - stats
-      description: API_Entities_ProjectImportStatus model
   securitySchemes:
     access_token_header:
       type: apiKey

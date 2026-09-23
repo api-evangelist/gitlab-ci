@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Suggestions API
+  title: GitLab Suggestions API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to suggestions
 servers:
 - url: https://gitlab.com
 tags:
-- name: suggestions
+- name: Suggestions
   description: Operations related to suggestions
 paths:
   /api/v4/suggestions/{id}/apply:
@@ -28,7 +28,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Suggestion'
       tags:
-      - suggestions
+      - Suggestions
       operationId: putApiV4SuggestionsIdApply
       requestBody:
         content:
@@ -36,6 +36,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4SuggestionsIdApply'
         required: true
+      summary: Put api V4 suggestions id apply
+      x-summary-source: derived
   /api/v4/suggestions/batch_apply:
     put:
       description: Apply multiple suggestion patches in the Merge Request where they were created
@@ -47,7 +49,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Suggestion'
       tags:
-      - suggestions
+      - Suggestions
       operationId: putApiV4SuggestionsBatchApply
       requestBody:
         content:
@@ -55,8 +57,25 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4SuggestionsBatchApply'
         required: true
+      summary: Put api V4 suggestions batch apply
+      x-summary-source: derived
 components:
   schemas:
+    putApiV4SuggestionsBatchApply:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: An array of the suggestion IDs
+          items:
+            type: integer
+            format: int32
+        commit_message:
+          type: string
+          description: A custom commit message to use instead of the default generated message or the project's default message
+      required:
+      - ids
+      description: Apply multiple suggestion patches in the Merge Request where they were created
     putApiV4SuggestionsIdApply:
       type: object
       properties:
@@ -104,21 +123,6 @@ components:
       - from_content
       - to_content
       description: API_Entities_Suggestion model
-    putApiV4SuggestionsBatchApply:
-      type: object
-      properties:
-        ids:
-          type: array
-          description: An array of the suggestion IDs
-          items:
-            type: integer
-            format: int32
-        commit_message:
-          type: string
-          description: A custom commit message to use instead of the default generated message or the project's default message
-      required:
-      - ids
-      description: Apply multiple suggestion patches in the Merge Request where they were created
   securitySchemes:
     access_token_header:
       type: apiKey

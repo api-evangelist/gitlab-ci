@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Award Emoji API
+  title: GitLab Award Emoji API
   version: v4
-  description: Operations related to access requests
+  description: Operations about award_emoji
 servers:
 - url: https://gitlab.com
 tags:
@@ -1343,46 +1343,6 @@ paths:
       operationId: deleteApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmojiAwardId
 components:
   schemas:
-    postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the emoji without colons.
-      required:
-      - name
-      description: Add a new emoji reaction
-    postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the emoji without colons.
-      required:
-      - name
-      description: Add a new emoji reaction
-    postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the emoji without colons.
-      required:
-      - name
-      description: Add a new emoji reaction
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
     postApiV4ProjectsIdSnippetsSnippetIdAwardEmoji:
       type: object
       properties:
@@ -1432,6 +1392,69 @@ components:
       - awardable_type
       - url
       description: API_Entities_AwardEmoji model
+    postApiV4ProjectsIdIssuesIssueIidNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4GroupsIdEpicsEpicIidAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdIssuesIssueIidAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
+    postApiV4ProjectsIdSnippetsSnippetIdNotesNoteIdAwardEmoji:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the emoji without colons.
+      required:
+      - name
+      description: Add a new emoji reaction
     API_Entities_UserBasic:
       type: object
       properties:
@@ -1476,42 +1499,19 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
-    postApiV4GroupsIdEpicsEpicIidAwardEmoji:
+    API_Entities_CustomAttribute:
       type: object
       properties:
-        name:
+        key:
           type: string
-          description: Name of the emoji without colons.
-      required:
-      - name
-      description: Add a new emoji reaction
-    postApiV4ProjectsIdIssuesIssueIidAwardEmoji:
-      type: object
-      properties:
-        name:
+          example: foo
+        value:
           type: string
-          description: Name of the emoji without colons.
+          example: bar
       required:
-      - name
-      description: Add a new emoji reaction
-    postApiV4GroupsIdEpicsEpicIidNotesNoteIdAwardEmoji:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the emoji without colons.
-      required:
-      - name
-      description: Add a new emoji reaction
-    postApiV4ProjectsIdMergeRequestsMergeRequestIidAwardEmoji:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the emoji without colons.
-      required:
-      - name
-      description: Add a new emoji reaction
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

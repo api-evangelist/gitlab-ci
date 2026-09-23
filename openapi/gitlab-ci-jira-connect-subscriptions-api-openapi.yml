@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Jira Connect Subscriptions API
+  title: GitLab Jira Connect Subscriptions API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to JiraConnect subscriptions
 servers:
 - url: https://gitlab.com
 tags:
@@ -39,6 +39,15 @@ paths:
         required: true
 components:
   schemas:
+    API_Entities_BasicSuccess:
+      type: object
+      properties:
+        success:
+          type: object
+          properties: {}
+      required:
+      - success
+      description: API_Entities_BasicSuccess model
     postApiV4IntegrationsJiraConnectSubscriptions:
       type: object
       properties:
@@ -52,15 +61,6 @@ components:
       - jwt
       - namespace_path
       description: Subscribe a namespace to a JiraConnectInstallation
-    API_Entities_BasicSuccess:
-      type: object
-      properties:
-        success:
-          type: object
-          properties: {}
-      required:
-      - success
-      description: API_Entities_BasicSuccess model
   securitySchemes:
     access_token_header:
       type: apiKey

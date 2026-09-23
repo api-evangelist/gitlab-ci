@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Avatars API
+  title: GitLab Avatars API
   version: v4
-  description: Operations related to access requests
+  description: Operations about avatars
 servers:
 - url: https://gitlab.com
 tags:
-- name: avatars
+- name: Avatars
   description: Operations about avatars
 paths:
   /api/v4/groups/{id}/avatar:
@@ -24,7 +24,7 @@ paths:
         '200':
           description: Download the group avatar
       tags:
-      - avatars
+      - Avatars
       operationId: getApiV4GroupsIdAvatar
   /api/v4/projects/{id}/avatar:
     get:
@@ -41,7 +41,7 @@ paths:
         '200':
           description: Download a project avatar
       tags:
-      - avatars
+      - Avatars
       operationId: getApiV4ProjectsIdAvatar
   /api/v4/avatar:
     get:
@@ -68,8 +68,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Avatar'
       tags:
-      - avatars
+      - Avatars
       operationId: getApiV4Avatar
+      summary: Get api V4 avatar
+      x-summary-source: derived
 components:
   schemas:
     API_Entities_Avatar:

@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Submodules API
+  title: GitLab Submodules API
   version: v4
-  description: Operations related to access requests
+  description: Operations about submodules
 servers:
 - url: https://gitlab.com
 tags:
-- name: submodules
+- name: Submodules
   description: Operations about submodules
 paths:
   /api/v4/projects/{id}/repository/submodules/{submodule}:
@@ -41,7 +41,7 @@ paths:
         '400':
           description: The repository is empty
       tags:
-      - submodules
+      - Submodules
       operationId: putApiV4ProjectsIdRepositorySubmodulesSubmodule
       requestBody:
         content:
@@ -49,46 +49,10 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdRepositorySubmodulesSubmodule'
         required: true
+      summary: Put api V4 projects id repository submodules submodule
+      x-summary-source: derived
 components:
   schemas:
-    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
-      type: object
-      properties:
-        commit_sha:
-          type: string
-          description: Commit sha to update the submodule to.
-          example: ed899a2f4b50b4370feeea94676502b42383c746
-        branch:
-          type: string
-          description: Name of the branch to commit into.
-          example: main
-        commit_message:
-          type: string
-          description: Commit message. If no message is provided a default one will be set.
-          example: Commit message
-      required:
-      - commit_sha
-      - branch
-      description: Update existing submodule reference in repository
-    API_Entities_CommitStats:
-      type: object
-      properties:
-        additions:
-          type: integer
-          format: int32
-          example: 1
-        deletions:
-          type: integer
-          format: int32
-          example: 0
-        total:
-          type: integer
-          format: int32
-          example: 1
-      required:
-      - additions
-      - deletions
-      - total
     API_Entities_CommitDetail:
       type: object
       properties:
@@ -178,6 +142,44 @@ components:
       - project_id
       - last_pipeline
       description: API_Entities_CommitDetail model
+    API_Entities_CommitStats:
+      type: object
+      properties:
+        additions:
+          type: integer
+          format: int32
+          example: 1
+        deletions:
+          type: integer
+          format: int32
+          example: 0
+        total:
+          type: integer
+          format: int32
+          example: 1
+      required:
+      - additions
+      - deletions
+      - total
+    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
+      type: object
+      properties:
+        commit_sha:
+          type: string
+          description: Commit sha to update the submodule to.
+          example: ed899a2f4b50b4370feeea94676502b42383c746
+        branch:
+          type: string
+          description: Name of the branch to commit into.
+          example: main
+        commit_message:
+          type: string
+          description: Commit message. If no message is provided a default one will be set.
+          example: Commit message
+      required:
+      - commit_sha
+      - branch
+      description: Update existing submodule reference in repository
     API_Entities_Ci_PipelineBasic:
       type: object
       properties:

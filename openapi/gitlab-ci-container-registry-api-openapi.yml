@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Container Registry API
+  title: GitLab Container Registry API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to container registry
 servers:
 - url: https://gitlab.com
 tags:
-- name: container_registry
+- name: Container Registry
   description: Operations related to container registry
 paths:
   /api/v4/groups/{id}/registry/repositories:
@@ -52,7 +52,7 @@ paths:
         '404':
           description: Group Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: getApiV4GroupsIdRegistryRepositories
   /api/v4/projects/{id}/registry/repositories:
     get:
@@ -111,7 +111,7 @@ paths:
         '404':
           description: Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: getApiV4ProjectsIdRegistryRepositories
   /api/v4/projects/{id}/registry/repositories/{repository_id}:
     delete:
@@ -139,7 +139,7 @@ paths:
         '404':
           description: Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: deleteApiV4ProjectsIdRegistryRepositoriesRepositoryId
   /api/v4/projects/{id}/registry/repositories/{repository_id}/tags:
     get:
@@ -193,7 +193,7 @@ paths:
         '405':
           description: Method Not Allowed
       tags:
-      - container_registry
+      - Container Registry
       operationId: getApiV4ProjectsIdRegistryRepositoriesRepositoryIdTags
     delete:
       summary: Delete repository tags (in bulk)
@@ -253,7 +253,7 @@ paths:
         '404':
           description: Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: deleteApiV4ProjectsIdRegistryRepositoriesRepositoryIdTags
   /api/v4/projects/{id}/registry/repositories/{repository_id}/tags/{tag_name}:
     get:
@@ -293,7 +293,7 @@ paths:
         '404':
           description: Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: getApiV4ProjectsIdRegistryRepositoriesRepositoryIdTagsTagName
     delete:
       summary: Delete repository tag
@@ -330,7 +330,7 @@ paths:
         '404':
           description: Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: deleteApiV4ProjectsIdRegistryRepositoriesRepositoryIdTagsTagName
   /api/v4/container_registry_event/events:
     post:
@@ -342,7 +342,7 @@ paths:
         '401':
           description: Invalid Token
       tags:
-      - container_registry
+      - Container Registry
       operationId: postApiV4ContainerRegistryEventEvents
   /api/v4/registry/repositories/{id}:
     get:
@@ -388,27 +388,10 @@ paths:
         '404':
           description: Repository Not Found
       tags:
-      - container_registry
+      - Container Registry
       operationId: getApiV4RegistryRepositoriesId
 components:
   schemas:
-    API_Entities_ContainerRegistry_Tag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: latest
-        path:
-          type: string
-          example: namespace1/project1/test_image_1:latest
-        location:
-          type: string
-          example: registry.dev/namespace1/project1/test_image_1:latest
-      required:
-      - name
-      - path
-      - location
-      description: API_Entities_ContainerRegistry_Tag model
     API_Entities_ContainerRegistry_TagDetails:
       type: object
       properties:
@@ -502,6 +485,23 @@ components:
       - cleanup_policy_started_at
       - status
       description: API_Entities_ContainerRegistry_Repository model
+    API_Entities_ContainerRegistry_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: latest
+        path:
+          type: string
+          example: namespace1/project1/test_image_1:latest
+        location:
+          type: string
+          example: registry.dev/namespace1/project1/test_image_1:latest
+      required:
+      - name
+      - path
+      - location
+      description: API_Entities_ContainerRegistry_Tag model
   securitySchemes:
     access_token_header:
       type: apiKey

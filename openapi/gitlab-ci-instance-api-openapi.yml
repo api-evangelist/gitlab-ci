@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Instance API
+  title: GitLab Instance API
   version: v4
-  description: Operations related to access requests
+  description: Operations about instances
 servers:
 - url: https://gitlab.com
 tags:
-- name: instance
+- name: Instance
   description: Operations about instances
 paths:
   /api/v4/application/appearance:
@@ -20,8 +20,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Appearance'
       tags:
-      - instance
+      - Instance
       operationId: getApiV4ApplicationAppearance
+      summary: Get api V4 application appearance
+      x-summary-source: derived
     put:
       description: Modify appearance
       responses:
@@ -32,7 +34,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Appearance'
       tags:
-      - instance
+      - Instance
       operationId: putApiV4ApplicationAppearance
       requestBody:
         content:
@@ -98,6 +100,8 @@ paths:
                 site_name:
                   type: string
                   description: Last part of the webpage title. Defaults to empty.
+      summary: Put api V4 application appearance
+      x-summary-source: derived
   /api/v4/application/statistics:
     get:
       description: Get the current application statistics
@@ -109,8 +113,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_ApplicationStatistics'
       tags:
-      - instance
+      - Instance
       operationId: getApiV4ApplicationStatistics
+      summary: Get api V4 application statistics
+      x-summary-source: derived
 components:
   schemas:
     API_Entities_ApplicationStatistics:

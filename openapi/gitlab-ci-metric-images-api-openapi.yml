@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Metric Images API
+  title: GitLab Metric Images API
   version: v4
-  description: Operations related to access requests
+  description: Operations about metric_images
 servers:
 - url: https://gitlab.com
 tags:
@@ -31,6 +31,8 @@ paths:
       tags:
       - metric_images
       operationId: postApiV4ProjectsIdIssuesIssueIidMetricImagesAuthorize
+      summary: Post api V4 projects id issues issue iid metric images authorize
+      x-summary-source: derived
   /api/v4/projects/{id}/issues/{issue_iid}/metric_images:
     post:
       description: Upload a metric image for an issue
@@ -63,6 +65,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdIssuesIssueIidMetricImages'
         required: true
+      summary: Post api V4 projects id issues issue iid metric images
+      x-summary-source: derived
     get:
       description: Metric Images for issue
       parameters:
@@ -88,6 +92,8 @@ paths:
       tags:
       - metric_images
       operationId: getApiV4ProjectsIdIssuesIssueIidMetricImages
+      summary: Get api V4 projects id issues issue iid metric images
+      x-summary-source: derived
   /api/v4/projects/{id}/issues/{issue_iid}/metric_images/{metric_image_id}:
     put:
       description: Update a metric image for an issue
@@ -127,6 +133,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId'
         required: true
+      summary: Put api V4 projects id issues issue iid metric images metric image id
+      x-summary-source: derived
     delete:
       description: Remove a metric image for an issue
       parameters:
@@ -159,8 +167,36 @@ paths:
       tags:
       - metric_images
       operationId: deleteApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId
+      summary: Delete api V4 projects id issues issue iid metric images metric image id
+      x-summary-source: derived
 components:
   schemas:
+    putApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The url to view more metric info
+        url_text:
+          type: string
+          description: A description of the image or URL
+      description: Update a metric image for an issue
+    postApiV4ProjectsIdIssuesIssueIidMetricImages:
+      type: object
+      properties:
+        file:
+          type: string
+          description: The image file to be uploaded
+          format: binary
+        url:
+          type: string
+          description: The url to view more metric info
+        url_text:
+          type: string
+          description: A description of the image or URL
+      required:
+      - file
+      description: Upload a metric image for an issue
     API_Entities_IssuableMetricImage:
       type: object
       properties:
@@ -192,32 +228,6 @@ components:
       - url
       - url_text
       description: API_Entities_IssuableMetricImage model
-    postApiV4ProjectsIdIssuesIssueIidMetricImages:
-      type: object
-      properties:
-        file:
-          type: string
-          description: The image file to be uploaded
-          format: binary
-        url:
-          type: string
-          description: The url to view more metric info
-        url_text:
-          type: string
-          description: A description of the image or URL
-      required:
-      - file
-      description: Upload a metric image for an issue
-    putApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The url to view more metric info
-        url_text:
-          type: string
-          description: A description of the image or URL
-      description: Update a metric image for an issue
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Tags API
+  title: GitLab Tags API
   version: v4
-  description: Operations related to access requests
+  description: Operations about tags
 servers:
 - url: https://gitlab.com
 tags:
-- name: tags
+- name: Tags
   description: Operations about tags
 paths:
   /api/v4/projects/{id}/repository/tags:
@@ -88,8 +88,10 @@ paths:
         '503':
           description: Service unavailable
       tags:
-      - tags
+      - Tags
       operationId: getApiV4ProjectsIdRepositoryTags
+      summary: Get api V4 projects id repository tags
+      x-summary-source: derived
     post:
       description: Create a new repository tag
       parameters:
@@ -113,7 +115,7 @@ paths:
         '404':
           description: Not found
       tags:
-      - tags
+      - Tags
       operationId: postApiV4ProjectsIdRepositoryTags
       requestBody:
         content:
@@ -121,6 +123,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdRepositoryTags'
         required: true
+      summary: Post api V4 projects id repository tags
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/tags/{tag_name}:
     get:
       description: Get a single repository tag
@@ -149,8 +153,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - tags
+      - Tags
       operationId: getApiV4ProjectsIdRepositoryTagsTagName
+      summary: Get api V4 projects id repository tags tag name
+      x-summary-source: derived
     delete:
       description: Delete a repository tag
       parameters:
@@ -178,8 +184,10 @@ paths:
         '412':
           description: Precondition failed
       tags:
-      - tags
+      - Tags
       operationId: deleteApiV4ProjectsIdRepositoryTagsTagName
+      summary: Delete api V4 projects id repository tags tag name
+      x-summary-source: derived
   /api/v4/projects/{id}/repository/tags/{tag_name}/signature:
     get:
       description: Get a tag's signature
@@ -206,65 +214,12 @@ paths:
         '404':
           description: Not found
       tags:
-      - tags
+      - Tags
       operationId: getApiV4ProjectsIdRepositoryTagsTagNameSignature
+      summary: Get api V4 projects id repository tags tag name signature
+      x-summary-source: derived
 components:
   schemas:
-    API_Entities_TagRelease:
-      type: object
-      properties:
-        tag_name:
-          type: string
-          example: 1.0.0
-        description:
-          type: string
-          example: Amazing release. Wow
-      required:
-      - tag_name
-      - description
-    API_Entities_TagSignature:
-      type: object
-      properties:
-        signature_type:
-          type: string
-          example: PGP
-        signature:
-          type: object
-      required:
-      - signature_type
-      - signature
-      description: API_Entities_TagSignature model
-    API_Entities_Tag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: v1.0.0
-        message:
-          type: string
-          example: Release v1.0.0
-        target:
-          type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        release:
-          $ref: '#/components/schemas/API_Entities_TagRelease'
-        protected:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-          example: '2023-10-12T02:16:52.000Z'
-      required:
-      - name
-      - message
-      - target
-      - commit
-      - protected
-      - created_at
-      description: API_Entities_Tag model
     API_Entities_Commit:
       type: object
       properties:
@@ -340,6 +295,18 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
+    API_Entities_TagSignature:
+      type: object
+      properties:
+        signature_type:
+          type: string
+          example: PGP
+        signature:
+          type: object
+      required:
+      - signature_type
+      - signature
+      description: API_Entities_TagSignature model
     postApiV4ProjectsIdRepositoryTags:
       type: object
       properties:
@@ -359,6 +326,49 @@ components:
       - tag_name
       - ref
       description: Create a new repository tag
+    API_Entities_TagRelease:
+      type: object
+      properties:
+        tag_name:
+          type: string
+          example: 1.0.0
+        description:
+          type: string
+          example: Amazing release. Wow
+      required:
+      - tag_name
+      - description
+    API_Entities_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: v1.0.0
+        message:
+          type: string
+          example: Release v1.0.0
+        target:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        release:
+          $ref: '#/components/schemas/API_Entities_TagRelease'
+        protected:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2023-10-12T02:16:52.000Z'
+      required:
+      - name
+      - message
+      - target
+      - commit
+      - protected
+      - created_at
+      description: API_Entities_Tag model
   securitySchemes:
     access_token_header:
       type: apiKey

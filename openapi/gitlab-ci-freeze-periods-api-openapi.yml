@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Freeze Periods API
+  title: GitLab Freeze Periods API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to deploy freeze periods
 servers:
 - url: https://gitlab.com
 tags:
@@ -183,19 +183,22 @@ paths:
       operationId: deleteApiV4ProjectsIdFreezePeriodsFreezePeriodId
 components:
   schemas:
-    putApiV4ProjectsIdFreezePeriodsFreezePeriodId:
+    postApiV4ProjectsIdFreezePeriods:
       type: object
       properties:
         freeze_start:
           type: string
-          description: Start of the freeze period in cron format
+          description: Start of the freeze period in cron format.
         freeze_end:
           type: string
           description: End of the freeze period in cron format
         cron_timezone:
           type: string
-          description: The time zone for the cron fields
-      description: Update a freeze period
+          description: The time zone for the cron fields, defaults to UTC if not provided
+      required:
+      - freeze_start
+      - freeze_end
+      description: Create a freeze period
     API_Entities_FreezePeriod:
       type: object
       properties:
@@ -228,22 +231,19 @@ components:
       - created_at
       - updated_at
       description: API_Entities_FreezePeriod model
-    postApiV4ProjectsIdFreezePeriods:
+    putApiV4ProjectsIdFreezePeriodsFreezePeriodId:
       type: object
       properties:
         freeze_start:
           type: string
-          description: Start of the freeze period in cron format.
+          description: Start of the freeze period in cron format
         freeze_end:
           type: string
           description: End of the freeze period in cron format
         cron_timezone:
           type: string
-          description: The time zone for the cron fields, defaults to UTC if not provided
-      required:
-      - freeze_start
-      - freeze_end
-      description: Create a freeze period
+          description: The time zone for the cron fields
+      description: Update a freeze period
   securitySchemes:
     access_token_header:
       type: apiKey

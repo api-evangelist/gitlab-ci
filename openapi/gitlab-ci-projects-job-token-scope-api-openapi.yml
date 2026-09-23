@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Projects Job Token Scope API
+  title: GitLab Projects Job Token Scope API
   version: v4
-  description: Operations related to access requests
+  description: Operations about projects_job_token_scopes
 servers:
 - url: https://gitlab.com
 tags:
@@ -35,6 +35,8 @@ paths:
       tags:
       - projects_job_token_scope
       operationId: getApiV4ProjectsIdJobTokenScope
+      summary: Get api V4 projects id job token scope
+      x-summary-source: derived
     patch:
       description: Patch CI_JOB_TOKEN access settings.
       parameters:
@@ -64,6 +66,8 @@ paths:
             schema:
               $ref: '#/components/schemas/patchApiV4ProjectsIdJobTokenScope'
         required: true
+      summary: Patch api V4 projects id job token scope
+      x-summary-source: derived
   /api/v4/projects/{id}/job_token_scope/allowlist:
     get:
       description: Fetch project inbound allowlist for CI_JOB_TOKEN access settings.
@@ -108,6 +112,8 @@ paths:
       tags:
       - projects_job_token_scope
       operationId: getApiV4ProjectsIdJobTokenScopeAllowlist
+      summary: Get api V4 projects id job token scope allowlist
+      x-summary-source: derived
     post:
       description: Add target project to allowlist.
       parameters:
@@ -145,6 +151,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdJobTokenScopeAllowlist'
         required: true
+      summary: Post api V4 projects id job token scope allowlist
+      x-summary-source: derived
   /api/v4/projects/{id}/job_token_scope/groups_allowlist:
     get:
       description: Fetch project groups allowlist for CI_JOB_TOKEN access settings.
@@ -189,6 +197,8 @@ paths:
       tags:
       - projects_job_token_scope
       operationId: getApiV4ProjectsIdJobTokenScopeGroupsAllowlist
+      summary: Get api V4 projects id job token scope groups allowlist
+      x-summary-source: derived
     post:
       description: Add target group to allowlist.
       parameters:
@@ -226,6 +236,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdJobTokenScopeGroupsAllowlist'
         required: true
+      summary: Post api V4 projects id job token scope groups allowlist
+      x-summary-source: derived
   /api/v4/projects/{id}/job_token_scope/groups_allowlist/{target_group_id}:
     delete:
       description: Delete target group from allowlist.
@@ -260,6 +272,8 @@ paths:
       tags:
       - projects_job_token_scope
       operationId: deleteApiV4ProjectsIdJobTokenScopeGroupsAllowlistTargetGroupId
+      summary: Delete api V4 projects id job token scope groups allowlist target group id
+      x-summary-source: derived
   /api/v4/projects/{id}/job_token_scope/allowlist/{target_project_id}:
     delete:
       description: Delete project from allowlist.
@@ -294,8 +308,55 @@ paths:
       tags:
       - projects_job_token_scope
       operationId: deleteApiV4ProjectsIdJobTokenScopeAllowlistTargetProjectId
+      summary: Delete api V4 projects id job token scope allowlist target project id
+      x-summary-source: derived
 components:
   schemas:
+    API_Entities_ProjectJobTokenScope:
+      type: object
+      properties:
+        inbound_enabled:
+          type: boolean
+        outbound_enabled:
+          type: boolean
+      required:
+      - inbound_enabled
+      - outbound_enabled
+      description: API_Entities_ProjectJobTokenScope model
+    postApiV4ProjectsIdJobTokenScopeAllowlist:
+      type: object
+      properties:
+        target_project_id:
+          type: integer
+          format: int32
+          description: ID of target project
+          example: 2
+      required:
+      - target_project_id
+      description: Add target project to allowlist.
+    API_Entities_LicenseBasic:
+      type: object
+      properties:
+        key:
+          type: string
+          example: gpl-3.0
+        name:
+          type: string
+          example: GNU General Public License v3.0
+        nickname:
+          type: string
+          example: GNU GPLv3
+        html_url:
+          type: string
+          example: http://choosealicense.com/licenses/gpl-3.0
+        source_url:
+          type: string
+      required:
+      - key
+      - name
+      - nickname
+      - html_url
+      - source_url
     API_Entities_BasicGroupDetails:
       type: object
       properties:
@@ -313,6 +374,39 @@ components:
       - web_url
       - name
       description: API_Entities_BasicGroupDetails model
+    postApiV4ProjectsIdJobTokenScopeGroupsAllowlist:
+      type: object
+      properties:
+        target_group_id:
+          type: integer
+          format: int32
+          description: ID of target group
+          example: 2
+      required:
+      - target_group_id
+      description: Add target group to allowlist.
+    patchApiV4ProjectsIdJobTokenScope:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates CI/CD job tokens generated in other projects have restricted access to this project.
+      required:
+      - enabled
+      description: Patch CI_JOB_TOKEN access settings.
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
     API_Entities_BasicProjectDetails:
       type: object
       properties:
@@ -415,17 +509,6 @@ components:
       - visibility
       - namespace
       description: API_Entities_BasicProjectDetails model
-    postApiV4ProjectsIdJobTokenScopeAllowlist:
-      type: object
-      properties:
-        target_project_id:
-          type: integer
-          format: int32
-          description: ID of target project
-          example: 2
-      required:
-      - target_project_id
-      description: Add target project to allowlist.
     API_Entities_NamespaceBasic:
       type: object
       properties:
@@ -464,73 +547,6 @@ components:
       - parent_id
       - avatar_url
       - web_url
-    API_Entities_ProjectJobTokenScope:
-      type: object
-      properties:
-        inbound_enabled:
-          type: boolean
-        outbound_enabled:
-          type: boolean
-      required:
-      - inbound_enabled
-      - outbound_enabled
-      description: API_Entities_ProjectJobTokenScope model
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    API_Entities_LicenseBasic:
-      type: object
-      properties:
-        key:
-          type: string
-          example: gpl-3.0
-        name:
-          type: string
-          example: GNU General Public License v3.0
-        nickname:
-          type: string
-          example: GNU GPLv3
-        html_url:
-          type: string
-          example: http://choosealicense.com/licenses/gpl-3.0
-        source_url:
-          type: string
-      required:
-      - key
-      - name
-      - nickname
-      - html_url
-      - source_url
-    postApiV4ProjectsIdJobTokenScopeGroupsAllowlist:
-      type: object
-      properties:
-        target_group_id:
-          type: integer
-          format: int32
-          description: ID of target group
-          example: 2
-      required:
-      - target_group_id
-      description: Add target group to allowlist.
-    patchApiV4ProjectsIdJobTokenScope:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Indicates CI/CD job tokens generated in other projects have restricted access to this project.
-      required:
-      - enabled
-      description: Patch CI_JOB_TOKEN access settings.
   securitySchemes:
     access_token_header:
       type: apiKey

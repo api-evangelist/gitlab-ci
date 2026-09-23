@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Gitlab Pages API
+  title: Gitlab Pages API
   version: v4
-  description: Operations related to access requests
+  description: Operations about gitlab_pages
 servers:
 - url: https://gitlab.com
 tags:
@@ -116,6 +116,8 @@ paths:
       tags:
       - gitlab_pages
       operationId: getApiV4ProjectsIdPagesDomains
+      summary: Get api V4 projects id pages domains
+      x-summary-source: derived
     post:
       description: Create a new pages domain
       parameters:
@@ -141,6 +143,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdPagesDomains'
         required: true
+      summary: Post api V4 projects id pages domains
+      x-summary-source: derived
   /api/v4/projects/{id}/pages/domains/{domain}:
     get:
       description: Get a single pages domain
@@ -167,6 +171,8 @@ paths:
       tags:
       - gitlab_pages
       operationId: getApiV4ProjectsIdPagesDomainsDomain
+      summary: Get api V4 projects id pages domains domain
+      x-summary-source: derived
     put:
       description: Updates a pages domain
       parameters:
@@ -194,6 +200,8 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdPagesDomainsDomain'
         required: true
+      summary: Put api V4 projects id pages domains domain
+      x-summary-source: derived
     delete:
       description: Delete a pages domain
       parameters:
@@ -215,6 +223,8 @@ paths:
       tags:
       - gitlab_pages
       operationId: deleteApiV4ProjectsIdPagesDomainsDomain
+      summary: Delete api V4 projects id pages domains domain
+      x-summary-source: derived
   /api/v4/projects/{id}/pages/domains/{domain}/verify:
     put:
       description: Verify a pages domain
@@ -241,6 +251,8 @@ paths:
       tags:
       - gitlab_pages
       operationId: putApiV4ProjectsIdPagesDomainsDomainVerify
+      summary: Put api V4 projects id pages domains domain verify
+      x-summary-source: derived
   /api/v4/pages/domains:
     get:
       description: Get all pages domains
@@ -279,49 +291,10 @@ paths:
       tags:
       - gitlab_pages
       operationId: getApiV4PagesDomains
+      summary: Get api V4 pages domains
+      x-summary-source: derived
 components:
   schemas:
-    API_Entities_PagesDomainCertificate:
-      type: object
-      properties:
-        subject:
-          type: string
-        expired:
-          type: string
-        certificate:
-          type: string
-        certificate_text:
-          type: string
-      required:
-      - subject
-      - expired
-      - certificate
-      - certificate_text
-    putApiV4ProjectsIdPagesDomainsDomain:
-      type: object
-      properties:
-        certificate:
-          type: string
-          description: The certificate
-          format: binary
-        key:
-          type: string
-          description: The key
-          format: binary
-        auto_ssl_enabled:
-          type: boolean
-          description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
-      description: Updates a pages domain
-    API_Entities_PagesDomainCertificateExpiration:
-      type: object
-      properties:
-        expired:
-          type: string
-        expiration:
-          type: string
-      required:
-      - expired
-      - expiration
     API_Entities_PagesDomain:
       type: object
       properties:
@@ -347,44 +320,6 @@ components:
       - enabled_until
       - auto_ssl_enabled
       description: API_Entities_PagesDomain model
-    patchApiV4ProjectsIdPages:
-      type: object
-      properties:
-        pages_unique_domain_enabled:
-          type: boolean
-          description: Whether to use unique domain
-        pages_https_only:
-          type: boolean
-          description: Whether to force HTTPS
-        pages_primary_domain:
-          type: string
-          description: Set pages primary domain
-      description: Update pages settings
-    postApiV4ProjectsIdPagesDomains:
-      type: object
-      properties:
-        domain:
-          type: string
-          description: The domain
-        certificate:
-          type: string
-          description: The certificate
-          format: binary
-        key:
-          type: string
-          description: The key
-          format: binary
-        auto_ssl_enabled:
-          type: boolean
-          description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
-          default: false
-        user_provided_certificate:
-          type: string
-        user_provided_key:
-          type: string
-      required:
-      - domain
-      description: Create a new pages domain
     API_Entities_PagesDomainBasic:
       type: object
       properties:
@@ -413,6 +348,85 @@ components:
       - enabled_until
       - auto_ssl_enabled
       description: API_Entities_PagesDomainBasic model
+    postApiV4ProjectsIdPagesDomains:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: The domain
+        certificate:
+          type: string
+          description: The certificate
+          format: binary
+        key:
+          type: string
+          description: The key
+          format: binary
+        auto_ssl_enabled:
+          type: boolean
+          description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
+          default: false
+        user_provided_certificate:
+          type: string
+        user_provided_key:
+          type: string
+      required:
+      - domain
+      description: Create a new pages domain
+    patchApiV4ProjectsIdPages:
+      type: object
+      properties:
+        pages_unique_domain_enabled:
+          type: boolean
+          description: Whether to use unique domain
+        pages_https_only:
+          type: boolean
+          description: Whether to force HTTPS
+        pages_primary_domain:
+          type: string
+          description: Set pages primary domain
+      description: Update pages settings
+    putApiV4ProjectsIdPagesDomainsDomain:
+      type: object
+      properties:
+        certificate:
+          type: string
+          description: The certificate
+          format: binary
+        key:
+          type: string
+          description: The key
+          format: binary
+        auto_ssl_enabled:
+          type: boolean
+          description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
+      description: Updates a pages domain
+    API_Entities_PagesDomainCertificate:
+      type: object
+      properties:
+        subject:
+          type: string
+        expired:
+          type: string
+        certificate:
+          type: string
+        certificate_text:
+          type: string
+      required:
+      - subject
+      - expired
+      - certificate
+      - certificate_text
+    API_Entities_PagesDomainCertificateExpiration:
+      type: object
+      properties:
+        expired:
+          type: string
+        expiration:
+          type: string
+      required:
+      - expired
+      - expiration
   securitySchemes:
     access_token_header:
       type: apiKey

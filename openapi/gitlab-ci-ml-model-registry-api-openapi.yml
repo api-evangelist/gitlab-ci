@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Ml Model Registry API
+  title: GitLab Ml Model Registry API
   version: v4
-  description: Operations related to access requests
+  description: Operations related to Model registry
 servers:
 - url: https://gitlab.com
 tags:
@@ -142,6 +142,19 @@ paths:
       operationId: getApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles(*path)FileName
 components:
   schemas:
+    putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileNameAuthorize:
+      type: object
+      properties:
+        path:
+          type: string
+          description: File directory path
+        status:
+          type: string
+          description: Package status
+          enum:
+          - default
+          - hidden
+      description: Workhorse authorize model package file
     putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileName:
       type: object
       properties:
@@ -161,19 +174,6 @@ components:
       required:
       - file
       description: Workhorse upload model package file
-    putApiV4ProjectsIdPackagesMlModelsModelVersionIdFiles__path_FileNameAuthorize:
-      type: object
-      properties:
-        path:
-          type: string
-          description: File directory path
-        status:
-          type: string
-          description: Package status
-          enum:
-          - default
-          - hidden
-      description: Workhorse authorize model package file
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -1,18 +1,22 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Organizations API
+  title: GitLab Organizations API
   version: v4
-  description: Operations related to access requests
+  description: Operations about organizations
 servers:
 - url: https://gitlab.com
 tags:
-- name: organizations
+- name: Organizations
   description: Operations about organizations
 paths:
   /api/v4/organizations:
     post:
       summary: Create an organization
-      description: "This feature was introduced in GitLab 17.5. \\\n                    This feature is behind the `allow_organization_creation` feature flag. \\\n                    In GitLab 18.3, feature flag changed to `organization_switching`."
+      description: 'This feature was introduced in GitLab 17.5. \
+
+        This feature is behind the `allow_organization_creation` feature flag. \
+
+        In GitLab 18.3, feature flag changed to `organization_switching`.'
       responses:
         '201':
           description: Create an organization
@@ -21,7 +25,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/API_Entities_Organizations_Organization'
       tags:
-      - organizations
+      - Organizations
       operationId: postApiV4Organizations
       requestBody:
         content:
@@ -31,26 +35,6 @@ paths:
         required: true
 components:
   schemas:
-    postApiV4Organizations:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        path:
-          type: string
-          description: The path of the organization
-        description:
-          type: string
-          description: The description of the organization
-        avatar:
-          type: string
-          description: The avatar image for the organization
-          format: binary
-      required:
-      - name
-      - path
-      description: Create an organization
     API_Entities_Organizations_Organization:
       type: object
       properties:
@@ -91,6 +75,26 @@ components:
       - web_url
       - avatar_url
       description: API_Entities_Organizations_Organization model
+    postApiV4Organizations:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        path:
+          type: string
+          description: The path of the organization
+        description:
+          type: string
+          description: The description of the organization
+        avatar:
+          type: string
+          description: The avatar image for the organization
+          format: binary
+      required:
+      - name
+      - path
+      description: Create an organization
   securitySchemes:
     access_token_header:
       type: apiKey

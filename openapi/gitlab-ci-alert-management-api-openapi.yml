@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Alert Management API
+  title: GitLab Alert Management API
   version: v4
-  description: Operations related to access requests
+  description: Operations about alert_managements
 servers:
 - url: https://gitlab.com
 tags:
-- name: alert_management
+- name: Alert Management
   description: Operations about alert_managements
 paths:
   /api/v4/projects/{id}/alert_management_alerts/{alert_iid}/metric_images/authorize:
@@ -34,8 +34,10 @@ paths:
         '403':
           description: Forbidden
       tags:
-      - alert_management
+      - Alert Management
       operationId: postApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImagesAuthorize
+      summary: Post api V4 projects id alert management alerts alert iid metric images…
+      x-summary-source: derived
   /api/v4/projects/{id}/alert_management_alerts/{alert_iid}/metric_images:
     post:
       description: Upload a metric image for an alert
@@ -65,7 +67,7 @@ paths:
         '403':
           description: Forbidden
       tags:
-      - alert_management
+      - Alert Management
       operationId: postApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImages
       requestBody:
         content:
@@ -85,6 +87,8 @@ paths:
                   description: A description of the image or URL
               required:
               - file
+      summary: Post api V4 projects id alert management alerts alert iid metric images
+      x-summary-source: derived
     get:
       description: Metric Images for alert
       parameters:
@@ -115,8 +119,10 @@ paths:
         '404':
           description: Not found
       tags:
-      - alert_management
+      - Alert Management
       operationId: getApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImages
+      summary: Get api V4 projects id alert management alerts alert iid metric images
+      x-summary-source: derived
   /api/v4/projects/{id}/alert_management_alerts/{alert_iid}/metric_images/{metric_image_id}:
     put:
       description: Update a metric image for an alert
@@ -156,7 +162,7 @@ paths:
         '422':
           description: Unprocessable entity
       tags:
-      - alert_management
+      - Alert Management
       operationId: putApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImagesMetricImageId
       requestBody:
         content:
@@ -170,6 +176,8 @@ paths:
                 url_text:
                   type: string
                   description: A description of the image or URL
+      summary: Put api V4 projects id alert management alerts alert iid metric images metric…
+      x-summary-source: derived
     delete:
       description: Remove a metric image for an alert
       parameters:
@@ -208,8 +216,10 @@ paths:
         '422':
           description: Unprocessable entity
       tags:
-      - alert_management
+      - Alert Management
       operationId: deleteApiV4ProjectsIdAlertManagementAlertsAlertIidMetricImagesMetricImageId
+      summary: Delete api V4 projects id alert management alerts alert iid metric images…
+      x-summary-source: derived
 components:
   schemas:
     API_Entities_MetricImage:

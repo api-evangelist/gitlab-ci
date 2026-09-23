@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: GitLab access_requests Protected Branches API
+  title: GitLab Protected Branches API
   version: v4
-  description: Operations related to access requests
+  description: Operations about protected_branches
 servers:
 - url: https://gitlab.com
 tags:
@@ -61,6 +61,8 @@ paths:
       tags:
       - protected_branches
       operationId: getApiV4ProjectsIdProtectedBranches
+      summary: Get api V4 projects id protected branches
+      x-summary-source: derived
     post:
       description: Protect a single branch
       parameters:
@@ -95,6 +97,8 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdProtectedBranches'
         required: true
+      summary: Post api V4 projects id protected branches
+      x-summary-source: derived
   /api/v4/projects/{id}/protected_branches/{name}:
     get:
       description: Get a single protected branch
@@ -127,6 +131,8 @@ paths:
       tags:
       - protected_branches
       operationId: getApiV4ProjectsIdProtectedBranchesName
+      summary: Get api V4 projects id protected branches name
+      x-summary-source: derived
     patch:
       description: Update a protected branch
       parameters:
@@ -168,6 +174,8 @@ paths:
             schema:
               $ref: '#/components/schemas/patchApiV4ProjectsIdProtectedBranchesName'
         required: true
+      summary: Patch api V4 projects id protected branches name
+      x-summary-source: derived
     delete:
       description: Unprotect a single branch
       parameters:
@@ -195,46 +203,10 @@ paths:
       tags:
       - protected_branches
       operationId: deleteApiV4ProjectsIdProtectedBranchesName
+      summary: Delete api V4 projects id protected branches name
+      x-summary-source: derived
 components:
   schemas:
-    API_Entities_ProtectedBranch:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
-          type: string
-          example: main
-        push_access_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
-        merge_access_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
-        allow_force_push:
-          type: boolean
-        unprotect_access_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
-        code_owner_approval_required:
-          type: boolean
-        inherited:
-          type: boolean
-      required:
-      - id
-      - name
-      - push_access_levels
-      - merge_access_levels
-      - allow_force_push
-      - unprotect_access_levels
-      - code_owner_approval_required
-      - inherited
-      description: API_Entities_ProtectedBranch model
     patchApiV4ProjectsIdProtectedBranchesName:
       type: object
       properties:
@@ -388,6 +360,44 @@ components:
       - access_level_description
       - user_id
       - group_id
+    API_Entities_ProtectedBranch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: main
+        push_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+        merge_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+        allow_force_push:
+          type: boolean
+        unprotect_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+        code_owner_approval_required:
+          type: boolean
+        inherited:
+          type: boolean
+      required:
+      - id
+      - name
+      - push_access_levels
+      - merge_access_levels
+      - allow_force_push
+      - unprotect_access_levels
+      - code_owner_approval_required
+      - inherited
+      description: API_Entities_ProtectedBranch model
     postApiV4ProjectsIdProtectedBranches:
       type: object
       properties:
