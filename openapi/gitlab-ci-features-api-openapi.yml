@@ -131,6 +131,38 @@ components:
       required:
       - value
       description: Set or create a feature
+    API_Entities_FeatureGate:
+      type: object
+      properties:
+        key:
+          type: string
+          example: percentage_of_actors
+        value:
+          type: integer
+          format: int32
+          example: 34
+      required:
+      - key
+      - value
+    API_Entities_Feature:
+      type: object
+      properties:
+        name:
+          type: string
+          example: experimental_feature
+        state:
+          type: string
+          example: 'off'
+        gates:
+          $ref: '#/components/schemas/API_Entities_FeatureGate'
+        definition:
+          $ref: '#/components/schemas/API_Entities_Feature_Definition'
+      required:
+      - name
+      - state
+      - gates
+      - definition
+      description: API_Entities_Feature model
     API_Entities_Feature_Definition:
       type: object
       properties:
@@ -166,38 +198,6 @@ components:
       - default_enabled
       - intended_to_rollout_by
       description: API_Entities_Feature_Definition model
-    API_Entities_FeatureGate:
-      type: object
-      properties:
-        key:
-          type: string
-          example: percentage_of_actors
-        value:
-          type: integer
-          format: int32
-          example: 34
-      required:
-      - key
-      - value
-    API_Entities_Feature:
-      type: object
-      properties:
-        name:
-          type: string
-          example: experimental_feature
-        state:
-          type: string
-          example: 'off'
-        gates:
-          $ref: '#/components/schemas/API_Entities_FeatureGate'
-        definition:
-          $ref: '#/components/schemas/API_Entities_Feature_Definition'
-      required:
-      - name
-      - state
-      - gates
-      - definition
-      description: API_Entities_Feature model
   securitySchemes:
     access_token_header:
       type: apiKey

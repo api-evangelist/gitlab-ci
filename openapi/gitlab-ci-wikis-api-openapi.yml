@@ -419,7 +419,7 @@ paths:
         required: true
 components:
   schemas:
-    putApiV4ProjectsIdWikisSlug:
+    postApiV4ProjectsIdWikis:
       type: object
       properties:
         title:
@@ -444,8 +444,105 @@ components:
           - asciidoc
           - org
           default: markdown
-      description: Update a wiki page
-    putApiV4GroupsIdWikisSlug:
+      required:
+      - title
+      - content
+      description: Create a wiki page
+    postApiV4GroupsIdWikis:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of a wiki page
+        front_matter:
+          type: object
+          description: Object that contains YAML frontmatter
+          properties:
+            title:
+              type: string
+              description: Frontmatter title of a wiki page
+        content:
+          type: string
+          description: Content of a wiki page
+        format:
+          type: string
+          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+          enum:
+          - markdown
+          - rdoc
+          - asciidoc
+          - org
+          default: markdown
+      required:
+      - title
+      - content
+      description: Create a wiki page
+    API_Entities_WikiAttachment:
+      type: object
+      properties:
+        file_name:
+          type: string
+          example: dk.png
+        file_path:
+          type: string
+          example: uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png
+        branch:
+          type: string
+          example: main
+        link:
+          type: object
+          properties:
+            url:
+              type: string
+              example: uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png
+            markdown:
+              type: string
+              example: '![dk](uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png)'
+          required:
+          - url
+          - markdown
+      required:
+      - file_name
+      - file_path
+      - branch
+      - link
+      description: API_Entities_WikiAttachment model
+    postApiV4GroupsIdWikisAttachments:
+      type: object
+      properties:
+        file:
+          type: string
+          description: The attachment file to be uploaded
+          format: binary
+        branch:
+          type: string
+          description: The name of the branch
+      required:
+      - file
+      description: Upload an attachment to the wiki repository
+    API_Entities_WikiPageBasic:
+      type: object
+      properties:
+        format:
+          type: string
+          example: markdown
+        slug:
+          type: string
+          example: deploy
+        title:
+          type: string
+          example: deploy
+        wiki_page_meta_id:
+          type: integer
+          format: int32
+          example: 123
+      required:
+      - format
+      - slug
+      - title
+      - wiki_page_meta_id
+      description: API_Entities_WikiPageBasic model
+    putApiV4ProjectsIdWikisSlug:
       type: object
       properties:
         title:
@@ -506,130 +603,33 @@ components:
       - encoding
       - front_matter
       description: API_Entities_WikiPage model
+    putApiV4GroupsIdWikisSlug:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of a wiki page
+        front_matter:
+          type: object
+          description: Object that contains YAML frontmatter
+          properties:
+            title:
+              type: string
+              description: Frontmatter title of a wiki page
+        content:
+          type: string
+          description: Content of a wiki page
+        format:
+          type: string
+          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+          enum:
+          - markdown
+          - rdoc
+          - asciidoc
+          - org
+          default: markdown
+      description: Update a wiki page
     postApiV4ProjectsIdWikisAttachments:
-      type: object
-      properties:
-        file:
-          type: string
-          description: The attachment file to be uploaded
-          format: binary
-        branch:
-          type: string
-          description: The name of the branch
-      required:
-      - file
-      description: Upload an attachment to the wiki repository
-    postApiV4GroupsIdWikis:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of a wiki page
-        front_matter:
-          type: object
-          description: Object that contains YAML frontmatter
-          properties:
-            title:
-              type: string
-              description: Frontmatter title of a wiki page
-        content:
-          type: string
-          description: Content of a wiki page
-        format:
-          type: string
-          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
-          enum:
-          - markdown
-          - rdoc
-          - asciidoc
-          - org
-          default: markdown
-      required:
-      - title
-      - content
-      description: Create a wiki page
-    postApiV4ProjectsIdWikis:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of a wiki page
-        front_matter:
-          type: object
-          description: Object that contains YAML frontmatter
-          properties:
-            title:
-              type: string
-              description: Frontmatter title of a wiki page
-        content:
-          type: string
-          description: Content of a wiki page
-        format:
-          type: string
-          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
-          enum:
-          - markdown
-          - rdoc
-          - asciidoc
-          - org
-          default: markdown
-      required:
-      - title
-      - content
-      description: Create a wiki page
-    API_Entities_WikiPageBasic:
-      type: object
-      properties:
-        format:
-          type: string
-          example: markdown
-        slug:
-          type: string
-          example: deploy
-        title:
-          type: string
-          example: deploy
-        wiki_page_meta_id:
-          type: integer
-          format: int32
-          example: 123
-      required:
-      - format
-      - slug
-      - title
-      - wiki_page_meta_id
-      description: API_Entities_WikiPageBasic model
-    API_Entities_WikiAttachment:
-      type: object
-      properties:
-        file_name:
-          type: string
-          example: dk.png
-        file_path:
-          type: string
-          example: uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png
-        branch:
-          type: string
-          example: main
-        link:
-          type: object
-          properties:
-            url:
-              type: string
-              example: uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png
-            markdown:
-              type: string
-              example: '![dk](uploads/6a061c4cf9f1c28cb22c384b4b8d4e3c/dk.png)'
-          required:
-          - url
-          - markdown
-      required:
-      - file_name
-      - file_path
-      - branch
-      - link
-      description: API_Entities_WikiAttachment model
-    postApiV4GroupsIdWikisAttachments:
       type: object
       properties:
         file:

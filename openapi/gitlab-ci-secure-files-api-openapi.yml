@@ -163,20 +163,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    postApiV4ProjectsIdSecureFiles:
-      type: object
-      properties:
-        name:
-          type: string
-          description: "The name of the file being uploaded. The filename must be unique within\n            the project"
-        file:
-          type: string
-          description: The secure file being uploaded
-          format: binary
-      required:
-      - name
-      - file
-      description: Create a secure file
     API_Entities_Ci_SecureFile:
       type: object
       properties:
@@ -218,6 +204,20 @@ components:
       - metadata
       - file_extension
       description: API_Entities_Ci_SecureFile model
+    postApiV4ProjectsIdSecureFiles:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "The name of the file being uploaded. The filename must be unique within\n            the project"
+        file:
+          type: string
+          description: The secure file being uploaded
+          format: binary
+      required:
+      - name
+      - file
+      description: Create a secure file
   securitySchemes:
     access_token_header:
       type: apiKey

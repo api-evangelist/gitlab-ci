@@ -276,72 +276,46 @@ paths:
       operationId: getApiV4UsersIdEvents
 components:
   schemas:
-    API_Entities_Event:
+    API_Entities_Suggestion:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        project_id:
+        from_line:
           type: integer
           format: int32
-          example: 2
-        action_name:
-          type: string
-          example: closed
-        target_id:
+          example: 1
+        to_line:
           type: integer
           format: int32
-          example: 160
-        target_iid:
-          type: integer
-          format: int32
-          example: 157
-        target_type:
-          type: string
-          example: Issue
-        author_id:
-          type: integer
-          format: int32
-          example: 25
-        target_title:
-          type: string
-          example: Public project search field
-        created_at:
-          type: string
-          example: '2017-02-09T10:43:19.667Z'
-        note:
-          $ref: '#/components/schemas/API_Entities_Note'
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        wiki_page:
-          $ref: '#/components/schemas/API_Entities_WikiPageBasic'
-        imported:
+          example: 1
+        appliable:
+          type: boolean
+          example: true
+        applied:
           type: boolean
           example: false
-        imported_from:
+        from_content:
           type: string
-          example: none
-        push_data:
-          $ref: '#/components/schemas/API_Entities_PushEventPayload'
-        author_username:
+          example: 'Original content
+
+            '
+        to_content:
           type: string
-          example: root
+          example: 'New content
+
+            '
       required:
       - id
-      - project_id
-      - action_name
-      - target_id
-      - target_iid
-      - target_type
-      - author_id
-      - target_title
-      - created_at
-      - imported
-      - imported_from
-      - author_username
-      description: API_Entities_Event model
+      - from_line
+      - to_line
+      - appliable
+      - applied
+      - from_content
+      - to_content
+      description: API_Entities_Suggestion model
     API_Entities_Note:
       type: object
       properties:
@@ -434,66 +408,6 @@ components:
       - imported_from
       - noteable_iid
       - commands_changes
-    API_Entities_WikiPageBasic:
-      type: object
-      properties:
-        format:
-          type: string
-          example: markdown
-        slug:
-          type: string
-          example: deploy
-        title:
-          type: string
-          example: deploy
-        wiki_page_meta_id:
-          type: integer
-          format: int32
-          example: 123
-      required:
-      - format
-      - slug
-      - title
-      - wiki_page_meta_id
-      description: API_Entities_WikiPageBasic model
-    API_Entities_PushEventPayload:
-      type: object
-      properties:
-        commit_count:
-          type: integer
-          format: int32
-          example: 1
-        action:
-          type: string
-          example: pushed
-        ref_type:
-          type: string
-          example: branch
-        commit_from:
-          type: string
-          example: 50d4420237a9de7be1304607147aec22e4a14af7
-        commit_to:
-          type: string
-          example: c5feabde2d8cd023215af4d2ceeb7a64839fc428
-        ref:
-          type: string
-          example: master
-        commit_title:
-          type: string
-          example: Add simple search to projects in public area
-        ref_count:
-          type: integer
-          format: int32
-          example: 1
-      required:
-      - commit_count
-      - action
-      - ref_type
-      - commit_from
-      - commit_to
-      - ref
-      - commit_title
-      - ref_count
     API_Entities_UserBasic:
       type: object
       properties:
@@ -538,46 +452,6 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
-    API_Entities_Suggestion:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        from_line:
-          type: integer
-          format: int32
-          example: 1
-        to_line:
-          type: integer
-          format: int32
-          example: 1
-        appliable:
-          type: boolean
-          example: true
-        applied:
-          type: boolean
-          example: false
-        from_content:
-          type: string
-          example: 'Original content
-
-            '
-        to_content:
-          type: string
-          example: 'New content
-
-            '
-      required:
-      - id
-      - from_line
-      - to_line
-      - appliable
-      - applied
-      - from_content
-      - to_content
-      description: API_Entities_Suggestion model
     API_Entities_CustomAttribute:
       type: object
       properties:
@@ -591,6 +465,132 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
+    API_Entities_PushEventPayload:
+      type: object
+      properties:
+        commit_count:
+          type: integer
+          format: int32
+          example: 1
+        action:
+          type: string
+          example: pushed
+        ref_type:
+          type: string
+          example: branch
+        commit_from:
+          type: string
+          example: 50d4420237a9de7be1304607147aec22e4a14af7
+        commit_to:
+          type: string
+          example: c5feabde2d8cd023215af4d2ceeb7a64839fc428
+        ref:
+          type: string
+          example: master
+        commit_title:
+          type: string
+          example: Add simple search to projects in public area
+        ref_count:
+          type: integer
+          format: int32
+          example: 1
+      required:
+      - commit_count
+      - action
+      - ref_type
+      - commit_from
+      - commit_to
+      - ref
+      - commit_title
+      - ref_count
+    API_Entities_WikiPageBasic:
+      type: object
+      properties:
+        format:
+          type: string
+          example: markdown
+        slug:
+          type: string
+          example: deploy
+        title:
+          type: string
+          example: deploy
+        wiki_page_meta_id:
+          type: integer
+          format: int32
+          example: 123
+      required:
+      - format
+      - slug
+      - title
+      - wiki_page_meta_id
+      description: API_Entities_WikiPageBasic model
+    API_Entities_Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        project_id:
+          type: integer
+          format: int32
+          example: 2
+        action_name:
+          type: string
+          example: closed
+        target_id:
+          type: integer
+          format: int32
+          example: 160
+        target_iid:
+          type: integer
+          format: int32
+          example: 157
+        target_type:
+          type: string
+          example: Issue
+        author_id:
+          type: integer
+          format: int32
+          example: 25
+        target_title:
+          type: string
+          example: Public project search field
+        created_at:
+          type: string
+          example: '2017-02-09T10:43:19.667Z'
+        note:
+          $ref: '#/components/schemas/API_Entities_Note'
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        wiki_page:
+          $ref: '#/components/schemas/API_Entities_WikiPageBasic'
+        imported:
+          type: boolean
+          example: false
+        imported_from:
+          type: string
+          example: none
+        push_data:
+          $ref: '#/components/schemas/API_Entities_PushEventPayload'
+        author_username:
+          type: string
+          example: root
+      required:
+      - id
+      - project_id
+      - action_name
+      - target_id
+      - target_iid
+      - target_type
+      - author_id
+      - target_title
+      - created_at
+      - imported
+      - imported_from
+      - author_username
+      description: API_Entities_Event model
   securitySchemes:
     access_token_header:
       type: apiKey

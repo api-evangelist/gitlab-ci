@@ -99,47 +99,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_Ci_Lint_Result:
-      type: object
-      properties:
-        valid:
-          type: boolean
-        errors:
-          type: array
-          items:
-            type: string
-          example:
-          - variables config should be a hash of key value pairs
-        warnings:
-          type: array
-          items:
-            type: string
-          example:
-          - jobs:job may allow multiple pipelines ...
-        merged_yaml:
-          type: string
-          example: "---\\n:another_test:\\n  :stage: test\\n\n          :script: echo 2\\n:test:\\n  :stage: test\\n  :script: echo 1\\n"
-        includes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_Ci_Lint_Result_Include'
-          example:
-          - blob: https://gitlab.com/root/example-project/-/blob/...
-        jobs:
-          type: array
-          items:
-            type: object
-          example:
-          - name: test
-            script:
-            - ls
-      required:
-      - valid
-      - errors
-      - warnings
-      - merged_yaml
-      - includes
-      description: API_Entities_Ci_Lint_Result model
     API_Entities_Ci_Lint_Result_Include:
       type: object
       properties:
@@ -194,6 +153,47 @@ components:
       required:
       - content
       description: Validate a CI YAML configuration with a namespace
+    API_Entities_Ci_Lint_Result:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: string
+          example:
+          - variables config should be a hash of key value pairs
+        warnings:
+          type: array
+          items:
+            type: string
+          example:
+          - jobs:job may allow multiple pipelines ...
+        merged_yaml:
+          type: string
+          example: "---\\n:another_test:\\n  :stage: test\\n\n          :script: echo 2\\n:test:\\n  :stage: test\\n  :script: echo 1\\n"
+        includes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Ci_Lint_Result_Include'
+          example:
+          - blob: https://gitlab.com/root/example-project/-/blob/...
+        jobs:
+          type: array
+          items:
+            type: object
+          example:
+          - name: test
+            script:
+            - ls
+      required:
+      - valid
+      - errors
+      - warnings
+      - merged_yaml
+      - includes
+      description: API_Entities_Ci_Lint_Result model
   securitySchemes:
     access_token_header:
       type: apiKey

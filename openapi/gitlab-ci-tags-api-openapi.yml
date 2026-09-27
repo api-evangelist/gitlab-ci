@@ -220,6 +220,49 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_TagRelease:
+      type: object
+      properties:
+        tag_name:
+          type: string
+          example: 1.0.0
+        description:
+          type: string
+          example: Amazing release. Wow
+      required:
+      - tag_name
+      - description
+    API_Entities_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: v1.0.0
+        message:
+          type: string
+          example: Release v1.0.0
+        target:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        release:
+          $ref: '#/components/schemas/API_Entities_TagRelease'
+        protected:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2023-10-12T02:16:52.000Z'
+      required:
+      - name
+      - message
+      - target
+      - commit
+      - protected
+      - created_at
+      description: API_Entities_Tag model
     API_Entities_Commit:
       type: object
       properties:
@@ -295,18 +338,6 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_TagSignature:
-      type: object
-      properties:
-        signature_type:
-          type: string
-          example: PGP
-        signature:
-          type: object
-      required:
-      - signature_type
-      - signature
-      description: API_Entities_TagSignature model
     postApiV4ProjectsIdRepositoryTags:
       type: object
       properties:
@@ -326,49 +357,18 @@ components:
       - tag_name
       - ref
       description: Create a new repository tag
-    API_Entities_TagRelease:
+    API_Entities_TagSignature:
       type: object
       properties:
-        tag_name:
+        signature_type:
           type: string
-          example: 1.0.0
-        description:
-          type: string
-          example: Amazing release. Wow
+          example: PGP
+        signature:
+          type: object
       required:
-      - tag_name
-      - description
-    API_Entities_Tag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: v1.0.0
-        message:
-          type: string
-          example: Release v1.0.0
-        target:
-          type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        release:
-          $ref: '#/components/schemas/API_Entities_TagRelease'
-        protected:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-          example: '2023-10-12T02:16:52.000Z'
-      required:
-      - name
-      - message
-      - target
-      - commit
-      - protected
-      - created_at
-      description: API_Entities_Tag model
+      - signature_type
+      - signature
+      description: API_Entities_TagSignature model
   securitySchemes:
     access_token_header:
       type: apiKey

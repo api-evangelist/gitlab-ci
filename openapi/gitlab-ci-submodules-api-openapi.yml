@@ -53,6 +53,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_CommitStats:
+      type: object
+      properties:
+        additions:
+          type: integer
+          format: int32
+          example: 1
+        deletions:
+          type: integer
+          format: int32
+          example: 0
+        total:
+          type: integer
+          format: int32
+          example: 1
+      required:
+      - additions
+      - deletions
+      - total
     API_Entities_CommitDetail:
       type: object
       properties:
@@ -142,25 +161,6 @@ components:
       - project_id
       - last_pipeline
       description: API_Entities_CommitDetail model
-    API_Entities_CommitStats:
-      type: object
-      properties:
-        additions:
-          type: integer
-          format: int32
-          example: 1
-        deletions:
-          type: integer
-          format: int32
-          example: 0
-        total:
-          type: integer
-          format: int32
-          example: 1
-      required:
-      - additions
-      - deletions
-      - total
     putApiV4ProjectsIdRepositorySubmodulesSubmodule:
       type: object
       properties:

@@ -35,6 +35,26 @@ paths:
         required: true
 components:
   schemas:
+    postApiV4Organizations:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization
+        path:
+          type: string
+          description: The path of the organization
+        description:
+          type: string
+          description: The description of the organization
+        avatar:
+          type: string
+          description: The avatar image for the organization
+          format: binary
+      required:
+      - name
+      - path
+      description: Create an organization
     API_Entities_Organizations_Organization:
       type: object
       properties:
@@ -75,26 +95,6 @@ components:
       - web_url
       - avatar_url
       description: API_Entities_Organizations_Organization model
-    postApiV4Organizations:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization
-        path:
-          type: string
-          description: The path of the organization
-        description:
-          type: string
-          description: The description of the organization
-        avatar:
-          type: string
-          description: The avatar image for the organization
-          format: binary
-      required:
-      - name
-      - path
-      description: Create an organization
   securitySchemes:
     access_token_header:
       type: apiKey

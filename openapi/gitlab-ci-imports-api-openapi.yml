@@ -431,57 +431,6 @@ paths:
         required: true
 components:
   schemas:
-    postApiV4ImportGithubGists:
-      type: object
-      properties:
-        personal_access_token:
-          type: string
-          description: GitHub personal access token
-      required:
-      - personal_access_token
-      description: Import User Gists
-    API_Entities_BulkImport:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        status:
-          type: string
-          enum:
-          - created
-          - started
-          - finished
-          - timeout
-          - failed
-          example: finished
-        source_type:
-          type: string
-          example: gitlab
-        source_url:
-          type: string
-          example: https://source.gitlab.com/
-        created_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        has_failures:
-          type: boolean
-          example: false
-      required:
-      - id
-      - status
-      - source_type
-      - source_url
-      - created_at
-      - updated_at
-      - has_failures
-      description: API_Entities_BulkImport model
     API_Entities_BulkImports_EntityFailure:
       type: object
       properties:
@@ -511,6 +460,15 @@ components:
       - source_url
       - source_title
       description: API_Entities_BulkImports_EntityFailure model
+    postApiV4ImportGithubGists:
+      type: object
+      properties:
+        personal_access_token:
+          type: string
+          description: GitHub personal access token
+      required:
+      - personal_access_token
+      description: Import User Gists
     API_Entities_BulkImports:
       type: object
       properties:
@@ -607,6 +565,48 @@ components:
       - has_failures
       - stats
       description: API_Entities_BulkImports model
+    API_Entities_BulkImport:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          example: finished
+        source_type:
+          type: string
+          example: gitlab
+        source_url:
+          type: string
+          example: https://source.gitlab.com/
+        created_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        has_failures:
+          type: boolean
+          example: false
+      required:
+      - id
+      - status
+      - source_type
+      - source_url
+      - created_at
+      - updated_at
+      - has_failures
+      description: API_Entities_BulkImport model
   securitySchemes:
     access_token_header:
       type: apiKey

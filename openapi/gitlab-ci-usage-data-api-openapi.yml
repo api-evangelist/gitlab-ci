@@ -150,6 +150,49 @@ components:
       required:
       - event
       description: Track usage data event for the current user
+    postApiV4UsageDataTrackEvents:
+      type: object
+      properties:
+        events:
+          type: array
+          description: An array of internal events. Maximum 50 events allowed.
+          items:
+            type: object
+            properties:
+              event:
+                type: string
+                description: The event name that should be tracked
+                example: i_quickactions_page
+              namespace_id:
+                type: integer
+                format: int32
+                description: Namespace ID
+                example: 1234
+              project_id:
+                type: integer
+                format: int32
+                description: Project ID
+                example: 1234
+              project_path:
+                type: string
+                description: Project path (used to resolve project_id if not provided)
+                example: namespace/project
+              additional_properties:
+                type: object
+                description: Additional properties to be tracked
+                example:
+                  label: login_button
+                  value: 1
+              send_to_snowplow:
+                type: boolean
+                description: Send the tracked event to Snowplow
+                default: false
+                example: true
+            required:
+            - event
+      required:
+      - events
+      description: Track multiple gitlab internal events
     postApiV4UsageDataIncrementCounter:
       type: object
       properties:
@@ -195,49 +238,6 @@ components:
       required:
       - event
       description: Track gitlab internal events
-    postApiV4UsageDataTrackEvents:
-      type: object
-      properties:
-        events:
-          type: array
-          description: An array of internal events. Maximum 50 events allowed.
-          items:
-            type: object
-            properties:
-              event:
-                type: string
-                description: The event name that should be tracked
-                example: i_quickactions_page
-              namespace_id:
-                type: integer
-                format: int32
-                description: Namespace ID
-                example: 1234
-              project_id:
-                type: integer
-                format: int32
-                description: Project ID
-                example: 1234
-              project_path:
-                type: string
-                description: Project path (used to resolve project_id if not provided)
-                example: namespace/project
-              additional_properties:
-                type: object
-                description: Additional properties to be tracked
-                example:
-                  label: login_button
-                  value: 1
-              send_to_snowplow:
-                type: boolean
-                description: Send the tracked event to Snowplow
-                default: false
-                example: true
-            required:
-            - event
-      required:
-      - events
-      description: Track multiple gitlab internal events
   securitySchemes:
     access_token_header:
       type: apiKey

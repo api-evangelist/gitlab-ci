@@ -254,6 +254,198 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    DetailedStatusEntity:
+      type: object
+      properties:
+        icon:
+          type: string
+          example: status_success
+        text:
+          type: string
+          example: passed
+        label:
+          type: string
+          example: passed
+        group:
+          type: string
+          example: success
+        tooltip:
+          type: string
+          example: passed
+        has_details:
+          type: boolean
+          example: true
+        details_path:
+          type: string
+          example: /test-group/test-project/-/pipelines/287
+        illustration:
+          type: object
+          example:
+            image: illustrations/empty-state/empty-job-not-triggered-md.svg
+            size: ''
+            title: This job has not been triggered yet
+            content: This job depends on upstream jobs that need to succeed in order for this job to be triggered
+        favicon:
+          type: string
+          example: /assets/ci_favicons/favicon_status_success.png
+        action:
+          type: object
+          properties:
+            icon:
+              type: string
+              example: cancel
+            title:
+              type: string
+              example: Cancel
+            path:
+              type: string
+              example: /namespace1/project1/-/jobs/2/cancel
+            method:
+              type: string
+              example: post
+            button_title:
+              type: string
+              example: Cancel this job
+            confirmation_message:
+              type: string
+              example: Are you sure?
+          required:
+          - icon
+          - title
+          - path
+          - method
+          - button_title
+          - confirmation_message
+      required:
+      - icon
+      - text
+      - label
+      - group
+      - tooltip
+      - has_details
+      - details_path
+      - illustration
+      - favicon
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    putApiV4ProjectsIdTriggersTriggerId:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The trigger token description
+      description: Update a trigger token
+    API_Entities_Trigger:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 10
+        token:
+          type: string
+          example: 6d056f63e50fe6f8c5f8f4aa10edb7
+        description:
+          type: string
+          example: test
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        last_used:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        expires_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        owner:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+      required:
+      - id
+      - token
+      - description
+      - created_at
+      - updated_at
+      - last_used
+      - expires_at
+      - owner
+      description: API_Entities_Trigger model
+    postApiV4ProjectsIdTriggers:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The trigger token description
+          example: my trigger token description
+        expires_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the pipeline trigger token expires.
+          example: '2024-07-01T00:00:00.000Z'
+      required:
+      - description
+      description: Create a trigger token
     API_Entities_Ci_Pipeline:
       type: object
       properties:
@@ -358,47 +550,6 @@ components:
       - detailed_status
       - archived
       description: API_Entities_Ci_Pipeline model
-    API_Entities_Trigger:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 10
-        token:
-          type: string
-          example: 6d056f63e50fe6f8c5f8f4aa10edb7
-        description:
-          type: string
-          example: test
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        last_used:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        expires_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        owner:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-      required:
-      - id
-      - token
-      - description
-      - created_at
-      - updated_at
-      - last_used
-      - expires_at
-      - owner
-      description: API_Entities_Trigger model
     postApiV4ProjectsId_refRef_triggerPipeline:
       type: object
       properties:
@@ -418,157 +569,6 @@ components:
       required:
       - token
       description: Trigger a GitLab project pipeline
-    DetailedStatusEntity:
-      type: object
-      properties:
-        icon:
-          type: string
-          example: status_success
-        text:
-          type: string
-          example: passed
-        label:
-          type: string
-          example: passed
-        group:
-          type: string
-          example: success
-        tooltip:
-          type: string
-          example: passed
-        has_details:
-          type: boolean
-          example: true
-        details_path:
-          type: string
-          example: /test-group/test-project/-/pipelines/287
-        illustration:
-          type: object
-          example:
-            image: illustrations/empty-state/empty-job-not-triggered-md.svg
-            size: ''
-            title: This job has not been triggered yet
-            content: This job depends on upstream jobs that need to succeed in order for this job to be triggered
-        favicon:
-          type: string
-          example: /assets/ci_favicons/favicon_status_success.png
-        action:
-          type: object
-          properties:
-            icon:
-              type: string
-              example: cancel
-            title:
-              type: string
-              example: Cancel
-            path:
-              type: string
-              example: /namespace1/project1/-/jobs/2/cancel
-            method:
-              type: string
-              example: post
-            button_title:
-              type: string
-              example: Cancel this job
-            confirmation_message:
-              type: string
-              example: Are you sure?
-          required:
-          - icon
-          - title
-          - path
-          - method
-          - button_title
-          - confirmation_message
-      required:
-      - icon
-      - text
-      - label
-      - group
-      - tooltip
-      - has_details
-      - details_path
-      - illustration
-      - favicon
-    putApiV4ProjectsIdTriggersTriggerId:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The trigger token description
-      description: Update a trigger token
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    postApiV4ProjectsIdTriggers:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The trigger token description
-          example: my trigger token description
-        expires_at:
-          type: string
-          format: date-time
-          description: Timestamp of when the pipeline trigger token expires.
-          example: '2024-07-01T00:00:00.000Z'
-      required:
-      - description
-      description: Create a trigger token
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
   securitySchemes:
     access_token_header:
       type: apiKey

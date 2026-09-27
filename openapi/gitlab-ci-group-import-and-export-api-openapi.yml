@@ -234,44 +234,6 @@ paths:
               - file
 components:
   schemas:
-    API_Entities_BulkImports_ExportBatchStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - started
-          - finished
-          - failed
-          example: started
-        batch_number:
-          type: integer
-          format: int32
-          example: 1
-        objects_count:
-          type: integer
-          format: int32
-          example: 100
-        error:
-          type: string
-          example: Error message
-        updated_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-      required:
-      - status
-      - batch_number
-      - objects_count
-      - error
-      - updated_at
-    postApiV4GroupsIdExportRelations:
-      type: object
-      properties:
-        batched:
-          type: boolean
-          description: Whether to export in batches
-      description: Start relations export
     API_Entities_BulkImports_ExportStatus:
       type: object
       properties:
@@ -315,6 +277,44 @@ components:
       - batches_count
       - total_objects_count
       description: API_Entities_BulkImports_ExportStatus model
+    postApiV4GroupsIdExportRelations:
+      type: object
+      properties:
+        batched:
+          type: boolean
+          description: Whether to export in batches
+      description: Start relations export
+    API_Entities_BulkImports_ExportBatchStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - started
+          - finished
+          - failed
+          example: started
+        batch_number:
+          type: integer
+          format: int32
+          example: 1
+        objects_count:
+          type: integer
+          format: int32
+          example: 100
+        error:
+          type: string
+          example: Error message
+        updated_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+      required:
+      - status
+      - batch_number
+      - objects_count
+      - error
+      - updated_at
   securitySchemes:
     access_token_header:
       type: apiKey

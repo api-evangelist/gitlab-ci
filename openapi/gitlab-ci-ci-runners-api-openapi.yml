@@ -147,29 +147,6 @@ paths:
       operationId: getApiV4RunnersRouterDiscovery
 components:
   schemas:
-    API_Entities_Ci_JobRouter_DiscoveryInformation:
-      type: object
-      properties:
-        server_url:
-          type: string
-          example: wss://kas.example.com
-      required:
-      - server_url
-      description: API_Entities_Ci_JobRouter_DiscoveryInformation model
-    API_Entities_Ci_RunnerRegistrationDetails:
-      type: object
-      properties:
-        id:
-          type: string
-        token:
-          type: string
-        token_expires_at:
-          type: string
-      required:
-      - id
-      - token
-      - token_expires_at
-      description: API_Entities_Ci_RunnerRegistrationDetails model
     postApiV4RunnersResetAuthenticationToken:
       type: object
       properties:
@@ -179,18 +156,6 @@ components:
       required:
       - token
       description: Reset runner authentication token with current token
-    postApiV4RunnersVerify:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The runner's authentication token
-        system_id:
-          type: string
-          description: The runner's system identifier
-      required:
-      - token
-      description: Validate authentication credentials
     postApiV4Runners:
       type: object
       properties:
@@ -255,6 +220,41 @@ components:
       required:
       - token
       description: Register a new runner
+    API_Entities_Ci_JobRouter_DiscoveryInformation:
+      type: object
+      properties:
+        server_url:
+          type: string
+          example: wss://kas.example.com
+      required:
+      - server_url
+      description: API_Entities_Ci_JobRouter_DiscoveryInformation model
+    postApiV4RunnersVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The runner's authentication token
+        system_id:
+          type: string
+          description: The runner's system identifier
+      required:
+      - token
+      description: Validate authentication credentials
+    API_Entities_Ci_RunnerRegistrationDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        token:
+          type: string
+        token_expires_at:
+          type: string
+      required:
+      - id
+      - token
+      - token_expires_at
+      description: API_Entities_Ci_RunnerRegistrationDetails model
     API_Entities_Ci_ResetTokenResult:
       type: object
       properties:
