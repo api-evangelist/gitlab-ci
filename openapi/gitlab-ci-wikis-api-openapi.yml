@@ -448,7 +448,7 @@ components:
       - title
       - content
       description: Create a wiki page
-    postApiV4GroupsIdWikis:
+    putApiV4ProjectsIdWikisSlug:
       type: object
       properties:
         title:
@@ -473,10 +473,7 @@ components:
           - asciidoc
           - org
           default: markdown
-      required:
-      - title
-      - content
-      description: Create a wiki page
+      description: Update a wiki page
     API_Entities_WikiAttachment:
       type: object
       properties:
@@ -520,54 +517,6 @@ components:
       required:
       - file
       description: Upload an attachment to the wiki repository
-    API_Entities_WikiPageBasic:
-      type: object
-      properties:
-        format:
-          type: string
-          example: markdown
-        slug:
-          type: string
-          example: deploy
-        title:
-          type: string
-          example: deploy
-        wiki_page_meta_id:
-          type: integer
-          format: int32
-          example: 123
-      required:
-      - format
-      - slug
-      - title
-      - wiki_page_meta_id
-      description: API_Entities_WikiPageBasic model
-    putApiV4ProjectsIdWikisSlug:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of a wiki page
-        front_matter:
-          type: object
-          description: Object that contains YAML frontmatter
-          properties:
-            title:
-              type: string
-              description: Frontmatter title of a wiki page
-        content:
-          type: string
-          description: Content of a wiki page
-        format:
-          type: string
-          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
-          enum:
-          - markdown
-          - rdoc
-          - asciidoc
-          - org
-          default: markdown
-      description: Update a wiki page
     API_Entities_WikiPage:
       type: object
       properties:
@@ -603,6 +552,35 @@ components:
       - encoding
       - front_matter
       description: API_Entities_WikiPage model
+    postApiV4GroupsIdWikis:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of a wiki page
+        front_matter:
+          type: object
+          description: Object that contains YAML frontmatter
+          properties:
+            title:
+              type: string
+              description: Frontmatter title of a wiki page
+        content:
+          type: string
+          description: Content of a wiki page
+        format:
+          type: string
+          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+          enum:
+          - markdown
+          - rdoc
+          - asciidoc
+          - org
+          default: markdown
+      required:
+      - title
+      - content
+      description: Create a wiki page
     putApiV4GroupsIdWikisSlug:
       type: object
       properties:
@@ -629,6 +607,28 @@ components:
           - org
           default: markdown
       description: Update a wiki page
+    API_Entities_WikiPageBasic:
+      type: object
+      properties:
+        format:
+          type: string
+          example: markdown
+        slug:
+          type: string
+          example: deploy
+        title:
+          type: string
+          example: deploy
+        wiki_page_meta_id:
+          type: integer
+          format: int32
+          example: 123
+      required:
+      - format
+      - slug
+      - title
+      - wiki_page_meta_id
+      description: API_Entities_WikiPageBasic model
     postApiV4ProjectsIdWikisAttachments:
       type: object
       properties:

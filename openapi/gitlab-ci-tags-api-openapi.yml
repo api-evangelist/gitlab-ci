@@ -232,37 +232,6 @@ components:
       required:
       - tag_name
       - description
-    API_Entities_Tag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: v1.0.0
-        message:
-          type: string
-          example: Release v1.0.0
-        target:
-          type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        release:
-          $ref: '#/components/schemas/API_Entities_TagRelease'
-        protected:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-          example: '2023-10-12T02:16:52.000Z'
-      required:
-      - name
-      - message
-      - target
-      - commit
-      - protected
-      - created_at
-      description: API_Entities_Tag model
     API_Entities_Commit:
       type: object
       properties:
@@ -357,6 +326,37 @@ components:
       - tag_name
       - ref
       description: Create a new repository tag
+    API_Entities_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: v1.0.0
+        message:
+          type: string
+          example: Release v1.0.0
+        target:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        release:
+          $ref: '#/components/schemas/API_Entities_TagRelease'
+        protected:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2023-10-12T02:16:52.000Z'
+      required:
+      - name
+      - message
+      - target
+      - commit
+      - protected
+      - created_at
+      description: API_Entities_Tag model
     API_Entities_TagSignature:
       type: object
       properties:

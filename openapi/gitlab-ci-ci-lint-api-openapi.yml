@@ -99,41 +99,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_Ci_Lint_Result_Include:
-      type: object
-      properties:
-        type:
-          type: string
-          example: local
-        location:
-          type: string
-          example: .gitlab/ci/build-images.gitlab-ci.yml
-        blob:
-          type: string
-          example: https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
-        raw:
-          type: string
-          example: https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
-        extra:
-          type: object
-          example:
-            job_name: test
-            project: gitlab-org/gitlab
-            ref: master
-        context_project:
-          type: string
-          example: gitlab-org/gitlab
-        context_sha:
-          type: string
-          example: e52d6d0246d7375291850e61f0abc101fbda9dc2
-      required:
-      - type
-      - location
-      - blob
-      - raw
-      - extra
-      - context_project
-      - context_sha
     postApiV4ProjectsIdCiLint:
       type: object
       properties:
@@ -194,6 +159,41 @@ components:
       - merged_yaml
       - includes
       description: API_Entities_Ci_Lint_Result model
+    API_Entities_Ci_Lint_Result_Include:
+      type: object
+      properties:
+        type:
+          type: string
+          example: local
+        location:
+          type: string
+          example: .gitlab/ci/build-images.gitlab-ci.yml
+        blob:
+          type: string
+          example: https://gitlab.com/gitlab-org/gitlab/-/blob/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
+        raw:
+          type: string
+          example: https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
+        extra:
+          type: object
+          example:
+            job_name: test
+            project: gitlab-org/gitlab
+            ref: master
+        context_project:
+          type: string
+          example: gitlab-org/gitlab
+        context_sha:
+          type: string
+          example: e52d6d0246d7375291850e61f0abc101fbda9dc2
+      required:
+      - type
+      - location
+      - blob
+      - raw
+      - extra
+      - context_project
+      - context_sha
   securitySchemes:
     access_token_header:
       type: apiKey

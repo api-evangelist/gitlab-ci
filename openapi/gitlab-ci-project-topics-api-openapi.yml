@@ -170,6 +170,31 @@ paths:
         required: true
 components:
   schemas:
+    postApiV4Topics:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Slug (name)
+        title:
+          type: string
+          description: Title
+        description:
+          type: string
+          description: Description
+        avatar:
+          type: string
+          description: Avatar image for topic
+          format: binary
+        organization_id:
+          type: integer
+          format: int32
+          description: The organization id for the topic
+          default: {}
+      required:
+      - name
+      - title
+      description: Create a topic
     putApiV4TopicsId:
       type: object
       properties:
@@ -238,31 +263,6 @@ components:
       - organization_id
       - avatar_url
       description: API_Entities_Projects_Topic model
-    postApiV4Topics:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Slug (name)
-        title:
-          type: string
-          description: Title
-        description:
-          type: string
-          description: Description
-        avatar:
-          type: string
-          description: Avatar image for topic
-          format: binary
-        organization_id:
-          type: integer
-          format: int32
-          description: The organization id for the topic
-          default: {}
-      required:
-      - name
-      - title
-      description: Create a topic
   securitySchemes:
     access_token_header:
       type: apiKey

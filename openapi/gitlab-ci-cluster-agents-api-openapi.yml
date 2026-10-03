@@ -271,6 +271,76 @@ paths:
       operationId: deleteApiV4ProjectsIdClusterAgentsAgentId
 components:
   schemas:
+    API_Entities_Clusters_AgentToken:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        agent_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+        created_by_user_id:
+          type: string
+        last_used_at:
+          type: string
+      required:
+      - id
+      - name
+      - description
+      - agent_id
+      - status
+      - created_at
+      - created_by_user_id
+      - last_used_at
+      description: API_Entities_Clusters_AgentToken model
+    API_Entities_Clusters_AgentTokenWithToken:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        agent_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+        created_by_user_id:
+          type: string
+        last_used_at:
+          type: string
+        token:
+          type: string
+      required:
+      - id
+      - name
+      - description
+      - agent_id
+      - status
+      - created_at
+      - created_by_user_id
+      - last_used_at
+      - token
+      description: API_Entities_Clusters_AgentTokenWithToken model
+    postApiV4ProjectsIdClusterAgents:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the agent
+      required:
+      - name
+      description: Register an agent with a project
     API_Entities_ProjectIdentity:
       type: object
       properties:
@@ -305,58 +375,18 @@ components:
       - path
       - path_with_namespace
       - created_at
-    API_Entities_Clusters_Agent:
+    postApiV4ProjectsIdClusterAgentsAgentIdTokens:
       type: object
       properties:
-        id:
-          type: string
         name:
           type: string
-        config_project:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-        created_at:
-          type: string
-        created_by_user_id:
-          type: string
-        is_receptive:
-          type: string
-      required:
-      - id
-      - name
-      - config_project
-      - created_at
-      - created_by_user_id
-      - is_receptive
-      description: API_Entities_Clusters_Agent model
-    API_Entities_Clusters_AgentToken:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
+          description: The name for the token
         description:
           type: string
-        agent_id:
-          type: string
-        status:
-          type: string
-        created_at:
-          type: string
-        created_by_user_id:
-          type: string
-        last_used_at:
-          type: string
+          description: The description for the token
       required:
-      - id
       - name
-      - description
-      - agent_id
-      - status
-      - created_at
-      - created_by_user_id
-      - last_used_at
-      description: API_Entities_Clusters_AgentToken model
+      description: Create an agent token
     API_Entities_Clusters_AgentTokenBasic:
       type: object
       properties:
@@ -383,59 +413,29 @@ components:
       - created_at
       - created_by_user_id
       description: API_Entities_Clusters_AgentTokenBasic model
-    API_Entities_Clusters_AgentTokenWithToken:
+    API_Entities_Clusters_Agent:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-        description:
-          type: string
-        agent_id:
-          type: string
-        status:
-          type: string
+        config_project:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
         created_at:
           type: string
         created_by_user_id:
           type: string
-        last_used_at:
-          type: string
-        token:
+        is_receptive:
           type: string
       required:
       - id
       - name
-      - description
-      - agent_id
-      - status
+      - config_project
       - created_at
       - created_by_user_id
-      - last_used_at
-      - token
-      description: API_Entities_Clusters_AgentTokenWithToken model
-    postApiV4ProjectsIdClusterAgentsAgentIdTokens:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name for the token
-        description:
-          type: string
-          description: The description for the token
-      required:
-      - name
-      description: Create an agent token
-    postApiV4ProjectsIdClusterAgents:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the agent
-      required:
-      - name
-      description: Register an agent with a project
+      - is_receptive
+      description: API_Entities_Clusters_Agent model
   securitySchemes:
     access_token_header:
       type: apiKey

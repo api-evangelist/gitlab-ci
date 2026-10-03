@@ -484,98 +484,85 @@ paths:
         required: true
 components:
   schemas:
-    postApiV4ProjectsIdRepositoryChangelog:
+    API_Entities_RepositoryHealth:
       type: object
       properties:
-        version:
-          type: string
-          description: The version of the release, using the semantic versioning format
-          example: 1.0.0
-        from:
-          type: string
-          description: The first commit in the range of commits to use for the changelog
-          example: ed899a2f4b50b4370feeea94676502b42383c746
-        to:
-          type: string
-          description: The last commit in the range of commits to use for the changelog
-          example: 6104942438c14ec7bd21c6cd5bd995272b3faff6
-        date:
+        size:
+          type: integer
+          format: int32
+        references:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_References'
+        objects:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Objects'
+        commit_graph:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_CommitGraph'
+        bitmap:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
+        multi_pack_index:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_MultiPackIndex'
+        multi_pack_index_bitmap:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
+        alternates:
+          type: object
+        is_object_pool:
+          type: boolean
+        last_full_repack:
+          $ref: '#/components/schemas/API_Entities_RepositoryHealth_LastFullRepack'
+        updated_at:
           type: string
           format: date-time
-          description: The date and time of the release
-          example: '2021-09-20T11:50:22.001+00:00'
-        trailer:
-          type: string
-          description: The Git trailer to use for determining if commits are to be included in the changelog
-          default: Changelog
-          example: Changelog
-        config_file:
-          type: string
-          description: The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'
-          example: .gitlab/changelog_config.yml
-        config_file_ref:
-          type: string
-          description: The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch.
-          example: main
-        branch:
-          type: string
-          description: The branch to commit the changelog changes to
-          example: main
-        file:
-          type: string
-          description: The file to commit the changelog changes to
-          default: CHANGELOG.md
-          example: CHANGELOG.md
-        message:
-          type: string
-          description: The commit message to use when committing the changelog
-          example: Initial commit
+          example: '2025-02-24T09:05:50.355Z'
       required:
-      - version
-      description: Generates a changelog section for a release and commits it in a changelog file
-    API_Entities_Diff:
+      - size
+      - references
+      - objects
+      - commit_graph
+      - bitmap
+      - multi_pack_index
+      - multi_pack_index_bitmap
+      - alternates
+      - is_object_pool
+      - last_full_repack
+      - updated_at
+      description: API_Entities_RepositoryHealth model
+    API_Entities_RepositoryHealth_MultiPackIndex:
       type: object
       properties:
-        diff:
-          type: string
-          example: '@@ -71,6 +71,8 @@\n...'
-        collapsed:
-          type: boolean
-        too_large:
-          type: boolean
-        new_path:
-          type: string
-          example: doc/update/5.4-to-6.0.md
-        old_path:
-          type: string
-          example: doc/update/5.4-to-6.0.md
-        a_mode:
-          type: string
-          example: '100755'
-        b_mode:
-          type: string
-          example: '100644'
-        new_file:
-          type: boolean
-        renamed_file:
-          type: boolean
-        deleted_file:
-          type: boolean
-        generated_file:
-          type: boolean
+        packfile_count:
+          type: integer
+          format: int32
+        version:
+          type: integer
+          format: int32
       required:
-      - diff
-      - collapsed
-      - too_large
-      - new_path
-      - old_path
-      - a_mode
-      - b_mode
-      - new_file
-      - renamed_file
-      - deleted_file
-      - generated_file
-      description: API_Entities_Diff model
+      - packfile_count
+      - version
+    API_Entities_RepositoryHealth_Bitmap:
+      type: object
+      properties:
+        has_hash_cache:
+          type: boolean
+        has_lookup_table:
+          type: boolean
+        version:
+          type: integer
+          format: int32
+      required:
+      - has_hash_cache
+      - has_lookup_table
+      - version
+    API_Entities_RepositoryHealth_LastFullRepack:
+      type: object
+      properties:
+        seconds:
+          type: integer
+          format: int32
+        nanos:
+          type: integer
+          format: int32
+      required:
+      - seconds
+      - nanos
     API_Entities_Contributor:
       type: object
       properties:
@@ -604,109 +591,6 @@ components:
       - additions
       - deletions
       description: API_Entities_Contributor model
-    API_Entities_RepositoryHealth_LastFullRepack:
-      type: object
-      properties:
-        seconds:
-          type: integer
-          format: int32
-        nanos:
-          type: integer
-          format: int32
-      required:
-      - seconds
-      - nanos
-    API_Entities_RepositoryHealth_Objects:
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        recent_size:
-          type: integer
-          format: int32
-        stale_size:
-          type: integer
-          format: int32
-        keep_size:
-          type: integer
-          format: int32
-        packfile_count:
-          type: integer
-          format: int32
-        reverse_index_count:
-          type: integer
-          format: int32
-        cruft_count:
-          type: integer
-          format: int32
-        keep_count:
-          type: integer
-          format: int32
-        loose_objects_count:
-          type: integer
-          format: int32
-        stale_loose_objects_count:
-          type: integer
-          format: int32
-        loose_objects_garbage_count:
-          type: integer
-          format: int32
-      required:
-      - size
-      - recent_size
-      - stale_size
-      - keep_size
-      - packfile_count
-      - reverse_index_count
-      - cruft_count
-      - keep_count
-      - loose_objects_count
-      - stale_loose_objects_count
-      - loose_objects_garbage_count
-    API_Entities_RepositoryHealth_References:
-      type: object
-      properties:
-        loose_count:
-          type: integer
-          format: int32
-        packed_size:
-          type: integer
-          format: int32
-        reference_backend:
-          type: string
-      required:
-      - loose_count
-      - packed_size
-      - reference_backend
-    API_Entities_Compare:
-      type: object
-      properties:
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        commits:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_Commit'
-        diffs:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_Diff'
-        compare_timeout:
-          type: boolean
-        compare_same_ref:
-          type: boolean
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab/gitlab-foss/-/compare/main...feature
-      required:
-      - commit
-      - commits
-      - diffs
-      - compare_timeout
-      - compare_same_ref
-      - web_url
-      description: API_Entities_Compare model
     API_Entities_Commit:
       type: object
       properties:
@@ -782,6 +666,163 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
+    API_Entities_Diff:
+      type: object
+      properties:
+        diff:
+          type: string
+          example: '@@ -71,6 +71,8 @@\n...'
+        collapsed:
+          type: boolean
+        too_large:
+          type: boolean
+        new_path:
+          type: string
+          example: doc/update/5.4-to-6.0.md
+        old_path:
+          type: string
+          example: doc/update/5.4-to-6.0.md
+        a_mode:
+          type: string
+          example: '100755'
+        b_mode:
+          type: string
+          example: '100644'
+        new_file:
+          type: boolean
+        renamed_file:
+          type: boolean
+        deleted_file:
+          type: boolean
+        generated_file:
+          type: boolean
+      required:
+      - diff
+      - collapsed
+      - too_large
+      - new_path
+      - old_path
+      - a_mode
+      - b_mode
+      - new_file
+      - renamed_file
+      - deleted_file
+      - generated_file
+      description: API_Entities_Diff model
+    API_Entities_RepositoryHealth_Objects:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        recent_size:
+          type: integer
+          format: int32
+        stale_size:
+          type: integer
+          format: int32
+        keep_size:
+          type: integer
+          format: int32
+        packfile_count:
+          type: integer
+          format: int32
+        reverse_index_count:
+          type: integer
+          format: int32
+        cruft_count:
+          type: integer
+          format: int32
+        keep_count:
+          type: integer
+          format: int32
+        loose_objects_count:
+          type: integer
+          format: int32
+        stale_loose_objects_count:
+          type: integer
+          format: int32
+        loose_objects_garbage_count:
+          type: integer
+          format: int32
+      required:
+      - size
+      - recent_size
+      - stale_size
+      - keep_size
+      - packfile_count
+      - reverse_index_count
+      - cruft_count
+      - keep_count
+      - loose_objects_count
+      - stale_loose_objects_count
+      - loose_objects_garbage_count
+    API_Entities_RepositoryHealth_CommitGraph:
+      type: object
+      properties:
+        commit_graph_chain_length:
+          type: integer
+          format: int32
+        has_bloom_filters:
+          type: boolean
+        has_generation_data:
+          type: boolean
+        has_generation_data_overflow:
+          type: boolean
+      required:
+      - commit_graph_chain_length
+      - has_bloom_filters
+      - has_generation_data
+      - has_generation_data_overflow
+    postApiV4ProjectsIdRepositoryChangelog:
+      type: object
+      properties:
+        version:
+          type: string
+          description: The version of the release, using the semantic versioning format
+          example: 1.0.0
+        from:
+          type: string
+          description: The first commit in the range of commits to use for the changelog
+          example: ed899a2f4b50b4370feeea94676502b42383c746
+        to:
+          type: string
+          description: The last commit in the range of commits to use for the changelog
+          example: 6104942438c14ec7bd21c6cd5bd995272b3faff6
+        date:
+          type: string
+          format: date-time
+          description: The date and time of the release
+          example: '2021-09-20T11:50:22.001+00:00'
+        trailer:
+          type: string
+          description: The Git trailer to use for determining if commits are to be included in the changelog
+          default: Changelog
+          example: Changelog
+        config_file:
+          type: string
+          description: The file path to the configuration file as stored in the project's Git repository. Defaults to '.gitlab/changelog_config.yml'
+          example: .gitlab/changelog_config.yml
+        config_file_ref:
+          type: string
+          description: The git reference (for example, branch) where the changelog configuration file is defined. Defaults to the default repository branch.
+          example: main
+        branch:
+          type: string
+          description: The branch to commit the changelog changes to
+          example: main
+        file:
+          type: string
+          description: The file to commit the changelog changes to
+          default: CHANGELOG.md
+          example: CHANGELOG.md
+        message:
+          type: string
+          description: The commit message to use when committing the changelog
+          example: Initial commit
+      required:
+      - version
+      description: Generates a changelog section for a release and commits it in a changelog file
     API_Entities_TreeObject:
       type: object
       properties:
@@ -807,47 +848,34 @@ components:
       - path
       - mode
       description: API_Entities_TreeObject model
-    API_Entities_RepositoryHealth:
+    API_Entities_Compare:
       type: object
       properties:
-        size:
-          type: integer
-          format: int32
-        references:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_References'
-        objects:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Objects'
-        commit_graph:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_CommitGraph'
-        bitmap:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
-        multi_pack_index:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_MultiPackIndex'
-        multi_pack_index_bitmap:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_Bitmap'
-        alternates:
-          type: object
-        is_object_pool:
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Commit'
+        diffs:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Diff'
+        compare_timeout:
           type: boolean
-        last_full_repack:
-          $ref: '#/components/schemas/API_Entities_RepositoryHealth_LastFullRepack'
-        updated_at:
+        compare_same_ref:
+          type: boolean
+        web_url:
           type: string
-          format: date-time
-          example: '2025-02-24T09:05:50.355Z'
+          example: https://gitlab.example.com/gitlab/gitlab-foss/-/compare/main...feature
       required:
-      - size
-      - references
-      - objects
-      - commit_graph
-      - bitmap
-      - multi_pack_index
-      - multi_pack_index_bitmap
-      - alternates
-      - is_object_pool
-      - last_full_repack
-      - updated_at
-      description: API_Entities_RepositoryHealth model
+      - commit
+      - commits
+      - diffs
+      - compare_timeout
+      - compare_same_ref
+      - web_url
+      description: API_Entities_Compare model
     API_Entities_Changelog:
       type: object
       properties:
@@ -857,49 +885,21 @@ components:
       required:
       - notes
       description: API_Entities_Changelog model
-    API_Entities_RepositoryHealth_CommitGraph:
+    API_Entities_RepositoryHealth_References:
       type: object
       properties:
-        commit_graph_chain_length:
+        loose_count:
           type: integer
           format: int32
-        has_bloom_filters:
-          type: boolean
-        has_generation_data:
-          type: boolean
-        has_generation_data_overflow:
-          type: boolean
+        packed_size:
+          type: integer
+          format: int32
+        reference_backend:
+          type: string
       required:
-      - commit_graph_chain_length
-      - has_bloom_filters
-      - has_generation_data
-      - has_generation_data_overflow
-    API_Entities_RepositoryHealth_Bitmap:
-      type: object
-      properties:
-        has_hash_cache:
-          type: boolean
-        has_lookup_table:
-          type: boolean
-        version:
-          type: integer
-          format: int32
-      required:
-      - has_hash_cache
-      - has_lookup_table
-      - version
-    API_Entities_RepositoryHealth_MultiPackIndex:
-      type: object
-      properties:
-        packfile_count:
-          type: integer
-          format: int32
-        version:
-          type: integer
-          format: int32
-      required:
-      - packfile_count
-      - version
+      - loose_count
+      - packed_size
+      - reference_backend
   securitySchemes:
     access_token_header:
       type: apiKey

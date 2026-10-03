@@ -267,6 +267,71 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_DraftNote:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 2
+        author_id:
+          type: integer
+          format: int32
+          example: 4
+        merge_request_id:
+          type: integer
+          format: int32
+          example: 52
+        resolve_discussion:
+          type: boolean
+          example: true
+        discussion_id:
+          type: integer
+          format: int32
+          example: 613
+        note:
+          type: string
+          example: This is a note
+        commit_id:
+          type: integer
+          format: int32
+          example: 4
+        line_code:
+          type: string
+          example: 1c497fbb3a46b78edf0_2_4
+        position:
+          type: object
+          example:
+            base_sha: aa149113
+            start_sha: b3a0a8c4
+            head_sha: be3020c7
+            old_path: example.md
+            new_path: example.md
+            position_type: text
+            old_line: 2
+            new_line: 4
+            line_range:
+              start:
+                line_code: 1c497fbb3a46b78edf04cc2a2fa33f67e3ffbe2a_2_4
+                type: null
+                old_line: 2
+                new_line: 4
+              end:
+                line_code: 1c497fbb3a46b78edf04cc2a2fa33f67e3ffbe2a_2_4
+                type: null
+                old_line: 2
+                new_line: 4
+      required:
+      - id
+      - author_id
+      - merge_request_id
+      - resolve_discussion
+      - discussion_id
+      - note
+      - commit_id
+      - line_code
+      - position
+      description: API_Entities_DraftNote model
     putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId:
       type: object
       properties:
@@ -482,71 +547,6 @@ components:
       required:
       - note
       description: Create a new draft note
-    API_Entities_DraftNote:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 2
-        author_id:
-          type: integer
-          format: int32
-          example: 4
-        merge_request_id:
-          type: integer
-          format: int32
-          example: 52
-        resolve_discussion:
-          type: boolean
-          example: true
-        discussion_id:
-          type: integer
-          format: int32
-          example: 613
-        note:
-          type: string
-          example: This is a note
-        commit_id:
-          type: integer
-          format: int32
-          example: 4
-        line_code:
-          type: string
-          example: 1c497fbb3a46b78edf0_2_4
-        position:
-          type: object
-          example:
-            base_sha: aa149113
-            start_sha: b3a0a8c4
-            head_sha: be3020c7
-            old_path: example.md
-            new_path: example.md
-            position_type: text
-            old_line: 2
-            new_line: 4
-            line_range:
-              start:
-                line_code: 1c497fbb3a46b78edf04cc2a2fa33f67e3ffbe2a_2_4
-                type: null
-                old_line: 2
-                new_line: 4
-              end:
-                line_code: 1c497fbb3a46b78edf04cc2a2fa33f67e3ffbe2a_2_4
-                type: null
-                old_line: 2
-                new_line: 4
-      required:
-      - id
-      - author_id
-      - merge_request_id
-      - resolve_discussion
-      - discussion_id
-      - note
-      - commit_id
-      - line_code
-      - position
-      description: API_Entities_DraftNote model
   securitySchemes:
     access_token_header:
       type: apiKey

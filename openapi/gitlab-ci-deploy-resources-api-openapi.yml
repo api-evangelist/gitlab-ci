@@ -1281,27 +1281,63 @@ paths:
       operationId: getApiV4DeployTokens
 components:
   schemas:
-    API_Entities_Deployments_Approval:
+    API_Entities_Milestone:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        status:
+        id:
+          type: integer
+          format: int32
+        iid:
+          type: integer
+          format: int32
+        project_id:
+          type: integer
+          format: int32
+        group_id:
           type: string
-          example: approved
+        title:
+          type: string
+        description:
+          type: string
+        state:
+          type: string
         created_at:
           type: string
-          format: date-time
-          example: '2022-02-24T20:22:30.097Z'
-        comment:
+        updated_at:
           type: string
-          example: LGTM
+        due_date:
+          type: string
+        start_date:
+          type: string
+        expired:
+          type: boolean
+        web_url:
+          type: string
       required:
-      - user
-      - status
+      - id
+      - iid
+      - title
+      - description
+      - state
       - created_at
-      - comment
-      description: API_Entities_Deployments_Approval model
+      - updated_at
+      - due_date
+      - start_date
+      - expired
+      - web_url
+    API_Entities_Ci_JobArtifactFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: artifacts.zip
+        size:
+          type: integer
+          format: int32
+          example: 1000
+      required:
+      - filename
+      - size
     API_Entities_UserBasic:
       type: object
       properties:
@@ -1346,6 +1382,309 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_DeploymentExtended:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 41
+        iid:
+          type: integer
+          format: int32
+          example: 1
+        ref:
+          type: string
+          example: main
+        sha:
+          type: string
+          example: 99d03678b90d914dbb1b109132516d71a4a03ea8
+        created_at:
+          type: string
+          format: date-time
+          example: '2016-08-11T11:32:35.444Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2016-08-11T11:32:35.444Z'
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        environment:
+          $ref: '#/components/schemas/API_Entities_EnvironmentBasic'
+        deployable:
+          $ref: '#/components/schemas/API_Entities_Ci_Job'
+        status:
+          type: string
+          example: created
+        pending_approval_count:
+          type: integer
+          format: int32
+          example: 0
+        approvals:
+          $ref: '#/components/schemas/API_Entities_Deployments_Approval'
+        approval_summary:
+          $ref: '#/components/schemas/API_Entities_Deployments_ApprovalSummary'
+      required:
+      - id
+      - iid
+      - ref
+      - sha
+      - created_at
+      - updated_at
+      - user
+      - environment
+      - deployable
+      - status
+      - pending_approval_count
+      - approvals
+      - approval_summary
+      description: API_Entities_DeploymentExtended model
+    API_Entities_EnvironmentBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: deploy
+        slug:
+          type: string
+          example: deploy
+        external_url:
+          type: string
+          example: https://deploy.gitlab.example.com
+        created_at:
+          type: string
+          format: date-time
+          example: '2019-05-25T18:55:13.252Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2019-05-25T18:55:13.252Z'
+      required:
+      - id
+      - name
+      - slug
+      - external_url
+      - created_at
+      - updated_at
+      description: API_Entities_EnvironmentBasic model
+    postApiV4ProjectsIdDeployTokens:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New deploy token's name
+        scopes:
+          type: array
+          description: Indicates the deploy token scopes. Must be at least one of `read_repository`, `read_registry`, `write_registry`, `read_package_registry`, `write_package_registry`, `read_virtual_registry`, or `write_virtual_registry`.
+          items:
+            type: string
+            enum:
+            - read_repository
+            - read_registry
+            - write_registry
+            - read_package_registry
+            - write_package_registry
+            - read_virtual_registry
+            - write_virtual_registry
+        expires_at:
+          type: string
+          format: date-time
+          description: Expiration date for the deploy token. Does not expire if no value is provided. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`).
+        username:
+          type: string
+          description: Username for deploy token. Default is `gitlab+deploy-token-{n}`
+      required:
+      - name
+      - scopes
+      description: Create a project deploy token
+    putApiV4ProjectsIdDeployKeysKeyId:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New deploy key's title
+        can_push:
+          type: boolean
+          description: Can deploy key push to the project's repository
+      description: Update deploy key
+    postApiV4DeployKeys:
+      type: object
+      properties:
+        key:
+          type: string
+          description: New deploy key
+        title:
+          type: string
+          description: New deploy key's title
+        expires_at:
+          type: string
+          format: date-time
+          description: The expiration date of the SSH key in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ)
+      required:
+      - key
+      - title
+      description: Create a deploy key
+    API_Entities_IssuableTimeStats:
+      type: object
+      properties:
+        time_estimate:
+          type: integer
+          format: int32
+          example: 12600
+        total_time_spent:
+          type: integer
+          format: int32
+          example: 3600
+        human_time_estimate:
+          type: string
+          example: 3h 30m
+        human_total_time_spent:
+          type: string
+          example: 1h
+      required:
+      - time_estimate
+      - total_time_spent
+      - human_time_estimate
+      - human_total_time_spent
+      description: API_Entities_IssuableTimeStats model
+    postApiV4ProjectsIdDeploymentsDeploymentIdApproval:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the approval (either `approved` or `rejected`)
+          enum:
+          - approved
+          - rejected
+        comment:
+          type: string
+          description: A comment to go with the approval
+        represented_as:
+          type: string
+          description: The name of the User/Group/Role to use for the approval, when the user belongs to multiple approval rules
+      required:
+      - status
+      description: Approve or reject a blocked deployment
+    API_Entities_ProtectedEnvironments_ApprovalRuleForSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        group_id:
+          type: string
+        access_level:
+          type: string
+        access_level_description:
+          type: string
+        required_approvals:
+          type: string
+        group_inheritance_type:
+          type: string
+        deployment_approvals:
+          $ref: '#/components/schemas/API_Entities_Deployments_Approval'
+      required:
+      - id
+      - user_id
+      - group_id
+      - access_level
+      - access_level_description
+      - required_approvals
+      - group_inheritance_type
+      - deployment_approvals
+    API_Entities_Commit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
+          type: string
+          example: 2695effb
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
+          type: string
+          example: Initial commit
+        message:
+          type: string
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+      required:
+      - id
+      - short_id
+      - created_at
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
+      - web_url
+      description: API_Entities_Commit model
     API_Entities_User:
       type: object
       properties:
@@ -1436,24 +1775,269 @@ components:
       - bot
       - work_information
       - local_time
-    postApiV4ProjectsIdDeploymentsDeploymentIdApproval:
+    API_Entities_Ci_RunnerManager:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 8
+        system_id:
+          type: string
+          example: runner-1
+        version:
+          type: string
+          example: 16.11.0
+        revision:
+          type: string
+          example: 91a27b2a
+        platform:
+          type: string
+          example: linux
+        architecture:
+          type: string
+          example: amd64
+        created_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        contacted_at:
+          type: string
+          example: '2023-10-24T01:27:06.549Z'
+        ip_address:
+          type: string
+          example: 127.0.0.1
+        status:
+          type: string
+          example: online
+        job_execution_status:
+          type: string
+          enum:
+          - active
+          - idle
+          example: idle
+      required:
+      - id
+      - system_id
+      - version
+      - revision
+      - platform
+      - architecture
+      - created_at
+      - contacted_at
+      - ip_address
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_RunnerManager model
+    API_Entities_DeployKey:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: Sample key 25
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:44.627Z'
+        expires_at:
+          type: string
+          format: date-time
+          example: '2020-09-03T07:24:44.627Z'
+        last_used_at:
+          type: string
+          format: date-time
+          example: '2020-09-03T07:24:44.627Z'
+        key:
+          type: string
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDNJAkI3Wdf0r13c8a5pEExB2YowPWCSVzfZV22pNBc1CuEbyYLHpUyaD0GwpGvFdx2aP7lMEk35k6Rz3ccBF6jRaVJyhsn5VNnW92PMpBJ/P1UebhXwsFHdQf5rTt082cSxWuk61kGWRQtk4ozt/J2DF/dIUVaLvc+z4HomT41fQ==
+        usage_type:
+          type: string
+          example: auth
+        fingerprint:
+          type: string
+          example: 4a:9d:64:15:ed:3a:e6:07:6e:89:36:b3:3b:03:05:d9
+        fingerprint_sha256:
+          type: string
+          example: SHA256:Jrs3LD1Ji30xNLtTVf9NDCj7kkBgPBb2pjvTZ3HfIgU
+        projects_with_write_access:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+        projects_with_readonly_access:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+      required:
+      - id
+      - title
+      - created_at
+      - expires_at
+      - last_used_at
+      - key
+      - usage_type
+      - fingerprint_sha256
+      description: API_Entities_DeployKey model
+    postApiV4GroupsIdDeployTokens:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New deploy token's name
+        scopes:
+          type: array
+          description: Indicates the deploy token scopes. Must be at least one of `read_repository`, `read_registry`, `write_registry`, `read_package_registry`, or `write_package_registry`
+          items:
+            type: string
+            enum:
+            - read_repository
+            - read_registry
+            - write_registry
+            - read_package_registry
+            - write_package_registry
+            - read_virtual_registry
+            - write_virtual_registry
+        expires_at:
+          type: string
+          format: date-time
+          description: Expiration date for the deploy token. Does not expire if no value is provided. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
+        username:
+          type: string
+          description: Username for deploy token. Default is `gitlab+deploy-token-{n}`
+      required:
+      - name
+      - scopes
+      description: Create a group deploy token
+    API_Entities_Deployment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 41
+        iid:
+          type: integer
+          format: int32
+          example: 1
+        ref:
+          type: string
+          example: main
+        sha:
+          type: string
+          example: 99d03678b90d914dbb1b109132516d71a4a03ea8
+        created_at:
+          type: string
+          format: date-time
+          example: '2016-08-11T11:32:35.444Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2016-08-11T11:32:35.444Z'
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        environment:
+          $ref: '#/components/schemas/API_Entities_EnvironmentBasic'
+        deployable:
+          $ref: '#/components/schemas/API_Entities_Ci_Job'
+        status:
+          type: string
+          example: created
+      required:
+      - id
+      - iid
+      - ref
+      - sha
+      - created_at
+      - updated_at
+      - user
+      - environment
+      - deployable
+      - status
+      description: API_Entities_Deployment model
+    putApiV4ProjectsIdDeploymentsDeploymentId:
       type: object
       properties:
         status:
           type: string
-          description: The status of the approval (either `approved` or `rejected`)
+          description: The new status of the deployment. One of `running`, `success`, `failed`, or `canceled`
           enum:
-          - approved
-          - rejected
-        comment:
-          type: string
-          description: A comment to go with the approval
-        represented_as:
-          type: string
-          description: The name of the User/Group/Role to use for the approval, when the user belongs to multiple approval rules
+          - running
+          - success
+          - failed
+          - canceled
       required:
       - status
-      description: Approve or reject a blocked deployment
+      description: Update a deployment
+    API_Entities_Deployments_Approval:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        status:
+          type: string
+          example: approved
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-02-24T20:22:30.097Z'
+        comment:
+          type: string
+          example: LGTM
+      required:
+      - user
+      - status
+      - created_at
+      - comment
+      description: API_Entities_Deployments_Approval model
+    API_Entities_DeployKeysProject:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: Sample key 25
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-09-03T07:24:44.627Z'
+        expires_at:
+          type: string
+          format: date-time
+          example: '2020-09-03T07:24:44.627Z'
+        last_used_at:
+          type: string
+          format: date-time
+          example: '2020-09-03T07:24:44.627Z'
+        key:
+          type: string
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDNJAkI3Wdf0r13c8a5pEExB2YowPWCSVzfZV22pNBc1CuEbyYLHpUyaD0GwpGvFdx2aP7lMEk35k6Rz3ccBF6jRaVJyhsn5VNnW92PMpBJ/P1UebhXwsFHdQf5rTt082cSxWuk61kGWRQtk4ozt/J2DF/dIUVaLvc+z4HomT41fQ==
+        usage_type:
+          type: string
+          example: auth
+        fingerprint:
+          type: string
+          example: 4a:9d:64:15:ed:3a:e6:07:6e:89:36:b3:3b:03:05:d9
+        fingerprint_sha256:
+          type: string
+          example: SHA256:Jrs3LD1Ji30xNLtTVf9NDCj7kkBgPBb2pjvTZ3HfIgU
+        projects_with_write_access:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+        projects_with_readonly_access:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+        can_push:
+          type: boolean
+      required:
+      - id
+      - title
+      - created_at
+      - expires_at
+      - last_used_at
+      - key
+      - usage_type
+      - fingerprint_sha256
+      - can_push
+      description: API_Entities_DeployKeysProject model
     API_Entities_Ci_PipelineBasic:
       type: object
       properties:
@@ -1504,63 +2088,261 @@ components:
       - updated_at
       - web_url
       description: API_Entities_Ci_PipelineBasic model
-    API_Entities_DeploymentExtended:
+    API_Entities_DeployTokenWithToken:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          example: 41
-        iid:
+          example: 1
+        name:
+          type: string
+          example: MyToken
+        username:
+          type: string
+          example: gitlab+deploy-token-1
+        expires_at:
+          type: string
+          format: date-time
+          example: '2020-02-14T00:00:00.000Z'
+        scopes:
+          type: array
+          example:
+          - read_repository
+        revoked:
+          type: boolean
+        expired:
+          type: boolean
+        token:
+          type: string
+          example: jMRvtPNxrn3crTAGukpZ
+      required:
+      - id
+      - name
+      - username
+      - expires_at
+      - scopes
+      - revoked
+      - expired
+      - token
+      description: API_Entities_DeployTokenWithToken model
+    API_Entities_Ci_Job:
+      type: object
+      properties:
+        id:
           type: integer
           format: int32
           example: 1
+        status:
+          type: string
+          example: waiting_for_resource
+        stage:
+          type: string
+          example: deploy
+        name:
+          type: string
+          example: deploy_to_production
         ref:
           type: string
           example: main
-        sha:
-          type: string
-          example: 99d03678b90d914dbb1b109132516d71a4a03ea8
+        tag:
+          type: boolean
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        allow_failure:
+          type: boolean
         created_at:
           type: string
           format: date-time
-          example: '2016-08-11T11:32:35.444Z'
-        updated_at:
+          example: '2015-12-24T15:51:21.880Z'
+        started_at:
           type: string
           format: date-time
-          example: '2016-08-11T11:32:35.444Z'
-        user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        environment:
-          $ref: '#/components/schemas/API_Entities_EnvironmentBasic'
-        deployable:
-          $ref: '#/components/schemas/API_Entities_Ci_Job'
-        status:
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
           type: string
-          example: created
-        pending_approval_count:
-          type: integer
-          format: int32
-          example: 0
-        approvals:
-          $ref: '#/components/schemas/API_Entities_Deployments_Approval'
-        approval_summary:
-          $ref: '#/components/schemas/API_Entities_Deployments_ApprovalSummary'
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        erased_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T18:00:29.728Z'
+        duration:
+          type: number
+          format: float
+          example: 0.465
+          description: Time spent running
+        queued_duration:
+          type: number
+          format: float
+          example: 0.123
+          description: Time spent enqueued
+        user:
+          $ref: '#/components/schemas/API_Entities_User'
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        failure_reason:
+          type: string
+          example: script_failure
+        web_url:
+          type: string
+          example: https://example.com/foo/bar/-/jobs/1
+        project:
+          type: object
+          properties:
+            ci_job_token_scope_enabled:
+              type: string
+              example: false
+          required:
+          - ci_job_token_scope_enabled
+        artifacts_file:
+          $ref: '#/components/schemas/API_Entities_Ci_JobArtifactFile'
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_Ci_JobArtifact'
+        runner:
+          $ref: '#/components/schemas/API_Entities_Ci_Runner'
+        runner_manager:
+          $ref: '#/components/schemas/API_Entities_Ci_RunnerManager'
+        artifacts_expire_at:
+          type: string
+          format: date-time
+          example: '2016-01-19T09:05:50.355Z'
+        archived:
+          type: boolean
+          example: false
+        tag_list:
+          type: array
+          items:
+            type: string
+          example:
+          - ubuntu18
+          - docker runner
       required:
       - id
-      - iid
-      - ref
-      - sha
-      - created_at
-      - updated_at
-      - user
-      - environment
-      - deployable
       - status
-      - pending_approval_count
-      - approvals
-      - approval_summary
-      description: API_Entities_DeploymentExtended model
+      - stage
+      - name
+      - ref
+      - tag
+      - coverage
+      - allow_failure
+      - created_at
+      - started_at
+      - finished_at
+      - erased_at
+      - duration
+      - queued_duration
+      - user
+      - commit
+      - pipeline
+      - web_url
+      - project
+      - artifacts
+      - runner
+      - artifacts_expire_at
+      - archived
+      - tag_list
+      description: API_Entities_Ci_Job model
+    API_Entities_Ci_Runner:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 8
+        description:
+          type: string
+          example: test-1-20150125
+        ip_address:
+          type: string
+          example: 127.0.0.1
+        active:
+          type: boolean
+          example: true
+        paused:
+          type: boolean
+          example: false
+        is_shared:
+          type: boolean
+          example: true
+        runner_type:
+          type: string
+          enum:
+          - instance_type
+          - group_type
+          - project_type
+          example: instance_type
+        name:
+          type: string
+          example: test
+        online:
+          type: boolean
+          example: true
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-05-03T00:00:00.000Z'
+        status:
+          type: string
+          example: online
+        job_execution_status:
+          type: string
+          enum:
+          - active
+          - idle
+          example: idle
+      required:
+      - id
+      - description
+      - ip_address
+      - active
+      - paused
+      - is_shared
+      - runner_type
+      - name
+      - online
+      - created_at
+      - status
+      - job_execution_status
+      description: API_Entities_Ci_Runner model
+    API_Entities_IssuableReferences:
+      type: object
+      properties:
+        short:
+          type: string
+          example: '&6'
+        relative:
+          type: string
+          example: '&6'
+        full:
+          type: string
+          example: test&6
+      required:
+      - short
+      - relative
+      - full
+    API_Entities_TaskCompletionStatus:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 5
+        completed_count:
+          type: integer
+          format: int32
+          example: 3
+      required:
+      - count
+      - completed_count
     postApiV4ProjectsIdDeployKeys:
       type: object
       properties:
@@ -1581,137 +2363,40 @@ components:
       - key
       - title
       description: Add deploy key
-    API_Entities_Deployment:
+    API_Entities_ProjectIdentity:
       type: object
       properties:
         id:
-          type: integer
-          format: int32
-          example: 41
-        iid:
           type: integer
           format: int32
           example: 1
-        ref:
+        description:
           type: string
-          example: main
-        sha:
+          example: desc
+        name:
           type: string
-          example: 99d03678b90d914dbb1b109132516d71a4a03ea8
+          example: project1
+        name_with_namespace:
+          type: string
+          example: John Doe / project1
+        path:
+          type: string
+          example: project1
+        path_with_namespace:
+          type: string
+          example: namespace1/project1
         created_at:
           type: string
           format: date-time
-          example: '2016-08-11T11:32:35.444Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2016-08-11T11:32:35.444Z'
-        user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        environment:
-          $ref: '#/components/schemas/API_Entities_EnvironmentBasic'
-        deployable:
-          $ref: '#/components/schemas/API_Entities_Ci_Job'
-        status:
-          type: string
-          example: created
+          example: '2020-05-07T04:27:17.016Z'
       required:
       - id
-      - iid
-      - ref
-      - sha
+      - description
+      - name
+      - name_with_namespace
+      - path
+      - path_with_namespace
       - created_at
-      - updated_at
-      - user
-      - environment
-      - deployable
-      - status
-      description: API_Entities_Deployment model
-    postApiV4ProjectsIdDeployments:
-      type: object
-      properties:
-        environment:
-          type: string
-          description: The name of the environment to create the deployment for
-        sha:
-          type: string
-          description: The SHA of the commit that is deployed
-        ref:
-          type: string
-          description: The name of the branch or tag that is deployed
-        tag:
-          type: boolean
-          description: A boolean that indicates if the deployed ref is a tag (`true`) or not (`false`)
-        status:
-          type: string
-          description: The status of the deployment that is created. One of `running`, `success`, `failed`, or `canceled`
-          enum:
-          - running
-          - success
-          - failed
-          - canceled
-      required:
-      - environment
-      - sha
-      - ref
-      - tag
-      - status
-      description: Create a deployment
-    API_Entities_Ci_JobArtifactFile:
-      type: object
-      properties:
-        filename:
-          type: string
-          example: artifacts.zip
-        size:
-          type: integer
-          format: int32
-          example: 1000
-      required:
-      - filename
-      - size
-    API_Entities_TaskCompletionStatus:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 5
-        completed_count:
-          type: integer
-          format: int32
-          example: 3
-      required:
-      - count
-      - completed_count
-    API_Entities_ProtectedEnvironments_ApprovalRuleForSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        user_id:
-          type: string
-        group_id:
-          type: string
-        access_level:
-          type: string
-        access_level_description:
-          type: string
-        required_approvals:
-          type: string
-        group_inheritance_type:
-          type: string
-        deployment_approvals:
-          $ref: '#/components/schemas/API_Entities_Deployments_Approval'
-      required:
-      - id
-      - user_id
-      - group_id
-      - access_level
-      - access_level_description
-      - required_approvals
-      - group_inheritance_type
-      - deployment_approvals
     API_Entities_MergeRequestBasic:
       type: object
       properties:
@@ -1916,337 +2601,7 @@ components:
       - blocking_discussions_resolved
       - approvals_before_merge
       description: API_Entities_MergeRequestBasic model
-    API_Entities_Ci_Job:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        status:
-          type: string
-          example: waiting_for_resource
-        stage:
-          type: string
-          example: deploy
-        name:
-          type: string
-          example: deploy_to_production
-        ref:
-          type: string
-          example: main
-        tag:
-          type: boolean
-        coverage:
-          type: number
-          format: float
-          example: 98.29
-        allow_failure:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        started_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:30.733Z'
-        finished_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        erased_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T18:00:29.728Z'
-        duration:
-          type: number
-          format: float
-          example: 0.465
-          description: Time spent running
-        queued_duration:
-          type: number
-          format: float
-          example: 0.123
-          description: Time spent enqueued
-        user:
-          $ref: '#/components/schemas/API_Entities_User'
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        pipeline:
-          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
-        failure_reason:
-          type: string
-          example: script_failure
-        web_url:
-          type: string
-          example: https://example.com/foo/bar/-/jobs/1
-        project:
-          type: object
-          properties:
-            ci_job_token_scope_enabled:
-              type: string
-              example: false
-          required:
-          - ci_job_token_scope_enabled
-        artifacts_file:
-          $ref: '#/components/schemas/API_Entities_Ci_JobArtifactFile'
-        artifacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_Ci_JobArtifact'
-        runner:
-          $ref: '#/components/schemas/API_Entities_Ci_Runner'
-        runner_manager:
-          $ref: '#/components/schemas/API_Entities_Ci_RunnerManager'
-        artifacts_expire_at:
-          type: string
-          format: date-time
-          example: '2016-01-19T09:05:50.355Z'
-        archived:
-          type: boolean
-          example: false
-        tag_list:
-          type: array
-          items:
-            type: string
-          example:
-          - ubuntu18
-          - docker runner
-      required:
-      - id
-      - status
-      - stage
-      - name
-      - ref
-      - tag
-      - coverage
-      - allow_failure
-      - created_at
-      - started_at
-      - finished_at
-      - erased_at
-      - duration
-      - queued_duration
-      - user
-      - commit
-      - pipeline
-      - web_url
-      - project
-      - artifacts
-      - runner
-      - artifacts_expire_at
-      - archived
-      - tag_list
-      description: API_Entities_Ci_Job model
-    postApiV4ProjectsIdDeployTokens:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New deploy token's name
-        scopes:
-          type: array
-          description: Indicates the deploy token scopes. Must be at least one of `read_repository`, `read_registry`, `write_registry`, `read_package_registry`, `write_package_registry`, `read_virtual_registry`, or `write_virtual_registry`.
-          items:
-            type: string
-            enum:
-            - read_repository
-            - read_registry
-            - write_registry
-            - read_package_registry
-            - write_package_registry
-            - read_virtual_registry
-            - write_virtual_registry
-        expires_at:
-          type: string
-          format: date-time
-          description: Expiration date for the deploy token. Does not expire if no value is provided. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`).
-        username:
-          type: string
-          description: Username for deploy token. Default is `gitlab+deploy-token-{n}`
-      required:
-      - name
-      - scopes
-      description: Create a project deploy token
-    API_Entities_IssuableTimeStats:
-      type: object
-      properties:
-        time_estimate:
-          type: integer
-          format: int32
-          example: 12600
-        total_time_spent:
-          type: integer
-          format: int32
-          example: 3600
-        human_time_estimate:
-          type: string
-          example: 3h 30m
-        human_total_time_spent:
-          type: string
-          example: 1h
-      required:
-      - time_estimate
-      - total_time_spent
-      - human_time_estimate
-      - human_total_time_spent
-      description: API_Entities_IssuableTimeStats model
-    API_Entities_Ci_RunnerManager:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 8
-        system_id:
-          type: string
-          example: runner-1
-        version:
-          type: string
-          example: 16.11.0
-        revision:
-          type: string
-          example: 91a27b2a
-        platform:
-          type: string
-          example: linux
-        architecture:
-          type: string
-          example: amd64
-        created_at:
-          type: string
-          example: '2023-10-24T01:27:06.549Z'
-        contacted_at:
-          type: string
-          example: '2023-10-24T01:27:06.549Z'
-        ip_address:
-          type: string
-          example: 127.0.0.1
-        status:
-          type: string
-          example: online
-        job_execution_status:
-          type: string
-          enum:
-          - active
-          - idle
-          example: idle
-      required:
-      - id
-      - system_id
-      - version
-      - revision
-      - platform
-      - architecture
-      - created_at
-      - contacted_at
-      - ip_address
-      - status
-      - job_execution_status
-      description: API_Entities_Ci_RunnerManager model
-    API_Entities_ProjectIdentity:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        description:
-          type: string
-          example: desc
-        name:
-          type: string
-          example: project1
-        name_with_namespace:
-          type: string
-          example: John Doe / project1
-        path:
-          type: string
-          example: project1
-        path_with_namespace:
-          type: string
-          example: namespace1/project1
-        created_at:
-          type: string
-          format: date-time
-          example: '2020-05-07T04:27:17.016Z'
-      required:
-      - id
-      - description
-      - name
-      - name_with_namespace
-      - path
-      - path_with_namespace
-      - created_at
-    API_Entities_IssuableReferences:
-      type: object
-      properties:
-        short:
-          type: string
-          example: '&6'
-        relative:
-          type: string
-          example: '&6'
-        full:
-          type: string
-          example: test&6
-      required:
-      - short
-      - relative
-      - full
-    API_Entities_Milestone:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        iid:
-          type: integer
-          format: int32
-        project_id:
-          type: integer
-          format: int32
-        group_id:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        state:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        due_date:
-          type: string
-        start_date:
-          type: string
-        expired:
-          type: boolean
-        web_url:
-          type: string
-      required:
-      - id
-      - iid
-      - title
-      - description
-      - state
-      - created_at
-      - updated_at
-      - due_date
-      - start_date
-      - expired
-      - web_url
-    API_Entities_Deployments_ApprovalSummary:
-      type: object
-      properties:
-        rules:
-          $ref: '#/components/schemas/API_Entities_ProtectedEnvironments_ApprovalRuleForSummary'
-      required:
-      - rules
-    API_Entities_DeployTokenWithToken:
+    API_Entities_DeployToken:
       type: object
       properties:
         id:
@@ -2271,9 +2626,6 @@ components:
           type: boolean
         expired:
           type: boolean
-        token:
-          type: string
-          example: jMRvtPNxrn3crTAGukpZ
       required:
       - id
       - name
@@ -2282,21 +2634,37 @@ components:
       - scopes
       - revoked
       - expired
-      - token
-      description: API_Entities_DeployTokenWithToken model
-    API_Entities_CustomAttribute:
+      description: API_Entities_DeployToken model
+    postApiV4ProjectsIdDeployments:
       type: object
       properties:
-        key:
+        environment:
           type: string
-          example: foo
-        value:
+          description: The name of the environment to create the deployment for
+        sha:
           type: string
-          example: bar
+          description: The SHA of the commit that is deployed
+        ref:
+          type: string
+          description: The name of the branch or tag that is deployed
+        tag:
+          type: boolean
+          description: A boolean that indicates if the deployed ref is a tag (`true`) or not (`false`)
+        status:
+          type: string
+          description: The status of the deployment that is created. One of `running`, `success`, `failed`, or `canceled`
+          enum:
+          - running
+          - success
+          - failed
+          - canceled
       required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
+      - environment
+      - sha
+      - ref
+      - tag
+      - status
+      description: Create a deployment
     API_Entities_Ci_JobArtifact:
       type: object
       properties:
@@ -2358,381 +2726,13 @@ components:
       - size
       - filename
       - file_format
-    postApiV4DeployKeys:
+    API_Entities_Deployments_ApprovalSummary:
       type: object
       properties:
-        key:
-          type: string
-          description: New deploy key
-        title:
-          type: string
-          description: New deploy key's title
-        expires_at:
-          type: string
-          format: date-time
-          description: The expiration date of the SSH key in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ)
+        rules:
+          $ref: '#/components/schemas/API_Entities_ProtectedEnvironments_ApprovalRuleForSummary'
       required:
-      - key
-      - title
-      description: Create a deploy key
-    API_Entities_DeployToken:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
-          type: string
-          example: MyToken
-        username:
-          type: string
-          example: gitlab+deploy-token-1
-        expires_at:
-          type: string
-          format: date-time
-          example: '2020-02-14T00:00:00.000Z'
-        scopes:
-          type: array
-          example:
-          - read_repository
-        revoked:
-          type: boolean
-        expired:
-          type: boolean
-      required:
-      - id
-      - name
-      - username
-      - expires_at
-      - scopes
-      - revoked
-      - expired
-      description: API_Entities_DeployToken model
-    API_Entities_EnvironmentBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
-          type: string
-          example: deploy
-        slug:
-          type: string
-          example: deploy
-        external_url:
-          type: string
-          example: https://deploy.gitlab.example.com
-        created_at:
-          type: string
-          format: date-time
-          example: '2019-05-25T18:55:13.252Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2019-05-25T18:55:13.252Z'
-      required:
-      - id
-      - name
-      - slug
-      - external_url
-      - created_at
-      - updated_at
-      description: API_Entities_EnvironmentBasic model
-    putApiV4ProjectsIdDeploymentsDeploymentId:
-      type: object
-      properties:
-        status:
-          type: string
-          description: The new status of the deployment. One of `running`, `success`, `failed`, or `canceled`
-          enum:
-          - running
-          - success
-          - failed
-          - canceled
-      required:
-      - status
-      description: Update a deployment
-    API_Entities_DeployKeysProject:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        title:
-          type: string
-          example: Sample key 25
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-09-03T07:24:44.627Z'
-        expires_at:
-          type: string
-          format: date-time
-          example: '2020-09-03T07:24:44.627Z'
-        last_used_at:
-          type: string
-          format: date-time
-          example: '2020-09-03T07:24:44.627Z'
-        key:
-          type: string
-          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDNJAkI3Wdf0r13c8a5pEExB2YowPWCSVzfZV22pNBc1CuEbyYLHpUyaD0GwpGvFdx2aP7lMEk35k6Rz3ccBF6jRaVJyhsn5VNnW92PMpBJ/P1UebhXwsFHdQf5rTt082cSxWuk61kGWRQtk4ozt/J2DF/dIUVaLvc+z4HomT41fQ==
-        usage_type:
-          type: string
-          example: auth
-        fingerprint:
-          type: string
-          example: 4a:9d:64:15:ed:3a:e6:07:6e:89:36:b3:3b:03:05:d9
-        fingerprint_sha256:
-          type: string
-          example: SHA256:Jrs3LD1Ji30xNLtTVf9NDCj7kkBgPBb2pjvTZ3HfIgU
-        projects_with_write_access:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-        projects_with_readonly_access:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-        can_push:
-          type: boolean
-      required:
-      - id
-      - title
-      - created_at
-      - expires_at
-      - last_used_at
-      - key
-      - usage_type
-      - fingerprint_sha256
-      - can_push
-      description: API_Entities_DeployKeysProject model
-    postApiV4GroupsIdDeployTokens:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New deploy token's name
-        scopes:
-          type: array
-          description: Indicates the deploy token scopes. Must be at least one of `read_repository`, `read_registry`, `write_registry`, `read_package_registry`, or `write_package_registry`
-          items:
-            type: string
-            enum:
-            - read_repository
-            - read_registry
-            - write_registry
-            - read_package_registry
-            - write_package_registry
-            - read_virtual_registry
-            - write_virtual_registry
-        expires_at:
-          type: string
-          format: date-time
-          description: Expiration date for the deploy token. Does not expire if no value is provided. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`)
-        username:
-          type: string
-          description: Username for deploy token. Default is `gitlab+deploy-token-{n}`
-      required:
-      - name
-      - scopes
-      description: Create a group deploy token
-    API_Entities_Commit:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        short_id:
-          type: string
-          example: 2695effb
-        created_at:
-          type: string
-          format: date-time
-          example: '2017-07-26T11:08:53.000+02:00'
-        parent_ids:
-          type: array
-          items:
-            type: string
-          example:
-          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-        title:
-          type: string
-          example: Initial commit
-        message:
-          type: string
-          example: Initial commit
-        author_name:
-          type: string
-          example: John Smith
-        author_email:
-          type: string
-          example: john@example.com
-        authored_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        committer_name:
-          type: string
-          example: Jack Smith
-        committer_email:
-          type: string
-          example: jack@example.com
-        committed_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        trailers:
-          type: object
-          example:
-            Merged-By: Jane Doe janedoe@gitlab.com
-        extended_trailers:
-          type: object
-          example:
-            Signed-off-by:
-            - John Doe <johndoe@gitlab.com>
-            - Jane Doe <janedoe@gitlab.com>
-        web_url:
-          type: string
-          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
-      required:
-      - id
-      - short_id
-      - created_at
-      - parent_ids
-      - title
-      - message
-      - author_name
-      - author_email
-      - authored_date
-      - committer_name
-      - committer_email
-      - committed_date
-      - trailers
-      - extended_trailers
-      - web_url
-      description: API_Entities_Commit model
-    putApiV4ProjectsIdDeployKeysKeyId:
-      type: object
-      properties:
-        title:
-          type: string
-          description: New deploy key's title
-        can_push:
-          type: boolean
-          description: Can deploy key push to the project's repository
-      description: Update deploy key
-    API_Entities_Ci_Runner:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 8
-        description:
-          type: string
-          example: test-1-20150125
-        ip_address:
-          type: string
-          example: 127.0.0.1
-        active:
-          type: boolean
-          example: true
-        paused:
-          type: boolean
-          example: false
-        is_shared:
-          type: boolean
-          example: true
-        runner_type:
-          type: string
-          enum:
-          - instance_type
-          - group_type
-          - project_type
-          example: instance_type
-        name:
-          type: string
-          example: test
-        online:
-          type: boolean
-          example: true
-        created_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-05-03T00:00:00.000Z'
-        status:
-          type: string
-          example: online
-        job_execution_status:
-          type: string
-          enum:
-          - active
-          - idle
-          example: idle
-      required:
-      - id
-      - description
-      - ip_address
-      - active
-      - paused
-      - is_shared
-      - runner_type
-      - name
-      - online
-      - created_at
-      - status
-      - job_execution_status
-      description: API_Entities_Ci_Runner model
-    API_Entities_DeployKey:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        title:
-          type: string
-          example: Sample key 25
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-09-03T07:24:44.627Z'
-        expires_at:
-          type: string
-          format: date-time
-          example: '2020-09-03T07:24:44.627Z'
-        last_used_at:
-          type: string
-          format: date-time
-          example: '2020-09-03T07:24:44.627Z'
-        key:
-          type: string
-          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDNJAkI3Wdf0r13c8a5pEExB2YowPWCSVzfZV22pNBc1CuEbyYLHpUyaD0GwpGvFdx2aP7lMEk35k6Rz3ccBF6jRaVJyhsn5VNnW92PMpBJ/P1UebhXwsFHdQf5rTt082cSxWuk61kGWRQtk4ozt/J2DF/dIUVaLvc+z4HomT41fQ==
-        usage_type:
-          type: string
-          example: auth
-        fingerprint:
-          type: string
-          example: 4a:9d:64:15:ed:3a:e6:07:6e:89:36:b3:3b:03:05:d9
-        fingerprint_sha256:
-          type: string
-          example: SHA256:Jrs3LD1Ji30xNLtTVf9NDCj7kkBgPBb2pjvTZ3HfIgU
-        projects_with_write_access:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-        projects_with_readonly_access:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-      required:
-      - id
-      - title
-      - created_at
-      - expires_at
-      - last_used_at
-      - key
-      - usage_type
-      - fingerprint_sha256
-      description: API_Entities_DeployKey model
+      - rules
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -133,71 +133,6 @@ paths:
       operationId: deleteApiV4BroadcastMessagesId
 components:
   schemas:
-    postApiV4BroadcastMessages:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Message to display
-        starts_at:
-          type: string
-          format: date-time
-          description: Starting time
-          default: {}
-        ends_at:
-          type: string
-          format: date-time
-          description: Ending time
-          default: {}
-        color:
-          type: string
-          description: Background color (Deprecated. Use "theme" instead.)
-        font:
-          type: string
-          description: Foreground color (Deprecated. Use "theme" instead.)
-        target_access_levels:
-          type: array
-          description: Target user roles
-          items:
-            type: integer
-            format: int32
-            enum:
-            - 10
-            - 15
-            - 20
-            - 30
-            - 40
-            - 50
-        target_path:
-          type: string
-          description: Target path
-        broadcast_type:
-          type: string
-          description: Broadcast type. Defaults to banner
-          enum:
-          - banner
-          - notification
-          default: banner
-        dismissable:
-          type: boolean
-          description: Is dismissable
-        theme:
-          type: string
-          description: The theme for the message
-          enum:
-          - indigo
-          - light-indigo
-          - blue
-          - light-blue
-          - green
-          - light-green
-          - red
-          - light-red
-          - dark
-          - light
-      required:
-      - message
-      description: Create a broadcast message
     putApiV4BroadcastMessagesId:
       type: object
       properties:
@@ -300,6 +235,71 @@ components:
       - dismissable
       - active
       description: API_Entities_System_BroadcastMessage model
+    postApiV4BroadcastMessages:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Message to display
+        starts_at:
+          type: string
+          format: date-time
+          description: Starting time
+          default: {}
+        ends_at:
+          type: string
+          format: date-time
+          description: Ending time
+          default: {}
+        color:
+          type: string
+          description: Background color (Deprecated. Use "theme" instead.)
+        font:
+          type: string
+          description: Foreground color (Deprecated. Use "theme" instead.)
+        target_access_levels:
+          type: array
+          description: Target user roles
+          items:
+            type: integer
+            format: int32
+            enum:
+            - 10
+            - 15
+            - 20
+            - 30
+            - 40
+            - 50
+        target_path:
+          type: string
+          description: Target path
+        broadcast_type:
+          type: string
+          description: Broadcast type. Defaults to banner
+          enum:
+          - banner
+          - notification
+          default: banner
+        dismissable:
+          type: boolean
+          description: Is dismissable
+        theme:
+          type: string
+          description: The theme for the message
+          enum:
+          - indigo
+          - light-indigo
+          - blue
+          - light-blue
+          - green
+          - light-green
+          - red
+          - light-red
+          - dark
+          - light
+      required:
+      - message
+      description: Create a broadcast message
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -86,36 +86,29 @@ paths:
       operationId: postApiV4ApplicationsIdRenewSecret
 components:
   schemas:
-    API_Entities_Application:
+    postApiV4Applications:
       type: object
       properties:
-        id:
+        name:
           type: string
-        application_id:
-          type: string
-          example: 5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737
-        application_name:
-          type: string
+          description: Name of the application.
           example: MyApplication
-        callback_url:
+        redirect_uri:
           type: string
+          description: Redirect URI of the application.
           example: https://redirect.uri
+        scopes:
+          type: string
+          description: "Scopes of the application. You can specify multiple scopes by separating\\\n                                 each scope using a space"
         confidential:
           type: boolean
-          example: true
-        scopes:
-          type: array
-          example:
-          - api
-          - read_user
+          description: "The application is used where the client secret can be kept confidential. Native mobile apps \\\n                        and Single Page Apps are considered non-confidential. Defaults to true if not supplied"
+          default: true
       required:
-      - id
-      - application_id
-      - application_name
-      - callback_url
-      - confidential
+      - name
+      - redirect_uri
       - scopes
-      description: API_Entities_Application model
+      description: Create a new application
     API_Entities_ApplicationWithSecret:
       type: object
       properties:
@@ -150,29 +143,36 @@ components:
       - scopes
       - secret
       description: API_Entities_ApplicationWithSecret model
-    postApiV4Applications:
+    API_Entities_Application:
       type: object
       properties:
-        name:
+        id:
           type: string
-          description: Name of the application.
+        application_id:
+          type: string
+          example: 5832fc6e14300a0d962240a8144466eef4ee93ef0d218477e55f11cf12fc3737
+        application_name:
+          type: string
           example: MyApplication
-        redirect_uri:
+        callback_url:
           type: string
-          description: Redirect URI of the application.
           example: https://redirect.uri
-        scopes:
-          type: string
-          description: "Scopes of the application. You can specify multiple scopes by separating\\\n                                 each scope using a space"
         confidential:
           type: boolean
-          description: "The application is used where the client secret can be kept confidential. Native mobile apps \\\n                        and Single Page Apps are considered non-confidential. Defaults to true if not supplied"
-          default: true
+          example: true
+        scopes:
+          type: array
+          example:
+          - api
+          - read_user
       required:
-      - name
-      - redirect_uri
+      - id
+      - application_id
+      - application_name
+      - callback_url
+      - confidential
       - scopes
-      description: Create a new application
+      description: API_Entities_Application model
   securitySchemes:
     access_token_header:
       type: apiKey

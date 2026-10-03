@@ -402,19 +402,6 @@ components:
           type: string
           description: Name for the badge
       description: Updates a badge of a group.
-    putApiV4ProjectsIdBadgesBadgeId:
-      type: object
-      properties:
-        link_url:
-          type: string
-          description: URL of the badge link
-        image_url:
-          type: string
-          description: URL of the badge image
-        name:
-          type: string
-          description: Name for the badge
-      description: Updates a badge of a project.
     API_Entities_BasicBadgeDetails:
       type: object
       properties:
@@ -440,7 +427,7 @@ components:
       - rendered_link_url
       - rendered_image_url
       description: API_Entities_BasicBadgeDetails model
-    postApiV4ProjectsIdBadges:
+    putApiV4ProjectsIdBadgesBadgeId:
       type: object
       properties:
         link_url:
@@ -452,10 +439,7 @@ components:
         name:
           type: string
           description: Name for the badge
-      required:
-      - link_url
-      - image_url
-      description: Adds a badge to a project.
+      description: Updates a badge of a project.
     API_Entities_Badge:
       type: object
       properties:
@@ -506,6 +490,22 @@ components:
       - link_url
       - image_url
       description: Adds a badge to a group.
+    postApiV4ProjectsIdBadges:
+      type: object
+      properties:
+        link_url:
+          type: string
+          description: URL of the badge link
+        image_url:
+          type: string
+          description: URL of the badge image
+        name:
+          type: string
+          description: Name for the badge
+      required:
+      - link_url
+      - image_url
+      description: Adds a badge to a project.
   securitySchemes:
     access_token_header:
       type: apiKey

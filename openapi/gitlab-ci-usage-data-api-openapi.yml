@@ -140,16 +140,6 @@ paths:
       operationId: getApiV4UsageDataQueries
 components:
   schemas:
-    postApiV4UsageDataIncrementUniqueUsers:
-      type: object
-      properties:
-        event:
-          type: string
-          description: The event name that should be tracked
-          example: i_quickactions_page
-      required:
-      - event
-      description: Track usage data event for the current user
     postApiV4UsageDataTrackEvents:
       type: object
       properties:
@@ -193,16 +183,6 @@ components:
       required:
       - events
       description: Track multiple gitlab internal events
-    postApiV4UsageDataIncrementCounter:
-      type: object
-      properties:
-        event:
-          type: string
-          description: The event name that should be tracked
-          example: i_quickactions_page
-      required:
-      - event
-      description: Track usage data event
     postApiV4UsageDataTrackEvent:
       type: object
       properties:
@@ -238,6 +218,26 @@ components:
       required:
       - event
       description: Track gitlab internal events
+    postApiV4UsageDataIncrementCounter:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+      required:
+      - event
+      description: Track usage data event
+    postApiV4UsageDataIncrementUniqueUsers:
+      type: object
+      properties:
+        event:
+          type: string
+          description: The event name that should be tracked
+          example: i_quickactions_page
+      required:
+      - event
+      description: Track usage data event for the current user
   securitySchemes:
     access_token_header:
       type: apiKey

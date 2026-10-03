@@ -254,6 +254,66 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_Trigger:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 10
+        token:
+          type: string
+          example: 6d056f63e50fe6f8c5f8f4aa10edb7
+        description:
+          type: string
+          example: test
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        last_used:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        expires_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        owner:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+      required:
+      - id
+      - token
+      - description
+      - created_at
+      - updated_at
+      - last_used
+      - expires_at
+      - owner
+      description: API_Entities_Trigger model
+    postApiV4ProjectsId_refRef_triggerPipeline:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token of trigger or job token
+          example: 6d056f63e50fe6f8c5f8f4aa10edb7
+        variables:
+          type: object
+          description: The list of variables to be injected into build
+          example:
+            VAR1: value1
+            VAR2: value2
+        inputs:
+          type: object
+          description: The list of inputs to be used to create the pipeline.
+      required:
+      - token
+      description: Trigger a GitLab project pipeline
     DetailedStatusEntity:
       type: object
       properties:
@@ -326,126 +386,6 @@ components:
       - details_path
       - illustration
       - favicon
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    putApiV4ProjectsIdTriggersTriggerId:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The trigger token description
-      description: Update a trigger token
-    API_Entities_Trigger:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 10
-        token:
-          type: string
-          example: 6d056f63e50fe6f8c5f8f4aa10edb7
-        description:
-          type: string
-          example: test
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        last_used:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        expires_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        owner:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-      required:
-      - id
-      - token
-      - description
-      - created_at
-      - updated_at
-      - last_used
-      - expires_at
-      - owner
-      description: API_Entities_Trigger model
-    postApiV4ProjectsIdTriggers:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The trigger token description
-          example: my trigger token description
-        expires_at:
-          type: string
-          format: date-time
-          description: Timestamp of when the pipeline trigger token expires.
-          example: '2024-07-01T00:00:00.000Z'
-      required:
-      - description
-      description: Create a trigger token
     API_Entities_Ci_Pipeline:
       type: object
       properties:
@@ -550,25 +490,85 @@ components:
       - detailed_status
       - archived
       description: API_Entities_Ci_Pipeline model
-    postApiV4ProjectsId_refRef_triggerPipeline:
+    API_Entities_UserBasic:
       type: object
       properties:
-        token:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
           type: string
-          description: The unique token of trigger or job token
-          example: 6d056f63e50fe6f8c5f8f4aa10edb7
-        variables:
-          type: object
-          description: The list of variables to be injected into build
-          example:
-            VAR1: value1
-            VAR2: value2
-        inputs:
-          type: object
-          description: The list of inputs to be used to create the pipeline.
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
       required:
-      - token
-      description: Trigger a GitLab project pipeline
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    putApiV4ProjectsIdTriggersTriggerId:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The trigger token description
+      description: Update a trigger token
+    postApiV4ProjectsIdTriggers:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The trigger token description
+          example: my trigger token description
+        expires_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the pipeline trigger token expires.
+          example: '2024-07-01T00:00:00.000Z'
+      required:
+      - description
+      description: Create a trigger token
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -61,6 +61,28 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    putApiV4SuggestionsIdApply:
+      type: object
+      properties:
+        commit_message:
+          type: string
+          description: A custom commit message to use instead of the default generated message or the project's default message
+      description: Apply suggestion patch in the Merge Request it was created
+    putApiV4SuggestionsBatchApply:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: An array of the suggestion IDs
+          items:
+            type: integer
+            format: int32
+        commit_message:
+          type: string
+          description: A custom commit message to use instead of the default generated message or the project's default message
+      required:
+      - ids
+      description: Apply multiple suggestion patches in the Merge Request where they were created
     API_Entities_Suggestion:
       type: object
       properties:
@@ -101,28 +123,6 @@ components:
       - from_content
       - to_content
       description: API_Entities_Suggestion model
-    putApiV4SuggestionsIdApply:
-      type: object
-      properties:
-        commit_message:
-          type: string
-          description: A custom commit message to use instead of the default generated message or the project's default message
-      description: Apply suggestion patch in the Merge Request it was created
-    putApiV4SuggestionsBatchApply:
-      type: object
-      properties:
-        ids:
-          type: array
-          description: An array of the suggestion IDs
-          items:
-            type: integer
-            format: int32
-        commit_message:
-          type: string
-          description: A custom commit message to use instead of the default generated message or the project's default message
-      required:
-      - ids
-      description: Apply multiple suggestion patches in the Merge Request where they were created
   securitySchemes:
     access_token_header:
       type: apiKey

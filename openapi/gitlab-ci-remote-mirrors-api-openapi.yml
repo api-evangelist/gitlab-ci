@@ -247,47 +247,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    API_Entities_MirrorHostKey:
-      type: object
-      properties:
-        fingerprint_sha256:
-          type: string
-          example: SHA256:abcd1234
-      required:
-      - fingerprint_sha256
-    postApiV4ProjectsIdRemoteMirrors:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The URL for a remote mirror
-          example: https://*****:*****@example.com/gitlab/example.git
-        enabled:
-          type: boolean
-          description: Determines if the mirror is enabled
-        auth_method:
-          type: string
-          description: Determines the mirror authentication method
-          enum:
-          - ssh_public_key
-          - password
-        keep_divergent_refs:
-          type: boolean
-          description: Determines if divergent refs are kept on the target
-        only_protected_branches:
-          type: boolean
-          description: Determines if only protected branches are mirrored
-        mirror_branch_regex:
-          type: string
-          description: Determines if only matched branches are mirrored
-        host_keys:
-          type: array
-          description: SSH host keys in bare format (ssh-ed25519 AAAA...) or full known_hosts format (hostname ssh-ed25519 AAAA...). Bare keys use the hostname from the mirror URL.
-          items:
-            type: string
-      required:
-      - url
-      description: Create remote mirror for a project
     API_Entities_RemoteMirror:
       type: object
       properties:
@@ -348,6 +307,47 @@ components:
       - host_keys
       - mirror_branch_regex
       description: API_Entities_RemoteMirror model
+    postApiV4ProjectsIdRemoteMirrors:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL for a remote mirror
+          example: https://*****:*****@example.com/gitlab/example.git
+        enabled:
+          type: boolean
+          description: Determines if the mirror is enabled
+        auth_method:
+          type: string
+          description: Determines the mirror authentication method
+          enum:
+          - ssh_public_key
+          - password
+        keep_divergent_refs:
+          type: boolean
+          description: Determines if divergent refs are kept on the target
+        only_protected_branches:
+          type: boolean
+          description: Determines if only protected branches are mirrored
+        mirror_branch_regex:
+          type: string
+          description: Determines if only matched branches are mirrored
+        host_keys:
+          type: array
+          description: SSH host keys in bare format (ssh-ed25519 AAAA...) or full known_hosts format (hostname ssh-ed25519 AAAA...). Bare keys use the hostname from the mirror URL.
+          items:
+            type: string
+      required:
+      - url
+      description: Create remote mirror for a project
+    API_Entities_MirrorHostKey:
+      type: object
+      properties:
+        fingerprint_sha256:
+          type: string
+          example: SHA256:abcd1234
+      required:
+      - fingerprint_sha256
     putApiV4ProjectsIdRemoteMirrorsMirrorId:
       type: object
       properties:

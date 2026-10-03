@@ -431,44 +431,6 @@ paths:
         required: true
 components:
   schemas:
-    API_Entities_BulkImports_EntityFailure:
-      type: object
-      properties:
-        relation:
-          type: string
-          example: label
-        exception_message:
-          type: string
-          example: error message
-        exception_class:
-          type: string
-          example: Exception
-        correlation_id_value:
-          type: string
-          example: dfcf583058ed4508e4c7c617bd7f0edd
-        source_url:
-          type: string
-          example: https://source.gitlab.com/group/-/epics/1
-        source_title:
-          type: string
-          example: title
-      required:
-      - relation
-      - exception_message
-      - exception_class
-      - correlation_id_value
-      - source_url
-      - source_title
-      description: API_Entities_BulkImports_EntityFailure model
-    postApiV4ImportGithubGists:
-      type: object
-      properties:
-        personal_access_token:
-          type: string
-          description: GitHub personal access token
-      required:
-      - personal_access_token
-      description: Import User Gists
     API_Entities_BulkImports:
       type: object
       properties:
@@ -565,6 +527,35 @@ components:
       - has_failures
       - stats
       description: API_Entities_BulkImports model
+    API_Entities_BulkImports_EntityFailure:
+      type: object
+      properties:
+        relation:
+          type: string
+          example: label
+        exception_message:
+          type: string
+          example: error message
+        exception_class:
+          type: string
+          example: Exception
+        correlation_id_value:
+          type: string
+          example: dfcf583058ed4508e4c7c617bd7f0edd
+        source_url:
+          type: string
+          example: https://source.gitlab.com/group/-/epics/1
+        source_title:
+          type: string
+          example: title
+      required:
+      - relation
+      - exception_message
+      - exception_class
+      - correlation_id_value
+      - source_url
+      - source_title
+      description: API_Entities_BulkImports_EntityFailure model
     API_Entities_BulkImport:
       type: object
       properties:
@@ -607,6 +598,15 @@ components:
       - updated_at
       - has_failures
       description: API_Entities_BulkImport model
+    postApiV4ImportGithubGists:
+      type: object
+      properties:
+        personal_access_token:
+          type: string
+          description: GitHub personal access token
+      required:
+      - personal_access_token
+      description: Import User Gists
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -374,42 +374,66 @@ paths:
       operationId: deleteApiV4ProjectsIdFeatureFlagsUserListsIid
 components:
   schemas:
-    API_Entities_FeatureFlag:
+    API_Entities_FeatureFlag_Scope:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        environment_scope:
+          type: string
+          example: production
+      required:
+      - id
+      - environment_scope
+    postApiV4ProjectsIdFeatureFlags:
       type: object
       properties:
         name:
           type: string
-          example: merge_train
+          description: The name of the feature flag
         description:
           type: string
-          example: merge train feature flag
+          description: The description of the feature flag
         active:
           type: boolean
+          description: The active state of the flag. Defaults to `true`. Supported in GitLab 13.3 and later
         version:
           type: string
-          example: new_version_flag
-        created_at:
-          type: string
-          format: date-time
-          example: '2019-11-04T08:13:51.423Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2019-11-04T08:13:51.423Z'
-        scopes:
-          type: string
+          description: The version of the feature flag. Must be `new_version_flag`. Omit to create a Legacy feature flag.
         strategies:
-          $ref: '#/components/schemas/API_Entities_FeatureFlag_Strategy'
+          type: array
+          description: Array of feature flag strategies
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The strategy name. Can be `default`, `gradualRolloutUserId`, `userWithId`, or `gitlabUserList`. In GitLab 13.5 and later, can be `flexibleRollout`
+              parameters:
+                type: string
+                description: The strategy parameters as a JSON-formatted string e.g. `{"userIds":"user1"}`
+              user_list_id:
+                type: integer
+                format: int32
+                description: The ID of the feature flag user list. If strategy is `gitlabUserList`.
+              scopes:
+                type: array
+                description: Array of scopes for the strategy
+                items:
+                  type: object
+                  properties:
+                    environment_scope:
+                      type: string
+                      description: The environment scope of the scope
+                  required:
+                  - environment_scope
+            required:
+            - name
       required:
       - name
-      - description
-      - active
-      - version
-      - created_at
-      - updated_at
-      - scopes
-      - strategies
-      description: API_Entities_FeatureFlag model
+      description: Create a new feature flag
     putApiV4ProjectsIdFeatureFlagsFeatureFlagName:
       type: object
       properties:
@@ -462,53 +486,6 @@ components:
                       type: boolean
                       description: Delete the scope when true
       description: Update a feature flag
-    postApiV4ProjectsIdFeatureFlags:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the feature flag
-        description:
-          type: string
-          description: The description of the feature flag
-        active:
-          type: boolean
-          description: The active state of the flag. Defaults to `true`. Supported in GitLab 13.3 and later
-        version:
-          type: string
-          description: The version of the feature flag. Must be `new_version_flag`. Omit to create a Legacy feature flag.
-        strategies:
-          type: array
-          description: Array of feature flag strategies
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The strategy name. Can be `default`, `gradualRolloutUserId`, `userWithId`, or `gitlabUserList`. In GitLab 13.5 and later, can be `flexibleRollout`
-              parameters:
-                type: string
-                description: The strategy parameters as a JSON-formatted string e.g. `{"userIds":"user1"}`
-              user_list_id:
-                type: integer
-                format: int32
-                description: The ID of the feature flag user list. If strategy is `gitlabUserList`.
-              scopes:
-                type: array
-                description: Array of scopes for the strategy
-                items:
-                  type: object
-                  properties:
-                    environment_scope:
-                      type: string
-                      description: The environment scope of the scope
-                  required:
-                  - environment_scope
-            required:
-            - name
-      required:
-      - name
-      description: Create a new feature flag
     API_Entities_FeatureFlag_BasicUserList:
       type: object
       properties:
@@ -531,29 +508,6 @@ components:
       - iid
       - name
       - user_xids
-    API_Entities_FeatureFlag_Scope:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        environment_scope:
-          type: string
-          example: production
-      required:
-      - id
-      - environment_scope
-    putApiV4ProjectsIdFeatureFlagsUserListsIid:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the list
-        user_xids:
-          type: string
-          description: A comma separated list of external user ids
-      description: Update a feature flag user list
     API_Entities_FeatureFlag_UserList:
       type: object
       properties:
@@ -611,6 +565,42 @@ components:
       - name
       - user_xids
       description: Create a feature flag user list
+    API_Entities_FeatureFlag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: merge_train
+        description:
+          type: string
+          example: merge train feature flag
+        active:
+          type: boolean
+        version:
+          type: string
+          example: new_version_flag
+        created_at:
+          type: string
+          format: date-time
+          example: '2019-11-04T08:13:51.423Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2019-11-04T08:13:51.423Z'
+        scopes:
+          type: string
+        strategies:
+          $ref: '#/components/schemas/API_Entities_FeatureFlag_Strategy'
+      required:
+      - name
+      - description
+      - active
+      - version
+      - created_at
+      - updated_at
+      - scopes
+      - strategies
+      description: API_Entities_FeatureFlag model
     API_Entities_FeatureFlag_Strategy:
       type: object
       properties:
@@ -634,6 +624,16 @@ components:
       - parameters
       - scopes
       - user_list
+    putApiV4ProjectsIdFeatureFlagsUserListsIid:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the list
+        user_xids:
+          type: string
+          description: A comma separated list of external user ids
+      description: Update a feature flag user list
   securitySchemes:
     access_token_header:
       type: apiKey

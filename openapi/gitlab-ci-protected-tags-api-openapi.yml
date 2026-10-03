@@ -149,20 +149,6 @@ paths:
       operationId: deleteApiV4ProjectsIdProtectedTagsName
 components:
   schemas:
-    API_Entities_ProtectedTag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: release-1-0
-        create_access_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
-      required:
-      - name
-      - create_access_levels
-      description: API_Entities_ProtectedTag model
     postApiV4ProjectsIdProtectedTags:
       type: object
       properties:
@@ -242,6 +228,20 @@ components:
       - access_level_description
       - user_id
       - group_id
+    API_Entities_ProtectedTag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: release-1-0
+        create_access_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_ProtectedRefAccess'
+      required:
+      - name
+      - create_access_levels
+      description: API_Entities_ProtectedTag model
   securitySchemes:
     access_token_header:
       type: apiKey

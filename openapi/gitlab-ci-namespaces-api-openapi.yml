@@ -279,38 +279,6 @@ paths:
       operationId: getApiV4NamespacesIdExists
 components:
   schemas:
-    API_Entities_Namespaces_Storage_LimitExclusion:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        namespace_id:
-          type: integer
-          format: int32
-          example: 123
-        namespace_name:
-          type: string
-          example: GitLab
-        reason:
-          type: string
-          example: a reason
-      required:
-      - id
-      - namespace_id
-      - namespace_name
-      - reason
-      description: API_Entities_Namespaces_Storage_LimitExclusion model
-    postApiV4NamespacesIdStorageLimitExclusion:
-      type: object
-      properties:
-        reason:
-          type: string
-          description: The reason the Namespace is being excluded
-      required:
-      - reason
-      description: Creates a storage limit exclusion for a Namespace
     putApiV4NamespacesId:
       type: object
       properties:
@@ -387,6 +355,97 @@ components:
       - exists
       - suggests
       description: API_Entities_NamespaceExistence model
+    postApiV4NamespacesIdStorageLimitExclusion:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason the Namespace is being excluded
+      required:
+      - reason
+      description: Creates a storage limit exclusion for a Namespace
+    API_Entities_Namespaces_Storage_LimitExclusion:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        namespace_id:
+          type: integer
+          format: int32
+          example: 123
+        namespace_name:
+          type: string
+          example: GitLab
+        reason:
+          type: string
+          example: a reason
+      required:
+      - id
+      - namespace_id
+      - namespace_name
+      - reason
+      description: API_Entities_Namespaces_Storage_LimitExclusion model
+    API_Entities_GitlabSubscription:
+      type: object
+      properties:
+        plan:
+          type: object
+          properties:
+            code:
+              type: string
+            name:
+              type: string
+            trial:
+              type: string
+            auto_renew:
+              type: string
+            upgradable:
+              type: string
+            exclude_guests:
+              type: string
+          required:
+          - code
+          - name
+          - trial
+          - auto_renew
+          - upgradable
+          - exclude_guests
+        usage:
+          type: object
+          properties:
+            seats_in_subscription:
+              type: string
+            seats_in_use:
+              type: string
+            max_seats_used:
+              type: string
+            seats_owed:
+              type: string
+          required:
+          - seats_in_subscription
+          - seats_in_use
+          - max_seats_used
+          - seats_owed
+        billing:
+          type: object
+          properties:
+            subscription_start_date:
+              type: string
+            subscription_end_date:
+              type: string
+            trial_ends_on:
+              type: string
+          required:
+          - subscription_start_date
+          - subscription_end_date
+          - trial_ends_on
+      required:
+      - plan
+      - usage
+      - billing
+      description: API_Entities_GitlabSubscription model
     API_Entities_Namespace:
       type: object
       properties:
@@ -484,65 +543,6 @@ components:
       - web_url
       - billable_members_count
       description: API_Entities_Namespace model
-    API_Entities_GitlabSubscription:
-      type: object
-      properties:
-        plan:
-          type: object
-          properties:
-            code:
-              type: string
-            name:
-              type: string
-            trial:
-              type: string
-            auto_renew:
-              type: string
-            upgradable:
-              type: string
-            exclude_guests:
-              type: string
-          required:
-          - code
-          - name
-          - trial
-          - auto_renew
-          - upgradable
-          - exclude_guests
-        usage:
-          type: object
-          properties:
-            seats_in_subscription:
-              type: string
-            seats_in_use:
-              type: string
-            max_seats_used:
-              type: string
-            seats_owed:
-              type: string
-          required:
-          - seats_in_subscription
-          - seats_in_use
-          - max_seats_used
-          - seats_owed
-        billing:
-          type: object
-          properties:
-            subscription_start_date:
-              type: string
-            subscription_end_date:
-              type: string
-            trial_ends_on:
-              type: string
-          required:
-          - subscription_start_date
-          - subscription_end_date
-          - trial_ends_on
-      required:
-      - plan
-      - usage
-      - billing
-      description: API_Entities_GitlabSubscription model
   securitySchemes:
     access_token_header:
       type: apiKey

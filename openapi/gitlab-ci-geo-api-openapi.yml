@@ -204,13 +204,6 @@ paths:
       operationId: postApiV4GeoNodeProxyIdGraphql
 components:
   schemas:
-    StorageShardEntity:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-      - name
     postApiV4GeoProxyGitSshUploadPack:
       type: object
       properties:
@@ -238,52 +231,6 @@ components:
       - data
       - output
       description: "Responsible for making HTTP POST /repo.git/git-upload-pack\n                  request from secondary gitlab-shell to primary"
-    postApiV4GeoProxyGitSshInfoRefsUploadPack:
-      type: object
-      properties:
-        secret_token:
-          type: string
-          description: Secret token to authenticate by gitlab shell
-        data:
-          type: object
-          description: Object that contains the payload data for the Geo operation
-          properties:
-            gl_id:
-              type: string
-              description: ID of the user performing the operation
-            primary_repo:
-              type: string
-              description: Primary repository to clone or pull from
-          required:
-          - gl_id
-          - primary_repo
-      required:
-      - secret_token
-      - data
-      description: "Responsible for making HTTP GET /repo.git/info/refs?service=git-upload-pack\n                  request from secondary gitlab-shell to primary"
-    postApiV4GeoProxyGitSshInfoRefsReceivePack:
-      type: object
-      properties:
-        secret_token:
-          type: string
-          description: "Secret token used to authenticate requests from gitlab-shell\n                to Geo proxy endpoints"
-        data:
-          type: object
-          description: Object that contains the payload data for the Geo operation
-          properties:
-            gl_id:
-              type: string
-              description: ID of the user performing the operation
-            primary_repo:
-              type: string
-              description: Primary repository to push to
-          required:
-          - gl_id
-          - primary_repo
-      required:
-      - secret_token
-      - data
-      description: "Responsible for making HTTP GET /repo.git/info/refs?service=git-receive-pack\n                  request from secondary gitlab-shell to primary"
     API_Entities_GeoNodeStatus:
       type: object
       properties:
@@ -1526,6 +1473,36 @@ components:
       - storage_shards_match
       - _links
       description: API_Entities_GeoNodeStatus model
+    StorageShardEntity:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+    postApiV4GeoProxyGitSshInfoRefsReceivePack:
+      type: object
+      properties:
+        secret_token:
+          type: string
+          description: "Secret token used to authenticate requests from gitlab-shell\n                to Geo proxy endpoints"
+        data:
+          type: object
+          description: Object that contains the payload data for the Geo operation
+          properties:
+            gl_id:
+              type: string
+              description: ID of the user performing the operation
+            primary_repo:
+              type: string
+              description: Primary repository to push to
+          required:
+          - gl_id
+          - primary_repo
+      required:
+      - secret_token
+      - data
+      description: "Responsible for making HTTP GET /repo.git/info/refs?service=git-receive-pack\n                  request from secondary gitlab-shell to primary"
     API_Entities_NamespaceBasic:
       type: object
       properties:
@@ -1564,24 +1541,12 @@ components:
       - parent_id
       - avatar_url
       - web_url
-    API_Entities_Geo_PipelineRefs:
-      type: object
-      properties:
-        pipeline_refs:
-          type: array
-          items:
-            type: string
-          example:
-          - refs/pipelines/1
-      required:
-      - pipeline_refs
-      description: API_Entities_Geo_PipelineRefs model
-    postApiV4GeoProxyGitSshReceivePack:
+    postApiV4GeoProxyGitSshInfoRefsUploadPack:
       type: object
       properties:
         secret_token:
           type: string
-          description: "Secret token used to authenticate requests from gitlab-shell\n                to Geo proxy endpoints"
+          description: Secret token to authenticate by gitlab shell
         data:
           type: object
           description: Object that contains the payload data for the Geo operation
@@ -1591,18 +1556,14 @@ components:
               description: ID of the user performing the operation
             primary_repo:
               type: string
-              description: Primary repository to push to
+              description: Primary repository to clone or pull from
           required:
           - gl_id
           - primary_repo
-        output:
-          type: string
-          description: Output from git-receive-pack
       required:
       - secret_token
       - data
-      - output
-      description: "Responsible for making HTTP POST /repo.git/info/refs?service=git-receive-pack\n                  request from secondary gitlab-shell to primary"
+      description: "Responsible for making HTTP GET /repo.git/info/refs?service=git-upload-pack\n                  request from secondary gitlab-shell to primary"
     postApiV4GeoStatus:
       type: object
       properties:
@@ -2209,6 +2170,45 @@ components:
           required:
           - geo_node_id
       description: Posts the current node status to the primary site
+    API_Entities_Geo_PipelineRefs:
+      type: object
+      properties:
+        pipeline_refs:
+          type: array
+          items:
+            type: string
+          example:
+          - refs/pipelines/1
+      required:
+      - pipeline_refs
+      description: API_Entities_Geo_PipelineRefs model
+    postApiV4GeoProxyGitSshReceivePack:
+      type: object
+      properties:
+        secret_token:
+          type: string
+          description: "Secret token used to authenticate requests from gitlab-shell\n                to Geo proxy endpoints"
+        data:
+          type: object
+          description: Object that contains the payload data for the Geo operation
+          properties:
+            gl_id:
+              type: string
+              description: ID of the user performing the operation
+            primary_repo:
+              type: string
+              description: Primary repository to push to
+          required:
+          - gl_id
+          - primary_repo
+        output:
+          type: string
+          description: Output from git-receive-pack
+      required:
+      - secret_token
+      - data
+      - output
+      description: "Responsible for making HTTP POST /repo.git/info/refs?service=git-receive-pack\n                  request from secondary gitlab-shell to primary"
   securitySchemes:
     access_token_header:
       type: apiKey

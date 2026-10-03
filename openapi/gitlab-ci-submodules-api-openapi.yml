@@ -72,6 +72,75 @@ components:
       - additions
       - deletions
       - total
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
+      type: object
+      properties:
+        commit_sha:
+          type: string
+          description: Commit sha to update the submodule to.
+          example: ed899a2f4b50b4370feeea94676502b42383c746
+        branch:
+          type: string
+          description: Name of the branch to commit into.
+          example: main
+        commit_message:
+          type: string
+          description: Commit message. If no message is provided a default one will be set.
+          example: Commit message
+      required:
+      - commit_sha
+      - branch
+      description: Update existing submodule reference in repository
     API_Entities_CommitDetail:
       type: object
       properties:
@@ -161,75 +230,6 @@ components:
       - project_id
       - last_pipeline
       description: API_Entities_CommitDetail model
-    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
-      type: object
-      properties:
-        commit_sha:
-          type: string
-          description: Commit sha to update the submodule to.
-          example: ed899a2f4b50b4370feeea94676502b42383c746
-        branch:
-          type: string
-          description: Name of the branch to commit into.
-          example: main
-        commit_message:
-          type: string
-          description: Commit message. If no message is provided a default one will be set.
-          example: Commit message
-      required:
-      - commit_sha
-      - branch
-      description: Update existing submodule reference in repository
-    API_Entities_Ci_PipelineBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      description: API_Entities_Ci_PipelineBasic model
   securitySchemes:
     access_token_header:
       type: apiKey

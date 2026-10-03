@@ -167,53 +167,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    postApiV4ProjectsIdStatusesSha:
+    API_Entities_CustomAttribute:
       type: object
       properties:
-        state:
+        key:
           type: string
-          description: The state of the status
-          enum:
-          - pending
-          - running
-          - success
-          - failed
-          - canceled
-          - skipped
-          example: pending
-        ref:
+          example: foo
+        value:
           type: string
-          description: The ref
-          example: develop
-        target_url:
-          type: string
-          description: The target URL to associate with this status
-          example: https://gitlab.example.com/janedoe/gitlab-foss/builds/91
-        description:
-          type: string
-          description: A short description of the status
-        name:
-          type: string
-          description: A string label to differentiate this status from the status of other systems
-          default: default
-          example: coverage
-        context:
-          type: string
-          description: A string label to differentiate this status from the status of other systems
-          default: default
-          example: coverage
-        coverage:
-          type: number
-          format: float
-          description: The total code coverage
-          example: 100.0
-        pipeline_id:
-          type: integer
-          format: int32
-          description: An existing pipeline ID, when multiple pipelines on the same commit SHA have been triggered
+          example: bar
       required:
-      - state
-      description: Post status to a commit
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
     API_Entities_UserBasic:
       type: object
       properties:
@@ -323,19 +289,53 @@ components:
       - pipeline_id
       - author
       description: API_Entities_CommitStatus model
-    API_Entities_CustomAttribute:
+    postApiV4ProjectsIdStatusesSha:
       type: object
       properties:
-        key:
+        state:
           type: string
-          example: foo
-        value:
+          description: The state of the status
+          enum:
+          - pending
+          - running
+          - success
+          - failed
+          - canceled
+          - skipped
+          example: pending
+        ref:
           type: string
-          example: bar
+          description: The ref
+          example: develop
+        target_url:
+          type: string
+          description: The target URL to associate with this status
+          example: https://gitlab.example.com/janedoe/gitlab-foss/builds/91
+        description:
+          type: string
+          description: A short description of the status
+        name:
+          type: string
+          description: A string label to differentiate this status from the status of other systems
+          default: default
+          example: coverage
+        context:
+          type: string
+          description: A string label to differentiate this status from the status of other systems
+          default: default
+          example: coverage
+        coverage:
+          type: number
+          format: float
+          description: The total code coverage
+          example: 100.0
+        pipeline_id:
+          type: integer
+          format: int32
+          description: An existing pipeline ID, when multiple pipelines on the same commit SHA have been triggered
       required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
+      - state
+      description: Post status to a commit
   securitySchemes:
     access_token_header:
       type: apiKey

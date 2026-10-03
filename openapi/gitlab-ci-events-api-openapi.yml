@@ -408,6 +408,72 @@ components:
       - imported_from
       - noteable_iid
       - commands_changes
+    API_Entities_Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        project_id:
+          type: integer
+          format: int32
+          example: 2
+        action_name:
+          type: string
+          example: closed
+        target_id:
+          type: integer
+          format: int32
+          example: 160
+        target_iid:
+          type: integer
+          format: int32
+          example: 157
+        target_type:
+          type: string
+          example: Issue
+        author_id:
+          type: integer
+          format: int32
+          example: 25
+        target_title:
+          type: string
+          example: Public project search field
+        created_at:
+          type: string
+          example: '2017-02-09T10:43:19.667Z'
+        note:
+          $ref: '#/components/schemas/API_Entities_Note'
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        wiki_page:
+          $ref: '#/components/schemas/API_Entities_WikiPageBasic'
+        imported:
+          type: boolean
+          example: false
+        imported_from:
+          type: string
+          example: none
+        push_data:
+          $ref: '#/components/schemas/API_Entities_PushEventPayload'
+        author_username:
+          type: string
+          example: root
+      required:
+      - id
+      - project_id
+      - action_name
+      - target_id
+      - target_iid
+      - target_type
+      - author_id
+      - target_title
+      - created_at
+      - imported
+      - imported_from
+      - author_username
+      description: API_Entities_Event model
     API_Entities_UserBasic:
       type: object
       properties:
@@ -525,72 +591,6 @@ components:
       - title
       - wiki_page_meta_id
       description: API_Entities_WikiPageBasic model
-    API_Entities_Event:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        project_id:
-          type: integer
-          format: int32
-          example: 2
-        action_name:
-          type: string
-          example: closed
-        target_id:
-          type: integer
-          format: int32
-          example: 160
-        target_iid:
-          type: integer
-          format: int32
-          example: 157
-        target_type:
-          type: string
-          example: Issue
-        author_id:
-          type: integer
-          format: int32
-          example: 25
-        target_title:
-          type: string
-          example: Public project search field
-        created_at:
-          type: string
-          example: '2017-02-09T10:43:19.667Z'
-        note:
-          $ref: '#/components/schemas/API_Entities_Note'
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        wiki_page:
-          $ref: '#/components/schemas/API_Entities_WikiPageBasic'
-        imported:
-          type: boolean
-          example: false
-        imported_from:
-          type: string
-          example: none
-        push_data:
-          $ref: '#/components/schemas/API_Entities_PushEventPayload'
-        author_username:
-          type: string
-          example: root
-      required:
-      - id
-      - project_id
-      - action_name
-      - target_id
-      - target_iid
-      - target_type
-      - author_id
-      - target_title
-      - created_at
-      - imported
-      - imported_from
-      - author_username
-      description: API_Entities_Event model
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -92,45 +92,6 @@ paths:
       operationId: deleteApiV4FeaturesName
 components:
   schemas:
-    postApiV4FeaturesName:
-      type: object
-      properties:
-        value:
-          type: string
-          description: '`true` or `false` to enable/disable, or an integer for percentage of time'
-        key:
-          type: string
-          description: '`percentage_of_actors` or `percentage_of_time` (default)'
-        feature_group:
-          type: string
-          description: A Feature group name
-        user:
-          type: string
-          description: A GitLab username or comma-separated multiple usernames
-        group:
-          type: string
-          description: A GitLab group's path, for example `gitlab-org`, or comma-separated multiple group paths
-        namespace:
-          type: string
-          description: A GitLab group or user namespace's path, for example `john-doe`, or comma-separated multiple namespace paths. Introduced in GitLab 15.0.
-        project:
-          type: string
-          description: A projects path, for example `gitlab-org/gitlab-foss`, or comma-separated multiple project paths
-        repository:
-          type: string
-          description: A repository path, for example `gitlab-org/gitlab-test.git`, `gitlab-org/gitlab-test.wiki.git`, `snippets/21.git`, to name a few. Use comma to separate multiple repository paths
-        runner:
-          type: string
-          description: A runner ID, or comma-separated list of runner IDs
-        endpoint:
-          type: string
-          description: A caller_id identifying a code path, for example `GET /api/v4/projects/:id` or `ProjectsController#show`. Use comma to separate multiple endpoint paths
-        force:
-          type: boolean
-          description: Skip feature flag validation checks, such as a YAML definition
-      required:
-      - value
-      description: Set or create a feature
     API_Entities_FeatureGate:
       type: object
       properties:
@@ -198,6 +159,45 @@ components:
       - default_enabled
       - intended_to_rollout_by
       description: API_Entities_Feature_Definition model
+    postApiV4FeaturesName:
+      type: object
+      properties:
+        value:
+          type: string
+          description: '`true` or `false` to enable/disable, or an integer for percentage of time'
+        key:
+          type: string
+          description: '`percentage_of_actors` or `percentage_of_time` (default)'
+        feature_group:
+          type: string
+          description: A Feature group name
+        user:
+          type: string
+          description: A GitLab username or comma-separated multiple usernames
+        group:
+          type: string
+          description: A GitLab group's path, for example `gitlab-org`, or comma-separated multiple group paths
+        namespace:
+          type: string
+          description: A GitLab group or user namespace's path, for example `john-doe`, or comma-separated multiple namespace paths. Introduced in GitLab 15.0.
+        project:
+          type: string
+          description: A projects path, for example `gitlab-org/gitlab-foss`, or comma-separated multiple project paths
+        repository:
+          type: string
+          description: A repository path, for example `gitlab-org/gitlab-test.git`, `gitlab-org/gitlab-test.wiki.git`, `snippets/21.git`, to name a few. Use comma to separate multiple repository paths
+        runner:
+          type: string
+          description: A runner ID, or comma-separated list of runner IDs
+        endpoint:
+          type: string
+          description: A caller_id identifying a code path, for example `GET /api/v4/projects/:id` or `ProjectsController#show`. Use comma to separate multiple endpoint paths
+        force:
+          type: boolean
+          description: Skip feature flag validation checks, such as a YAML definition
+      required:
+      - value
+      description: Set or create a feature
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -211,6 +211,46 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    putApiV4ProjectsIdResourceGroupsKey:
+      type: object
+      properties:
+        process_mode:
+          type: string
+          description: The process mode of the resource group
+          enum:
+          - unordered
+          - oldest_first
+          - newest_first
+          - newest_ready_first
+      description: Edit an existing resource group
+    API_Entities_Ci_ResourceGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        key:
+          type: string
+          example: production
+        process_mode:
+          type: string
+          example: unordered
+        created_at:
+          type: string
+          format: date-time
+          example: '2021-09-01T08:04:59.650Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2021-09-01T08:04:59.650Z'
+      required:
+      - id
+      - key
+      - process_mode
+      - created_at
+      - updated_at
+      description: API_Entities_Ci_ResourceGroup model
     API_Entities_Ci_JobBasic:
       type: object
       properties:
@@ -305,34 +345,131 @@ components:
       - web_url
       - project
       description: API_Entities_Ci_JobBasic model
-    API_Entities_Ci_ResourceGroup:
+    API_Entities_Ci_PipelineBasic:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        key:
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
           type: string
-          example: production
-        process_mode:
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
           type: string
-          example: unordered
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
         created_at:
           type: string
           format: date-time
-          example: '2021-09-01T08:04:59.650Z'
+          example: '2022-10-21T16:49:48.000+02:00'
         updated_at:
           type: string
           format: date-time
-          example: '2021-09-01T08:04:59.650Z'
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
       required:
       - id
-      - key
-      - process_mode
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
       - created_at
       - updated_at
-      description: API_Entities_Ci_ResourceGroup model
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
+    API_Entities_Commit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        short_id:
+          type: string
+          example: 2695effb
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-07-26T11:08:53.000+02:00'
+        parent_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+        title:
+          type: string
+          example: Initial commit
+        message:
+          type: string
+          example: Initial commit
+        author_name:
+          type: string
+          example: John Smith
+        author_email:
+          type: string
+          example: john@example.com
+        authored_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        committer_name:
+          type: string
+          example: Jack Smith
+        committer_email:
+          type: string
+          example: jack@example.com
+        committed_date:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        trailers:
+          type: object
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
+        extended_trailers:
+          type: object
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
+        web_url:
+          type: string
+          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
+      required:
+      - id
+      - short_id
+      - created_at
+      - parent_ids
+      - title
+      - message
+      - author_name
+      - author_email
+      - authored_date
+      - committer_name
+      - committer_email
+      - committed_date
+      - trailers
+      - extended_trailers
+      - web_url
+      description: API_Entities_Commit model
     API_Entities_User:
       type: object
       properties:
@@ -423,131 +560,6 @@ components:
       - bot
       - work_information
       - local_time
-    API_Entities_Commit:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        short_id:
-          type: string
-          example: 2695effb
-        created_at:
-          type: string
-          format: date-time
-          example: '2017-07-26T11:08:53.000+02:00'
-        parent_ids:
-          type: array
-          items:
-            type: string
-          example:
-          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
-        title:
-          type: string
-          example: Initial commit
-        message:
-          type: string
-          example: Initial commit
-        author_name:
-          type: string
-          example: John Smith
-        author_email:
-          type: string
-          example: john@example.com
-        authored_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        committer_name:
-          type: string
-          example: Jack Smith
-        committer_email:
-          type: string
-          example: jack@example.com
-        committed_date:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        trailers:
-          type: object
-          example:
-            Merged-By: Jane Doe janedoe@gitlab.com
-        extended_trailers:
-          type: object
-          example:
-            Signed-off-by:
-            - John Doe <johndoe@gitlab.com>
-            - Jane Doe <janedoe@gitlab.com>
-        web_url:
-          type: string
-          example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
-      required:
-      - id
-      - short_id
-      - created_at
-      - parent_ids
-      - title
-      - message
-      - author_name
-      - author_email
-      - authored_date
-      - committer_name
-      - committer_email
-      - committed_date
-      - trailers
-      - extended_trailers
-      - web_url
-      description: API_Entities_Commit model
-    API_Entities_Ci_PipelineBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      description: API_Entities_Ci_PipelineBasic model
     API_Entities_CustomAttribute:
       type: object
       properties:
@@ -561,18 +573,6 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
-    putApiV4ProjectsIdResourceGroupsKey:
-      type: object
-      properties:
-        process_mode:
-          type: string
-          description: The process mode of the resource group
-          enum:
-          - unordered
-          - oldest_first
-          - newest_first
-          - newest_ready_first
-      description: Edit an existing resource group
   securitySchemes:
     access_token_header:
       type: apiKey

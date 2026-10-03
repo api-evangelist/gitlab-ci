@@ -783,90 +783,6 @@ paths:
       operationId: deleteApiV4HooksHookId
 components:
   schemas:
-    postApiV4Hooks:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The URL to send the request to
-          example: http://example.com/hook
-        name:
-          type: string
-          description: Name of the hook
-        description:
-          type: string
-          description: Description of the hook
-        token:
-          type: string
-          description: Secret token to validate received payloads; this isn't returned in the response
-        signing_token:
-          type: string
-          description: HMAC signing token used to compute the webhook-signature header. Must be in whsec_<base64> format encoding a 32-byte key. Not returned in the response
-        push_events:
-          type: boolean
-          description: When true, the hook fires on push events
-        tag_push_events:
-          type: boolean
-          description: When true, the hook fires on new tags being pushed
-        merge_requests_events:
-          type: boolean
-          description: Trigger hook on merge requests events
-        repository_update_events:
-          type: boolean
-          description: Trigger hook on repository update events
-        enable_ssl_verification:
-          type: boolean
-          description: Do SSL verification when triggering the hook
-        push_events_branch_filter:
-          type: string
-          description: Trigger hook on specified branch only
-        branch_filter_strategy:
-          type: string
-          description: Filter push events by branch. Possible values are `wildcard` (default), `regex`, and `all_branches`
-          enum:
-          - wildcard
-          - regex
-          - all_branches
-        custom_webhook_template:
-          type: string
-          description: Custom template for the request payload
-        url_variables:
-          type: array
-          description: URL variables for interpolation
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-                description: Name of the variable
-                example: token
-              value:
-                type: string
-                description: Value of the variable
-                example: '123'
-            required:
-            - key
-            - value
-        custom_headers:
-          type: array
-          description: Custom headers
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-                description: Name of the header
-                example: X-Custom-Header
-              value:
-                type: string
-                description: Value of the header
-                example: value
-            required:
-            - key
-            - value
-      required:
-      - url
-      description: Add new system hook
     putApiV4ProjectsIdHooksHookId:
       type: object
       properties:
@@ -999,105 +915,95 @@ components:
       required:
       - value
       description: Set a url variable
-    putApiV4HooksHookIdCustomHeadersKey:
+    API_Entities_Hook:
       type: object
       properties:
-        value:
-          type: string
-          description: The value of the custom header
-      required:
-      - value
-      description: Set a custom header
-    putApiV4ProjectsIdHooksHookIdUrlVariablesKey:
-      type: object
-      properties:
-        value:
-          type: string
-          description: The value of the variable
-      required:
-      - value
-      description: Set a url variable
-    putApiV4HooksHookId:
-      type: object
-      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
         url:
           type: string
-          description: The URL to send the request to
+          example: https://webhook.site
         name:
           type: string
-          description: Name of the hook
+          example: Hook name
         description:
           type: string
-          description: Description of the hook
-        token:
+          example: Hook description
+        created_at:
           type: string
-          description: Secret token to validate received payloads; this isn't returned in the response
-        signing_token:
-          type: string
-          description: HMAC signing token used to compute the webhook-signature header. Must be in whsec_<base64> format encoding a 32-byte key. Not returned in the response
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
         push_events:
           type: boolean
-          description: When true, the hook fires on push events
         tag_push_events:
           type: boolean
-          description: When true, the hook fires on new tags being pushed
         merge_requests_events:
           type: boolean
-          description: Trigger hook on merge requests events
         repository_update_events:
           type: boolean
-          description: Trigger hook on repository update events
         enable_ssl_verification:
           type: boolean
-          description: Do SSL verification when triggering the hook
-        push_events_branch_filter:
+        organization_id:
+          type: integer
+          format: int32
+          example: 1
+        alert_status:
           type: string
-          description: Trigger hook on specified branch only
-        branch_filter_strategy:
+          example: executable
+        disabled_until:
           type: string
-          description: Filter push events by branch. Possible values are `wildcard` (default), `regex`, and `all_branches`
-          enum:
-          - wildcard
-          - regex
-          - all_branches
-        custom_webhook_template:
-          type: string
-          description: Custom template for the request payload
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
         url_variables:
           type: array
-          description: URL variables for interpolation
           items:
             type: object
-            properties:
-              key:
-                type: string
-                description: Name of the variable
-                example: token
-              value:
-                type: string
-                description: Value of the variable
-                example: '123'
-            required:
-            - key
-            - value
+          example:
+          - token: secr3t
+        push_events_branch_filter:
+          type: string
+          example: my-branch-*
+        branch_filter_strategy:
+          type: string
+          example: wildcard
+        custom_webhook_template:
+          type: string
+          example: '{"event":"{{object_kind}}"}'
         custom_headers:
           type: array
-          description: Custom headers
           items:
             type: object
-            properties:
-              key:
-                type: string
-                description: Name of the header
-                example: X-Custom-Header
-              value:
-                type: string
-                description: Value of the header
-                example: value
-            required:
-            - key
-            - value
-      description: Edit system hook
+          example:
+          - X-Custom-Header: value
+        token_present:
+          type: boolean
+          example: false
+          description: Whether a secret token is configured
+        signing_token_present:
+          type: boolean
+          example: false
+          description: Whether an HMAC signing token is configured
+      required:
+      - id
+      - url
+      - name
+      - description
+      - created_at
+      - push_events
+      - tag_push_events
+      - merge_requests_events
+      - repository_update_events
+      - enable_ssl_verification
+      - alert_status
+      - disabled_until
+      - push_events_branch_filter
+      - branch_filter_strategy
+      - custom_webhook_template
+      - token_present
+      - signing_token_present
+      description: API_Entities_Hook model
     API_Entities_ProjectHook:
       type: object
       properties:
@@ -1237,6 +1143,87 @@ components:
       - resource_deploy_token_events
       - vulnerability_events
       description: API_Entities_ProjectHook model
+    putApiV4HooksHookId:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL to send the request to
+        name:
+          type: string
+          description: Name of the hook
+        description:
+          type: string
+          description: Description of the hook
+        token:
+          type: string
+          description: Secret token to validate received payloads; this isn't returned in the response
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header. Must be in whsec_<base64> format encoding a 32-byte key. Not returned in the response
+        push_events:
+          type: boolean
+          description: When true, the hook fires on push events
+        tag_push_events:
+          type: boolean
+          description: When true, the hook fires on new tags being pushed
+        merge_requests_events:
+          type: boolean
+          description: Trigger hook on merge requests events
+        repository_update_events:
+          type: boolean
+          description: Trigger hook on repository update events
+        enable_ssl_verification:
+          type: boolean
+          description: Do SSL verification when triggering the hook
+        push_events_branch_filter:
+          type: string
+          description: Trigger hook on specified branch only
+        branch_filter_strategy:
+          type: string
+          description: Filter push events by branch. Possible values are `wildcard` (default), `regex`, and `all_branches`
+          enum:
+          - wildcard
+          - regex
+          - all_branches
+        custom_webhook_template:
+          type: string
+          description: Custom template for the request payload
+        url_variables:
+          type: array
+          description: URL variables for interpolation
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: Name of the variable
+                example: token
+              value:
+                type: string
+                description: Value of the variable
+                example: '123'
+            required:
+            - key
+            - value
+        custom_headers:
+          type: array
+          description: Custom headers
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: Name of the header
+                example: X-Custom-Header
+              value:
+                type: string
+                description: Value of the header
+                example: value
+            required:
+            - key
+            - value
+      description: Edit system hook
     putApiV4ProjectsIdHooksHookIdCustomHeadersKey:
       type: object
       properties:
@@ -1246,95 +1233,6 @@ components:
       required:
       - value
       description: Set a custom header
-    API_Entities_Hook:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        url:
-          type: string
-          example: https://webhook.site
-        name:
-          type: string
-          example: Hook name
-        description:
-          type: string
-          example: Hook description
-        created_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        push_events:
-          type: boolean
-        tag_push_events:
-          type: boolean
-        merge_requests_events:
-          type: boolean
-        repository_update_events:
-          type: boolean
-        enable_ssl_verification:
-          type: boolean
-        organization_id:
-          type: integer
-          format: int32
-          example: 1
-        alert_status:
-          type: string
-          example: executable
-        disabled_until:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        url_variables:
-          type: array
-          items:
-            type: object
-          example:
-          - token: secr3t
-        push_events_branch_filter:
-          type: string
-          example: my-branch-*
-        branch_filter_strategy:
-          type: string
-          example: wildcard
-        custom_webhook_template:
-          type: string
-          example: '{"event":"{{object_kind}}"}'
-        custom_headers:
-          type: array
-          items:
-            type: object
-          example:
-          - X-Custom-Header: value
-        token_present:
-          type: boolean
-          example: false
-          description: Whether a secret token is configured
-        signing_token_present:
-          type: boolean
-          example: false
-          description: Whether an HMAC signing token is configured
-      required:
-      - id
-      - url
-      - name
-      - description
-      - created_at
-      - push_events
-      - tag_push_events
-      - merge_requests_events
-      - repository_update_events
-      - enable_ssl_verification
-      - alert_status
-      - disabled_until
-      - push_events_branch_filter
-      - branch_filter_strategy
-      - custom_webhook_template
-      - token_present
-      - signing_token_present
-      description: API_Entities_Hook model
     postApiV4ProjectsIdHooks:
       type: object
       properties:
@@ -1461,6 +1359,108 @@ components:
       required:
       - url
       description: Add project hook
+    putApiV4HooksHookIdCustomHeadersKey:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the custom header
+      required:
+      - value
+      description: Set a custom header
+    postApiV4Hooks:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL to send the request to
+          example: http://example.com/hook
+        name:
+          type: string
+          description: Name of the hook
+        description:
+          type: string
+          description: Description of the hook
+        token:
+          type: string
+          description: Secret token to validate received payloads; this isn't returned in the response
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header. Must be in whsec_<base64> format encoding a 32-byte key. Not returned in the response
+        push_events:
+          type: boolean
+          description: When true, the hook fires on push events
+        tag_push_events:
+          type: boolean
+          description: When true, the hook fires on new tags being pushed
+        merge_requests_events:
+          type: boolean
+          description: Trigger hook on merge requests events
+        repository_update_events:
+          type: boolean
+          description: Trigger hook on repository update events
+        enable_ssl_verification:
+          type: boolean
+          description: Do SSL verification when triggering the hook
+        push_events_branch_filter:
+          type: string
+          description: Trigger hook on specified branch only
+        branch_filter_strategy:
+          type: string
+          description: Filter push events by branch. Possible values are `wildcard` (default), `regex`, and `all_branches`
+          enum:
+          - wildcard
+          - regex
+          - all_branches
+        custom_webhook_template:
+          type: string
+          description: Custom template for the request payload
+        url_variables:
+          type: array
+          description: URL variables for interpolation
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: Name of the variable
+                example: token
+              value:
+                type: string
+                description: Value of the variable
+                example: '123'
+            required:
+            - key
+            - value
+        custom_headers:
+          type: array
+          description: Custom headers
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: Name of the header
+                example: X-Custom-Header
+              value:
+                type: string
+                description: Value of the header
+                example: value
+            required:
+            - key
+            - value
+      required:
+      - url
+      description: Add new system hook
+    putApiV4ProjectsIdHooksHookIdUrlVariablesKey:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the variable
+      required:
+      - value
+      description: Set a url variable
   securitySchemes:
     access_token_header:
       type: apiKey
