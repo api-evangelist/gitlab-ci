@@ -295,6 +295,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_PagesDomainCertificateExpiration:
+      type: object
+      properties:
+        expired:
+          type: string
+        expiration:
+          type: string
+      required:
+      - expired
+      - expiration
     API_Entities_PagesDomainBasic:
       type: object
       properties:
@@ -323,6 +333,31 @@ components:
       - enabled_until
       - auto_ssl_enabled
       description: API_Entities_PagesDomainBasic model
+    API_Entities_PagesDomain:
+      type: object
+      properties:
+        domain:
+          type: string
+        url:
+          type: string
+        verified:
+          type: string
+        verification_code:
+          type: string
+        enabled_until:
+          type: string
+        auto_ssl_enabled:
+          type: string
+        certificate:
+          $ref: '#/components/schemas/API_Entities_PagesDomainCertificate'
+      required:
+      - domain
+      - url
+      - verified
+      - verification_code
+      - enabled_until
+      - auto_ssl_enabled
+      description: API_Entities_PagesDomain model
     patchApiV4ProjectsIdPages:
       type: object
       properties:
@@ -361,6 +396,21 @@ components:
       required:
       - domain
       description: Create a new pages domain
+    putApiV4ProjectsIdPagesDomainsDomain:
+      type: object
+      properties:
+        certificate:
+          type: string
+          description: The certificate
+          format: binary
+        key:
+          type: string
+          description: The key
+          format: binary
+        auto_ssl_enabled:
+          type: boolean
+          description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
+      description: Updates a pages domain
     API_Entities_PagesDomainCertificate:
       type: object
       properties:
@@ -377,56 +427,6 @@ components:
       - expired
       - certificate
       - certificate_text
-    putApiV4ProjectsIdPagesDomainsDomain:
-      type: object
-      properties:
-        certificate:
-          type: string
-          description: The certificate
-          format: binary
-        key:
-          type: string
-          description: The key
-          format: binary
-        auto_ssl_enabled:
-          type: boolean
-          description: Enables automatic generation of SSL certificates issued by Let's Encrypt for custom domains.
-      description: Updates a pages domain
-    API_Entities_PagesDomainCertificateExpiration:
-      type: object
-      properties:
-        expired:
-          type: string
-        expiration:
-          type: string
-      required:
-      - expired
-      - expiration
-    API_Entities_PagesDomain:
-      type: object
-      properties:
-        domain:
-          type: string
-        url:
-          type: string
-        verified:
-          type: string
-        verification_code:
-          type: string
-        enabled_until:
-          type: string
-        auto_ssl_enabled:
-          type: string
-        certificate:
-          $ref: '#/components/schemas/API_Entities_PagesDomainCertificate'
-      required:
-      - domain
-      - url
-      - verified
-      - verification_code
-      - enabled_until
-      - auto_ssl_enabled
-      description: API_Entities_PagesDomain model
   securitySchemes:
     access_token_header:
       type: apiKey

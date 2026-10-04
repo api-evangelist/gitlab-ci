@@ -332,108 +332,6 @@ components:
       - line_code
       - position
       description: API_Entities_DraftNote model
-    putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId:
-      type: object
-      properties:
-        note:
-          type: string
-          description: The content of a note.
-        position:
-          type: object
-          description: Position when creating a note
-          properties:
-            base_sha:
-              type: string
-              description: Base commit SHA in the source branch
-            start_sha:
-              type: string
-              description: SHA referencing commit in target branch
-            head_sha:
-              type: string
-              description: SHA referencing HEAD of this merge request
-            position_type:
-              type: string
-              description: Type of the position reference
-              enum:
-              - text
-              - image
-              - file
-            new_path:
-              type: string
-              description: File path after change
-            new_line:
-              type: integer
-              format: int32
-              description: Line number after change
-            old_path:
-              type: string
-              description: File path before change
-            old_line:
-              type: integer
-              format: int32
-              description: Line number before change
-            width:
-              type: integer
-              format: int32
-              description: Width of the image
-            height:
-              type: integer
-              format: int32
-              description: Height of the image
-            x:
-              type: integer
-              format: int32
-              description: X coordinate in the image
-            y:
-              type: integer
-              format: int32
-              description: Y coordinate in the image
-            line_range:
-              type: object
-              description: Line range for a multi-line note
-              properties:
-                start:
-                  type: object
-                  description: Start line for a multi-line note
-                  properties:
-                    line_code:
-                      type: string
-                      description: Start line code for multi-line note
-                    type:
-                      type: string
-                      description: Start line type for multi-line note
-                    old_line:
-                      type: integer
-                      format: int32
-                      description: Start old_line line number
-                    new_line:
-                      type: integer
-                      format: int32
-                      description: Start new_line line number
-                end:
-                  type: object
-                  description: End line for a multi-line note
-                  properties:
-                    line_code:
-                      type: string
-                      description: End line code for multi-line note
-                    type:
-                      type: string
-                      description: End line type for multi-line note
-                    old_line:
-                      type: integer
-                      format: int32
-                      description: End old_line line number
-                    new_line:
-                      type: integer
-                      format: int32
-                      description: End new_line line number
-          required:
-          - base_sha
-          - start_sha
-          - head_sha
-          - position_type
-      description: Modify an existing draft note
     postApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotes:
       type: object
       properties:
@@ -547,6 +445,108 @@ components:
       required:
       - note
       description: Create a new draft note
+    putApiV4ProjectsIdMergeRequestsMergeRequestIidDraftNotesDraftNoteId:
+      type: object
+      properties:
+        note:
+          type: string
+          description: The content of a note.
+        position:
+          type: object
+          description: Position when creating a note
+          properties:
+            base_sha:
+              type: string
+              description: Base commit SHA in the source branch
+            start_sha:
+              type: string
+              description: SHA referencing commit in target branch
+            head_sha:
+              type: string
+              description: SHA referencing HEAD of this merge request
+            position_type:
+              type: string
+              description: Type of the position reference
+              enum:
+              - text
+              - image
+              - file
+            new_path:
+              type: string
+              description: File path after change
+            new_line:
+              type: integer
+              format: int32
+              description: Line number after change
+            old_path:
+              type: string
+              description: File path before change
+            old_line:
+              type: integer
+              format: int32
+              description: Line number before change
+            width:
+              type: integer
+              format: int32
+              description: Width of the image
+            height:
+              type: integer
+              format: int32
+              description: Height of the image
+            x:
+              type: integer
+              format: int32
+              description: X coordinate in the image
+            y:
+              type: integer
+              format: int32
+              description: Y coordinate in the image
+            line_range:
+              type: object
+              description: Line range for a multi-line note
+              properties:
+                start:
+                  type: object
+                  description: Start line for a multi-line note
+                  properties:
+                    line_code:
+                      type: string
+                      description: Start line code for multi-line note
+                    type:
+                      type: string
+                      description: Start line type for multi-line note
+                    old_line:
+                      type: integer
+                      format: int32
+                      description: Start old_line line number
+                    new_line:
+                      type: integer
+                      format: int32
+                      description: Start new_line line number
+                end:
+                  type: object
+                  description: End line for a multi-line note
+                  properties:
+                    line_code:
+                      type: string
+                      description: End line code for multi-line note
+                    type:
+                      type: string
+                      description: End line type for multi-line note
+                    old_line:
+                      type: integer
+                      format: int32
+                      description: End old_line line number
+                    new_line:
+                      type: integer
+                      format: int32
+                      description: End new_line line number
+          required:
+          - base_sha
+          - start_sha
+          - head_sha
+          - position_type
+      description: Modify an existing draft note
   securitySchemes:
     access_token_header:
       type: apiKey

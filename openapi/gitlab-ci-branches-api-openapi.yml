@@ -278,46 +278,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    API_Entities_Branch:
-      type: object
-      properties:
-        name:
-          type: string
-          example: master
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        merged:
-          type: boolean
-          example: true
-        protected:
-          type: boolean
-          example: true
-        developers_can_push:
-          type: boolean
-          example: true
-        developers_can_merge:
-          type: boolean
-          example: true
-        can_push:
-          type: boolean
-          example: true
-        default:
-          type: boolean
-          example: true
-        web_url:
-          type: string
-          example: https://gitlab.example.com/Commit921/the-dude/-/tree/master
-      required:
-      - name
-      - commit
-      - merged
-      - protected
-      - developers_can_push
-      - developers_can_merge
-      - can_push
-      - default
-      - web_url
-      description: API_Entities_Branch model
     putApiV4ProjectsIdRepositoryBranchesBranchProtect:
       type: object
       properties:
@@ -328,6 +288,19 @@ components:
           type: boolean
           description: Flag if developers can merge to that branch
       description: Protect a single branch
+    postApiV4ProjectsIdRepositoryBranches:
+      type: object
+      properties:
+        branch:
+          type: string
+          description: The name of the branch
+        ref:
+          type: string
+          description: Create branch from commit sha or existing branch
+      required:
+      - branch
+      - ref
+      description: Create branch
     API_Entities_Commit:
       type: object
       properties:
@@ -403,19 +376,46 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    postApiV4ProjectsIdRepositoryBranches:
+    API_Entities_Branch:
       type: object
       properties:
-        branch:
+        name:
           type: string
-          description: The name of the branch
-        ref:
+          example: master
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        merged:
+          type: boolean
+          example: true
+        protected:
+          type: boolean
+          example: true
+        developers_can_push:
+          type: boolean
+          example: true
+        developers_can_merge:
+          type: boolean
+          example: true
+        can_push:
+          type: boolean
+          example: true
+        default:
+          type: boolean
+          example: true
+        web_url:
           type: string
-          description: Create branch from commit sha or existing branch
+          example: https://gitlab.example.com/Commit921/the-dude/-/tree/master
       required:
-      - branch
-      - ref
-      description: Create branch
+      - name
+      - commit
+      - merged
+      - protected
+      - developers_can_push
+      - developers_can_merge
+      - can_push
+      - default
+      - web_url
+      description: API_Entities_Branch model
   securitySchemes:
     access_token_header:
       type: apiKey

@@ -595,110 +595,45 @@ paths:
       operationId: deleteApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
 components:
   schemas:
-    postApiV4ProjectsIdReleasesTagNameAssetsLinks:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the link. Link names must be unique in the release
-        url:
-          type: string
-          description: The URL of the link. Link URLs must be unique in the release.
-        direct_asset_path:
-          type: string
-          description: Optional path for a direct asset link
-        filepath:
-          type: string
-          description: 'Deprecated: optional path for a direct asset link'
-        link_type:
-          type: string
-          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
-          enum:
-          - other
-          - runbook
-          - image
-          - package
-          default: other
-      required:
-      - name
-      - url
-      description: Create a release link
-    API_Entities_Releases_Evidence:
-      type: object
-      properties:
-        sha:
-          type: string
-          example: 760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d
-        filepath:
-          type: string
-          example: https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json
-        collected_at:
-          type: string
-          format: date-time
-          example: '2019-01-03T01:56:19.539Z'
-      required:
-      - sha
-      - filepath
-      - collected_at
-    API_Entities_MilestoneWithStats:
+    API_Entities_Releases_Link:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        iid:
-          type: integer
-          format: int32
-        project_id:
-          type: integer
-          format: int32
-        group_id:
+          example: 1
+        name:
           type: string
-        title:
+          example: app-v1.0.dmg
+        url:
           type: string
-        description:
+          example: https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg
+        direct_asset_url:
           type: string
-        state:
+          example: https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg
+        link_type:
           type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        due_date:
-          type: string
-        start_date:
-          type: string
-        expired:
-          type: boolean
-        web_url:
-          type: string
-        issue_stats:
-          type: object
-          properties:
-            total:
-              type: integer
-              format: int32
-              example: 10
-            closed:
-              type: integer
-              format: int32
-              example: 5
-          required:
-          - total
-          - closed
+          example: other
       required:
       - id
-      - iid
-      - title
-      - description
-      - state
-      - created_at
-      - updated_at
-      - due_date
-      - start_date
-      - expired
-      - web_url
-      - issue_stats
+      - name
+      - url
+      - direct_asset_url
+      - link_type
+      description: API_Entities_Releases_Link model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
     API_Entities_Releases_Source:
       type: object
       properties:
@@ -755,19 +690,219 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
-    API_Entities_CustomAttribute:
+    API_Entities_Release:
       type: object
       properties:
-        key:
+        name:
           type: string
-          example: foo
-        value:
+          example: Release v1.0
+        tag_name:
           type: string
-          example: bar
+          example: v1.0
+        description:
+          type: string
+          example: Finally released v1.0
+        created_at:
+          type: string
+          format: date-time
+          example: '2019-01-03T01:56:19.539Z'
+        released_at:
+          type: string
+          format: date-time
+          example: '2019-01-03T01:56:19.539Z'
+        upcoming_release:
+          type: boolean
+        description_html:
+          type: string
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        milestones:
+          $ref: '#/components/schemas/API_Entities_MilestoneWithStats'
+        commit_path:
+          type: string
+          example: /root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a
+        tag_path:
+          type: string
+          example: /root/app/-/tags/v1.0
+        assets:
+          type: object
+          properties:
+            count:
+              type: integer
+              format: int32
+              example: 2
+            sources:
+              $ref: '#/components/schemas/API_Entities_Releases_Source'
+            links:
+              $ref: '#/components/schemas/API_Entities_Releases_Link'
+          required:
+          - count
+          - links
+        evidences:
+          $ref: '#/components/schemas/API_Entities_Releases_Evidence'
+        _links:
+          type: object
+          properties:
+            closed_issues_url:
+              type: string
+            closed_merge_requests_url:
+              type: string
+            edit_url:
+              type: string
+            merged_merge_requests_url:
+              type: string
+            opened_issues_url:
+              type: string
+            opened_merge_requests_url:
+              type: string
+            self:
+              type: string
       required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
+      - name
+      - tag_name
+      - description
+      - created_at
+      - released_at
+      - upcoming_release
+      - assets
+      - _links
+      description: API_Entities_Release model
+    putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the link
+        url:
+          type: string
+          description: The URL of the link
+        direct_asset_path:
+          type: string
+          description: Optional path for a direct asset link
+        filepath:
+          type: string
+          description: 'Deprecated: optional path for a direct asset link'
+        link_type:
+          type: string
+          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
+          enum:
+          - other
+          - runbook
+          - image
+          - package
+          default: other
+      description: Update a release link
+    postApiV4ProjectsIdReleasesTagNameAssetsLinks:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the link. Link names must be unique in the release
+        url:
+          type: string
+          description: The URL of the link. Link URLs must be unique in the release.
+        direct_asset_path:
+          type: string
+          description: Optional path for a direct asset link
+        filepath:
+          type: string
+          description: 'Deprecated: optional path for a direct asset link'
+        link_type:
+          type: string
+          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
+          enum:
+          - other
+          - runbook
+          - image
+          - package
+          default: other
+      required:
+      - name
+      - url
+      description: Create a release link
+    postApiV4ProjectsIdReleases:
+      type: object
+      properties:
+        tag_name:
+          type: string
+          description: The tag where the release is created from
+        tag_message:
+          type: string
+          description: Message to use if creating a new annotated tag
+        name:
+          type: string
+          description: The release name
+        description:
+          type: string
+          description: The description of the release. You can use Markdown
+        ref:
+          type: string
+          description: If a tag specified in `tag_name` doesn't exist, the release is created from `ref` and tagged with `tag_name`. It can be a commit SHA, another tag name, or a branch name.
+        assets:
+          type: object
+          description: Object that contains assets for the release
+          properties:
+            links:
+              type: array
+              description: Link information about the release
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the link. Link names must be unique within the release
+                  url:
+                    type: string
+                    description: The URL of the link. Link URLs must be unique within the release
+                  direct_asset_path:
+                    type: string
+                    description: Optional path for a direct asset link
+                  filepath:
+                    type: string
+                    description: 'Deprecated: optional path for a direct asset link'
+                  link_type:
+                    type: string
+                    description: 'The type of the link: `other`, `runbook`, `image`, `package`. Defaults to `other`'
+                required:
+                - name
+                - url
+        milestones:
+          type: array
+          description: The title of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestone_ids` parameter.
+          items:
+            type: string
+        milestone_ids:
+          type: string
+          description: The ID of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestones` parameter.
+        released_at:
+          type: string
+          format: date-time
+          description: Date and time for the release. Defaults to the current time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). Only provide this field if creating an upcoming or historical release.
+        legacy_catalog_publish:
+          type: boolean
+          description: If true, the release will be published to the CI catalog. This parameter is for internal use only and will be removed in a future release. If the feature flag ci_release_cli_catalog_publish_option is disabled, this parameter will be ignored and the release will published to the CI catalog as it was before this parameter was introduced.
+      required:
+      - tag_name
+      description: Create a release
+    API_Entities_Releases_Evidence:
+      type: object
+      properties:
+        sha:
+          type: string
+          example: 760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d
+        filepath:
+          type: string
+          example: https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json
+        collected_at:
+          type: string
+          format: date-time
+          example: '2019-01-03T01:56:19.539Z'
+      required:
+      - sha
+      - filepath
+      - collected_at
     API_Entities_Commit:
       type: object
       properties:
@@ -865,200 +1000,65 @@ components:
           type: string
           description: The ID of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestones` parameter. To remove all milestones from the release, specify `[]`
       description: Update a release
-    putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the link
-        url:
-          type: string
-          description: The URL of the link
-        direct_asset_path:
-          type: string
-          description: Optional path for a direct asset link
-        filepath:
-          type: string
-          description: 'Deprecated: optional path for a direct asset link'
-        link_type:
-          type: string
-          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
-          enum:
-          - other
-          - runbook
-          - image
-          - package
-          default: other
-      description: Update a release link
-    postApiV4ProjectsIdReleases:
-      type: object
-      properties:
-        tag_name:
-          type: string
-          description: The tag where the release is created from
-        tag_message:
-          type: string
-          description: Message to use if creating a new annotated tag
-        name:
-          type: string
-          description: The release name
-        description:
-          type: string
-          description: The description of the release. You can use Markdown
-        ref:
-          type: string
-          description: If a tag specified in `tag_name` doesn't exist, the release is created from `ref` and tagged with `tag_name`. It can be a commit SHA, another tag name, or a branch name.
-        assets:
-          type: object
-          description: Object that contains assets for the release
-          properties:
-            links:
-              type: array
-              description: Link information about the release
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: The name of the link. Link names must be unique within the release
-                  url:
-                    type: string
-                    description: The URL of the link. Link URLs must be unique within the release
-                  direct_asset_path:
-                    type: string
-                    description: Optional path for a direct asset link
-                  filepath:
-                    type: string
-                    description: 'Deprecated: optional path for a direct asset link'
-                  link_type:
-                    type: string
-                    description: 'The type of the link: `other`, `runbook`, `image`, `package`. Defaults to `other`'
-                required:
-                - name
-                - url
-        milestones:
-          type: array
-          description: The title of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestone_ids` parameter.
-          items:
-            type: string
-        milestone_ids:
-          type: string
-          description: The ID of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestones` parameter.
-        released_at:
-          type: string
-          format: date-time
-          description: Date and time for the release. Defaults to the current time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). Only provide this field if creating an upcoming or historical release.
-        legacy_catalog_publish:
-          type: boolean
-          description: If true, the release will be published to the CI catalog. This parameter is for internal use only and will be removed in a future release. If the feature flag ci_release_cli_catalog_publish_option is disabled, this parameter will be ignored and the release will published to the CI catalog as it was before this parameter was introduced.
-      required:
-      - tag_name
-      description: Create a release
-    API_Entities_Releases_Link:
+    API_Entities_MilestoneWithStats:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          example: 1
-        name:
+        iid:
+          type: integer
+          format: int32
+        project_id:
+          type: integer
+          format: int32
+        group_id:
           type: string
-          example: app-v1.0.dmg
-        url:
+        title:
           type: string
-          example: https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg
-        direct_asset_url:
-          type: string
-          example: https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg
-        link_type:
-          type: string
-          example: other
-      required:
-      - id
-      - name
-      - url
-      - direct_asset_url
-      - link_type
-      description: API_Entities_Releases_Link model
-    API_Entities_Release:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Release v1.0
-        tag_name:
-          type: string
-          example: v1.0
         description:
           type: string
-          example: Finally released v1.0
+        state:
+          type: string
         created_at:
           type: string
-          format: date-time
-          example: '2019-01-03T01:56:19.539Z'
-        released_at:
+        updated_at:
           type: string
-          format: date-time
-          example: '2019-01-03T01:56:19.539Z'
-        upcoming_release:
+        due_date:
+          type: string
+        start_date:
+          type: string
+        expired:
           type: boolean
-        description_html:
+        web_url:
           type: string
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        milestones:
-          $ref: '#/components/schemas/API_Entities_MilestoneWithStats'
-        commit_path:
-          type: string
-          example: /root/app/commit/588440f66559714280628a4f9799f0c4eb880a4a
-        tag_path:
-          type: string
-          example: /root/app/-/tags/v1.0
-        assets:
+        issue_stats:
           type: object
           properties:
-            count:
+            total:
               type: integer
               format: int32
-              example: 2
-            sources:
-              $ref: '#/components/schemas/API_Entities_Releases_Source'
-            links:
-              $ref: '#/components/schemas/API_Entities_Releases_Link'
+              example: 10
+            closed:
+              type: integer
+              format: int32
+              example: 5
           required:
-          - count
-          - links
-        evidences:
-          $ref: '#/components/schemas/API_Entities_Releases_Evidence'
-        _links:
-          type: object
-          properties:
-            closed_issues_url:
-              type: string
-            closed_merge_requests_url:
-              type: string
-            edit_url:
-              type: string
-            merged_merge_requests_url:
-              type: string
-            opened_issues_url:
-              type: string
-            opened_merge_requests_url:
-              type: string
-            self:
-              type: string
+          - total
+          - closed
       required:
-      - name
-      - tag_name
+      - id
+      - iid
+      - title
       - description
+      - state
       - created_at
-      - released_at
-      - upcoming_release
-      - assets
-      - _links
-      description: API_Entities_Release model
+      - updated_at
+      - due_date
+      - start_date
+      - expired
+      - web_url
+      - issue_stats
   securitySchemes:
     access_token_header:
       type: apiKey

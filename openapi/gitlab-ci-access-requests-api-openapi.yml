@@ -245,41 +245,6 @@ paths:
       operationId: deleteApiV4ProjectsIdAccessRequestsUserId
 components:
   schemas:
-    API_Entities_ScimIdentity:
-      type: object
-      properties:
-        extern_uid:
-          type: string
-        group_id:
-          type: string
-        active:
-          type: string
-      required:
-      - extern_uid
-      - group_id
-      - active
-    putApiV4ProjectsIdAccessRequestsUserIdApprove:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: 'A valid access level (defaults: `30`, the Developer role)'
-          default: 30
-      description: Approves an access request for the given user.
-    API_Entities_Identity:
-      type: object
-      properties:
-        provider:
-          type: string
-        extern_uid:
-          type: string
-        saml_provider_id:
-          type: string
-      required:
-      - provider
-      - extern_uid
-      - saml_provider_id
     API_Entities_CustomAttribute:
       type: object
       properties:
@@ -337,6 +302,24 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
+    putApiV4GroupsIdAccessRequestsUserIdApprove:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: 'A valid access level (defaults: `30`, the Developer role)'
+          default: 30
+      description: Approves an access request for the given user.
+    putApiV4ProjectsIdAccessRequestsUserIdApprove:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: 'A valid access level (defaults: `30`, the Developer role)'
+          default: 30
+      description: Approves an access request for the given user.
     API_Entities_AccessRequester:
       type: object
       properties:
@@ -384,6 +367,102 @@ components:
       - web_url
       - requested_at
       description: API_Entities_AccessRequester model
+    API_Entities_Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        access_level:
+          type: string
+        created_at:
+          type: string
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        expires_at:
+          type: string
+        group_saml_identity:
+          $ref: '#/components/schemas/API_Entities_Identity'
+        group_scim_identity:
+          $ref: '#/components/schemas/API_Entities_ScimIdentity'
+        email:
+          type: string
+        is_using_seat:
+          type: string
+        override:
+          type: string
+        membership_state:
+          type: string
+        member_role:
+          $ref: '#/components/schemas/API_Entities_MemberRole'
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - access_level
+      - created_at
+      - expires_at
+      - membership_state
+      description: API_Entities_Member model
+    API_Entities_Identity:
+      type: object
+      properties:
+        provider:
+          type: string
+        extern_uid:
+          type: string
+        saml_provider_id:
+          type: string
+      required:
+      - provider
+      - extern_uid
+      - saml_provider_id
+    API_Entities_ScimIdentity:
+      type: object
+      properties:
+        extern_uid:
+          type: string
+        group_id:
+          type: string
+        active:
+          type: string
+      required:
+      - extern_uid
+      - group_id
+      - active
     API_Entities_MemberRole:
       type: object
       properties:
@@ -532,85 +611,6 @@ components:
       - read_admin_monitoring
       - read_admin_users
       - read_vulnerability
-    putApiV4GroupsIdAccessRequestsUserIdApprove:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: 'A valid access level (defaults: `30`, the Developer role)'
-          default: 30
-      description: Approves an access request for the given user.
-    API_Entities_Member:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-        access_level:
-          type: string
-        created_at:
-          type: string
-        created_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        expires_at:
-          type: string
-        group_saml_identity:
-          $ref: '#/components/schemas/API_Entities_Identity'
-        group_scim_identity:
-          $ref: '#/components/schemas/API_Entities_ScimIdentity'
-        email:
-          type: string
-        is_using_seat:
-          type: string
-        override:
-          type: string
-        membership_state:
-          type: string
-        member_role:
-          $ref: '#/components/schemas/API_Entities_MemberRole'
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      - access_level
-      - created_at
-      - expires_at
-      - membership_state
-      description: API_Entities_Member model
   securitySchemes:
     access_token_header:
       type: apiKey

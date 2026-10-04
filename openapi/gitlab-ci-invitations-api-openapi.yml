@@ -306,7 +306,30 @@ components:
           format: int32
           description: The ID of a member role for the invited user
       description: Updates a group or project invitation.
-    postApiV4GroupsIdInvitations:
+    putApiV4GroupsIdInvitationsEmail:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: 'A valid access level (defaults: `30`, developer access level)'
+          enum:
+          - 10
+          - 15
+          - 20
+          - 30
+          - 40
+          - 50
+        expires_at:
+          type: string
+          format: date-time
+          description: Date string in ISO 8601 format (`YYYY-MM-DDTHH:MM:SSZ`)
+        member_role_id:
+          type: integer
+          format: int32
+          description: The ID of a member role for the invited user
+      description: Updates a group or project invitation.
+    postApiV4ProjectsIdInvitations:
       type: object
       properties:
         access_level:
@@ -346,7 +369,7 @@ components:
       required:
       - access_level
       description: Invite non-members by email address to a group or project.
-    postApiV4ProjectsIdInvitations:
+    postApiV4GroupsIdInvitations:
       type: object
       properties:
         access_level:
@@ -411,29 +434,6 @@ components:
       - invite_token
       - created_by_name
       description: API_Entities_Invitation model
-    putApiV4GroupsIdInvitationsEmail:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: 'A valid access level (defaults: `30`, developer access level)'
-          enum:
-          - 10
-          - 15
-          - 20
-          - 30
-          - 40
-          - 50
-        expires_at:
-          type: string
-          format: date-time
-          description: Date string in ISO 8601 format (`YYYY-MM-DDTHH:MM:SSZ`)
-        member_role_id:
-          type: integer
-          format: int32
-          description: The ID of a member role for the invited user
-      description: Updates a group or project invitation.
   securitySchemes:
     access_token_header:
       type: apiKey

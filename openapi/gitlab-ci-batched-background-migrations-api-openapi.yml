@@ -168,6 +168,34 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    putApiV4AdminBatchedBackgroundMigrationsIdPause:
+      type: object
+      properties:
+        database:
+          type: string
+          description: The name of the database
+          enum:
+          - main
+          - ci
+          - sec
+          - embedding
+          - geo
+          default: main
+      description: Pause a batched background migration
+    putApiV4AdminBatchedBackgroundMigrationsIdResume:
+      type: object
+      properties:
+        database:
+          type: string
+          description: The name of the database
+          enum:
+          - main
+          - ci
+          - sec
+          - embedding
+          - geo
+          default: main
+      description: Resume a batched background migration
     API_Entities_BatchedBackgroundMigration:
       type: object
       properties:
@@ -207,34 +235,6 @@ components:
       - created_at
       - estimated_time_remaining
       description: API_Entities_BatchedBackgroundMigration model
-    putApiV4AdminBatchedBackgroundMigrationsIdResume:
-      type: object
-      properties:
-        database:
-          type: string
-          description: The name of the database
-          enum:
-          - main
-          - ci
-          - sec
-          - embedding
-          - geo
-          default: main
-      description: Resume a batched background migration
-    putApiV4AdminBatchedBackgroundMigrationsIdPause:
-      type: object
-      properties:
-        database:
-          type: string
-          description: The name of the database
-          enum:
-          - main
-          - ci
-          - sec
-          - embedding
-          - geo
-          default: main
-      description: Pause a batched background migration
   securitySchemes:
     access_token_header:
       type: apiKey

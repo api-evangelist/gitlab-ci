@@ -53,25 +53,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    API_Entities_CommitStats:
+    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
       type: object
       properties:
-        additions:
-          type: integer
-          format: int32
-          example: 1
-        deletions:
-          type: integer
-          format: int32
-          example: 0
-        total:
-          type: integer
-          format: int32
-          example: 1
+        commit_sha:
+          type: string
+          description: Commit sha to update the submodule to.
+          example: ed899a2f4b50b4370feeea94676502b42383c746
+        branch:
+          type: string
+          description: Name of the branch to commit into.
+          example: main
+        commit_message:
+          type: string
+          description: Commit message. If no message is provided a default one will be set.
+          example: Commit message
       required:
-      - additions
-      - deletions
-      - total
+      - commit_sha
+      - branch
+      description: Update existing submodule reference in repository
     API_Entities_Ci_PipelineBasic:
       type: object
       properties:
@@ -122,25 +122,25 @@ components:
       - updated_at
       - web_url
       description: API_Entities_Ci_PipelineBasic model
-    putApiV4ProjectsIdRepositorySubmodulesSubmodule:
+    API_Entities_CommitStats:
       type: object
       properties:
-        commit_sha:
-          type: string
-          description: Commit sha to update the submodule to.
-          example: ed899a2f4b50b4370feeea94676502b42383c746
-        branch:
-          type: string
-          description: Name of the branch to commit into.
-          example: main
-        commit_message:
-          type: string
-          description: Commit message. If no message is provided a default one will be set.
-          example: Commit message
+        additions:
+          type: integer
+          format: int32
+          example: 1
+        deletions:
+          type: integer
+          format: int32
+          example: 0
+        total:
+          type: integer
+          format: int32
+          example: 1
       required:
-      - commit_sha
-      - branch
-      description: Update existing submodule reference in repository
+      - additions
+      - deletions
+      - total
     API_Entities_CommitDetail:
       type: object
       properties:

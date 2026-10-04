@@ -392,62 +392,6 @@ paths:
       operationId: getApiV4RegistryRepositoriesId
 components:
   schemas:
-    API_Entities_ContainerRegistry_Tag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: latest
-        path:
-          type: string
-          example: namespace1/project1/test_image_1:latest
-        location:
-          type: string
-          example: registry.dev/namespace1/project1/test_image_1:latest
-      required:
-      - name
-      - path
-      - location
-      description: API_Entities_ContainerRegistry_Tag model
-    API_Entities_ContainerRegistry_TagDetails:
-      type: object
-      properties:
-        name:
-          type: string
-          example: latest
-        path:
-          type: string
-          example: namespace1/project1/test_image_1:latest
-        location:
-          type: string
-          example: registry.dev/namespace1/project1/test_image_1:latest
-        revision:
-          type: string
-          example: tagrevision
-        short_revision:
-          type: string
-          example: shortrevison
-        digest:
-          type: string
-          example: shadigest
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-01-10T13:39:08.229Z'
-        total_size:
-          type: integer
-          format: int32
-          example: 3
-      required:
-      - name
-      - path
-      - location
-      - revision
-      - short_revision
-      - digest
-      - created_at
-      - total_size
-      description: API_Entities_ContainerRegistry_TagDetails model
     API_Entities_ContainerRegistry_Repository:
       type: object
       properties:
@@ -502,6 +446,62 @@ components:
       - cleanup_policy_started_at
       - status
       description: API_Entities_ContainerRegistry_Repository model
+    API_Entities_ContainerRegistry_TagDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          example: latest
+        path:
+          type: string
+          example: namespace1/project1/test_image_1:latest
+        location:
+          type: string
+          example: registry.dev/namespace1/project1/test_image_1:latest
+        revision:
+          type: string
+          example: tagrevision
+        short_revision:
+          type: string
+          example: shortrevison
+        digest:
+          type: string
+          example: shadigest
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-10T13:39:08.229Z'
+        total_size:
+          type: integer
+          format: int32
+          example: 3
+      required:
+      - name
+      - path
+      - location
+      - revision
+      - short_revision
+      - digest
+      - created_at
+      - total_size
+      description: API_Entities_ContainerRegistry_TagDetails model
+    API_Entities_ContainerRegistry_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: latest
+        path:
+          type: string
+          example: namespace1/project1/test_image_1:latest
+        location:
+          type: string
+          example: registry.dev/namespace1/project1/test_image_1:latest
+      required:
+      - name
+      - path
+      - location
+      description: API_Entities_ContainerRegistry_Tag model
   securitySchemes:
     access_token_header:
       type: apiKey

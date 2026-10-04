@@ -124,6 +124,48 @@ paths:
         required: true
 components:
   schemas:
+    API_Entities_BulkImport:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          enum:
+          - created
+          - started
+          - finished
+          - timeout
+          - failed
+          example: finished
+        source_type:
+          type: string
+          example: gitlab
+        source_url:
+          type: string
+          example: https://source.gitlab.com/
+        created_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
+        has_failures:
+          type: boolean
+          example: false
+      required:
+      - id
+      - status
+      - source_type
+      - source_url
+      - created_at
+      - updated_at
+      - has_failures
+      description: API_Entities_BulkImport model
     postApiV4OfflineExports:
       type: object
       properties:
@@ -192,48 +234,6 @@ components:
       - bucket
       - entities
       description: Start a new offline transfer export
-    API_Entities_BulkImport:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        status:
-          type: string
-          enum:
-          - created
-          - started
-          - finished
-          - timeout
-          - failed
-          example: finished
-        source_type:
-          type: string
-          example: gitlab
-        source_url:
-          type: string
-          example: https://source.gitlab.com/
-        created_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2012-05-28T04:42:42-07:00'
-        has_failures:
-          type: boolean
-          example: false
-      required:
-      - id
-      - status
-      - source_type
-      - source_url
-      - created_at
-      - updated_at
-      - has_failures
-      description: API_Entities_BulkImport model
     postApiV4OfflineImports:
       type: object
       properties:

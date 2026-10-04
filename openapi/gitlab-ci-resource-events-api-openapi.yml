@@ -179,63 +179,6 @@ paths:
       operationId: getApiV4ProjectsIdMergeRequestsEventableIdResourceMilestoneEventsEventId
 components:
   schemas:
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
     API_Entities_Milestone:
       type: object
       properties:
@@ -280,6 +223,63 @@ components:
       - start_date
       - expired
       - web_url
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
     API_Entities_ResourceMilestoneEvent:
       type: object
       properties:
