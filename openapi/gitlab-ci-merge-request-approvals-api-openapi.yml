@@ -37,7 +37,7 @@ paths:
       tags:
       - merge_request_approvals
       operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals
-      summary: Get api V4 projects id merge requests merge request iid approvals
+      summary: Get api V4Projects id merge requests merge request iid approvals
       x-summary-source: derived
     post:
       summary: Change approval-related configuration
@@ -109,7 +109,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove'
         required: true
-      summary: Post api V4 projects id merge requests merge request iid approve
+      summary: Post api V4Projects id merge requests merge request iid approve
       x-summary-source: derived
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/unapprove:
     post:
@@ -141,7 +141,7 @@ paths:
       tags:
       - merge_request_approvals
       operationId: postApiV4ProjectsIdMergeRequestsMergeRequestIidUnapprove
-      summary: Post api V4 projects id merge requests merge request iid unapprove
+      summary: Post api V4Projects id merge requests merge request iid unapprove
       x-summary-source: derived
   /api/v4/projects/{id}/merge_requests/{merge_request_iid}/reset_approvals:
     put:
@@ -197,7 +197,7 @@ paths:
       tags:
       - merge_request_approvals
       operationId: getApiV4ProjectsIdMergeRequestsMergeRequestIidApprovalState
-      summary: Get api V4 projects id merge requests merge request iid approval state
+      summary: Get api V4Projects id merge requests merge request iid approval state
       x-summary-source: derived
 components:
   schemas:
@@ -290,23 +290,6 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
-    API_Entities_ApprovalRuleShort:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
-          type: string
-          example: QA
-        rule_type:
-          type: string
-          example: regular
-      required:
-      - id
-      - name
-      - rule_type
     API_Entities_UserBasic:
       type: object
       properties:
@@ -351,6 +334,15 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
+    API_Entities_MergeRequestApprovalRule_SourceRule:
+      type: object
+      properties:
+        approvals_required:
+          type: integer
+          format: int32
+          example: 2
+      required:
+      - approvals_required
     API_Entities_SamlGroupLink:
       type: object
       properties:
@@ -372,19 +364,6 @@ components:
       - name
       - access_level
       - provider
-    API_Entities_MergeRequestApprovalState:
-      type: object
-      properties:
-        approval_rules_overwritten:
-          type: boolean
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_MergeRequestApprovalStateRule'
-      required:
-      - approval_rules_overwritten
-      - rules
-      description: API_Entities_MergeRequestApprovalState model
     API_Entities_Namespace_RootStorageStatistics:
       type: object
       properties:
@@ -626,6 +605,71 @@ components:
       - ldap_access
       - wiki_access_level
       description: API_Entities_Group model
+    API_Entities_ApprovalRuleShort:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: QA
+        rule_type:
+          type: string
+          example: regular
+      required:
+      - id
+      - name
+      - rule_type
+    API_Entities_LdapGroupLink:
+      type: object
+      properties:
+        cn:
+          type: string
+          example: ldap-group-1
+        group_access:
+          type: integer
+          format: int32
+          example: 10
+        provider:
+          type: string
+          example: ldapmain
+        filter:
+          type: string
+          example: id >= 500
+        member_role_id:
+          type: integer
+          format: int32
+          example: 12
+      required:
+      - cn
+      - group_access
+      - provider
+    postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals:
+      type: object
+      properties:
+        approvals_required:
+          type: integer
+          format: int32
+          description: The amount of approvals required. Must be higher than the project approvals
+          example: 2
+      required:
+      - approvals_required
+      description: Change approval-related configuration
+    API_Entities_MergeRequestApprovalState:
+      type: object
+      properties:
+        approval_rules_overwritten:
+          type: boolean
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_MergeRequestApprovalStateRule'
+      required:
+      - approval_rules_overwritten
+      - rules
+      description: API_Entities_MergeRequestApprovalState model
     API_Entities_MergeRequestApprovals:
       type: object
       properties:
@@ -643,26 +687,6 @@ components:
       - approved
       - approved_by
       description: API_Entities_MergeRequestApprovals model
-    postApiV4ProjectsIdMergeRequestsMergeRequestIidApprovals:
-      type: object
-      properties:
-        approvals_required:
-          type: integer
-          format: int32
-          description: The amount of approvals required. Must be higher than the project approvals
-          example: 2
-      required:
-      - approvals_required
-      description: Change approval-related configuration
-    API_Entities_MergeRequestApprovalRule_SourceRule:
-      type: object
-      properties:
-        approvals_required:
-          type: integer
-          format: int32
-          example: 2
-      required:
-      - approvals_required
     API_Entities_ApprovalState:
       type: object
       properties:
@@ -766,30 +790,6 @@ components:
       - multiple_approval_rules_available
       - invalid_approvers_rules
       description: API_Entities_ApprovalState model
-    API_Entities_LdapGroupLink:
-      type: object
-      properties:
-        cn:
-          type: string
-          example: ldap-group-1
-        group_access:
-          type: integer
-          format: int32
-          example: 10
-        provider:
-          type: string
-          example: ldapmain
-        filter:
-          type: string
-          example: id >= 500
-        member_role_id:
-          type: integer
-          format: int32
-          example: 12
-      required:
-      - cn
-      - group_access
-      - provider
     postApiV4ProjectsIdMergeRequestsMergeRequestIidApprove:
       type: object
       properties:

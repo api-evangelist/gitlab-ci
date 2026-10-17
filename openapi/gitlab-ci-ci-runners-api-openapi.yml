@@ -125,7 +125,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4RunnersResetAuthenticationToken'
         required: true
-      summary: Post api V4 runners reset authentication token
+      summary: Post api V4Runners reset authentication token
       x-summary-source: derived
   /api/v4/runners/router/discovery:
     get:
@@ -147,6 +147,15 @@ paths:
       operationId: getApiV4RunnersRouterDiscovery
 components:
   schemas:
+    API_Entities_Ci_JobRouter_DiscoveryInformation:
+      type: object
+      properties:
+        server_url:
+          type: string
+          example: wss://kas.example.com
+      required:
+      - server_url
+      description: API_Entities_Ci_JobRouter_DiscoveryInformation model
     API_Entities_Ci_RunnerRegistrationDetails:
       type: object
       properties:
@@ -161,27 +170,16 @@ components:
       - token
       - token_expires_at
       description: API_Entities_Ci_RunnerRegistrationDetails model
-    postApiV4RunnersVerify:
+    API_Entities_Ci_ResetTokenResult:
       type: object
       properties:
         token:
           type: string
-          description: The runner's authentication token
-        system_id:
+        token_expires_at:
           type: string
-          description: The runner's system identifier
       required:
       - token
-      description: Validate authentication credentials
-    API_Entities_Ci_JobRouter_DiscoveryInformation:
-      type: object
-      properties:
-        server_url:
-          type: string
-          example: wss://kas.example.com
-      required:
-      - server_url
-      description: API_Entities_Ci_JobRouter_DiscoveryInformation model
+      description: API_Entities_Ci_ResetTokenResult model
     postApiV4Runners:
       type: object
       properties:
@@ -246,16 +244,18 @@ components:
       required:
       - token
       description: Register a new runner
-    API_Entities_Ci_ResetTokenResult:
+    postApiV4RunnersVerify:
       type: object
       properties:
         token:
           type: string
-        token_expires_at:
+          description: The runner's authentication token
+        system_id:
           type: string
+          description: The runner's system identifier
       required:
       - token
-      description: API_Entities_Ci_ResetTokenResult model
+      description: Validate authentication credentials
     postApiV4RunnersResetAuthenticationToken:
       type: object
       properties:

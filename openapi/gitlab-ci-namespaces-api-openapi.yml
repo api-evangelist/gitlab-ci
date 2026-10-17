@@ -80,7 +80,7 @@ paths:
       tags:
       - Namespaces
       operationId: getApiV4NamespacesIdGitlabSubscription
-      summary: Get api V4 namespaces id gitlab subscription
+      summary: Get api V4Namespaces id gitlab subscription
       x-summary-source: derived
   /api/v4/namespaces/{id}/storage/limit_exclusion:
     post:
@@ -279,67 +279,30 @@ paths:
       operationId: getApiV4NamespacesIdExists
 components:
   schemas:
-    putApiV4NamespacesId:
+    postApiV4NamespacesIdStorageLimitExclusion:
       type: object
       properties:
-        shared_runners_minutes_limit:
-          type: integer
-          format: int32
-          description: Compute minutes quota for this namespace
-        extra_shared_runners_minutes_limit:
-          type: integer
-          format: int32
-          description: Extra compute minutes for this namespace
-        additional_purchased_storage_size:
-          type: integer
-          format: int32
-          description: Additional storage size for this namespace
-        additional_purchased_storage_ends_on:
+        reason:
           type: string
-          format: date
-          description: End of subscription of the additional purchased storage
-        gitlab_subscription_attributes:
-          type: object
-          description: Object that contains information on the GitLab subscription
-          properties:
-            start_date:
-              type: string
-              format: date
-              description: Start date of subscription
-            seats:
-              type: integer
-              format: int32
-              description: Number of seats in subscription
-            max_seats_used:
-              type: integer
-              format: int32
-              description: Highest number of active users in the last month
-            plan_code:
-              type: string
-              description: Subscription tier code
-            end_date:
-              type: string
-              format: date
-              description: End date of subscription
-            auto_renew:
-              type: boolean
-              description: Whether subscription will auto renew on end date
-            trial:
-              type: boolean
-              description: Whether the subscription is a trial
-            trial_ends_on:
-              type: string
-              format: date
-              description: End date of trial
-            trial_starts_on:
-              type: string
-              format: date
-              description: Start date of trial
-            trial_extension_type:
-              type: integer
-              format: int32
-              description: Whether subscription is an extended or reactivated trial
-      description: Update a namespace
+          description: The reason the Namespace is being excluded
+      required:
+      - reason
+      description: Creates a storage limit exclusion for a Namespace
+    API_Entities_NamespaceExistence:
+      type: object
+      properties:
+        exists:
+          type: boolean
+        suggests:
+          type: array
+          items:
+            type: string
+          example:
+          - my-group1
+      required:
+      - exists
+      - suggests
+      description: API_Entities_NamespaceExistence model
     API_Entities_Namespace:
       type: object
       properties:
@@ -437,6 +400,90 @@ components:
       - web_url
       - billable_members_count
       description: API_Entities_Namespace model
+    API_Entities_Namespaces_Storage_LimitExclusion:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        namespace_id:
+          type: integer
+          format: int32
+          example: 123
+        namespace_name:
+          type: string
+          example: GitLab
+        reason:
+          type: string
+          example: a reason
+      required:
+      - id
+      - namespace_id
+      - namespace_name
+      - reason
+      description: API_Entities_Namespaces_Storage_LimitExclusion model
+    putApiV4NamespacesId:
+      type: object
+      properties:
+        shared_runners_minutes_limit:
+          type: integer
+          format: int32
+          description: Compute minutes quota for this namespace
+        extra_shared_runners_minutes_limit:
+          type: integer
+          format: int32
+          description: Extra compute minutes for this namespace
+        additional_purchased_storage_size:
+          type: integer
+          format: int32
+          description: Additional storage size for this namespace
+        additional_purchased_storage_ends_on:
+          type: string
+          format: date
+          description: End of subscription of the additional purchased storage
+        gitlab_subscription_attributes:
+          type: object
+          description: Object that contains information on the GitLab subscription
+          properties:
+            start_date:
+              type: string
+              format: date
+              description: Start date of subscription
+            seats:
+              type: integer
+              format: int32
+              description: Number of seats in subscription
+            max_seats_used:
+              type: integer
+              format: int32
+              description: Highest number of active users in the last month
+            plan_code:
+              type: string
+              description: Subscription tier code
+            end_date:
+              type: string
+              format: date
+              description: End date of subscription
+            auto_renew:
+              type: boolean
+              description: Whether subscription will auto renew on end date
+            trial:
+              type: boolean
+              description: Whether the subscription is a trial
+            trial_ends_on:
+              type: string
+              format: date
+              description: End date of trial
+            trial_starts_on:
+              type: string
+              format: date
+              description: Start date of trial
+            trial_extension_type:
+              type: integer
+              format: int32
+              description: Whether subscription is an extended or reactivated trial
+      description: Update a namespace
     API_Entities_GitlabSubscription:
       type: object
       properties:
@@ -496,53 +543,6 @@ components:
       - usage
       - billing
       description: API_Entities_GitlabSubscription model
-    postApiV4NamespacesIdStorageLimitExclusion:
-      type: object
-      properties:
-        reason:
-          type: string
-          description: The reason the Namespace is being excluded
-      required:
-      - reason
-      description: Creates a storage limit exclusion for a Namespace
-    API_Entities_NamespaceExistence:
-      type: object
-      properties:
-        exists:
-          type: boolean
-        suggests:
-          type: array
-          items:
-            type: string
-          example:
-          - my-group1
-      required:
-      - exists
-      - suggests
-      description: API_Entities_NamespaceExistence model
-    API_Entities_Namespaces_Storage_LimitExclusion:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        namespace_id:
-          type: integer
-          format: int32
-          example: 123
-        namespace_name:
-          type: string
-          example: GitLab
-        reason:
-          type: string
-          example: a reason
-      required:
-      - id
-      - namespace_id
-      - namespace_name
-      - reason
-      description: API_Entities_Namespaces_Storage_LimitExclusion model
   securitySchemes:
     access_token_header:
       type: apiKey

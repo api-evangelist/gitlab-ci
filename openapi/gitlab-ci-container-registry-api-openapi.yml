@@ -392,6 +392,23 @@ paths:
       operationId: getApiV4RegistryRepositoriesId
 components:
   schemas:
+    API_Entities_ContainerRegistry_Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: latest
+        path:
+          type: string
+          example: namespace1/project1/test_image_1:latest
+        location:
+          type: string
+          example: registry.dev/namespace1/project1/test_image_1:latest
+      required:
+      - name
+      - path
+      - location
+      description: API_Entities_ContainerRegistry_Tag model
     API_Entities_ContainerRegistry_Repository:
       type: object
       properties:
@@ -485,23 +502,6 @@ components:
       - created_at
       - total_size
       description: API_Entities_ContainerRegistry_TagDetails model
-    API_Entities_ContainerRegistry_Tag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: latest
-        path:
-          type: string
-          example: namespace1/project1/test_image_1:latest
-        location:
-          type: string
-          example: registry.dev/namespace1/project1/test_image_1:latest
-      required:
-      - name
-      - path
-      - location
-      description: API_Entities_ContainerRegistry_Tag model
   securitySchemes:
     access_token_header:
       type: apiKey

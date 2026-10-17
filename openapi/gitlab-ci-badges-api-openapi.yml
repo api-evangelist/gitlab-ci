@@ -389,44 +389,6 @@ paths:
       operationId: deleteApiV4ProjectsIdBadgesBadgeId
 components:
   schemas:
-    API_Entities_BasicBadgeDetails:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Pipeline Status
-        link_url:
-          type: string
-          example: https://example.gitlab.com
-        image_url:
-          type: string
-          example: https://example.gitlab.com
-        rendered_link_url:
-          type: string
-          example: https://example.gitlab.com
-        rendered_image_url:
-          type: string
-          example: https://example.gitlab.com
-      required:
-      - name
-      - link_url
-      - image_url
-      - rendered_link_url
-      - rendered_image_url
-      description: API_Entities_BasicBadgeDetails model
-    putApiV4GroupsIdBadgesBadgeId:
-      type: object
-      properties:
-        link_url:
-          type: string
-          description: URL of the badge link
-        image_url:
-          type: string
-          description: URL of the badge image
-        name:
-          type: string
-          description: Name for the badge
-      description: Updates a badge of a group.
     API_Entities_Badge:
       type: object
       properties:
@@ -461,22 +423,31 @@ components:
       - id
       - kind
       description: API_Entities_Badge model
-    postApiV4ProjectsIdBadges:
+    API_Entities_BasicBadgeDetails:
       type: object
       properties:
-        link_url:
-          type: string
-          description: URL of the badge link
-        image_url:
-          type: string
-          description: URL of the badge image
         name:
           type: string
-          description: Name for the badge
+          example: Pipeline Status
+        link_url:
+          type: string
+          example: https://example.gitlab.com
+        image_url:
+          type: string
+          example: https://example.gitlab.com
+        rendered_link_url:
+          type: string
+          example: https://example.gitlab.com
+        rendered_image_url:
+          type: string
+          example: https://example.gitlab.com
       required:
+      - name
       - link_url
       - image_url
-      description: Adds a badge to a project.
+      - rendered_link_url
+      - rendered_image_url
+      description: API_Entities_BasicBadgeDetails model
     putApiV4ProjectsIdBadgesBadgeId:
       type: object
       properties:
@@ -506,6 +477,35 @@ components:
       - link_url
       - image_url
       description: Adds a badge to a group.
+    postApiV4ProjectsIdBadges:
+      type: object
+      properties:
+        link_url:
+          type: string
+          description: URL of the badge link
+        image_url:
+          type: string
+          description: URL of the badge image
+        name:
+          type: string
+          description: Name for the badge
+      required:
+      - link_url
+      - image_url
+      description: Adds a badge to a project.
+    putApiV4GroupsIdBadgesBadgeId:
+      type: object
+      properties:
+        link_url:
+          type: string
+          description: URL of the badge link
+        image_url:
+          type: string
+          description: URL of the badge image
+        name:
+          type: string
+          description: Name for the badge
+      description: Updates a badge of a group.
   securitySchemes:
     access_token_header:
       type: apiKey

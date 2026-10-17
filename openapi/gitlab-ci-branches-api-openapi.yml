@@ -79,7 +79,7 @@ paths:
       tags:
       - Branches
       operationId: getApiV4ProjectsIdRepositoryBranches
-      summary: Get api V4 projects id repository branches
+      summary: Get api V4Projects id repository branches
       x-summary-source: derived
     post:
       description: Create branch
@@ -108,7 +108,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdRepositoryBranches'
         required: true
-      summary: Post api V4 projects id repository branches
+      summary: Post api V4Projects id repository branches
       x-summary-source: derived
   /api/v4/projects/{id}/repository/branches/{branch}:
     head:
@@ -134,7 +134,7 @@ paths:
       tags:
       - Branches
       operationId: headApiV4ProjectsIdRepositoryBranchesBranch
-      summary: Head api V4 projects id repository branches branch
+      summary: Head api V4Projects id repository branches branch
       x-summary-source: derived
     get:
       description: Get a single repository branch
@@ -163,7 +163,7 @@ paths:
       tags:
       - Branches
       operationId: getApiV4ProjectsIdRepositoryBranchesBranch
-      summary: Get api V4 projects id repository branches branch
+      summary: Get api V4Projects id repository branches branch
       x-summary-source: derived
     delete:
       description: Delete a branch
@@ -188,7 +188,7 @@ paths:
       tags:
       - Branches
       operationId: deleteApiV4ProjectsIdRepositoryBranchesBranch
-      summary: Delete api V4 projects id repository branches branch
+      summary: Delete api V4Projects id repository branches branch
       x-summary-source: derived
   /api/v4/projects/{id}/repository/branches/{branch}/protect:
     put:
@@ -224,7 +224,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdRepositoryBranchesBranchProtect'
         required: true
-      summary: Put api V4 projects id repository branches branch protect
+      summary: Put api V4Projects id repository branches branch protect
       x-summary-source: derived
   /api/v4/projects/{id}/repository/branches/{branch}/unprotect:
     put:
@@ -254,7 +254,7 @@ paths:
       tags:
       - Branches
       operationId: putApiV4ProjectsIdRepositoryBranchesBranchUnprotect
-      summary: Put api V4 projects id repository branches branch unprotect
+      summary: Put api V4Projects id repository branches branch unprotect
       x-summary-source: derived
   /api/v4/projects/{id}/repository/merged_branches:
     delete:
@@ -274,33 +274,50 @@ paths:
       tags:
       - Branches
       operationId: deleteApiV4ProjectsIdRepositoryMergedBranches
-      summary: Delete api V4 projects id repository merged branches
+      summary: Delete api V4Projects id repository merged branches
       x-summary-source: derived
 components:
   schemas:
-    putApiV4ProjectsIdRepositoryBranchesBranchProtect:
+    API_Entities_Branch:
       type: object
       properties:
+        name:
+          type: string
+          example: master
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        merged:
+          type: boolean
+          example: true
+        protected:
+          type: boolean
+          example: true
         developers_can_push:
           type: boolean
-          description: Flag if developers can push to that branch
+          example: true
         developers_can_merge:
           type: boolean
-          description: Flag if developers can merge to that branch
-      description: Protect a single branch
-    postApiV4ProjectsIdRepositoryBranches:
-      type: object
-      properties:
-        branch:
+          example: true
+        can_push:
+          type: boolean
+          example: true
+        default:
+          type: boolean
+          example: true
+        web_url:
           type: string
-          description: The name of the branch
-        ref:
-          type: string
-          description: Create branch from commit sha or existing branch
+          example: https://gitlab.example.com/Commit921/the-dude/-/tree/master
       required:
-      - branch
-      - ref
-      description: Create branch
+      - name
+      - commit
+      - merged
+      - protected
+      - developers_can_push
+      - developers_can_merge
+      - can_push
+      - default
+      - web_url
+      description: API_Entities_Branch model
     API_Entities_Commit:
       type: object
       properties:
@@ -376,46 +393,29 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_Branch:
+    putApiV4ProjectsIdRepositoryBranchesBranchProtect:
       type: object
       properties:
-        name:
-          type: string
-          example: master
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        merged:
-          type: boolean
-          example: true
-        protected:
-          type: boolean
-          example: true
         developers_can_push:
           type: boolean
-          example: true
+          description: Flag if developers can push to that branch
         developers_can_merge:
           type: boolean
-          example: true
-        can_push:
-          type: boolean
-          example: true
-        default:
-          type: boolean
-          example: true
-        web_url:
+          description: Flag if developers can merge to that branch
+      description: Protect a single branch
+    postApiV4ProjectsIdRepositoryBranches:
+      type: object
+      properties:
+        branch:
           type: string
-          example: https://gitlab.example.com/Commit921/the-dude/-/tree/master
+          description: The name of the branch
+        ref:
+          type: string
+          description: Create branch from commit sha or existing branch
       required:
-      - name
-      - commit
-      - merged
-      - protected
-      - developers_can_push
-      - developers_can_merge
-      - can_push
-      - default
-      - web_url
-      description: API_Entities_Branch model
+      - branch
+      - ref
+      description: Create branch
   securitySchemes:
     access_token_header:
       type: apiKey

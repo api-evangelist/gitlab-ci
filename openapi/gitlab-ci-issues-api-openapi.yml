@@ -355,7 +355,7 @@ paths:
       tags:
       - Issues
       operationId: getApiV4ProjectsIdIssuesIssueIidRelatedMergeRequests
-      summary: Get api V4 projects id issues issue iid related merge requests
+      summary: Get api V4Projects id issues issue iid related merge requests
       x-summary-source: derived
   /api/v4/projects/{id}/issues/{issue_iid}/participants:
     get:
@@ -384,7 +384,7 @@ paths:
       tags:
       - Issues
       operationId: getApiV4ProjectsIdIssuesIssueIidParticipants
-      summary: Get api V4 projects id issues issue iid participants
+      summary: Get api V4Projects id issues issue iid participants
       x-summary-source: derived
   /api/v4/projects/{id}/issues/{issue_iid}/user_agent_detail:
     get:
@@ -413,7 +413,7 @@ paths:
       tags:
       - Issues
       operationId: getApiV4ProjectsIdIssuesIssueIidUserAgentDetail
-      summary: Get api V4 projects id issues issue iid user agent detail
+      summary: Get api V4Projects id issues issue iid user agent detail
       x-summary-source: derived
   /api/v4/issues:
     get:
@@ -784,7 +784,7 @@ paths:
       tags:
       - Issues
       operationId: getApiV4Issues
-      summary: Get api V4 issues
+      summary: Get api V4Issues
       x-summary-source: derived
   /api/v4/issues/{id}:
     get:
@@ -806,7 +806,7 @@ paths:
       tags:
       - Issues
       operationId: getApiV4IssuesId
-      summary: Get api V4 issues id
+      summary: Get api V4Issues id
       x-summary-source: derived
   /api/v4/issues_statistics:
     get:
@@ -1064,10 +1064,288 @@ paths:
       tags:
       - Issues
       operationId: getApiV4IssuesStatistics
-      summary: Get api V4 issues statistics
+      summary: Get api V4Issues statistics
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_IssuableTimeStats:
+      type: object
+      properties:
+        time_estimate:
+          type: integer
+          format: int32
+          example: 12600
+        total_time_spent:
+          type: integer
+          format: int32
+          example: 3600
+        human_time_estimate:
+          type: string
+          example: 3h 30m
+        human_total_time_spent:
+          type: string
+          example: 1h
+      required:
+      - time_estimate
+      - total_time_spent
+      - human_time_estimate
+      - human_total_time_spent
+      description: API_Entities_IssuableTimeStats model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_TaskCompletionStatus:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 5
+        completed_count:
+          type: integer
+          format: int32
+          example: 3
+      required:
+      - count
+      - completed_count
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
+    API_Entities_IssueBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 84
+        iid:
+          type: integer
+          format: int32
+          example: 14
+        project_id:
+          type: integer
+          format: int32
+          example: 4
+        title:
+          type: string
+          example: Impedit et ut et dolores vero provident ullam est
+        description:
+          type: string
+          example: Repellendus impedit et vel velit dignissimos.
+        state:
+          type: string
+          example: closed
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-08-17T12:46:35.053Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-11-14T17:22:01.470Z'
+        closed_at:
+          type: string
+          format: date-time
+          example: '2022-11-15T08:30:55.232Z'
+        closed_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        labels:
+          type: array
+          items:
+            type: string
+          example:
+          - bug
+        milestone:
+          $ref: '#/components/schemas/API_Entities_Milestone'
+        assignees:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        type:
+          type: string
+          example: ISSUE
+          description: One of ["ISSUE", "INCIDENT", "TEST_CASE", "REQUIREMENT", "TASK", "TICKET"]
+        assignee:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        user_notes_count:
+          type: integer
+          format: int32
+        merge_requests_count:
+          type: integer
+          format: int32
+        upvotes:
+          type: integer
+          format: int32
+        downvotes:
+          type: integer
+          format: int32
+        start_date:
+          type: string
+          format: date
+          example: '2022-11-18'
+        due_date:
+          type: string
+          format: date
+          example: '2022-11-20'
+        confidential:
+          type: boolean
+        discussion_locked:
+          type: boolean
+        issue_type:
+          type: string
+          example: issue
+        web_url:
+          type: string
+          example: http://example.com/example/example/issues/14
+        time_stats:
+          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
+        task_completion_status:
+          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
+        weight:
+          type: integer
+          format: int32
+          example: 5
+        blocking_issues_count:
+          type: integer
+          format: int32
+          example: 2
+      required:
+      - id
+      - iid
+      - project_id
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - closed_at
+      - closed_by
+      - labels
+      - milestone
+      - assignees
+      - author
+      - type
+      - assignee
+      - user_notes_count
+      - merge_requests_count
+      - upvotes
+      - downvotes
+      - start_date
+      - due_date
+      - confidential
+      - discussion_locked
+      - issue_type
+      - web_url
+      - time_stats
+      - task_completion_status
+      - blocking_issues_count
+    API_Entities_UserAgentDetail:
+      type: object
+      properties:
+        user_agent:
+          type: string
+          example: AppleWebKit/537.36
+        ip_address:
+          type: string
+          example: 127.0.0.1
+        akismet_submitted:
+          type: boolean
+          example: false
+      required:
+      - user_agent
+      - ip_address
+      - akismet_submitted
+      description: API_Entities_UserAgentDetail model
+    postApiV4ProjectsIdIssuesIssueIidAddSpentTime:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: The duration in human format.
+      required:
+      - duration
+      description: Add spent time for a issue
+    postApiV4ProjectsIdIssuesIssueIidLinks:
+      type: object
+      properties:
+        target_project_id:
+          type: string
+          description: The ID or URL-encoded path of a target project
+        target_issue_iid:
+          type: string
+          description: The internal ID of a target project’s issue
+        link_type:
+          type: string
+          description: The type of the relation (“relates_to”, “blocks”, “is_blocked_by”),defaults to “relates_to”)
+          enum:
+          - relates_to
+          - blocks
+          - is_blocked_by
+      required:
+      - target_project_id
+      - target_issue_iid
+      description: Create an issue link
+    postApiV4ProjectsIdIssuesIssueIidTimeEstimate:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: The duration in human format.
+          example: 3h30m
+      required:
+      - duration
+      description: Set a time estimate for a issue
     API_Entities_IssuableReferences:
       type: object
       properties:
@@ -1084,33 +1362,274 @@ components:
       - short
       - relative
       - full
-    API_Entities_TaskCompletionStatus:
+    API_Entities_Milestone:
       type: object
       properties:
-        count:
+        id:
           type: integer
           format: int32
-          example: 5
-        completed_count:
+        iid:
           type: integer
           format: int32
-          example: 3
+        project_id:
+          type: integer
+          format: int32
+        group_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        state:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        due_date:
+          type: string
+        start_date:
+          type: string
+        expired:
+          type: boolean
+        web_url:
+          type: string
       required:
-      - count
-      - completed_count
-    API_Entities_CustomAttribute:
+      - id
+      - iid
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - due_date
+      - start_date
+      - expired
+      - web_url
+    API_Entities_MergeRequestBasic:
       type: object
       properties:
-        key:
+        id:
+          type: integer
+          format: int32
+          example: 84
+        iid:
+          type: integer
+          format: int32
+          example: 14
+        project_id:
+          type: integer
+          format: int32
+          example: 4
+        title:
           type: string
-          example: foo
-        value:
+          example: Impedit et ut et dolores vero provident ullam est
+        description:
           type: string
-          example: bar
+          example: Repellendus impedit et vel velit dignissimos.
+        state:
+          type: string
+          example: closed
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-08-17T12:46:35.053Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-11-14T17:22:01.470Z'
+        merged_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merge_user:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        merged_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        closed_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        closed_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        title_html:
+          type: string
+        description_html:
+          type: string
+        target_branch:
+          type: string
+        source_branch:
+          type: string
+        user_notes_count:
+          type: integer
+          format: int32
+        upvotes:
+          type: integer
+          format: int32
+        downvotes:
+          type: integer
+          format: int32
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignees:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        assignee:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        reviewers:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        source_project_id:
+          type: integer
+          format: int32
+        target_project_id:
+          type: integer
+          format: int32
+        labels:
+          type: array
+          items:
+            type: string
+        draft:
+          type: boolean
+        imported:
+          type: boolean
+        imported_from:
+          type: string
+          example: bitbucket
+        work_in_progress:
+          type: boolean
+        milestone:
+          $ref: '#/components/schemas/API_Entities_Milestone'
+        merge_when_pipeline_succeeds:
+          type: boolean
+        merge_status:
+          type: string
+          example: unchecked
+        detailed_merge_status:
+          type: string
+          example: mergeable
+        merge_after:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        sha:
+          type: string
+          example: 1234abcd
+        merge_commit_sha:
+          type: string
+          example: 1234abcd
+        squash_commit_sha:
+          type: string
+          example: 1234abcd
+        discussion_locked:
+          type: boolean
+        should_remove_source_branch:
+          type: boolean
+        force_remove_source_branch:
+          type: boolean
+        prepared_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
+        allow_collaboration:
+          type: boolean
+        allow_maintainer_to_push:
+          type: boolean
+        reference:
+          type: string
+          example: '!1'
+        references:
+          $ref: '#/components/schemas/API_Entities_IssuableReferences'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
+        time_stats:
+          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
+        squash:
+          type: boolean
+        squash_on_merge:
+          type: boolean
+        task_completion_status:
+          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
+        has_conflicts:
+          type: boolean
+        blocking_discussions_resolved:
+          type: boolean
+        approvals_before_merge:
+          type: integer
+          format: int32
+          example: 2
       required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
+      - id
+      - iid
+      - project_id
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - merged_by
+      - merge_user
+      - merged_at
+      - closed_by
+      - closed_at
+      - target_branch
+      - source_branch
+      - user_notes_count
+      - upvotes
+      - downvotes
+      - author
+      - assignees
+      - assignee
+      - reviewers
+      - source_project_id
+      - target_project_id
+      - labels
+      - draft
+      - imported
+      - imported_from
+      - work_in_progress
+      - milestone
+      - merge_when_pipeline_succeeds
+      - merge_status
+      - detailed_merge_status
+      - merge_after
+      - sha
+      - merge_commit_sha
+      - squash_commit_sha
+      - discussion_locked
+      - should_remove_source_branch
+      - force_remove_source_branch
+      - prepared_at
+      - reference
+      - references
+      - web_url
+      - time_stats
+      - squash
+      - squash_on_merge
+      - task_completion_status
+      - has_conflicts
+      - blocking_discussions_resolved
+      - approvals_before_merge
+      description: API_Entities_MergeRequestBasic model
+    API_Entities_IssueLink:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        source_issue:
+          $ref: '#/components/schemas/API_Entities_IssueBasic'
+        target_issue:
+          $ref: '#/components/schemas/API_Entities_IssueBasic'
+        link_type:
+          type: string
+          example: relates_to
+      required:
+      - id
+      - source_issue
+      - target_issue
+      - link_type
+      description: API_Entities_IssueLink model
     API_Entities_Issue:
       type: object
       properties:
@@ -1307,97 +1826,6 @@ components:
       - imported_from
       - service_desk_reply_to
       description: API_Entities_Issue model
-    API_Entities_UserAgentDetail:
-      type: object
-      properties:
-        user_agent:
-          type: string
-          example: AppleWebKit/537.36
-        ip_address:
-          type: string
-          example: 127.0.0.1
-        akismet_submitted:
-          type: boolean
-          example: false
-      required:
-      - user_agent
-      - ip_address
-      - akismet_submitted
-      description: API_Entities_UserAgentDetail model
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    API_Entities_IssueLink:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        source_issue:
-          $ref: '#/components/schemas/API_Entities_IssueBasic'
-        target_issue:
-          $ref: '#/components/schemas/API_Entities_IssueBasic'
-        link_type:
-          type: string
-          example: relates_to
-      required:
-      - id
-      - source_issue
-      - target_issue
-      - link_type
-      description: API_Entities_IssueLink model
-    postApiV4ProjectsIdIssuesIssueIidTimeEstimate:
-      type: object
-      properties:
-        duration:
-          type: string
-          description: The duration in human format.
-          example: 3h30m
-      required:
-      - duration
-      description: Set a time estimate for a issue
     API_Entities_RelatedIssue:
       type: object
       properties:
@@ -1613,254 +2041,6 @@ components:
       - link_created_at
       - link_updated_at
       description: API_Entities_RelatedIssue model
-    API_Entities_MergeRequestBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 84
-        iid:
-          type: integer
-          format: int32
-          example: 14
-        project_id:
-          type: integer
-          format: int32
-          example: 4
-        title:
-          type: string
-          example: Impedit et ut et dolores vero provident ullam est
-        description:
-          type: string
-          example: Repellendus impedit et vel velit dignissimos.
-        state:
-          type: string
-          example: closed
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-08-17T12:46:35.053Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-11-14T17:22:01.470Z'
-        merged_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        merge_user:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        merged_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:45.080Z'
-        closed_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        closed_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:45.080Z'
-        title_html:
-          type: string
-        description_html:
-          type: string
-        target_branch:
-          type: string
-        source_branch:
-          type: string
-        user_notes_count:
-          type: integer
-          format: int32
-        upvotes:
-          type: integer
-          format: int32
-        downvotes:
-          type: integer
-          format: int32
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        assignees:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        assignee:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        reviewers:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        source_project_id:
-          type: integer
-          format: int32
-        target_project_id:
-          type: integer
-          format: int32
-        labels:
-          type: array
-          items:
-            type: string
-        draft:
-          type: boolean
-        imported:
-          type: boolean
-        imported_from:
-          type: string
-          example: bitbucket
-        work_in_progress:
-          type: boolean
-        milestone:
-          $ref: '#/components/schemas/API_Entities_Milestone'
-        merge_when_pipeline_succeeds:
-          type: boolean
-        merge_status:
-          type: string
-          example: unchecked
-        detailed_merge_status:
-          type: string
-          example: mergeable
-        merge_after:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:45.080Z'
-        sha:
-          type: string
-          example: 1234abcd
-        merge_commit_sha:
-          type: string
-          example: 1234abcd
-        squash_commit_sha:
-          type: string
-          example: 1234abcd
-        discussion_locked:
-          type: boolean
-        should_remove_source_branch:
-          type: boolean
-        force_remove_source_branch:
-          type: boolean
-        prepared_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:45.080Z'
-        allow_collaboration:
-          type: boolean
-        allow_maintainer_to_push:
-          type: boolean
-        reference:
-          type: string
-          example: '!1'
-        references:
-          $ref: '#/components/schemas/API_Entities_IssuableReferences'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
-        time_stats:
-          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
-        squash:
-          type: boolean
-        squash_on_merge:
-          type: boolean
-        task_completion_status:
-          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
-        has_conflicts:
-          type: boolean
-        blocking_discussions_resolved:
-          type: boolean
-        approvals_before_merge:
-          type: integer
-          format: int32
-          example: 2
-      required:
-      - id
-      - iid
-      - project_id
-      - title
-      - description
-      - state
-      - created_at
-      - updated_at
-      - merged_by
-      - merge_user
-      - merged_at
-      - closed_by
-      - closed_at
-      - target_branch
-      - source_branch
-      - user_notes_count
-      - upvotes
-      - downvotes
-      - author
-      - assignees
-      - assignee
-      - reviewers
-      - source_project_id
-      - target_project_id
-      - labels
-      - draft
-      - imported
-      - imported_from
-      - work_in_progress
-      - milestone
-      - merge_when_pipeline_succeeds
-      - merge_status
-      - detailed_merge_status
-      - merge_after
-      - sha
-      - merge_commit_sha
-      - squash_commit_sha
-      - discussion_locked
-      - should_remove_source_branch
-      - force_remove_source_branch
-      - prepared_at
-      - reference
-      - references
-      - web_url
-      - time_stats
-      - squash
-      - squash_on_merge
-      - task_completion_status
-      - has_conflicts
-      - blocking_discussions_resolved
-      - approvals_before_merge
-      description: API_Entities_MergeRequestBasic model
-    API_Entities_Milestone:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        iid:
-          type: integer
-          format: int32
-        project_id:
-          type: integer
-          format: int32
-        group_id:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        state:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        due_date:
-          type: string
-        start_date:
-          type: string
-        expired:
-          type: boolean
-        web_url:
-          type: string
-      required:
-      - id
-      - iid
-      - title
-      - description
-      - state
-      - created_at
-      - updated_at
-      - due_date
-      - start_date
-      - expired
-      - web_url
     API_Entities_Iteration:
       type: object
       properties:
@@ -1922,177 +2102,6 @@ components:
       - start_date
       - due_date
       - web_url
-    API_Entities_IssuableTimeStats:
-      type: object
-      properties:
-        time_estimate:
-          type: integer
-          format: int32
-          example: 12600
-        total_time_spent:
-          type: integer
-          format: int32
-          example: 3600
-        human_time_estimate:
-          type: string
-          example: 3h 30m
-        human_total_time_spent:
-          type: string
-          example: 1h
-      required:
-      - time_estimate
-      - total_time_spent
-      - human_time_estimate
-      - human_total_time_spent
-      description: API_Entities_IssuableTimeStats model
-    postApiV4ProjectsIdIssuesIssueIidLinks:
-      type: object
-      properties:
-        target_project_id:
-          type: string
-          description: The ID or URL-encoded path of a target project
-        target_issue_iid:
-          type: string
-          description: The internal ID of a target project’s issue
-        link_type:
-          type: string
-          description: The type of the relation (“relates_to”, “blocks”, “is_blocked_by”),defaults to “relates_to”)
-          enum:
-          - relates_to
-          - blocks
-          - is_blocked_by
-      required:
-      - target_project_id
-      - target_issue_iid
-      description: Create an issue link
-    API_Entities_IssueBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 84
-        iid:
-          type: integer
-          format: int32
-          example: 14
-        project_id:
-          type: integer
-          format: int32
-          example: 4
-        title:
-          type: string
-          example: Impedit et ut et dolores vero provident ullam est
-        description:
-          type: string
-          example: Repellendus impedit et vel velit dignissimos.
-        state:
-          type: string
-          example: closed
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-08-17T12:46:35.053Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-11-14T17:22:01.470Z'
-        closed_at:
-          type: string
-          format: date-time
-          example: '2022-11-15T08:30:55.232Z'
-        closed_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        labels:
-          type: array
-          items:
-            type: string
-          example:
-          - bug
-        milestone:
-          $ref: '#/components/schemas/API_Entities_Milestone'
-        assignees:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        type:
-          type: string
-          example: ISSUE
-          description: One of ["ISSUE", "INCIDENT", "TEST_CASE", "REQUIREMENT", "TASK", "TICKET"]
-        assignee:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        user_notes_count:
-          type: integer
-          format: int32
-        merge_requests_count:
-          type: integer
-          format: int32
-        upvotes:
-          type: integer
-          format: int32
-        downvotes:
-          type: integer
-          format: int32
-        start_date:
-          type: string
-          format: date
-          example: '2022-11-18'
-        due_date:
-          type: string
-          format: date
-          example: '2022-11-20'
-        confidential:
-          type: boolean
-        discussion_locked:
-          type: boolean
-        issue_type:
-          type: string
-          example: issue
-        web_url:
-          type: string
-          example: http://example.com/example/example/issues/14
-        time_stats:
-          $ref: '#/components/schemas/API_Entities_IssuableTimeStats'
-        task_completion_status:
-          $ref: '#/components/schemas/API_Entities_TaskCompletionStatus'
-        weight:
-          type: integer
-          format: int32
-          example: 5
-        blocking_issues_count:
-          type: integer
-          format: int32
-          example: 2
-      required:
-      - id
-      - iid
-      - project_id
-      - title
-      - description
-      - state
-      - created_at
-      - updated_at
-      - closed_at
-      - closed_by
-      - labels
-      - milestone
-      - assignees
-      - author
-      - type
-      - assignee
-      - user_notes_count
-      - merge_requests_count
-      - upvotes
-      - downvotes
-      - start_date
-      - due_date
-      - confidential
-      - discussion_locked
-      - issue_type
-      - web_url
-      - time_stats
-      - task_completion_status
-      - blocking_issues_count
     EpicBaseEntity:
       type: object
       properties:
@@ -2116,15 +2125,6 @@ components:
       - title
       - url
       - group_id
-    postApiV4ProjectsIdIssuesIssueIidAddSpentTime:
-      type: object
-      properties:
-        duration:
-          type: string
-          description: The duration in human format.
-      required:
-      - duration
-      description: Add spent time for a issue
   securitySchemes:
     access_token_header:
       type: apiKey

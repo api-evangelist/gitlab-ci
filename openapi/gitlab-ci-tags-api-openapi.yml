@@ -90,7 +90,7 @@ paths:
       tags:
       - Tags
       operationId: getApiV4ProjectsIdRepositoryTags
-      summary: Get api V4 projects id repository tags
+      summary: Get api V4Projects id repository tags
       x-summary-source: derived
     post:
       description: Create a new repository tag
@@ -123,7 +123,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdRepositoryTags'
         required: true
-      summary: Post api V4 projects id repository tags
+      summary: Post api V4Projects id repository tags
       x-summary-source: derived
   /api/v4/projects/{id}/repository/tags/{tag_name}:
     get:
@@ -155,7 +155,7 @@ paths:
       tags:
       - Tags
       operationId: getApiV4ProjectsIdRepositoryTagsTagName
-      summary: Get api V4 projects id repository tags tag name
+      summary: Get api V4Projects id repository tags tag name
       x-summary-source: derived
     delete:
       description: Delete a repository tag
@@ -186,7 +186,7 @@ paths:
       tags:
       - Tags
       operationId: deleteApiV4ProjectsIdRepositoryTagsTagName
-      summary: Delete api V4 projects id repository tags tag name
+      summary: Delete api V4Projects id repository tags tag name
       x-summary-source: derived
   /api/v4/projects/{id}/repository/tags/{tag_name}/signature:
     get:
@@ -216,10 +216,22 @@ paths:
       tags:
       - Tags
       operationId: getApiV4ProjectsIdRepositoryTagsTagNameSignature
-      summary: Get api V4 projects id repository tags tag name signature
+      summary: Get api V4Projects id repository tags tag name signature
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_TagRelease:
+      type: object
+      properties:
+        tag_name:
+          type: string
+          example: 1.0.0
+        description:
+          type: string
+          example: Amazing release. Wow
+      required:
+      - tag_name
+      - description
     API_Entities_Tag:
       type: object
       properties:
@@ -251,37 +263,18 @@ components:
       - protected
       - created_at
       description: API_Entities_Tag model
-    API_Entities_TagRelease:
+    API_Entities_TagSignature:
       type: object
       properties:
-        tag_name:
+        signature_type:
           type: string
-          example: 1.0.0
-        description:
-          type: string
-          example: Amazing release. Wow
+          example: PGP
+        signature:
+          type: object
       required:
-      - tag_name
-      - description
-    postApiV4ProjectsIdRepositoryTags:
-      type: object
-      properties:
-        tag_name:
-          type: string
-          description: The name of the tag
-          example: v.1.0.0
-        ref:
-          type: string
-          description: The commit sha or branch name
-          example: 2695effb5807a22ff3d138d593fd856244e155e7
-        message:
-          type: string
-          description: Specifying a message creates an annotated tag
-          example: Release 1.0.0
-      required:
-      - tag_name
-      - ref
-      description: Create a new repository tag
+      - signature_type
+      - signature
+      description: API_Entities_TagSignature model
     API_Entities_Commit:
       type: object
       properties:
@@ -357,18 +350,25 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_TagSignature:
+    postApiV4ProjectsIdRepositoryTags:
       type: object
       properties:
-        signature_type:
+        tag_name:
           type: string
-          example: PGP
-        signature:
-          type: object
+          description: The name of the tag
+          example: v.1.0.0
+        ref:
+          type: string
+          description: The commit sha or branch name
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
+        message:
+          type: string
+          description: Specifying a message creates an annotated tag
+          example: Release 1.0.0
       required:
-      - signature_type
-      - signature
-      description: API_Entities_TagSignature model
+      - tag_name
+      - ref
+      description: Create a new repository tag
   securitySchemes:
     access_token_header:
       type: apiKey

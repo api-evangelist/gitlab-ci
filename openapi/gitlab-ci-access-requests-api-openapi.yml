@@ -245,6 +245,15 @@ paths:
       operationId: deleteApiV4ProjectsIdAccessRequestsUserId
 components:
   schemas:
+    putApiV4GroupsIdAccessRequestsUserIdApprove:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: 'A valid access level (defaults: `30`, the Developer role)'
+          default: 30
+      description: Approves an access request for the given user.
     API_Entities_CustomAttribute:
       type: object
       properties:
@@ -258,115 +267,6 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    putApiV4GroupsIdAccessRequestsUserIdApprove:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: 'A valid access level (defaults: `30`, the Developer role)'
-          default: 30
-      description: Approves an access request for the given user.
-    putApiV4ProjectsIdAccessRequestsUserIdApprove:
-      type: object
-      properties:
-        access_level:
-          type: integer
-          format: int32
-          description: 'A valid access level (defaults: `30`, the Developer role)'
-          default: 30
-      description: Approves an access request for the given user.
-    API_Entities_AccessRequester:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-        requested_at:
-          type: string
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      - requested_at
-      description: API_Entities_AccessRequester model
     API_Entities_Member:
       type: object
       properties:
@@ -437,32 +337,50 @@ components:
       - expires_at
       - membership_state
       description: API_Entities_Member model
-    API_Entities_Identity:
+    API_Entities_UserBasic:
       type: object
       properties:
-        provider:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
           type: string
-        extern_uid:
+          example: admin
+        public_email:
           type: string
-        saml_provider_id:
+          example: john@example.com
+        name:
           type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
       required:
-      - provider
-      - extern_uid
-      - saml_provider_id
-    API_Entities_ScimIdentity:
-      type: object
-      properties:
-        extern_uid:
-          type: string
-        group_id:
-          type: string
-        active:
-          type: string
-      required:
-      - extern_uid
-      - group_id
-      - active
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
     API_Entities_MemberRole:
       type: object
       properties:
@@ -611,6 +529,88 @@ components:
       - read_admin_monitoring
       - read_admin_users
       - read_vulnerability
+    API_Entities_Identity:
+      type: object
+      properties:
+        provider:
+          type: string
+        extern_uid:
+          type: string
+        saml_provider_id:
+          type: string
+      required:
+      - provider
+      - extern_uid
+      - saml_provider_id
+    API_Entities_AccessRequester:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        requested_at:
+          type: string
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - requested_at
+      description: API_Entities_AccessRequester model
+    putApiV4ProjectsIdAccessRequestsUserIdApprove:
+      type: object
+      properties:
+        access_level:
+          type: integer
+          format: int32
+          description: 'A valid access level (defaults: `30`, the Developer role)'
+          default: 30
+      description: Approves an access request for the given user.
+    API_Entities_ScimIdentity:
+      type: object
+      properties:
+        extern_uid:
+          type: string
+        group_id:
+          type: string
+        active:
+          type: string
+      required:
+      - extern_uid
+      - group_id
+      - active
   securitySchemes:
     access_token_header:
       type: apiKey

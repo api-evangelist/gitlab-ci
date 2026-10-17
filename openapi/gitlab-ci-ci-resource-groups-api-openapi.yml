@@ -53,7 +53,7 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroups
-      summary: Get api V4 projects id resource groups
+      summary: Get api V4Projects id resource groups
       x-summary-source: derived
   /api/v4/projects/{id}/resource_groups/{key}:
     get:
@@ -85,7 +85,7 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroupsKey
-      summary: Get api V4 projects id resource groups key
+      summary: Get api V4Projects id resource groups key
       x-summary-source: derived
     put:
       summary: Edit an existing resource group
@@ -155,7 +155,7 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroupsKeyCurrentJob
-      summary: Get api V4 projects id resource groups key current job
+      summary: Get api V4Projects id resource groups key current job
       x-summary-source: derived
   /api/v4/projects/{id}/resource_groups/{key}/upcoming_jobs:
     get:
@@ -207,10 +207,104 @@ paths:
       tags:
       - ci_resource_groups
       operationId: getApiV4ProjectsIdResourceGroupsKeyUpcomingJobs
-      summary: Get api V4 projects id resource groups key upcoming jobs
+      summary: Get api V4Projects id resource groups key upcoming jobs
       x-summary-source: derived
 components:
   schemas:
+    API_Entities_Ci_JobBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          example: waiting_for_resource
+        stage:
+          type: string
+          example: deploy
+        name:
+          type: string
+          example: deploy_to_production
+        ref:
+          type: string
+          example: main
+        tag:
+          type: boolean
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        allow_failure:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        started_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        erased_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T18:00:29.728Z'
+        duration:
+          type: number
+          format: float
+          example: 0.465
+          description: Time spent running
+        queued_duration:
+          type: number
+          format: float
+          example: 0.123
+          description: Time spent enqueued
+        user:
+          $ref: '#/components/schemas/API_Entities_User'
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        failure_reason:
+          type: string
+          example: script_failure
+        web_url:
+          type: string
+          example: https://example.com/foo/bar/-/jobs/1
+        project:
+          type: object
+          properties:
+            ci_job_token_scope_enabled:
+              type: string
+              example: false
+          required:
+          - ci_job_token_scope_enabled
+      required:
+      - id
+      - status
+      - stage
+      - name
+      - ref
+      - tag
+      - coverage
+      - allow_failure
+      - created_at
+      - started_at
+      - finished_at
+      - erased_at
+      - duration
+      - queued_duration
+      - user
+      - commit
+      - pipeline
+      - web_url
+      - project
+      description: API_Entities_Ci_JobBasic model
     API_Entities_User:
       type: object
       properties:
@@ -314,100 +408,6 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
-    API_Entities_Ci_JobBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        status:
-          type: string
-          example: waiting_for_resource
-        stage:
-          type: string
-          example: deploy
-        name:
-          type: string
-          example: deploy_to_production
-        ref:
-          type: string
-          example: main
-        tag:
-          type: boolean
-        coverage:
-          type: number
-          format: float
-          example: 98.29
-        allow_failure:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        started_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:30.733Z'
-        finished_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        erased_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T18:00:29.728Z'
-        duration:
-          type: number
-          format: float
-          example: 0.465
-          description: Time spent running
-        queued_duration:
-          type: number
-          format: float
-          example: 0.123
-          description: Time spent enqueued
-        user:
-          $ref: '#/components/schemas/API_Entities_User'
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        pipeline:
-          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
-        failure_reason:
-          type: string
-          example: script_failure
-        web_url:
-          type: string
-          example: https://example.com/foo/bar/-/jobs/1
-        project:
-          type: object
-          properties:
-            ci_job_token_scope_enabled:
-              type: string
-              example: false
-          required:
-          - ci_job_token_scope_enabled
-      required:
-      - id
-      - status
-      - stage
-      - name
-      - ref
-      - tag
-      - coverage
-      - allow_failure
-      - created_at
-      - started_at
-      - finished_at
-      - erased_at
-      - duration
-      - queued_duration
-      - user
-      - commit
-      - pipeline
-      - web_url
-      - project
-      description: API_Entities_Ci_JobBasic model
     API_Entities_Ci_ResourceGroup:
       type: object
       properties:
@@ -436,6 +436,56 @@ components:
       - created_at
       - updated_at
       description: API_Entities_Ci_ResourceGroup model
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
     API_Entities_Commit:
       type: object
       properties:
@@ -511,56 +561,6 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_Ci_PipelineBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      description: API_Entities_Ci_PipelineBasic model
     putApiV4ProjectsIdResourceGroupsKey:
       type: object
       properties:

@@ -40,7 +40,7 @@ paths:
       tags:
       - Wikis
       operationId: getApiV4GroupsIdWikis
-      summary: Get api V4 groups id wikis
+      summary: Get api V4Groups id wikis
       x-summary-source: derived
     post:
       description: Create a wiki page
@@ -73,7 +73,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4GroupsIdWikis'
         required: true
-      summary: Post api V4 groups id wikis
+      summary: Post api V4Groups id wikis
       x-summary-source: derived
   /api/v4/groups/{id}/wikis/{slug}:
     get:
@@ -116,7 +116,7 @@ paths:
       tags:
       - Wikis
       operationId: getApiV4GroupsIdWikisSlug
-      summary: Get api V4 groups id wikis slug
+      summary: Get api V4Groups id wikis slug
       x-summary-source: derived
     put:
       description: Update a wiki page
@@ -155,7 +155,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4GroupsIdWikisSlug'
         required: true
-      summary: Put api V4 groups id wikis slug
+      summary: Put api V4Groups id wikis slug
       x-summary-source: derived
     delete:
       description: Delete a wiki page
@@ -182,7 +182,7 @@ paths:
       tags:
       - Wikis
       operationId: deleteApiV4GroupsIdWikisSlug
-      summary: Delete api V4 groups id wikis slug
+      summary: Delete api V4Groups id wikis slug
       x-summary-source: derived
   /api/v4/groups/{id}/wikis/attachments:
     post:
@@ -244,7 +244,7 @@ paths:
       tags:
       - Wikis
       operationId: getApiV4ProjectsIdWikis
-      summary: Get api V4 projects id wikis
+      summary: Get api V4Projects id wikis
       x-summary-source: derived
     post:
       description: Create a wiki page
@@ -277,7 +277,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdWikis'
         required: true
-      summary: Post api V4 projects id wikis
+      summary: Post api V4Projects id wikis
       x-summary-source: derived
   /api/v4/projects/{id}/wikis/{slug}:
     get:
@@ -320,7 +320,7 @@ paths:
       tags:
       - Wikis
       operationId: getApiV4ProjectsIdWikisSlug
-      summary: Get api V4 projects id wikis slug
+      summary: Get api V4Projects id wikis slug
       x-summary-source: derived
     put:
       description: Update a wiki page
@@ -359,7 +359,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdWikisSlug'
         required: true
-      summary: Put api V4 projects id wikis slug
+      summary: Put api V4Projects id wikis slug
       x-summary-source: derived
     delete:
       description: Delete a wiki page
@@ -386,7 +386,7 @@ paths:
       tags:
       - Wikis
       operationId: deleteApiV4ProjectsIdWikisSlug
-      summary: Delete api V4 projects id wikis slug
+      summary: Delete api V4Projects id wikis slug
       x-summary-source: derived
   /api/v4/projects/{id}/wikis/attachments:
     post:
@@ -419,7 +419,7 @@ paths:
         required: true
 components:
   schemas:
-    putApiV4ProjectsIdWikisSlug:
+    postApiV4ProjectsIdWikis:
       type: object
       properties:
         title:
@@ -444,43 +444,11 @@ components:
           - asciidoc
           - org
           default: markdown
-      description: Update a wiki page
-    API_Entities_WikiPageBasic:
-      type: object
-      properties:
-        format:
-          type: string
-          example: markdown
-        slug:
-          type: string
-          example: deploy
-        title:
-          type: string
-          example: deploy
-        wiki_page_meta_id:
-          type: integer
-          format: int32
-          example: 123
       required:
-      - format
-      - slug
       - title
-      - wiki_page_meta_id
-      description: API_Entities_WikiPageBasic model
+      - content
+      description: Create a wiki page
     postApiV4GroupsIdWikisAttachments:
-      type: object
-      properties:
-        file:
-          type: string
-          description: The attachment file to be uploaded
-          format: binary
-        branch:
-          type: string
-          description: The name of the branch
-      required:
-      - file
-      description: Upload an attachment to the wiki repository
-    postApiV4ProjectsIdWikisAttachments:
       type: object
       properties:
         file:
@@ -583,35 +551,6 @@ components:
       - title
       - content
       description: Create a wiki page
-    postApiV4ProjectsIdWikis:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of a wiki page
-        front_matter:
-          type: object
-          description: Object that contains YAML frontmatter
-          properties:
-            title:
-              type: string
-              description: Frontmatter title of a wiki page
-        content:
-          type: string
-          description: Content of a wiki page
-        format:
-          type: string
-          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
-          enum:
-          - markdown
-          - rdoc
-          - asciidoc
-          - org
-          default: markdown
-      required:
-      - title
-      - content
-      description: Create a wiki page
     API_Entities_WikiAttachment:
       type: object
       properties:
@@ -642,6 +581,67 @@ components:
       - branch
       - link
       description: API_Entities_WikiAttachment model
+    putApiV4ProjectsIdWikisSlug:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of a wiki page
+        front_matter:
+          type: object
+          description: Object that contains YAML frontmatter
+          properties:
+            title:
+              type: string
+              description: Frontmatter title of a wiki page
+        content:
+          type: string
+          description: Content of a wiki page
+        format:
+          type: string
+          description: Format of a wiki page. Available formats are markdown, rdoc, asciidoc and org
+          enum:
+          - markdown
+          - rdoc
+          - asciidoc
+          - org
+          default: markdown
+      description: Update a wiki page
+    postApiV4ProjectsIdWikisAttachments:
+      type: object
+      properties:
+        file:
+          type: string
+          description: The attachment file to be uploaded
+          format: binary
+        branch:
+          type: string
+          description: The name of the branch
+      required:
+      - file
+      description: Upload an attachment to the wiki repository
+    API_Entities_WikiPageBasic:
+      type: object
+      properties:
+        format:
+          type: string
+          example: markdown
+        slug:
+          type: string
+          example: deploy
+        title:
+          type: string
+          example: deploy
+        wiki_page_meta_id:
+          type: integer
+          format: int32
+          example: 123
+      required:
+      - format
+      - slug
+      - title
+      - wiki_page_meta_id
+      description: API_Entities_WikiPageBasic model
   securitySchemes:
     access_token_header:
       type: apiKey

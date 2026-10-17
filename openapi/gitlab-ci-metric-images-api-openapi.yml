@@ -31,7 +31,7 @@ paths:
       tags:
       - metric_images
       operationId: postApiV4ProjectsIdIssuesIssueIidMetricImagesAuthorize
-      summary: Post api V4 projects id issues issue iid metric images authorize
+      summary: Post api V4Projects id issues issue iid metric images authorize
       x-summary-source: derived
   /api/v4/projects/{id}/issues/{issue_iid}/metric_images:
     post:
@@ -65,7 +65,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdIssuesIssueIidMetricImages'
         required: true
-      summary: Post api V4 projects id issues issue iid metric images
+      summary: Post api V4Projects id issues issue iid metric images
       x-summary-source: derived
     get:
       description: Metric Images for issue
@@ -92,7 +92,7 @@ paths:
       tags:
       - metric_images
       operationId: getApiV4ProjectsIdIssuesIssueIidMetricImages
-      summary: Get api V4 projects id issues issue iid metric images
+      summary: Get api V4Projects id issues issue iid metric images
       x-summary-source: derived
   /api/v4/projects/{id}/issues/{issue_iid}/metric_images/{metric_image_id}:
     put:
@@ -133,7 +133,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId'
         required: true
-      summary: Put api V4 projects id issues issue iid metric images metric image id
+      summary: Put api V4Projects id issues issue iid metric images metric image id
       x-summary-source: derived
     delete:
       description: Remove a metric image for an issue
@@ -167,10 +167,20 @@ paths:
       tags:
       - metric_images
       operationId: deleteApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId
-      summary: Delete api V4 projects id issues issue iid metric images metric image id
+      summary: Delete api V4Projects id issues issue iid metric images metric image id
       x-summary-source: derived
 components:
   schemas:
+    putApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The url to view more metric info
+        url_text:
+          type: string
+          description: A description of the image or URL
+      description: Update a metric image for an issue
     postApiV4ProjectsIdIssuesIssueIidMetricImages:
       type: object
       properties:
@@ -218,16 +228,6 @@ components:
       - url
       - url_text
       description: API_Entities_IssuableMetricImage model
-    putApiV4ProjectsIdIssuesIssueIidMetricImagesMetricImageId:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The url to view more metric info
-        url_text:
-          type: string
-          description: A description of the image or URL
-      description: Update a metric image for an issue
   securitySchemes:
     access_token_header:
       type: apiKey

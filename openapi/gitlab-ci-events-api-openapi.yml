@@ -93,7 +93,7 @@ paths:
       tags:
       - Events
       operationId: getApiV4ProjectsIdEvents
-      summary: Get api V4 projects id events
+      summary: Get api V4Projects id events
       x-summary-source: derived
   /api/v4/events:
     get:
@@ -276,46 +276,98 @@ paths:
       operationId: getApiV4UsersIdEvents
 components:
   schemas:
-    API_Entities_Suggestion:
+    API_Entities_Note:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        from_line:
-          type: integer
-          format: int32
-          example: 1
-        to_line:
-          type: integer
-          format: int32
-          example: 1
-        appliable:
-          type: boolean
-          example: true
-        applied:
+        type:
+          type: string
+          example: DiscussionNote
+        body:
+          type: string
+          example: Note body.
+        author:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:44.988Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:44.988Z'
+        system:
           type: boolean
           example: false
-        from_content:
+        noteable_id:
+          type: integer
+          format: int32
+          example: 1
+        noteable_type:
           type: string
-          example: 'Original content
-
-            '
-        to_content:
+          example: Issue
+        project_id:
+          type: integer
+          format: int32
+          example: 1
+        commit_id:
           type: string
-          example: 'New content
-
-            '
+          example: 7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d
+        position:
+          type: object
+        resolvable:
+          type: boolean
+          example: false
+        resolved:
+          type: boolean
+          example: false
+        resolved_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        resolved_at:
+          type: string
+          format: date-time
+          example: '2022-01-31T15:10:44.988Z'
+        suggestions:
+          $ref: '#/components/schemas/API_Entities_Suggestion'
+        confidential:
+          type: boolean
+          example: false
+        internal:
+          type: boolean
+          example: false
+        imported:
+          type: boolean
+          example: false
+        imported_from:
+          type: string
+          example: github
+        noteable_iid:
+          type: integer
+          format: int32
+          example: 1
+        commands_changes:
+          type: object
       required:
       - id
-      - from_line
-      - to_line
-      - appliable
-      - applied
-      - from_content
-      - to_content
-      description: API_Entities_Suggestion model
+      - type
+      - body
+      - author
+      - created_at
+      - updated_at
+      - system
+      - noteable_id
+      - noteable_type
+      - project_id
+      - resolvable
+      - confidential
+      - internal
+      - imported
+      - imported_from
+      - noteable_iid
+      - commands_changes
     API_Entities_CustomAttribute:
       type: object
       properties:
@@ -329,28 +381,6 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
-    API_Entities_WikiPageBasic:
-      type: object
-      properties:
-        format:
-          type: string
-          example: markdown
-        slug:
-          type: string
-          example: deploy
-        title:
-          type: string
-          example: deploy
-        wiki_page_meta_id:
-          type: integer
-          format: int32
-          example: 123
-      required:
-      - format
-      - slug
-      - title
-      - wiki_page_meta_id
-      description: API_Entities_WikiPageBasic model
     API_Entities_UserBasic:
       type: object
       properties:
@@ -461,98 +491,68 @@ components:
       - imported_from
       - author_username
       description: API_Entities_Event model
-    API_Entities_Note:
+    API_Entities_Suggestion:
       type: object
       properties:
         id:
           type: integer
           format: int32
           example: 1
-        type:
-          type: string
-          example: DiscussionNote
-        body:
-          type: string
-          example: Note body.
-        author:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:44.988Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-01-31T15:10:44.988Z'
-        system:
-          type: boolean
-          example: false
-        noteable_id:
+        from_line:
           type: integer
           format: int32
           example: 1
-        noteable_type:
-          type: string
-          example: Issue
-        project_id:
+        to_line:
           type: integer
           format: int32
           example: 1
-        commit_id:
+        appliable:
+          type: boolean
+          example: true
+        applied:
+          type: boolean
+          example: false
+        from_content:
           type: string
-          example: 7b09ce7e6f80347baf0316c8c94cdba9a0a7e91d
-        position:
-          type: object
-        resolvable:
-          type: boolean
-          example: false
-        resolved:
-          type: boolean
-          example: false
-        resolved_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        resolved_at:
+          example: 'Original content
+
+            '
+        to_content:
           type: string
-          format: date-time
-          example: '2022-01-31T15:10:44.988Z'
-        suggestions:
-          $ref: '#/components/schemas/API_Entities_Suggestion'
-        confidential:
-          type: boolean
-          example: false
-        internal:
-          type: boolean
-          example: false
-        imported:
-          type: boolean
-          example: false
-        imported_from:
-          type: string
-          example: github
-        noteable_iid:
-          type: integer
-          format: int32
-          example: 1
-        commands_changes:
-          type: object
+          example: 'New content
+
+            '
       required:
       - id
-      - type
-      - body
-      - author
-      - created_at
-      - updated_at
-      - system
-      - noteable_id
-      - noteable_type
-      - project_id
-      - resolvable
-      - confidential
-      - internal
-      - imported
-      - imported_from
-      - noteable_iid
-      - commands_changes
+      - from_line
+      - to_line
+      - appliable
+      - applied
+      - from_content
+      - to_content
+      description: API_Entities_Suggestion model
+    API_Entities_WikiPageBasic:
+      type: object
+      properties:
+        format:
+          type: string
+          example: markdown
+        slug:
+          type: string
+          example: deploy
+        title:
+          type: string
+          example: deploy
+        wiki_page_meta_id:
+          type: integer
+          format: int32
+          example: 123
+      required:
+      - format
+      - slug
+      - title
+      - wiki_page_meta_id
+      description: API_Entities_WikiPageBasic model
     API_Entities_PushEventPayload:
       type: object
       properties:

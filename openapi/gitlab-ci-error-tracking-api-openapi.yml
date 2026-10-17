@@ -189,6 +189,19 @@ components:
       - api_url
       - integrated
       description: API_Entities_ErrorTracking_ProjectSetting model
+    putApiV4ProjectsIdErrorTrackingSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Pass true to enable the configured Error Tracking settings or false to disable it.
+        integrated:
+          type: boolean
+          description: Pass true to enable the integrated Error Tracking backend.
+      required:
+      - active
+      - integrated
+      description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
     API_Entities_ErrorTracking_ClientKey:
       type: object
       properties:
@@ -210,19 +223,6 @@ components:
       - public_key
       - sentry_dsn
       description: API_Entities_ErrorTracking_ClientKey model
-    putApiV4ProjectsIdErrorTrackingSettings:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Pass true to enable the configured Error Tracking settings or false to disable it.
-        integrated:
-          type: boolean
-          description: Pass true to enable the integrated Error Tracking backend.
-      required:
-      - active
-      - integrated
-      description: Update Error Tracking project settings. Available in GitLab 15.10 and later.
     patchApiV4ProjectsIdErrorTrackingSettings:
       type: object
       properties:

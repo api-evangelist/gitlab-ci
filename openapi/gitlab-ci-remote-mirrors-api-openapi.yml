@@ -53,7 +53,7 @@ paths:
       tags:
       - remote_mirrors
       operationId: getApiV4ProjectsIdRemoteMirrors
-      summary: Get api V4 projects id remote mirrors
+      summary: Get api V4Projects id remote mirrors
       x-summary-source: derived
     post:
       description: Create remote mirror for a project
@@ -86,7 +86,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdRemoteMirrors'
         required: true
-      summary: Post api V4 projects id remote mirrors
+      summary: Post api V4Projects id remote mirrors
       x-summary-source: derived
   /api/v4/projects/{id}/remote_mirrors/{mirror_id}:
     get:
@@ -118,7 +118,7 @@ paths:
       tags:
       - remote_mirrors
       operationId: getApiV4ProjectsIdRemoteMirrorsMirrorId
-      summary: Get api V4 projects id remote mirrors mirror id
+      summary: Get api V4Projects id remote mirrors mirror id
       x-summary-source: derived
     put:
       description: Update the attributes of a single remote mirror
@@ -157,7 +157,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdRemoteMirrorsMirrorId'
         required: true
-      summary: Put api V4 projects id remote mirrors mirror id
+      summary: Put api V4Projects id remote mirrors mirror id
       x-summary-source: derived
     delete:
       summary: Delete a single remote mirror
@@ -215,7 +215,7 @@ paths:
       tags:
       - remote_mirrors
       operationId: postApiV4ProjectsIdRemoteMirrorsMirrorIdSync
-      summary: Post api V4 projects id remote mirrors mirror id sync
+      summary: Post api V4Projects id remote mirrors mirror id sync
       x-summary-source: derived
   /api/v4/projects/{id}/remote_mirrors/{mirror_id}/public_key:
     get:
@@ -243,68 +243,10 @@ paths:
       tags:
       - remote_mirrors
       operationId: getApiV4ProjectsIdRemoteMirrorsMirrorIdPublicKey
-      summary: Get api V4 projects id remote mirrors mirror id public key
+      summary: Get api V4Projects id remote mirrors mirror id public key
       x-summary-source: derived
 components:
   schemas:
-    postApiV4ProjectsIdRemoteMirrors:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The URL for a remote mirror
-          example: https://*****:*****@example.com/gitlab/example.git
-        enabled:
-          type: boolean
-          description: Determines if the mirror is enabled
-        auth_method:
-          type: string
-          description: Determines the mirror authentication method
-          enum:
-          - ssh_public_key
-          - password
-        keep_divergent_refs:
-          type: boolean
-          description: Determines if divergent refs are kept on the target
-        only_protected_branches:
-          type: boolean
-          description: Determines if only protected branches are mirrored
-        mirror_branch_regex:
-          type: string
-          description: Determines if only matched branches are mirrored
-        host_keys:
-          type: array
-          description: SSH host keys in bare format (ssh-ed25519 AAAA...) or full known_hosts format (hostname ssh-ed25519 AAAA...). Bare keys use the hostname from the mirror URL.
-          items:
-            type: string
-      required:
-      - url
-      description: Create remote mirror for a project
-    putApiV4ProjectsIdRemoteMirrorsMirrorId:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Determines if the mirror is enabled
-          example: true
-        auth_method:
-          type: string
-          description: Determines the mirror authentication method
-        keep_divergent_refs:
-          type: boolean
-          description: Determines if divergent refs are kept on the target
-        only_protected_branches:
-          type: boolean
-          description: Determines if only protected branches are mirrored
-        mirror_branch_regex:
-          type: string
-          description: Determines if only matched branches are mirrored
-        host_keys:
-          type: array
-          description: SSH host keys in bare format (ssh-ed25519 AAAA...) or full known_hosts format (hostname ssh-ed25519 AAAA...). Bare keys use the hostname from the mirror URL.
-          items:
-            type: string
-      description: Update the attributes of a single remote mirror
     API_Entities_RemoteMirror:
       type: object
       properties:
@@ -365,6 +307,39 @@ components:
       - host_keys
       - mirror_branch_regex
       description: API_Entities_RemoteMirror model
+    postApiV4ProjectsIdRemoteMirrors:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL for a remote mirror
+          example: https://*****:*****@example.com/gitlab/example.git
+        enabled:
+          type: boolean
+          description: Determines if the mirror is enabled
+        auth_method:
+          type: string
+          description: Determines the mirror authentication method
+          enum:
+          - ssh_public_key
+          - password
+        keep_divergent_refs:
+          type: boolean
+          description: Determines if divergent refs are kept on the target
+        only_protected_branches:
+          type: boolean
+          description: Determines if only protected branches are mirrored
+        mirror_branch_regex:
+          type: string
+          description: Determines if only matched branches are mirrored
+        host_keys:
+          type: array
+          description: SSH host keys in bare format (ssh-ed25519 AAAA...) or full known_hosts format (hostname ssh-ed25519 AAAA...). Bare keys use the hostname from the mirror URL.
+          items:
+            type: string
+      required:
+      - url
+      description: Create remote mirror for a project
     API_Entities_MirrorHostKey:
       type: object
       properties:
@@ -373,6 +348,31 @@ components:
           example: SHA256:abcd1234
       required:
       - fingerprint_sha256
+    putApiV4ProjectsIdRemoteMirrorsMirrorId:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Determines if the mirror is enabled
+          example: true
+        auth_method:
+          type: string
+          description: Determines the mirror authentication method
+        keep_divergent_refs:
+          type: boolean
+          description: Determines if divergent refs are kept on the target
+        only_protected_branches:
+          type: boolean
+          description: Determines if only protected branches are mirrored
+        mirror_branch_regex:
+          type: string
+          description: Determines if only matched branches are mirrored
+        host_keys:
+          type: array
+          description: SSH host keys in bare format (ssh-ed25519 AAAA...) or full known_hosts format (hostname ssh-ed25519 AAAA...). Bare keys use the hostname from the mirror URL.
+          items:
+            type: string
+      description: Update the attributes of a single remote mirror
   securitySchemes:
     access_token_header:
       type: apiKey

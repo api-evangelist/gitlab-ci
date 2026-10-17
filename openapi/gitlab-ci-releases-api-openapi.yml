@@ -595,32 +595,18 @@ paths:
       operationId: deleteApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId
 components:
   schemas:
-    API_Entities_Releases_Link:
+    API_Entities_Releases_Source:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        name:
+        format:
           type: string
-          example: app-v1.0.dmg
+          example: zip
         url:
           type: string
-          example: https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg
-        direct_asset_url:
-          type: string
-          example: https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg
-        link_type:
-          type: string
-          example: other
+          example: https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip
       required:
-      - id
-      - name
+      - format
       - url
-      - direct_asset_url
-      - link_type
-      description: API_Entities_Releases_Link model
     API_Entities_CustomAttribute:
       type: object
       properties:
@@ -634,18 +620,6 @@ components:
       - key
       - value
       description: API_Entities_CustomAttribute model
-    API_Entities_Releases_Source:
-      type: object
-      properties:
-        format:
-          type: string
-          example: zip
-        url:
-          type: string
-          example: https://gitlab.example.com/root/app/-/archive/v1.0/app-v1.0.zip
-      required:
-      - format
-      - url
     API_Entities_UserBasic:
       type: object
       properties:
@@ -690,6 +664,49 @@ components:
       - avatar_url
       - web_url
       description: API_Entities_UserBasic model
+    API_Entities_Releases_Evidence:
+      type: object
+      properties:
+        sha:
+          type: string
+          example: 760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d
+        filepath:
+          type: string
+          example: https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json
+        collected_at:
+          type: string
+          format: date-time
+          example: '2019-01-03T01:56:19.539Z'
+      required:
+      - sha
+      - filepath
+      - collected_at
+    API_Entities_Releases_Link:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: app-v1.0.dmg
+        url:
+          type: string
+          example: https://gitlab.example.com/root/app/-/jobs/688/artifacts/raw/bin/app-v1.0.dmg
+        direct_asset_url:
+          type: string
+          example: https://gitlab.example.com/root/app/-/releases/v1.0/downloads/app-v1.0.dmg
+        link_type:
+          type: string
+          example: other
+      required:
+      - id
+      - name
+      - url
+      - direct_asset_url
+      - link_type
+      description: API_Entities_Releases_Link model
     API_Entities_Release:
       type: object
       properties:
@@ -769,59 +786,6 @@ components:
       - assets
       - _links
       description: API_Entities_Release model
-    putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the link
-        url:
-          type: string
-          description: The URL of the link
-        direct_asset_path:
-          type: string
-          description: Optional path for a direct asset link
-        filepath:
-          type: string
-          description: 'Deprecated: optional path for a direct asset link'
-        link_type:
-          type: string
-          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
-          enum:
-          - other
-          - runbook
-          - image
-          - package
-          default: other
-      description: Update a release link
-    postApiV4ProjectsIdReleasesTagNameAssetsLinks:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the link. Link names must be unique in the release
-        url:
-          type: string
-          description: The URL of the link. Link URLs must be unique in the release.
-        direct_asset_path:
-          type: string
-          description: Optional path for a direct asset link
-        filepath:
-          type: string
-          description: 'Deprecated: optional path for a direct asset link'
-        link_type:
-          type: string
-          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
-          enum:
-          - other
-          - runbook
-          - image
-          - package
-          default: other
-      required:
-      - name
-      - url
-      description: Create a release link
     postApiV4ProjectsIdReleases:
       type: object
       properties:
@@ -886,23 +850,90 @@ components:
       required:
       - tag_name
       description: Create a release
-    API_Entities_Releases_Evidence:
+    putApiV4ProjectsIdReleasesTagNameAssetsLinksLinkId:
       type: object
       properties:
-        sha:
+        name:
           type: string
-          example: 760d6cdfb0879c3ffedec13af470e0f71cf52c6cde4d
+          description: The name of the link
+        url:
+          type: string
+          description: The URL of the link
+        direct_asset_path:
+          type: string
+          description: Optional path for a direct asset link
         filepath:
           type: string
-          example: https://gitlab.example.com/root/app/-/releases/v1.0/evidence.json
-        collected_at:
+          description: 'Deprecated: optional path for a direct asset link'
+        link_type:
           type: string
-          format: date-time
-          example: '2019-01-03T01:56:19.539Z'
+          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
+          enum:
+          - other
+          - runbook
+          - image
+          - package
+          default: other
+      description: Update a release link
+    API_Entities_MilestoneWithStats:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        iid:
+          type: integer
+          format: int32
+        project_id:
+          type: integer
+          format: int32
+        group_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        state:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        due_date:
+          type: string
+        start_date:
+          type: string
+        expired:
+          type: boolean
+        web_url:
+          type: string
+        issue_stats:
+          type: object
+          properties:
+            total:
+              type: integer
+              format: int32
+              example: 10
+            closed:
+              type: integer
+              format: int32
+              example: 5
+          required:
+          - total
+          - closed
       required:
-      - sha
-      - filepath
-      - collected_at
+      - id
+      - iid
+      - title
+      - description
+      - state
+      - created_at
+      - updated_at
+      - due_date
+      - start_date
+      - expired
+      - web_url
+      - issue_stats
     API_Entities_Commit:
       type: object
       properties:
@@ -1000,65 +1031,34 @@ components:
           type: string
           description: The ID of each milestone the release is associated with. GitLab Premium customers can specify group milestones. Cannot be combined with `milestones` parameter. To remove all milestones from the release, specify `[]`
       description: Update a release
-    API_Entities_MilestoneWithStats:
+    postApiV4ProjectsIdReleasesTagNameAssetsLinks:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        iid:
-          type: integer
-          format: int32
-        project_id:
-          type: integer
-          format: int32
-        group_id:
+        name:
           type: string
-        title:
+          description: The name of the link. Link names must be unique in the release
+        url:
           type: string
-        description:
+          description: The URL of the link. Link URLs must be unique in the release.
+        direct_asset_path:
           type: string
-        state:
+          description: Optional path for a direct asset link
+        filepath:
           type: string
-        created_at:
+          description: 'Deprecated: optional path for a direct asset link'
+        link_type:
           type: string
-        updated_at:
-          type: string
-        due_date:
-          type: string
-        start_date:
-          type: string
-        expired:
-          type: boolean
-        web_url:
-          type: string
-        issue_stats:
-          type: object
-          properties:
-            total:
-              type: integer
-              format: int32
-              example: 10
-            closed:
-              type: integer
-              format: int32
-              example: 5
-          required:
-          - total
-          - closed
+          description: 'The type of the link: `other`, `runbook`, `image`, or `package`. Defaults to `other`'
+          enum:
+          - other
+          - runbook
+          - image
+          - package
+          default: other
       required:
-      - id
-      - iid
-      - title
-      - description
-      - state
-      - created_at
-      - updated_at
-      - due_date
-      - start_date
-      - expired
-      - web_url
-      - issue_stats
+      - name
+      - url
+      description: Create a release link
   securitySchemes:
     access_token_header:
       type: apiKey

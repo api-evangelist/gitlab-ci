@@ -647,7 +647,7 @@ paths:
       tags:
       - Runners
       operationId: getApiV4RunnersIdManagers
-      summary: Get api V4 runners id managers
+      summary: Get api V4Runners id managers
       x-summary-source: derived
   /api/v4/runners/{id}/projects:
     get:
@@ -861,54 +861,203 @@ paths:
         required: true
 components:
   schemas:
-    putApiV4RunnersId:
+    postApiV4UserRunners:
       type: object
       properties:
+        runner_type:
+          type: string
+          description: Specifies the scope of the runner
+          enum:
+          - instance_type
+          - group_type
+          - project_type
+        group_id:
+          type: integer
+          format: int32
+          description: The ID of the group that the runner is created in
+          example: 1
+        project_id:
+          type: integer
+          format: int32
+          description: The ID of the project that the runner is created in
+          example: 1
         description:
           type: string
-          description: The description of the runner
-        active:
-          type: boolean
-          description: 'Deprecated: Use `paused` instead. Flag indicating whether the runner is allowed to receive jobs'
+          description: Description of the runner
+        maintenance_note:
+          type: string
+          description: Free-form maintenance notes for the runner (1024 characters)
         paused:
           type: boolean
-          description: Specifies if the runner should ignore new jobs
-        tag_list:
-          type: array
-          description: The list of tags for a runner
-          example: '[''macos'', ''shell'']'
-          items:
-            type: string
-        run_untagged:
-          type: boolean
-          description: Specifies if the runner can execute untagged jobs
+          description: Specifies if the runner should ignore new jobs (defaults to false)
         locked:
           type: boolean
-          description: Specifies if the runner is locked
+          description: Specifies if the runner should be locked for the current project (defaults to false)
         access_level:
           type: string
           description: The access level of the runner
           enum:
           - not_protected
           - ref_protected
+        run_untagged:
+          type: boolean
+          description: Specifies if the runner should handle untagged jobs  (defaults to true)
+        tag_list:
+          type: array
+          description: A list of runner tags
+          items:
+            type: string
         maximum_timeout:
           type: integer
           format: int32
           description: Maximum timeout that limits the amount of time (in seconds) that runners can run jobs
-        maintenance_note:
+        token_expires_at:
           type: string
-          description: Free-form maintenance notes for the runner (1024 characters)
-      description: Update runner's details
-    postApiV4ProjectsIdRunners:
+          format: date-time
+          description: The expiration time for the runner authentication token (ISO 8601 format). Must be between 5 minutes and 15 days in the future, and cannot exceed instance/group/project limits.
+        token_rotation_deadline:
+          type: string
+          format: date-time
+          description: The deadline for token rotation (ISO 8601 format). Must be specified with token_expires_at and be <= token_expires_at.
+      required:
+      - runner_type
+      - group_id
+      - project_id
+      description: Create a runner owned by currently authenticated user
+    API_Entities_User:
       type: object
       properties:
-        runner_id:
+        id:
           type: integer
           format: int32
-          description: The ID of a runner
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+        created_at:
+          type: string
+        bio:
+          type: string
+        location:
+          type: string
+        linkedin:
+          type: string
+        twitter:
+          type: string
+        discord:
+          type: string
+        website_url:
+          type: string
+        github:
+          type: string
+        job_title:
+          type: string
+        pronouns:
+          type: string
+        organization:
+          type: string
+        bot:
+          type: boolean
+        work_information:
+          type: string
+        followers:
+          type: string
+        following:
+          type: string
+        is_followed:
+          type: string
+        local_time:
+          type: string
       required:
-      - runner_id
-      description: Assign a runner to project
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      - bio
+      - location
+      - linkedin
+      - twitter
+      - discord
+      - website_url
+      - github
+      - job_title
+      - pronouns
+      - organization
+      - bot
+      - work_information
+      - local_time
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
     API_Entities_Ci_ResetTokenResult:
       type: object
       properties:
@@ -919,108 +1068,7 @@ components:
       required:
       - token
       description: API_Entities_Ci_ResetTokenResult model
-    API_Entities_Ci_JobBasicWithProject:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        status:
-          type: string
-          example: waiting_for_resource
-        stage:
-          type: string
-          example: deploy
-        name:
-          type: string
-          example: deploy_to_production
-        ref:
-          type: string
-          example: main
-        tag:
-          type: boolean
-        coverage:
-          type: number
-          format: float
-          example: 98.29
-        allow_failure:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T15:51:21.880Z'
-        started_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:30.733Z'
-        finished_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T17:54:31.198Z'
-        erased_at:
-          type: string
-          format: date-time
-          example: '2015-12-24T18:00:29.728Z'
-        duration:
-          type: number
-          format: float
-          example: 0.465
-          description: Time spent running
-        queued_duration:
-          type: number
-          format: float
-          example: 0.123
-          description: Time spent enqueued
-        user:
-          $ref: '#/components/schemas/API_Entities_User'
-        commit:
-          $ref: '#/components/schemas/API_Entities_Commit'
-        pipeline:
-          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
-        failure_reason:
-          type: string
-          example: script_failure
-        web_url:
-          type: string
-          example: https://example.com/foo/bar/-/jobs/1
-        project:
-          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
-      required:
-      - id
-      - status
-      - stage
-      - name
-      - ref
-      - tag
-      - coverage
-      - allow_failure
-      - created_at
-      - started_at
-      - finished_at
-      - erased_at
-      - duration
-      - queued_duration
-      - user
-      - commit
-      - pipeline
-      - web_url
-      - project
-      description: API_Entities_Ci_JobBasicWithProject model
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
-    API_Entities_Ci_RunnerDetails:
+    API_Entities_Ci_Runner:
       type: object
       properties:
         id:
@@ -1070,32 +1118,6 @@ components:
           - active
           - idle
           example: idle
-        tag_list:
-          type: string
-        run_untagged:
-          type: string
-        locked:
-          type: string
-        maximum_timeout:
-          type: string
-        access_level:
-          type: string
-        version:
-          type: string
-        revision:
-          type: string
-        platform:
-          type: string
-        architecture:
-          type: string
-        contacted_at:
-          type: string
-        maintenance_note:
-          type: string
-        projects:
-          $ref: '#/components/schemas/API_Entities_BasicProjectDetails'
-        groups:
-          $ref: '#/components/schemas/API_Entities_BasicGroupDetails'
       required:
       - id
       - description
@@ -1109,19 +1131,17 @@ components:
       - created_at
       - status
       - job_execution_status
-      - tag_list
-      - run_untagged
-      - locked
-      - maximum_timeout
-      - access_level
-      - version
-      - revision
-      - platform
-      - architecture
-      - contacted_at
-      - maintenance_note
-      - groups
-      description: API_Entities_Ci_RunnerDetails model
+      description: API_Entities_Ci_Runner model
+    postApiV4ProjectsIdRunners:
+      type: object
+      properties:
+        runner_id:
+          type: integer
+          format: int32
+          description: The ID of a runner
+      required:
+      - runner_id
+      description: Assign a runner to project
     API_Entities_BasicProjectDetails:
       type: object
       properties:
@@ -1224,6 +1244,94 @@ components:
       - visibility
       - namespace
       description: API_Entities_BasicProjectDetails model
+    API_Entities_Ci_JobBasicWithProject:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        status:
+          type: string
+          example: waiting_for_resource
+        stage:
+          type: string
+          example: deploy
+        name:
+          type: string
+          example: deploy_to_production
+        ref:
+          type: string
+          example: main
+        tag:
+          type: boolean
+        coverage:
+          type: number
+          format: float
+          example: 98.29
+        allow_failure:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T15:51:21.880Z'
+        started_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:30.733Z'
+        finished_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T17:54:31.198Z'
+        erased_at:
+          type: string
+          format: date-time
+          example: '2015-12-24T18:00:29.728Z'
+        duration:
+          type: number
+          format: float
+          example: 0.465
+          description: Time spent running
+        queued_duration:
+          type: number
+          format: float
+          example: 0.123
+          description: Time spent enqueued
+        user:
+          $ref: '#/components/schemas/API_Entities_User'
+        commit:
+          $ref: '#/components/schemas/API_Entities_Commit'
+        pipeline:
+          $ref: '#/components/schemas/API_Entities_Ci_PipelineBasic'
+        failure_reason:
+          type: string
+          example: script_failure
+        web_url:
+          type: string
+          example: https://example.com/foo/bar/-/jobs/1
+        project:
+          $ref: '#/components/schemas/API_Entities_ProjectIdentity'
+      required:
+      - id
+      - status
+      - stage
+      - name
+      - ref
+      - tag
+      - coverage
+      - allow_failure
+      - created_at
+      - started_at
+      - finished_at
+      - erased_at
+      - duration
+      - queued_duration
+      - user
+      - commit
+      - pipeline
+      - web_url
+      - project
+      description: API_Entities_Ci_JobBasicWithProject model
     API_Entities_Ci_PipelineBasic:
       type: object
       properties:
@@ -1274,6 +1382,19 @@ components:
       - updated_at
       - web_url
       description: API_Entities_Ci_PipelineBasic model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
     API_Entities_Ci_RunnerManager:
       type: object
       properties:
@@ -1327,268 +1448,108 @@ components:
       - status
       - job_execution_status
       description: API_Entities_Ci_RunnerManager model
-    API_Entities_User:
+    API_Entities_Ci_RunnerDetails:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-        created_at:
-          type: string
-        bio:
-          type: string
-        location:
-          type: string
-        linkedin:
-          type: string
-        twitter:
-          type: string
-        discord:
-          type: string
-        website_url:
-          type: string
-        github:
-          type: string
-        job_title:
-          type: string
-        pronouns:
-          type: string
-        organization:
-          type: string
-        bot:
-          type: boolean
-        work_information:
-          type: string
-        followers:
-          type: string
-        following:
-          type: string
-        is_followed:
-          type: string
-        local_time:
-          type: string
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      - bio
-      - location
-      - linkedin
-      - twitter
-      - discord
-      - website_url
-      - github
-      - job_title
-      - pronouns
-      - organization
-      - bot
-      - work_information
-      - local_time
-    API_Entities_Ci_RunnerRegistrationDetails:
-      type: object
-      properties:
-        id:
-          type: string
-        token:
-          type: string
-        token_expires_at:
-          type: string
-      required:
-      - id
-      - token
-      - token_expires_at
-      description: API_Entities_Ci_RunnerRegistrationDetails model
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    API_Entities_ProjectIdentity:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
+          example: 8
         description:
           type: string
-          example: desc
-        name:
+          example: test-1-20150125
+        ip_address:
           type: string
-          example: project1
-        name_with_namespace:
-          type: string
-          example: John Doe / project1
-        path:
-          type: string
-          example: project1
-        path_with_namespace:
-          type: string
-          example: namespace1/project1
-        created_at:
-          type: string
-          format: date-time
-          example: '2020-05-07T04:27:17.016Z'
-      required:
-      - id
-      - description
-      - name
-      - name_with_namespace
-      - path
-      - path_with_namespace
-      - created_at
-    API_Entities_BasicGroupDetails:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        web_url:
-          type: string
-          example: http://gitlab.example.com/groups/diaspora
-        name:
-          type: string
-          example: Diaspora
-      required:
-      - id
-      - web_url
-      - name
-      description: API_Entities_BasicGroupDetails model
-    postApiV4UserRunners:
-      type: object
-      properties:
+          example: 127.0.0.1
+        active:
+          type: boolean
+          example: true
+        paused:
+          type: boolean
+          example: false
+        is_shared:
+          type: boolean
+          example: true
         runner_type:
           type: string
-          description: Specifies the scope of the runner
           enum:
           - instance_type
           - group_type
           - project_type
-        group_id:
-          type: integer
-          format: int32
-          description: The ID of the group that the runner is created in
-          example: 1
-        project_id:
-          type: integer
-          format: int32
-          description: The ID of the project that the runner is created in
-          example: 1
-        description:
+          example: instance_type
+        name:
           type: string
-          description: Description of the runner
-        maintenance_note:
-          type: string
-          description: Free-form maintenance notes for the runner (1024 characters)
-        paused:
+          example: test
+        online:
           type: boolean
-          description: Specifies if the runner should ignore new jobs (defaults to false)
+          example: true
+        created_by:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        created_at:
+          type: string
+          format: date-time
+          example: '2025-05-03T00:00:00.000Z'
+        status:
+          type: string
+          example: online
+        job_execution_status:
+          type: string
+          enum:
+          - active
+          - idle
+          example: idle
+        tag_list:
+          type: string
+        run_untagged:
+          type: string
         locked:
-          type: boolean
-          description: Specifies if the runner should be locked for the current project (defaults to false)
+          type: string
+        maximum_timeout:
+          type: string
         access_level:
           type: string
-          description: The access level of the runner
-          enum:
-          - not_protected
-          - ref_protected
-        run_untagged:
-          type: boolean
-          description: Specifies if the runner should handle untagged jobs  (defaults to true)
-        tag_list:
-          type: array
-          description: A list of runner tags
-          items:
-            type: string
-        maximum_timeout:
-          type: integer
-          format: int32
-          description: Maximum timeout that limits the amount of time (in seconds) that runners can run jobs
-        token_expires_at:
+        version:
           type: string
-          format: date-time
-          description: The expiration time for the runner authentication token (ISO 8601 format). Must be between 5 minutes and 15 days in the future, and cannot exceed instance/group/project limits.
-        token_rotation_deadline:
+        revision:
           type: string
-          format: date-time
-          description: The deadline for token rotation (ISO 8601 format). Must be specified with token_expires_at and be <= token_expires_at.
+        platform:
+          type: string
+        architecture:
+          type: string
+        contacted_at:
+          type: string
+        maintenance_note:
+          type: string
+        projects:
+          $ref: '#/components/schemas/API_Entities_BasicProjectDetails'
+        groups:
+          $ref: '#/components/schemas/API_Entities_BasicGroupDetails'
       required:
+      - id
+      - description
+      - ip_address
+      - active
+      - paused
+      - is_shared
       - runner_type
-      - group_id
-      - project_id
-      description: Create a runner owned by currently authenticated user
+      - name
+      - online
+      - created_at
+      - status
+      - job_execution_status
+      - tag_list
+      - run_untagged
+      - locked
+      - maximum_timeout
+      - access_level
+      - version
+      - revision
+      - platform
+      - architecture
+      - contacted_at
+      - maintenance_note
+      - groups
+      description: API_Entities_Ci_RunnerDetails model
     API_Entities_Commit:
       type: object
       properties:
@@ -1664,70 +1625,75 @@ components:
       - extended_trailers
       - web_url
       description: API_Entities_Commit model
-    API_Entities_Ci_Runner:
+    API_Entities_Ci_RunnerRegistrationDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        token:
+          type: string
+        token_expires_at:
+          type: string
+      required:
+      - id
+      - token
+      - token_expires_at
+      description: API_Entities_Ci_RunnerRegistrationDetails model
+    putApiV4RunnersId:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the runner
+        active:
+          type: boolean
+          description: 'Deprecated: Use `paused` instead. Flag indicating whether the runner is allowed to receive jobs'
+        paused:
+          type: boolean
+          description: Specifies if the runner should ignore new jobs
+        tag_list:
+          type: array
+          description: The list of tags for a runner
+          example: '[''macos'', ''shell'']'
+          items:
+            type: string
+        run_untagged:
+          type: boolean
+          description: Specifies if the runner can execute untagged jobs
+        locked:
+          type: boolean
+          description: Specifies if the runner is locked
+        access_level:
+          type: string
+          description: The access level of the runner
+          enum:
+          - not_protected
+          - ref_protected
+        maximum_timeout:
+          type: integer
+          format: int32
+          description: Maximum timeout that limits the amount of time (in seconds) that runners can run jobs
+        maintenance_note:
+          type: string
+          description: Free-form maintenance notes for the runner (1024 characters)
+      description: Update runner's details
+    API_Entities_BasicGroupDetails:
       type: object
       properties:
         id:
           type: integer
           format: int32
-          example: 8
-        description:
+        web_url:
           type: string
-          example: test-1-20150125
-        ip_address:
-          type: string
-          example: 127.0.0.1
-        active:
-          type: boolean
-          example: true
-        paused:
-          type: boolean
-          example: false
-        is_shared:
-          type: boolean
-          example: true
-        runner_type:
-          type: string
-          enum:
-          - instance_type
-          - group_type
-          - project_type
-          example: instance_type
+          example: http://gitlab.example.com/groups/diaspora
         name:
           type: string
-          example: test
-        online:
-          type: boolean
-          example: true
-        created_by:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        created_at:
-          type: string
-          format: date-time
-          example: '2025-05-03T00:00:00.000Z'
-        status:
-          type: string
-          example: online
-        job_execution_status:
-          type: string
-          enum:
-          - active
-          - idle
-          example: idle
+          example: Diaspora
       required:
       - id
-      - description
-      - ip_address
-      - active
-      - paused
-      - is_shared
-      - runner_type
+      - web_url
       - name
-      - online
-      - created_at
-      - status
-      - job_execution_status
-      description: API_Entities_Ci_Runner model
+      description: API_Entities_BasicGroupDetails model
     API_Entities_NamespaceBasic:
       type: object
       properties:
@@ -1789,6 +1755,40 @@ components:
       - nickname
       - html_url
       - source_url
+    API_Entities_ProjectIdentity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        description:
+          type: string
+          example: desc
+        name:
+          type: string
+          example: project1
+        name_with_namespace:
+          type: string
+          example: John Doe / project1
+        path:
+          type: string
+          example: project1
+        path_with_namespace:
+          type: string
+          example: namespace1/project1
+        created_at:
+          type: string
+          format: date-time
+          example: '2020-05-07T04:27:17.016Z'
+      required:
+      - id
+      - description
+      - name
+      - name_with_namespace
+      - path
+      - path_with_namespace
+      - created_at
   securitySchemes:
     access_token_header:
       type: apiKey

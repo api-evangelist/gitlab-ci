@@ -49,7 +49,7 @@ paths:
       tags:
       - batched_background_migrations
       operationId: getApiV4AdminBatchedBackgroundMigrationsId
-      summary: Get api V4 admin batched background migrations id
+      summary: Get api V4Admin batched background migrations id
       x-summary-source: derived
   /api/v4/admin/batched_background_migrations/{id}/resume:
     put:
@@ -86,7 +86,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4AdminBatchedBackgroundMigrationsIdResume'
         required: true
-      summary: Put api V4 admin batched background migrations id resume
+      summary: Put api V4Admin batched background migrations id resume
       x-summary-source: derived
   /api/v4/admin/batched_background_migrations/{id}/pause:
     put:
@@ -123,7 +123,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4AdminBatchedBackgroundMigrationsIdPause'
         required: true
-      summary: Put api V4 admin batched background migrations id pause
+      summary: Put api V4Admin batched background migrations id pause
       x-summary-source: derived
   /api/v4/admin/batched_background_migrations:
     get:
@@ -164,24 +164,10 @@ paths:
       tags:
       - batched_background_migrations
       operationId: getApiV4AdminBatchedBackgroundMigrations
-      summary: Get api V4 admin batched background migrations
+      summary: Get api V4Admin batched background migrations
       x-summary-source: derived
 components:
   schemas:
-    putApiV4AdminBatchedBackgroundMigrationsIdPause:
-      type: object
-      properties:
-        database:
-          type: string
-          description: The name of the database
-          enum:
-          - main
-          - ci
-          - sec
-          - embedding
-          - geo
-          default: main
-      description: Pause a batched background migration
     putApiV4AdminBatchedBackgroundMigrationsIdResume:
       type: object
       properties:
@@ -196,6 +182,20 @@ components:
           - geo
           default: main
       description: Resume a batched background migration
+    putApiV4AdminBatchedBackgroundMigrationsIdPause:
+      type: object
+      properties:
+        database:
+          type: string
+          description: The name of the database
+          enum:
+          - main
+          - ci
+          - sec
+          - embedding
+          - geo
+          default: main
+      description: Pause a batched background migration
     API_Entities_BatchedBackgroundMigration:
       type: object
       properties:

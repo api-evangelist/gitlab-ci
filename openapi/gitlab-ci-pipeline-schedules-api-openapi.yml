@@ -66,7 +66,7 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: getApiV4ProjectsIdPipelineSchedules
-      summary: Get api V4 projects id pipeline schedules
+      summary: Get api V4Projects id pipeline schedules
       x-summary-source: derived
     post:
       description: Create a new pipeline schedule
@@ -102,7 +102,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdPipelineSchedules'
         required: true
-      summary: Post api V4 projects id pipeline schedules
+      summary: Post api V4Projects id pipeline schedules
       x-summary-source: derived
   /api/v4/projects/{id}/pipeline_schedules/{pipeline_schedule_id}:
     get:
@@ -139,7 +139,7 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: getApiV4ProjectsIdPipelineSchedulesPipelineScheduleId
-      summary: Get api V4 projects id pipeline schedules pipeline schedule id
+      summary: Get api V4Projects id pipeline schedules pipeline schedule id
       x-summary-source: derived
     put:
       description: Edit a pipeline schedule
@@ -183,7 +183,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdPipelineSchedulesPipelineScheduleId'
         required: true
-      summary: Put api V4 projects id pipeline schedules pipeline schedule id
+      summary: Put api V4Projects id pipeline schedules pipeline schedule id
       x-summary-source: derived
     delete:
       description: Delete a pipeline schedule
@@ -217,7 +217,7 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: deleteApiV4ProjectsIdPipelineSchedulesPipelineScheduleId
-      summary: Delete api V4 projects id pipeline schedules pipeline schedule id
+      summary: Delete api V4Projects id pipeline schedules pipeline schedule id
       x-summary-source: derived
   /api/v4/projects/{id}/pipeline_schedules/{pipeline_schedule_id}/pipelines:
     get:
@@ -351,7 +351,7 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: getApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdPipelines
-      summary: Get api V4 projects id pipeline schedules pipeline schedule id pipelines
+      summary: Get api V4Projects id pipeline schedules pipeline schedule id pipelines
       x-summary-source: derived
   /api/v4/projects/{id}/pipeline_schedules/{pipeline_schedule_id}/take_ownership:
     post:
@@ -390,7 +390,7 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: postApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdTakeOwnership
-      summary: Post api V4 projects id pipeline schedules pipeline schedule id take ownership
+      summary: Post api V4Projects id pipeline schedules pipeline schedule id take ownership
       x-summary-source: derived
   /api/v4/projects/{id}/pipeline_schedules/{pipeline_schedule_id}/play:
     post:
@@ -467,7 +467,7 @@ paths:
             schema:
               $ref: '#/components/schemas/postApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariables'
         required: true
-      summary: Post api V4 projects id pipeline schedules pipeline schedule id variables
+      summary: Post api V4Projects id pipeline schedules pipeline schedule id variables
       x-summary-source: derived
   /api/v4/projects/{id}/pipeline_schedules/{pipeline_schedule_id}/variables/{key}:
     get:
@@ -511,7 +511,7 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: getApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey
-      summary: Get api V4 projects id pipeline schedules pipeline schedule id variables key
+      summary: Get api V4Projects id pipeline schedules pipeline schedule id variables key
       x-summary-source: derived
     put:
       description: Edit a pipeline schedule variable
@@ -562,7 +562,7 @@ paths:
             schema:
               $ref: '#/components/schemas/putApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey'
         required: true
-      summary: Put api V4 projects id pipeline schedules pipeline schedule id variables key
+      summary: Put api V4Projects id pipeline schedules pipeline schedule id variables key
       x-summary-source: derived
     delete:
       description: Delete a pipeline schedule variable
@@ -605,10 +605,171 @@ paths:
       tags:
       - Pipeline Schedules
       operationId: deleteApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey
-      summary: Delete api V4 projects id pipeline schedules pipeline schedule id variables key
+      summary: Delete api V4Projects id pipeline schedules pipeline schedule id variables key
       x-summary-source: derived
 components:
   schemas:
+    postApiV4ProjectsIdPipelineSchedules:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of pipeline schedule
+          example: Test schedule pipeline
+        ref:
+          type: string
+          description: The branch/tag name will be triggered
+          example: develop
+        cron:
+          type: string
+          description: The cron
+          example: '* * * * *'
+        cron_timezone:
+          type: string
+          description: The timezone
+          default: UTC
+          example: Asia/Tokyo
+        active:
+          type: boolean
+          description: The activation of pipeline schedule
+          default: true
+          example: true
+        inputs:
+          type: array
+          description: Inputs for the pipeline schedule
+          example:
+          - name: array_input
+            value:
+            - 1
+            - 2
+          - name: boolean_input
+            value: true
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the input
+                example: deploy_strategy
+              value:
+                type: string
+                description: The value of the input
+                example: blue-green
+            required:
+            - name
+            - value
+      required:
+      - description
+      - ref
+      - cron
+      description: Create a new pipeline schedule
+    API_Entities_Ci_PipelineSchedule:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 13
+        description:
+          type: string
+          example: Test schedule pipeline
+        ref:
+          type: string
+          example: develop
+        cron:
+          type: string
+          example: '* * * * *'
+        cron_timezone:
+          type: string
+          example: Asia/Tokyo
+        next_run_at:
+          type: string
+          format: date-time
+          example: '2017-05-19T13:41:00.000Z'
+        active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: '2017-05-19T13:31:08.849Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2017-05-19T13:40:17.727Z'
+        owner:
+          $ref: '#/components/schemas/API_Entities_UserBasic'
+        inputs:
+          $ref: '#/components/schemas/API_Entities_Ci_Input'
+      required:
+      - id
+      - description
+      - ref
+      - cron
+      - cron_timezone
+      - next_run_at
+      - active
+      - created_at
+      - updated_at
+      - owner
+      description: API_Entities_Ci_PipelineSchedule model
+    API_Entities_CustomAttribute:
+      type: object
+      properties:
+        key:
+          type: string
+          example: foo
+        value:
+          type: string
+          example: bar
+      required:
+      - key
+      - value
+      description: API_Entities_CustomAttribute model
+    API_Entities_UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        username:
+          type: string
+          example: admin
+        public_email:
+          type: string
+          example: john@example.com
+        name:
+          type: string
+          example: Administrator
+        state:
+          type: string
+          example: active
+        locked:
+          type: boolean
+        avatar_url:
+          type: string
+          example: https://gravatar.com/avatar/1
+        avatar_path:
+          type: string
+          example: /user/avatar/28/The-Big-Lebowski-400-400.png
+        custom_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/API_Entities_CustomAttribute'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/root
+      required:
+      - id
+      - username
+      - public_email
+      - name
+      - state
+      - locked
+      - avatar_url
+      - web_url
+      description: API_Entities_UserBasic model
     putApiV4ProjectsIdPipelineSchedulesPipelineScheduleId:
       type: object
       properties:
@@ -657,19 +818,6 @@ components:
             - name
             - value
       description: Edit a pipeline schedule
-    API_Entities_CustomAttribute:
-      type: object
-      properties:
-        key:
-          type: string
-          example: foo
-        value:
-          type: string
-          example: bar
-      required:
-      - key
-      - value
-      description: API_Entities_CustomAttribute model
     putApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariablesKey:
       type: object
       properties:
@@ -685,60 +833,6 @@ components:
           - file
           default: env_var
       description: Edit a pipeline schedule variable
-    API_Entities_UserBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        username:
-          type: string
-          example: admin
-        public_email:
-          type: string
-          example: john@example.com
-        name:
-          type: string
-          example: Administrator
-        state:
-          type: string
-          example: active
-        locked:
-          type: boolean
-        avatar_url:
-          type: string
-          example: https://gravatar.com/avatar/1
-        avatar_path:
-          type: string
-          example: /user/avatar/28/The-Big-Lebowski-400-400.png
-        custom_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/API_Entities_CustomAttribute'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/root
-      required:
-      - id
-      - username
-      - public_email
-      - name
-      - state
-      - locked
-      - avatar_url
-      - web_url
-      description: API_Entities_UserBasic model
-    API_Entities_Ci_Input:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      required:
-      - name
-      - value
     postApiV4ProjectsIdPipelineSchedulesPipelineScheduleIdVariables:
       type: object
       properties:
@@ -761,6 +855,66 @@ components:
       - key
       - value
       description: Create a new pipeline schedule variable
+    API_Entities_Ci_Input:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      required:
+      - name
+      - value
+    API_Entities_Ci_PipelineBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        iid:
+          type: integer
+          format: int32
+          example: 2
+        project_id:
+          type: integer
+          format: int32
+          example: 3
+        sha:
+          type: string
+          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
+        ref:
+          type: string
+          example: feature-branch
+        status:
+          type: string
+          example: success
+        source:
+          type: string
+          example: push
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-10-21T16:49:48.000+02:00'
+        web_url:
+          type: string
+          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
+      required:
+      - id
+      - iid
+      - project_id
+      - sha
+      - ref
+      - status
+      - source
+      - created_at
+      - updated_at
+      - web_url
+      description: API_Entities_Ci_PipelineBasic model
     API_Entities_Ci_PipelineScheduleDetails:
       type: object
       properties:
@@ -816,106 +970,6 @@ components:
       - owner
       - last_pipeline
       description: API_Entities_Ci_PipelineScheduleDetails model
-    API_Entities_Ci_PipelineBasic:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 1
-        iid:
-          type: integer
-          format: int32
-          example: 2
-        project_id:
-          type: integer
-          format: int32
-          example: 3
-        sha:
-          type: string
-          example: 0ec9e58fdfca6cdd6652c083c9edb53abc0bad52
-        ref:
-          type: string
-          example: feature-branch
-        status:
-          type: string
-          example: success
-        source:
-          type: string
-          example: push
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-10-21T16:49:48.000+02:00'
-        web_url:
-          type: string
-          example: https://gitlab.example.com/gitlab-org/gitlab-foss/-/pipelines/61
-      required:
-      - id
-      - iid
-      - project_id
-      - sha
-      - ref
-      - status
-      - source
-      - created_at
-      - updated_at
-      - web_url
-      description: API_Entities_Ci_PipelineBasic model
-    API_Entities_Ci_PipelineSchedule:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 13
-        description:
-          type: string
-          example: Test schedule pipeline
-        ref:
-          type: string
-          example: develop
-        cron:
-          type: string
-          example: '* * * * *'
-        cron_timezone:
-          type: string
-          example: Asia/Tokyo
-        next_run_at:
-          type: string
-          format: date-time
-          example: '2017-05-19T13:41:00.000Z'
-        active:
-          type: boolean
-          example: true
-        created_at:
-          type: string
-          format: date-time
-          example: '2017-05-19T13:31:08.849Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2017-05-19T13:40:17.727Z'
-        owner:
-          $ref: '#/components/schemas/API_Entities_UserBasic'
-        inputs:
-          $ref: '#/components/schemas/API_Entities_Ci_Input'
-      required:
-      - id
-      - description
-      - ref
-      - cron
-      - cron_timezone
-      - next_run_at
-      - active
-      - created_at
-      - updated_at
-      - owner
-      description: API_Entities_Ci_PipelineSchedule model
     API_Entities_Ci_Variable:
       type: object
       properties:
@@ -947,60 +1001,6 @@ components:
       - key
       - value
       description: API_Entities_Ci_Variable model
-    postApiV4ProjectsIdPipelineSchedules:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The description of pipeline schedule
-          example: Test schedule pipeline
-        ref:
-          type: string
-          description: The branch/tag name will be triggered
-          example: develop
-        cron:
-          type: string
-          description: The cron
-          example: '* * * * *'
-        cron_timezone:
-          type: string
-          description: The timezone
-          default: UTC
-          example: Asia/Tokyo
-        active:
-          type: boolean
-          description: The activation of pipeline schedule
-          default: true
-          example: true
-        inputs:
-          type: array
-          description: Inputs for the pipeline schedule
-          example:
-          - name: array_input
-            value:
-            - 1
-            - 2
-          - name: boolean_input
-            value: true
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the input
-                example: deploy_strategy
-              value:
-                type: string
-                description: The value of the input
-                example: blue-green
-            required:
-            - name
-            - value
-      required:
-      - description
-      - ref
-      - cron
-      description: Create a new pipeline schedule
   securitySchemes:
     access_token_header:
       type: apiKey
